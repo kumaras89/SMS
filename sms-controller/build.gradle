@@ -1,0 +1,5 @@
+
+dependencies{
+    compile project(':sms-interfaces')
+    compile "org.springframework:spring-web:$springVersion"
+}

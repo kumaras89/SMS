@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http use-expressions="true" auto-config="false"
+                   entry-point-ref="http403EntryPoint">
+        <security:csrf disabled="true"/>
+        <security:intercept-url pattern="/login"
+                                access="permitAll"/>
+        <security:intercept-url pattern="/**"
+                                access="isAuthenticated()"/>
+
+        <security:custom-filter ref="smsAuthenticationFilter"
+                                position="FORM_LOGIN_FILTER"/>
+        <security:custom-filter ref="logoutFilter"
+                                position="LOGOUT_FILTER"/>
+
+    </security:http>
+
+    <bean id="http403EntryPoint"
+          class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
+
+    <bean id="smsAuthenticationFilter" class="com.sms.core.security.filter.SmsAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
+        <property name="passwordParameter" value="password"/>
+        <property name="usernameParameter" value="username"/>
+        <property name="filterProcessesUrl" value="/login"/>
+    </bean>
+
+    <bean id="authenticationSuccessHandler"
+          class="com.sms.core.security.filter.NoRedirectAuthenticationSuccessHandler"/>
+    <bean id="authenticationFailureHandler"
+          class="com.sms.core.security.filter.NoRedirectLoginFailureHandler"/>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="userDetailService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="logoutFilter"
+          class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg>
+            <bean class="com.sms.core.security.filter.NoRedirectLogoutSucessHandler"/>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <bean id="userDetailService" class="com.sms.core.security.UserDetailServiceImpl"/>
+</beans>

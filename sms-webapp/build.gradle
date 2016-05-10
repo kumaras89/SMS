@@ -1,0 +1,26 @@
+apply plugin: 'war'
+
+
+eclipse{
+	wtp{
+		component{
+			contextPath = "/"
+			deployName = 'sms'
+			resource sourcePath : 'src/main/webapp',deployPath:'/'
+		}
+	}
+}
+
+dependencies{
+	compile project(':sms-interfaces')
+	compile project(':sms-controller')
+	compile project(':sms-core')
+	
+    compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+    compile 'org.springframework.security:spring-security-config:4.0.2.RELEASE'
+    compile 'com.google.code.gson:gson:2.3.1'
+
+    
+}
