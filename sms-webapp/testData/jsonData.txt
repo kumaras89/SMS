@@ -1,0 +1,43 @@
+# To Test insertion of new student
+{
+    "code": "CH0116000001",
+    "name": "Sai Prasad",
+    "age": 20,
+    "phoneNumber": 9884309696,
+    "alternatePhoneNumber": 9884309696,
+    "dateOfBirth": "",
+    "mailId": "sample@sample.com",
+    "address": {
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "country": "India",
+        "streetName": "Gandhi Nagar",
+        "doorNumber": "1/25",
+        "postalCode": 600063
+    },
+    "branchCode": "CH01"
+}
+
+# To test insertion of new branch
+{
+        "code": "CH01",
+        "name": "Chennai Tambaram",
+        "address": {
+            "city": "Chennai",
+            "state": "Tamil Nadu",
+            "country": "India",
+            "streetName": "Tambaram Shanmugam Road",
+            "doorNumber": "1/25",
+            "postalCode": "600045"
+        },
+        "isActive": "1"
+}
+
+# To test insertion of new user
+{"name":"gans","role":"SUPER_ADMIN","password":"ganesan"}
+
+# To test login of new user created
+{"username":"gans","password":"changeme"}
+
+# To test login of default user
+{"username":"admin","password":"admin"}

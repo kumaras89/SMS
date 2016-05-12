@@ -1,5 +1,6 @@
 package com.sms.core;
 
+import com.sms.core.repositery.BranchRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ public abstract class BaseServiceImpl<T> implements IStudentPortalService<T> {
 
     private final JpaRepository<T, Long> jpaRepository;
 
-    public BaseServiceImpl(JpaRepository<T, Long> jpaRepository) {
+    public BaseServiceImpl(BranchRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 

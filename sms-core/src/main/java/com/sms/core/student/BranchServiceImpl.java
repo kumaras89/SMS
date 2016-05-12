@@ -1,14 +1,13 @@
 package com.sms.core.student;
 
+import com.sms.core.BaseServiceImpl;
+import com.sms.core.repositery.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sms.core.BaseStudentPortalFindServiceImpl;
-import com.sms.core.repositery.BranchRepository;
-
 
 @Service(BranchServiceImpl.QUALIFIER)
-public class BranchServiceImpl extends BaseStudentPortalFindServiceImpl<Branch> {
+public class BranchServiceImpl extends BaseServiceImpl<Branch> {
 
     public static final String QUALIFIER = "branchService";
 
