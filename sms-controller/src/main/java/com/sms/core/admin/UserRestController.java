@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/user")
 public class UserRestController extends BaseController<UserInfo>{
 
     @Autowired
