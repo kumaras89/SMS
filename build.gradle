@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin :'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    jacksonVersion = '2.5.4'
+    springVersion  = '4.2.0.RELEASE'
+    hibernateVersion = '4.3.11.Final'
+    springSecurityVersion = '4.0.2.RELEASE'
+}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin :'eclipse'
+    apply plugin: 'jacoco'
+    apply plugin:'eclipse-wtp'
+
+    repositories {
+        mavenCentral()
+    }
+
+    jar { manifest.attributes provider: 'sms Inc.  All Rights Reserved.' }
+
+    dependencies {
+        compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+        compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+        compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework.security:spring-security-core:$springSecurityVersion"
+    }
+}
