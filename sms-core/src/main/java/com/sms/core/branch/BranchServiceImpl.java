@@ -10,7 +10,7 @@ import com.sms.core.repositery.BranchRepository;
 @Service(BranchServiceImpl.QUALIFIER)
 public class BranchServiceImpl extends BaseServiceImpl<Branch> {
 
-    public static final String QUALIFIER = "branchService";
+    public static final String QUALIFIER = "BranchServiceImpl";
 
     @Autowired
     public BranchServiceImpl(final BranchRepository branchRepository) {

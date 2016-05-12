@@ -1,21 +1,18 @@
 package com.sms.core.admin;
 
-import com.sms.core.BaseModel;
-
 import java.util.Optional;
 
-public class UserInfo extends BaseModel {
+public class UserInfo{
 
     private String name;
     private String role;
     private String password;
 
     public UserInfo() {
-        super();
+
     }
 
     private UserInfo(final Builder builder) {
-        super(builder);
         this.name = builder.name.get();
         this.role = builder.role.get();
         this.password = builder.password.get();
@@ -25,10 +22,10 @@ public class UserInfo extends BaseModel {
         return new Builder();
     }
 
-    public static Builder toBuilder(final UserInfo user) {
+    public static Builder toBuilder(final User user) {
         return builder()
-                .withId(user.getId())
-                .withRole(user.getRole())
+                .withName(user.getName())
+                .withRole(user.getRole().name())
                 .withPassword(user.getPassword());
     }
 
@@ -56,7 +53,7 @@ public class UserInfo extends BaseModel {
         this.password = password;
     }
 
-    public static class Builder extends BaseModel.Builder<UserInfo, Builder> {
+    public static class Builder {
 
         private Optional<String> name = Optional.empty();
         private Optional<String> role = Optional.empty();
@@ -85,7 +82,6 @@ public class UserInfo extends BaseModel {
             return new UserInfo(this);
         }
 
-        @Override
         protected Builder getThis() {
             return this;
         }

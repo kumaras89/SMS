@@ -14,11 +14,7 @@ public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
     @Autowired
     public UserServiceImpl(final UserRepository jpaRepository,
                            final Converter<UserInfo, User> userConverter) {
-        super(jpaRepository, userConverter, (source) -> UserInfo.builder()
-                .withName(source.getName())
-                .withRole(source.getRole().name())
-                .withPassword(source.getPassword())
-                .build());
+        super(jpaRepository, userConverter, (source) -> UserInfo.toBuilder(source).build());
     }
 
     @Override
