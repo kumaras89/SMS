@@ -33,6 +33,6 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     }
 
     private boolean isPasswordMatches(final String oldPassword, final String existingPassword) {
-        return encoder.encode(oldPassword).equals(existingPassword);
+        return encoder.matches(oldPassword,existingPassword);
     }
 }
