@@ -1,34 +1,17 @@
 package com.sms.core.admin;
 
+import com.sms.core.BaseController;
+import com.sms.core.IStudentPortalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/admin")
-public class UserRestController {
+@RequestMapping(value = "/user")
+public class UserRestController extends BaseController<UserInfo>{
 
     @Autowired
-    private UserService userService;
-
-    @RequestMapping(method = RequestMethod.POST)
-    public void add(@RequestBody final UserInfo user) {
-        userService.save(user);
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public List<UserInfo> listUsers() {
-        return userService.list();
-    }
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public void edit(@RequestBody final UserInfo user) {
-        userService.edit(user);
-    }
-
-    @RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable final String userName) {
-        userService.remove(userName);
+    public UserRestController(final IStudentPortalService<UserInfo> userService) {
+        super(userService);
     }
 }

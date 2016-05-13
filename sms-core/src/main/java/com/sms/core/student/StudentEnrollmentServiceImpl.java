@@ -1,41 +1,40 @@
 package com.sms.core.student;
 
+import com.sms.core.BaseServiceConvertorImpl;
+import com.sms.core.repositery.BranchRepository;
+import com.sms.core.repositery.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sms.core.BaseStudentPortalFindServiceImpl;
-import com.sms.core.repositery.StudentRepository;
-
-import java.util.List;
-import java.util.Optional;
-
 @Service("studentEnrollmentService")
 @Transactional
-public class StudentEnrollmentServiceImpl extends BaseStudentPortalFindServiceImpl<Student> {
-
-    public static final String QUALIFIER = "studentEnrollmentService";
+public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<StudentInfo, Student> {
 
     @Autowired
-    public StudentEnrollmentServiceImpl(final StudentRepository studentRepository) {
-        super(studentRepository);
+    public StudentEnrollmentServiceImpl(final StudentRepository studentRepository, final BranchRepository branchRepository) {
+
+        super(studentRepository,
+                (studentInfo) ->
+                        Student.toBuilder(studentInfo)
+                                .withBranch(branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
+                                .build(),
+                (student) -> StudentInfo.toBuilder(student).build());
     }
 
     @Override
-    protected Student buildToPersistObject(final Long id, final Student student) {
+    protected StudentInfo buildToPersistObject(Long id, StudentInfo student) {
 
-        return Student.builder()
-                .withId(id)
+        return StudentInfo.builder()
                 .withCode(student.getCode())
                 .withName(student.getName())
                 .withAge(student.getAge())
                 .withPhoneNumber(student.getPhoneNumber())
-                .withDateOfBirth(student.getDateOfBirth())
                 .withAlternatePhoneNumber(student.getAlternatePhoneNumber())
+                .withDateOfBirth(student.getDateOfBirth())
                 .withMailId(student.getMailId())
                 .withAddress(student.getAddress())
-                .withBranch(student.getBranch())
+                .withBranchCode(student.getBranchCode())
                 .build();
     }
 }
-

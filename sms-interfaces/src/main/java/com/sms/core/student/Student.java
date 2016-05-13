@@ -1,15 +1,14 @@
 package com.sms.core.student;
 
+import com.sms.core.BaseModel;
+import com.sms.core.branch.Branch;
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Optional;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.sms.core.BaseModel;
 
 @Entity
 @Table(name = "sp_tr_student")
@@ -38,7 +37,7 @@ public class Student extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "st_address_id")
-//    @Cascade(value = CascadeType.ALL)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Address address;
 
     @ManyToOne
@@ -57,7 +56,7 @@ public class Student extends BaseModel {
         this.age = builder.age.get();
         this.phoneNumber = builder.phoneNumber.get();
         this.alternatePhoneNumber = builder.alternatePhoneNumber.get();
-        this.dateOfBirth = builder.dateOfBirth.get();
+        this.dateOfBirth = builder.dateOfBirth.orElseGet(Date::new);
         this.mailId = builder.mailId.get();
         this.address = builder.address.get();
         this.branch = builder.branch.get();
@@ -67,9 +66,8 @@ public class Student extends BaseModel {
         return new Builder();
     }
 
-    public static Builder toBuilder(final Student student) {
+    public static Builder toBuilder(final StudentInfo student) {
         return builder()
-                .withId(student.getId())
                 .withCode(student.getCode())
                 .withName(student.getName())
                 .withAge(student.getAge())
@@ -77,8 +75,7 @@ public class Student extends BaseModel {
                 .withAlternatePhoneNumber(student.getAlternatePhoneNumber())
                 .withDateOfBirth(student.getDateOfBirth())
                 .withMailId(student.getMailId())
-                .withAddress(student.getAddress())
-                .withBranch(student.getBranch());
+                .withAddress(student.getAddress());
     }
 
     public String getCode() {
@@ -159,7 +156,7 @@ public class Student extends BaseModel {
         }
 
         public Builder withDateOfBirth(final Date theDateOfBirth) {
-            this.dateOfBirth = Optional.of(theDateOfBirth);
+            this.dateOfBirth = Optional.ofNullable(theDateOfBirth);
             return this;
         }
 

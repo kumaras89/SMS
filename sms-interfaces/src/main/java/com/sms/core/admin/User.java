@@ -1,63 +1,92 @@
 package com.sms.core.admin;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.sms.core.BaseModel;
+
+import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "LG_MA_USER")
-public class User {
+public class User extends BaseModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "US_ID")
-	private Long id;
+    @Column(name = "US_NAME")
+    private String name;
 
-	@Column(name = "US_NAME")
-	private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "US_ROLE")
+    private UserRole role;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "US_ROLE")
-	private UserRole role;
+    @Column(name = "US_PASSWORD")
+    private String password;
 
-	//TODO can we have converter or spring aop to encrypt and decrypt password
-	@Column(name = "US_PASSWORD")
-	private String password;
+    public User() {
+        super();
+    }
 
-	public Long getId() {
-		return id;
-	}
+    private User(final Builder builder) {
+        //super(builder);
+        this.name = builder.name.get();
+        this.role = builder.userRole.get();
+        this.password = builder.password.get();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public static Builder toBuilder(final User user) {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        return builder()
+                .withId(user.getId())
+                .withRole(user.getRole())
+                .withPassword(user.getPassword());
+    }
 
-	public UserRole getRole() {
-		return role;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
+    public UserRole getRole() {
+        return role;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public static class Builder extends BaseModel.Builder<User, Builder> {
+
+        private Optional<String> name = Optional.empty();
+        private Optional<UserRole> userRole = Optional.empty();
+        private Optional<String> password = Optional.empty();
+
+        private Builder() {
+            super();
+        }
+
+        public Builder withName(final String theName) {
+            this.name = Optional.of(theName);
+            return this;
+        }
+
+        public Builder withRole(final UserRole theUserRole) {
+            this.userRole = Optional.of(theUserRole);
+            return this;
+        }
+
+        public Builder withPassword(final String thePassword) {
+            this.password = Optional.of(thePassword);
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+
+        @Override
+        protected Builder getThis() {
+            return this;
+        }
+    }
+
 }

@@ -37,7 +37,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     protected BaseModel(final Builder<?, ?> builder) {
-        this.id = builder.id.get();
+        this.id = builder.id.orElse(null);
     }
 
     /**
@@ -52,7 +52,6 @@ public abstract class BaseModel implements Serializable {
     public abstract static class Builder<E extends BaseModel, B extends Builder<E, B>> {
 
         private Optional<Long> id = Optional.empty();
-        private Optional<Integer> version = Optional.of(0);
 
         protected Builder() {
             super();
@@ -63,7 +62,7 @@ public abstract class BaseModel implements Serializable {
         }
 
         public B withId(final Long aId) {
-            this.id = Optional.of(aId);
+            this.id = Optional.ofNullable(aId);
             return getThis();
         }
 

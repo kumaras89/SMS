@@ -1,51 +1,30 @@
 package com.sms.core.admin;
 
-import com.sms.core.repositery.UserRepositery;
+import com.sms.core.BaseServiceConvertorImpl;
+import com.sms.core.repositery.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-@Service("userService")
+@Service("UserServiceImpl")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
 
-	@Autowired
-	private UserRepositery userRepositery;
+    @Autowired
+    public UserServiceImpl(final UserRepository jpaRepository,
+                           final Converter<UserInfo, User> userConverter) {
+        super(jpaRepository, userConverter, (source) -> UserInfo.toBuilder(source).build());
+    }
 
-	@Autowired
-	private UserConverter userConverter;
+    @Override
+    protected UserInfo buildToPersistObject(Long id, UserInfo user) {
+        return UserInfo.builder()
+                .withPassword(user.getPassword())
+                .withRole(user.getRole())
+                .withName(user.getName())
+                .build();
+    }
 
-	@Override
-	public void save(final UserInfo userInfo) {
-		final User user = userConverter.convert(userInfo);
-		userRepositery.saveAndFlush(user);
-	}
 
-	@Override
-	public void edit(final UserInfo userInfo) {
-		final User user = userConverter.convert(userInfo);
-		userRepositery.edit(user.getRole(), user.getName());
-	}
-
-	@Override
-	public List<UserInfo> list() {
-		return userRepositery.findAll().stream().map(userConverter::convert).collect(Collectors.toList());
-	}
-
-	@Override
-	public UserInfo findUserByName(String userName) {
-		return Optional.of(userName).map(userRepositery::findByNameIgnoreCase).map(userConverter::convert)
-				.orElseGet(UserInfo::new);
-	}
-
-	@Override
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void remove(final String userName) {
-		userRepositery.remove(userName);
-	}
 }

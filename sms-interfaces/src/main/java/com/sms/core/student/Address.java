@@ -1,11 +1,10 @@
 package com.sms.core.student;
 
+import com.sms.core.BaseModel;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.sms.core.BaseModel;
-
 import java.util.Optional;
 
 @Entity
@@ -31,7 +30,7 @@ public class Address extends BaseModel {
     private long postalCode;
 
     public Address() {
-
+        super();
     }
 
     private Address(final Builder builder) {

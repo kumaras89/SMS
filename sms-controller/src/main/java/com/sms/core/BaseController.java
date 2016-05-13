@@ -41,7 +41,7 @@ public abstract class BaseController<T> {
         return new ResponseEntity<T>(entityObject.get(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody T entityObject, UriComponentsBuilder ucBuilder) {
 
         studentPortalService.save(entityObject);
@@ -49,14 +49,14 @@ public abstract class BaseController<T> {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/modify/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<T> update(@PathVariable("id") long id,
                                     @RequestBody T entityObject) {
         final Optional<T> persistedStudent = studentPortalService.update(id, entityObject);
         return new ResponseEntity<T>(persistedStudent.get(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<T> delete(@PathVariable("id") long id) {
 
         System.out.println("Fetching & Deleting Student with id " + id);
