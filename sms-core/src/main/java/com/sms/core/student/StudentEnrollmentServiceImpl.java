@@ -1,6 +1,9 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseServiceConvertorImpl;
+import com.sms.core.Caste;
+import com.sms.core.Gender;
+import com.sms.core.Religion;
 import com.sms.core.repositery.BranchRepository;
 import com.sms.core.repositery.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<StudentInfo, Student> {
 
+    private BranchRepository branchRepository;
+
     @Autowired
     public StudentEnrollmentServiceImpl(final StudentRepository studentRepository, final BranchRepository branchRepository) {
 
@@ -20,12 +25,14 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
                                 .withBranch(branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
                                 .build(),
                 (student) -> StudentInfo.toBuilder(student).build());
+        this.branchRepository = branchRepository;
     }
 
     @Override
-    protected StudentInfo buildToPersistObject(Long id, StudentInfo student) {
+    protected Student buildToPersistObject(Long id, StudentInfo student) {
 
-        return StudentInfo.builder()
+        return Student.builder()
+                .withId(id)
                 .withCode(student.getCode())
                 .withName(student.getName())
                 .withAge(student.getAge())
@@ -34,7 +41,11 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
                 .withDateOfBirth(student.getDateOfBirth())
                 .withMailId(student.getMailId())
                 .withAddress(student.getAddress())
-                .withBranchCode(student.getBranchCode())
+                .withGender(Gender.valueOf(student.getGender()))
+                .withReligion(Religion.valueOf(student.getReligion()))
+                .withCaste(Caste.valueOf(student.getCaste()))
+                .withGuardians(student.getGuardians())
+                .withBranch(branchRepository.findByCodeIgnoreCase(student.getBranchCode()))
                 .build();
     }
 }

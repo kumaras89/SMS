@@ -1,14 +1,19 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseModel;
+import com.sms.core.Caste;
+import com.sms.core.Gender;
+import com.sms.core.Religion;
 import com.sms.core.branch.Branch;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Table(name = "sp_tr_student")
@@ -35,6 +40,19 @@ public class Student extends BaseModel {
     @Column(name = "st_mail_id")
     private String mailId;
 
+    @Column(name = "st_gender")
+    private Gender gender;
+
+    @Column(name = "st_caste")
+    private Caste caste;
+
+    @Column(name = "st_religion")
+    private Religion religion;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "gu_student_id")
+    private Set<Guardian> guardians;
+
     @ManyToOne
     @JoinColumn(name = "st_address_id")
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
@@ -42,7 +60,6 @@ public class Student extends BaseModel {
 
     @ManyToOne
     @JoinColumn(name = "st_branch_id")
-//    @Cascade(value = CascadeType.ALL)
     private Branch branch;
 
     public Student() {
@@ -58,8 +75,12 @@ public class Student extends BaseModel {
         this.alternatePhoneNumber = builder.alternatePhoneNumber.get();
         this.dateOfBirth = builder.dateOfBirth.orElseGet(Date::new);
         this.mailId = builder.mailId.get();
+        this.gender = builder.gender.get();
         this.address = builder.address.get();
         this.branch = builder.branch.get();
+        this.caste = builder.caste.get();
+        this.religion = builder.religion.get();
+        this.guardians = builder.guardians.get();
     }
 
     public static Builder builder() {
@@ -75,6 +96,10 @@ public class Student extends BaseModel {
                 .withAlternatePhoneNumber(student.getAlternatePhoneNumber())
                 .withDateOfBirth(student.getDateOfBirth())
                 .withMailId(student.getMailId())
+                .withGender(Gender.valueOf(student.getGender()))
+                .withCaste(Caste.valueOf(student.getCaste()))
+                .withReligion(Religion.valueOf(student.getReligion()))
+                .withGuardians(student.getGuardians())
                 .withAddress(student.getAddress());
     }
 
@@ -106,12 +131,28 @@ public class Student extends BaseModel {
         return mailId;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
     public Address getAddress() {
         return address;
     }
 
     public Branch getBranch() {
         return branch;
+    }
+
+    public Caste getCaste() {
+        return caste;
+    }
+
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public Set<Guardian> getGuardians() {
+        return guardians;
     }
 
     public static class Builder extends BaseModel.Builder<Student, Builder> {
@@ -125,6 +166,11 @@ public class Student extends BaseModel {
         private Optional<String> mailId = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<Branch> branch = Optional.empty();
+        private Optional<Gender> gender = Optional.empty();
+        private Optional<Caste> caste = Optional.empty();
+        private Optional<Religion> religion = Optional.empty();
+        private Optional<Set<Guardian>> guardians = Optional.empty();
+
 
         private Builder() {
             super();
@@ -165,6 +211,11 @@ public class Student extends BaseModel {
             return this;
         }
 
+        public Builder withGender(final Gender theGender) {
+            this.gender = Optional.of(theGender);
+            return this;
+        }
+
         public Builder withAddress(final Address theAddress) {
             this.address = Optional.of(theAddress);
             return this;
@@ -172,6 +223,21 @@ public class Student extends BaseModel {
 
         public Builder withBranch(final Branch theBranch) {
             this.branch = Optional.of(theBranch);
+            return this;
+        }
+
+        public Builder withCaste(final Caste theCaste) {
+            this.caste = Optional.of(theCaste);
+            return this;
+        }
+
+        public Builder withReligion(final Religion theReligion) {
+            this.religion = Optional.of(theReligion);
+            return this;
+        }
+
+        public Builder withGuardians(final Set<Guardian> theGuardians) {
+            this.guardians = Optional.of(theGuardians);
             return this;
         }
 

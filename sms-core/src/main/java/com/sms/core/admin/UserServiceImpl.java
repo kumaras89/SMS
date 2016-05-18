@@ -18,13 +18,12 @@ public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
     }
 
     @Override
-    protected UserInfo buildToPersistObject(Long id, UserInfo user) {
-        return UserInfo.builder()
+    protected User buildToPersistObject(Long id, UserInfo user) {
+        return User.builder()
+                .withId(id)
                 .withPassword(user.getPassword())
-                .withRole(user.getRole())
+                .withRole(UserRole.valueOf(user.getRole()))
                 .withName(user.getName())
                 .build();
     }
-
-
 }

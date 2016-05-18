@@ -2,6 +2,7 @@ package com.sms.core.student;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.Set;
 
 public class StudentInfo {
 
@@ -14,6 +15,10 @@ public class StudentInfo {
     private String mailId;
     private Address address;
     private String branchCode;
+    private String gender;
+    private String caste;
+    private String religion;
+    private Set<Guardian> guardians;
 
     public StudentInfo() {
     }
@@ -28,6 +33,10 @@ public class StudentInfo {
         this.mailId = builder.mailId.get();
         this.address = builder.address.get();
         this.branchCode = builder.branch.get();
+        this.gender = builder.gender.get();
+        this.caste = builder.caste.get();
+        this.religion = builder.religion.get();
+        this.guardians = builder.guardians.get();
     }
 
     public static Builder builder() {
@@ -44,7 +53,11 @@ public class StudentInfo {
                 .withDateOfBirth(student.getDateOfBirth())
                 .withMailId(student.getMailId())
                 .withAddress(student.getAddress())
-                .withBranchCode(student.getBranch().getCode());
+                .withBranchCode(student.getBranch().getCode())
+                .withGender(student.getGender().name())
+                .withCaste(student.getCaste().name())
+                .withReligion(student.getReligion().name())
+                .withGuardians(student.getGuardians());
     }
 
     public String getCode() {
@@ -83,6 +96,22 @@ public class StudentInfo {
         return branchCode;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public String getCaste() {
+        return caste;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public Set<Guardian> getGuardians() {
+        return guardians;
+    }
+
     public static class Builder {
 
         private Optional<String> code = Optional.empty();
@@ -94,6 +123,11 @@ public class StudentInfo {
         private Optional<String> mailId = Optional.empty();
         private Optional<Address> address = Optional.empty();
         private Optional<String> branch = Optional.empty();
+        private Optional<String> gender = Optional.empty();
+        private Optional<String> caste = Optional.empty();
+        private Optional<String> religion = Optional.empty();
+        private Optional<Set<Guardian>> guardians = Optional.empty();
+
 
         private Builder() {
             super();
@@ -141,6 +175,26 @@ public class StudentInfo {
 
         public Builder withBranchCode(final String theBranch) {
             this.branch = Optional.of(theBranch);
+            return this;
+        }
+
+        public Builder withGender(final String theGender) {
+            this.gender = Optional.of(theGender);
+            return this;
+        }
+
+        public Builder withCaste(final String theCaste) {
+            this.caste = Optional.of(theCaste);
+            return this;
+        }
+
+        public Builder withReligion(final String theReligion) {
+            this.religion = Optional.of(theReligion);
+            return this;
+        }
+
+        public Builder withGuardians(final Set<Guardian> theGuardians) {
+            this.guardians = Optional.of(theGuardians);
             return this;
         }
 

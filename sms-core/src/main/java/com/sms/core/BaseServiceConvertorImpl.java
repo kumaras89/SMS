@@ -19,11 +19,11 @@ public abstract class BaseServiceConvertorImpl<SOURCE, TARGET> implements IStude
     public BaseServiceConvertorImpl(final JpaRepository<TARGET, Long> jpaRepository,
                                     final Converter<SOURCE, TARGET> sourceConverter,
                                     final Converter<TARGET, SOURCE> destinationConverter) {
-        BiFunction<Long, SOURCE,SOURCE> buildPersist = this::buildToPersistObject;
+        BiFunction<Long, SOURCE, TARGET> buildPersist = this::buildToPersistObject;
         this.studentPortalService = new BaseServiceImpl<TARGET>(jpaRepository) {
             @Override
             protected TARGET buildToPersistObject(Long id, TARGET entityObject) {
-                return sourceConverter.convert(buildPersist.apply(id, destinationConverter.convert(entityObject)));
+                return buildPersist.apply(id, destinationConverter.convert(entityObject));
             }
         };
         this.sourceConverter = sourceConverter;
@@ -57,8 +57,8 @@ public abstract class BaseServiceConvertorImpl<SOURCE, TARGET> implements IStude
 
     @Override
     public Optional<SOURCE> update(Long id, SOURCE entityType) {
-        return studentPortalService.update(id, sourceConverter.convert(entityType)).map(destinationConverter::convert);
+        return studentPortalService.update(id, buildToPersistObject(id, entityType)).map(destinationConverter::convert);
     }
 
-    protected abstract SOURCE buildToPersistObject(final Long id, final SOURCE entityObject);
+    protected abstract TARGET buildToPersistObject(final Long id, final SOURCE entityObject);
 }
