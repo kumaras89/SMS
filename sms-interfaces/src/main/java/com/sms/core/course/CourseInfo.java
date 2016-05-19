@@ -1,0 +1,76 @@
+package com.sms.core.course;
+
+import java.util.Optional;
+
+public class CourseInfo {
+
+    private String code;
+    private String name;
+    private String description;
+
+    public CourseInfo() {
+    }
+
+    private CourseInfo(final Builder builder) {
+        this.name = builder.name.get();
+        this.code = builder.code.get();
+        this.description = builder.description.get();
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static Builder toBuilder(final Course course) {
+        return builder()
+                .withName(course.getName())
+                .withCode(course.getCode())
+                .withDescription(course.getDescription());
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public static class Builder {
+
+        private Optional<String> code = Optional.empty();
+        private Optional<String> name = Optional.empty();
+        private Optional<String> description = Optional.empty();
+
+        private Builder() {
+            super();
+        }
+
+        public Builder withCode(final String theCode) {
+            this.code = Optional.of(theCode);
+            return this;
+        }
+
+        public Builder withName(final String theName) {
+            this.name = Optional.of(theName);
+            return this;
+        }
+
+        public Builder withDescription(final String theDescription) {
+            this.description = Optional.of(theDescription);
+            return this;
+        }
+
+        public CourseInfo build() {
+            return new CourseInfo(this);
+        }
+
+        protected Builder getThis() {
+            return this;
+        }
+    }
+}

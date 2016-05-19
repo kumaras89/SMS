@@ -34,6 +34,9 @@ public class Guardian extends BaseModel {
     @Column(name = "gu_relation")
     private Relation relationShip;
 
+    @Column(name = "gu_phone_number")
+    private String phoneNumber;
+
     public Guardian() {
     }
 
@@ -47,6 +50,7 @@ public class Guardian extends BaseModel {
         this.annualIncome = builder.annualIncome.get();
         this.gender = builder.gender.get();
         this.relationShip = builder.relationShip.get();
+        this.phoneNumber = builder.phoneNumber.get();
     }
 
     public static Builder builder() {
@@ -81,6 +85,10 @@ public class Guardian extends BaseModel {
         return relationShip;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public static class Builder extends BaseModel.Builder<Guardian, Builder> {
 
         private Optional<Integer> isEmployed = Optional.empty();
@@ -90,6 +98,7 @@ public class Guardian extends BaseModel {
         private Optional<BigDecimal> annualIncome = Optional.empty();
         private Optional<Gender> gender = Optional.empty();
         private Optional<Relation> relationShip = Optional.empty();
+        private Optional<String> phoneNumber = Optional.empty();
 
         private Builder() {
             super();
@@ -127,6 +136,11 @@ public class Guardian extends BaseModel {
 
         public Builder withRelationShip(final Relation theRelationShip) {
             this.relationShip = Optional.of(theRelationShip);
+            return this;
+        }
+
+        public Builder withPhoneNumber(final String thePhoneNumber) {
+            this.phoneNumber = Optional.of(thePhoneNumber);
             return this;
         }
 

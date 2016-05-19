@@ -2,5 +2,5 @@ package com.sms.core;
 
 public enum Caste {
 
-    SC, ST, OBC, OC, MBC;
+    SC, ST, OBC, OC, MBC, BC, OTHERS;
 }

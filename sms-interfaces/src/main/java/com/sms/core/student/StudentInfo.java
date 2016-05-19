@@ -9,8 +9,8 @@ public class StudentInfo {
     private String code;
     private String name;
     private int age;
-    private long phoneNumber;
-    private Long alternatePhoneNumber;
+    private String phoneNumber;
+    private String alternatePhoneNumber;
     private Date dateOfBirth;
     private String mailId;
     private Address address;
@@ -19,6 +19,11 @@ public class StudentInfo {
     private String caste;
     private String religion;
     private Set<Guardian> guardians;
+    private Set<EducationDetail> educationDetails;
+    private String nationality;
+    private String maritalStatus;
+    private String englishFluency;
+    private String courseCode;
 
     public StudentInfo() {
     }
@@ -31,12 +36,17 @@ public class StudentInfo {
         this.alternatePhoneNumber = builder.alternatePhoneNumber.get();
         this.dateOfBirth = builder.dateOfBirth.get();
         this.mailId = builder.mailId.get();
+        this.gender = builder.gender.get();
         this.address = builder.address.get();
         this.branchCode = builder.branch.get();
-        this.gender = builder.gender.get();
         this.caste = builder.caste.get();
         this.religion = builder.religion.get();
         this.guardians = builder.guardians.get();
+        this.educationDetails = builder.educationDetails.get();
+        this.nationality = builder.nationality.get();
+        this.maritalStatus = builder.maritalStatus.get();
+        this.englishFluency = builder.englishFluency.get();
+        this.courseCode = builder.courseCode.get();
     }
 
     public static Builder builder() {
@@ -57,7 +67,12 @@ public class StudentInfo {
                 .withGender(student.getGender().name())
                 .withCaste(student.getCaste().name())
                 .withReligion(student.getReligion().name())
-                .withGuardians(student.getGuardians());
+                .withGuardians(student.getGuardians())
+                .withEducationDetails(student.getEducationDetails())
+                .withMaritalStatus(student.getMaritalStatus().name())
+                .withEnglishFluency(student.getEnglishFluency().name())
+                .withNationality(student.getNationality())
+                .withCourseCode(student.getCourse().getCode());
     }
 
     public String getCode() {
@@ -72,11 +87,11 @@ public class StudentInfo {
         return age;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public Long getAlternatePhoneNumber() {
+    public String getAlternatePhoneNumber() {
         return alternatePhoneNumber;
     }
 
@@ -112,13 +127,33 @@ public class StudentInfo {
         return guardians;
     }
 
+    public Set<EducationDetail> getEducationDetails() {
+        return educationDetails;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public String getEnglishFluency() {
+        return englishFluency;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
     public static class Builder {
 
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<Integer> age = Optional.empty();
-        private Optional<Long> phoneNumber = Optional.empty();
-        private Optional<Long> alternatePhoneNumber = Optional.empty();
+        private Optional<String> phoneNumber = Optional.empty();
+        private Optional<String> alternatePhoneNumber = Optional.empty();
         private Optional<Date> dateOfBirth = Optional.empty();
         private Optional<String> mailId = Optional.empty();
         private Optional<Address> address = Optional.empty();
@@ -127,7 +162,11 @@ public class StudentInfo {
         private Optional<String> caste = Optional.empty();
         private Optional<String> religion = Optional.empty();
         private Optional<Set<Guardian>> guardians = Optional.empty();
-
+        private Optional<Set<EducationDetail>> educationDetails = Optional.empty();
+        private Optional<String> nationality = Optional.empty();
+        private Optional<String> maritalStatus = Optional.empty();
+        private Optional<String> englishFluency = Optional.empty();
+        private Optional<String> courseCode = Optional.empty();
 
         private Builder() {
             super();
@@ -148,12 +187,12 @@ public class StudentInfo {
             return this;
         }
 
-        public Builder withPhoneNumber(final Long thePhoneNumber) {
+        public Builder withPhoneNumber(final String thePhoneNumber) {
             this.phoneNumber = Optional.of(thePhoneNumber);
             return this;
         }
 
-        public Builder withAlternatePhoneNumber(final Long theAlternatePhoneNumber) {
+        public Builder withAlternatePhoneNumber(final String theAlternatePhoneNumber) {
             this.alternatePhoneNumber = Optional.of(theAlternatePhoneNumber);
             return this;
         }
@@ -195,6 +234,31 @@ public class StudentInfo {
 
         public Builder withGuardians(final Set<Guardian> theGuardians) {
             this.guardians = Optional.of(theGuardians);
+            return this;
+        }
+
+        public Builder withEducationDetails(final Set<EducationDetail> theEducationDetails) {
+            this.educationDetails = Optional.of(theEducationDetails);
+            return this;
+        }
+
+        public Builder withNationality(final String theNationality) {
+            this.nationality = Optional.of(theNationality);
+            return this;
+        }
+
+        public Builder withMaritalStatus(final String theMaritalStatus) {
+            this.maritalStatus = Optional.of(theMaritalStatus);
+            return this;
+        }
+
+        public Builder withEnglishFluency(final String theEnglishFluency) {
+            this.englishFluency = Optional.of(theEnglishFluency);
+            return this;
+        }
+
+        public Builder withCourseCode(final String theCourseCode) {
+            this.courseCode = Optional.of(theCourseCode);
             return this;
         }
 
