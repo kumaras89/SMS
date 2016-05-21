@@ -24,6 +24,7 @@ public class StudentInfo {
     private String maritalStatus;
     private String englishFluency;
     private String courseCode;
+    private String schemeCode;
 
     public StudentInfo() {
     }
@@ -47,6 +48,7 @@ public class StudentInfo {
         this.maritalStatus = builder.maritalStatus.get();
         this.englishFluency = builder.englishFluency.get();
         this.courseCode = builder.courseCode.get();
+        this.schemeCode = builder.schemeCode.get();
     }
 
     public static Builder builder() {
@@ -72,7 +74,8 @@ public class StudentInfo {
                 .withMaritalStatus(student.getMaritalStatus().name())
                 .withEnglishFluency(student.getEnglishFluency().name())
                 .withNationality(student.getNationality())
-                .withCourseCode(student.getCourse().getCode());
+                .withCourseCode(student.getCourse().getCode())
+                .withSchemeCode(student.getScheme().getCode());
     }
 
     public String getCode() {
@@ -147,6 +150,10 @@ public class StudentInfo {
         return courseCode;
     }
 
+    public String getSchemeCode() {
+        return schemeCode;
+    }
+
     public static class Builder {
 
         private Optional<String> code = Optional.empty();
@@ -167,6 +174,7 @@ public class StudentInfo {
         private Optional<String> maritalStatus = Optional.empty();
         private Optional<String> englishFluency = Optional.empty();
         private Optional<String> courseCode = Optional.empty();
+        private Optional<String> schemeCode = Optional.empty();
 
         private Builder() {
             super();
@@ -259,6 +267,11 @@ public class StudentInfo {
 
         public Builder withCourseCode(final String theCourseCode) {
             this.courseCode = Optional.of(theCourseCode);
+            return this;
+        }
+
+        public Builder withSchemeCode(final String theSchemeCode) {
+            this.schemeCode = Optional.of(theSchemeCode);
             return this;
         }
 

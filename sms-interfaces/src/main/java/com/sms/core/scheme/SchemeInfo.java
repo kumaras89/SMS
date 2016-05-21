@@ -1,46 +1,36 @@
-package com.sms.core.course;
+package com.sms.core.scheme;
 
-import com.sms.core.BaseModel;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Optional;
+import java.util.Set;
 
-@Entity
-@Table(name = "sp_ma_course")
-public class Course extends BaseModel {
+public class SchemeInfo {
 
-    @Column(name = "co_code", unique = true)
     private String code;
-
-    @Column(name = "co_name")
     private String name;
-
-    @Column(name = "co_description")
     private String description;
+    private Set<FeesCategory> feesCategories;
 
-    public Course() {
+    public SchemeInfo() {
     }
 
-    private Course(final Builder builder) {
-        super(builder);
-        this.name = builder.name.get();
+    public SchemeInfo(Builder builder) {
         this.code = builder.code.get();
+        this.name = builder.name.get();
         this.description = builder.description.get();
+        this.feesCategories = builder.feesCategories.get();
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public static Builder toBuilder(final CourseInfo course) {
+    public static Builder toBuilder(final Scheme scheme) {
         return builder()
-                .withName(course.getName())
-                .withCode(course.getCode())
-                .withDescription(course.getDescription());
+                .withName(scheme.getName())
+                .withCode(scheme.getCode())
+                .withDescription(scheme.getDescription())
+                .withFeesCategories(scheme.getFeesCategories());
     }
-
 
     public String getCode() {
         return code;
@@ -54,11 +44,16 @@ public class Course extends BaseModel {
         return description;
     }
 
-    public static class Builder extends BaseModel.Builder<Course, Builder> {
+    public Set<FeesCategory> getFeesCategories() {
+        return feesCategories;
+    }
+
+    public static class Builder {
 
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
+        private Optional<Set<FeesCategory>> feesCategories = Optional.empty();
 
         private Builder() {
             super();
@@ -79,11 +74,15 @@ public class Course extends BaseModel {
             return this;
         }
 
-        public Course build() {
-            return new Course(this);
+        public Builder withFeesCategories(final Set<FeesCategory> theFeesCategories) {
+            this.feesCategories = Optional.of(theFeesCategories);
+            return this;
         }
 
-        @Override
+        public SchemeInfo build() {
+            return new SchemeInfo(this);
+        }
+
         protected Builder getThis() {
             return this;
         }

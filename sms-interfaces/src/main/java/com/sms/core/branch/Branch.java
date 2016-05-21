@@ -13,7 +13,7 @@ import java.util.Optional;
 @Table(name = "sp_ma_branch")
 public class Branch extends BaseModel {
 
-    @Column(name = "br_code")
+    @Column(name = "br_code", unique = true)
     private String code;
 
     @Column(name = "br_name")

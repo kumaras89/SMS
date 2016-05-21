@@ -68,7 +68,8 @@
     "nationality": "INDIAN",
     "maritalStatus": "SINGLE",
     "englishFluency": "EXCELLENT",
-    "courseCode": "C001"
+    "courseCode": "C001",
+    "schemeCode": "SC001"
 }
 
 # To test insertion of new branch
@@ -97,3 +98,25 @@
 
 # To test course details
 {"code":"C001","name":"Hotel Management","description":"Hotel Management Details"}
+
+# To test FeesCategory Details
+{"code":"FC999","name":"Test Fees","description":"usedd for testing application", "weightage":0}
+
+# To test Scheme Details
+{"code":"SC001","name":"Default Scheme","description":"Applied to all students by Default",
+"feesCategories": [
+{"code":"FC001","name":"Admission Fees","description":"collected during admission", "weightage":20},
+{"code":"FC002","name":"Tution Fees","description":"collected during admission", "weightage":10},
+{"code":"FC003","name":"Registration Fees","description":"collected during admission", "weightage":5},
+{"code":"FC004","name":"Entrance Fees","description":"collected during admission", "weightage":5},
+{"code":"FC005","name":"Uniform Fees","description":"collected during admission", "weightage":10},
+{"code":"FC006","name":"Tamil/English Typing Fees","description":"collected during admission", "weightage":5},
+{"code":"FC007","name":"Pratical/Lab Fees","description":"collected during admission", "weightage":10},
+{"code":"FC008","name":"Book/Record Note Fees","description":"collected during admission", "weightage":10},
+{"code":"FC009","name":"Exam Note Fees","description":"collected during admission", "weightage":10},
+{"code":"FC010","name":"Hostel/Mess Fees","description":"collected during admission", "weightage":5},
+{"code":"FC011","name":"Bus Fees","description":"collected during admission", "weightage":5},
+{"code":"FC012","name":"Breakage Fees","description":"collected during admission", "weightage":5},
+{"code":"FC013","name":"Other Fees","description":"collected during admission", "weightage":0}
+]
+}

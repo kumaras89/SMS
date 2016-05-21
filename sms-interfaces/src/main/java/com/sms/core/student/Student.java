@@ -3,6 +3,7 @@ package com.sms.core.student;
 import com.sms.core.*;
 import com.sms.core.branch.Branch;
 import com.sms.core.course.Course;
+import com.sms.core.scheme.Scheme;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Table(name = "sp_tr_student")
 public class Student extends BaseModel {
 
-    @Column(name = "st_code")
+    @Column(name = "st_code", unique = true)
     private String code;
 
     @Column(name = "st_name")
@@ -35,7 +36,7 @@ public class Student extends BaseModel {
     @Column(name = "st_date_of_birth")
     private Date dateOfBirth;
 
-    @Column(name = "st_mail_id")
+    @Column(name = "st_mail_id", unique = true)
     private String mailId;
 
     @Column(name = "st_gender")
@@ -77,6 +78,10 @@ public class Student extends BaseModel {
     @JoinColumn(name = "st_course_id")
     private Course course;
 
+    @ManyToOne
+    @JoinColumn(name = "st_scheme_id")
+    private Scheme scheme;
+
     public Student() {
         super();
     }
@@ -101,6 +106,7 @@ public class Student extends BaseModel {
         this.maritalStatus = builder.maritalStatus.get();
         this.englishFluency = builder.englishFluency.get();
         this.course = builder.course.get();
+        this.scheme = builder.scheme.get();
     }
 
     public static Builder builder() {
@@ -199,6 +205,10 @@ public class Student extends BaseModel {
         return course;
     }
 
+    public Scheme getScheme() {
+        return scheme;
+    }
+
     public static class Builder extends BaseModel.Builder<Student, Builder> {
 
         private Optional<String> code = Optional.empty();
@@ -219,6 +229,7 @@ public class Student extends BaseModel {
         private Optional<MaritalStatus> maritalStatus = Optional.empty();
         private Optional<Rating> englishFluency = Optional.empty();
         private Optional<Course> course = Optional.empty();
+        private Optional<Scheme> scheme = Optional.empty();
 
         private Builder() {
             super();
@@ -311,6 +322,11 @@ public class Student extends BaseModel {
 
         public Builder withCourse(final Course theCourse) {
             this.course = Optional.ofNullable(theCourse);
+            return this;
+        }
+
+        public Builder withScheme(final Scheme theScheme) {
+            this.scheme = Optional.ofNullable(theScheme);
             return this;
         }
 

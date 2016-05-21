@@ -1,4 +1,4 @@
-package com.sms.core.course;
+package com.sms.core.scheme;
 
 import com.sms.core.BaseModel;
 
@@ -8,39 +8,39 @@ import javax.persistence.Table;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_ma_course")
-public class Course extends BaseModel {
+@Table(name = "sp_ma_fees_category")
+public class FeesCategory extends BaseModel {
 
-    @Column(name = "co_code", unique = true)
+    @Column(name = "fc_code", unique = true)
     private String code;
 
-    @Column(name = "co_name")
+    @Column(name = "fc_name")
     private String name;
 
-    @Column(name = "co_description")
-    private String description;
+    @Column(name = "fc_weightage")
+    private int weightage = 0;
 
-    public Course() {
+    public FeesCategory() {
+        super();
     }
 
-    private Course(final Builder builder) {
+    public FeesCategory(Builder builder) {
         super(builder);
-        this.name = builder.name.get();
         this.code = builder.code.get();
-        this.description = builder.description.get();
+        this.name = builder.name.get();
+        this.weightage = builder.weightage.get();
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public static Builder toBuilder(final CourseInfo course) {
+    public static Builder toBuilder(final FeesCategoryInfo feesCategoryInfo) {
         return builder()
-                .withName(course.getName())
-                .withCode(course.getCode())
-                .withDescription(course.getDescription());
+                .withCode(feesCategoryInfo.getCode())
+                .withName(feesCategoryInfo.getName())
+                .withWeightage(feesCategoryInfo.getWeightage());
     }
-
 
     public String getCode() {
         return code;
@@ -50,15 +50,15 @@ public class Course extends BaseModel {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public int getWeightage() {
+        return weightage;
     }
 
-    public static class Builder extends BaseModel.Builder<Course, Builder> {
+    public static class Builder extends BaseModel.Builder<FeesCategory, Builder> {
 
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
-        private Optional<String> description = Optional.empty();
+        private Optional<Integer> weightage = Optional.empty();
 
         private Builder() {
             super();
@@ -74,13 +74,13 @@ public class Course extends BaseModel {
             return this;
         }
 
-        public Builder withDescription(final String theDescription) {
-            this.description = Optional.of(theDescription);
+        public Builder withWeightage(final Integer theWeightage) {
+            this.weightage = Optional.of(theWeightage);
             return this;
         }
 
-        public Course build() {
-            return new Course(this);
+        public FeesCategory build() {
+            return new FeesCategory(this);
         }
 
         @Override
