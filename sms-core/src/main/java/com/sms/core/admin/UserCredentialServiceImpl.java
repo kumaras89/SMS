@@ -24,6 +24,14 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     @Value("${PASSWORD_NOT_MATCH_ERROR_MSG}")
     private String passwordNotMatchErrorMsg;
 
+    @Value("${DEFAULT_PASSWORD}")
+    private String defaultPassword;
+
+    public void resetPassword(final Long theId) {
+        final User user = userRepository.findOne(theId);
+        userRepository.changePassword(encoder.encode(defaultPassword), user.getName());
+    }
+
     public void changePassword(final Password password) {
 
         final User user = userRepository.findByNameIgnoreCase(password.getUserName());

@@ -21,24 +21,19 @@ public abstract class BaseController<T> {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<T>> listAll() {
-        final List<T> entityObjects = studentPortalService.findAll();
-        if (entityObjects.isEmpty()) {
-            return new ResponseEntity<List<T>>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<List<T>>(entityObjects, HttpStatus.OK);
+        return Optional.ofNullable(studentPortalService.findAll())
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<T> get(@PathVariable("id") long id) {
+        return studentPortalService.
+                findById(id).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
-        System.out.println("Fetching with id " + id);
-        final Optional<T> entityObject = studentPortalService.findById(id);
-
-        if (!entityObject.isPresent()) {
-            System.out.println("Student with id " + id + " not found");
-            return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<T>(entityObject.get(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -46,21 +41,20 @@ public abstract class BaseController<T> {
 
         studentPortalService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<T> update(@PathVariable("id") long id,
                                     @RequestBody T entityObject) {
-        final Optional<T> persistedStudent = studentPortalService.update(id, entityObject);
-        return new ResponseEntity<T>(persistedStudent.get(), HttpStatus.OK);
+        return studentPortalService.update(id, entityObject)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<T> delete(@PathVariable("id") long id) {
-
-        System.out.println("Fetching & Deleting Student with id " + id);
         studentPortalService.delete(id);
-        return new ResponseEntity<T>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

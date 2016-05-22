@@ -14,7 +14,12 @@ public class NoRedirectLogoutSucessHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		// no redirect 
+		try {
 
+			response.getWriter().print("{ \"result\": true, \"message\" : \"Logged out!\" }");
+	        response.getWriter().flush();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 }

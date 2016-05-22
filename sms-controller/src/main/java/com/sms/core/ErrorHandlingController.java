@@ -3,6 +3,7 @@ package com.sms.core;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,4 +33,11 @@ public class ErrorHandlingController {
 
 		return String.format("{ \"%s\" : \"%s\" }", "error", e.getMessage());
 	}
+	
+	
+	@ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public String exception(AccessDeniedException e) {
+        return "{\"status\":\"access denied\"}";
+    } 
 }

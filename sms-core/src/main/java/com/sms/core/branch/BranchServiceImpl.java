@@ -19,7 +19,6 @@ public class BranchServiceImpl extends BaseServiceImpl<Branch> {
 
     @Override
     protected Branch buildToPersistObject(final Long id, final Branch student) {
-
         return Branch.builder()
                 .withId(id)
                 .withCode(student.getCode())

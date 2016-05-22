@@ -6,87 +6,133 @@ import javax.persistence.*;
 import java.util.Optional;
 
 @Entity
-@Table(name = "LG_MA_USER")
+@Table(name = "SMS_MA_USER")
 public class User extends BaseModel {
 
-    @Column(name = "US_NAME")
-    private String name;
+	@Column(name = "US_FIRST_NAME")
+	private String firstName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "US_ROLE")
-    private UserRole role;
+	@Column(name = "US_LAST_NAME")
+	private String lastName;
 
-    @Column(name = "US_PASSWORD")
-    private String password;
+	@Column(name = "US_BRANCH")
+	private String branch;
 
-    public User() {
-        super();
-    }
+	@Column(name = "US_NAME")
+	private String name;
 
-    private User(final Builder builder) {
-        //super(builder);
-        this.name = builder.name.get();
-        this.role = builder.userRole.get();
-        this.password = builder.password.get();
-    }
+	@Enumerated(EnumType.STRING)
+	@Column(name = "US_ROLE")
+	private UserRole role;
 
-    public static Builder builder() {
-        return new Builder();
-    }
+	@Column(name = "US_PASSWORD")
+	private String password;
 
-    public static Builder toBuilder(final User user) {
+	public User() {
+		super();
+	}
 
-        return builder()
-                .withId(user.getId())
-                .withRole(user.getRole())
-                .withPassword(user.getPassword());
-    }
+	private User(final Builder builder) {
+		super(builder);
 
-    public String getName() {
-        return name;
-    }
+		this.name = builder.name.orElse(null);
+		this.role = builder.userRole.orElse(null);
+		this.password = builder.password.orElse(null);
+		this.firstName = builder.firstName.orElse(null);
+		this.lastName = builder.lastName.orElse(null);
+		this.branch = builder.branch.orElse(null);
+	}
 
-    public UserRole getRole() {
-        return role;
-    }
+	public static Builder builder() {
+		return new Builder();
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public static Builder toBuilder(final User user) {
 
-    public static class Builder extends BaseModel.Builder<User, Builder> {
+		return builder().withId(user.getId())
+				.withRole(user.getRole())
+				.withPassword(user.getPassword())
+				.withBranch(user.getBranch())
+				.withFirstName(user.getFirstName())
+				.withLastName(user.getLastName());
 
-        private Optional<String> name = Optional.empty();
-        private Optional<UserRole> userRole = Optional.empty();
-        private Optional<String> password = Optional.empty();
+	}
 
-        private Builder() {
-            super();
-        }
+	public String getName() {
+		return name;
+	}
 
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
+	public UserRole getRole() {
+		return role;
+	}
 
-        public Builder withRole(final UserRole theUserRole) {
-            this.userRole = Optional.of(theUserRole);
-            return this;
-        }
+	public String getPassword() {
+		return password;
+	}
 
-        public Builder withPassword(final String thePassword) {
-            this.password = Optional.of(thePassword);
-            return this;
-        }
+	public String getFirstName() {
+		return firstName;
+	}
 
-        public User build() {
-            return new User(this);
-        }
+	public String getLastName() {
+		return lastName;
+	}
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
-    }
+	public String getBranch() {
+		return branch;
+	}
+
+	public static class Builder extends BaseModel.Builder<User, Builder> {
+
+		private Optional<String> firstName = Optional.empty();
+		private Optional<String> lastName = Optional.empty();
+		private Optional<String> branch = Optional.empty();
+		private Optional<String> name = Optional.empty();
+		private Optional<UserRole> userRole = Optional.empty();
+		private Optional<String> password = Optional.empty();
+
+		private Builder() {
+			super();
+		}
+
+		public Builder withName(final String theName) {
+			this.name = Optional.of(theName);
+			return this;
+		}
+
+		public Builder withFirstName(final String theName) {
+			this.firstName = Optional.of(theName);
+			return this;
+		}
+
+		public Builder withLastName(final String theName) {
+			this.lastName = Optional.of(theName);
+			return this;
+		}
+
+		public Builder withBranch(final String theName) {
+			this.branch = Optional.of(theName);
+			return this;
+		}
+
+		public Builder withRole(final UserRole theUserRole) {
+			this.userRole = Optional.of(theUserRole);
+			return this;
+		}
+
+		public Builder withPassword(final String thePassword) {
+			this.password = Optional.of(thePassword);
+			return this;
+		}
+
+		public User build() {
+			return new User(this);
+		}
+
+		@Override
+		protected Builder getThis() {
+			return this;
+		}
+	}
 
 }

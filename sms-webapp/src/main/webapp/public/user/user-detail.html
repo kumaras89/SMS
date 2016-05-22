@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>Branch detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="name">User Name:</label>
+            <div class="controls">
+                <input type="text" id="name" ng-model="user.name" placeholder="User Name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="firstName">First Name:</label>
+            <div class="controls">
+                <input type="text" id="firstName" ng-model="user.firstName" placeholder="First Name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="lastName">Last Name:</label>
+            <div class="controls">
+                <input type="text" id="lastName" ng-model="user.lastName" placeholder="Last Name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="role">Role : </label>
+            <div class="controls">
+                <input type="text" id="role" ng-model="user.role" placeholder="Role"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="branch">Branch:</label>
+            <div class="controls">
+                <input type="text" id="branch" ng-model="user.branch" placeholder="Branch"/>
+            </div>
+        </div>
+        <br><br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+            </div>
+        </div>
+    </form>
+</div>

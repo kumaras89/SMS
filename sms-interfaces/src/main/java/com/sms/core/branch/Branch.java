@@ -19,8 +19,8 @@ public class Branch extends BaseModel {
     @Column(name = "br_name")
     private String name;
 
-    @Column(name = "br_active")
-    private Integer isActive;
+     @Column(name = "br_active")
+     private Integer isActive;
 
     @ManyToOne
     @JoinColumn(name = "br_address_id")

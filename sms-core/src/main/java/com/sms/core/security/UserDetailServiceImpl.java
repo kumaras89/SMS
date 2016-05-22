@@ -30,8 +30,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 //                .map(userService::findByNameIgnoreCase)
 //                .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().name()))))
 //                .get();
-        return Optional.of(username)
-                .filter(e -> !"ADMIN".equalsIgnoreCase(e)).map(userService::findByNameIgnoreCase)
+        UserDetails userDetails = Optional.of(username)
+                .filter(e -> !"ADMIN".equalsIgnoreCase(e))
+                .map(userService::findByNameIgnoreCase)
                 .map(Optional::of)
                 .orElseGet(() -> Optional.of(com.sms.core.admin.User.builder()
                         .withName(username)
@@ -40,5 +41,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
                         .build()))
                 .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().name()))))
                 .get();
+        return userDetails;
     }
 }

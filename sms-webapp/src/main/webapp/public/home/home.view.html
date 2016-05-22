@@ -1,0 +1,6 @@
+﻿<p>You're logged in as {{globals.currentUser.otherDetails.name }}!!</p>
+<a include-if-allowed operation="branch" href="#/branch-list">Manage Branch</a><br>
+<a include-if-allowed operation="user" href="#/user-list">Manage Users</a><br>
+<a include-if-allowed operation="student" href="#/user">Manage Students</a><br>
+<p>&nbsp;</p>
+<p><a href="#/logout" class="btn btn-primary">Logout</a></p>

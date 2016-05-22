@@ -23,4 +23,5 @@ public class LoginRestController {
     public void changePassword(@RequestBody @Valid Password password) {
         userCredentialService.changePassword(password);
     }
+
 }

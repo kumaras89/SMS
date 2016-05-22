@@ -21,6 +21,10 @@ public class UserConverterImpl implements Converter<UserInfo, User> {
                 .withName(userInfo.getName())
                 .withRole(UserRole.valueOf(userInfo.getRole().toUpperCase()))
                 .withPassword(encoder.encode(defaultPassword))
+                .withBranch(userInfo.getBranch())
+                .withFirstName(userInfo.getFirstName())
+                .withLastName(userInfo.getLastName())
+                .withId(userInfo.getId())
                 .build();
     }
 }

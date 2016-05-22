@@ -35,10 +35,10 @@
 	</filter-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/views/index.html</welcome-file>
+		<welcome-file>/public/index.html</welcome-file>
 	</welcome-file-list>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>/public/*</url-pattern>
+		<url-pattern>/public/**</url-pattern>
 	</servlet-mapping>
 </web-app>

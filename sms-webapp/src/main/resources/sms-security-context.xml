@@ -7,13 +7,16 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http use-expressions="true" auto-config="false"
-                   entry-point-ref="http403EntryPoint">
+                   entry-point-ref="http403EntryPoint" access-decision-manager-ref="accessDecisionManager" >
         <security:csrf disabled="true"/>
-        <security:intercept-url pattern="/login"
+        <security:intercept-url pattern="/login/**"
+                                access="permitAll"/>
+        <security:intercept-url pattern="/authenticate"
+                                access="permitAll"/>
+        <security:intercept-url pattern="/public/**"
                                 access="permitAll"/>
         <security:intercept-url pattern="/**"
                                 access="isAuthenticated()"/>
-
         <security:custom-filter ref="smsAuthenticationFilter"
                                 position="FORM_LOGIN_FILTER"/>
         <security:custom-filter ref="logoutFilter"
@@ -30,7 +33,7 @@
         <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
         <property name="passwordParameter" value="password"/>
         <property name="usernameParameter" value="username"/>
-        <property name="filterProcessesUrl" value="/login"/>
+        <property name="filterProcessesUrl" value="/authenticate"/>
     </bean>
 
     <bean id="authenticationSuccessHandler"
@@ -59,4 +62,16 @@
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <bean id="userDetailService" class="com.sms.core.security.UserDetailServiceImpl"/>
+
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+                <bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
+                <bean class="com.sms.core.security.filter.OperationAuthorizationVoter"/>
+
+            </list>
+        </constructor-arg>
+    </bean>
 </beans>
