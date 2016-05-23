@@ -18,6 +18,7 @@ public class UserRestController extends BaseController<UserInfo>{
     @Autowired
     public UserRestController(final IStudentPortalService<UserInfo> userService, UserCredentialService credentialService) {
         super(userService);
+        this.credentialService = credentialService;
     }
 
     @RequestMapping(value = "/resetpassword/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

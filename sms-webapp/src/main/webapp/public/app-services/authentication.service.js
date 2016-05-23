@@ -3,7 +3,8 @@
 
     angular
         .module('app')
-        .factory('AuthenticationService', AuthenticationService).directive('includeIfAllowed', function(AuthenticationService){
+        .factory('AuthenticationService', AuthenticationService)
+        .directive('includeIfAllowed', function(AuthenticationService){
             return {
                 restrict: 'A',
                 priority: 100000,
@@ -18,10 +19,10 @@
                     });
                 }
             }
-    });
+        });
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout) {
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope'];
+    function AuthenticationService($http, $cookieStore, $rootScope) {
         var service = {};
 
         service.Login = Login;

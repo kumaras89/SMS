@@ -23,19 +23,25 @@
         <div class="control-group">
             <label class="control-label" for="role">Role : </label>
             <div class="controls">
-                <input type="text" id="role" ng-model="user.role" placeholder="Role"/>
+                <input type="text" ng-model="user.role" list="roles"  id="role" placeholder="Role"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="branch">Branch:</label>
             <div class="controls">
-                <input type="text" id="branch" ng-model="user.branch" placeholder="Branch"/>
+                <input type="text" ng-model="user.branch" list="branchNames" id="branch" placeholder="Branch"/>
             </div>
         </div>
+        <datalist id="roles">
+            <option  data-ng-repeat="role in roles" value="{{role}}">
+        </datalist>
+        <datalist id="branchNames">
+            <option  data-ng-repeat="bn in branchNames" value="{{bn}}">
+        </datalist>
         <br><br>
         <div class="control-group">
             <div class="controls">
-                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="#/user-list" class="btn btn-small">cancel</a>
                 <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
             </div>
         </div>
