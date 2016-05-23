@@ -1,6 +1,5 @@
 package com.sms.core.security;
 
-import com.sms.core.admin.UserRole;
 import com.sms.core.repositery.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,21 +25,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
-//        return Optional.of(username)
-//                .map(userService::findByNameIgnoreCase)
-//                .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().name()))))
-//                .get();
-        UserDetails userDetails = Optional.of(username)
-                .filter(e -> !"ADMIN".equalsIgnoreCase(e))
+        return Optional.of(username)
                 .map(userService::findByNameIgnoreCase)
-                .map(Optional::of)
-                .orElseGet(() -> Optional.of(com.sms.core.admin.User.builder()
-                        .withName(username)
-                        .withPassword(encoder.encode("admin"))
-                        .withRole(UserRole.SUPER_ADMIN)
-                        .build()))
                 .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().name()))))
                 .get();
-        return userDetails;
     }
 }

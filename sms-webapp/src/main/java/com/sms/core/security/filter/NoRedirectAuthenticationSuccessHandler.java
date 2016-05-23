@@ -1,17 +1,16 @@
 package com.sms.core.security.filter;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.Gson;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NoRedirectAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
@@ -28,7 +27,7 @@ public class NoRedirectAuthenticationSuccessHandler extends SimpleUrlAuthenticat
 			userJson.put("firstName", "Admin");
 			userJson.put("lastName", "");
 			userJson.put("role", "ADMIN");
-			userJson.put("allowedOperations", Arrays.asList("home","branch", "user","schema"));
+			userJson.put("allowedOperations", Arrays.asList("home", "branch", "course", "user", "schema"));
 			jsonResult.put("user", userJson);
 
 			response.getWriter().print(new Gson().toJson(jsonResult));

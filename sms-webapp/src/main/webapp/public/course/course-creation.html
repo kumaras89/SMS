@@ -1,0 +1,32 @@
+﻿<div class="container">
+    <h1>Create a Course</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="code">Code:</label>
+
+            <div class="controls">
+                <input type="text" id="code" ng-model="course.code" placeholder="Code"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="name">Name:</label>
+            <div class="controls">
+                <input type="text" id="name" ng-model="course.name" placeholder="Name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="description">Description:</label>
+            <div class="controls">
+                <textarea id="description" ng-model="course.description" placeholder="Description about the course"/>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="createNewCourse()" class="btn btn-small btn-primary">create new course</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,155 +1,158 @@
---1.Melmaruvathur Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Melmaruvathur', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 1, 'MMT01', 1, 'Melmaruvathur Branch');
+-- user insertion
+INSERT INTO SMS_MA_USER (ID, US_FIRST_NAME, US_LAST_NAME, US_BRANCH, US_NAME, US_ROLE, US_PASSWORD) VALUES (NULL, 'ADMIN', 'ADMIN', 'MMT01', 'ADMIN', 'SUPER_ADMIN', '$2a$10$IhHsRrddT9qVXke96pQqSO94hCzSlPolLHSElYFbKUaouVisr6g4W');
 
---2.Maduranthagam Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Maduranthagam', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 2, 'MDT01', 1, 'Maduranthagam Branch');
+--1.MELMARUVATHUR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'MELMARUVATHUR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 1, 'MMT01', 1, 'MELMARUVATHUR BRANCH');
 
---3.Chengalpattu Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Chengalpattu', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 3, 'CGP01', 1, 'Chengalpattu Branch');
+--2.MADURANTHAGAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'MADURANTHAGAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 2, 'MDT01', 1, 'MADURANTHAGAM BRANCH');
 
---4.Kanchipuram Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Kanchipuram', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 4, 'KCP01', 1, 'Kanchipuram Branch');
+--3.CHENGALPATTU BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CHENGALPATTU', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 3, 'CGP01', 1, 'CHENGALPATTU BRANCH');
 
---5.Cheyyar Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Cheyyar', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 5, 'CHY01', 1, 'Cheyyar Branch');
+--4.KANCHIPURAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'KANCHIPURAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 4, 'KCP01', 1, 'KANCHIPURAM BRANCH');
 
---6.Arani Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Arani', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 6, 'ARI01', 1, 'Arani Branch');
+--5.CHEYYAR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CHEYYAR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 5, 'CHY01', 1, 'CHEYYAR BRANCH');
 
---7.Vellore Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Vellore', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 7, 'VLR01', 1, 'Vellore Branch');
+--6.ARANI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'ARANI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 6, 'ARI01', 1, 'ARANI BRANCH');
 
---8.Chetpattu Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Chetpattu', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 8, 'CPT01', 1, 'Chetpattu Branch');
+--7.VELLORE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'VELLORE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 7, 'VLR01', 1, 'VELLORE BRANCH');
 
---9.Polure Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Polure', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 9, 'PLR01', 1, 'Polure Branch');
+--8.CHETPATTU BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CHETPATTU', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 8, 'CPT01', 1, 'CHETPATTU BRANCH');
 
---10.Thiruvannamalai Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Thiruvannamalai', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 10, 'TVM01', 1, 'Thiruvannamalai Branch');
+--9.POLURE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'POLURE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 9, 'PLR01', 1, 'POLURE BRANCH');
 
---11.Gingee Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Gingee', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 11, 'GNE01', 1, 'Gingee Branch');
+--10.THIRUVANNAMALAI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'THIRUVANNAMALAI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 10, 'TVM01', 1, 'THIRUVANNAMALAI BRANCH');
 
---12.Chengam Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Chengam', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 12, 'CGM01', 1, 'Chengam Branch');
+--11.GINGEE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'GINGEE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 11, 'GNE01', 1, 'GINGEE BRANCH');
 
---13.Thiruvallure Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Thiruvallure', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 13, 'TVR01', 1, 'Thiruvallure Branch');
+--12.CHENGAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CHENGAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 12, 'CGM01', 1, 'CHENGAM BRANCH');
 
---14.Thiruthani Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Thiruthani', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 14, 'TTN01', 1, 'Thiruthani Branch');
+--13.THIRUVALLURE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'THIRUVALLURE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 13, 'TVR01', 1, 'THIRUVALLURE BRANCH');
 
---15.Arakkonam Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Arakkonam', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 15, 'AKN01', 1, 'Arakkonam Branch');
+--14.THIRUTHANI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'THIRUTHANI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 14, 'TTN01', 1, 'THIRUTHANI BRANCH');
 
---16.Kallakurichi Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Kallakurichi', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 16, 'KKI01', 1, 'Kallakurichi Branch');
+--15.ARAKKONAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'ARAKKONAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 15, 'AKN01', 1, 'ARAKKONAM BRANCH');
 
---17.Sangarapuram Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Sangarapuram', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 17, 'SRP01', 1, 'Sangarapuram Branch');
+--16.KALLAKURICHI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'KALLAKURICHI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 16, 'KKI01', 1, 'KALLAKURICHI BRANCH');
 
---18.Ulunthurpettai Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Ulunthurpettai', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 18, 'UDP01', 1, 'Ulunthurpettai Branch');
+--17.SANGARAPURAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'SANGARAPURAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 17, 'SRP01', 1, 'SANGARAPURAM BRANCH');
 
---19.Villupuram Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Villupuram', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 19, 'VPM01', 1, 'Villupuram Branch');
+--18.ULUNTHURPETTAI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'ULUNTHURPETTAI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 18, 'UDP01', 1, 'ULUNTHURPETTAI BRANCH');
 
---20.Tindivanam Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Tindivanam', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 20, 'TDM01', 1, 'Tindivanam Branch');
+--19.VILLUPURAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'VILLUPURAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 19, 'VPM01', 1, 'VILLUPURAM BRANCH');
 
---21.Cudalure Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Cudalure', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 21, 'CDL01', 1, 'Cudalure Branch');
+--20.TINDIVANAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'TINDIVANAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 20, 'TDM01', 1, 'TINDIVANAM BRANCH');
 
---22.Chidambaram Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Chidambaram', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 22, 'CDM01', 1, 'Chidambaram Branch');
+--21.CUDALURE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CUDALURE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 21, 'CDL01', 1, 'CUDALURE BRANCH');
 
---23.Vandavasi Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Vandavasi', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 23, 'VDV01', 1, 'Vandavasi Branch');
+--22.CHIDAMBARAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'CHIDAMBARAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 22, 'CDM01', 1, 'CHIDAMBARAM BRANCH');
 
---24.Uthiramerur Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Uthiramerur', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 24, 'UMR01', 1, 'Uthiramerur Branch');
+--23.VANDAVASI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'VANDAVASI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 23, 'VDV01', 1, 'VANDAVASI BRANCH');
 
---25.Prambalure Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Prambalure', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 25, 'PBL01', 1, 'Prambalure Branch');
+--24.UTHIRAMERUR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'UTHIRAMERUR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 24, 'UMR01', 1, 'UTHIRAMERUR BRANCH');
 
---26.Ariyalure Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Ariyalure', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 26, 'AYL01', 1, 'Ariyalure Branch');
+--25.PRAMBALURE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'PRAMBALURE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 25, 'PBL01', 1, 'PRAMBALURE BRANCH');
 
---27.Trichy Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Trichy', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 27, 'TRY01', 1, 'Trichy Branch');
+--26.ARIYALURE BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'ARIYALURE', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 26, 'AYL01', 1, 'ARIYALURE BRANCH');
 
---28.Thanjavur Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Thanjavur', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 28, 'TJV01', 1, 'Thanjavur Branch');
+--27.TRICHY BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'TRICHY', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 27, 'TRY01', 1, 'TRICHY BRANCH');
 
---29.Pattukottai Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Pattukottai', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 29, 'PTI01', 1, 'Pattukottai Branch');
+--28.THANJAVUR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'THANJAVUR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 28, 'TJV01', 1, 'THANJAVUR BRANCH');
 
---30.Kumbakonam Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Kumbakonam', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 30, 'KBM01', 1, 'Kumbakonam Branch');
+--29.PATTUKOTTAI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'PATTUKOTTAI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 29, 'PTI01', 1, 'PATTUKOTTAI BRANCH');
 
---31.Puthukottai Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Puthukottai', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 31, 'PDI01', 1, 'Puthukottai Branch');
+--30.KUMBAKONAM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'KUMBAKONAM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 30, 'KBM01', 1, 'KUMBAKONAM BRANCH');
 
---32.Thuraiyur Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Thuraiyur', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 32, 'TRI01', 1, 'Thuraiyur Branch');
+--31.PUTHUKOTTAI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'PUTHUKOTTAI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 31, 'PDI01', 1, 'PUTHUKOTTAI BRANCH');
 
---33.Madurai Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Madurai', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 33, 'MDI01', 1, 'Madurai Branch');
+--32.THURAIYUR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'THURAIYUR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 32, 'TRI01', 1, 'THURAIYUR BRANCH');
 
---34.Namakkal Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Namakkal', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 34, 'NMK01', 1, 'Namakkal Branch');
+--33.MADURAI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'MADURAI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 33, 'MDI01', 1, 'MADURAI BRANCH');
 
---35.Viruthunagar Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Viruthunagar', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 35, 'VDN01', 1, 'Viruthunagar Branch');
+--34.NAMAKKAL BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'NAMAKKAL', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 34, 'NMK01', 1, 'NAMAKKAL BRANCH');
 
---36.Salem Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Salem', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 36, 'SLM01', 1, 'Salem Branch');
+--35.VIRUTHUNAGAR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'VIRUTHUNAGAR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 35, 'VDN01', 1, 'VIRUTHUNAGAR BRANCH');
 
---37.Dindukal Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Dindukal', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 37, 'DDK01', 1, 'Dindukal Branch');
+--36.SALEM BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'SALEM', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 36, 'SLM01', 1, 'SALEM BRANCH');
 
---38.Dharmapuri Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Dharmapuri', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 38, 'DMP01', 1, 'Dharmapuri Branch');
+--37.DINDUKAL BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'DINDUKAL', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 37, 'DDK01', 1, 'DINDUKAL BRANCH');
 
---39.Harur Branch
-insert into sp_tr_address (id, ad_city, ad_country, ad_door_number, ad_postal_code, ad_state, ad_street_name) values (null, 'Harur', 'India', '1', '600063', 'Tamil Nadu', 'Gandhi Nagar');
-insert into sp_ma_branch (id, br_address_id, br_code, br_active, br_name) values (null, 39, 'HRR01', 1, 'Harur Branch');
+--38.DHARMAPURI BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'DHARMAPURI', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 38, 'DMP01', 1, 'DHARMAPURI BRANCH');
+
+--39.HARUR BRANCH
+INSERT INTO SP_TR_ADDRESS (ID, AD_CITY, AD_COUNTRY, AD_DOOR_NUMBER, AD_POSTAL_CODE, AD_STATE, AD_STREET_NAME) VALUES (NULL, 'HARUR', 'INDIA', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
+INSERT INTO SP_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (NULL, 39, 'HRR01', 1, 'HARUR BRANCH');

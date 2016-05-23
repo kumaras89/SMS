@@ -16,6 +16,7 @@
 
         service.branchService = service.of('branch')
         service.userService = service.of('user')
+        service.courseService = service.of('course')
 
         return service;
 
