@@ -15,71 +15,76 @@ import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Table(name = "sp_tr_student")
+@Table(name = "SMS_TR_STUDENT")
 public class Student extends BaseModel {
 
-    @Column(name = "st_code", unique = true)
+    @Column(name = "ST_CODE", unique = true)
     private String code;
 
-    @Column(name = "st_name")
+    @Column(name = "ST_NAME")
     private String name;
 
-    @Column(name = "st_age")
+    @Column(name = "ST_AGE")
     private int age;
 
-    @Column(name = "st_phone_number")
+    @Column(name = "ST_PHONE_NUMBER")
     private String phoneNumber;
 
-    @Column(name = "st_alternate_phone_number")
+    @Column(name = "ST_ALTERNATE_PHONE_NUMBER")
     private String alternatePhoneNumber;
 
-    @Column(name = "st_date_of_birth")
+    @Column(name = "ST_DATE_OF_BIRTH")
     private Date dateOfBirth;
 
-    @Column(name = "st_mail_id", unique = true)
+    @Column(name = "ST_MAIL_ID", unique = true)
     private String mailId;
 
-    @Column(name = "st_gender")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ST_GENDER")
     private Gender gender;
 
-    @Column(name = "st_caste")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ST_CASTE")
     private Caste caste;
 
-    @Column(name = "st_religion")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ST_RELIGION")
     private Religion religion;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "gu_student_id")
+    @JoinColumn(name = "GU_STUDENT_ID")
     private Set<Guardian> guardians;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ed_student_id")
+    @JoinColumn(name = "ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
     @ManyToOne
-    @JoinColumn(name = "st_address_id")
+    @JoinColumn(name = "ST_ADDRESS_ID")
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Address address;
 
     @ManyToOne
-    @JoinColumn(name = "st_branch_id")
+    @JoinColumn(name = "ST_BRANCH_ID")
     private Branch branch;
 
-    @Column(name = "st_nationality")
+    @Column(name = "ST_NATIONALITY")
     private String nationality;
 
-    @Column(name = "st_marital_status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ST_MARITAL_STATUS")
     private MaritalStatus maritalStatus;
 
-    @Column(name = "st_english_fluency")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ST_ENGLISH_FLUENCY")
     private Rating englishFluency;
 
     @ManyToOne
-    @JoinColumn(name = "st_course_id")
+    @JoinColumn(name = "ST_COURSE_ID")
     private Course course;
 
     @ManyToOne
-    @JoinColumn(name = "st_scheme_id")
+    @JoinColumn(name = "ST_SCHEME_ID")
     private Scheme scheme;
 
     public Student() {

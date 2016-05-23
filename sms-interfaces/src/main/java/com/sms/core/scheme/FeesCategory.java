@@ -8,16 +8,16 @@ import javax.persistence.Table;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_ma_fees_category")
+@Table(name = "SMS_MA_FEES_CATEGORY")
 public class FeesCategory extends BaseModel {
 
-    @Column(name = "fc_code", unique = true)
+    @Column(name = "FC_CODE", unique = true)
     private String code;
 
-    @Column(name = "fc_name")
+    @Column(name = "FC_NAME")
     private String name;
 
-    @Column(name = "fc_weightage")
+    @Column(name = "FC_WEIGHTAGE")
     private int weightage = 0;
 
     public FeesCategory() {

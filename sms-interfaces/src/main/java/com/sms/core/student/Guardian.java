@@ -10,31 +10,31 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_tr_guardian")
+@Table(name = "SMS_TR_GUARDIAN")
 public class Guardian extends BaseModel {
 
-    @Column(name = "gu_is_employed")
+    @Column(name = "GU_IS_EMPLOYED")
     private int isEmployed;
 
-    @Column(name = "gu_name")
+    @Column(name = "GU_NAME")
     private String name;
 
-    @Column(name = "gu_occupation")
+    @Column(name = "GU_OCCUPATION")
     private String occupation;
 
-    @Column(name = "gu_monthly_income")
+    @Column(name = "GU_MONTHLY_INCOME")
     private BigDecimal monthlyIncome;
 
-    @Column(name = "gu_annual_income")
+    @Column(name = "GU_ANNUAL_INCOME")
     private BigDecimal annualIncome;
 
-    @Column(name = "gu_gender")
+    @Column(name = "GU_GENDER")
     private Gender gender;
 
-    @Column(name = "gu_relation")
+    @Column(name = "GU_RELATION")
     private Relation relationShip;
 
-    @Column(name = "gu_phone_number")
+    @Column(name = "GU_PHONE_NUMBER")
     private String phoneNumber;
 
     public Guardian() {

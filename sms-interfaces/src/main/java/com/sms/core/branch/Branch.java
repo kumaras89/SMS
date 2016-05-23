@@ -10,20 +10,20 @@ import javax.persistence.*;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_ma_branch")
+@Table(name = "SMS_MA_BRANCH")
 public class Branch extends BaseModel {
 
-    @Column(name = "br_code", unique = true)
+    @Column(name = "BR_CODE", unique = true)
     private String code;
 
-    @Column(name = "br_name")
+    @Column(name = "BR_NAME")
     private String name;
 
-     @Column(name = "br_active")
+     @Column(name = "BR_ACTIVE")
      private Integer isActive;
 
     @ManyToOne
-    @JoinColumn(name = "br_address_id")
+    @JoinColumn(name = "BR_ADDRESS_ID")
     @Cascade(value = CascadeType.ALL)
     private Address address;
 

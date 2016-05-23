@@ -8,25 +8,25 @@ import javax.persistence.Table;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_tr_address")
+@Table(name = "SMS_TR_ADDRESS")
 public class Address extends BaseModel {
 
-    @Column(name = "ad_city")
+    @Column(name = "AD_CITY")
     private String city;
 
-    @Column(name = "ad_state")
+    @Column(name = "AD_STATE")
     private String state;
 
-    @Column(name = "ad_country")
+    @Column(name = "AD_COUNTRY")
     private String country;
 
-    @Column(name = "ad_street_name")
+    @Column(name = "AD_STREET_NAME")
     private String streetName;
 
-    @Column(name = "ad_door_number")
+    @Column(name = "AD_DOOR_NUMBER")
     private String doorNumber;
 
-    @Column(name = "ad_postal_code")
+    @Column(name = "AD_POSTAL_CODE")
     private long postalCode;
 
     public Address() {

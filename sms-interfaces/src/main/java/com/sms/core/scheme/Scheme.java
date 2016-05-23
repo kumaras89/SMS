@@ -7,20 +7,20 @@ import java.util.Optional;
 import java.util.Set;
 
 @Entity
-@Table(name = "sp_ma_scheme")
+@Table(name = "SMS_MA_SCHEME")
 public class Scheme extends BaseModel {
 
-    @Column(name = "sc_code", unique = true)
+    @Column(name = "SC_CODE", unique = true)
     private String code;
 
-    @Column(name = "sc_name")
+    @Column(name = "SC_NAME")
     private String name;
 
-    @Column(name = "sc_description")
+    @Column(name = "SC_DESCRIPTION")
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "fc_scheme_id")
+    @JoinColumn(name = "FC_SCHEME_ID")
     private Set<FeesCategory> feesCategories;
 
     public Scheme() {

@@ -8,25 +8,25 @@ import javax.persistence.Table;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_tr_education_detail")
+@Table(name = "SMS_TR_EDUCATION_DETAIL")
 public class EducationDetail extends BaseModel {
 
-    @Column(name = "ed_exam_passed")
+    @Column(name = "ED_EXAM_PASSED")
     private String examPassed;
 
-    @Column(name = "ed_institute_name")
+    @Column(name = "ED_INSTITUTE_NAME")
     private String instituteName;
 
-    @Column(name = "ed_group_name")
+    @Column(name = "ED_GROUP_NAME")
     private String groupName;
 
-    @Column(name = "ed_passing_year")
+    @Column(name = "ED_PASSING_YEAR")
     private Long passingYear;
 
-    @Column(name = "ed_percentage_obtained")
+    @Column(name = "ED_PERCENTAGE_OBTAINED")
     private Integer percentageObtained;
 
-    @Column(name = "ed_remark")
+    @Column(name = "ED_REMARK")
     private String remark;
 
     public EducationDetail() {

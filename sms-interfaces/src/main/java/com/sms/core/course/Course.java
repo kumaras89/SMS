@@ -8,16 +8,16 @@ import javax.persistence.Table;
 import java.util.Optional;
 
 @Entity
-@Table(name = "sp_ma_course")
+@Table(name = "SMS_MA_COURSE")
 public class Course extends BaseModel {
 
-    @Column(name = "co_code", unique = true)
+    @Column(name = "CO_CODE", unique = true)
     private String code;
 
-    @Column(name = "co_name")
+    @Column(name = "CO_NAME")
     private String name;
 
-    @Column(name = "co_description")
+    @Column(name = "CO_DESCRIPTION")
     private String description;
 
     public Course() {
