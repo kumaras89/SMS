@@ -2,13 +2,14 @@ package com.sms.core.scheme;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SchemeInfo {
 
     private String code;
     private String name;
     private String description;
-    private Set<FeesCategory> feesCategories;
+    private Set<String> feesCategories;
 
     public SchemeInfo() {
     }
@@ -29,7 +30,9 @@ public class SchemeInfo {
                 .withName(scheme.getName())
                 .withCode(scheme.getCode())
                 .withDescription(scheme.getDescription())
-                .withFeesCategories(scheme.getFeesCategories());
+                .withFeesCategories(scheme.getFeesCategories().stream()
+                        .map(feesCategory -> feesCategory.getCode())
+                        .collect(Collectors.toSet()));
     }
 
     public String getCode() {
@@ -44,7 +47,7 @@ public class SchemeInfo {
         return description;
     }
 
-    public Set<FeesCategory> getFeesCategories() {
+    public Set<String> getFeesCategories() {
         return feesCategories;
     }
 
@@ -53,7 +56,7 @@ public class SchemeInfo {
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
-        private Optional<Set<FeesCategory>> feesCategories = Optional.empty();
+        private Optional<Set<String>> feesCategories = Optional.empty();
 
         private Builder() {
             super();
@@ -74,7 +77,7 @@ public class SchemeInfo {
             return this;
         }
 
-        public Builder withFeesCategories(final Set<FeesCategory> theFeesCategories) {
+        public Builder withFeesCategories(final Set<String> theFeesCategories) {
             this.feesCategories = Optional.of(theFeesCategories);
             return this;
         }

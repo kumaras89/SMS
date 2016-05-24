@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Scheme detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="code">Code</label>
+
+            <div class="controls">
+                <input type="text" id="code" ng-model="scheme.code" readonly/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="name">Name:</label>
+            <div class="controls">
+                <input type="text" id="name" ng-model="scheme.name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="description">Description:</label>
+            <div class="controls">
+                <textarea id="description" ng-model="scheme.description"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="feesCategory.weightage">Fees Category:</label>
+            <div class="controls">
+                <tr ng-repeat="feesCategory in feesCategories">
+                    <td>{{ feesCategory.name }}</td>
+                    <td><input type="text" id="feesCategory.weightage" ng-model="feesCategory.name" placeholder="weightage"/></td>
+                </tr>
+            </div>
+        </div>
+        <br><br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateScheme()" class="btn btn-small btn-primary">update scheme</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -43,8 +43,7 @@ public class Scheme extends BaseModel {
         return builder()
                 .withName(schemeInfo.getName())
                 .withCode(schemeInfo.getCode())
-                .withDescription(schemeInfo.getDescription())
-                .withFeesCategories(schemeInfo.getFeesCategories());
+                .withDescription(schemeInfo.getDescription());
     }
 
     public String getCode() {

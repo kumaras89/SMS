@@ -27,7 +27,7 @@ public class NoRedirectAuthenticationSuccessHandler extends SimpleUrlAuthenticat
 			userJson.put("firstName", "Admin");
 			userJson.put("lastName", "");
 			userJson.put("role", "ADMIN");
-			userJson.put("allowedOperations", Arrays.asList("home", "branch", "course", "user", "schema"));
+			userJson.put("allowedOperations", Arrays.asList("home", "branch", "course", "scheme", "user", "schema"));
 			jsonResult.put("user", userJson);
 
 			response.getWriter().print(new Gson().toJson(jsonResult));
