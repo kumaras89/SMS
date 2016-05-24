@@ -1,7 +1,7 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseServiceConvertorImpl;
-import com.sms.core.repositery.FeesCategoryRepository;
+import com.sms.core.repositery.FeesParticularRepository;
 import com.sms.core.repositery.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,30 @@ import java.util.stream.Collectors;
 @Transactional
 public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Scheme> {
 
+    private FeesParticularRepository feesParticularRepository;
+
     @Autowired
-    public SchemeServiceImpl(SchemeRepository schemeRepository, FeesCategoryRepository feesCategoryRepository) {
+    public SchemeServiceImpl(SchemeRepository schemeRepository, FeesParticularRepository feesParticularRepository) {
         super(schemeRepository,
                 (schemeInfo) -> Scheme.toBuilder(schemeInfo)
-                        .withFeesCategories(schemeInfo.getFeesCategories().stream()
-                                        .map(feesCategoryCode -> feesCategoryRepository.findByCodeIgnoreCase(feesCategoryCode))
-                                        .collect(Collectors.toSet()))
+                        .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
+                                .map(scheme -> SchemeFees.toBuilder(scheme)
+                                        .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
+                                        .build())
+                                .collect(Collectors.toSet()))
                         .build(),
                 (scheme) -> SchemeInfo.toBuilder(scheme).build());
+        this.feesParticularRepository = feesParticularRepository;
     }
 
     @Override
     protected Scheme buildToPersistObject(Long id, SchemeInfo schemeInfo) {
-        return Scheme.toBuilder(schemeInfo).build();
+        return Scheme.toBuilder(schemeInfo)
+                .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
+                        .map(scheme -> SchemeFees.toBuilder(scheme)
+                                .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
+                                .build())
+                        .collect(Collectors.toSet()))
+                .build();
     }
 }

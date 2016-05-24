@@ -1,4 +1,4 @@
-package com.sms.core.scheme;
+package com.sms.core.feesparticular;
 
 import com.sms.core.BaseController;
 import com.sms.core.IStudentPortalService;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/feesCategory")
-public class FeesCategoryRestController extends BaseController<FeesCategoryInfo> {
+@RequestMapping("/feesParticular")
+public class FeesParticularRestController extends BaseController<FeesParticular> {
 
     @Autowired
-    public FeesCategoryRestController(final IStudentPortalService<FeesCategoryInfo> feesCategoryServiceImpl) {
-        super(feesCategoryServiceImpl);
+    public FeesParticularRestController(final IStudentPortalService<FeesParticular> feesParticularServiceImpl) {
+        super(feesParticularServiceImpl);
     }
 }
 

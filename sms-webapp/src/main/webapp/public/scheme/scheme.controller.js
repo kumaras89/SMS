@@ -7,7 +7,6 @@
             return function (items) {
                 var sum = 0;
                 items.forEach(function (item) {
-                    console.log(item.weightage);
                     if (item.weightage) {
                         sum += item.weightage;
                     }
@@ -69,6 +68,10 @@
                     CrudService.schemeService.GetById($routeParams.id).then(function (res) {
                         $scope.scheme = res
                     })
+
+                    SchemeService.getFeesParticulars(function (data) {
+                        $scope.feesParticulars = data;
+                    })
                 }
 
                 $scope.loadScheme();
@@ -77,6 +80,10 @@
             function ($scope, CrudService, SchemeService, FlashService, $location) {
 
                 $scope.createNewScheme = function () {
+
+                    $scope.scheme.schemeFeesInfos = $scope.schemeFeesInfos;
+                    console.log($scope.scheme);
+
                     CrudService.schemeService.Create($scope.scheme).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
                         $location.path('/scheme-list');
@@ -84,8 +91,12 @@
                 }
 
                 $scope.init = function () {
-                    SchemeService.getFeesCategories(function (data) {
-                        $scope.feesCategories = data;
+                    SchemeService.getFeesParticulars(function (data) {
+                        $scope.feesParticulars = data;
+                        $scope.schemeFeesInfos = [];
+                        data.forEach(function (feesParticular) {
+                            $scope.schemeFeesInfos.push({feesParticularCode: feesParticular.code, weightage: 0});
+                        });
                     })
                 }
 

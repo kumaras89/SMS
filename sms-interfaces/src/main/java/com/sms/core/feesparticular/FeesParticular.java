@@ -1,31 +1,40 @@
-package com.sms.core.scheme;
+package com.sms.core.feesparticular;
 
+import com.sms.core.BaseModel;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Optional;
 
-public class FeesCategoryInfo {
+@Entity
+@Table(name = "SMS_MA_FEES_PARTICULAR")
+public class FeesParticular extends BaseModel {
 
+    @Column(name = "FP_CODE", unique = true)
     private String code;
-    private String name;
-    private int weightage = 0;
 
-    public FeesCategoryInfo() {
+    @Column(name = "FP_NAME")
+    private String name;
+
+    public FeesParticular() {
+        super();
     }
 
-    public FeesCategoryInfo(Builder builder) {
+    public FeesParticular(Builder builder) {
+        super(builder);
         this.code = builder.code.get();
         this.name = builder.name.get();
-        this.weightage = builder.weightage.get();
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public static Builder toBuilder(final FeesCategory feesCategory) {
+    public static Builder toBuilder(final FeesParticular feesParticular) {
         return builder()
-                .withCode(feesCategory.getCode())
-                .withName(feesCategory.getName())
-                .withWeightage(feesCategory.getWeightage());
+                .withCode(feesParticular.getCode())
+                .withName(feesParticular.getName());
     }
 
     public String getCode() {
@@ -36,15 +45,10 @@ public class FeesCategoryInfo {
         return name;
     }
 
-    public int getWeightage() {
-        return weightage;
-    }
-
-    public static class Builder {
+    public static class Builder extends BaseModel.Builder<FeesParticular, Builder> {
 
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
-        private Optional<Integer> weightage = Optional.empty();
 
         private Builder() {
             super();
@@ -60,15 +64,11 @@ public class FeesCategoryInfo {
             return this;
         }
 
-        public Builder withWeightage(final Integer theWeightage) {
-            this.weightage = Optional.of(theWeightage);
-            return this;
+        public FeesParticular build() {
+            return new FeesParticular(this);
         }
 
-        public FeesCategoryInfo build() {
-            return new FeesCategoryInfo(this);
-        }
-
+        @Override
         protected Builder getThis() {
             return this;
         }

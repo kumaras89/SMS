@@ -18,6 +18,7 @@
         service.userService = service.of('user')
         service.courseService = service.of('course')
         service.schemeService = service.of('scheme')
+        service.feesParticularService = service.of('feesParticular')
 
         return service;
 

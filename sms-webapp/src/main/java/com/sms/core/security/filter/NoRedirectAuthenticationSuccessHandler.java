@@ -14,26 +14,26 @@ import java.util.Map;
 
 public class NoRedirectAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
 
-		try {
-			//These info must be read from table and set into SMS context
-			Map<String, Object>  jsonResult = new HashMap<>();
-			jsonResult.put("result", true);
-			jsonResult.put("message", "Successfully logged in!!");
-			Map<String, Object>  userJson = new HashMap<>();
-			userJson.put("firstName", "Admin");
-			userJson.put("lastName", "");
-			userJson.put("role", "ADMIN");
-			userJson.put("allowedOperations", Arrays.asList("home", "branch", "course", "scheme", "user", "schema"));
-			jsonResult.put("user", userJson);
+        try {
+            //These info must be read from table and set into SMS context
+            Map<String, Object> jsonResult = new HashMap<>();
+            jsonResult.put("result", true);
+            jsonResult.put("message", "Successfully logged in!!");
+            Map<String, Object> userJson = new HashMap<>();
+            userJson.put("firstName", "Admin");
+            userJson.put("lastName", "");
+            userJson.put("role", "ADMIN");
+            userJson.put("allowedOperations", Arrays.asList("home", "branch", "course", "scheme", "user", "schema", "feesparticular"));
+            jsonResult.put("user", userJson);
 
-			response.getWriter().print(new Gson().toJson(jsonResult));
-	        response.getWriter().flush();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
+            response.getWriter().print(new Gson().toJson(jsonResult));
+            response.getWriter().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

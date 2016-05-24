@@ -4,6 +4,7 @@ import java.util.Optional;
 
 public class CourseInfo {
 
+    private Long id;
     private String code;
     private String name;
     private String description;
@@ -15,6 +16,7 @@ public class CourseInfo {
         this.name = builder.name.get();
         this.code = builder.code.get();
         this.description = builder.description.get();
+        this.id = builder.id.get();
     }
 
     public static Builder builder() {
@@ -23,6 +25,7 @@ public class CourseInfo {
 
     public static Builder toBuilder(final Course course) {
         return builder()
+                .withId(course.getId())
                 .withName(course.getName())
                 .withCode(course.getCode())
                 .withDescription(course.getDescription());
@@ -40,14 +43,24 @@ public class CourseInfo {
         return description;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
 
         private Builder() {
             super();
+        }
+
+        public Builder withId(final Long theId) {
+            this.id = Optional.of(theId);
+            return this;
         }
 
         public Builder withCode(final String theCode) {

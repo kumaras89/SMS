@@ -21,7 +21,7 @@ public class Scheme extends BaseModel {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "FC_SCHEME_ID")
-    private Set<FeesCategory> feesCategories;
+    private Set<SchemeFees> schemeFees;
 
     public Scheme() {
         super();
@@ -32,7 +32,7 @@ public class Scheme extends BaseModel {
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.description = builder.description.get();
-        this.feesCategories = builder.feesCategories.get();
+        this.schemeFees = builder.schemeFees.get();
     }
 
     public static Builder builder() {
@@ -58,8 +58,8 @@ public class Scheme extends BaseModel {
         return description;
     }
 
-    public Set<FeesCategory> getFeesCategories() {
-        return feesCategories;
+    public Set<SchemeFees> getSchemeFees() {
+        return schemeFees;
     }
 
     public static class Builder extends BaseModel.Builder<Scheme, Builder> {
@@ -67,7 +67,7 @@ public class Scheme extends BaseModel {
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
-        private Optional<Set<FeesCategory>> feesCategories = Optional.empty();
+        private Optional<Set<SchemeFees>> schemeFees = Optional.empty();
 
         private Builder() {
             super();
@@ -88,8 +88,8 @@ public class Scheme extends BaseModel {
             return this;
         }
 
-        public Builder withFeesCategories(final Set<FeesCategory> theFeesCategories) {
-            this.feesCategories = Optional.of(theFeesCategories);
+        public Builder withSchemeFees(final Set<SchemeFees> theSchemeFees) {
+            this.schemeFees = Optional.of(theSchemeFees);
             return this;
         }
 

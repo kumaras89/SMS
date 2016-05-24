@@ -10,24 +10,20 @@
 
         var service = {};
 
-        service.getFeesCategories = getFeesCategories
+        service.getFeesParticulars = getFeesParticulars
 
         return service;
 
-        function getFeesCategories(success) {
-            success(['Admission Fees',
-                     'Tution Fees',
-                     'Registration Fees',
-                     'Entrance Fees',
-                     'Uniform Fees',
-                     'Tamil/English Typing Fees',
-                     'Pratical/Lab Fees',
-                     'Book/Record Note Fees',
-                     'Exam Note Fees',
-                     'Hostel/Mess Fees',
-                     'Bus Fees',
-                     'Breakage Fees',
-                     'Other Fees']);
+        function getFeesParticulars(success) {
+            CrudService.feesParticularService.GetAll().then(function (res) {
+                if (res.message) {
+                    success([])
+                } else {
+                    success(res)
+                }
+            }, function () {
+                success([])
+            })
         }
     }
 

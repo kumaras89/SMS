@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'Branch', 'User', 'Course', 'Scheme'])
+        .module('app', ['ngRoute', 'ngCookies', 'Branch', 'User', 'Course', 'Scheme', 'FeesParticular'])
         .config(config)
         .run(run);
 

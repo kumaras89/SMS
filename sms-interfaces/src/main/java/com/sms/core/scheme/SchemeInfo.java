@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 
 public class SchemeInfo {
 
+    private Long id;
     private String code;
     private String name;
     private String description;
-    private Set<String> feesCategories;
+    private Set<SchemeFeesInfo> schemeFeesInfos;
 
     public SchemeInfo() {
     }
@@ -18,7 +19,8 @@ public class SchemeInfo {
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.description = builder.description.get();
-        this.feesCategories = builder.feesCategories.get();
+        this.schemeFeesInfos = builder.schemeFeesInfos.get();
+        this.id = builder.id.get();
     }
 
     public static Builder builder() {
@@ -27,11 +29,12 @@ public class SchemeInfo {
 
     public static Builder toBuilder(final Scheme scheme) {
         return builder()
+                .withId(scheme.getId())
                 .withName(scheme.getName())
                 .withCode(scheme.getCode())
                 .withDescription(scheme.getDescription())
-                .withFeesCategories(scheme.getFeesCategories().stream()
-                        .map(feesCategory -> feesCategory.getCode())
+                .withFeesCategories(scheme.getSchemeFees().stream()
+                        .map(feesCategory -> SchemeFeesInfo.toBuilder(feesCategory).build())
                         .collect(Collectors.toSet()));
     }
 
@@ -47,19 +50,29 @@ public class SchemeInfo {
         return description;
     }
 
-    public Set<String> getFeesCategories() {
-        return feesCategories;
+    public Long getId() {
+        return id;
+    }
+
+    public Set<SchemeFeesInfo> getSchemeFeesInfos() {
+        return schemeFeesInfos;
     }
 
     public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
-        private Optional<Set<String>> feesCategories = Optional.empty();
+        private Optional<Set<SchemeFeesInfo>> schemeFeesInfos = Optional.empty();
 
         private Builder() {
             super();
+        }
+
+        public Builder withId(final Long theId) {
+            this.id = Optional.of(theId);
+            return this;
         }
 
         public Builder withCode(final String theCode) {
@@ -77,8 +90,8 @@ public class SchemeInfo {
             return this;
         }
 
-        public Builder withFeesCategories(final Set<String> theFeesCategories) {
-            this.feesCategories = Optional.of(theFeesCategories);
+        public Builder withFeesCategories(final Set<SchemeFeesInfo> theFeesCategories) {
+            this.schemeFeesInfos = Optional.of(theFeesCategories);
             return this;
         }
 

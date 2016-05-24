@@ -1,0 +1,26 @@
+﻿<div class="container">
+    <h1>Create a Fees Particular</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="code">Code:</label>
+
+            <div class="controls">
+                <input type="text" id="code" ng-model="feesParticular.code" placeholder="Code"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="name">Name:</label>
+            <div class="controls">
+                <input type="text" id="name" ng-model="feesParticular.name" placeholder="Name"/>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="createNewFeesParticular()" class="btn btn-small btn-primary">create new fees particular</a>
+            </div>
+        </div>
+    </form>
+</div>

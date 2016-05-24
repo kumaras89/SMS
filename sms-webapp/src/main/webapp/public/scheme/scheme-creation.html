@@ -36,15 +36,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="feesCategory in feesCategories track by $index" ng-model="scheme.feesCategories">
-                        <td>{{$index+1}}. {{feesCategory}}</td>
+                    <tr ng-repeat="schemeFeesInfo in schemeFeesInfos track by $index">
+                        <td>{{$index+1}}. {{feesParticulars[$index].name}}</td>
                         <td>
-                            <input type="number" id="weightage" ng-model="weightage" placeholder="0" min="0" max="100"/>
+                            <input type="hidden" id="feesParticularCode" ng-model="schemeFeesInfo.feesParticularCode" value="{{schemeFeesInfo.feesParticularCode}}"/>
+                            <input type="number" id="weightage" ng-model="schemeFeesInfo.weightage" placeholder="0" min="0" max="100"/>
                         </td>
                     </tr>
                     <tr>
                         <td style="min-width: 20px;">Total</td>
-                        <td style="min-width: 20px;">{{ feesCategories | mysum}}</td>
+                        <td style="min-width: 20px;">{{ schemeFeesInfos | mysum}}</td>
                     </tr>
                     </tbody>
                 </table>
