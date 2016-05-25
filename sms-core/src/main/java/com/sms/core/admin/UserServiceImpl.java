@@ -2,6 +2,7 @@ package com.sms.core.admin;
 
 import com.sms.core.BaseServiceConvertorImpl;
 import com.sms.core.repositery.UserRepository;
+import com.sms.core.repositery.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
@@ -14,23 +15,24 @@ import java.util.Optional;
 public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
 
     private UserRepository userRepository;
-    private Converter<UserInfo, User> userConverter;
+    private UserRoleRepository userRoleRepository;
 
     @Autowired
     public UserServiceImpl(final UserRepository jpaRepository,
+                           UserRoleRepository userRoleRepository,
                            final Converter<UserInfo, User> userConverter) {
-        super(jpaRepository, userConverter, (source) -> UserInfo.toBuilder(source).build());
+        super(jpaRepository, (userInfo) -> User.toBuilder(userConverter.convert(userInfo))
+                .on(u -> u.getRole()).set(userRoleRepository.findByName(userInfo.getRole())).build(), (source) -> UserInfo.toBuilder(source).build());
         this.userRepository = jpaRepository;
-        this.userConverter = userConverter;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
     public Optional<UserInfo> update(Long id, UserInfo entityType) {
         return  Optional.of(entityType)
-                .map(e -> userConverter.convert(e))
-                .map(User::toBuilder)
-                .map(e-> e.withPassword(userRepository.findOne(id).getPassword()))
-                .map(User.Builder::build)
+                .map(e -> buildToPersistObject(id, entityType))
+                .map(user -> User.toBuilder(user)
+                        .on(u -> u.getPassword()).set(userRepository.findOne(id).getPassword()).build())
                 .map(userRepository::saveAndFlush)
                 .map(e -> UserInfo.toBuilder(e).build());
     }
@@ -38,12 +40,12 @@ public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
     @Override
     protected User buildToPersistObject(Long id, UserInfo user) {
         return User.builder()
-                .withId(id)
-                .withFirstName(user.getFirstName())
-                .withLastName(user.getLastName())
-                .withBranch(user.getBranch())
-                .withRole(UserRole.valueOf(user.getRole()))
-                .withName(user.getName())
+                .on(u-> u.getId()).set(id)
+                .on(u-> u.getFirstName()).set(user.getFirstName())
+                .on(u-> u.getLastName()).set(user.getLastName())
+                .on(u-> u.getBranch()).set(user.getBranch())
+                .on(u-> u.getRole()).set(userRoleRepository.findByName(user.getRole()))
+                .on(u-> u.getName()).set(user.getName())
                 .build();
     }
 }

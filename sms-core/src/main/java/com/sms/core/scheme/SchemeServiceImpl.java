@@ -21,7 +21,7 @@ public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Sche
                 (schemeInfo) -> Scheme.toBuilder(schemeInfo)
                         .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
                                 .map(scheme -> SchemeFees.toBuilder(scheme)
-                                        .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
+                                        .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
                                         .build())
                                 .collect(Collectors.toSet()))
                         .build(),
@@ -34,7 +34,7 @@ public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Sche
         return Scheme.toBuilder(schemeInfo)
                 .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
                         .map(scheme -> SchemeFees.toBuilder(scheme)
-                                .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
+                                .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
                                 .build())
                         .collect(Collectors.toSet()))
                 .build();

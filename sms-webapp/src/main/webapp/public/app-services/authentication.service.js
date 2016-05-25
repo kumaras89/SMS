@@ -21,8 +21,8 @@
             }
         });
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope'];
-    function AuthenticationService($http, $cookieStore, $rootScope) {
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', 'StorageService'];
+    function AuthenticationService($http, $cookieStore, $rootScope, StorageService) {
         var service = {};
 
         service.Login = Login;
@@ -57,13 +57,8 @@
 
         }
 
-        function openResources() {
-            return ['login']
-        }
-
-
-        function isAuthorized(resource, success, failure) {
-            if(_.contains(openResources(), resource)){
+        function isAuthorizedWithLocalStorage(resource, success, failure, securedOperations) {
+            if(resource == 'login' || !_.contains(securedOperations, resource)){
                 success()
             } else {
                 var currentUser = $rootScope.globals.currentUser;
@@ -77,7 +72,13 @@
                     failure()
                 }
             }
+        }
 
+
+        function isAuthorized(resource, success, failure) {
+            StorageService.getFromStoarage('securedoperation','/login/securedoperation', function(securedOperation) {
+                isAuthorizedWithLocalStorage(resource, success, failure, securedOperation)
+            });
         }
         
         function SetCredentials(username, password, otherDetails) {

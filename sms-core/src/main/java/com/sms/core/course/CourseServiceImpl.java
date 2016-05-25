@@ -22,8 +22,7 @@ public class CourseServiceImpl extends BaseServiceConvertorImpl<CourseInfo, Cour
     @Override
     protected Course buildToPersistObject(Long id, CourseInfo courseInfo) {
 
-        return Course.toBuilder(courseInfo)
-                .withId(id)
+        return Course.toBuilder(courseInfo).on(c -> c.getId()).set(id)
                 .build();
     }
 }

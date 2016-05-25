@@ -3,8 +3,8 @@
 
     angular
         .module('User')
-        .controller('UserListCtrl', ['$scope', 'CrudService','UserService', 'FlashService', '$location','$http',
-        function ($scope, CrudService,UserService, FlashService, $location,$http) {
+        .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http',
+        function ($scope, CrudService,AdminService, FlashService, $location,$http) {
             $scope.editUser = function (userId) {
                 $location.path('/user-detail/' + userId);
             };
@@ -43,30 +43,28 @@
                     })
                 };
 
-                UserService.getBranches(function(data) {
+                AdminService.getBranches(function(data) {
                     $scope.branches = data;
                     loadUserFunc()
                 })
 
             }
 
-            $scope.getBranchDesc = function(code) {
-                return UserService.getBranchDesc($scope.branches, code)
-            }
+            $scope.getBranchDesc = AdminService.getBranchDesc
 
             $scope.loadUsers()
 
 
 
         }])
-        .controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserService', 'CrudService','FlashService', '$location',
-        function ($scope, $routeParams,UserService, CrudService,FlashService, $location) {
+        .controller('UserDetailCtrl', ['$scope', '$routeParams', 'AdminService', 'CrudService','FlashService', '$location',
+        function ($scope, $routeParams,AdminService, CrudService,FlashService, $location) {
 
             $scope.updateUser = function () {
                 var user = {};
                 var user = $.extend(user, $scope.user);
-                user.branch = UserService.getBranchCode($scope.branches, $scope.user.branch);
-                CrudService.userService.Update(user.id, user).then(function(){
+                user.branch = AdminService.getBranchCode($scope.user.branch);
+                CrudService.userService.Update(user).then(function(){
                     FlashService.Success("Successfuly Modified !!", true);
                     $location.path('/user-list');
                 });
@@ -77,14 +75,14 @@
                 var loadUserFunc = function(){
                     CrudService.userService.GetById($routeParams.id).then(function(res) {
                         var user = res;
-                        user.branch = UserService.getBranchDesc($scope.branches, res.branch);
+                        user.branch = AdminService.getBranchDesc(res.branch);
                         $scope.user = user;
                     })
                 }
-                UserService.getRoles(function(data) {
-                    $scope.roles = data;
+                AdminService.getRoles(function(data) {
+                    $scope.roles = _.pluck(data,"name");
                 })
-                UserService.getBranches(function(data) {
+                AdminService.getBranches(function(data) {
                     $scope.branches = data;
                     $scope.branchNames = _.pluck(data,"name")
                     loadUserFunc();
@@ -93,13 +91,13 @@
 
             $scope.loadUser();
         }])
-        .controller('UserCreationCtrl', ['$scope', 'CrudService','UserService','FlashService', '$location',
-        function ($scope, CrudService,UserService,FlashService, $location) {
+        .controller('UserCreationCtrl', ['$scope', 'CrudService','AdminService','FlashService', '$location',
+        function ($scope, CrudService,AdminService,FlashService, $location) {
 
             $scope.createNewUser = function () {
                 var user = {};
                 var user = $.extend(user, $scope.user);
-                user.branch = UserService.getBranchCode($scope.branches, $scope.user.branch);
+                user.branch = AdminService.getBranchCode($scope.user.branch);
                 CrudService.userService.Create(user).then(function (res) {
                     if(res.message) {
                         FlashService.Error(res.message);
@@ -113,10 +111,10 @@
             }
 
             $scope.init = function() {
-                UserService.getRoles(function(data) {
-                    $scope.roles = data;
+                AdminService.getRoles(function(data) {
+                    $scope.roles = _.pluck(data, "name");
                 })
-                UserService.getBranches(function(data) {
+                AdminService.getBranches(function(data) {
                     $scope.branches = data;
                     $scope.branchNames = _.pluck(data,"name")
                 })

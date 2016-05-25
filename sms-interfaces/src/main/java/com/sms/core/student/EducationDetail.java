@@ -33,7 +33,7 @@ public class EducationDetail extends BaseModel {
     }
 
     private EducationDetail(final Builder builder) {
-        super(builder);
+        this.id = builder.id.get();
         this.examPassed = builder.examPassed.get();
         this.instituteName = builder.instituteName.get();
         this.groupName = builder.groupName.get();
@@ -70,8 +70,9 @@ public class EducationDetail extends BaseModel {
         return passingYear;
     }
 
-    public static class Builder extends BaseModel.Builder<EducationDetail, Builder> {
+    public static class Builder  {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> examPassed = Optional.empty();
         private Optional<String> instituteName = Optional.empty();
         private Optional<String> groupName = Optional.empty();
@@ -81,6 +82,11 @@ public class EducationDetail extends BaseModel {
 
         private Builder() {
             super();
+        }
+
+        public Builder witId(final Long theId) {
+            this.id = Optional.ofNullable(theId);
+            return this;
         }
 
         public Builder withExamPassed(final String theExamPassed) {
@@ -117,9 +123,6 @@ public class EducationDetail extends BaseModel {
             return new EducationDetail(this);
         }
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
+
     }
 }

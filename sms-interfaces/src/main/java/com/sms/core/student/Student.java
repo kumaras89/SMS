@@ -92,7 +92,7 @@ public class Student extends BaseModel {
     }
 
     private Student(final Builder builder) {
-        super(builder);
+        this.id = builder.id.get();
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.age = builder.age.get();
@@ -214,8 +214,9 @@ public class Student extends BaseModel {
         return scheme;
     }
 
-    public static class Builder extends BaseModel.Builder<Student, Builder> {
+    public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<Integer> age = Optional.empty();
@@ -238,6 +239,11 @@ public class Student extends BaseModel {
 
         private Builder() {
             super();
+        }
+
+        public Builder withId(Long id) {
+            this.id = Optional.of(id);
+            return this;
         }
 
         public Builder withCode(final String theCode) {
@@ -339,9 +345,6 @@ public class Student extends BaseModel {
             return new Student(this);
         }
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
+
     }
 }

@@ -27,9 +27,9 @@
             }).otherwise({ redirectTo: '/login' });
     }
 
-    run.$inject = ['$rootScope','AuthenticationService', '$location', '$cookieStore', '$http'];
+    run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http'];
     
-    function run($rootScope, AuthenticationService, $location, $cookieStore, $http) {
+    function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http) {
 
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -58,8 +58,9 @@
                 resource = path.substr(1, hyphenInedex - 1);
             }
             AuthenticationService.isAuthorized(resource, function() {}, function() {
+                    FlashService.Error('Not Authorized to access \"'+ resource+'\"', true);
                     $location.path('/login');
-            })
+            });
 
         });
     }

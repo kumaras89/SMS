@@ -16,18 +16,15 @@ import java.util.Optional;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder encoder;
 
     @Autowired
     private UserRepository userService;
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-
         return Optional.of(username)
                 .map(userService::findByNameIgnoreCase)
-                .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().name()))))
+                .map(e -> new User(e.getName(), e.getPassword(), Arrays.asList(new SimpleGrantedAuthority(e.getRole().getName()))))
                 .get();
     }
 }

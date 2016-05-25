@@ -19,7 +19,7 @@ public class SchemeFeesServiceImpl extends BaseServiceConvertorImpl<SchemeFeesIn
 
         super(schemeFeesRepository,
                 (feesCategoryInfo) -> SchemeFees.toBuilder(feesCategoryInfo)
-                        .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(feesCategoryInfo.getFeesParticularCode()))
+                        .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(feesCategoryInfo.getFeesParticularCode()))
                         .build(),
                 (feesCategory) -> SchemeFeesInfo.toBuilder(feesCategory).build());
         this.feesParticularRepository = feesParticularRepository;
@@ -28,8 +28,8 @@ public class SchemeFeesServiceImpl extends BaseServiceConvertorImpl<SchemeFeesIn
     @Override
     protected SchemeFees buildToPersistObject(Long id, SchemeFeesInfo schemeFeesInfo) {
         return SchemeFees.toBuilder(schemeFeesInfo)
-                .withId(id)
-                .withFeesParticular(feesParticularRepository.findByCodeIgnoreCase(schemeFeesInfo.getFeesParticularCode()))
+                .on(s -> s.getId()).set(id)
+                .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(schemeFeesInfo.getFeesParticularCode()))
                 .build();
     }
 }

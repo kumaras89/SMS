@@ -27,7 +27,7 @@ public abstract class BaseModel implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     /**
      * Instantiates a new abstract base model. Required for Hibernate.
@@ -36,9 +36,6 @@ public abstract class BaseModel implements Serializable {
         super();
     }
 
-    protected BaseModel(final Builder<?, ?> builder) {
-        this.id = builder.id.orElse(null);
-    }
 
     /**
      * Gets the id.
@@ -49,26 +46,5 @@ public abstract class BaseModel implements Serializable {
         return this.id;
     }
 
-    public abstract static class Builder<E extends BaseModel, B extends Builder<E, B>> {
 
-        private Optional<Long> id = Optional.empty();
-
-        protected Builder() {
-            super();
-        }
-
-        protected Builder(final BaseModel aModel) {
-            this.id = Optional.of(aModel.id);
-        }
-
-        public B withId(final Long aId) {
-            this.id = Optional.ofNullable(aId);
-            return getThis();
-        }
-
-        public abstract E build();
-
-        protected abstract B getThis();
-
-    }
 }

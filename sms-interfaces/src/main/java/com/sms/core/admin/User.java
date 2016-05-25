@@ -1,9 +1,12 @@
 package com.sms.core.admin;
 
 import com.sms.core.BaseModel;
+import com.sms.core.Builder;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import java.util.Optional;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "SMS_MA_USER")
@@ -21,8 +24,9 @@ public class User extends BaseModel {
 	@Column(name = "US_NAME")
 	private String name;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "US_ROLE")
+	@ManyToOne
+	@JoinColumn(name = "US_UR_ID")
+	@Cascade(value = org.hibernate.annotations.CascadeType.ALL)
 	private UserRole role;
 
 	@Column(name = "US_PASSWORD")
@@ -32,29 +36,19 @@ public class User extends BaseModel {
 		super();
 	}
 
-	private User(final Builder builder) {
-		super(builder);
-
-		this.name = builder.name.orElse(null);
-		this.role = builder.userRole.orElse(null);
-		this.password = builder.password.orElse(null);
-		this.firstName = builder.firstName.orElse(null);
-		this.lastName = builder.lastName.orElse(null);
-		this.branch = builder.branch.orElse(null);
+	public static Builder<User> builder() {
+		return Builder.of(User.class);
 	}
 
-	public static Builder builder() {
-		return new Builder();
-	}
+	public static Builder<User> toBuilder(final User user) {
 
-	public static Builder toBuilder(final User user) {
-
-		return builder().withId(user.getId())
-				.withRole(user.getRole())
-				.withPassword(user.getPassword())
-				.withBranch(user.getBranch())
-				.withFirstName(user.getFirstName())
-				.withLastName(user.getLastName());
+		return builder()
+				.on(u -> u.getId()).set(user.getId())
+				.on(u -> u.getRole()).set(user.getRole())
+				.on(u -> u.getPassword()).set(user.getPassword())
+				.on(u -> u.getBranch()).set(user.getBranch())
+				.on(u -> u.getFirstName()).set(user.getFirstName())
+				.on(u -> u.getLastName()).set(user.getLastName());
 
 	}
 
@@ -82,57 +76,6 @@ public class User extends BaseModel {
 		return branch;
 	}
 
-	public static class Builder extends BaseModel.Builder<User, Builder> {
 
-		private Optional<String> firstName = Optional.empty();
-		private Optional<String> lastName = Optional.empty();
-		private Optional<String> branch = Optional.empty();
-		private Optional<String> name = Optional.empty();
-		private Optional<UserRole> userRole = Optional.empty();
-		private Optional<String> password = Optional.empty();
-
-		private Builder() {
-			super();
-		}
-
-		public Builder withName(final String theName) {
-			this.name = Optional.of(theName);
-			return this;
-		}
-
-		public Builder withFirstName(final String theName) {
-			this.firstName = Optional.of(theName);
-			return this;
-		}
-
-		public Builder withLastName(final String theName) {
-			this.lastName = Optional.of(theName);
-			return this;
-		}
-
-		public Builder withBranch(final String theName) {
-			this.branch = Optional.of(theName);
-			return this;
-		}
-
-		public Builder withRole(final UserRole theUserRole) {
-			this.userRole = Optional.of(theUserRole);
-			return this;
-		}
-
-		public Builder withPassword(final String thePassword) {
-			this.password = Optional.of(thePassword);
-			return this;
-		}
-
-		public User build() {
-			return new User(this);
-		}
-
-		@Override
-		protected Builder getThis() {
-			return this;
-		}
-	}
 
 }

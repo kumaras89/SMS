@@ -34,7 +34,7 @@ public class Address extends BaseModel {
     }
 
     private Address(final Builder builder) {
-        super(builder);
+        this.id = builder.id.get();
         this.city = builder.city.get();
         this.state = builder.state.get();
         this.country = builder.country.get();
@@ -82,8 +82,9 @@ public class Address extends BaseModel {
         return postalCode;
     }
 
-    public static class Builder extends BaseModel.Builder<Address, Builder> {
+    public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> city = Optional.empty();
         private Optional<String> state = Optional.empty();
         private Optional<String> country = Optional.empty();
@@ -93,6 +94,11 @@ public class Address extends BaseModel {
 
         private Builder() {
             super();
+        }
+
+        public Builder withId(final Long theId) {
+            this.id = Optional.of(theId);
+            return this;
         }
 
         public Builder withCity(final String theCity) {
@@ -129,9 +135,6 @@ public class Address extends BaseModel {
             return new Address(this);
         }
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
+
     }
 }

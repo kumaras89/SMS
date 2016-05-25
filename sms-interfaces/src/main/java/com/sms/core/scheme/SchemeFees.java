@@ -1,6 +1,7 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseModel;
+import com.sms.core.Builder;
 import com.sms.core.feesparticular.FeesParticular;
 
 import javax.persistence.*;
@@ -21,18 +22,12 @@ public class SchemeFees extends BaseModel {
         super();
     }
 
-    public SchemeFees(Builder builder) {
-        super(builder);
-        this.feesParticular = builder.feesParticular.get();
-        this.weightage = builder.weightage.get();
+    public static Builder<SchemeFees> builder() {
+        return Builder.of(SchemeFees.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final SchemeFeesInfo schemeFeesInfo) {
-        return builder().withWeightage(schemeFeesInfo.getWeightage());
+    public static Builder<SchemeFees> toBuilder(final SchemeFeesInfo schemeFeesInfo) {
+        return builder().on(s -> s.getWeightage()).set(schemeFeesInfo.getWeightage());
     }
 
     public int getWeightage() {
@@ -43,32 +38,5 @@ public class SchemeFees extends BaseModel {
         return feesParticular;
     }
 
-    public static class Builder extends BaseModel.Builder<SchemeFees, Builder> {
 
-        private Optional<FeesParticular> feesParticular = Optional.empty();
-        private Optional<Integer> weightage = Optional.empty();
-
-        private Builder() {
-            super();
-        }
-
-        public Builder withFeesParticular(final FeesParticular theFeesParticular) {
-            this.feesParticular = Optional.of(theFeesParticular);
-            return this;
-        }
-
-        public Builder withWeightage(final Integer theWeightage) {
-            this.weightage = Optional.of(theWeightage);
-            return this;
-        }
-
-        public SchemeFees build() {
-            return new SchemeFees(this);
-        }
-
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
-    }
 }

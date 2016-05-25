@@ -2,6 +2,7 @@ package com.sms.core.branch;
 
 
 import com.sms.core.BaseModel;
+import com.sms.core.Builder;
 import com.sms.core.student.Address;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,24 +32,17 @@ public class Branch extends BaseModel {
         super();
     }
 
-    private Branch(final Builder builder) {
-        super(builder);
-        this.code = builder.code.get();
-        this.name = builder.name.get();
-        this.isActive = builder.isActive;
-        this.address = builder.address.get();
+    public static Builder<Branch> builder() {
+        return Builder.of(Branch.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final Branch branch) {
+    public static Builder<Branch> toBuilder(final Branch branch) {
         return builder()
-                .withId(branch.getId())
-                .withCode(branch.getCode())
-                .withIsActive(branch.getIsActive())
-                .withAddress(branch.getAddress());
+                .on(b -> b.getId()).set(branch.getId())
+                .on(b -> b.getCode()).set(branch.getCode())
+                .on(b -> b.getName()).set(branch.getName())
+                .on(b -> b.getIsActive()).set(branch.getIsActive())
+                .on(b -> b.getAddress()).set(branch.getAddress());
     }
 
     public String getCode() {
@@ -67,44 +61,5 @@ public class Branch extends BaseModel {
         return address;
     }
 
-    public static class Builder extends BaseModel.Builder<Branch, Builder> {
 
-        private Optional<String> code = Optional.empty();
-        private Optional<String> name = Optional.empty();
-        private Integer isActive = 0;
-        private Optional<Address> address = Optional.empty();
-
-        private Builder() {
-            super();
-        }
-
-        public Builder withCode(final String theCode) {
-            this.code = Optional.of(theCode);
-            return this;
-        }
-
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
-
-        public Builder withIsActive(final int isActive) {
-            this.isActive = isActive;
-            return this;
-        }
-
-        public Builder withAddress(final Address theAddress) {
-            this.address = Optional.of(theAddress);
-            return this;
-        }
-
-        public Branch build() {
-            return new Branch(this);
-        }
-
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
-    }
 }

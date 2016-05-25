@@ -1,6 +1,7 @@
 package com.sms.core.course;
 
 import com.sms.core.BaseModel;
+import com.sms.core.Builder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,22 +24,16 @@ public class Course extends BaseModel {
     public Course() {
     }
 
-    private Course(final Builder builder) {
-        super(builder);
-        this.name = builder.name.get();
-        this.code = builder.code.get();
-        this.description = builder.description.get();
+
+    public static Builder<Course> builder() {
+        return Builder.of(Course.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final CourseInfo course) {
+    public static Builder<Course> toBuilder(final CourseInfo course) {
         return builder()
-                .withName(course.getName())
-                .withCode(course.getCode())
-                .withDescription(course.getDescription());
+                .on(c -> c.getName()).set(course.getName())
+                .on(c -> c.getCode()).set(course.getCode())
+                .on(c -> c.getDescription()).set(course.getDescription());
     }
 
 
@@ -54,38 +49,5 @@ public class Course extends BaseModel {
         return description;
     }
 
-    public static class Builder extends BaseModel.Builder<Course, Builder> {
 
-        private Optional<String> code = Optional.empty();
-        private Optional<String> name = Optional.empty();
-        private Optional<String> description = Optional.empty();
-
-        private Builder() {
-            super();
-        }
-
-        public Builder withCode(final String theCode) {
-            this.code = Optional.of(theCode);
-            return this;
-        }
-
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
-
-        public Builder withDescription(final String theDescription) {
-            this.description = Optional.of(theDescription);
-            return this;
-        }
-
-        public Course build() {
-            return new Course(this);
-        }
-
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
-    }
 }

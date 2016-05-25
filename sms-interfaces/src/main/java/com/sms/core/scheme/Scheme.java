@@ -28,7 +28,7 @@ public class Scheme extends BaseModel {
     }
 
     public Scheme(Builder builder) {
-        super(builder);
+        this.id = builder.id.get();
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.description = builder.description.get();
@@ -62,8 +62,9 @@ public class Scheme extends BaseModel {
         return schemeFees;
     }
 
-    public static class Builder extends BaseModel.Builder<Scheme, Builder> {
+    public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<String> code = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
@@ -71,6 +72,12 @@ public class Scheme extends BaseModel {
 
         private Builder() {
             super();
+        }
+
+
+        public Builder withId(final Long theId) {
+            this.id = Optional.of(theId);
+            return this;
         }
 
         public Builder withCode(final String theCode) {
@@ -97,9 +104,6 @@ public class Scheme extends BaseModel {
             return new Scheme(this);
         }
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
+
     }
 }

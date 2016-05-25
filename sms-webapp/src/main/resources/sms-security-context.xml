@@ -1,22 +1,27 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd">
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="com.sms.core"/>
+    <bean id="smsSessionContext" class="com.sms.core.SmsSessionContext">
+        <aop:scoped-proxy/>
+    </bean>
 
     <security:http use-expressions="true" auto-config="false"
                    entry-point-ref="http403EntryPoint" access-decision-manager-ref="accessDecisionManager" >
         <security:csrf disabled="true"/>
-        <security:intercept-url pattern="/login/**"
-                                access="permitAll"/>
-        <security:intercept-url pattern="/authenticate"
-                                access="permitAll"/>
-        <security:intercept-url pattern="/public/**"
-                                access="permitAll"/>
         <security:intercept-url pattern="/**"
-                                access="isAuthenticated()"/>
+                                access="permitAll" />
         <security:custom-filter ref="smsAuthenticationFilter"
                                 position="FORM_LOGIN_FILTER"/>
         <security:custom-filter ref="logoutFilter"
@@ -29,15 +34,13 @@
 
     <bean id="smsAuthenticationFilter" class="com.sms.core.security.filter.SmsAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager"/>
-        <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
+        <property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>
         <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
         <property name="passwordParameter" value="password"/>
         <property name="usernameParameter" value="username"/>
         <property name="filterProcessesUrl" value="/authenticate"/>
     </bean>
 
-    <bean id="authenticationSuccessHandler"
-          class="com.sms.core.security.filter.NoRedirectAuthenticationSuccessHandler"/>
     <bean id="authenticationFailureHandler"
           class="com.sms.core.security.filter.NoRedirectLoginFailureHandler"/>
 
@@ -66,11 +69,7 @@
     <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
         <constructor-arg>
             <list>
-                <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
-                <bean class="org.springframework.security.access.vote.RoleVoter" />
-                <bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
                 <bean class="com.sms.core.security.filter.OperationAuthorizationVoter"/>
-
             </list>
         </constructor-arg>
     </bean>

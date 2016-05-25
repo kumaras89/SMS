@@ -42,7 +42,7 @@ public class Guardian extends BaseModel {
 
     private Guardian(final Builder builder) {
 
-        super(builder);
+        this.id = builder.id.get();
         this.isEmployed = builder.isEmployed.get();
         this.name = builder.name.get();
         this.occupation = builder.occupation.get();
@@ -89,8 +89,9 @@ public class Guardian extends BaseModel {
         return phoneNumber;
     }
 
-    public static class Builder extends BaseModel.Builder<Guardian, Builder> {
+    public static class Builder {
 
+        private Optional<Long> id = Optional.empty();
         private Optional<Integer> isEmployed = Optional.empty();
         private Optional<String> name = Optional.empty();
         private Optional<String> occupation = Optional.empty();
@@ -102,6 +103,11 @@ public class Guardian extends BaseModel {
 
         private Builder() {
             super();
+        }
+
+        public Builder withId(final Long theId) {
+            this.id = Optional.of(theId);
+            return this;
         }
 
         public Builder withIsEmployed(final Integer isEmployed) {
@@ -148,9 +154,5 @@ public class Guardian extends BaseModel {
             return new Guardian(this);
         }
 
-        @Override
-        protected Builder getThis() {
-            return this;
-        }
     }
 }
