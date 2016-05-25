@@ -18,14 +18,30 @@ public class Password {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$", message = "Password must have atleast one numeric, lower and uppercase and one special character(@#$%^&+=)")
     private String newPassword;
 
+    @NotEmpty(message = "Retype new password is empty")
+    private String reTypeNewPwd;
+
     public Password() {
     }
 
-    public Password(String userName, String oldPassword, String newPassword) {
+
+    public Password(String userName, String oldPassword, String newPassword, String reTypeNewPwd) {
         this.userName = userName;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
+        this.reTypeNewPwd = reTypeNewPwd;
+
     }
+
+    public String getReTypeNewPwd() {
+        return reTypeNewPwd;
+    }
+
+    public void setReTypeNewPwd(String reTypeNewPwd) {
+        this.reTypeNewPwd = reTypeNewPwd;
+    }
+
+
 
     public String getUserName() {
         return userName;

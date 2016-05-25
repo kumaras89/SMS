@@ -12,6 +12,8 @@
 
         service.getRoles = getRoles
         service.getBranches = getBranches
+        service.getBranchCode = getBranchCode
+        service.getBranchDesc = getBranchDesc
 
         return service;
 
@@ -30,6 +32,18 @@
             }, function() {
                 success([])
             })
+        }
+
+        function getBranchCode(branches, branchdesc) {
+            return _.find(branches, function(branch) {
+                return branch.name == branchdesc
+            }).code
+        }
+
+        function getBranchDesc(branches, branchCode) {
+            return _.find(branches, function(branch) {
+                return branch.code == branchCode
+            }).name
         }
         
     }

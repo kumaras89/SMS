@@ -25,16 +25,29 @@
 
         function changePassword() {
             vm.dataLoading = true;
-
-
-            $http.post('/login/changepassword', { userName: vm.username, oldPassword: vm.oldPassword, newPassword : vm.newPassword }).then(function(response) {
-                var data = response.data;
-                if(data.result) {
-                    $location.path('/login');
+            var passwordInput = {
+                userName: vm.username,
+                oldPassword: vm.oldPassword,
+                newPassword : vm.newPassword,
+                reTypeNewPwd :  vm.reTypeNewPassword
+            };
+            var errorFunc = function(res) {
+                if (typeof res.data.error === 'string') {
+                    failure(res.data.error)
                 } else {
-                    failure(data.message)
+                    failure(_.values(res.data.error).join('\n'))
                 }
-            }, failure);
+
+            }
+            $http.post('/login/changepassword', passwordInput)
+                .then(function(res) {
+                    if(res.data.error) {
+                        errorFunc(res)
+                    } else {
+                        FlashService.Success('Password Succesfully Changed!!', true);
+                        $location.path('/login');
+                    }
+                },errorFunc);
         };
         var failure = function(msg){
             FlashService.Error(msg);
