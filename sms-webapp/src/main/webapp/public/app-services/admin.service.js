@@ -25,19 +25,19 @@
         }
 
          function getBranches(success) {
-             StorageService.getFromStoarage('branches', '/branch', function(data) {
+             StorageService.getFromStoarage('/branch', function(data) {
                  success(data);
              });
          }
 
         function getRoles(success) {
-            StorageService.getFromStoarage('roles', '/role', function(data) {
+            StorageService.getFromStoarage('/role', function(data) {
                 success(data);
             });
         }
 
         function getBranches0(){
-            return StorageService.getTrustedStoarage('branches');
+            return StorageService.getTrustedStoarage('/branch');
         }
 
         function getBranchCode(branchdesc) {

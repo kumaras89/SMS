@@ -1,0 +1,25 @@
+﻿<div class="span6" ng-init="init('securedoperation', ['/login/securedoperation'])">
+    <table class="table table-striped table-condensed" ng-init="loadEntities()">
+        <thead>
+        <tr>
+            <th style="min-width: 80px;">Operation</th>
+            <th style="min-width: 80px;">Type</th>
+            <th style="min-width: 80px;">Desc</th>
+            <th style="width:20px;">&nbsp;</th>
+            <th style="width:20px;">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="so in entities">
+            <td>{{ so.operation }}</td>
+            <td>{{ so.type }}</td>
+            <td>{{ so.operationDesc }}</td>
+            <td><a ng-click="goToEdit(so.id)" class="btn btn-small btn-primary">edit</a></td>
+            <td><a ng-click="delete(so.id)" class="btn btn-small btn-danger">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a ng-click="goToCreate()" class="btn btn-small">create new secured operation</a>
+    <a href="#/home" class="btn btn-small">Home</a>
+</div>

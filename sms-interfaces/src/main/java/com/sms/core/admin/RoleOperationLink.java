@@ -1,14 +1,8 @@
 package com.sms.core.admin;
 
 import com.sms.core.BaseModel;
-import com.sms.core.Builder;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Ganesan on 25/05/16.
@@ -17,26 +11,26 @@ import javax.persistence.Table;
 @Table(name = "SMS_MA_ROLE_OPERATION_LINK")
 public class RoleOperationLink extends BaseModel {
 
-    @ManyToOne
-    @JoinColumn(name = "ROL_UR_ID")
-    @Cascade(value = CascadeType.ALL)
-    private UserRole userRole;
+    @Column(name = "ROL_UR_ID")
+    private Long userRoleId;
 
-    @ManyToOne
-    @JoinColumn(name = "ROL_SO_ID")
-    @Cascade(value = CascadeType.ALL)
-    private SecuredOperation securedOperation;
+    @Column(name = "ROL_SO_ID")
+    private Long securedOperationId;
 
-    public UserRole getUserRole() {
-        return userRole;
+    private RoleOperationLink(){
+
     }
 
-    public SecuredOperation getSecuredOperation() {
-        return securedOperation;
+    public RoleOperationLink(Long userId, Long securedOperationId) {
+        this.userRoleId = userId;
+        this.securedOperationId = securedOperationId;
     }
 
-    public static Builder<SecuredOperation> builder() {
-        return Builder.of(SecuredOperation.class);
+    public Long getUserRoleId() {
+        return userRoleId;
     }
 
+    public Long getSecuredOperationId() {
+        return securedOperationId;
+    }
 }

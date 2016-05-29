@@ -2,12 +2,13 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'Branch', 'User', 'Course', 'Scheme', 'FeesParticular'])
+        .module('app', ['ngRoute', 'ngCookies', 'Branch', 'User', 'Course', 'Scheme', 'FeesParticular', 'Role', 'SecuredOperation', 'RoleOperationLink'])
         .config(config)
         .run(run);
 
     config.$inject = ['$routeProvider'];
     function config($routeProvider) {
+        localStorage.clear();
         $routeProvider.when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'home/home.view.html',

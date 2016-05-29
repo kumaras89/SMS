@@ -1,11 +1,10 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseModel;
-import com.sms.core.Builder;
+import com.sms.core.util.Builder;
 import com.sms.core.feesparticular.FeesParticular;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 @Table(name = "SMS_TR_SCHEME_TO_FEES")

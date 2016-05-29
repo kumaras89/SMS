@@ -1,0 +1,27 @@
+﻿<div class="container" ng-init="init('role', ['/role'])">
+    <h1>Create a Role</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="name">Role :</label>
+
+            <div class="controls">
+                <input type="text" id="name" ng-model="entity.name" placeholder="Role"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="desc">Desc:</label>
+            <div class="controls">
+                <input type="text" id="desc" ng-model="entity.desc" placeholder="Desc"/>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="goToList()" class="btn btn-small">cancel</a>
+                <a ng-click="save()" class="btn btn-small btn-primary">create new role</a>
+            </div>
+        </div>
+    </form>
+</div>

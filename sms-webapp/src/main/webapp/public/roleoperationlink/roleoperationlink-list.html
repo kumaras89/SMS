@@ -1,0 +1,37 @@
+﻿<div class="span6" ng-init="init()">
+    <h1>Role Operaiton Link</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="role">User Role : </label>
+            <div class="controls">
+                <select id="role" ng-change="userChanged()" ng-model="rol.userRoleId" placeholder="User Role">
+                    <option value="">-- select --</option>
+                    <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group checkboxes">
+            <label class="control-label" for="linkedOperations">Operations : </label>
+            <ul>
+                <li ng-repeat="so in securedOperations">
+                    <input  id="linkedOperations"
+                            type="checkbox"
+                            name="selectedOperations[]"
+                            value="{{so.id}}"
+                            ng-checked="isChecked(so.id)"
+                            ng-click="toggleSelection(so.id)"
+                    > {{so.operation}}
+                </li>
+
+            </ul>
+        </div>
+        <br><br>
+        <div class="control-group">
+            <div class="controls">
+                <a href="#/home" class="btn btn-small">cancel</a>
+                <a ng-click="save()" ng-if="rol.userRoleId" class="btn btn-small btn-primary">Update</a>
+            </div>
+        </div>
+    </form>
+</div>

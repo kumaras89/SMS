@@ -21,8 +21,15 @@ public class UserServiceImpl extends BaseServiceConvertorImpl<UserInfo, User> {
     public UserServiceImpl(final UserRepository jpaRepository,
                            UserRoleRepository userRoleRepository,
                            final Converter<UserInfo, User> userConverter) {
-        super(jpaRepository, (userInfo) -> User.toBuilder(userConverter.convert(userInfo))
-                .on(u -> u.getRole()).set(userRoleRepository.findByName(userInfo.getRole())).build(), (source) -> UserInfo.toBuilder(source).build());
+        super(jpaRepository,
+                (userInfo) -> User
+                        .toBuilder(userConverter
+                                .convert(userInfo))
+                .on(u -> u.getRole())
+                        .set(userRoleRepository
+                                .findByName(userInfo.getRole()))
+                        .build(),
+                (source) -> UserInfo.toBuilder(source).build());
         this.userRepository = jpaRepository;
         this.userRoleRepository = userRoleRepository;
     }

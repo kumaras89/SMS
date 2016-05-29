@@ -1,8 +1,7 @@
 package com.sms.core.admin;
 
 import com.sms.core.BaseModel;
-import com.sms.core.Builder;
-import org.hibernate.annotations.*;
+import com.sms.core.util.Builder;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -26,7 +25,6 @@ public class User extends BaseModel {
 
 	@ManyToOne
 	@JoinColumn(name = "US_UR_ID")
-	@Cascade(value = org.hibernate.annotations.CascadeType.ALL)
 	private UserRole role;
 
 	@Column(name = "US_PASSWORD")
@@ -44,6 +42,7 @@ public class User extends BaseModel {
 
 		return builder()
 				.on(u -> u.getId()).set(user.getId())
+				.on(u -> u.getName()).set(user.getName())
 				.on(u -> u.getRole()).set(user.getRole())
 				.on(u -> u.getPassword()).set(user.getPassword())
 				.on(u -> u.getBranch()).set(user.getBranch())

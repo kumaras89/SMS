@@ -2,13 +2,12 @@ package com.sms.core.branch;
 
 
 import com.sms.core.BaseModel;
-import com.sms.core.Builder;
+import com.sms.core.util.Builder;
 import com.sms.core.student.Address;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 @Table(name = "SMS_MA_BRANCH")

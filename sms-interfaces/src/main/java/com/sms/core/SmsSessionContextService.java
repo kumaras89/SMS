@@ -1,9 +1,6 @@
 package com.sms.core;
 
-import com.sms.core.admin.SecuredOperation;
-import com.sms.core.admin.SecuredOperationType;
-import com.sms.core.admin.User;
-import com.sms.core.admin.UserInfo;
+import com.sms.core.admin.*;
 import com.sms.core.repositery.RoleOperationLinkRepository;
 import com.sms.core.repositery.SecuredOperationRepository;
 import com.sms.core.repositery.UserRepository;
@@ -12,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,27 +36,40 @@ public class SmsSessionContextService {
         User user = userRepository.findByNameIgnoreCase(userName);
         sessionContext.setContextIntialized(true);
         sessionContext.setLoggedInUserInfo(UserInfo.toBuilder(user).build());
-        sessionContext.setSecuredOperations(getSecuredOperations());
-        sessionContext.setAllowedOperations(getSecuredOperationByType(user.getRole().getName(), OPERATION));
-        sessionContext.setAllowedUrls(getSecuredOperationByType(user.getRole().getName(), URL));
+        List<SecuredOperation> securedOperations = securedOperationRepository.findAll();
+        sessionContext.setSecuredOperations(getSecuredByType(OPERATION).apply(securedOperations));
+        List<SecuredOperation> allowedOperationsForUser = findListOfSecuredOperation(getSecuredOperationByUser(user.getRole().getId()), securedOperations);
+        sessionContext.setAllowedOperations(getSecuredByType(OPERATION).apply(allowedOperationsForUser));
+        sessionContext.setAllowedUrls(getSecuredByType(URL).apply(allowedOperationsForUser));
         return sessionContext;
     }
 
-    private List<String> getSecuredOperationByType(String userRole, Predicate<SecuredOperation> filter) {
-        return roleOperationLinkRepository.findAll().stream().filter(rol -> rol.getUserRole().getName().equals(userRole)).map(s-> s.getSecuredOperation()).filter(filter).map(s -> s.getOperation()).collect(Collectors.toList());
+    private List<SecuredOperation> findListOfSecuredOperation(List<RoleOperationLink> rols, List<SecuredOperation> securedOperations){
+        return rols.stream()
+                .map(rol -> securedOperations
+                        .stream()
+                        .filter(so -> so.getId().equals(rol.getSecuredOperationId()))
+                        .findFirst()
+                        .get())
+                .collect(Collectors.toList());
+    }
+
+    private List<RoleOperationLink> getSecuredOperationByUser(Long userId) {
+        return roleOperationLinkRepository.findAll().stream().filter(rol -> rol.getUserRoleId().equals(userId))
+                .collect(Collectors.toList());
     }
 
     public List<String> getSecuredOperations() {
-        return getSecuredByType(OPERATION);
+        return getSecuredByType(OPERATION).apply(securedOperationRepository.findAll());
     }
 
 
-    private List<String> getSecuredByType(Predicate<SecuredOperation> filter) {
-        return securedOperationRepository.findAll().stream().filter(filter).map(s -> s.getOperation()).collect(Collectors.toList());
+    private Function<List<SecuredOperation>, List<String>> getSecuredByType(Predicate<SecuredOperation> filter) {
+        return l -> l.stream().filter(filter).map(s -> s.getOperation()).collect(Collectors.toList());
     }
 
     public List<String> getSecuredUrls() {
-        return getSecuredByType(URL);
+        return getSecuredByType(URL).apply(securedOperationRepository.findAll());
     }
 
 

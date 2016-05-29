@@ -76,7 +76,7 @@
 
 
         function isAuthorized(resource, success, failure) {
-            StorageService.getFromStoarage('securedoperation','/login/securedoperation', function(securedOperation) {
+            StorageService.getFromStoarage('/login/securedoperation', function(securedOperation) {
                 isAuthorizedWithLocalStorage(resource, success, failure, securedOperation)
             });
         }

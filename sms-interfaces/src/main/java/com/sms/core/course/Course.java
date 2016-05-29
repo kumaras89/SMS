@@ -1,12 +1,11 @@
 package com.sms.core.course;
 
 import com.sms.core.BaseModel;
-import com.sms.core.Builder;
+import com.sms.core.util.Builder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Optional;
 
 @Entity
 @Table(name = "SMS_MA_COURSE")

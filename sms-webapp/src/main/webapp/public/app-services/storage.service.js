@@ -9,13 +9,13 @@
     function StorageService($http) {
         var service = {};
 
-        service.getFromStoarage = function(key, url, callback) {
-            var storageVal = localStorage.getItem(key);
+        service.getFromStoarage = function(url, callback) {
+            var storageVal = localStorage.getItem(url);
             if(storageVal == null) {
                 $http.get(url).then(function(response) {
                     var data = response.data;
                     if(!data.message) {
-                        localStorage.setItem(key, JSON.stringify(data));
+                        localStorage.setItem(url, JSON.stringify(data));
                         callback(data)
                     }
                 });
@@ -24,9 +24,13 @@
             }
         }
 
-        service.getTrustedStoarage = function(key) {
-            var storageVal = localStorage.getItem(key);
+        service.getTrustedStoarage = function(url) {
+            var storageVal = localStorage.getItem(url);
             return JSON.parse(storageVal)
+        }
+
+        service.clearStorage = function(url) {
+            localStorage.removeItem(url);
         }
 
         return service;

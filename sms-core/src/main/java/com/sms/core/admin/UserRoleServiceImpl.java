@@ -1,11 +1,8 @@
 package com.sms.core.admin;
 
 import com.sms.core.BaseServiceImpl;
-import com.sms.core.Builder;
-import com.sms.core.branch.Branch;
 import com.sms.core.repositery.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 /**
