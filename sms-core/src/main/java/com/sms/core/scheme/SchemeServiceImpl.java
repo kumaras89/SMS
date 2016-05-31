@@ -32,6 +32,7 @@ public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Sche
     @Override
     protected Scheme buildToPersistObject(Long id, SchemeInfo schemeInfo) {
         return Scheme.toBuilder(schemeInfo)
+                .withId(id)
                 .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
                         .map(scheme -> SchemeFees.toBuilder(scheme)
                                 .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))

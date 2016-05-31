@@ -92,7 +92,6 @@ public class Student extends BaseModel {
     }
 
     private Student(final Builder builder) {
-        this.id = builder.id.get();
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.age = builder.age.get();
@@ -120,7 +119,6 @@ public class Student extends BaseModel {
 
     public static Builder toBuilder(final StudentInfo student) {
         return builder()
-                .withCode(student.getCode())
                 .withName(student.getName())
                 .withAge(student.getAge())
                 .withPhoneNumber(student.getPhoneNumber())

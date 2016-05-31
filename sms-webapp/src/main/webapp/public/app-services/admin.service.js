@@ -14,6 +14,13 @@
 
         service.getRoles = getRoles
         service.getBranches = getBranches
+        service.getSchemes = getSchemes
+        service.getFeesParticularDesc = getFeesParticularDesc
+        service.getSchemeCode = getSchemeCode
+        service.getSchemeDesc = getSchemeDesc
+        service.getCourses = getCourses
+        service.getCourseCode = getCourseCode
+        service.getCourseDesc = getCourseDesc
         service.getBranchCode = getBranchCode
         service.getBranchDesc = getBranchDesc
 
@@ -22,6 +29,20 @@
         function initService() {
             getBranches(function(){})
             getRoles(function(){})
+            getFeesParticulars(function(){})
+        }
+
+        function getFeesParticulars(success) {
+            StorageService.getFromStoarage('/feesParticular', function(data) {
+                success(data);
+            });
+        }
+
+        function getFeesParticularDesc(feesParticularCode) {
+            var feesParticulars = StorageService.getTrustedStoarage('/feesParticular');
+            return _.find(feesParticulars, function(feesParticular) {
+                return feesParticular.code == feesParticularCode
+            }).name
         }
 
          function getBranches(success) {
@@ -29,6 +50,46 @@
                  success(data);
              });
          }
+
+        function getSchemes(success) {
+            StorageService.getFromStoarage('/scheme', function(data) {
+                success(data);
+            });
+        }
+
+        function getSchemeCode(schemeName) {
+            var schemes = StorageService.getTrustedStoarage('/scheme');
+            return _.find(schemes, function(scheme) {
+                return scheme.name == schemeName
+            }).code
+        }
+
+        function getSchemeDesc(schemeCode) {
+            var schemes = StorageService.getTrustedStoarage('/scheme');
+            return _.find(schemes, function(scheme) {
+                return scheme.code == schemeCode
+            }).name
+        }
+
+        function getCourses(success) {
+            StorageService.getFromStoarage('/course', function(data) {
+                success(data);
+            });
+        }
+
+        function getCourseCode(courseName) {
+            var courses = StorageService.getTrustedStoarage('/course');
+            return _.find(courses, function(course) {
+                return course.name == courseName
+            }).code
+        }
+
+        function getCourseDesc(courseCode) {
+            var courses = StorageService.getTrustedStoarage('/course');
+            return _.find(courses, function(course) {
+                return course.code == courseCode
+            }).name
+        }
 
         function getRoles(success) {
             StorageService.getFromStoarage('/role', function(data) {

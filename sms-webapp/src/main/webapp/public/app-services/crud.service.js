@@ -19,6 +19,7 @@
         service.courseService = service.of('course')
         service.schemeService = service.of('scheme')
         service.feesParticularService = service.of('feesParticular')
+        service.studentService = service.of('student')
 
         return service;
 

@@ -82,7 +82,6 @@
                 $scope.createNewScheme = function () {
 
                     $scope.scheme.schemeFeesInfos = $scope.schemeFeesInfos;
-                    console.log($scope.scheme);
 
                     CrudService.schemeService.Create($scope.scheme).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);

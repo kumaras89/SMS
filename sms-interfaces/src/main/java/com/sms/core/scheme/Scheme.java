@@ -3,6 +3,7 @@ package com.sms.core.scheme;
 import com.sms.core.BaseModel;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +17,9 @@ public class Scheme extends BaseModel {
     @Column(name = "SC_NAME")
     private String name;
 
+    @Column(name = "SC_FEES_AMOUNT")
+    private BigDecimal feesAmount;
+
     @Column(name = "SC_DESCRIPTION")
     private String description;
 
@@ -28,11 +32,11 @@ public class Scheme extends BaseModel {
     }
 
     public Scheme(Builder builder) {
-        this.id = builder.id.get();
         this.code = builder.code.get();
         this.name = builder.name.get();
         this.description = builder.description.get();
         this.schemeFees = builder.schemeFees.get();
+        this.feesAmount = builder.feesAmount.get();
     }
 
     public static Builder builder() {
@@ -43,7 +47,8 @@ public class Scheme extends BaseModel {
         return builder()
                 .withName(schemeInfo.getName())
                 .withCode(schemeInfo.getCode())
-                .withDescription(schemeInfo.getDescription());
+                .withDescription(schemeInfo.getDescription())
+                .withFeesAmount(schemeInfo.getFeesAmount());
     }
 
     public String getCode() {
@@ -62,6 +67,10 @@ public class Scheme extends BaseModel {
         return schemeFees;
     }
 
+    public BigDecimal getFeesAmount() {
+        return feesAmount;
+    }
+
     public static class Builder {
 
         private Optional<Long> id = Optional.empty();
@@ -69,6 +78,7 @@ public class Scheme extends BaseModel {
         private Optional<String> name = Optional.empty();
         private Optional<String> description = Optional.empty();
         private Optional<Set<SchemeFees>> schemeFees = Optional.empty();
+        private Optional<BigDecimal> feesAmount = Optional.empty();
 
         private Builder() {
             super();
@@ -97,6 +107,11 @@ public class Scheme extends BaseModel {
 
         public Builder withSchemeFees(final Set<SchemeFees> theSchemeFees) {
             this.schemeFees = Optional.of(theSchemeFees);
+            return this;
+        }
+
+        public Builder withFeesAmount(final BigDecimal thefeesAmount) {
+            this.feesAmount = Optional.of(thefeesAmount);
             return this;
         }
 
