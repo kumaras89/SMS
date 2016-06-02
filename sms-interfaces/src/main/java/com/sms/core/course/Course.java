@@ -1,7 +1,7 @@
 package com.sms.core.course;
 
 import com.sms.core.BaseModel;
-import com.sms.core.util.Builder;
+import com.sms.core.common.Builder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

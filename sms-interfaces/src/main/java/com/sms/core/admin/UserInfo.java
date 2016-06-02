@@ -1,6 +1,6 @@
 package com.sms.core.admin;
 
-import com.sms.core.util.Builder;
+import com.sms.core.common.Builder;
 
 import java.io.Serializable;
 

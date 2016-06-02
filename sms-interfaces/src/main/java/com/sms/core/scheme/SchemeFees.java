@@ -1,7 +1,7 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseModel;
-import com.sms.core.util.Builder;
+import com.sms.core.common.Builder;
 import com.sms.core.feesparticular.FeesParticular;
 
 import javax.persistence.*;

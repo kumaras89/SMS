@@ -1,4 +1,4 @@
-package com.sms.core.util;
+package com.sms.core.common;
 
 import java.util.List;
 import java.util.Optional;
