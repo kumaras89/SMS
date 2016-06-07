@@ -1,10 +1,12 @@
 package com.sms.core.scheme;
 
+import com.sms.core.common.Builder;
+
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("all")
 public class SchemeInfo {
 
     private Long id;
@@ -17,27 +19,18 @@ public class SchemeInfo {
     public SchemeInfo() {
     }
 
-    public SchemeInfo(Builder builder) {
-        this.code = builder.code.get();
-        this.name = builder.name.get();
-        this.description = builder.description.get();
-        this.schemeFeesInfos = builder.schemeFeesInfos.get();
-        this.id = builder.id.get();
-        this.feesAmount = builder.feesAmount.get();
+    public static Builder<SchemeInfo> builder() {
+        return Builder.of(SchemeInfo.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final Scheme scheme) {
+    public static Builder<SchemeInfo> toBuilder(final Scheme scheme) {
         return builder()
-                .withId(scheme.getId())
-                .withName(scheme.getName())
-                .withCode(scheme.getCode())
-                .withDescription(scheme.getDescription())
-                .withFeesAmount(scheme.getFeesAmount())
-                .withFeesCategories(scheme.getSchemeFees().stream()
+                .with(SchemeInfo::getId, scheme.getId())
+                .with(SchemeInfo::getName, scheme.getName())
+                .with(SchemeInfo::getCode, scheme.getCode())
+                .with(SchemeInfo::getDescription, scheme.getDescription())
+                .with(SchemeInfo::getFeesAmount, scheme.getFeesAmount())
+                .with(SchemeInfo::getSchemeFeesInfos, scheme.getSchemeFees().stream()
                         .map(feesCategory -> SchemeFeesInfo.toBuilder(feesCategory).build())
                         .collect(Collectors.toSet()));
     }
@@ -64,57 +57,5 @@ public class SchemeInfo {
 
     public BigDecimal getFeesAmount() {
         return feesAmount;
-    }
-
-    public static class Builder {
-
-        private Optional<Long> id = Optional.empty();
-        private Optional<String> code = Optional.empty();
-        private Optional<String> name = Optional.empty();
-        private Optional<String> description = Optional.empty();
-        private Optional<Set<SchemeFeesInfo>> schemeFeesInfos = Optional.empty();
-        private Optional<BigDecimal> feesAmount = Optional.empty();
-
-        private Builder() {
-            super();
-        }
-
-        public Builder withId(final Long theId) {
-            this.id = Optional.of(theId);
-            return this;
-        }
-
-        public Builder withCode(final String theCode) {
-            this.code = Optional.of(theCode);
-            return this;
-        }
-
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
-
-        public Builder withDescription(final String theDescription) {
-            this.description = Optional.of(theDescription);
-            return this;
-        }
-
-        public Builder withFeesCategories(final Set<SchemeFeesInfo> theFeesCategories) {
-            this.schemeFeesInfos = Optional.of(theFeesCategories);
-            return this;
-        }
-
-        public Builder withFeesAmount(final BigDecimal thefeesAmount) {
-            this.feesAmount = Optional.of(thefeesAmount);
-            return this;
-        }
-
-        public SchemeInfo build() {
-            return new SchemeInfo(this);
-        }
-
-        protected Builder getThis() {
-            return this;
-        }
     }
 }

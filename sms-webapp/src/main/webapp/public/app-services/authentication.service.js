@@ -47,6 +47,7 @@
                     SetCredentials(username, password, {
                         name : data.user.firstName + ' ' + data.user.lastName,
                         role : data.user.role,
+                        branch: data.user.branch,
                         allowedOperations : data.user.allowedOperations
                     });
                     success(data);

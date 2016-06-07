@@ -109,6 +109,7 @@
                     $scope.student.address = $scope.address;
                     $scope.student.guardians = $scope.guardians;
                     $scope.student.educationDetails = $scope.educationDetails;
+                    $scope.student.status = 'CREATED';
 
                     $scope.student.branchCode = AdminService.getBranchCode($scope.branchName);
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.schemeName);

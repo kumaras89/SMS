@@ -1,7 +1,8 @@
 package com.sms.core.student;
 
+import com.sms.core.common.Builder;
+
 import java.util.Date;
-import java.util.Optional;
 import java.util.Set;
 
 public class StudentInfo {
@@ -25,57 +26,41 @@ public class StudentInfo {
     private String englishFluency;
     private String courseCode;
     private String schemeCode;
+    private String status;
+    private Date createdDate;
+    private Date lastModifiedDate;
 
     public StudentInfo() {
     }
 
-    private StudentInfo(final Builder builder) {
-        this.code = builder.code.get();
-        this.name = builder.name.get();
-        this.age = builder.age.get();
-        this.phoneNumber = builder.phoneNumber.get();
-        this.alternatePhoneNumber = builder.alternatePhoneNumber.get();
-        this.dateOfBirth = builder.dateOfBirth.get();
-        this.mailId = builder.mailId.get();
-        this.gender = builder.gender.get();
-        this.address = builder.address.get();
-        this.branchCode = builder.branch.get();
-        this.caste = builder.caste.get();
-        this.religion = builder.religion.get();
-        this.guardians = builder.guardians.get();
-        this.educationDetails = builder.educationDetails.get();
-        this.nationality = builder.nationality.get();
-        this.maritalStatus = builder.maritalStatus.get();
-        this.englishFluency = builder.englishFluency.get();
-        this.courseCode = builder.courseCode.get();
-        this.schemeCode = builder.schemeCode.get();
+    public static Builder<StudentInfo> builder() {
+        return Builder.of(StudentInfo.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final Student student) {
+    public static Builder<StudentInfo> toBuilder(final Student student) {
         return builder()
-                .withCode(student.getCode())
-                .withName(student.getName())
-                .withAge(student.getAge())
-                .withPhoneNumber(student.getPhoneNumber())
-                .withAlternatePhoneNumber(student.getAlternatePhoneNumber())
-                .withDateOfBirth(student.getDateOfBirth())
-                .withMailId(student.getMailId())
-                .withAddress(student.getAddress())
-                .withBranchCode(student.getBranch().getCode())
-                .withGender(student.getGender().name())
-                .withCaste(student.getCaste().name())
-                .withReligion(student.getReligion().name())
-                .withGuardians(student.getGuardians())
-                .withEducationDetails(student.getEducationDetails())
-                .withMaritalStatus(student.getMaritalStatus().name())
-                .withEnglishFluency(student.getEnglishFluency().name())
-                .withNationality(student.getNationality())
-                .withCourseCode(student.getCourse().getCode())
-                .withSchemeCode(student.getScheme().getCode());
+                .with(StudentInfo::getCode, student.getCode())
+                .with(StudentInfo::getName, student.getName())
+                .with(StudentInfo::getAge, student.getAge())
+                .with(StudentInfo::getPhoneNumber, student.getPhoneNumber())
+                .with(StudentInfo::getAlternatePhoneNumber, student.getAlternatePhoneNumber())
+                .with(StudentInfo::getDateOfBirth, student.getDateOfBirth())
+                .with(StudentInfo::getMailId, student.getMailId())
+                .with(StudentInfo::getGender, student.getGender().name())
+                .with(StudentInfo::getCaste, student.getCaste().name())
+                .with(StudentInfo::getReligion, student.getReligion().name())
+                .with(StudentInfo::getGuardians, student.getGuardians())
+                .with(StudentInfo::getEducationDetails, student.getEducationDetails())
+                .with(StudentInfo::getAddress, student.getAddress())
+                .with(StudentInfo::getEnglishFluency, student.getEnglishFluency().name())
+                .with(StudentInfo::getMaritalStatus, student.getMaritalStatus().name())
+                .with(StudentInfo::getNationality, student.getNationality())
+                .with(StudentInfo::getBranchCode, student.getBranch().getCode())
+                .with(StudentInfo::getCourseCode, student.getCourse().getCode())
+                .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
+                .with(StudentInfo::getStatus, student.getStatus().name())
+                .with(StudentInfo::getCreatedDate, student.getCreatedDate())
+                .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate());
     }
 
     public String getCode() {
@@ -154,133 +139,15 @@ public class StudentInfo {
         return schemeCode;
     }
 
-    public static class Builder {
+    public String getStatus() {
+        return status;
+    }
 
-        private Optional<String> code = Optional.empty();
-        private Optional<String> name = Optional.empty();
-        private Optional<Integer> age = Optional.empty();
-        private Optional<String> phoneNumber = Optional.empty();
-        private Optional<String> alternatePhoneNumber = Optional.empty();
-        private Optional<Date> dateOfBirth = Optional.empty();
-        private Optional<String> mailId = Optional.empty();
-        private Optional<Address> address = Optional.empty();
-        private Optional<String> branch = Optional.empty();
-        private Optional<String> gender = Optional.empty();
-        private Optional<String> caste = Optional.empty();
-        private Optional<String> religion = Optional.empty();
-        private Optional<Set<Guardian>> guardians = Optional.empty();
-        private Optional<Set<EducationDetail>> educationDetails = Optional.empty();
-        private Optional<String> nationality = Optional.empty();
-        private Optional<String> maritalStatus = Optional.empty();
-        private Optional<String> englishFluency = Optional.empty();
-        private Optional<String> courseCode = Optional.empty();
-        private Optional<String> schemeCode = Optional.empty();
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
-        private Builder() {
-            super();
-        }
-
-        public Builder withCode(final String theCode) {
-            this.code = Optional.of(theCode);
-            return this;
-        }
-
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
-
-        public Builder withAge(final Integer theAge) {
-            this.age = Optional.of(theAge);
-            return this;
-        }
-
-        public Builder withPhoneNumber(final String thePhoneNumber) {
-            this.phoneNumber = Optional.of(thePhoneNumber);
-            return this;
-        }
-
-        public Builder withAlternatePhoneNumber(final String theAlternatePhoneNumber) {
-            this.alternatePhoneNumber = Optional.of(theAlternatePhoneNumber);
-            return this;
-        }
-
-        public Builder withDateOfBirth(final Date theDateOfBirth) {
-            this.dateOfBirth = Optional.of(theDateOfBirth);
-            return this;
-        }
-
-        public Builder withMailId(final String theMailId) {
-            this.mailId = Optional.of(theMailId);
-            return this;
-        }
-
-        public Builder withAddress(final Address theAddress) {
-            this.address = Optional.of(theAddress);
-            return this;
-        }
-
-        public Builder withBranchCode(final String theBranch) {
-            this.branch = Optional.of(theBranch);
-            return this;
-        }
-
-        public Builder withGender(final String theGender) {
-            this.gender = Optional.of(theGender);
-            return this;
-        }
-
-        public Builder withCaste(final String theCaste) {
-            this.caste = Optional.of(theCaste);
-            return this;
-        }
-
-        public Builder withReligion(final String theReligion) {
-            this.religion = Optional.of(theReligion);
-            return this;
-        }
-
-        public Builder withGuardians(final Set<Guardian> theGuardians) {
-            this.guardians = Optional.of(theGuardians);
-            return this;
-        }
-
-        public Builder withEducationDetails(final Set<EducationDetail> theEducationDetails) {
-            this.educationDetails = Optional.of(theEducationDetails);
-            return this;
-        }
-
-        public Builder withNationality(final String theNationality) {
-            this.nationality = Optional.of(theNationality);
-            return this;
-        }
-
-        public Builder withMaritalStatus(final String theMaritalStatus) {
-            this.maritalStatus = Optional.of(theMaritalStatus);
-            return this;
-        }
-
-        public Builder withEnglishFluency(final String theEnglishFluency) {
-            this.englishFluency = Optional.of(theEnglishFluency);
-            return this;
-        }
-
-        public Builder withCourseCode(final String theCourseCode) {
-            this.courseCode = Optional.of(theCourseCode);
-            return this;
-        }
-
-        public Builder withSchemeCode(final String theSchemeCode) {
-            this.schemeCode = Optional.of(theSchemeCode);
-            return this;
-        }
-
-        public StudentInfo build() {
-            return new StudentInfo(this);
-        }
-
-        protected Builder getThis() {
-            return this;
-        }
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
     }
 }

@@ -19,25 +19,26 @@ public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Sche
     public SchemeServiceImpl(SchemeRepository schemeRepository, FeesParticularRepository feesParticularRepository) {
         super(schemeRepository,
                 (schemeInfo) -> Scheme.toBuilder(schemeInfo)
-                        .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
+                        .with(Scheme::getSchemeFees,schemeInfo.getSchemeFeesInfos().stream()
                                 .map(scheme -> SchemeFees.toBuilder(scheme)
                                         .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
                                         .build())
                                 .collect(Collectors.toSet()))
-                        .build(),
+                .build(),
                 (scheme) -> SchemeInfo.toBuilder(scheme).build());
         this.feesParticularRepository = feesParticularRepository;
     }
 
     @Override
     protected Scheme buildToPersistObject(Long id, SchemeInfo schemeInfo) {
+
         return Scheme.toBuilder(schemeInfo)
-                .withId(id)
-                .withSchemeFees(schemeInfo.getSchemeFeesInfos().stream()
-                        .map(scheme -> SchemeFees.toBuilder(scheme)
-                                .on(s -> s.getFeesParticular()).set(feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
-                                .build())
-                        .collect(Collectors.toSet()))
+                .with(Scheme::getId,id)
+                .with(Scheme::getSchemeFees,schemeInfo.getSchemeFeesInfos().stream()
+                .map(scheme -> SchemeFees.toBuilder(scheme)
+                        .with(SchemeFees::getFeesParticular, feesParticularRepository.findByCodeIgnoreCase(scheme.getFeesParticularCode()))
+                        .build())
+                .collect(Collectors.toSet()))
                 .build();
     }
 }
