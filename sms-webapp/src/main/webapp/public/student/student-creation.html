@@ -37,10 +37,6 @@
     }
 </style>
 <script type="text/javascript">
-    function updateTextInput(val) {
-        document.getElementById("slider_value").innerHTML=val;
-    }
-
     function updateAnnualIncome(val) {
         document.getElementById("annualIncome").value = (eval(val * 12));
     }
@@ -83,10 +79,7 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" for="age">Age</label></td>
-                            <td>
-                                <input type="range" id="age" ng-model="student.age" min="0" max="100" value="20" onchange="updateTextInput(this.value);" style="width:200px;">
-                                <div align="center" id="slider_value" style="color:#43A047;"></div>
-                            </td>
+                            <td><input type="number" id="age" ng-model="student.age" min="0" max="100" value="20"></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="gender">Gender</label></td>
@@ -383,7 +376,7 @@
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                <td><label class="control-label">{{student.dateOfBirth}}</label></td>
+                                <td><label class="control-label">{{student.dateOfBirth | date}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="age">Age</label></td>

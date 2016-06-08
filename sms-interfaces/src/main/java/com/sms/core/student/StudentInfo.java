@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class StudentInfo {
 
+    private Long id;
     private String code;
     private String name;
     private int age;
@@ -39,6 +40,7 @@ public class StudentInfo {
 
     public static Builder<StudentInfo> toBuilder(final Student student) {
         return builder()
+                .with(StudentInfo::getId, student.getId())
                 .with(StudentInfo::getCode, student.getCode())
                 .with(StudentInfo::getName, student.getName())
                 .with(StudentInfo::getAge, student.getAge())
@@ -61,6 +63,10 @@ public class StudentInfo {
                 .with(StudentInfo::getStatus, student.getStatus().name())
                 .with(StudentInfo::getCreatedDate, student.getCreatedDate())
                 .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate());
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getCode() {

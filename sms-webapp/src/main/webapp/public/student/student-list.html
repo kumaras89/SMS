@@ -7,6 +7,8 @@
             <th style="min-width: 80px;">Branch Name</th>
             <th style="min-width: 80px;">Course Name</th>
             <th style="min-width: 80px;">Scheme Name</th>
+            <th style="min-width: 80px;">Joining  Date</th>
+            <th style="min-width: 80px;">&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -16,6 +18,8 @@
             <td>{{ getBranchDesc(student.branchCode) }}</td>
             <td>{{ getCourseDesc(student.courseCode) }}</td>
             <td>{{ getSchemeDesc(student.schemeCode) }}</td>
+            <td>{{ student.createdDate | date }}</td>
+            <td><a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary">View</a></td>
         </tr>
         </tbody>
     </table>
