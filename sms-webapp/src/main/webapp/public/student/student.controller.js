@@ -42,8 +42,8 @@
 
 
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$location',
-            function ($scope, $routeParams, CrudService, FlashService, $location) {
+        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService',
+            function ($scope, $routeParams, CrudService) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($routeParams.id).then(function (res) {
@@ -66,8 +66,8 @@
 
                 $scope.loadStudent();
             }])
-        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'StudentService', 'FlashService', '$location', 'AdminService',
-            function ($scope, CrudService, StudentService, FlashService, $location, AdminService) {
+        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
+            function ($scope, CrudService, FlashService, $location, AdminService) {
 
                 $scope.educationDetails = [];
                 $scope.guardians = [];
@@ -151,28 +151,9 @@
                 };
 
                 $scope.init = function () {
-                    StudentService.getReligions(function (data) {
-                        $scope.religions = data;
-                    });
 
-                    StudentService.getCaste(function (data) {
-                        $scope.castes = data;
-                    });
-
-                    StudentService.getMaritalStatus(function (data) {
-                        $scope.maritalStatus = data;
-                    });
-
-                    StudentService.getGender(function (data) {
-                        $scope.genders = data;
-                    });
-
-                    StudentService.getRatings(function (data) {
-                        $scope.ratings = data;
-                    });
-
-                    StudentService.getRelations(function (data) {
-                        $scope.relations = data;
+                    AdminService.getConstants(function (data) {
+                        $scope.commonAttributes = data;
                     });
 
                     AdminService.getBranches(function (data) {

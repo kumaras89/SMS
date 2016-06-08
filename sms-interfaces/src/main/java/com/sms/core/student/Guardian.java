@@ -1,7 +1,7 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseModel;
-import com.sms.core.Gender;
+import com.sms.core.common.Gender;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -2,7 +2,7 @@ package com.sms.core.student;
 
 import com.sms.core.*;
 import com.sms.core.branch.Branch;
-import com.sms.core.common.Builder;
+import com.sms.core.common.*;
 import com.sms.core.course.Course;
 import com.sms.core.scheme.Scheme;
 import org.hibernate.annotations.Cascade;
