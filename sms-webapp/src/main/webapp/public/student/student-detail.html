@@ -208,13 +208,17 @@
         <table class="table table-striped table-condensed">
             <thead>
             <tr>
-                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course And Fees Details</label></td>
+                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees And Referral Details</label></td>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td><label class="control-label">Course Name</label></td>
                 <td><label class="control-label">{{getCourseDesc(student.courseCode)}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label">Referred By</label></td>
+                <td><label class="control-label">{{ getMarketingEmployeeName(student.marketingEmployeeCode) }}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label">Scheme Name</label></td>

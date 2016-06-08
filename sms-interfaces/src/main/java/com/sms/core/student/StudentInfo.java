@@ -30,6 +30,7 @@ public class StudentInfo {
     private String status;
     private Date createdDate;
     private Date lastModifiedDate;
+    private String marketingEmployeeCode;
 
     public StudentInfo() {
     }
@@ -62,7 +63,8 @@ public class StudentInfo {
                 .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
                 .with(StudentInfo::getStatus, student.getStatus().name())
                 .with(StudentInfo::getCreatedDate, student.getCreatedDate())
-                .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate());
+                .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate())
+                .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode());
     }
 
     public Long getId() {
@@ -155,5 +157,9 @@ public class StudentInfo {
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public String getMarketingEmployeeCode() {
+        return marketingEmployeeCode;
     }
 }

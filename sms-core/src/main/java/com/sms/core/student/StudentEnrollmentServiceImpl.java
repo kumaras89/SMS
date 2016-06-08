@@ -1,10 +1,7 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseServiceConvertorImpl;
-import com.sms.core.repositery.BranchRepository;
-import com.sms.core.repositery.CourseRepository;
-import com.sms.core.repositery.SchemeRepository;
-import com.sms.core.repositery.StudentRepository;
+import com.sms.core.repositery.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +13,17 @@ import java.util.Date;
 @Transactional
 public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<StudentInfo, Student> {
 
-    private BranchRepository branchRepository;
-    private CourseRepository courseRepository;
-    private SchemeRepository schemeRepository;
+    private final BranchRepository branchRepository;
+    private final CourseRepository courseRepository;
+    private final SchemeRepository schemeRepository;
+    private final MarketingEmployeeRepository marketingEmployeeRepository;
 
     @Autowired
     public StudentEnrollmentServiceImpl(final StudentRepository studentRepository,
                                         final BranchRepository branchRepository,
                                         final CourseRepository courseRepository,
-                                        final SchemeRepository schemeRepository) {
+                                        final SchemeRepository schemeRepository,
+                                        final MarketingEmployeeRepository marketingEmployeeRepository) {
 
         super(studentRepository,
                 (studentInfo) ->
@@ -36,6 +35,7 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
                                 .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
                                 .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
                                 .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                                .with(Student::getMarketingEmployee, marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode()))
                                 .with(Student::getCreatedDate, new Date())
                                 .with(Student::getLastModifiedDate, new Date())
                                 .build(),
@@ -43,6 +43,7 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
         this.branchRepository = branchRepository;
         this.courseRepository = courseRepository;
         this.schemeRepository = schemeRepository;
+        this.marketingEmployeeRepository = marketingEmployeeRepository;
     }
 
     @Override
@@ -54,6 +55,7 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
                 .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
                 .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
                 .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                .with(Student::getMarketingEmployee, marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode()))
                 .with(Student::getLastModifiedDate, new Date())
                 .build();
     }

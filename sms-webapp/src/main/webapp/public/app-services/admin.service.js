@@ -24,6 +24,9 @@
         service.getBranchCode = getBranchCode
         service.getBranchDesc = getBranchDesc
         service.getConstants = getConstants
+        service.getMarketingEmployees = getMarketingEmployees
+        service.getMarketingEmployeeCode = getMarketingEmployeeCode
+        service.getMarketingEmployeeName = getMarketingEmployeeName
 
         return service;
         
@@ -32,6 +35,26 @@
             getRoles(function(){})
             getFeesParticulars(function(){})
             getConstants(function(){})
+        }
+
+        function getMarketingEmployeeName(marketingEmployeeCode) {
+            var marketingEmployees = StorageService.getTrustedStoarage('/marketingEmployee');
+            return _.find(marketingEmployees, function(marketingEmployee) {
+                return marketingEmployee.code == marketingEmployeeCode
+            }).name
+        }
+
+        function getMarketingEmployeeCode(marketingEmployeeName) {
+            var marketingEmployees = StorageService.getTrustedStoarage('/marketingEmployee');
+            return _.find(marketingEmployees, function(marketingEmployee) {
+                return marketingEmployee.name == marketingEmployeeName
+            }).code
+        }
+
+        function getMarketingEmployees(success) {
+            StorageService.getFromStoarage('/marketingEmployee', function(data) {
+                success(data);
+            });
         }
 
         function getConstants(success) {

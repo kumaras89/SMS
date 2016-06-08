@@ -331,7 +331,7 @@
                     <table class="table table-striped table-condensed">
                         <thead>
                         <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course And Fees Details</label></td>
+                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referal Details</label></td>
                         </tr>
                         </thead>
                         <tbody>
@@ -342,6 +342,10 @@
                         <tr>
                             <td><label class="control-label">Fees Scheme Name</label></td>
                             <td><input type="text" ng-model="schemeName" list="schemeList" id="schemeName" placeholder="scheme"/></td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Referred By</label></td>
+                            <td><input type="text" ng-model="referalName" list="marketingEmployeeList" id="referalName" placeholder="referal name"/></td>
                         </tr>
                         <tr>
                             <td align="left"><input class="submit" type="submit" name="submit_back_third" id="submit_back_third" value="Back" /></td>
@@ -562,13 +566,17 @@
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
-                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course And Fees Details</label></td>
+                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referral Details</label></td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td><label class="control-label">Course Name</label></td>
                         <td><label class="control-label">{{courseName}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label">Referred By</label></td>
+                        <td><label class="control-label">{{referalName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Scheme Type and Amount</label></td>
@@ -641,6 +649,10 @@
 
 <datalist id="courseNames">
     <option  data-ng-repeat="courseName in courseNames" value="{{courseName}}">
+</datalist>
+
+<datalist id="marketingEmployeeList">
+    <option  data-ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">
 </datalist>
 
 </body>

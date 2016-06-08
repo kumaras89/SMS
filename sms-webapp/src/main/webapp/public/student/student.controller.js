@@ -42,8 +42,8 @@
 
 
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService',
-            function ($scope, $routeParams, CrudService) {
+        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'AdminService',
+            function ($scope, $routeParams, CrudService, AdminService) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($routeParams.id).then(function (res) {
@@ -61,6 +61,10 @@
 
                 $scope.getSchemeDesc = function (schemeCode){
                     return AdminService.getSchemeDesc(schemeCode);
+                };
+
+                $scope.getMarketingEmployeeName = function (schemeCode){
+                    return AdminService.getMarketingEmployeeName(schemeCode);
                 };
 
 
@@ -107,6 +111,8 @@
                     $scope.student.branchCode = AdminService.getBranchCode($scope.branchName);
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.schemeName);
                     $scope.student.courseCode = AdminService.getCourseCode($scope.courseName);
+                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.referalName);
+
 
                     CrudService.studentService.Create($scope.student).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
@@ -154,6 +160,10 @@
 
                     AdminService.getConstants(function (data) {
                         $scope.commonAttributes = data;
+                    });
+
+                    AdminService.getMarketingEmployees(function (data) {
+                        $scope.marketingEmployees = data;
                     });
 
                     AdminService.getBranches(function (data) {

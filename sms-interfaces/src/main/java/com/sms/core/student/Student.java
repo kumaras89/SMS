@@ -4,6 +4,7 @@ import com.sms.core.*;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
 import com.sms.core.course.Course;
+import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.scheme.Scheme;
 import org.hibernate.annotations.Cascade;
 
@@ -93,6 +94,10 @@ public class Student extends BaseModel {
 
     @Column(name = "ST_LAST_MODIFIED_DATE")
     private Date lastModifiedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "ST_MARKETING_EMPLOYEE_ID")
+    private MarketingEmployee marketingEmployee;
 
     public Student() {
         super();
@@ -210,5 +215,9 @@ public class Student extends BaseModel {
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public MarketingEmployee getMarketingEmployee() {
+        return marketingEmployee;
     }
 }
