@@ -8,7 +8,7 @@ public class DocType {
     private String type;
     private String uploadCategoryName;
     private String desc;
-    private String id;
+    private Long id;
 
     public String getType() {
         return type;
@@ -22,7 +22,7 @@ public class DocType {
         return desc;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

@@ -1,5 +1,8 @@
 package com.sms.core.common;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.concurrent.ListenableFuture;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -28,6 +31,12 @@ public class React<T> {
 
     public static <T> React<T> of(React<T> t) {
         return of(t.get());
+    }
+
+    public static <T> React<T> of(ListenableFuture<ResponseEntity<T>> t) {
+        return React.of(() -> t)
+                .thenCF(FunctionUtils::buildCompletableFutureFromListenableFuture)
+                .then(re -> re.getBody());
     }
 
     public static <T> React<T> of(Supplier<T> t) {
@@ -61,6 +70,14 @@ public class React<T> {
     public <U> React<U> thenCF(Function<T, CompletableFuture<U>> function) {
         return new React<>(completableFuture.thenCompose(t -> function.apply(t)));
     }
+
+    public <U> React<U> thenLF(Function<T, ListenableFuture<ResponseEntity<U>>> function) {
+        return then(function)
+                .thenCF(FunctionUtils::buildCompletableFutureFromListenableFuture)
+                .then(re -> re.getBody());
+    }
+
+
 
     public <U> React<U> thenR(Function<T, React<U>> function) {
         return thenCF(t -> function.apply(t).get());

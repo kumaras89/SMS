@@ -32,4 +32,6 @@ public class UploadInfo {
     public String getFileName() {
         return fileName;
     }
+
+
 }
