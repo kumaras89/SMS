@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service("studentEnrollmentService")
 @Transactional
@@ -28,13 +29,15 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
         super(studentRepository,
                 (studentInfo) ->
                         Student.toBuilder(studentInfo)
-                                .withCode(new StringBuilder(studentInfo.getBranchCode())
+                                .with(Student::getCode, new StringBuilder(studentInfo.getBranchCode())
                                         .append(LocalDateTime.now().getYear())
                                         .append(String.format("%06d", studentRepository.count() + 1))
                                         .toString())
-                                .withBranch(branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
-                                .withCourse(courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
-                                .withScheme(schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                                .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
+                                .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
+                                .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                                .with(Student::getCreatedDate, new Date())
+                                .with(Student::getLastModifiedDate, new Date())
                                 .build(),
                 (student) -> StudentInfo.toBuilder(student).build());
         this.branchRepository = branchRepository;
@@ -46,11 +49,12 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
     protected Student buildToPersistObject(Long id, StudentInfo studentInfo) {
 
         return Student.toBuilder(studentInfo)
-                .withId(id)
-                .withCode(studentInfo.getCode())
-                .withBranch(branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
-                .withCourse(courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
-                .withScheme(schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                .with(Student::getId, id)
+                .with(Student::getCode, studentInfo.getCode())
+                .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
+                .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
+                .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
+                .with(Student::getLastModifiedDate, new Date())
                 .build();
     }
 }

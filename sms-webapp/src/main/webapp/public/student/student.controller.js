@@ -5,16 +5,8 @@
         .module('Student')
         .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
             function ($scope, CrudService, FlashService, $location, AdminService) {
-                $scope.editStudent = function (userId) {
+                $scope.viewStudent = function (userId) {
                     $location.path('/student-detail/' + userId);
-                };
-
-                $scope.deleteStudent = function (id) {
-                    CrudService.studentService.Delete(id).then(function () {
-                        FlashService.Success('Successfully Deleted');
-                        $scope.loadStudents();
-                    });
-
                 };
 
                 $scope.getBranchDesc = function (branchCode){
@@ -50,20 +42,8 @@
 
 
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$location',
-            function ($scope, $routeParams, CrudService, FlashService, $location) {
-
-                $scope.updateStudent = function () {
-                    CrudService.studentService.Update($scope.student).then(function () {
-                        FlashService.Success("Successfuly Modified !!", true);
-                        $location.path('/student-list');
-                    });
-
-                };
-
-                $scope.cancel = function () {
-                    $location.path('/student-list');
-                };
+        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService',
+            function ($scope, $routeParams, CrudService) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($routeParams.id).then(function (res) {
@@ -71,10 +51,23 @@
                     })
                 }
 
+                $scope.getBranchDesc = function (branchCode){
+                    return AdminService.getBranchDesc(branchCode);
+                };
+
+                $scope.getCourseDesc = function (courseCode){
+                    return AdminService.getCourseDesc(courseCode);
+                };
+
+                $scope.getSchemeDesc = function (schemeCode){
+                    return AdminService.getSchemeDesc(schemeCode);
+                };
+
+
                 $scope.loadStudent();
             }])
-        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'StudentService', 'FlashService', '$location', 'AdminService',
-            function ($scope, CrudService, StudentService, FlashService, $location, AdminService) {
+        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
+            function ($scope, CrudService, FlashService, $location, AdminService) {
 
                 $scope.educationDetails = [];
                 $scope.guardians = [];
@@ -109,6 +102,7 @@
                     $scope.student.address = $scope.address;
                     $scope.student.guardians = $scope.guardians;
                     $scope.student.educationDetails = $scope.educationDetails;
+                    $scope.student.status = 'CREATED';
 
                     $scope.student.branchCode = AdminService.getBranchCode($scope.branchName);
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.schemeName);
@@ -157,28 +151,9 @@
                 };
 
                 $scope.init = function () {
-                    StudentService.getReligions(function (data) {
-                        $scope.religions = data;
-                    });
 
-                    StudentService.getCaste(function (data) {
-                        $scope.castes = data;
-                    });
-
-                    StudentService.getMaritalStatus(function (data) {
-                        $scope.maritalStatus = data;
-                    });
-
-                    StudentService.getGender(function (data) {
-                        $scope.genders = data;
-                    });
-
-                    StudentService.getRatings(function (data) {
-                        $scope.ratings = data;
-                    });
-
-                    StudentService.getRelations(function (data) {
-                        $scope.relations = data;
+                    AdminService.getConstants(function (data) {
+                        $scope.commonAttributes = data;
                     });
 
                     AdminService.getBranches(function (data) {

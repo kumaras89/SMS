@@ -1,10 +1,10 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseModel;
+import com.sms.core.common.Builder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -31,24 +31,16 @@ public class Scheme extends BaseModel {
         super();
     }
 
-    public Scheme(Builder builder) {
-        this.code = builder.code.get();
-        this.name = builder.name.get();
-        this.description = builder.description.get();
-        this.schemeFees = builder.schemeFees.get();
-        this.feesAmount = builder.feesAmount.get();
+    public static Builder<Scheme> builder() {
+        return Builder.of(Scheme.class);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static Builder toBuilder(final SchemeInfo schemeInfo) {
+    public static Builder<Scheme> toBuilder(final SchemeInfo schemeInfo) {
         return builder()
-                .withName(schemeInfo.getName())
-                .withCode(schemeInfo.getCode())
-                .withDescription(schemeInfo.getDescription())
-                .withFeesAmount(schemeInfo.getFeesAmount());
+                .with(Scheme::getName, schemeInfo.getName())
+                .with(Scheme::getCode, schemeInfo.getCode())
+                .with(Scheme::getDescription, schemeInfo.getDescription())
+                .with(Scheme::getFeesAmount, schemeInfo.getFeesAmount());
     }
 
     public String getCode() {
@@ -71,54 +63,5 @@ public class Scheme extends BaseModel {
         return feesAmount;
     }
 
-    public static class Builder {
 
-        private Optional<Long> id = Optional.empty();
-        private Optional<String> code = Optional.empty();
-        private Optional<String> name = Optional.empty();
-        private Optional<String> description = Optional.empty();
-        private Optional<Set<SchemeFees>> schemeFees = Optional.empty();
-        private Optional<BigDecimal> feesAmount = Optional.empty();
-
-        private Builder() {
-            super();
-        }
-
-
-        public Builder withId(final Long theId) {
-            this.id = Optional.of(theId);
-            return this;
-        }
-
-        public Builder withCode(final String theCode) {
-            this.code = Optional.of(theCode);
-            return this;
-        }
-
-        public Builder withName(final String theName) {
-            this.name = Optional.of(theName);
-            return this;
-        }
-
-        public Builder withDescription(final String theDescription) {
-            this.description = Optional.of(theDescription);
-            return this;
-        }
-
-        public Builder withSchemeFees(final Set<SchemeFees> theSchemeFees) {
-            this.schemeFees = Optional.of(theSchemeFees);
-            return this;
-        }
-
-        public Builder withFeesAmount(final BigDecimal thefeesAmount) {
-            this.feesAmount = Optional.of(thefeesAmount);
-            return this;
-        }
-
-        public Scheme build() {
-            return new Scheme(this);
-        }
-
-
-    }
 }

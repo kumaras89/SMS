@@ -23,6 +23,7 @@
         service.getCourseDesc = getCourseDesc
         service.getBranchCode = getBranchCode
         service.getBranchDesc = getBranchDesc
+        service.getConstants = getConstants
 
         return service;
         
@@ -30,6 +31,13 @@
             getBranches(function(){})
             getRoles(function(){})
             getFeesParticulars(function(){})
+            getConstants(function(){})
+        }
+
+        function getConstants(success) {
+            StorageService.getFromStoarage('/common', function(data) {
+                success(data);
+            });
         }
 
         function getFeesParticulars(success) {

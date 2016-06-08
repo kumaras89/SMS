@@ -20,7 +20,7 @@
             <label class="control-label" for="feesAmount">Total Fees Amount:</label>
 
             <div class="controls">
-                <input type="text" id="feesAmount" ng-model="scheme.feesAmount" placeholder="amount"/>
+                <input type="text" id="feesAmount" ng-model="scheme.feesAmount" placeholder="amount" value="0"/>
             </div>
         </div>
         <div class="control-group">
@@ -48,6 +48,7 @@
                         <td>
                             <input type="hidden" id="feesParticularCode" ng-model="schemeFeesInfo.feesParticularCode" value="{{schemeFeesInfo.feesParticularCode}}"/>
                             <input type="number" id="weightage" ng-model="schemeFeesInfo.weightage" placeholder="0" min="0" max="100"/>
+                            &nbsp;&nbsp;<label class="control-label" for="weightage">{{schemeFeesInfo.weightage/100 * scheme.feesAmount | currency:'&#8377;'}}</label>
                         </td>
                     </tr>
                     <tr>

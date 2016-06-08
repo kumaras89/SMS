@@ -37,10 +37,6 @@
     }
 </style>
 <script type="text/javascript">
-    function updateTextInput(val) {
-        document.getElementById("slider_value").innerHTML=val;
-    }
-
     function updateAnnualIncome(val) {
         document.getElementById("annualIncome").value = (eval(val * 12));
     }
@@ -83,10 +79,7 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" for="age">Age</label></td>
-                            <td>
-                                <input type="range" id="age" ng-model="student.age" min="0" max="100" value="20" onchange="updateTextInput(this.value);" style="width:200px;">
-                                <div align="center" id="slider_value" style="color:#43A047;"></div>
-                            </td>
+                            <td><input type="number" id="age" ng-model="student.age" min="0" max="100" value="20"></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="gender">Gender</label></td>
@@ -164,12 +157,12 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><label class="control-label" for="doorNumber">Door Number</label></td>
-                            <td><input type="text" ng-model="address.doorNumber" id="doorNumber" placeholder="Door Number"/></td>
+                            <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
+                            <td><input type="text" ng-model="address.doorNumber" id="doorNumber" placeholder="address 1"/></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" for="streetName">Street Details</label></td>
-                            <td><input type="text" ng-model="address.streetName" id="streetName" placeholder="Street Name"/></td>
+                            <td><label class="control-label" for="streetName">Address 2</label></td>
+                            <td><input type="text" ng-model="address.streetName" id="streetName" placeholder="address 2"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="city">City</label></td>
@@ -286,7 +279,7 @@
                         <tr>
                             <td><label class="control-label" for="gender">Gender</label></td>
                             <td>
-                                <label ng-repeat="gender in genders track by $index" >
+                                <label ng-repeat="gender in commonAttributes.gender track by $index" >
                                     &nbsp;&nbsp;<input type="radio" ng-model="guardian.gender" id="gender" ng-value="gender"/> {{gender}}
                                 </label>
                             </td>
@@ -383,7 +376,7 @@
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                <td><label class="control-label">{{student.dateOfBirth}}</label></td>
+                                <td><label class="control-label">{{student.dateOfBirth | date}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="age">Age</label></td>
@@ -439,11 +432,11 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><label class="control-label" for="doorNumber">Door Number</label></td>
+                            <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
                             <td><label class="control-label">{{address.doorNumber}}</label></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" for="streetName">Street Details</label></td>
+                            <td><label class="control-label" for="streetName">Address 2</label></td>
                             <td><label class="control-label">{{address.streetName}}</label></td>
                         </tr>
                         <tr>
@@ -615,19 +608,19 @@
 </div>
 
 <datalist id="genders">
-    <option  data-ng-repeat="gender in genders" value="{{gender}}">
+    <option  data-ng-repeat="gender in commonAttributes.gender" value="{{gender}}">
 </datalist>
 
 <datalist id="religions">
-    <option  data-ng-repeat="religion in religions" value="{{religion}}">
+    <option  data-ng-repeat="religion in commonAttributes.religion" value="{{religion}}">
 </datalist>
 
 <datalist id="castes">
-    <option  data-ng-repeat="caste in castes" value="{{caste}}">
+    <option  data-ng-repeat="caste in commonAttributes.caste" value="{{caste}}">
 </datalist>
 
 <datalist id="maritalState">
-    <option  data-ng-repeat="status in maritalStatus" value="{{status}}">
+    <option  data-ng-repeat="status in commonAttributes.maritalStatus" value="{{status}}">
 </datalist>
 
 <datalist id="branchNames">
@@ -635,11 +628,11 @@
 </datalist>
 
 <datalist id="ratings">
-    <option  data-ng-repeat="rating in ratings" value="{{rating}}">
+    <option  data-ng-repeat="rating in commonAttributes.rating" value="{{rating}}">
 </datalist>
 
 <datalist id="relations">
-    <option  data-ng-repeat="relation in relations" value="{{relation}}">
+    <option  data-ng-repeat="relation in commonAttributes.relation" value="{{relation}}">
 </datalist>
 
 <datalist id="schemeList">

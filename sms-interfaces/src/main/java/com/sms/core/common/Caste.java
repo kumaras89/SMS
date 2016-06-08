@@ -1,4 +1,4 @@
-package com.sms.core;
+package com.sms.core.common;
 
 public enum Caste {
 
