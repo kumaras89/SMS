@@ -42,8 +42,8 @@
 
 
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'AdminService',
-            function ($scope, $routeParams, CrudService, AdminService) {
+        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'AdminService', '$location',
+            function ($scope, $routeParams, CrudService, AdminService, $location) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($routeParams.id).then(function (res) {
@@ -66,6 +66,10 @@
                 $scope.getMarketingEmployeeName = function (schemeCode){
                     return AdminService.getMarketingEmployeeName(schemeCode);
                 };
+
+                $scope.goToFms = function(code) {
+                    $location.path('/fms/STUDENT/'+code);
+                }
 
 
                 $scope.loadStudent();

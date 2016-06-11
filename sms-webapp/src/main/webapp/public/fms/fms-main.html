@@ -1,0 +1,35 @@
+﻿<div class="span6">
+    <h4>Document Management of {{cateory}} with id {{uploaderid}}</h4>
+    <table class="table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th style="min-width: 80px;">Document Type</th>
+            <th style="width:20px;">Document Desc</th>
+            <th style="width:20px;">&nbsp;</th>
+            <th style="width:20px;">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="doctype in doctypes">
+            <td>{{ doctype.desc }}</td>
+
+            <td ng-if="!isPresent(doctype.id)"><input type="text" ng-model="docs[doctype.id].fileInfo" placeholder="File Info"></td>
+            <td ng-if="!isPresent(doctype.id)"><input type="file" fileread="docs[doctype.id].file"></td>
+            <td ng-if="!isPresent(doctype.id)"><a ng-click="upload(doctype.id)" class="btn btn-small btn-primary">upload</a></td>
+
+            <td ng-if="isPresent(doctype.id)">{{ docs[doctype.id].doc.fileInfo }}</td>
+            <td ng-if="isPresent(doctype.id)"><a ng-click="download(doctype.id)" class="btn btn-small btn-primary">download</a></td>
+            <td ng-if="isPresent(doctype.id)"><a ng-click="delete(doctype.id)" class="btn btn-small btn-danger">delete</a></td>
+        </tr>
+
+        <br>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="uploadCommpleted()" class="btn btn-small btn-primary">Upload Completed</a>
+            </div>
+        </div>
+        </tbody>
+
+    </table>
+    <a href="#/home" class="btn btn-small">Home</a>
+</div>

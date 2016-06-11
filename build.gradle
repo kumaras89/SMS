@@ -31,6 +31,7 @@ subprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework:spring-web:$springVersion"
         compile "org.springframework.security:spring-security-core:$springSecurityVersion"
     }
 }

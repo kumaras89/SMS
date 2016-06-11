@@ -10,10 +10,31 @@ public class UploadInfo {
     private String fileInfo;
     private String fileName;
 
+    public UploadInfo(){
+
+    }
+
+
     public UploadInfo(Long documentTypeId, String uploaderId, String fileInfo, String fileName) {
         this.documentTypeId = documentTypeId;
         this.uploaderId = uploaderId;
         this.fileInfo = fileInfo;
+        this.fileName = fileName;
+    }
+
+    public void setDocumentTypeId(Long documentTypeId) {
+        this.documentTypeId = documentTypeId;
+    }
+
+    public void setUploaderId(String uploaderId) {
+        this.uploaderId = uploaderId;
+    }
+
+    public void setFileInfo(String fileInfo) {
+        this.fileInfo = fileInfo;
+    }
+
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
