@@ -1,8 +1,27 @@
 'use strict';
 
-angular.module('User', ['ngRoute', 'ngCookies']).
-    config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/user-list', {templateUrl: 'user/user-list.html', controller: 'UserListCtrl'});
-        $routeProvider.when('/user-detail/:id', {templateUrl: 'user/user-detail.html', controller: 'UserDetailCtrl'});
-        $routeProvider.when('/user-creation', {templateUrl: 'user/user-creation.html', controller: 'UserCreationCtrl'});
+angular.module('User', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies']).
+    config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+
+        $ocLazyLoadProvider.config({
+            debug: false,
+            events: true
+        });
+
+        $stateProvider
+            .state('home.user-list', {
+                templateUrl: 'user/user-list.html',
+                controller: 'UserListCtrl',
+                url: '/user-list'
+            })
+            .state('home.user-detail', {
+                templateUrl: 'user/user-detail.html',
+                controller: 'UserDetailCtrl',
+                url: '/user-detail/:id'
+            })
+            .state('home.user-creation', {
+                templateUrl: 'user/user-creation.html',
+                controller: 'UserCreationCtrl',
+                url: '/user-creation'
+            })
     }]);

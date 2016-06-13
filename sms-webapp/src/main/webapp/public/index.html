@@ -1,50 +1,35 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html class="no-js">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>RGMIHM Hotel Management Login</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-    <link href="/public/app-content/app.css" rel="stylesheet" />
-</head>
-<body>
-	<ul class="bg-bubbles">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-	</ul>
-    <div style="float: right" ng-if="globals.currentUser.otherDetails">
-        <h1>Hi {{globals.currentUser.otherDetails.name }}!</h1>
-    </div>
-    <div style="float: right" ng-if="globals.currentUser.otherDetails">
-        <a href="#/logout">Log out</a>
-    </div>
-	<div>
-		<img src="/public/app-content/logo.png" alt="RGMIHM" style="width: 165px; padding-bottom: 20px; "/>
-	</div>
+    <link rel="stylesheet" href="/public/styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/public/styles/main.css">
+    <link rel="stylesheet" href="/public/styles/sb-admin-2.css">
+    <link rel="stylesheet" href="/public/styles/timeline.css">
+    <link rel="stylesheet" href="/public/styles/metisMenu.min.css">
+    <link rel="stylesheet" href="/public/styles/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.css" type="text/css">
 
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-                <div ng-view></div>
-            </div>
-        </div>
-    </div>
 
-    <script src="/public/app-content/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
-    <script src="//code.angularjs.org/1.2.20/angular.js"></script>
-    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
-    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/js/angular.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/angular-cookies.js"></script>
+    <script src="/public/js/angular-ui-router.min.js"></script>
+    <script src="/public/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="/public/js/ocLazyLoad.min.js"></script>
+    <script src="/public/js/sb-admin-2.js"></script>
+    <script src="/public/js/Chart.min.js"></script>
+    <script src="/public/js/underscore-min.js"></script>
+    <script src="/public/js/json3.min.js"></script>
+    <script src="/public/js/metisMenu.min.js"></script>
     <script src="/public/app.js"></script>
+    <script src="/public/js/jquery.dataTables.min.js"></script>
+    <script src="/public/js/dataTables.bootstrap.min.js"></script>
+    <script src="/public/js/dataTables.responsive.js"></script>
+
     <script src="/public/app-services/authentication.service.js"></script>
     <script src="/public/app-services/crud.service.js"></script>
     <script src="/public/app-services/crud.controller.js"></script>
@@ -53,7 +38,6 @@
     <script src="/public/app-services/storage.service.js"></script>
     <script src="/public/login/login.controller.js"></script>
     <script src="/public/home/home.controller.js"></script>
-
 
     <!-- These scripts and modules should be moved as lazy load on demand -->
     <script src="/public/branch/branch.js"></script>
@@ -78,10 +62,12 @@
     <script src="/public/fms/fms.js"></script>
     <script src="/public/fms/fms.controller.js"></script>
 
-
-
-
-
-
+</head>
+<body>
+<div ng-app="app">
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
+         ng-if="flash" ng-bind="flash.message"></div>
+    <div ui-view></div>
+</div>
 </body>
 </html>

@@ -2,30 +2,90 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies', 'Branch', 'User', 'Course', 'Scheme', 'FeesParticular', 'Role', 'SecuredOperation', 'RoleOperationLink', 'Student', 'MarketingEmployee', 'FMS'])
+        .module('app', ['oc.lazyLoad',
+            'ui.router',
+            'ui.bootstrap',
+            'ngCookies',
+            'Branch',
+            'User',
+            'Course',
+            'Scheme',
+            'FeesParticular',
+            'Role',
+            'SecuredOperation',
+            'RoleOperationLink',
+            'Student',
+            'MarketingEmployee',
+            'FMS'])
         .config(config)
         .run(run);
 
-    config.$inject = ['$routeProvider'];
-    function config($routeProvider) {
+    config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider'];
+    function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
+
         localStorage.clear();
-        $routeProvider.when('/home', {
+
+        $ocLazyLoadProvider.config({
+            debug: false,
+            events: true
+        });
+
+        $stateProvider.state('login', {
+            templateUrl: 'login/login.view.html',
+            controller: 'LoginController',
+            controllerAs: 'vm',
+            url: '/login'
+        })
+            .state('home',{
+                url:'/home',
                 controller: 'HomeController',
-                templateUrl: 'home/home.view.html',
-                controllerAs: 'vm'
-            }).when('/login', {
-                controller: 'LoginController',
-                templateUrl: 'login/login.view.html',
-                controllerAs: 'vm'
-            }).when('/login-changepassword', {
-                controller: 'LoginController',
+                controllerAs: 'vm',
+                templateUrl:'home/home.view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'app',
+                            files:[
+                                '/public/directives/header/header.js',
+                                '/public/directives/header/header-notification/header-notification.js',
+                                '/public/directives/sidebar/sidebar.js',
+                                '/public/directives/sidebar/sidebar-search/sidebar-search.js',
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('home.dashboard',{
+                url:'/dashboard',
+                controller: 'HomeController',
+                templateUrl:'home/home.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'app',
+                            files:[
+                                '/public/directives/notifications/notifications.js',
+                                '/public/directives/dashboard/stats/stats.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('login-changepassword', {
                 templateUrl: 'login/login-changepassword.view.html',
-                controllerAs: 'vm'
-            }).when('/logout', {
                 controller: 'LoginController',
+                controllerAs: 'vm',
+                url: '/login'
+            })
+            .state('logout', {
                 templateUrl: 'login/login.view.html',
-                controllerAs: 'vm'
-            }).otherwise({ redirectTo: '/login' });
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                url: '/login'
+            })
+
+        $urlRouterProvider.otherwise('/login');
+
     }
 
     run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http'];

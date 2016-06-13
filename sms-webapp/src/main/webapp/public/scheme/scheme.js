@@ -1,8 +1,27 @@
 'use strict';
 
-angular.module('Scheme', ['ngRoute', 'ngCookies']).
-    config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/scheme-list', {templateUrl: 'scheme/scheme-list.html', controller: 'SchemeListCtrl'});
-        $routeProvider.when('/scheme-detail/:id', {templateUrl: 'scheme/scheme-detail.html', controller: 'SchemeDetailCtrl'});
-        $routeProvider.when('/scheme-creation', {templateUrl: 'scheme/scheme-creation.html', controller: 'SchemeCreationCtrl'});
+angular.module('Scheme', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies']).
+    config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+
+        $ocLazyLoadProvider.config({
+            debug: false,
+            events: true
+        });
+
+        $stateProvider
+            .state('home.scheme-list', {
+                templateUrl: 'scheme/scheme-list.html',
+                controller: 'SchemeListCtrl',
+                url: '/scheme-list'
+            })
+            .state('home.scheme-detail', {
+                templateUrl: 'scheme/scheme-detail.html',
+                controller: 'SchemeDetailCtrl',
+                url: '/scheme-detail/:id'
+            })
+            .state('home.scheme-creation', {
+                templateUrl: 'scheme/scheme-creation.html',
+                controller: 'SchemeCreationCtrl',
+                url: '/scheme-creation'
+            })
     }]);

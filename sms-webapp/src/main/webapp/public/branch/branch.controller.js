@@ -3,10 +3,18 @@
 
     angular
         .module('Branch')
-        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$location',
-        function ($scope, CrudService, FlashService, $location) {
+        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$location', '$timeout', '$state',
+        function ($scope, CrudService, FlashService, $location, $timeout, $state) {
+
+            $timeout(function(){
+                $('#branchTables').dataTable( {
+                    responsive: true
+                } );
+            }, 0, false);
+
+
             $scope.editBranch = function (userId) {
-                $location.path('/branch-detail/' + userId);
+                $location.path('home.branch-detail({id: userId})');
             };
 
             $scope.deleteBranch = function (id) {
@@ -18,7 +26,7 @@
             };
 
             $scope.createNewBranch = function () {
-                $location.path('/branch-creation');
+                $state.go('home.branch-creation');
             };
 
             $scope.loadBranches = function () {
