@@ -16,7 +16,7 @@ angular.module('app')
       scope: {
       },
       controller:function($scope){
-        $scope.selectedMenu = 'dashboard';
+        $scope.selectedMenu = 'home.dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
         

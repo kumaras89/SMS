@@ -1,72 +1,66 @@
-﻿<div class="container">
-    <h1>Create a Branch</h1>
-
-    <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="code">Code:</label>
-
-            <div class="controls">
-                <input type="text" id="code" ng-model="branch.code" placeholder="Code"/>
+﻿<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Create New Branches
+    </div>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="code">Code</label></td>
+                    <td><input type="text" id="code" ng-model="branch.code" placeholder="code"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="name">Name</label></td>
+                    <td><input type="text" id="name" ng-model="branch.name" placeholder="name"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label">Active/Inactive</label></td>
+                    <td>
+                        <label class="control-label">Active</label>&nbsp;<input type="radio" name="isActive" value="1" ng-model="branch.isActive">
+                        <label class="control-label">In Active</label>&nbsp;<input type="radio" name="isActive" value="0" ng-model="branch.isActive">
+                    </td>
+                </tr>
+            </table>
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr class="even gradeA">
+                    <td colspan="2"><label class="control-label">Address Details</label></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
+                    <td><input type="text" ng-model="branch.address.doorNumber" id="doorNumber" placeholder="address 1"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="streetName">Address 2</label></td>
+                    <td><input type="text" ng-model="branch.address.streetName" id="streetName" placeholder="address 2"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="city">City</label></td>
+                    <td><input type="text" ng-model="branch.address.city" id="city" placeholder="city"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="state">State</label></td>
+                    <td><input type="text" ng-model="branch.address.state" id="state" placeholder="state"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="country">Country</label></td>
+                    <td><input type="text" ng-model="branch.address.country" id="country" placeholder="country"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                    <td><input type="text" ng-model="branch.address.postalCode" id="postalCode" placeholder="postal code"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="well">
+                <a ng-click="createNewBranch()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Submit Branch</a>
+                <a ui-sref="home.branch-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Branches</a>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="name">Name:</label>
-            <div class="controls">
-                <input type="text" id="name" ng-model="branch.name" placeholder="Name"/>
-            </div>
-        </div>
-        <label>Active</label>
-        <div class="form-group">
-            <div class="radio">
-                <label>
-                    <input type="radio" name="isActive" value="1"  checked ng-model="branch.isActive">
-                    Active
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="isActive" value="0" ng-model="branch.isActive">
-                    In Active
-                </label>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="doorNumber">No And Street:</label>
-            <div class="controls">
-                <input type="text" id="doorNumber" ng-model="branch.address.doorNumber" placeholder="DoorNumber"/>
-                <input type="text" id="streetName" ng-model="branch.address.streetName" placeholder="StreetName"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="state">City : </label>
-            <div class="controls">
-                <input type="text" id="state" ng-model="branch.address.state" placeholder="State"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="city">State:</label>
-            <div class="controls">
-                <input type="text" id="city" ng-model="branch.address.city" placeholder="City"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="country">Country : </label>
-            <div class="controls">
-                <input type="text" id="country" ng-model="branch.address.country" placeholder="Country"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="postalCode">Postal Code : </label>
-            <div class="controls">
-                <input type="text" id="postalCode" ng-model="branch.address.postalCode" placeholder="PostalCode"/>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="createNewBranch()" class="btn btn-small btn-primary">create new branch</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+

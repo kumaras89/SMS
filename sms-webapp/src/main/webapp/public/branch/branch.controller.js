@@ -3,18 +3,11 @@
 
     angular
         .module('Branch')
-        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$location', '$timeout', '$state',
-        function ($scope, CrudService, FlashService, $location, $timeout, $state) {
-
-            $timeout(function(){
-                $('#branchTables').dataTable( {
-                    responsive: true
-                } );
-            }, 0, false);
-
+        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$state',
+        function ($scope, CrudService, FlashService, $state) {
 
             $scope.editBranch = function (userId) {
-                $location.path('home.branch-detail({id: userId})');
+                $state.go('home.branch-detail',{id: userId});
             };
 
             $scope.deleteBranch = function (id) {
@@ -47,36 +40,36 @@
 
 
         }])
-        .controller('BranchDetailCtrl', ['$scope', '$routeParams', 'CrudService','FlashService', '$location',
-        function ($scope, $routeParams, CrudService,FlashService, $location) {
+        .controller('BranchDetailCtrl', ['$scope', '$stateParams', 'CrudService','FlashService', '$state',
+        function ($scope, $stateParams, CrudService,FlashService, $state) {
 
             $scope.updateBranch = function () {
                 CrudService.branchService.Update($scope.branch).then(function(){
                     FlashService.Success("Successfuly Modified !!", true);
-                    $location.path('/branch-list');
+                    $state.go('home.branch-list');
                 });
 
             };
 
             $scope.cancel = function () {
-                $location.path('/branch-list');
+                $state.go('home.branch-list');
             };
 
             $scope.loadBranch = function() {
-                CrudService.branchService.GetById($routeParams.id).then(function(res) {
+                CrudService.branchService.GetById($stateParams.id).then(function(res) {
                     $scope.branch = res
                 })
             }
 
             $scope.loadBranch();
         }])
-        .controller('BranchCreationCtrl', ['$scope', 'CrudService','FlashService', '$location',
-        function ($scope, CrudService,FlashService, $location) {
+        .controller('BranchCreationCtrl', ['$scope', 'CrudService','FlashService', '$state',
+        function ($scope, CrudService,FlashService, $state) {
 
             $scope.createNewBranch = function () {
                 CrudService.branchService.Create($scope.branch).then(function () {
                     FlashService.Success("Successfuly Inserted !!", true);
-                    $location.path('/branch-list');
+                    $state.go('home.branch-list');
                 });
 
             }
