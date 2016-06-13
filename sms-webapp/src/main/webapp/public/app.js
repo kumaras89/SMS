@@ -56,7 +56,7 @@
                 }
             })
             .state('home.dashboard',{
-                url:'/dashboard',
+                url:'/',
                 controller: 'HomeController',
                 templateUrl:'home/home.html',
                 resolve: {

@@ -19,7 +19,7 @@
         function login() {
             vm.dataLoading = true;
             AuthenticationService.Login(vm.username, vm.password, function () {
-                $location.path('/home');
+                $location.path('/home/');
             }, failure);
         };
 
