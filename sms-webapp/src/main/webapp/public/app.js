@@ -65,6 +65,7 @@
                             name:'app',
                             files:[
                                 '/public/styles/morris.css',
+                                '/public/js/moment.js',
                                 '/public/js/raphael-min.js',
                                 '/public/js/morris.min.js',
                                 '/public/directives/notifications/notifications.js',

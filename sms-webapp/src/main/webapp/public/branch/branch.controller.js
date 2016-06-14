@@ -3,8 +3,8 @@
 
     angular
         .module('Branch')
-        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$state',
-        function ($scope, CrudService, FlashService, $state) {
+        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
+        function ($scope, CrudService, FlashService, $state, ngTableParams,$timeout) {
 
             $scope.editBranch = function (userId) {
                 $state.go('home.branch-detail',{id: userId});
@@ -33,9 +33,37 @@
                 }, function() {
                     $scope.branches = []
                 })
-            }
+            };
 
-            $scope.loadBranches()
+
+            $scope.tableParams = new ngTableParams({
+                page: 1,            // show first pagez
+                count: 10,          // count per page
+                sorting: {
+                    name: 'asc'     // initial sorting
+                }
+            }, {
+                total: 0,           // length of data
+                getData: function($defer, params) {
+                    CrudService.branchService.GetAll().then(function(data) {
+                        if(data.message) {
+                            $scope.branches = [];
+                            FlashService.Error(data.message)
+                        } else {
+                            $timeout(function() {
+                                params.total(data.length);
+                                $defer.resolve(data);
+                            }, 10);
+
+                        }
+                    }, function() {
+                        $scope.branches = []
+                    })
+               }
+            });
+
+
+            //$scope.loadBranches()
 
 
 

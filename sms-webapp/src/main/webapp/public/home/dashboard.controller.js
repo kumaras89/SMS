@@ -20,6 +20,31 @@
                     return AdminService.getSchemeDesc(schemeCode);
                 };
 
+                $scope.updateClock = function () {
+                    var now = moment(),
+                        second = now.seconds() * 6,
+                        minute = now.minutes() * 6 + second / 60,
+                        hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12;
+
+                    $('#hour').css("transform", "rotate(" + hour + "deg)");
+                    $('#minute').css("transform", "rotate(" + minute + "deg)");
+                    $('#second').css("transform", "rotate(" + second + "deg)");
+                };
+
+                $scope.timedUpdate = function () {
+                    $scope.updateClock();
+                    setTimeout($scope.timedUpdate, 1000);
+                };
+
+                (function (){
+                    var today_date = moment().format('DD');
+                    var month = moment().format('MMMM');
+                    $(".dates").html(today_date);
+                    $(".month_clock").html(month);
+
+                }());
+
+
                 $scope.loadStudents = function () {
                     CrudService.studentService.GetAll().then(function (res) {
                         if (res.message) {
@@ -31,9 +56,18 @@
                     }, function () {
                         $scope.students = []
                     })
-                }
+                };
 
-                $scope.loadStudents()
+                $scope.init = function () {
+                    $scope.loadStudents();
+                    $scope.timedUpdate();
+                    AdminService.getCourses(function (data) {
+                        $scope.courses = data
+                    });
+                };
+
+                $scope.init();
+
             }]);
 
 })();
