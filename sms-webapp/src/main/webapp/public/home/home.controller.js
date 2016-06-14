@@ -8,8 +8,6 @@
     HomeController.$inject = ['$rootScope'];
     function HomeController($rootScope) {
         var vm = this;
-        
-        
     }
 
 })();

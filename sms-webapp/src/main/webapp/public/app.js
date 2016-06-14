@@ -57,13 +57,16 @@
             })
             .state('home.dashboard',{
                 url:'/',
-                controller: 'HomeController',
+                controller: 'DashBoardCtrl',
                 templateUrl:'home/home.html',
                 resolve: {
                     loadMyFiles:function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name:'app',
                             files:[
+                                '/public/styles/morris.css',
+                                '/public/js/raphael-min.js',
+                                '/public/js/morris.min.js',
                                 '/public/directives/notifications/notifications.js',
                                 '/public/directives/dashboard/stats/stats.js'
                             ]

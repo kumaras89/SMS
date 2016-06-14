@@ -38,6 +38,7 @@
     <script src="/public/app-services/storage.service.js"></script>
     <script src="/public/login/login.controller.js"></script>
     <script src="/public/home/home.controller.js"></script>
+    <script src="/public/home/dashboard.controller.js"></script>
 
     <!-- These scripts and modules should be moved as lazy load on demand -->
     <script src="/public/branch/branch.js"></script>
@@ -65,8 +66,6 @@
 </head>
 <body>
 <div ng-app="app">
-    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
-         ng-if="flash" ng-bind="flash.message"></div>
     <div ui-view></div>
 </div>
 </body>

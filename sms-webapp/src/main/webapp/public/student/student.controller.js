@@ -32,6 +32,8 @@
                             FlashService.Error(res.message)
                         } else {
                             $scope.students = res
+
+
                         }
                     }, function () {
                         $scope.students = []
@@ -39,6 +41,7 @@
                 }
 
                 $scope.loadStudents()
+
 
 
             }])

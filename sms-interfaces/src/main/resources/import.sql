@@ -1,3 +1,5 @@
+INSERT INTO SMS_MA_COURSE(ID, CO_CODE, CO_NAME, CO_DESCRIPTION) VALUES (NULL, 'C001', 'Hotel Management', 'Hotel Management');
+
 -- user insertion
 INSERT INTO SMS_MA_USER_ROLE(ID, UR_NAME, UR_DESC) VALUES (NULL, 'SUPER_ADMIN', 'Admin role');
 
