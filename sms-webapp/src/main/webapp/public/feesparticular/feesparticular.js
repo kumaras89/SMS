@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('FeesParticular', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies']).
+angular.module('FeesParticular', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies', 'ngTable']).
     config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({

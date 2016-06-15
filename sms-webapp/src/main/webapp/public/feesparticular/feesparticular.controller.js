@@ -3,75 +3,82 @@
 
     angular
         .module('FeesParticular')
-        .controller('FeesParticularListCtrl', ['$scope', 'CrudService', 'FlashService', '$location',
-        function ($scope, CrudService, FlashService, $location) {
-            $scope.editFeesParticular = function (userId) {
-                $location.path('/feesparticular-detail/' + userId);
-            };
+        .controller('FeesParticularListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
+            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
+                $scope.editFeesParticular = function (userId) {
+                    $state.go('home.feesparticular-detail', {id: userId});
+                };
 
-            $scope.deleteFeesParticular = function (id) {
-                CrudService.feesParticularService.Delete(id).then(function() {
-                    FlashService.Success('Successfully Deleted');
-                    $scope.loadFeesParticulars();
-                });
+                $scope.deleteFeesParticular = function (id) {
+                    CrudService.feesParticularService.Delete(id).then(function () {
+                        FlashService.Success('Successfully Deleted');
+                    });
 
-            };
+                };
 
-            $scope.createNewFeesParticular = function () {
-                $location.path('/feesparticular-creation');
-            };
+                $scope.createNewFeesParticular = function () {
+                    $state.go('home.feesparticular-creation');
+                };
 
-            $scope.loadFeesParticulars = function () {
-                CrudService.feesParticularService.GetAll().then(function(res) {
-                    if(res.message) {
-                        $scope.feesParticulars = []
-                        FlashService.Error(res.message)
-                    } else {
-                        $scope.feesParticulars = res
+                $scope.tableParams = new ngTableParams({
+                    page: 1,            // show first pagez
+                    count: 10,          // count per page
+                    sorting: {
+                        name: 'asc'     // initial sorting
                     }
-                }, function() {
-                    $scope.feesParticulars = []
-                })
-            }
+                }, {
+                    total: 0,           // length of data
+                    getData: function ($defer, params) {
+                        CrudService.feesParticularService.GetAll().then(function (data) {
+                            if (data.message) {
+                                $scope.feesParticulars = [];
+                                FlashService.Error(data.message)
+                            } else {
+                                $timeout(function () {
+                                    params.total(data.length);
+                                    $defer.resolve(data);
+                                }, 10);
 
-            $scope.loadFeesParticulars()
-
-
-
-        }])
-        .controller('FeesParticularDetailCtrl', ['$scope', '$routeParams', 'CrudService','FlashService', '$location',
-        function ($scope, $routeParams, CrudService,FlashService, $location) {
-
-            $scope.updateFeesParticular = function () {
-                CrudService.feesParticularService.Update($scope.feesParticular).then(function(){
-                    FlashService.Success("Successfuly Modified !!", true);
-                    $location.path('/feesparticular-list');
+                            }
+                        }, function () {
+                            $scope.feesParticulars = []
+                        })
+                    }
                 });
+            }])
+        .controller('FeesParticularDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$state',
+            function ($scope, $routeParams, CrudService, FlashService, $state) {
 
-            };
+                $scope.updateFeesParticular = function () {
+                    CrudService.feesParticularService.Update($scope.feesParticular).then(function () {
+                        FlashService.Success("Successfuly Modified !!", true);
+                        $state.go('home.feesparticular-list');
+                    });
 
-            $scope.cancel = function () {
-                $location.path('/feesparticular-list');
-            };
+                };
 
-            $scope.loadFeesParticular = function() {
-                CrudService.feesParticularService.GetById($routeParams.id).then(function(res) {
-                    $scope.feesParticular = res
-                })
-            }
+                $scope.cancel = function () {
+                    $state.go('home.feesparticular-list');
+                };
 
-            $scope.loadFeesParticular();
-        }])
-        .controller('FeesParticularCreationCtrl', ['$scope', 'CrudService','FlashService', '$location',
-        function ($scope, CrudService,FlashService, $location) {
+                $scope.loadFeesParticular = function () {
+                    CrudService.feesParticularService.GetById($routeParams.id).then(function (res) {
+                        $scope.feesParticular = res
+                    })
+                }
 
-            $scope.createNewFeesParticular = function () {
-                CrudService.feesParticularService.Create($scope.feesParticular).then(function () {
-                    FlashService.Success("Successfuly Inserted !!", true);
-                    $location.path('/feesparticular-list');
-                });
+                $scope.loadFeesParticular();
+            }])
+        .controller('FeesParticularCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state',
+            function ($scope, CrudService, FlashService, $state) {
 
-            }
-        }]);
+                $scope.createNewFeesParticular = function () {
+                    CrudService.feesParticularService.Create($scope.feesParticular).then(function () {
+                        FlashService.Success("Successfuly Inserted !!", true);
+                        $state.go('home.feesparticular-list');
+                    });
+
+                }
+            }]);
 
 })();

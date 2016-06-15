@@ -3,75 +3,80 @@
 
     angular
         .module('Course')
-        .controller('CourseListCtrl', ['$scope', 'CrudService', 'FlashService', '$location',
-        function ($scope, CrudService, FlashService, $location) {
-            $scope.editCourse = function (userId) {
-                $location.path('/course-detail/' + userId);
-            };
+        .controller('CourseListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
+            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
+                $scope.editCourse = function (userId) {
+                    $state.go('home.course-detail', {id: userId});
+                };
 
-            $scope.deleteCourse = function (id) {
-                CrudService.courseService.Delete(id).then(function() {
-                    FlashService.Success('Successfully Deleted');
-                    $scope.loadCourses();
-                });
+                $scope.deleteCourse = function (id) {
+                    CrudService.courseService.Delete(id).then(function () {
+                        FlashService.Success('Successfully Deleted');
+                    });
 
-            };
+                };
 
-            $scope.createNewCourse = function () {
-                $location.path('/course-creation');
-            };
+                $scope.createNewCourse = function () {
+                    $state.go('home.course-creation');
+                };
 
-            $scope.loadCourses = function () {
-                CrudService.courseService.GetAll().then(function(res) {
-                    if(res.message) {
-                        $scope.courses = []
-                        FlashService.Error(res.message)
-                    } else {
-                        $scope.courses = res
+                $scope.tableParams = new ngTableParams({
+                    page: 1,            // show first pagez
+                    count: 10,          // count per page
+                    sorting: {
+                        name: 'asc'     // initial sorting
                     }
-                }, function() {
-                    $scope.courses = []
-                })
-            }
+                }, {
+                    total: 0,           // length of data
+                    getData: function ($defer, params) {
+                        CrudService.courseService.GetAll().then(function (data) {
+                            if (data.message) {
+                                $scope.courses = [];
+                                FlashService.Error(data.message)
+                            } else {
+                                $timeout(function () {
+                                    params.total(data.length);
+                                    $defer.resolve(data);
+                                }, 10);
 
-            $scope.loadCourses()
-
-
-
-        }])
-        .controller('CourseDetailCtrl', ['$scope', '$routeParams', 'CrudService','FlashService', '$location',
-        function ($scope, $routeParams, CrudService,FlashService, $location) {
-
-            $scope.updateCourse = function () {
-                CrudService.courseService.Update($scope.course).then(function(){
-                    FlashService.Success("Successfuly Modified !!", true);
-                    $location.path('/course-list');
+                            }
+                        }, function () {
+                            $scope.courses = []
+                        })
+                    }
                 });
+            }])
+        .controller('CourseDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$state',
+            function ($scope, $routeParams, CrudService, FlashService, $state) {
 
-            };
+                $scope.updateCourse = function () {
+                    CrudService.courseService.Update($scope.course).then(function () {
+                        FlashService.Success("Successfuly Modified !!", true);
+                        $state.go('home.course-list');
+                    });
 
-            $scope.cancel = function () {
-                $location.path('/course-list');
-            };
+                };
 
-            $scope.loadCourse = function() {
-                CrudService.courseService.GetById($routeParams.id).then(function(res) {
-                    $scope.course = res
-                })
-            }
+                $scope.cancel = function () {
+                    $state.go('home.course-list');
+                };
 
-            $scope.loadCourse();
-        }])
-        .controller('CourseCreationCtrl', ['$scope', 'CrudService','FlashService', '$location',
-        function ($scope, CrudService,FlashService, $location) {
+                $scope.loadCourse = function () {
+                    CrudService.courseService.GetById($routeParams.id).then(function (res) {
+                        $scope.course = res
+                    })
+                }
 
-            $scope.createNewCourse = function () {
-                CrudService.courseService.Create($scope.course).then(function () {
-                    FlashService.Success("Successfuly Inserted !!", true);
-                    $location.path('/course-list');
-                });
+                $scope.loadCourse();
+            }])
+        .controller('CourseCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state',
+            function ($scope, CrudService, FlashService, $state) {
 
-            }
-        }]);
-
+                $scope.createNewCourse = function () {
+                    CrudService.courseService.Create($scope.course).then(function () {
+                        FlashService.Success("Successfuly Inserted !!", true);
+                        $state.go('home.course-list');
+                    });
+                }
+            }]);
 })();

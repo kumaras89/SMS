@@ -4,7 +4,7 @@
     angular
         .module('Branch')
         .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
-        function ($scope, CrudService, FlashService, $state, ngTableParams,$timeout) {
+        function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
 
             $scope.editBranch = function (userId) {
                 $state.go('home.branch-detail',{id: userId});
@@ -13,7 +13,6 @@
             $scope.deleteBranch = function (id) {
                 CrudService.branchService.Delete(id).then(function() {
                     FlashService.Success('Successfully Deleted');
-                    $scope.loadBranches();
                 });
 
             };
@@ -21,20 +20,6 @@
             $scope.createNewBranch = function () {
                 $state.go('home.branch-creation');
             };
-
-            $scope.loadBranches = function () {
-                CrudService.branchService.GetAll().then(function(res) {
-                    if(res.message) {
-                        $scope.branches = []
-                        FlashService.Error(res.message)
-                    } else {
-                        $scope.branches = res
-                    }
-                }, function() {
-                    $scope.branches = []
-                })
-            };
-
 
             $scope.tableParams = new ngTableParams({
                 page: 1,            // show first pagez
@@ -61,12 +46,6 @@
                     })
                }
             });
-
-
-            //$scope.loadBranches()
-
-
-
         }])
         .controller('BranchDetailCtrl', ['$scope', '$stateParams', 'CrudService','FlashService', '$state',
         function ($scope, $stateParams, CrudService,FlashService, $state) {
