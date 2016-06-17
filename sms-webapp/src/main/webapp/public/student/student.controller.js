@@ -3,10 +3,10 @@
 
     angular
         .module('Student')
-        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
-            function ($scope, CrudService, FlashService, $location, AdminService) {
+        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
                 $scope.viewStudent = function (userId) {
-                    $location.path('/student-detail/' + userId);
+                    $state.go('home.student-detail' , {id: userId});
                 };
 
                 $scope.getBranchDesc = function (branchCode){
@@ -22,34 +22,39 @@
                 };
 
                 $scope.createNewStudent = function () {
-                    $location.path('/student-creation');
+                    $state.go('home.student-creation');
                 };
 
-                $scope.loadStudents = function () {
-                    CrudService.studentService.GetAll().then(function (res) {
-                        if (res.message) {
+                $scope.tableParams = new ngTableParams({
+                    page: 1,            // show first pagez
+                    count: 10,          // count per page
+                    sorting: {
+                        name: 'asc'     // initial sorting
+                    }
+                }, {
+                    total: 0,           // length of data
+                    getData: function($defer, params) {
+                        CrudService.studentService.GetAll().then(function(data) {
+                            if(data.message) {
+                                $scope.students = [];
+                                FlashService.Error(data.message)
+                            } else {
+                                $timeout(function() {
+                                    params.total(data.length);
+                                    $defer.resolve(data);
+                                }, 10);
+                            }
+                        }, function() {
                             $scope.students = []
-                            FlashService.Error(res.message)
-                        } else {
-                            $scope.students = res
-
-
-                        }
-                    }, function () {
-                        $scope.students = []
-                    })
-                }
-
-                $scope.loadStudents()
-
-
-
+                        })
+                    }
+                });
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'AdminService', '$location',
-            function ($scope, $routeParams, CrudService, AdminService, $location) {
+        .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
+            function ($scope, $stateParams, CrudService, AdminService, $location) {
 
                 $scope.loadStudent = function () {
-                    CrudService.studentService.GetById($routeParams.id).then(function (res) {
+                    CrudService.studentService.GetById($stateParams.id).then(function (res) {
                         $scope.student = res
                     })
                 }
@@ -77,8 +82,8 @@
 
                 $scope.loadStudent();
             }])
-        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
-            function ($scope, CrudService, FlashService, $location, AdminService) {
+        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
+            function ($scope, CrudService, FlashService, $state, AdminService) {
 
                 $scope.educationDetails = [];
                 $scope.guardians = [];
@@ -123,7 +128,7 @@
 
                     CrudService.studentService.Create($scope.student).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
-                        $location.path('/student-list');
+                        $state.go('home.student-list');
                     });
                 }
 

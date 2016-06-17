@@ -14,58 +14,66 @@
                 return sum;
             }
         })
-        .controller('SchemeListCtrl', ['$scope', 'CrudService', 'FlashService', '$location',
-            function ($scope, CrudService, FlashService, $location) {
+        .controller('SchemeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
                 $scope.editScheme = function (userId) {
-                    $location.path('/scheme-detail/' + userId);
+                    $state.go('home.scheme-detail' ,{id: userId});
                 };
 
                 $scope.deleteScheme = function (id) {
                     CrudService.schemeService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
-                        $scope.loadSchemes();
                     });
 
                 };
 
                 $scope.createNewScheme = function () {
-                    $location.path('/scheme-creation');
+                    $state.go('home.scheme-creation');
                 };
 
-                $scope.loadSchemes = function () {
+                $scope.tableParams = new ngTableParams({
+                    page: 1,            // show first pagez
+                    count: 10,          // count per page
+                    sorting: {
+                        name: 'asc'     // initial sorting
+                    }
+                }, {
+                    total: 0,           // length of data
+                    getData: function($defer, params) {
                     CrudService.schemeService.GetAll().then(function (res) {
                         if (res.message) {
                             $scope.schemes = []
                             FlashService.Error(res.message)
                         } else {
-                            $scope.schemes = res
+                            $timeout(function() {
+                                params.total(res.length);
+                                $defer.resolve(res);
+                            }, 10);
+
                         }
-                    }, function () {
+                    }, function() {
                         $scope.schemes = []
                     })
-                }
-
-                $scope.loadSchemes()
-
-
+                    }
+                });
             }])
-        .controller('SchemeDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'SchemeService', 'FlashService', '$location',
-            function ($scope, $routeParams, CrudService, SchemeService, FlashService, $location) {
+        .controller('SchemeDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'SchemeService', 'FlashService', '$state',
+            function ($scope, $stateParams, CrudService, SchemeService, FlashService, $state) {
 
                 $scope.updateScheme = function () {
                     CrudService.schemeService.Update($scope.scheme).then(function () {
                         FlashService.Success("Successfuly Modified !!", true);
-                        $location.path('/scheme-list');
+                        $state.go('home.scheme-list');
                     });
 
                 };
 
                 $scope.cancel = function () {
-                    $location.path('/scheme-list');
+                    $state.go('home.scheme-list');
                 };
 
                 $scope.loadScheme = function () {
-                    CrudService.schemeService.GetById($routeParams.id).then(function (res) {
+                    CrudService.schemeService.GetById($stateParams.id).then(function (res) {
                         $scope.scheme = res
                     })
 
@@ -76,8 +84,8 @@
 
                 $scope.loadScheme();
             }])
-        .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$location',
-            function ($scope, CrudService, SchemeService, FlashService, $location) {
+        .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$state',
+            function ($scope, CrudService, SchemeService, FlashService, $state) {
 
                 $scope.createNewScheme = function () {
 
@@ -85,7 +93,7 @@
 
                     CrudService.schemeService.Create($scope.scheme).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
-                        $location.path('/scheme-list');
+                        $state.go('home.scheme-list');
                     });
                 }
 

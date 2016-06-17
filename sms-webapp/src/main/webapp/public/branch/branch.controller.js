@@ -3,8 +3,8 @@
 
     angular
         .module('Branch')
-        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
-        function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
+        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
+        function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
 
             $scope.editBranch = function (userId) {
                 $state.go('home.branch-detail',{id: userId});

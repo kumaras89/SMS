@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Student', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies']).
+angular.module('Student', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies', 'ngTable']).
     config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
