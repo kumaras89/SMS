@@ -3,12 +3,12 @@
 
     angular
         .module('FMS')
-        .controller('FMSCtrl', ['$scope', '$http', '$routeParams', '$window',
-            function ($scope,$http, $routeParams, $window) {
+        .controller('FMSCtrl', ['$scope', '$http', '$stateParams', '$window',
+            function ($scope,$http, $stateParams, $window) {
 
                 $scope.init = function() {
-                    $scope.cateory = $routeParams.category;
-                    $scope.uploaderid = $routeParams.uploaderid;
+                    $scope.cateory = $stateParams.category;
+                    $scope.uploaderid = $stateParams.uploaderid;
                     $scope.docs = {};
                     $http.get('/document/doctypes/'+ $scope.cateory).then(
                         function(res) {

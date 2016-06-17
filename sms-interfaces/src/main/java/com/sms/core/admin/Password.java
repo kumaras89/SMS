@@ -3,11 +3,14 @@ package com.sms.core.admin;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class Password {
 
-    @NotEmpty(message = "Username is empty")
+    @NotNull(message = "Username is empty")
+    @Size(min = 1,message = "Username is empty")
     private String userName;
 
     @NotEmpty(message = "Old password is empty")
@@ -25,7 +28,7 @@ public class Password {
     }
 
 
-    public Password(String userName, String oldPassword, String newPassword, String reTypeNewPwd) {
+    public Password(final String userName, final String oldPassword, final String newPassword, final String reTypeNewPwd) {
         this.userName = userName;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
@@ -37,7 +40,7 @@ public class Password {
         return reTypeNewPwd;
     }
 
-    public void setReTypeNewPwd(String reTypeNewPwd) {
+    public void setReTypeNewPwd(final String reTypeNewPwd) {
         this.reTypeNewPwd = reTypeNewPwd;
     }
 
@@ -47,7 +50,7 @@ public class Password {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
         this.userName = userName;
     }
 
@@ -55,7 +58,7 @@ public class Password {
         return oldPassword;
     }
 
-    public void setOldPassword(String oldPassword) {
+    public void setOldPassword(final String oldPassword) {
         this.oldPassword = oldPassword;
     }
 
@@ -63,7 +66,7 @@ public class Password {
         return newPassword;
     }
 
-    public void setNewPassword(String newPassword) {
+    public void setNewPassword(final String newPassword) {
         this.newPassword = newPassword;
     }
 }

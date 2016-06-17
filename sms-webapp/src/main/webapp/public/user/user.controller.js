@@ -57,8 +57,8 @@
 
 
         }])
-        .controller('UserDetailCtrl', ['$scope', '$routeParams', 'AdminService', 'CrudService','FlashService', '$location',
-        function ($scope, $routeParams,AdminService, CrudService,FlashService, $location) {
+        .controller('UserDetailCtrl', ['$scope', '$stateParams', 'AdminService', 'CrudService','FlashService', '$location',
+        function ($scope, $stateParams,AdminService, CrudService,FlashService, $location) {
 
             $scope.updateUser = function () {
                 var user = {};
@@ -73,7 +73,7 @@
 
             $scope.loadUser = function() {
                 var loadUserFunc = function(){
-                    CrudService.userService.GetById($routeParams.id).then(function(res) {
+                    CrudService.userService.GetById($stateParams.id).then(function(res) {
                         var user = res;
                         user.branch = AdminService.getBranchDesc(res.branch);
                         $scope.user = user;

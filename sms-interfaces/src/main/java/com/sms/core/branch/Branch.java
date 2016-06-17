@@ -4,8 +4,6 @@ package com.sms.core.branch;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 import com.sms.core.student.Address;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 
@@ -22,9 +20,8 @@ public class Branch extends BaseModel {
      @Column(name = "BR_ACTIVE")
      private Integer isActive;
 
-    @ManyToOne
+    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "BR_ADDRESS_ID")
-    @Cascade(value = CascadeType.ALL)
     private Address address;
 
     public Branch() {

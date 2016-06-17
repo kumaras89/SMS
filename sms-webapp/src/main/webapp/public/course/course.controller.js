@@ -46,8 +46,8 @@
                     }
                 });
             }])
-        .controller('CourseDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$state',
-            function ($scope, $routeParams, CrudService, FlashService, $state) {
+        .controller('CourseDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state',
+            function ($scope, $stateParams, CrudService, FlashService, $state) {
 
                 $scope.updateCourse = function () {
                     CrudService.courseService.Update($scope.course).then(function () {
@@ -62,7 +62,7 @@
                 };
 
                 $scope.loadCourse = function () {
-                    CrudService.courseService.GetById($routeParams.id).then(function (res) {
+                    CrudService.courseService.GetById($stateParams.id).then(function (res) {
                         $scope.course = res
                     })
                 }

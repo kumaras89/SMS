@@ -1,12 +1,11 @@
 package com.sms.core.student;
 
-import com.sms.core.*;
+import com.sms.core.BaseModel;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
 import com.sms.core.course.Course;
 import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.scheme.Scheme;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -57,9 +56,8 @@ public class Student extends BaseModel {
     @JoinColumn(name = "ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_ADDRESS_ID")
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Address address;
 
     @ManyToOne

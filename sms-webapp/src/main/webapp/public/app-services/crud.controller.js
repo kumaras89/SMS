@@ -3,8 +3,8 @@
 
     angular
         .module('app')
-        .controller('CrudCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$location',
-        function ($scope,$routeParams, CrudService, FlashService, $location) {
+        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state',
+        function ($scope,$stateParams, CrudService, FlashService, $state) {
 
             $scope.init = function(path, clearCachePaths) {
                 $scope.path = path;
@@ -21,15 +21,15 @@
             }
 
             $scope.goToEdit = function (userId) {
-                $location.path('/'+$scope.path+'-detail/' + userId);
+                $state.go('/'+$scope.path+'-detail/' + userId);
             };
 
             $scope.goToCreate = function () {
-                $location.path('/'+$scope.path+'-creation');
+                $state.go('/'+$scope.path+'-creation');
             };
 
             $scope.goToList = function () {
-                $location.path('/'+ $scope.path +'-list');
+                $state.go('/'+ $scope.path +'-list');
             }
 
             $scope.delete = function (id) {
@@ -58,7 +58,7 @@
             }
 
             $scope.loadEntity = function() {
-                $scope.service.GetById($routeParams.id).then(function(res) {
+                $scope.service.GetById($stateParams.id).then(function(res) {
                     $scope.entity = res;
                 })
             }

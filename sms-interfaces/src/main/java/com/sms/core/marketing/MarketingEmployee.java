@@ -4,7 +4,6 @@ import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 import com.sms.core.common.Designation;
 import com.sms.core.student.Address;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -21,9 +20,8 @@ public class MarketingEmployee extends BaseModel {
     @Column(name = "ME_DESIGNATION")
     private Designation designation;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ME_ADDRESS_ID")
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Address address;
 
     @Column(name = "ME_PHONE_NUMBER")

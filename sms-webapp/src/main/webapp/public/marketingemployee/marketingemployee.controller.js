@@ -3,58 +3,67 @@
 
     angular
         .module('MarketingEmployee')
-        .controller('MarketingEmployeeListCtrl', ['$scope', 'CrudService', 'FlashService', '$location',
-            function ($scope, CrudService, FlashService, $location) {
+        .controller('MarketingEmployeeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
+
                 $scope.editMarketingEmployee = function (userId) {
-                    $location.path('/marketingemployee-detail/' + userId);
+                    $state.go('home.marketingemployee-detail' ,{id: userId});
                 };
 
                 $scope.deleteMarketingEmployee = function (id) {
                     CrudService.marketingEmployeeService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
-                        $scope.loadMarketingEmployees();
                     });
 
                 };
 
                 $scope.createNewMarketingEmployee = function () {
-                    $location.path('/marketingemployee-creation');
+                    $state.go('home.marketingemployee-creation');
                 };
 
-                $scope.loadMarketingEmployees = function () {
-                    CrudService.marketingEmployeeService.GetAll().then(function (res) {
-                        if (res.message) {
+                $scope.tableParams = new ngTableParams({
+                    page: 1,            // show first pagez
+                    count: 10,          // count per page
+                    sorting: {
+                        name: 'asc'     // initial sorting
+                    }
+                }, {
+                    total: 0,           // length of data
+                    getData: function($defer, params) {
+                        CrudService.marketingEmployeeService.GetAll().then(function(data) {
+                            if(data.message) {
+                                $scope.marketingEmployees = [];
+                                FlashService.Error(data.message)
+                            } else {
+                                $timeout(function() {
+                                    params.total(data.length);
+                                    $defer.resolve(data);
+                                }, 10);
+
+                            }
+                        }, function() {
                             $scope.marketingEmployees = []
-                            FlashService.Error(res.message)
-                        } else {
-                            $scope.marketingEmployees = res
-                        }
-                    }, function () {
-                        $scope.marketingEmployees = []
-                    })
-                }
-
-                $scope.loadMarketingEmployees()
-
-
+                        })
+                    }
+                });
             }])
-        .controller('MarketingEmployeeDetailCtrl', ['$scope', '$routeParams', 'CrudService', 'FlashService', '$location', 'AdminService',
-            function ($scope, $routeParams, CrudService, FlashService, $location, AdminService) {
+        .controller('MarketingEmployeeDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'AdminService',
+            function ($scope, $stateParams, CrudService, FlashService, $state, AdminService) {
 
                 $scope.updateMarketingEmployee = function () {
                     CrudService.marketingEmployeeService.Update($scope.marketingEmployee).then(function () {
                         FlashService.Success("Successfuly Modified !!", true);
-                        $location.path('/marketingemployee-list');
+                        $state.go('home.marketingemployee-list');
                     });
 
                 };
 
                 $scope.cancel = function () {
-                    $location.path('/marketingemployee-list');
+                    $state.go('home.marketingemployee-list');
                 };
 
                 $scope.loadMarketingEmployee = function () {
-                    CrudService.marketingEmployeeService.GetById($routeParams.id).then(function (res) {
+                    CrudService.marketingEmployeeService.GetById($stateParams.id).then(function (res) {
                         $scope.marketingEmployee = res
                     })
                 }
@@ -70,8 +79,8 @@
                 $scope.init();
 
             }])
-        .controller('MarketingEmployeeCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService',
-            function ($scope, CrudService, FlashService, $location, AdminService) {
+        .controller('MarketingEmployeeCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
+            function ($scope, CrudService, FlashService, $state, AdminService) {
 
                 $scope.init = function () {
 
@@ -86,7 +95,7 @@
                 $scope.createNewMarketingEmployee = function () {
                     CrudService.marketingEmployeeService.Create($scope.marketingEmployee).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
-                        $location.path('/marketingemployee-list');
+                        $state.go('home.marketingemployee-list');
                     });
                 }
             }]);
