@@ -8,6 +8,7 @@ public class DocType {
     private String type;
     private String uploadCategoryName;
     private String desc;
+    private Boolean multiple;
     private Long id;
 
     public String getType() {
@@ -24,5 +25,9 @@ public class DocType {
 
     public Long getId() {
         return id;
+    }
+
+    public Boolean isMultiple() {
+        return multiple;
     }
 }

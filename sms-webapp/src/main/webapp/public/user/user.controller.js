@@ -6,7 +6,7 @@
         .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http',
         function ($scope, CrudService,AdminService, FlashService, $location,$http) {
             $scope.editUser = function (userId) {
-                $location.path('/user-detail/' + userId);
+                $location.path('/home/user-detail/' + userId);
             };
 
             $scope.deleteUser = function (id) {
@@ -26,7 +26,7 @@
             }
 
             $scope.createNewUser = function () {
-                $location.path('/user-creation');
+                $location.path('/home/user-creation');
             };
 
             $scope.loadUsers = function () {
@@ -66,7 +66,7 @@
                 user.branch = AdminService.getBranchCode($scope.user.branch);
                 CrudService.userService.Update(user).then(function(){
                     FlashService.Success("Successfuly Modified !!", true);
-                    $location.path('/user-list');
+                    $location.path('/home/user-list');
                 });
 
             };
@@ -103,7 +103,7 @@
                         FlashService.Error(res.message);
                     } else {
                         FlashService.Success("Successfuly Inserted !!", true);
-                        $location.path('/user-list');
+                        $location.path('/home/user-list');
                     }
                 }, function(res) {
                     FlashService.Error(res.message);
