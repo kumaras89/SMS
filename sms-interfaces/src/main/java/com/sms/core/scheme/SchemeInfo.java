@@ -13,7 +13,7 @@ public class SchemeInfo {
     private String code;
     private String name;
     private String description;
-    private Set<SchemeFeesInfo> schemeFeesInfos;
+    private Set<FeesInfo> feesInfos;
     private BigDecimal feesAmount;
 
     public SchemeInfo() {
@@ -30,8 +30,8 @@ public class SchemeInfo {
                 .with(SchemeInfo::getCode, scheme.getCode())
                 .with(SchemeInfo::getDescription, scheme.getDescription())
                 .with(SchemeInfo::getFeesAmount, scheme.getFeesAmount())
-                .with(SchemeInfo::getSchemeFeesInfos, scheme.getSchemeFees().stream()
-                        .map(feesCategory -> SchemeFeesInfo.toBuilder(feesCategory).build())
+                .with(SchemeInfo::getFeesInfos, scheme.getSchemeFees().stream()
+                        .map(feesCategory -> FeesInfo.toBuilder(feesCategory).build())
                         .collect(Collectors.toSet()));
     }
 
@@ -51,8 +51,8 @@ public class SchemeInfo {
         return id;
     }
 
-    public Set<SchemeFeesInfo> getSchemeFeesInfos() {
-        return schemeFeesInfos;
+    public Set<FeesInfo> getFeesInfos() {
+        return feesInfos;
     }
 
     public BigDecimal getFeesAmount() {
