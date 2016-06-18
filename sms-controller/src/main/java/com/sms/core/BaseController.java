@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody T entityObject, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> create(@RequestBody @Valid T entityObject, UriComponentsBuilder ucBuilder) {
 
         studentPortalService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
@@ -46,7 +47,7 @@ public abstract class BaseController<T> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<T> update(@PathVariable("id") long id,
-                                    @RequestBody T entityObject) {
+                                    @RequestBody @Valid T entityObject) {
         return studentPortalService.update(id, entityObject)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();
