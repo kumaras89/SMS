@@ -1,37 +1,34 @@
-﻿<div class="container">
-    <h1>Create a User</h1>
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Create New User</h3>
+    </div>
+<div class="panel-body">
 
     <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="name">User Name:</label>
-            <div class="controls">
-                <input type="text" id="name" ng-model="user.name" placeholder="User Name"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="firstName">First Name:</label>
-            <div class="controls">
-                <input type="text" id="firstName" ng-model="user.firstName" placeholder="First Name"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="lastName">Last Name:</label>
-            <div class="controls">
-                <input type="text" id="lastName" ng-model="user.lastName" placeholder="Last Name"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="role">Role : </label>
-            <div class="controls">
-                <input type="text" ng-model="user.role" list="roles"  id="role" placeholder="Role"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="branch">Branch:</label>
-            <div class="controls">
-                <input type="text" ng-model="user.branch" list="branchNames" id="branch" placeholder="Branch"/>
-            </div>
-        </div>
+        <table width="75%" class="table table-striped table-bordered table-hover">
+            <tr class="even gradeA">
+                <td><label class="control-label" for="name">User Name:</label></td>
+                <td><input type="text" id="name" ng-model="user.name" placeholder="User Name"/></td>
+            </tr>
+            <tr class="even gradeA">
+                <td><label class="control-label" for="firstName">First Name:</label></td>
+                <td><input type="text" id="firstName" ng-model="user.firstName" placeholder="First Name"/></td>
+            </tr>
+            <tr class="even gradeA">
+                <td><label class="control-label" for="lastName">Last Name:</label></td>
+                <td><input type="text" id="lastName" ng-model="user.lastName" placeholder="Last Name"/></td>
+            </tr>
+            <tr class="even gradeA">
+                <td><label class="control-label" for="role">Role : </label></td>
+                <td><input type="text" ng-model="user.role" list="roles"  id="role" placeholder="Role"/></td>
+            </tr>
+            <tr class="even gradeA">
+                <td><label class="control-label" for="branch">Branch:</label></td>
+                <td><input type="text" ng-model="user.branch" list="branchNames" id="branch" placeholder="Branch"/></td>
+            </tr>
+
+
+        </table>
         <datalist id="roles">
             <option  data-ng-repeat="role in roles" value="{{role}}">
         </datalist>
@@ -40,11 +37,12 @@
         </datalist>
         <br>
         <br>
-        <div class="control-group">
+        <div class="well">
             <div class="controls">
-                <a ng-click="#/user-list" class="btn btn-small">cancel</a>
                 <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
+                <a ui-sref="home.user-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Users</a>
             </div>
         </div>
     </form>
+</div>
 </div>

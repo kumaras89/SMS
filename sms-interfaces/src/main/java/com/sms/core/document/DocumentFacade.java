@@ -49,7 +49,7 @@ public class DocumentFacade {
                     map.add("file", new HttpEntity<>(contentsAsResource, headers));
                     HttpEntity<Object> requestEntity = new HttpEntity<>(map);
                     return requestEntity;
-                } )
+                })
                 .thenLF(re -> asycTemp().exchange(fmsServer + "/upload", HttpMethod.POST, re, DocInfo.class))
                 .getPromise());
 
