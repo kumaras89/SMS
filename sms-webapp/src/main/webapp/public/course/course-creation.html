@@ -1,32 +1,34 @@
-﻿<div class="container">
-    <h1>Create a Course</h1>
+﻿<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+    Create a Course
+    </div>
 
-    <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="code">Code:</label>
-
-            <div class="controls">
-                <input type="text" id="code" ng-model="course.code" placeholder="Code"/>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="code">Code:</label></td>
+                    <td><input type="text" id="code" ng-model="course.code" placeholder="Code"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="name">Name:</label></td>
+                    <td><input type="text" id="name" ng-model="course.name" placeholder="Name"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="description">Description:</label></td>
+                    <td><textarea id="description" ng-model="course.description" placeholder="Description about the course"/></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="createNewCourse()" class="btn btn-small btn-primary">create new course</a>
+                    <a ui-sref="home.course-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Course</a>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="name">Name:</label>
-            <div class="controls">
-                <input type="text" id="name" ng-model="course.name" placeholder="Name"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="description">Description:</label>
-            <div class="controls">
-                <textarea id="description" ng-model="course.description" placeholder="Description about the course"/>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="createNewCourse()" class="btn btn-small btn-primary">create new course</a>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+ </div>

@@ -1,40 +1,44 @@
-<div class="container" ng-init="init('securedoperation',['/login/securedoperation'])">
-    <h1>Role detail</h1>
-
-    <form novalidate="novalidate" class="form-horizontal" ng-init="loadEntity()">
-        <div class="control-group">
-            <label class="control-label" for="operation">Secured Operation :</label>
-
-            <div class="controls">
-                <input type="text" id="operation" ng-model="entity.operation" placeholder="Secured Operation"/>
+<br>
+<br>
+<div class="panel panel-default" ng-init="init('securedoperation',['/login/securedoperation'])">
+    <div class="panel-heading">
+        Role detail
+    </div>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal" ng-init="loadEntity()">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="operation">Secured Operation :</label></td>
+                    <td><input type="text" id="operation" ng-model="entity.operation" placeholder="Secured Operation"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td> <label class="control-label" >Type :</label></td>
+                    <td>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="OPERATION"  checked ng-model="entity.type">OPERATION
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="URL" ng-model="entity.type">URL
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="even gradeA">
+                    <td> <label class="control-label" for="operationDesc">Desc:</label></td>
+                    <td><textarea type="text" id="operationDesc" ng-model="entity.operationDesc" placeholder="Desc"/></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="goToList()" class="btn btn-small">cancel</a>
+                    <a ng-click="update()" class="btn btn-small btn-primary">update branch</a>
+                </div>
             </div>
-        </div>
-        <label>Type</label>
-        <div class="form-group">
-            <div class="radio">
-                <label>
-                    <input type="radio" name="type" value="OPERATION"  checked ng-model="entity.type">OPERATION
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="type" value="URL" ng-model="entity.type">URL
-                </label>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="operationDesc">Desc:</label>
-            <div class="controls">
-                <input type="text" id="operationDesc" ng-model="entity.operationDesc" placeholder="Desc"/>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="goToList()" class="btn btn-small">cancel</a>
-                <a ng-click="update()" class="btn btn-small btn-primary">update branch</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

@@ -1,26 +1,30 @@
-<div class="container">
-    <h1>Fees Particular detail</h1>
+<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Fees Particular detail
+    </div>
 
-    <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="code">Code</label>
-
-            <div class="controls">
-                <input type="text" id="code" ng-model="feesParticular.code"/>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="code">Code</label></td>
+                    <td><input type="text" id="code" ng-model="feesParticular.code"/></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="name">Name:</label></td>
+                    <td><input type="text" id="name" ng-model="feesParticular.name"/></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                    <a ng-click="updateFeesParticular()" class="btn btn-small btn-primary">update fees particular</a>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="name">Name:</label>
-            <div class="controls">
-                <input type="text" id="name" ng-model="feesParticular.name"/>
-            </div>
-        </div>
-        <br><br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="updateFeesParticular()" class="btn btn-small btn-primary">update fees particular</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

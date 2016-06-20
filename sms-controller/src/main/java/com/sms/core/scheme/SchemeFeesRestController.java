@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/schemeFees")
-public class SchemeFeesRestController extends BaseController<SchemeFeesInfo> {
+public class SchemeFeesRestController extends BaseController<FeesInfo> {
 
     @Autowired
-    public SchemeFeesRestController(final IStudentPortalService<SchemeFeesInfo> schemeFeesServiceImpl) {
+    public SchemeFeesRestController(final IStudentPortalService<FeesInfo> schemeFeesServiceImpl) {
         super(schemeFeesServiceImpl);
     }
 }

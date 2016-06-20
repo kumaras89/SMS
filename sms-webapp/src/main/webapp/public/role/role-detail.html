@@ -1,27 +1,30 @@
-<div class="container" ng-init="init('role', ['/role'])">
-    <h1>Role detail</h1>
+<br>
+<br>
+<div class="panel panel-default" ng-init="init('role', ['/role'])">
+    <div class="panel-heading">
+        Update Role
+    </div>
 
-    <form novalidate="novalidate" class="form-horizontal" ng-init="loadEntity()">
-        <div class="control-group">
-            <label class="control-label" for="name">Role :</label>
-
-            <div class="controls">
-                <input type="text" id="name" ng-model="entity.name" placeholder="Role"/>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal" ng-init="loadEntity()">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="name">Role :</label></td>
+                    <td><input type="text" id="name" ng-model="entity.name"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="desc">Desc:</label></td>
+                    <td><input type="text" id="desc" ng-model="entity.desc" /></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="update()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Update Role</a>
+                    <a ui-sref="home.role-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Roles</a>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="desc">Desc:</label>
-            <div class="controls">
-                <input type="text" id="desc" ng-model="entity.desc" placeholder="Desc"/>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="goToList()" class="btn btn-small">cancel</a>
-                <a ng-click="update()" class="btn btn-small btn-primary">update branch</a>
-            </div>
-        </div>
-    </form>
+        </form>
+     </div>
 </div>

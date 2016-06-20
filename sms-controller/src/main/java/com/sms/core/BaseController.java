@@ -47,7 +47,7 @@ public abstract class BaseController<T> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<T> update(@PathVariable("id") long id,
-                                    @RequestBody T entityObject) {
+                                    @RequestBody @Valid T entityObject) {
         return studentPortalService.update(id, entityObject)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();

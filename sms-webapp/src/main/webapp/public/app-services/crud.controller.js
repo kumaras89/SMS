@@ -3,8 +3,8 @@
 
     angular
         .module('app')
-        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state',
-        function ($scope,$stateParams, CrudService, FlashService, $state) {
+        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
+        function ($scope,$stateParams, CrudService, FlashService, $state, ngTableParams,  $timeout) {
 
             $scope.init = function(path, clearCachePaths) {
                 $scope.path = path;
@@ -20,16 +20,16 @@
                 }
             }
 
-            $scope.goToEdit = function (userId) {
-                $state.go('/'+$scope.path+'-detail/' + userId);
+            $scope.goToEdit = function (id) {
+                $state.go('home.'+$scope.path+'-detail',{id: id});
             };
 
             $scope.goToCreate = function () {
-                $state.go('/'+$scope.path+'-creation');
+                $state.go('home.'+$scope.path+'-creation');
             };
 
             $scope.goToList = function () {
-                $state.go('/'+ $scope.path +'-list');
+                $state.go('home.'+ $scope.path +'-list');
             }
 
             $scope.delete = function (id) {
@@ -63,18 +63,34 @@
                 })
             }
 
-            $scope.loadEntities = function() {
-                $scope.service.GetAll().then(function(res) {
-                    if(res.message) {
+            $scope.tableParams = new ngTableParams({
+                page: 1,            // show first pagez
+                count: 10,          // count per page
+                sorting: {
+                    name: 'asc'     // initial sorting
+                }
+            }, {
+                total: 0,           // length of data
+                getData: function($defer, params) {
+                    $scope.service.GetAll().then(function(data) {
+                        if(data.message) {
+                            $scope.entities = [];
+                            FlashService.Error(data.message)
+                        } else {
+                            $scope.entities = data;
+                            $timeout(function() {
+                                params.total(data.length);
+                                $defer.resolve(data);
+                            }, 10);
+
+                        }
+                    }, function() {
                         $scope.entities = []
-                        FlashService.Error(res.message)
-                    } else {
-                        $scope.entities = res
-                    }
-                }, function() {
-                    $scope.entities = []
-                })
-            }
+                    })
+                }
+            });
+
+
         }]);
 
 })();

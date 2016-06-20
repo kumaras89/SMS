@@ -9,18 +9,12 @@ public class UploadInfo {
     private String uploaderId;
     private String fileInfo;
     private String fileName;
+    private Long fileSequence;
 
     public UploadInfo(){
 
     }
 
-
-    public UploadInfo(Long documentTypeId, String uploaderId, String fileInfo, String fileName) {
-        this.documentTypeId = documentTypeId;
-        this.uploaderId = uploaderId;
-        this.fileInfo = fileInfo;
-        this.fileName = fileName;
-    }
 
     public void setDocumentTypeId(Long documentTypeId) {
         this.documentTypeId = documentTypeId;
@@ -54,5 +48,11 @@ public class UploadInfo {
         return fileName;
     }
 
+    public Long getFileSequence() {
+        return fileSequence;
+    }
 
+    public void setFileSequence(Long fileSequence) {
+        this.fileSequence = fileSequence;
+    }
 }
