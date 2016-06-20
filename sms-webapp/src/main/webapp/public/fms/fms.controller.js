@@ -12,17 +12,25 @@
                     $scope.docs = {};
                     $http.get('/document/doctypes/'+ $scope.cateory).then(
                         function(res) {
-                           $scope.doctypes = res.data;
+                           var doctypes = res.data;
+                            _.each(doctypes, function(dt) {
+                                $scope.docs[dt.id+'-'+0] = {};
+                                $scope.docs[dt.id+'-'+0].docType = dt;
+                                $scope.docs[dt.id+'-'+0].fileSequence = 0;
+                            });
                             $http.get('/document/documents/'+ $scope.uploaderid).then(
                                 function(res) {
-                                    $scope.documents = res.data;
-                                    _.each($scope.doctypes, function(dt) {
-                                        $scope.docs[dt.id] = {};
-                                        $scope.docs[dt.id].doc =
-                                            _.find($scope.documents , function(doc) {
-                                                return doc.documentTypeId == dt.id
-                                            })
-                                    })
+                                    var documents = res.data;
+                                    _.each(documents, function(doc) {
+                                        var key = doc.documentTypeId+'-'+doc.fileSequence;
+                                        var foundDoc = $scope.docs[key];
+                                        if(typeof foundDoc === undefined) {
+                                            $scope.docs[key] = {}
+                                            $scope.docs[key].docType = $scope.docs[doc.documentTypeId+'-'+0].docType;
+                                        }
+                                        $scope.docs[key].doc = doc;
+                                        $scope.docs[key].fileSequence = doc.fileSequence;
+                                    });
                                 }
                             );
                         }
@@ -30,23 +38,25 @@
 
                 }
 
-                $scope.isPresent = function(id) {
-                    return $scope.docs[id].doc;
+                $scope.isPresent = function(key) {
+                    return $scope.docs[key].doc;
                 }
 
                 $scope.uploadCommpleted = function () {
 
                 }
 
-                $scope.upload = function (id) {
+                $scope.upload = function (key) {
+                    var foundDoc = $scope.docs[key];
                     var data = {
                         uploadInfo: {
-                            documentTypeId : id,
+                            documentTypeId : foundDoc.docType.id,
                             uploaderId : $scope.uploaderid,
-                            fileInfo : $scope.docs[id].fileInfo,
-                            fileName : $scope.docs[id].file.name
+                            fileInfo : foundDoc.fileInfo,
+                            fileName : foundDoc.file.name,
+                            fileSequence : foundDoc.fileSequence
                         },
-                        file: $scope.docs[id].file
+                        file: foundDoc.file
                     };
                     var fd = new FormData();
                     fd.append("uploadinfo", angular.toJson(data.uploadInfo,true));
@@ -57,7 +67,7 @@
                         headers: {'Content-Type': undefined}
                     }).
                     success(function (data, status, headers, config) {
-                        $scope.docs[id].doc = data;
+                        $scope.docs[key].doc = data;
                     }).
                     error(function (data, status, headers, config) {
                         alert("failed!");
@@ -65,21 +75,25 @@
 
                 }
 
-                $scope.download = function (id) {
+                $scope.download = function (key) {
                     console.log('download' + id + 'from  '+$scope.docs);
-                    var docId = $scope.docs[id].doc.id;
-                    var fileName = $scope.docs[id].doc.fileName
+                    var docId = $scope.docs[key].doc.id;
+                    var fileName = $scope.docs[key].doc.fileName
                     $window.open('/document/download/'+docId+'/'+fileName);
                 }
 
-                $scope.delete = function (id) {
-                    $http.delete('/document/delete/'+docId)
+                $scope.delete = function (key) {
+                    $http.delete('/document/delete/'+$scope.docs[key].doc.id)
                         .success(function(data) {
-                            $scope.docs[dt.id].doc = undefined;
+                            $scope.docs[key].doc = undefined;
                         }).
-                    error(function (data, status, headers, config) {
+                    error(function () {
                         alert("failed!");
                     });
+                }
+
+                $scope.keys = function(obj){
+                    return obj? Object.keys(obj) : [];
                 }
 
                 $scope.init();

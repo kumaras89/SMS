@@ -10,24 +10,32 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="doctype in doctypes">
-            <td>{{ doctype.desc }}</td>
+        <tr ng-repeat="key in keys(docs)">
+            <td>{{ docs[key].doctype.desc }}</td>
+            <td ng-if="!isPresent(key)">
+                <input type="text" ng-model="docs[key].fileInfo" placeholder="File Info">
+            </td>
+            <td ng-if="!isPresent(key)"><input type="file" fileread="docs[key].file"></td>
+            <td ng-if="!isPresent(key)"><a ng-click="upload(key)" class="btn btn-small btn-primary">upload</a></td>
 
-            <td ng-if="!isPresent(doctype.id)"><input type="text" ng-model="docs[doctype.id].fileInfo" placeholder="File Info"></td>
-            <td ng-if="!isPresent(doctype.id)"><input type="file" fileread="docs[doctype.id].file"></td>
-            <td ng-if="!isPresent(doctype.id)"><a ng-click="upload(doctype.id)" class="btn btn-small btn-primary">upload</a></td>
-
-            <td ng-if="isPresent(doctype.id)">{{ docs[doctype.id].doc.fileInfo }}</td>
-            <td ng-if="isPresent(doctype.id)"><a ng-click="download(doctype.id)" class="btn btn-small btn-primary">download</a></td>
-            <td ng-if="isPresent(doctype.id)"><a ng-click="delete(doctype.id)" class="btn btn-small btn-danger">delete</a></td>
+            <td ng-if="isPresent(key)">{{ docs[key].doc.fileInfo }} </td>
+            <td ng-if="isPresent(key)"><a ng-click="download(key)" class="btn btn-small btn-primary">download</a></td>
+            <td ng-if="isPresent(key)"><a ng-click="delete(key)" class="btn btn-small btn-danger">delete</a></td>
+            <td ng-if="docs[key].doctype.multiple">
+                <a ng-click="addRow(key)" class="btn btn-small btn-primary">+</a>
+                <a ng-if="!isPresent(key)" ng-click="deletRow(key)" class="btn btn-small btn-danger">-</a>
+            </td>
         </tr>
-
-        <br>
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="uploadCommpleted()" class="btn btn-small btn-primary">Upload Completed</a>
+        <tr>
+            <td colspan="2">
+            <br>
+            <div class="control-group">
+                <div class="controls">
+                    <a ng-click="uploadCommpleted()" class="btn btn-small btn-primary">Upload Completed</a>
+                </div>
             </div>
-        </div>
+            </td>
+        </tr>
         </tbody>
 
     </table>

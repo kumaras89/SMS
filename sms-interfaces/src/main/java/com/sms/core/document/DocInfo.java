@@ -1,6 +1,5 @@
 package com.sms.core.document;
 
-import org.springframework.core.style.ToStringCreator;
 
 /**
  * Created by Ganesan on 04/06/16.
@@ -8,6 +7,7 @@ import org.springframework.core.style.ToStringCreator;
 public class DocInfo {
 
     private Long documentTypeId;
+    private Long fileSequence;
     private String uploaderId;
     private String fileInfo;
     private String fileName;
@@ -38,4 +38,7 @@ public class DocInfo {
         return id;
     }
 
+    public Long getFileSequence() {
+        return fileSequence;
+    }
 }
