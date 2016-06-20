@@ -11,6 +11,7 @@
             'Course',
             'Scheme',
             'FeesParticular',
+            'ScholarshipEnrollment',
             'Role',
             'SecuredOperation',
             'RoleOperationLink',
