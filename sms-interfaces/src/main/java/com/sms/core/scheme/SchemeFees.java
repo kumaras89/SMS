@@ -5,14 +5,19 @@ import com.sms.core.common.Builder;
 import com.sms.core.feesparticular.FeesParticular;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "SMS_TR_SCHEME_TO_FEES")
 public class SchemeFees extends BaseModel {
 
+
+    @Valid
     @ManyToOne
     @JoinColumn(name = "FC_FEES_PARTICULAR_ID")
     private FeesParticular feesParticular;
+
+
 
     @Column(name = "FC_WEIGHTAGE")
     private int weightage = 0;

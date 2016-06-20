@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody T entityObject, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> create(@RequestBody @Valid T entityObject, UriComponentsBuilder ucBuilder) {
 
         studentPortalService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
