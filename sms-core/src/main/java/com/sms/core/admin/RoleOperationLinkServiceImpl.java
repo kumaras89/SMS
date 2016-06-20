@@ -46,7 +46,7 @@ public class RoleOperationLinkServiceImpl implements RoleOperationLinkService {
         repository.save(roleOperationLinkInfo
                 .getLinkedOperations()
                 .stream()
-                .filter(id -> roleOperationLinks.stream().anyMatch(rol -> rol.getSecuredOperationId().equals(id)))
+                .filter(id -> !roleOperationLinks.stream().anyMatch(rol -> rol.getSecuredOperationId().equals(id)))
                 .map(id -> new RoleOperationLink(roleOperationLinkInfo.getUserRoleId(), id))
                 .collect(Collectors.toList()));
     }

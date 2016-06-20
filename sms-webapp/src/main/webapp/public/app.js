@@ -118,9 +118,9 @@
 
             var path  = $location.path();
             var hyphenInedex = path.indexOf('-');
-            var resource = path.substr(1);
+            var resource = path.substr(6);
             if(hyphenInedex != -1) {
-                resource = path.substr(1, hyphenInedex - 1);
+                resource = path.substr(6, hyphenInedex - 6);
             }
             AuthenticationService.isAuthorized(resource, function() {}, function() {
                     FlashService.Error('Not Authorized to access \"'+ resource+'\"', true);
