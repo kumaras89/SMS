@@ -6,26 +6,41 @@ import com.sms.core.common.Builder;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "SMS_MA_USER")
 public class User extends BaseModel {
 
+	@NotNull(message = "First name is empty")
+	@Size(min = 1, message = "First name is empty")
 	@Column(name = "US_FIRST_NAME")
 	private String firstName;
 
+	@NotNull(message = "Last name is empty")
+	@Size(min = 1, message = "Last name is empty")
 	@Column(name = "US_LAST_NAME")
 	private String lastName;
 
+	@NotNull(message = "Branch  is empty")
+	@Size(min = 1, message = "branch  is empty")
 	@Column(name = "US_BRANCH")
 	private String branch;
 
+	@NotNull(message = "User Name  is empty")
+	@Size(min = 1, message = "User Name  is empty")
 	@Column(name = "US_NAME")
 	private String name;
+
+
+	@NotNull(message = "Role  Name is empty")
 
 	@ManyToOne
 	@JoinColumn(name = "US_UR_ID")
 	private UserRole role;
+
 
 	@Column(name = "US_PASSWORD")
 	private String password;

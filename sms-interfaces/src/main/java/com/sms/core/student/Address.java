@@ -20,12 +20,12 @@ public class Address extends BaseModel {
 
     @NotNull(message = "State is empty")
     @Size(min = 1,message = "State is Empty")
-    @Pattern(regexp = "[a-zA-Z ]+", message = "State Name is invalid")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "State Name is invalid")
     @Column(name = "AD_STATE")
     private String state;
 
     @NotNull(message = "Country is empty")
-    @Pattern(regexp = "[a-zA-Z]+", message = "Country Name is invalid")
+    @Pattern(regexp = "[a-zA-Z]*", message = "Country Name is invalid")
     @Size(min = 2,message = "Country is invalid")
     @Column(name = "AD_COUNTRY")
     private String country;
