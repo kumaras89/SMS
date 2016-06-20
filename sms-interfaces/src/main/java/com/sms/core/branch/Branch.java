@@ -23,7 +23,7 @@ public class Branch extends BaseModel {
     @Column(name = "BR_NAME")
     private String name;
 
-
+    @NotNull(message = "isActive is not set")
     @Column(name = "BR_ACTIVE")
     private Integer isActive;
 

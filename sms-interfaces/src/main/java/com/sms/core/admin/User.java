@@ -36,7 +36,7 @@ public class User extends BaseModel {
 
 
 	@NotNull(message = "Role  Name is empty")
-
+	
 	@ManyToOne
 	@JoinColumn(name = "US_UR_ID")
 	private UserRole role;
