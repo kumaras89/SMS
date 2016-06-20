@@ -1,0 +1,173 @@
+<script type="text/javascript" src="/public/app-content/jquery.main.js"></script>
+<style>
+
+    .container input.error { border: 1px solid red; }
+    .container input.valid { border: 1px solid #1FFF00; }
+
+</style>
+<script type="text/javascript">
+    function updateAnnualIncome(val) {
+        document.getElementById("annualIncome").value = (eval(val * 12));
+    }
+</script>
+
+<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Scholarship Enrollment
+    </div>
+    <div class="container">
+
+        <form class="form-horizontal">
+            <div class="control-group">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label class="control-label">Name of The Student</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.name}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Date Of Birth</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.dateOfBirth}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Age</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.age}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Gender</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.gender}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Nationality</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.nationality}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Religion</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.religion}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Cummunity</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.summunity}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Caste</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.caste}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Marital Status</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.maritalStatus}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Annual income</label></td>
+                                <td><label class="control-label">{{annualIncome}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Adddress 1</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.doorNumber}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Address 2</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.streetName}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">City</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.city}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">State</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.state}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Country</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.country}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Postal Code</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.address.postalCode}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Email Address</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.mailId}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Mobile Number</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.phoneNumber}}></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Alternate Mobile Number</label></td>
+                                <td><label class="control-label">{{scholarshipenrollment.student.alternatePhoneNumber}}></label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
+                            <thead>
+                            <tr>
+                                <th>Examination</th>
+                                <th>Name of Institue Studied</th>
+                                <th>Group</th>
+                                <th>Year of Passing</th>
+                                <th>Marks Perctange</th>
+                                <th>Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>SSLC</td>
+                                <td><label class="control-label">{{sslc.institue}}></label></td>
+                                <td><label class="control-label">{{sslc.group}}></label></td>
+                                <td><label class="control-label">{{sslc.year}}></label></td>
+                                <td><label class="control-label">{{sslc.ipercentage}}></label></td>
+                                <td><label class="control-label">{{sslc.remarks}}></label></td>
+                            </tr>
+                            <tr>
+                                <td>HSC</td>
+                                <td><label class="control-label">{{hsc.institue}}></label></td>
+                                <td><label class="control-label">{{hsc.group}}></label></td>
+                                <td><label class="control-label">{{hsc.year}}></label></td>
+                                <td><label class="control-label">{{hsc.ipercentage}}></label></td>
+                                <td><label class="control-label">{{hsc.remarks}}></label></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<datalist id="genders">
+    <option  data-ng-repeat="gender in commonAttributes.gender" value="{{gender}}">
+</datalist>
+
+<datalist id="religions">
+    <option  data-ng-repeat="religion in commonAttributes.religion" value="{{religion}}">
+</datalist>
+
+<datalist id="castes">
+    <option  data-ng-repeat="caste in commonAttributes.caste" value="{{caste}}">
+</datalist>
+
+<datalist id="maritalState">
+    <option  data-ng-repeat="status in commonAttributes.maritalStatus" value="{{status}}">
+</datalist>
+
+<datalist id="branchNames">
+    <option  data-ng-repeat="bn in branchNames" value="{{bn}}">
+</datalist>
