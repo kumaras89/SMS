@@ -6,20 +6,28 @@ import com.sms.core.common.Builder;
 import com.sms.core.student.Address;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "SMS_MA_BRANCH")
 public class Branch extends BaseModel {
-
+    @NotNull(message = "Branch Code is empty")
+    @Size(min = 1, message = "Branch Code is empty")
     @Column(name = "BR_CODE", unique = true)
     private String code;
 
+    @NotNull(message = "Branch Name is empty")
+    @Size(min = 2, message = "Branch Name is empty")
     @Column(name = "BR_NAME")
     private String name;
 
-     @Column(name = "BR_ACTIVE")
-     private Integer isActive;
+    @NotNull(message = "isActive is not set")
+    @Column(name = "BR_ACTIVE")
+    private Integer isActive;
 
+    @Valid
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "BR_ADDRESS_ID")
     private Address address;
