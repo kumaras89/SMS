@@ -67,7 +67,7 @@
                                 <tr>
                                     <td><label class="control-label" for="caste">Cummunity</label></td>
                                     <td>
-                                        <input type="text" ng-model="scholarshipenrollment.student.summunity" list="castes" id="caste" placeholder="cummunity"/>
+                                        <input type="text" ng-model="scholarshipenrollment.student.cummunity" list="castes" id="caste" placeholder="cummunity"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -163,19 +163,22 @@
                                 <tbody>
                                     <tr>
                                         <td>SSLC</td>
-                                        <td><input type="text" ng-model="sslc.institue" placeholder="Institue name"/></td>
-                                        <td><input type="text" ng-model="sslc.group" placeholder="Group"/></td>
-                                        <td><input type="text" ng-model="sslc.year" placeholder="Passing year"/></td>
-                                        <td><input type="text" ng-model="sslc.percentage" placeholder="Percentage"/> </td>
-                                        <td><input type="text" ng-model="sslc.remarks" placeholder="Remarks"/></td>
+                                        <td><input type="text" ng-model="sslc.instituteName" placeholder="Institue name"/></td>
+                                        <td><input type="text" ng-model="sslc.groupName" placeholder="Group"/></td>
+                                        <td><input type="text" ng-model="sslc.fromYear" placeholder="from"/>
+                                            <input type="text" ng-model="sslc.toYear" placeholder="to"/>
+                                        </td>
+                                        <td><input type="text" ng-model="sslc.percentageObtained" placeholder="Percentage"/> </td>
+                                        <td><input type="text" ng-model="sslc.remark" placeholder="Remarks"/></td>
                                     </tr>
                                     <tr>
                                         <td>HSC</td>
-                                        <td><input type="text" ng-model="hsc.institue" placeholder="Institue name"/></td>
-                                        <td><input type="text" ng-model="hsc.group" placeholder="Group"/></td>
-                                        <td><input type="text" ng-model="hsc.year" placeholder="Passing year"/></td>
-                                        <td><input type="text" ng-model="hsc.percentage" placeholder="Percentage"/> </td>
-                                        <td><input type="text" ng-model="hsc.remarks" placeholder="Remarks"/></td>
+                                        <td><input type="text" ng-model="hsc.instituteName" placeholder="Institue name"/></td>
+                                        <td><input type="text" ng-model="hsc.groupName" placeholder="Group"/></td>
+                                        <td><input type="text" ng-model="hsc.fromYear" placeholder="from"/>
+                                            <input type="text" ng-model="hsc.toYear" placeholder="to"/></td>
+                                        <td><input type="text" ng-model="hsc.percentageObtained" placeholder="Percentage"/> </td>
+                                        <td><input type="text" ng-model="hsc.remark" placeholder="Remarks"/></td>
                                     </tr>
                                     <tr>
                                         <td align="left"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
@@ -226,7 +229,7 @@
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="caste">Cummunity</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.summunity}}</label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.cummunity}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="caste">Caste</label></td>
@@ -298,19 +301,23 @@
                                 <tbody>
                                     <tr>
                                         <td>SSLC</td>
-                                        <td><label class="control-label">{{sslc.institue}}</label></td>
-                                        <td><label class="control-label">{{sslc.group}}</label></td>
-                                        <td><label class="control-label">{{sslc.year}}</label></td>
-                                        <td><label class="control-label">{{sslc.percentage}}</label></td>
-                                        <td><label class="control-label">{{sslc.remarks}}</label></td>
+                                        <td><label class="control-label">{{sslc.instituteName}}</label></td>
+                                        <td><label class="control-label">{{sslc.groupName}}</label></td>
+                                        <td><label class="control-label">{{sslc.fromYear}}</label>
+                                            <label class="control-label">{{sslc.toYear}}</label>
+                                        </td>
+                                        <td><label class="control-label">{{sslc.percentageObtained}}</label></td>
+                                        <td><label class="control-label">{{sslc.remark}}</label></td>
                                     </tr>
                                     <tr>
                                         <td>HSC</td>
-                                        <td><label class="control-label">{{hsc.institue}}</label></td>
-                                        <td><label class="control-label">{{hsc.group}}</label></td>
-                                        <td><label class="control-label">{{hsc.year}}</label></td>
-                                        <td><label class="control-label">{{hsc.percentage}}</label></td>
-                                        <td><label class="control-label">{{hsc.remarks}}</label></td>
+                                        <td><label class="control-label">{{hsc.instituteName}}</label></td>
+                                        <td><label class="control-label">{{hsc.groupName}}</label></td>
+                                        <td><label class="control-label">{{hsc.fromYear}}</label>
+                                            <label class="control-label">{{hsc.toYear}}</label>
+                                        </td>
+                                        <td><label class="control-label">{{hsc.percentageObtained}}</label></td>
+                                        <td><label class="control-label">{{hsc.remark}}</label></td>
                                     </tr>
                                 </tbody>
                             </table>
