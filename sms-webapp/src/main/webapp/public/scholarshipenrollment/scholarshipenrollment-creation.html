@@ -3,7 +3,7 @@
     .container #first_step, #second_step, #third_step { display: none; }
     .container #first_step { display: block; }
     .container input.valid { border: 1px solid #1FFF00; }
-
+    .container{ width: 100%;}
 
 
 </style>
@@ -15,13 +15,15 @@
 
 <br>
 <br>
-<div class="panel panel-default">
+<!--<div class="panel panel-default">
     <div class="panel-heading">
         Scholarship Enrollment
     </div>
-    <div class="container">
+    <br>
+    <br>-->
+    <div>
 
-        <form class="form-horizontal">
+        <form>
             <div class="control-group">
                 <!-- #first_step -->
                 <div id="first_step">
@@ -65,7 +67,7 @@
                                 <tr>
                                     <td><label class="control-label" for="caste">Cummunity</label></td>
                                     <td>
-                                        <input type="text" ng-model="scholarshipenrollment.student.summunity" id="caste" placeholder="cummunity"/>
+                                        <input type="text" ng-model="scholarshipenrollment.student.summunity" list="castes" id="caste" placeholder="cummunity"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,8 +86,8 @@
                                 <tr>
                                     <td><label class="control-label">Annual income</label></td>
                                     <td>
-                                        <input type="radio" name="annualIncome" value="1" ng-model="annualIncome">Upto 50,000
-                                        <input type="radio" name="annualIncome" value="0" ng-model="annualIncome">Upto 1,00,000
+                                        <input type="radio" name="annualIncome" value="1" ng-model="annualIncome">&nbsp;Upto 50,000
+                                        &nbsp; <input type="radio" name="annualIncome" value="0" ng-model="annualIncome">&nbsp;Upto 1,00,000
                                     </td>
                                 </tr>
                                 <tr>
@@ -140,6 +142,7 @@
                             </table>
                         </div>
                     </div>
+                    <br><br>
                 </div>
 
                 <!-- #second_step -->
@@ -147,39 +150,40 @@
                     <div class="control-group,form">
                         <div style="border-radius:20px;border: 2px solid #3dad9c;">
                             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
-                            <thead>
-                            <tr>
-                                <th>Examination</th>
-                                <th>Name of Institue Studied</th>
-                                <th>Group</th>
-                                <th>Year of Passing</th>
-                                <th>Marks Perctange</th>
-                                <th>Remarks</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SSLC</td>
-                                    <td><input type="text" ng-model="sslc.institue" placeholder="Institue name"/></td>
-                                    <td><input type="text" ng-model="sslc.group" placeholder="Group"/></td>
-                                    <td><input type="text" ng-model="sslc.year" placeholder="Passing year"/></td>
-                                    <td><input type="text" ng-model="sslc.ipercentage" placeholder="Percentage"/> </td>
-                                    <td><input type="text" ng-model="sslc.remarks" placeholder="Remarks"/></td>
-                                </tr>
-                                <tr>
-                                    <td>HSC</td>
-                                    <td><input type="text" ng-model="hsc.institue" placeholder="Institue name"/></td>
-                                    <td><input type="text" ng-model="hsc.group" placeholder="Group"/></td>
-                                    <td><input type="text" ng-model="hsc.year" placeholder="Passing year"/></td>
-                                    <td><input type="text" ng-model="hsc.ipercentage" placeholder="Percentage"/> </td>
-                                    <td><input type="text" ng-model="hsc.remarks" placeholder="Remarks"/></td>
-                                </tr>
-                                <tr>
-                                    <td align="left"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
-                                    <td align="right"><input class="submit" type="submit" name="submit_second" id="submit_second" value="Next" /></td>
-                                </tr>
-                            </tbody>
-                         </table>
+                                <thead>
+                                    <tr>
+                                        <th>Examination</th>
+                                        <th>Name of Institue Studied</th>
+                                        <th>Group</th>
+                                        <th>Year of Passing</th>
+                                        <th>% of Marks</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SSLC</td>
+                                        <td><input type="text" ng-model="sslc.institue" placeholder="Institue name"/></td>
+                                        <td><input type="text" ng-model="sslc.group" placeholder="Group"/></td>
+                                        <td><input type="text" ng-model="sslc.year" placeholder="Passing year"/></td>
+                                        <td><input type="text" ng-model="sslc.percentage" placeholder="Percentage"/> </td>
+                                        <td><input type="text" ng-model="sslc.remarks" placeholder="Remarks"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>HSC</td>
+                                        <td><input type="text" ng-model="hsc.institue" placeholder="Institue name"/></td>
+                                        <td><input type="text" ng-model="hsc.group" placeholder="Group"/></td>
+                                        <td><input type="text" ng-model="hsc.year" placeholder="Passing year"/></td>
+                                        <td><input type="text" ng-model="hsc.percentage" placeholder="Percentage"/> </td>
+                                        <td><input type="text" ng-model="hsc.remarks" placeholder="Remarks"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
+                                        <td align="right"><input class="submit" type="submit" name="submit_second" id="submit_second" value="Next" /></td>
+                                    </tr>
+
+                                </tbody>
+                             </table>
                         </div>
                         <br><br>
                     </div>
@@ -187,7 +191,7 @@
 
                 <!-- #third_step -->
                 <div id="third_step">
-                    <div class="control-group,form">
+                    <div class="control-group">
                         <div style="border-radius:20px;border: 2px solid #3dad9c;">
                             <table class="table table-striped table-condensed">
                                 <thead>
@@ -198,79 +202,79 @@
                                 <tbody>
                                     <tr>
                                         <td><label class="control-label" for="name">Name of The Student</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.name}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.name}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.dateOfBirth}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.dateOfBirth}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="age">Age</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.age}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.age}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="gender">Gender</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.gender}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.gender}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="nationality">Nationality</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.nationality}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.nationality}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="religion">Religion</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.religion}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.religion}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="caste">Cummunity</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.summunity}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.summunity}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="caste">Caste</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.caste}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.caste}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.maritalStatus}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.maritalStatus}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label">Annual income</label></td>
-                                        <td><label class="control-label">{{annualIncome}}></label></td>
+                                        <td><label class="control-label">{{annualIncome}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.doorNumber}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.doorNumber}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="streetName">Address 2</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.streetName}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.streetName}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="city">City</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.city}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.city}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="state">State</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.state}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.state}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="country">Country</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.country}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.country}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.address.postalCode}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.address.postalCode}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="mailId">Email Address</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.mailId}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.mailId}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.phoneNumber}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.phoneNumber}}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
-                                        <td><label class="control-label">{{scholarshipenrollment.student.alternatePhoneNumber}}></label></td>
+                                        <td><label class="control-label">{{scholarshipenrollment.student.alternatePhoneNumber}}</label></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">&nbsp;</td>
@@ -287,26 +291,26 @@
                                     <th>Name of Institue Studied</th>
                                     <th>Group</th>
                                     <th>Year of Passing</th>
-                                    <th>Marks Perctange</th>
+                                    <th>% of Marks</th>
                                     <th>Remarks</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>SSLC</td>
-                                        <td><label class="control-label">{{sslc.institue}}></label></td>
-                                        <td><label class="control-label">{{sslc.group}}></label></td>
-                                        <td><label class="control-label">{{sslc.year}}></label></td>
-                                        <td><label class="control-label">{{sslc.ipercentage}}></label></td>
-                                        <td><label class="control-label">{{sslc.remarks}}></label></td>
+                                        <td><label class="control-label">{{sslc.institue}}</label></td>
+                                        <td><label class="control-label">{{sslc.group}}</label></td>
+                                        <td><label class="control-label">{{sslc.year}}</label></td>
+                                        <td><label class="control-label">{{sslc.percentage}}</label></td>
+                                        <td><label class="control-label">{{sslc.remarks}}</label></td>
                                     </tr>
                                     <tr>
                                         <td>HSC</td>
-                                        <td><label class="control-label">{{hsc.institue}}></label></td>
-                                        <td><label class="control-label">{{hsc.group}}></label></td>
-                                        <td><label class="control-label">{{hsc.year}}></label></td>
-                                        <td><label class="control-label">{{hsc.ipercentage}}></label></td>
-                                        <td><label class="control-label">{{hsc.remarks}}></label></td>
+                                        <td><label class="control-label">{{hsc.institue}}</label></td>
+                                        <td><label class="control-label">{{hsc.group}}</label></td>
+                                        <td><label class="control-label">{{hsc.year}}</label></td>
+                                        <td><label class="control-label">{{hsc.percentage}}</label></td>
+                                        <td><label class="control-label">{{hsc.remarks}}</label></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -315,17 +319,19 @@
                         <br>
                         <div class="control-group">
                             <div class="controls" align="left">
-                                <input ng-click="createNewScholarshipEnrollment()" class="submit" type="submit" name="submit_back_fourth" id="submit_back_fourth" value="Back" />
+                                <td align="left"><input class="submit" type="submit" name="submit_back_second" id="submit_back_second" value="Back" /></td>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a ng-click="createNewScholarshipEnrollment()" class="btn btn-small btn-primary">Submit</a>
                             </div>
                         </div>
+                        <br>
+                        <br>
                      </div>
                 </div>
             </div>
         </form>
     </div>
-</div>
+<!--</div>-->
 <datalist id="genders">
     <option  data-ng-repeat="gender in commonAttributes.gender" value="{{gender}}">
 </datalist>
