@@ -3,17 +3,6 @@
 
     angular
         .module('Student')
-        .filter('ageFilter', function () {
-            function calculateAge(birthday) { // birthday is a date
-                var ageDifMs = Date.now() - new Date(birthday).getTime();
-                var ageDate = new Date(ageDifMs); // miliseconds from epoch
-                return Math.abs(ageDate.getUTCFullYear() - 1970);
-            }
-
-            return function (birthdate) {
-                return calculateAge(birthdate);
-            };
-        })
         .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
             function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
                 $scope.viewStudent = function (userId) {
@@ -101,18 +90,20 @@
                 $scope.student.otherLanguages = [{},{},{}];
 
                 $scope.createNewStudent = function () {
-
-                    $scope.student.status = 'CREATED';
-
-                    $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
-                    $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
-                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
-
-
-                    CrudService.studentService.Create($scope.student).then(function () {
+                    CrudService.studentService.Create($scope.studentSumarized).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.student-list');
                     });
+                }
+
+                $scope.calculateAge = function (birthday) { // birthday is a date
+                    var today = new Date();
+                    var birthDate = new Date(birthday);
+                    var months = (today.getFullYear() - birthDate.getFullYear()) * 12;
+                    months -= birthDate.getMonth() + 1;
+                    months += today.getMonth();
+                    $scope.student.age = Math.ceil(months <= 0 ? '' : months / 12) || '';
+                    return $scope.student.age;
                 }
 
                 $scope.getFeesParticularDesc = function (feesParticularCode){
@@ -120,9 +111,25 @@
                 };
 
                 $scope.updateStudent = function(){
+                    $scope.student.status = 'CREATED';
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.student.schemeName);
                     $scope.student.feesInfos = AdminService.getSchemeFeesInfo($scope.student.schemeCode);
+                    $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
+                    $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
+                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
+                    $scope.studentSumarized = $scope.student;
+                    $scope.studentSumarized.educationDetails = _.filter($scope.student.educationDetails, function(ed){
+                        return  ed.examPassed != undefined && ed.examPassed != '';
+                    });
+                    $scope.studentSumarized.guardians = _.filter($scope.student.guardians, function(ed){
+                        return  ed.examPassed != undefined && ed.relationShip != '';
+                    });
+                    $scope.studentSumarized.otherLanguages = _.filter($scope.student.otherLanguages, function(ed){
+                       return  ed.name != undefined && ed.name != '';
+                   });
+
                 };
+
 
 
                 $scope.init = function () {
@@ -147,6 +154,10 @@
 
                     AdminService.getCourses(function (data) {
                         $scope.courseNames = _.pluck(data, "name")
+                    });
+
+                    AdminService.getYearOfPassing(function (data) {
+                        $scope.yearOfPass = data;
                     });
                 }
 

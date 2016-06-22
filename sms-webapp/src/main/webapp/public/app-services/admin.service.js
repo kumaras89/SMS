@@ -28,6 +28,7 @@
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
         service.getSchemeFeesInfo = getSchemeFeesInfo
+        service.getYearOfPassing = getYearOfPassing
 
         return service;
         
@@ -56,6 +57,12 @@
             StorageService.getFromStoarage('/marketingEmployee', function(data) {
                 success(data);
             });
+        }
+
+        function getYearOfPassing(success){
+            var thisYear = new Date().getFullYear();
+            var years = [thisYear,thisYear - 1];
+            return success(years);
         }
 
         function getConstants(success) {

@@ -12,6 +12,7 @@ import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT")
@@ -152,8 +153,6 @@ public class Student extends BaseModel {
             .with(Student::getReligion, Religion.valueOf(studentInfo.getReligion()))
             .with(Student::getGuardians, studentInfo.getGuardians())
             .with(Student::getEducationDetails, studentInfo.getEducationDetails())
-            .with(Student::getStudentFees,
-                FunctionUtils.asList(StudentFees::toBuilder).apply(studentInfo.getFeesInfos()))
             .with(Student::getAddress, studentInfo.getAddress())
             .with(Student::getEnglishFluency, Rating.valueOf(studentInfo.getEnglishFluency()))
             .with(Student::getMaritalStatus, MaritalStatus.valueOf(studentInfo.getMaritalStatus()))

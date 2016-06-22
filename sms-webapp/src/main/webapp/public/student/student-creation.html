@@ -85,7 +85,7 @@
                         </tr>
                         <tr>
                             <td><label class="control-label" >Age</label></td>
-                            <td>{{student.dateOfBirth | ageFilter}}</td>
+                            <td><label class="control-label">{{calculateAge(student.dateOfBirth)}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="gender">Gender</label></td>
@@ -247,8 +247,9 @@
                                        placeholder="group name"/>
                             </td>
                             <td>
-                                <input type="text" ng-model="educationDetail.passingYear" id="passingYear"
-                                       placeholder="year of passsing"/>
+                                <select ng-model="educationDetail.passingYear" id="passingYear" placeholder="year of passsing">
+                                    <option ng-repeat="year in yearOfPass" value="{{year}}">{{year}}</option>
+                                </select>
                             </td>
                             <td>
                                 <input type="text" ng-model="educationDetail.percentageObtained"
@@ -361,55 +362,55 @@
                             <tbody>
                             <tr>
                                 <td><label class="control-label" for="branchName">Branch:</label></td>
-                                <td><label class="control-label">{{student.branchName}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.branchName}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="name">Name of The Student</label></td>
-                                <td><label class="control-label">{{student.name}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.name}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                <td><label class="control-label">{{student.dateOfBirth | date}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.dateOfBirth | date}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="age">Age</label></td>
-                                <td><label class="control-label">{{student.age}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.age}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="gender">Gender</label></td>
-                                <td><label class="control-label">{{student.gender}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.gender}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="nationality">Nationality</label></td>
-                                <td><label class="control-label">{{student.nationality}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.nationality}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="religion">Religion</label></td>
-                                <td><label class="control-label">{{student.religion}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.religion}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="caste">Caste</label></td>
-                                <td><label class="control-label">{{student.caste}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.caste}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                                <td><label class="control-label">{{student.maritalStatus}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.maritalStatus}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="mailId">Email Address</label></td>
-                                <td><label class="control-label">{{student.mailId}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.mailId}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
-                                <td><label class="control-label">{{student.phoneNumber}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.phoneNumber}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
-                                <td><label class="control-label">{{student.alternatePhoneNumber}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.alternatePhoneNumber}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="englishFluency">English Fluency</label></td>
-                                <td><label class="control-label">{{student.englishFluency}}</label></td>
+                                <td><label class="control-label">{{studentSumarized.englishFluency}}</label></td>
                             </tr>
                             </tbody>
                         </table>
@@ -426,27 +427,27 @@
                         <tbody>
                         <tr>
                             <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                            <td><label class="control-label">{{student.address.doorNumber}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.doorNumber}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="streetName">Address 2</label></td>
-                            <td><label class="control-label">{{student.address.streetName}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.streetName}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="city">City</label></td>
-                            <td><label class="control-label">{{student.address.city}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.city}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="state">State</label></td>
-                            <td><label class="control-label">{{student.address.state}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.state}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="country">Country</label></td>
-                            <td><label class="control-label">{{student.address.country}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.country}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                            <td><label class="control-label">{{student.address.postalCode}}</label></td>
+                            <td><label class="control-label">{{studentSumarized.address.postalCode}}</label></td>
                         </tr>
                         </tbody>
                     </table>
@@ -459,7 +460,7 @@
                             <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="educationDetail in student.educationDetails track by $index">
+                        <tbody ng-repeat="educationDetail in studentSumarized.educationDetails track by $index">
                         <tr>
                             <td>
                                 <label class="control-label" for="examPassed">Examination Passed</label>
@@ -510,7 +511,7 @@
                             <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Family Details</label></td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="guardian in student.guardians track by $index">
+                        <tbody ng-repeat="guardian in studentSumarized.guardians track by $index">
                         <tr>
                             <td><label class="control-label" for="relationShip">RelationShip with Student</label></td>
                             <td><label class="control-label">{{guardian.relationShip}}</label></td>
@@ -545,11 +546,11 @@
                     <tbody>
                     <tr>
                         <td><label class="control-label">Course Name</label></td>
-                        <td><label class="control-label">{{student.courseName}}</label></td>
+                        <td><label class="control-label">{{studentSumarized.courseName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Referred By</label></td>
-                        <td><label class="control-label">{{student.referalName}}</label></td>
+                        <td><label class="control-label">{{studentSumarized.referalName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Scheme Type and Amount</label></td>
@@ -563,7 +564,7 @@
                         <td style="min-width: 20px;"><label class="control-label">Fees Particulars</label></td>
                         <td style="min-width: 20px;"><label class="control-label">Amount</label></td>
                     </tr>
-                        <tr ng-repeat="feesInfo in student.feesInfos | orderBy: 'feesParticularCode'">
+                        <tr ng-repeat="feesInfo in studentSumarized.feesInfos | orderBy: 'feesParticularCode'">
                             <td><label class="control-label">{{$index+1}}. {{getFeesParticularDesc(feesInfo.feesParticularCode)}}</label></td>
                             <td>
                                 <label class="control-label">{{feesInfo.amount | currency:'&#8377;'}}</label></label>
@@ -575,7 +576,8 @@
             <br>
             <div class="control-group">
                 <div class="controls" align="left">
-                    <input ng-click="createNewStudent()" class="submit" type="submit" name="submit_back_fourth" id="submit_back_fourth" value="Back" />
+                    <input class="button" type="button" name="submit_back_fourth" id="submit_back_fourth"
+                           value="Back" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a ng-click="createNewStudent()" class="btn btn-small btn-primary">Submit</a>
                 </div>
