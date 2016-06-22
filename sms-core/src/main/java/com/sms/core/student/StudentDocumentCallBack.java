@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by Ganesan on 20/06/16.
  */
-@Service
-@Qualifier(value = "STUDENT")
+@Service(value = "STUDENT")
 public class StudentDocumentCallBack implements DocumentCallBack {
 
     @Autowired

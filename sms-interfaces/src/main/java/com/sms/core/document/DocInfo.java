@@ -7,12 +7,12 @@ package com.sms.core.document;
 public class DocInfo {
 
     private Long documentTypeId;
-    private Long fileSequence;
     private String uploaderId;
     private String fileInfo;
     private String fileName;
     private String fileLocation;
     private Long id;
+    private Long fileSequence;
 
     public Long getDocumentTypeId() {
         return documentTypeId;

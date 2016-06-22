@@ -17,7 +17,8 @@
             'RoleOperationLink',
             'Student',
             'MarketingEmployee',
-            'FMS'])
+            'FMS',
+            'ScholarshipEnrollment'])
         .config(config)
         .run(run);
 

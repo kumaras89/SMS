@@ -1,9 +1,6 @@
 package com.sms.core.document;
 
-import com.sms.core.common.Do;
-import com.sms.core.common.Promise;
-import com.sms.core.common.React;
-import com.sms.core.common.Reader;
+import com.sms.core.common.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
@@ -116,4 +113,5 @@ public class DocumentFacade {
     private static AsyncRestTemplate asycTemp() {
         return new AsyncRestTemplate();
     }
+
 }
