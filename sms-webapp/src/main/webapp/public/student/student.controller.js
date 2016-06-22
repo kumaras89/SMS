@@ -3,6 +3,17 @@
 
     angular
         .module('Student')
+        .filter('ageFilter', function () {
+            function calculateAge(birthday) { // birthday is a date
+                var ageDifMs = Date.now() - new Date(birthday).getTime();
+                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                return Math.abs(ageDate.getUTCFullYear() - 1970);
+            }
+
+            return function (birthdate) {
+                return calculateAge(birthdate);
+            };
+        })
         .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
             function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
                 $scope.viewStudent = function (userId) {
@@ -84,46 +95,18 @@
             }])
         .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
             function ($scope, CrudService, FlashService, $state, AdminService) {
-
-                $scope.educationDetails = [];
-                $scope.guardians = [];
-
-                // to load default once
-                $scope.educationDetails.push({
-                    examPassed: '',
-                    instituteName: '',
-                    groupName: '',
-                    passingYear: '',
-                    percentageObtained: '',
-                    remark: ''
-                });
-
-                $scope.guardians.push({
-                    isEmployed: '',
-                    name: '',
-                    occupation: '',
-                    monthlyIncome: '',
-                    annualIncome: '',
-                    gender: '',
-                    relationShip: '',
-                    phoneNumber: ''
-                });
+                $scope.student = {};
+                $scope.student.educationDetails = [{},{},{},{}];
+                $scope.student.guardians = [{},{},{},{}];
+                $scope.student.otherLanguages = [{},{},{}];
 
                 $scope.createNewStudent = function () {
 
-                    $scope.guardians.forEach(function (guaridian){
-                        guaridian.annualIncome = guaridian.monthlyIncome * 12;
-                    });
-
-                    $scope.student.address = $scope.address;
-                    $scope.student.guardians = $scope.guardians;
-                    $scope.student.educationDetails = $scope.educationDetails;
                     $scope.student.status = 'CREATED';
 
-                    $scope.student.branchCode = AdminService.getBranchCode($scope.branchName);
-                    $scope.student.schemeCode = AdminService.getSchemeCode($scope.schemeName);
-                    $scope.student.courseCode = AdminService.getCourseCode($scope.courseName);
-                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.referalName);
+                    $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
+                    $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
+                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
 
 
                     CrudService.studentService.Create($scope.student).then(function () {
@@ -132,41 +115,15 @@
                     });
                 }
 
-                $scope.removeGuardian = function () {
-                    $scope.guardians.splice(-1, 1);
-                };
-
-                $scope.addGuardian = function () {
-                    $scope.guardians.push({
-                        isEmployed: '',
-                        name: '',
-                        occupation: '',
-                        monthlyIncome: '',
-                        annualIncome: '',
-                        gender: '',
-                        relationShip: '',
-                        phoneNumber: ''
-                    });
-                };
-
-                $scope.removeEducationDetail = function () {
-                    $scope.educationDetails.splice(-1, 1);
-                };
-
-                $scope.addEducationDetail = function () {
-                    $scope.educationDetails.push({
-                        examPassed: '',
-                        instituteName: '',
-                        groupName: '',
-                        passingYear: '',
-                        percentageObtained: '',
-                        remark: ''
-                    });
-                };
-
                 $scope.getFeesParticularDesc = function (feesParticularCode){
                     return AdminService.getFeesParticularDesc(feesParticularCode);
                 };
+
+                $scope.updateStudent = function(){
+                    $scope.student.schemeCode = AdminService.getSchemeCode($scope.student.schemeName);
+                    $scope.student.feesInfos = AdminService.getSchemeFeesInfo($scope.student.schemeCode);
+                };
+
 
                 $scope.init = function () {
 

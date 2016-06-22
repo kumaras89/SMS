@@ -1,8 +1,11 @@
 package com.sms.core.common;
 
-public enum ErrorCode {
+import javax.validation.Payload;
+
+public enum ErrorCode implements Payload {
 
     FILE_WRTING_FAILED("FMS_0002");
+
 
     ErrorCode(final String status) {
         this.status = status;

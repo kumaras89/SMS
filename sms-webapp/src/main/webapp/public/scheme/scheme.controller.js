@@ -3,12 +3,12 @@
 
     angular
         .module('Scheme')
-        .filter('mysum', function () {
+        .filter('mySum', function () {
             return function (items) {
                 var sum = 0;
-                items.forEach(function (item) {
-                    if (item.weightage) {
-                        sum += item.weightage;
+                angular.forEach(items, function (item, index) {
+                    if (item.amount) {
+                        sum += item.amount;
                     }
                 })
                 return sum;
@@ -57,8 +57,8 @@
                     }
                 });
             }])
-        .controller('SchemeDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'SchemeService', 'FlashService', '$state',
-            function ($scope, $stateParams, CrudService, SchemeService, FlashService, $state) {
+        .controller('SchemeDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'SchemeService', 'FlashService', '$state', 'AdminService',
+            function ($scope, $stateParams, CrudService, SchemeService, FlashService, $state, AdminService) {
 
                 $scope.updateScheme = function () {
                     CrudService.schemeService.Update($scope.scheme).then(function () {
@@ -66,6 +66,10 @@
                         $state.go('home.scheme-list');
                     });
 
+                };
+
+                $scope.getFeesParticularDesc = function (feesParticularCode){
+                    return AdminService.getFeesParticularDesc(feesParticularCode);
                 };
 
                 $scope.cancel = function () {
@@ -84,12 +88,12 @@
 
                 $scope.loadScheme();
             }])
-        .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$state',
-            function ($scope, CrudService, SchemeService, FlashService, $state) {
+        .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$state','AdminService',
+            function ($scope, CrudService, SchemeService, FlashService, $state, AdminService) {
 
                 $scope.createNewScheme = function () {
 
-                    $scope.scheme.schemeFeesInfos = $scope.schemeFeesInfos;
+                    $scope.scheme.feesInfos = $scope.feesInfos;
 
                     CrudService.schemeService.Create($scope.scheme).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
@@ -97,12 +101,16 @@
                     });
                 }
 
+                $scope.getFeesParticularDesc = function (feesParticularCode){
+                    return AdminService.getFeesParticularDesc(feesParticularCode);
+                };
+
                 $scope.init = function () {
                     SchemeService.getFeesParticulars(function (data) {
                         $scope.feesParticulars = data;
-                        $scope.schemeFeesInfos = [];
+                        $scope.feesInfos = [];
                         data.forEach(function (feesParticular) {
-                            $scope.schemeFeesInfos.push({feesParticularCode: feesParticular.code, weightage: 0});
+                            $scope.feesInfos.push({feesParticularCode: feesParticular.code, amount: 0});
                         });
                     })
                 }

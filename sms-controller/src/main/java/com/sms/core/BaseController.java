@@ -40,7 +40,7 @@ public abstract class BaseController<T> {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid T entityObject, UriComponentsBuilder ucBuilder) {
 
-        studentPortalService.save(entityObject);
+        final Optional<T> t = studentPortalService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }

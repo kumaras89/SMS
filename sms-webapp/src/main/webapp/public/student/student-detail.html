@@ -9,16 +9,20 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><label class="control-label" for="branchName">Branch:</label></td>
+                        <td><label class="control-label" >Branch:</label></td>
                         <td><label class="control-label">{{ getBranchDesc(student.branchCode) }}</label></td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="name">Name of The Student</label></td>
+                        <td><label class="control-label" >Name of The Student</label></td>
                         <td><label class="control-label">{{student.name}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
                         <td><label class="control-label">{{student.dateOfBirth | date}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="fatherOrMotherName">Father/Mother Name</label></td>
+                        <td><label class="control-label">{{student.fatherOrMotherName | date}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label" for="age">Age</label></td>

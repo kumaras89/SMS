@@ -32,7 +32,8 @@ public abstract class BaseServiceImpl<T> implements IStudentPortalService<T> {
     }
 
     public Optional<T> save(final T entityObject) {
-        return Optional.of((T) jpaRepository.saveAndFlush(entityObject));
+        final Optional<T> value =  Optional.of((T) jpaRepository.saveAndFlush(entityObject));
+        return value;
     }
 
     public Optional<T> update(final Long id, final T entityObject) {

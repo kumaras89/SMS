@@ -5,7 +5,6 @@ import com.sms.core.common.Builder;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,11 +12,11 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Table(name = "SMS_MA_SCHEME")
+@Table(name = "SMS_MA_SCHEME", uniqueConstraints = {@UniqueConstraint(columnNames = "SC_CODE")})
 public class Scheme extends BaseModel {
 
     @NotNull(message = "Scheme Code is empty")
-    @Size(min = 1, message = "Sceme Code is empty")
+    @Size(min = 1, message = "Scheme Code is empty")
     @Column(name = "SC_CODE", unique = true)
     private String code;
 
@@ -27,12 +26,12 @@ public class Scheme extends BaseModel {
     private String name;
 
 
-    @NotNull(message = "Desciption  is empty")
+    @NotNull(message = "Description  is empty")
     @Size(min = 1, message = "Description  is empty")
     @Column(name = "SC_DESCRIPTION")
     private String description;
 
-    @Min(value=1, message="Amount is Empty")
+    @Min(value = 1, message = "Amount is Empty")
     @Column(name = "SC_FEES_AMOUNT")
     private BigDecimal feesAmount;
 
@@ -52,10 +51,10 @@ public class Scheme extends BaseModel {
 
     public static Builder<Scheme> toBuilder(final SchemeInfo schemeInfo) {
         return builder()
-                .with(Scheme::getName, schemeInfo.getName())
-                .with(Scheme::getCode, schemeInfo.getCode())
-                .with(Scheme::getDescription, schemeInfo.getDescription())
-                .with(Scheme::getFeesAmount, schemeInfo.getFeesAmount());
+            .with(Scheme::getName, schemeInfo.getName())
+            .with(Scheme::getCode, schemeInfo.getCode())
+            .with(Scheme::getDescription, schemeInfo.getDescription())
+            .with(Scheme::getFeesAmount, schemeInfo.getFeesAmount());
     }
 
     public String getCode() {

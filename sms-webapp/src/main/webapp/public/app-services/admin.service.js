@@ -27,6 +27,7 @@
         service.getMarketingEmployees = getMarketingEmployees
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
+        service.getSchemeFeesInfo = getSchemeFeesInfo
 
         return service;
         
@@ -102,6 +103,13 @@
             }).name
         }
 
+        function getSchemeFeesInfo(schemeCode) {
+            var schemes = StorageService.getTrustedStoarage('/scheme');
+            return _.find(schemes, function(scheme) {
+                return scheme.code == schemeCode
+            }).feesInfos
+        }
+
         function getCourses(success) {
             StorageService.getFromStoarage('/course', function(data) {
                 success(data);
@@ -141,9 +149,10 @@
 
         function getBranchDesc(branchCode) {
             var branches = getBranches0();
-            return _.find(branches, function(branch) {
+            var branch =  _.find(branches, function(branch) {
                 return branch.code == branchCode
-            }).name
+            })
+            return branch != undefined ? branch.name : "";
         }
 
     }

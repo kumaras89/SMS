@@ -67,19 +67,25 @@
                         <tbody>
                         <tr>
                             <td><label class="control-label" for="branchName">Branch:</label></td>
-                            <td><input type="text" ng-model="branchName" list="branchNames" id="branchName" placeholder="Branch"/></td>
+                            <td><input type="text" ng-model="student.branchName" list="branchNames" id="branchName"
+                                       placeholder="Branch"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="name">Name of The Student</label></td>
                             <td><input type="text" id="name" ng-model="student.name" placeholder="Name"/></td>
                         </tr>
                         <tr>
+                            <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
+                            <td><input type="text" id="fatherOrMotherName" ng-model="student.fatherOrMotherName"
+                                       placeholder="FatherOrMotherName"/></td>
+                        </tr>
+                        <tr>
                             <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
                             <td><input type="date" id="dateOfBirth" ng-model="student.dateOfBirth" placeholder="Name"/></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" for="age">Age</label></td>
-                            <td><input type="number" id="age" ng-model="student.age" min="0" max="100" value="20"></td>
+                            <td><label class="control-label" >Age</label></td>
+                            <td>{{student.dateOfBirth | ageFilter}}</td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="gender">Gender</label></td>
@@ -128,10 +134,25 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" for="englishFluency">English Fluency</label></td>
+                            <td><label class="control-label" for="englishFluency">Fluency in english</label></td>
                             <td>
                                 <input type="text" ng-model="student.englishFluency" list="ratings" id="englishFluency" placeholder="english fluency"/>
                             </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label" for="otherLanguages">Other languages Known To Speak</label></td>
+                        </tr>
+                        <tbody ng-repeat="otherLanguage in student.otherLanguages">
+                        <tr>
+                            <td>
+                                <input type="text" ng-model="otherLanguage.name" id="otherLanguages"
+                                       placeholder="other languages"/>
+                            </td>
+                            <td><label>Read:<input type="checkbox" ng-model="otherLanguage.canRead"></label></td>
+                            <td><label>Speak:<input type="checkbox" ng-model="otherLanguage.canSpeak"></label></td>
+                            <td><label>Write:<input type="checkbox" ng-model="otherLanguage.canWrite"></label></td>
+                        </tr>
+                        </tbody>
                         </tr>
                         </tbody>
                         <tr>
@@ -158,27 +179,31 @@
                         <tbody>
                         <tr>
                             <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                            <td><input type="text" ng-model="address.doorNumber" id="doorNumber" placeholder="address 1"/></td>
+                            <td><input type="text" ng-model="student.address.doorNumber" id="doorNumber"
+                                       placeholder="address 1"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="streetName">Address 2</label></td>
-                            <td><input type="text" ng-model="address.streetName" id="streetName" placeholder="address 2"/></td>
+                            <td><input type="text" ng-model="student.address.streetName" id="streetName"
+                                       placeholder="address 2"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="city">City</label></td>
-                            <td><input type="text" ng-model="address.city" id="city" placeholder="city"/></td>
+                            <td><input type="text" ng-model="student.address.city" id="city" placeholder="city"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="state">State</label></td>
-                            <td><input type="text" ng-model="address.state" id="state" placeholder="state"/></td>
+                            <td><input type="text" ng-model="student.address.state" id="state" placeholder="state"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="country">Country</label></td>
-                            <td><input type="text" ng-model="address.country" id="country" placeholder="country"/></td>
+                            <td><input type="text" ng-model="student.address.country" id="country"
+                                       placeholder="country"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                            <td><input type="text" ng-model="address.postalCode" id="postalCode" placeholder="postal code"/></td>
+                            <td><input type="text" ng-model="student.address.postalCode" id="postalCode"
+                                       placeholder="postal code"/></td>
                         </tr>
                         </tbody>
                     </table>
@@ -189,59 +214,49 @@
                         <thead>
                         <tr>
                             <td style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
-                            <td style="min-width: 20px;" align="right">
-                                <input class="submit" type="submit"  ng-click="addEducationDetail()" value="Add Row"/>&nbsp;&nbsp;
-                                <input type="submit" value="Remove Row" ng-click="removeEducationDetail()"/>
-                            </td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="educationDetail in educationDetails track by $index">
                         <tr>
-                            <td>
-                                <label class="control-label" for="examPassed">Examination Passed</label>
-                            </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.examPassed" id="examPassed" placeholder="exam passed"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="instituteName">Institute Name</label>
-                            </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.instituteName" id="instituteName" placeholder="institute name"/>
-                            </td>
-                        </tr>
-                        <tr>
+                            <td><label class="control-label" for="examPassed">Examination Passed</label></td>
+                            <td><label class="control-label" for="instituteName">Institute Name</label></td>
                             <td>
                                 <label class="control-label" for="groupName">Group Name</label>
                             </td>
                             <td>
-                                <input type="text" ng-model="educationDetail.groupName" id="groupName" placeholder="group name"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <label class="control-label" for="passingYear">Year Of Passing</label>
                             </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.passingYear" id="passingYear" placeholder="year of passsing"/>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <label class="control-label" for="percentageObtained">Percentage Obtained</label>
                             </td>
                             <td>
-                                <input type="text" ng-model="educationDetail.percentageObtained" id="percentageObtained" placeholder="percentage obtained"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <label class="control-label" for="remark">Remarks</label>
                             </td>
+                        </tr>
+                        <tbody ng-repeat="educationDetail in student.educationDetails">
+                        <tr>
                             <td>
-                                <input type="text" ng-model="educationDetail.remark" id="remark" placeholder="remark"/>
+                                <input type="text" ng-model="educationDetail.examPassed" placeholder="exam passed"/>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="educationDetail.instituteName"
+                                       id="instituteName" placeholder="institute name"/>
+                            </td>
+
+                            <td>
+                                <input type="text" ng-model="educationDetail.groupName" id="groupName"
+                                       placeholder="group name"/>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="educationDetail.passingYear" id="passingYear"
+                                       placeholder="year of passsing"/>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="educationDetail.percentageObtained"
+                                       id="percentageObtained" placeholder="percentage obtained"/>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="educationDetail.remark" id="remark"
+                                       placeholder="remark"/>
                             </td>
                         </tr>
                         <tr>
@@ -265,50 +280,19 @@
                         <thead>
                         <tr>
                             <td style="min-width: 20px;" align="center"><label class="control-label">Family Details</label></td>
-                            <td style="min-width: 20px;" align="right">
-                                <input class="submit" type="submit"  ng-click="addGuardian()" value="Add Row"/>&nbsp;&nbsp;
-                                <input type="submit" value="Remove Row" ng-click="removeGuardian()"/>
-                            </td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="guardian in guardians track by $index">
                         <tr>
-                            <td><label class="control-label" for="relationShip">RelationShip with Student</label></td>
-                            <td><input type="text" ng-model="guardian.relationShip" list="relations" id="relationShip" placeholder="relation ship"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="gender">Gender</label></td>
-                            <td>
-                                <label ng-repeat="gender in commonAttributes.gender track by $index" >
-                                    &nbsp;&nbsp;<input type="radio" ng-model="guardian.gender" id="gender" ng-value="gender"/> {{gender}}
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="name">{{guardian.relationShip}}'s Name</label></td>
-                            <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="isEmployed">Is Employed</label></td>
-                            <td>
-                                <input type="radio" ng-model="guardian.isEmployed" id="isEmployed" value="1"/> Yes
-                                <input type="radio" ng-model="guardian.isEmployed" id="isEmployed" value="0"/> No
-                            </td>
-                        </tr>
-                        <tr>
+                            <td><label class="control-label" for="relationShip">RelationShip</label></td>
+                            <td><label class="control-label" for="name">Name</label></td>
                             <td><label class="control-label" for="occupation">Occupation</label></td>
-                            <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="occupation"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="monthlyIncome">Monthly Income</label></td>
-                            <td><input type="text" ng-model="guardian.monthlyIncome" id="monthlyIncome" placeholder="monthly income" onkeyup="updateAnnualIncome(this.value)"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="annualIncome">Annual Income</label></td>
-                            <td><input type="text" readonly ng-model="guardian.annualIncome" id="annualIncome"/></td>
-                        </tr>
-                        <tr>
                             <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
+                        </tr>
+                        <tbody ng-repeat="guardian in student.guardians">
+                        <tr>
+                            <td><input type="text" ng-model="guardian.relationShip" list="relations" id="relationShip" placeholder="relation ship"/></td>
+                            <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
+                            <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="occupation"/></td>
                             <td><input type="text" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="phone number"/></td>
                         </tr>
                         <tr>
@@ -337,19 +321,24 @@
                         <tbody>
                         <tr>
                             <td><label class="control-label">Course Name</label></td>
-                            <td><input type="text" ng-model="courseName" list="courseNames" id="courseName" placeholder="course"/></td>
+                            <td><input type="text" ng-model="student.courseName" list="courseNames" id="courseName"
+                                       placeholder="course"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label">Fees Scheme Name</label></td>
-                            <td><input type="text" ng-model="schemeName" list="schemeList" id="schemeName" placeholder="scheme"/></td>
+                            <td><input type="text" ng-model="student.schemeName" list="schemeList" id="schemeName"
+                                       placeholder="scheme"/></td>
                         </tr>
                         <tr>
                             <td><label class="control-label">Referred By</label></td>
-                            <td><input type="text" ng-model="referalName" list="marketingEmployeeList" id="referalName" placeholder="referal name"/></td>
+                            <td><input type="text" ng-model="student.referalName" list="marketingEmployeeList"
+                                       id="referalName" placeholder="referal name"/></td>
                         </tr>
                         <tr>
                             <td align="left"><input class="submit" type="submit" name="submit_back_third" id="submit_back_third" value="Back" /></td>
-                            <td align="right"><input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="Next" /></td>
+                            <td align="right"><input class="submit" type="submit" ng-click="updateStudent()"
+                                                     name="submit_fourth"
+                                                     id="submit_fourth" value="Next" /></td>
                         </tr>
                         </tbody>
                     </table>
@@ -372,7 +361,7 @@
                             <tbody>
                             <tr>
                                 <td><label class="control-label" for="branchName">Branch:</label></td>
-                                <td><label class="control-label">{{branchName}}</label></td>
+                                <td><label class="control-label">{{student.branchName}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="name">Name of The Student</label></td>
@@ -437,27 +426,27 @@
                         <tbody>
                         <tr>
                             <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                            <td><label class="control-label">{{address.doorNumber}}</label></td>
+                            <td><label class="control-label">{{student.address.doorNumber}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="streetName">Address 2</label></td>
-                            <td><label class="control-label">{{address.streetName}}</label></td>
+                            <td><label class="control-label">{{student.address.streetName}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="city">City</label></td>
-                            <td><label class="control-label">{{address.city}}</label></td>
+                            <td><label class="control-label">{{student.address.city}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="state">State</label></td>
-                            <td><label class="control-label">{{address.state}}</label></td>
+                            <td><label class="control-label">{{student.address.state}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="country">Country</label></td>
-                            <td><label class="control-label">{{address.country}}</label></td>
+                            <td><label class="control-label">{{student.address.country}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                            <td><label class="control-label">{{address.postalCode}}</label></td>
+                            <td><label class="control-label">{{student.address.postalCode}}</label></td>
                         </tr>
                         </tbody>
                     </table>
@@ -470,7 +459,7 @@
                             <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="educationDetail in educationDetails track by $index">
+                        <tbody ng-repeat="educationDetail in student.educationDetails track by $index">
                         <tr>
                             <td>
                                 <label class="control-label" for="examPassed">Examination Passed</label>
@@ -521,34 +510,18 @@
                             <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Family Details</label></td>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="guardian in guardians track by $index">
+                        <tbody ng-repeat="guardian in student.guardians track by $index">
                         <tr>
                             <td><label class="control-label" for="relationShip">RelationShip with Student</label></td>
                             <td><label class="control-label">{{guardian.relationShip}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="gender">Gender</label></td>
-                            <td><label class="control-label">{{guardian.gender}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="name">{{guardian.relationShip}}'s Name</label></td>
                             <td><label class="control-label">{{guardian.name}}</label></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" for="isEmployed">Is Employed</label></td>
-                            <td><label class="control-label">{{guardian.isEmployed == 1 ? 'Yes' : 'No'}}</label></td>
-                        </tr>
-                        <tr>
                             <td><label class="control-label" for="occupation">Occupation</label></td>
                             <td><label class="control-label">{{guardian.occupation}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="monthlyIncome">Monthly Income</label></td>
-                            <td><label class="control-label">{{guardian.monthlyIncome | currency:'&#8377;'}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="annualIncome">Annual Income</label></td>
-                            <td><label class="control-label">{{guardian.monthlyIncome * 12 | currency:'&#8377;'}}</label></td>
                         </tr>
                         <tr>
                             <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
@@ -572,11 +545,11 @@
                     <tbody>
                     <tr>
                         <td><label class="control-label">Course Name</label></td>
-                        <td><label class="control-label">{{courseName}}</label></td>
+                        <td><label class="control-label">{{student.courseName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Referred By</label></td>
-                        <td><label class="control-label">{{referalName}}</label></td>
+                        <td><label class="control-label">{{student.referalName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Scheme Type and Amount</label></td>
@@ -590,15 +563,12 @@
                         <td style="min-width: 20px;"><label class="control-label">Fees Particulars</label></td>
                         <td style="min-width: 20px;"><label class="control-label">Amount</label></td>
                     </tr>
-                    <tbody ng-repeat="scheme in schemes | filter: { name: schemeName }">
-
-                        <tr ng-repeat="feesInfo in scheme.schemeFeesInfos track by $index | orderBy: 'feesParticularCode'">
+                        <tr ng-repeat="feesInfo in student.feesInfos | orderBy: 'feesParticularCode'">
                             <td><label class="control-label">{{$index+1}}. {{getFeesParticularDesc(feesInfo.feesParticularCode)}}</label></td>
                             <td>
                                 <label class="control-label">{{feesInfo.amount | currency:'&#8377;'}}</label></label>
                             </td>
                         </tr>
-                    </tbody>
                 </table>
             </div>
             <br>

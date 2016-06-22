@@ -40,16 +40,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="schemeFeesInfo in scheme.schemeFeesInfos track by $index">
-                        <td>{{$index+1}}. {{feesParticulars[$index].name}}</td>
+                    <tr ng-repeat="schemeFeesInfo in scheme.feesInfos | orderBy:'feesParticularCode'">
+                        <td>{{getFeesParticularDesc(schemeFeesInfo.feesParticularCode)}}</td>
                         <td>
                             <input type="hidden" id="feesParticularCode" ng-model="schemeFeesInfo.feesParticularCode" value="{{schemeFeesInfo.feesParticularCode}}"/>
-                            <input type="number" id="weightage" ng-model="schemeFeesInfo.weightage" placeholder="0" min="0" max="100"/>
+                            <input type="number" id="amount" ng-model="schemeFeesInfo.amount" />
                         </td>
                     </tr>
                     <tr>
                         <td style="min-width: 20px;">Total</td>
-                        <td style="min-width: 20px;">{{ scheme.schemeFeesInfos | mysum}}</td>
+                        <td style="min-width: 20px;">{{ scheme.feesInfos | mySum}}</td>
                     </tr>
                     </tbody>
                 </table>

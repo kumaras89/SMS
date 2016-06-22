@@ -1,30 +1,40 @@
 package com.sms.core.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sms.core.common.Builder;
+import com.sms.core.common.FunctionUtils;
+import com.sms.core.scheme.FeesInfo;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentInfo {
 
     private Long id;
     private String code;
     private String name;
+    private Date dateOfBirth;
     private int age;
+    private String fatherOrMotherName;
+    private String gender;
+    private String nationality;
+    private String religion;
+    private String caste;
+    private String maritalStatus;
+    private Address address;
+    private String mailId;
+    private String englishFluency;
+    private Set<OtherLanguage> otherLanguages;
+    private List<MarkDetails> markDetails;
     private String phoneNumber;
     private String alternatePhoneNumber;
-    private Date dateOfBirth;
-    private String mailId;
-    private Address address;
-    private String branchCode;
-    private String gender;
-    private String caste;
-    private String religion;
-    private Set<Guardian> guardians;
     private Set<EducationDetail> educationDetails;
-    private String nationality;
-    private String maritalStatus;
-    private String englishFluency;
+    private Set<Guardian> guardians;
+    private List<FeesInfo> feesInfos;
+    private String branchCode;
     private String courseCode;
     private String schemeCode;
     private String status;
@@ -41,30 +51,32 @@ public class StudentInfo {
 
     public static Builder<StudentInfo> toBuilder(final Student student) {
         return builder()
-                .with(StudentInfo::getId, student.getId())
-                .with(StudentInfo::getCode, student.getCode())
-                .with(StudentInfo::getName, student.getName())
-                .with(StudentInfo::getAge, student.getAge())
-                .with(StudentInfo::getPhoneNumber, student.getPhoneNumber())
-                .with(StudentInfo::getAlternatePhoneNumber, student.getAlternatePhoneNumber())
-                .with(StudentInfo::getDateOfBirth, student.getDateOfBirth())
-                .with(StudentInfo::getMailId, student.getMailId())
-                .with(StudentInfo::getGender, student.getGender().name())
-                .with(StudentInfo::getCaste, student.getCaste().name())
-                .with(StudentInfo::getReligion, student.getReligion().name())
-                .with(StudentInfo::getGuardians, student.getGuardians())
-                .with(StudentInfo::getEducationDetails, student.getEducationDetails())
-                .with(StudentInfo::getAddress, student.getAddress())
-                .with(StudentInfo::getEnglishFluency, student.getEnglishFluency().name())
-                .with(StudentInfo::getMaritalStatus, student.getMaritalStatus().name())
-                .with(StudentInfo::getNationality, student.getNationality())
-                .with(StudentInfo::getBranchCode, student.getBranch().getCode())
-                .with(StudentInfo::getCourseCode, student.getCourse().getCode())
-                .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
-                .with(StudentInfo::getStatus, student.getStatus().name())
-                .with(StudentInfo::getCreatedDate, student.getCreatedDate())
-                .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate())
-                .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode());
+            .with(StudentInfo::getId, student.getId())
+            .with(StudentInfo::getCode, student.getCode())
+            .with(StudentInfo::getName, student.getName())
+            .with(StudentInfo::getAge, student.getAge())
+            .with(StudentInfo::getPhoneNumber, student.getPhoneNumber())
+            .with(StudentInfo::getAlternatePhoneNumber, student.getAlternatePhoneNumber())
+            .with(StudentInfo::getDateOfBirth, student.getDateOfBirth())
+            .with(StudentInfo::getMailId, student.getMailId())
+            .with(StudentInfo::getGender, student.getGender().name())
+            .with(StudentInfo::getCaste, student.getCaste().name())
+            .with(StudentInfo::getReligion, student.getReligion().name())
+            .with(StudentInfo::getGuardians, student.getGuardians())
+            .with(StudentInfo::getEducationDetails, student.getEducationDetails())
+            .with(StudentInfo::getAddress, student.getAddress())
+            .with(StudentInfo::getEnglishFluency, student.getEnglishFluency().name())
+            .with(StudentInfo::getMaritalStatus, student.getMaritalStatus().name())
+            .with(StudentInfo::getFeesInfos , student.getStudentFees().stream().map(FeesInfo::toBuilder).collect
+                (Collectors.toList()))
+            .with(StudentInfo::getNationality, student.getNationality())
+            .with(StudentInfo::getBranchCode, student.getBranch().getCode())
+            .with(StudentInfo::getCourseCode, student.getCourse().getCode())
+            .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
+            .with(StudentInfo::getStatus, student.getStatus().name())
+            .with(StudentInfo::getCreatedDate, student.getCreatedDate())
+            .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate())
+            .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode());
     }
 
     public Long getId() {
@@ -161,5 +173,21 @@ public class StudentInfo {
 
     public String getMarketingEmployeeCode() {
         return marketingEmployeeCode;
+    }
+
+    public String getFatherOrMotherName() {
+        return fatherOrMotherName;
+    }
+
+    public Set<OtherLanguage> getOtherLanguages() {
+        return otherLanguages;
+    }
+
+    public List<FeesInfo> getFeesInfos() {
+        return feesInfos;
+    }
+
+    public List<MarkDetails> getMarkDetails() {
+        return markDetails;
     }
 }

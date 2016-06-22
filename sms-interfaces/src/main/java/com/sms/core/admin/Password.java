@@ -1,5 +1,6 @@
 package com.sms.core.admin;
 
+import com.sms.core.common.ErrorCode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,8 +10,8 @@ import javax.validation.constraints.Size;
 
 public class Password {
 
-    @NotNull(message = "Username is empty")
-    @Size(min = 1,message = "Username is empty")
+    @NotNull(message = "Username is empty", payload = {ErrorCode.class})
+    @Size(min = 1, message = "Username is empty")
     private String userName;
 
     @NotEmpty(message = "Old password is empty")
@@ -18,7 +19,8 @@ public class Password {
 
     @NotEmpty(message = "New password is empty")
     @Length(min = 8, max = 15, message = "Password should be 8 to 15 characters")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$", message = "Password must have atleast one numeric, lower and uppercase and one special character(@#$%^&+=)")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$", message = "Password must" +
+        " have atleast one numeric, lower and uppercase and one special character(@#$%^&+=)")
     private String newPassword;
 
     @NotEmpty(message = "Retype new password is empty")
@@ -28,7 +30,8 @@ public class Password {
     }
 
 
-    public Password(final String userName, final String oldPassword, final String newPassword, final String reTypeNewPwd) {
+    public Password(final String userName, final String oldPassword, final String newPassword,
+        final String reTypeNewPwd) {
         this.userName = userName;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
@@ -43,7 +46,6 @@ public class Password {
     public void setReTypeNewPwd(final String reTypeNewPwd) {
         this.reTypeNewPwd = reTypeNewPwd;
     }
-
 
 
     public String getUserName() {
