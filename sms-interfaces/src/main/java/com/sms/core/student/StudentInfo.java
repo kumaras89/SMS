@@ -67,7 +67,9 @@ public class StudentInfo {
             .with(StudentInfo::getAddress, student.getAddress())
             .with(StudentInfo::getEnglishFluency, student.getEnglishFluency().name())
             .with(StudentInfo::getMaritalStatus, student.getMaritalStatus().name())
-            .with(StudentInfo::getFeesInfos , student.getStudentFees().stream().map(FeesInfo::toBuilder).collect
+            .on(StudentInfo::getFeesInfos ).set(student.getStudentFees().stream().map(FeesInfo::toBuilder).map
+                (Builder::build)
+                .collect
                 (Collectors.toList()))
             .with(StudentInfo::getNationality, student.getNationality())
             .with(StudentInfo::getBranchCode, student.getBranch().getCode())

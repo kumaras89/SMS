@@ -28,7 +28,7 @@ public abstract class BaseServiceImpl<T> implements IStudentPortalService<T> {
     }
 
     public void delete(final Long id) {
-        this.jpaRepository.delete(jpaRepository.findOne(id));
+        this.jpaRepository.delete(id);
     }
 
     public Optional<T> save(final T entityObject) {

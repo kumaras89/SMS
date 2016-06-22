@@ -13,32 +13,27 @@ import javax.validation.constraints.*;
 @Table(name = "SMS_TR_ADDRESS")
 public class Address extends BaseModel {
 
-    @NotNull(message = "City is empty")
-    @Size(min = 1,message = "City is empty")
-    @Column(name = "AD_CITY")
-    private String city;
+    private static final long serialVersionUID = 8708958564726670901L;
 
-    @NotNull(message = "State is empty")
-    @Size(min = 1,message = "State is Empty")
-    @Pattern(regexp = "[a-zA-Z ]*", message = "State Name is invalid")
-    @Column(name = "AD_STATE")
-    private String state;
 
-    @NotNull(message = "Country is empty")
-    @Pattern(regexp = "[a-zA-Z]*", message = "Country Name is invalid")
-    @Size(min = 2,message = "Country is invalid")
-    @Column(name = "AD_COUNTRY")
-    private String country;
-
+    @NotNull(message = "door number is empty")
+    @Size(min = 1,message = "door number is empty")
+    @Column(name = "AD_ADDRESS_1")
+    private String doorNumber;
 
     @Column(name = "AD_ADDRESS_2")
     private String streetName;
 
+    @NotNull(message = "taluk is empty")
+    @Size(min = 1,message = "taluk is empty")
+    @Column(name = "AD_TALUK")
+    private String taluk;
 
-    @NotNull(message = "Address is empty")
-    @Size(min = 1,message = "Address is empty")
-    @Column(name = "AD_ADDRESS_1")
-    private String doorNumber;
+    @NotNull(message = "District is empty")
+    @Size(min = 1,message = "District is Empty")
+    @Pattern(regexp = "[a-zA-Z ]*", message = "District Name is invalid")
+    @Column(name = "AD_DISTRICT")
+    private String district;
 
     @Max( value=999999, message="Postal Code is invalid")
     @Min( value=100000, message="Postal Code is invalid")
@@ -53,35 +48,30 @@ public class Address extends BaseModel {
         return Builder.of(Address.class);
     }
 
-    public static Builder toBuilder(final Address address) {
+    public static Builder<Address> toBuilder(final Address address) {
         return builder()
                 .with(Address::getId, address.getId())
-                .with(Address::getCity, address.getCity())
-                .with(Address::getCountry, address.getCountry())
+                .with(Address::getTaluk, address.getTaluk())
+                .with(Address::getDistrict, address.getDistrict())
                 .with(Address::getDoorNumber, address.getDoorNumber())
                 .with(Address::getPostalCode, address.getPostalCode())
-                .with(Address::getState, address.getState())
                 .with(Address::getStreetName, address.getStreetName());
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCountry() {
-        return country;
+    public String getDoorNumber() {
+        return doorNumber;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public String getDoorNumber() {
-        return doorNumber;
+    public String getTaluk() {
+        return taluk;
+    }
+
+    public String getDistrict() {
+        return district;
     }
 
     public long getPostalCode() {
