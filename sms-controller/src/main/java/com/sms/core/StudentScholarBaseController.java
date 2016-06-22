@@ -25,6 +25,8 @@ public abstract class StudentScholarBaseController<T>
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<T>> listAll() {
+
+        System.out.print("hello world------dfhdhdfhfdhfhhd--------------------");
         return Optional.ofNullable(studentScholar.findAll())
                 .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
@@ -43,6 +45,7 @@ public abstract class StudentScholarBaseController<T>
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid T entityObject, UriComponentsBuilder ucBuilder)
     {
+        System.out.print("hello world--------------------------");
         studentScholar.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);

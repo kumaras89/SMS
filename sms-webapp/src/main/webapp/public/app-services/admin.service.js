@@ -25,6 +25,7 @@
         service.getBranchDesc = getBranchDesc
         service.getConstants = getConstants
         service.getMarketingEmployees = getMarketingEmployees
+        service.getScholarEnrollment = getScholarEnrollment
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
         service.getSchemeFeesInfo = getSchemeFeesInfo
@@ -138,7 +139,11 @@
                 success(data);
             });
         }
-
+        function getScholarEnrollment(success) {
+            StorageService.getFromStoarage('/studentScholar', function(data) {
+                success(data);
+            });
+        }
         function getCourseCode(courseName) {
             var courses = StorageService.getTrustedStoarage('/course');
             var course =  _.find(courses, function(course) {
