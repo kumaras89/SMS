@@ -15,8 +15,8 @@
                    comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn"></stats>
         </div>
 
-        <div class="row" ng-repeat="course in courses">
-            <stats number="{{(students | filter: { courseCode: course.code }).length}}"
+        <div class="row">
+            <stats ng-repeat="course in courses" number="{{(students | filter: { courseCode: course.code }).length}}"
                    comments="{{getCourseDesc(course.code)}}" colour="primary" type="anchor"></stats>
         </div>
 
@@ -40,3 +40,4 @@
             </div>
         </div>
     </div>
+</div>

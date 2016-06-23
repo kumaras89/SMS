@@ -3,8 +3,8 @@
 
     angular
         .module('User')
-        .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http',
-        function ($scope, CrudService,AdminService, FlashService, $location,$http) {
+        .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http', 'ngTableParams', '$timeout',
+        function ($scope, CrudService,AdminService, FlashService, $location,$http, ngTableParams, $timeout) {
             $scope.editUser = function (userId) {
                 $location.path('/home/user-detail/' + userId);
             };
@@ -29,31 +29,37 @@
                 $location.path('/home/user-creation');
             };
 
-            $scope.loadUsers = function () {
-                var loadUserFunc = function() {
-                    CrudService.userService.GetAll().then(function(res) {
-                        if(res.message) {
-                            $scope.users = []
-                            FlashService.Error(res.message)
+            $scope.tableParams = new ngTableParams({
+                page: 1,            // show first pagez
+                count: 10,          // count per page
+                sorting: {
+                    name: 'asc'     // initial sorting
+                }
+            }, {
+                total: 0,           // length of data
+                getData: function ($defer, params) {
+                    CrudService.userService.GetAll().then(function (data) {
+                        if (data.message) {
+                            $scope.users = [];
+                            FlashService.Error(data.message)
                         } else {
-                            $scope.users = res
+                            $timeout(function () {
+                                params.total(data.length);
+                                $defer.resolve(data);
+                            }, 10);
+
                         }
-                    }, function() {
+                    }, function () {
                         $scope.users = []
                     })
-                };
+                }
+            });
 
-                AdminService.getBranches(function(data) {
-                    $scope.branches = data;
-                    loadUserFunc()
-                })
-
-            }
+            AdminService.getBranches(function(data) {
+                $scope.branches = data;
+            })
 
             $scope.getBranchDesc = AdminService.getBranchDesc
-
-            $scope.loadUsers()
-
 
 
         }])
