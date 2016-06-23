@@ -1,12 +1,23 @@
 package com.sms.core.course;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Optional;
 
 public class CourseInfo {
 
     private Long id;
+
+    @NotNull(message = "Course Code is empty")
+    @Size(min = 1, message = "Course Code is empty")
     private String code;
+
+    @NotNull(message = "Course name is empty")
+    @Size(min = 1, message = "Course name is empty")
     private String name;
+
+    @NotNull(message = "Course Description is empty")
+    @Size(min = 1, message = "Course Description is empty")
     private String description;
 
     public CourseInfo() {

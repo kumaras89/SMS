@@ -2,6 +2,10 @@ package com.sms.core.scheme;
 
 import com.sms.core.common.Builder;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,10 +14,23 @@ import java.util.stream.Collectors;
 public class SchemeInfo {
 
     private Long id;
+
+    @NotNull(message = "Scheme Code is empty")
+    @Size(min = 1, message = "Scheme Code is empty")
     private String code;
+
+    @NotNull(message = "Scheme Name is empty")
+    @Size(min = 1, message = "Scheme Name is empty")
     private String name;
+
+    @NotNull(message = "Description  is empty")
+    @Size(min = 1, message = "Description  is empty")
     private String description;
+
+    @Valid
     private Set<FeesInfo> feesInfos;
+
+    @Min( value = 1,message = "Fee Amount is empty")
     private BigDecimal feesAmount;
 
     public SchemeInfo() {

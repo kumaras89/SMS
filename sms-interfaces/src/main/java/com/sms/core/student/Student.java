@@ -18,44 +18,31 @@ import java.util.stream.Collectors;
 @Table(name = "SMS_TR_STUDENT")
 public class Student extends BaseModel {
 
-    @NotNull(message = "Student Code is empty")
-    @Size(min = 1, message = "Student Code is empty")
     @Column(name = "ST_CODE", unique = true)
     private String code;
 
-
-    @NotNull(message = "Student Name is empty")
-    @Size(min = 2, max = 30, message = "Student Name is invalid")
     @Column(name = "ST_NAME")
     private String name;
 
     @Column(name = "ST_FATHER_OR_MOTHER_NAME")
     private String fatherOrMotherName;
 
-    @NotNull(message = "Age is empty")
-    @Min(value = 15, message = "Age is invalid")
     @Column(name = "ST_AGE")
     private int age;
 
-    @NotNull(message = "Phone nnumber is empty")
-    @Digits(integer = 10, fraction = 0, message = "Phone number is invalid")
     @Column(name = "ST_PHONE_NUMBER")
     private String phoneNumber;
 
-    @Digits(integer = 10, fraction = 0, message = "Phone number is invalid")
     @Column(name = "ST_ALTERNATE_PHONE_NUMBER")
     private String alternatePhoneNumber;
-    @NotNull(message = "Date of Birth is empty")
 
-    @Past
+
     @Column(name = "ST_DATE_OF_BIRTH")
     private Date dateOfBirth;
 
-    @NotNull(message = "Mail id is  empty ")
-
     @Column(name = "ST_MAIL_ID", unique = true)
     private String mailId;
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     @Column(name = "ST_GENDER")
     private Gender gender;

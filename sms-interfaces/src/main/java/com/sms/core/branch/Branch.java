@@ -7,6 +7,7 @@ import com.sms.core.student.Address;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,6 +25,7 @@ public class Branch extends BaseModel {
     private String name;
 
     @NotNull(message = "isActive is not set")
+    @Min(value = 1,message = "isActive is not set")
     @Column(name = "BR_ACTIVE")
     private Integer isActive;
 

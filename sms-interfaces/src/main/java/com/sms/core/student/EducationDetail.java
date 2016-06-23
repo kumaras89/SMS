@@ -5,6 +5,7 @@ import com.sms.core.BaseModel;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Optional;
@@ -18,17 +19,26 @@ public class EducationDetail extends BaseModel {
     @Column(name = "ED_EXAM_PASSED")
     private String examPassed;
 
+    @NotNull(message = "Institute Name  is empty")
+    @Size(min = 1, message = "Institute Name is empty")
     @Column(name = "ED_INSTITUTE_NAME")
     private String instituteName;
 
+    @NotNull(message = "Group Name  is empty")
+    @Size(min = 1, message = "Group Name is empty")
     @Column(name = "ED_GROUP_NAME")
     private String groupName;
 
+
+    @Min(value = 1980,message = "Passing year is invalid")
     @Column(name = "ED_PASSING_YEAR")
     private Long passingYear;
 
+    @NotNull(message = "Percentage is empty")
+    @Min(value = 1, message = "Percentage is empty")
     @Column(name = "ED_PERCENTAGE_OBTAINED")
     private Integer percentageObtained;
+
 
     @Column(name = "ED_REMARK")
     private String remark;

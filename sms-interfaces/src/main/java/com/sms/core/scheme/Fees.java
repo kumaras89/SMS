@@ -14,7 +14,7 @@ public abstract class Fees implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Valid
+
     @ManyToOne
     @JoinColumn(name = "FC_FEES_PARTICULAR_ID")
     private FeesParticular feesParticular;
