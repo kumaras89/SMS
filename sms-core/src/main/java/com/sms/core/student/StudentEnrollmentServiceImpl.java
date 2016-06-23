@@ -33,6 +33,7 @@ public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<Stude
                 (studentInfo) ->
                         Student.toBuilder(studentInfo)
                                 .with(Student::getCode, new StringBuilder(studentInfo.getBranchCode())
+                                        .append(studentInfo.getCourseCode())
                                         .append(LocalDateTime.now().getYear())
                                         .append(String.format("%06d", studentRepository.count() + 1))
                                         .toString())
