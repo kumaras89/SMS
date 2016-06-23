@@ -20,24 +20,21 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Code</th>
+                            <th>Applicant Number</th>
                             <th>Name</th>
-                            <th>Branch Name</th>
-                            <th>Course Name</th>
-                            <th>Scheme Name</th>
-                            <th>Joining Date</th>
+                            <th>Date of Birth</th>
+
+
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="student in $data | filter: student_filter" class="succcess">
                             <td>{{$index + 1 }}</td>
-                            <td sortable="code">{{ student.code }}</td>
-                            <td sortable="name">{{ student.name }}</td>
-                            <td sortable="branchCode">{{ getBranchDesc(student.branchCode) }}</td>
-                            <td sortable="courseCode">{{ getCourseDesc(student.courseCode) }}</td>
-                            <td sortable="schemeCode">{{ getSchemeDesc(student.schemeCode) }}</td>
-                            <td sortable="createdDate">{{ student.createdDate | date }}</td>
+                            <td sortable="code">{{ studentScholar.applicantNumber }}</td>
+                            <td sortable="name">{{ studentScholar.name }}</td>
+                            <td >{{ studentScholar.dateOfBirth}}</td>
+
                             <td>
                                 <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
                             </td>

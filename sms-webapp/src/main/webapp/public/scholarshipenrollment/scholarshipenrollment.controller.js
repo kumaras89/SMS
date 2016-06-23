@@ -3,23 +3,24 @@
 
     angular
         .module('ScholarshipEnrollment')
+        .filter('ageFilter', function () {
+            function calculateAge(birthday) { // birthday is a date
+                var ageDifMs = Date.now() - new Date(birthday).getTime();
+                var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                return Math.abs(ageDate.getUTCFullYear() - 1970);
+            }
+
+            return function (birthdate) {
+                return calculateAge(birthdate);
+            };
+        })
         .controller('ScholarshipEnrollmentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
             function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
                 $scope.viewScholarshipEnrollment = function (userId) {
                     $state.go('home.scholarshipenrollment-detail' , {id: userId});
                 };
 
-                $scope.getBranchDesc = function (branchCode){
-                    return AdminService.getBranchDesc(branchCode);
-                };
 
-                $scope.getCourseDesc = function (courseCode){
-                    return AdminService.getCourseDesc(courseCode);
-                };
-
-                $scope.getSchemeDesc = function (schemeCode){
-                    return AdminService.getSchemeDesc(schemeCode);
-                };
 
 
                 $scope.createNewScholarshipEnrollment = function () {
@@ -37,7 +38,7 @@
                     getData: function($defer, params) {
                         CrudService.scholarshipEnrollmentService.GetAll().then(function(data) {
                             if(data.message) {
-                                $scope.scholarshipenrollment = [];
+                                $scope.scholarshipEnrollment = [];
                                 FlashService.Error(data.message)
                             } else {
                                 $timeout(function() {
@@ -46,7 +47,7 @@
                                 }, 10);
                             }
                         }, function() {
-                            $scope.scholarshipenrollment = []
+                            $scope.scholarshipEnrollment = []
                         })
                     }
                 });
@@ -56,32 +57,10 @@
 
                 $scope.loadStudent = function () {
                     CrudService.scholarshipEnrollmentService.GetById($stateParams.id).then(function (res) {
-                        $scope.scholarshipenrollment = res
+                        $scope.scholarshipEnrollment = res
                     })
                 }
-
-                $scope.getBranchDesc = function (branchCode){
-                    return AdminService.getBranchDesc(branchCode);
-                };
-
-                $scope.getCourseDesc = function (courseCode){
-                    return AdminService.getCourseDesc(courseCode);
-                };
-
-                $scope.getSchemeDesc = function (schemeCode){
-                    return AdminService.getSchemeDesc(schemeCode);
-                };
-
-                $scope.getMarketingEmployeeName = function (schemeCode){
-                    return AdminService.getMarketingEmployeeName(schemeCode);
-                };
-
-                $scope.goToFms = function(code) {
-                    $location.path('/fms/STUDENT/'+code);
-                }
-
-
-                $scope.loadStudent();
+                $scope.loadScholarshipEnrollment();
             }])
         .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
             function ($scope, CrudService, FlashService, $state, AdminService) {
@@ -112,22 +91,7 @@
 
                 $scope.createNewScholarshipEnrollment = function () {
 
-                    $scope.guardians.forEach(function (guaridian){
-                        guaridian.annualIncome = guaridian.monthlyIncome * 12;
-                    });
-
-                    $scope.scholarshipenrollment.student.address = $scope.address;
-                    $scope.scholarshipenrollment.student.guardians = $scope.guardians;
-                    $scope.scholarshipenrollment.student.educationDetails = $scope.educationDetails;
-                    $scope.scholarshipenrollment.student.status = 'CREATED';
-
-                    $scope.scholarshipenrollment.student.branchCode = AdminService.getBranchCode($scope.branchName);
-                    $scope.scholarshipenrollment.student.schemeCode = AdminService.getSchemeCode($scope.schemeName);
-                    $scope.scholarshipenrollment.student.courseCode = AdminService.getCourseCode($scope.courseName);
-                    $scope.scholarshipenrollment.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.referalName);
-
-
-                    CrudService.scholarshipEnrollmentService.Create($scope.scholarshipenrollment).then(function () {
+                    CrudService.scholarshipEnrollmentService.Create($scope.studentScholar).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
                     });
@@ -137,18 +101,7 @@
                     $scope.guardians.splice(-1, 1);
                 };
 
-                $scope.addGuardian = function () {
-                    $scope.guardians.push({
-                        isEmployed: '',
-                        name: '',
-                        occupation: '',
-                        monthlyIncome: '',
-                        annualIncome: '',
-                        gender: '',
-                        relationShip: '',
-                        phoneNumber: ''
-                    });
-                };
+
 
                 $scope.removeEducationDetail = function () {
                     $scope.educationDetails.splice(-1, 1);

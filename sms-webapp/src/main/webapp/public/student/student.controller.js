@@ -59,6 +59,10 @@
                     })
                 }
 
+                $scope.getFeesParticularDesc = function (feesParticularCode){
+                    return AdminService.getFeesParticularDesc(feesParticularCode);
+                };
+                
                 $scope.getBranchDesc = function (branchCode){
                     return AdminService.getBranchDesc(branchCode);
                 };
