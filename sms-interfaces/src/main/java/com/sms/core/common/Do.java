@@ -10,44 +10,43 @@ import java.util.function.Function;
  */
 public class Do<T, R> {
 
-    private Function<T, R> function;
+    private final Function<T, R> function;
 
-    private Do(Function<T, R> theFunction) {
+    private Do(final Function<T, R> theFunction) {
         this.function = theFunction;
     }
 
-    public static <T,R> Do<T,R> of(Function<T,R> f) {
-        return new Do<>(f);
-    }
-    public static <T,R> Do<T,R> of(R r) {
+    public static <T,R> Do<T,R> of(final Function<T,R> f) { return new Do<>(f);}
+
+    public static <T,R> Do<T,R> of(final R r) {
         return of((T a) -> r);
     }
 
-    public <U> Do<T, U> then(Function<R, U> mapper) {
+    public <U> Do<T, U> then(final Function<R, U> mapper) {
         return of(function.andThen(mapper));
     }
 
-    public Do<T, T> thenSame(Consumer<R> mapper) {
+    public Do<T, T> thenSame(final Consumer<R> mapper) {
         return of(t-> function.andThen(r ->{ mapper.accept(r); return t; } ).apply(t) );
     }
 
-    public Do<T, Void> thenVoid(Consumer<R> mapper) {
+    public Do<T, Void> thenVoid(final Consumer<R> mapper) {
         return of(t -> function.andThen(r -> { mapper.accept(r); return (Void) null; }).apply(t));
     }
 
-    public <U> Do<T,U> thenFlat(Function<T,Do<R,U>> doNextFunc) {
+    public <U> Do<T,U> thenFlat(final Function<T,Do<R,U>> doNextFunc) {
         return of(t-> function.andThen(doNextFunc.apply(t).function).apply(t) );
     }
 
-
-    public Function<T,R> get() {
+    public Function<T,R> getF() {
         return function;
     }
-    public R get(T input) {
+
+    public R get(final T input) {
         return function.apply(input);
     }
-
-    public R getEmmpty() {
+    
+    public R get() {
         return function.apply(null);
     }
 

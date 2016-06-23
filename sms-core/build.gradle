@@ -3,4 +3,5 @@ dependencies{
     compile project(':sms-interfaces')
     compile "org.springframework:spring-tx:$springVersion"
     compile "org.easymock:easymock:2.5"
+    compile 'com.javaslang:javaslang:2.0.0-RC4'
 }

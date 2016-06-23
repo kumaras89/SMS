@@ -28,7 +28,8 @@ public class StudentInfo {
     private String mailId;
     private String englishFluency;
     private Set<OtherLanguage> otherLanguages;
-    private List<MarkDetails> markDetails;
+    private MarkDetails tenthMarkDetails;
+    private MarkDetails tewelthMarkDetails;
     private String phoneNumber;
     private String alternatePhoneNumber;
     private Set<EducationDetail> educationDetails;
@@ -47,38 +48,6 @@ public class StudentInfo {
 
     public static Builder<StudentInfo> builder() {
         return Builder.of(StudentInfo.class);
-    }
-
-    public static Builder<StudentInfo> toBuilder(final Student student) {
-        return builder()
-            .with(StudentInfo::getId, student.getId())
-            .with(StudentInfo::getCode, student.getCode())
-            .with(StudentInfo::getName, student.getName())
-            .with(StudentInfo::getAge, student.getAge())
-            .with(StudentInfo::getPhoneNumber, student.getPhoneNumber())
-            .with(StudentInfo::getAlternatePhoneNumber, student.getAlternatePhoneNumber())
-            .with(StudentInfo::getDateOfBirth, student.getDateOfBirth())
-            .with(StudentInfo::getMailId, student.getMailId())
-            .with(StudentInfo::getGender, student.getGender().name())
-            .with(StudentInfo::getCaste, student.getCaste().name())
-            .with(StudentInfo::getReligion, student.getReligion().name())
-            .with(StudentInfo::getGuardians, student.getGuardians())
-            .with(StudentInfo::getEducationDetails, student.getEducationDetails())
-            .with(StudentInfo::getAddress, student.getAddress())
-            .with(StudentInfo::getEnglishFluency, student.getEnglishFluency().name())
-            .with(StudentInfo::getMaritalStatus, student.getMaritalStatus().name())
-            .on(StudentInfo::getFeesInfos ).set(student.getStudentFees().stream().map(FeesInfo::toBuilder).map
-                (Builder::build)
-                .collect
-                (Collectors.toList()))
-            .with(StudentInfo::getNationality, student.getNationality())
-            .with(StudentInfo::getBranchCode, student.getBranch().getCode())
-            .with(StudentInfo::getCourseCode, student.getCourse().getCode())
-            .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
-            .with(StudentInfo::getStatus, student.getStatus().name())
-            .with(StudentInfo::getCreatedDate, student.getCreatedDate())
-            .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate())
-            .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode());
     }
 
     public Long getId() {
@@ -189,7 +158,11 @@ public class StudentInfo {
         return feesInfos;
     }
 
-    public List<MarkDetails> getMarkDetails() {
-        return markDetails;
+    public MarkDetails getTenthMarkDetails() {
+        return tenthMarkDetails;
+    }
+
+    public MarkDetails getTewelthMarkDetails() {
+        return tewelthMarkDetails;
     }
 }

@@ -28,7 +28,7 @@
         function Service(path) {
             this.path = path;
             this.GetAll =  function() {
-                var res = $http.get('/'+this.path).then(handleSuccess, handleError('Error getting all '+this.path))
+                var res = $http.get('/'+this.path).then(handleSuccess, handleError(this.path + '  not found'))
                 return res;
             }
 

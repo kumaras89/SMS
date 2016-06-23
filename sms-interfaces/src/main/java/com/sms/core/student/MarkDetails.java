@@ -20,10 +20,13 @@ public class MarkDetails {
     @OneToMany
     @JoinColumn(name = "SU_MD_ID")
     private List<Subject> subjects;
+
     @Embedded
     private MarkAdditionalDetails additionalDetails;
+
     @Column(name = "MD_TOTAL_MARKS")
     private Long totalMarks;
+
     @Column(name = "MD_PERCENTAGE")
     private int percentage;
 

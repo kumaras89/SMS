@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 @Transactional
 public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Scheme> {
 
-    private FeesParticularRepository feesParticularRepository;
+    private final FeesParticularRepository feesParticularRepository;
 
     @Autowired
-    public SchemeServiceImpl(SchemeRepository schemeRepository, FeesParticularRepository feesParticularRepository) {
+    public SchemeServiceImpl(final SchemeRepository schemeRepository,
+                             final FeesParticularRepository feesParticularRepository) {
+
         super(schemeRepository,
                 (schemeInfo) -> Scheme.toBuilder(schemeInfo)
                         .with(Scheme::getSchemeFees,schemeInfo.getFeesInfos().stream()
@@ -30,7 +32,7 @@ public class SchemeServiceImpl extends BaseServiceConvertorImpl<SchemeInfo, Sche
     }
 
     @Override
-    protected Scheme buildToPersistObject(Long id, SchemeInfo schemeInfo) {
+    protected Scheme buildToPersistObject(final Long id,final SchemeInfo schemeInfo) {
 
         return Scheme.toBuilder(schemeInfo)
                 .with(Scheme::getId,id)
