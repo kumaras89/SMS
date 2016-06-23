@@ -3,13 +3,32 @@ package com.sms.core.marketing;
 import com.sms.core.common.Builder;
 import com.sms.core.student.Address;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class MarketingEmployeeInfo {
 
     private Long id;
+
+    @NotNull(message = "Marketing Employee Code is empty")
+    @Size(min = 1, message = "Marketing Employee Code is empty")
     private String code;
+
+    @NotNull(message = "Marketing Employee name is empty")
+    @Size(min = 1, message = "Marketing Employee name is empty")
     private String name;
+
+    @NotNull(message = "Designation is empty")
+    @Size(min = 1, message = "Designation is empty")
     private String designation;
+
+    @Valid
+    @NotNull
     private Address address;
+
+    @NotNull(message = "Phone nnumber is empty")
+    @Size(min = 10,max=13,message = "Phone number is invalid")
     private String phoneNumber;
 
     public static Builder<MarketingEmployeeInfo> builder() {

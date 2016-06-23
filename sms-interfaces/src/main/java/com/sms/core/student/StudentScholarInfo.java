@@ -1,8 +1,13 @@
 package com.sms.core.student;
 
 import com.sms.core.common.Builder;
-import com.sms.core.common.Gender;
 
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,22 +17,68 @@ import java.util.Set;
 public class StudentScholarInfo
 {
     private Long id;
+
+    @NotNull(message = "Scholar code is empty")
+    @Size(min = 1, message = "Scholar code is empty")
     private String code;
 
+    @NotNull(message = "Scholar name is empty")
+    @Size(min = 1, message = "Scholar name is empty")
     private String name;
+
+
+    @Past(message = "Date of Birth is invalid")
+    @NotNull(message = "Date of Birth is empty")
     private Date dateOfBirth;
+
+    @Min(value = 1, message = "Age is empty")
     private int age;
+
+    @NotNull(message = "Scholar gender is empty")
+    @Size(min = 1, message = "Scholar gender is empty")
     private String gender;
+
+    @NotNull(message = "Marital Status is empty")
+    @Size(min = 1, message = "Marital Status is empty")
     private String maritalStatus;
+
+    @NotNull(message = "Student Phone number is empty")
+    @Size(min = 1, message = "Student Phone number is empty")
     private String studentPhoneNumber;
+
+    @NotNull(message = "Parent Phone number is empty")
+    @Size(min = 10,max=13, message = "parent Phone number is empty")
     private String parentPhoneNumber;
+
+    @NotNull(message = "Parent name is empty")
+    @Size(min = 10,max=13, message = "Parent name is empty")
     private String fatherOrMotherName;
+
+
+    @NotNull(message = "Nationality is empty")
+    @Size(min = 1, message = "Nationality is empty")
     private String nationality;
+
+
+    @NotNull(message = "Community is empty")
+    @Size(min = 1, message = "Community is empty")
     private String caste;
+
+    @NotNull(message = "Caste is empty")
+    @Size(min = 1, message = "Caste is empty")
     private String castee;//Added newly
+
+
+    @NotNull(message = "Religion is empty")
+    @Size(min = 1, message = "Religion is empty")
     private String religion;
 
+    @Valid
+    @NotNull
     private Set<EducationDetail> educationDetails;
+
+    @Valid
+    @NotNull
     private Address address;
 
     public StudentScholarInfo()

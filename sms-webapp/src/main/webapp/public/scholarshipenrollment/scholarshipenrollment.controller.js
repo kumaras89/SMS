@@ -52,7 +52,7 @@
         .controller('ScholarshipEnrollmentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
             function ($scope, $stateParams, CrudService, AdminService, $location) {
 
-                $scope.loadStudent = function () {
+                $scope.loadScholarshipEnrollment = function () {
                     CrudService.scholarshipEnrollmentService.GetById($stateParams.id).then(function (res) {
                         $scope.scholarshipEnrollment = res
                     })
@@ -84,7 +84,7 @@
                     return $scope.scholarshipEnrollment.age;
                 }
 
-                $scope.updateStudent = function(){
+                $scope.updateScholarshipEnrollment = function(){
                     $scope.scholarshipEnrollment.status = 'CREATED';
                     $scope.scholarshipEnrollment = $scope.scholarshipEnrollment;
                     $scope.scholarshipEnrollment.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){

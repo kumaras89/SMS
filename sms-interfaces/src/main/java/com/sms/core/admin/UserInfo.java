@@ -2,16 +2,33 @@ package com.sms.core.admin;
 
 import com.sms.core.common.Builder;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 
 public class UserInfo implements Serializable {
 
 	private Long id;
+
+    @NotNull(message = "First name is empty")
+    @Size(min = 1, message = "First name is empty")
 	private String firstName;
+
+    @NotNull(message = "Last name is empty")
+    @Size(min = 1, message = "Last name is empty")
 	private String lastName;
+
+    @NotNull(message = "User Name  is empty")
+    @Size(min = 1, message = "User Name  is empty")
     private String name;
+
+    @NotNull(message = "Role  is empty")
+    @Size(min = 1, message = "Role  is empty")
     private String role;
+
+    @NotNull(message = "Branch  is empty")
+    @Size(min = 1, message = "Branch is empty")
     private String branch;
 
     public UserInfo() {

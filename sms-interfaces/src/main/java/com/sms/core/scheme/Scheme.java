@@ -15,28 +15,18 @@ import java.util.Set;
 @Table(name = "SMS_MA_SCHEME", uniqueConstraints = {@UniqueConstraint(columnNames = "SC_CODE")})
 public class Scheme extends BaseModel {
 
-    @NotNull(message = "Scheme Code is empty")
-    @Size(min = 1, message = "Scheme Code is empty")
     @Column(name = "SC_CODE", unique = true)
     private String code;
 
-    @NotNull(message = "Scheme Name is empty")
-    @Size(min = 2, message = "Scheme Name is empty")
     @Column(name = "SC_NAME")
     private String name;
 
-
-    @NotNull(message = "Description  is empty")
-    @Size(min = 1, message = "Description  is empty")
     @Column(name = "SC_DESCRIPTION")
     private String description;
 
-    @Min(value = 1, message = "Amount is Empty")
     @Column(name = "SC_FEES_AMOUNT")
     private BigDecimal feesAmount;
 
-
-    @Valid
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "FC_SCHEME_ID")
     private Set<SchemeFees> schemeFees;

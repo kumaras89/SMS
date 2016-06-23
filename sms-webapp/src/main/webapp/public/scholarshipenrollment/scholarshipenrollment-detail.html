@@ -1,7 +1,3 @@
-<div class="panel-heading">
-    Scholarship Enrollment
-</div>
-
     <div class="control-group,form">
         <div style="border-radius:20px;border: 2px solid #3dad9c;">
             <table class="table table-striped table-condensed">
@@ -12,46 +8,46 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><label class="control-label" for="applicantNumber">Applicant Number</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.applicantNumber}}</label></td>
+                    <td><label class="control-label" for="code">Applicant Number</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.code}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="name">Name of The Student</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.name}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.name}}</label></td>
                 </tr>
                 <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                <td><label class="control-label">{{scholarshipenrollment.student.fatherOrMotherName}}</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.fatherOrMotherName}}</label></td>
                 <tr>
                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.dateOfBirth}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.dateOfBirth}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Age</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.dateOfBirth | ageFilter}}</label></td>
+                    <td><label class="control-label">{{calculateAge(scholarshipEnrollment.dateOfBirth)}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="gender">Gender</label></td>
-                    <td><label class="control-label">{{gender}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.gender}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="nationality">Nationality</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.nationality}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.nationality}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="religion">Religion</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.religion}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.religion}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="caste">Cummunity</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.cummunity}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.caste}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="caste">Caste</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.caste}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.castee}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                    <td><label class="control-label">{{maritalStatus}}</label></td>
+                    <td><label class="control-label">{{scholarshipEnrollment.status}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Annual income</label></td>
@@ -70,88 +66,96 @@
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.doorNumber}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="streetName">Address 2</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.streetName}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="city">City</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.city}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="state">State</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.state}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="country">Country</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.country}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.address.postalCode}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="mailId">Email Address</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.mailId}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.studentPhoneNumber}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                    <td><label class="control-label">{{scholarshipenrollment.student.parentPhoneNumber}}</label></td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                </tr>
+            <tr>
+                <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.doorNumber}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="streetName">Address 2</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.streetName}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="city">City</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.city}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="state">State</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.state}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="country">Country</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.country}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.address.postalCode}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="mailId">Email Address</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.mailId}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.studentPhoneNumber}}</label></td>
+            </tr>
+            <tr>
+                <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
+                <td><label class="control-label">{{scholarshipEnrollment.parentPhoneNumber}}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
             </tbody>
         </table>
     </div>
     <br>
     <div style="border-radius:20px;border: 2px solid #3dad9c;">
-        <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
-                <thead>
-                    <tr>
-                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Education Details</label></td>
-                    </tr>
-                <tr>
-                    <th>Examination</th>
-                    <th>Name of Institue Studied</th>
-                    <th>Group</th>
-                    <th>Year of Passing</th>
-                    <th>% of Marks</th>
-                    <th>Remarks</th>
-                </tr>
+        <table class="table table-striped table-condensed">
+            <thead>
+            <tr>
+                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
+            </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>SSLC</td>
-                    <td><label class="control-label">{{student.sslc.instituteName}}</label></td>
-                    <td><label class="control-label">{{student.sslc.groupName}}</label></td>
-                    <td><label class="control-label">{{student.sslc.examPassed}}</label></td>
-                    <td><label class="control-label">{{student.sslc.percentageObtained}}</label></td>
-                    <td><label class="control-label">{{student.sslc.remark}}</label></td>
-                </tr>
-                <tr>
-                    <td>HSC</td>
-                    <td><label class="control-label">{{student.hsc.instituteName}}</label></td>
-                    <td><label class="control-label">{{student.hsc.groupName}}</label></td>
-                    <td><label class="control-label">{{student.hsc.examPassed}}</label></td>
-                    <td><label class="control-label">{{student.hsc.percentageObtained}}</label></td>
-                    <td><label class="control-label">{{student.hsc.remark}}</label></td>
-                </tr>
-                <tr>
-                    <td colspan="2">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left"><a include-if-allowed operation="student" href="#/scholarshipenrollment-list">Student List</a><br></td>
-                    <!--<td align="right"><a ng-click="goToFms(student.code)" class="btn btn-small btn-primary">Manage Documents</a></td>-->
-                </tr>
+            <tbody ng-repeat="educationDetail in scholorshipEnrollment.educationDetails track by $index">
+            <tr>
+                <td>
+                    <label class="control-label" for="examPassed">Examination Passed</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.examPassed}}</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="instituteName">Institute Name</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.instituteName}}</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="groupName">Group Name</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.groupName}}</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="passingYear">Year Of Passing</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.passingYear}}</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="percentageObtained">Percentage Obtained</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.percentageObtained}}</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label" for="remark">Remarks</label>
+                </td>
+                <td><label class="control-label">{{educationDetail.remark}}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
             </tbody>
         </table>
     </div>

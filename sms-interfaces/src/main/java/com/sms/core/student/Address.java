@@ -31,12 +31,13 @@ public class Address extends BaseModel {
 
     @NotNull(message = "District is empty")
     @Size(min = 1,message = "District is Empty")
-    @Pattern(regexp = "[a-zA-Z ]*", message = "District Name is invalid")
     @Column(name = "AD_DISTRICT")
     private String district;
 
+    
     @Max( value=999999, message="Postal Code is invalid")
     @Min( value=100000, message="Postal Code is invalid")
+    @NotNull(message = "Postal Code is Empty")
     @Column(name = "AD_POSTAL_CODE")
     private long postalCode;
 
