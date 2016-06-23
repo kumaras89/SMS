@@ -39,7 +39,7 @@ public class StudentScholarRestController
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody  StudentScholarInfo entityObject, UriComponentsBuilder ucBuilder)
+    public ResponseEntity<Void> create(@RequestBody @Valid StudentScholarInfo entityObject)
     {
 
         System.out.println("i am in student scholar --create");

@@ -22,10 +22,40 @@
         .config(config)
         .run(run);
 
-    config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider'];
-    function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
+    config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider'];
+    function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
 
         localStorage.clear();
+
+        var interceptor = ['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
+
+            function success(response) {
+                return response;
+            }
+
+            function error(response) {
+                var msg = response.statusText+' on '+ response.config.url +'\n';
+
+                if(response.data) {
+
+                    var msgs = _.pluck(response.data.errorInfo, 'message');
+                    _.each(msgs, function(m) {
+                        msg += m + ', '
+                    })
+                    FlashService.Error(msg, true);
+                } else {
+                    FlashService.Error(msg, true);
+                }
+                return $q.reject(response);
+            }
+
+            return function (promise) {
+                return promise.then(success, error);
+            }
+
+        }];
+
+        $httpProvider.responseInterceptors.push(interceptor);
 
         $ocLazyLoadProvider.config({
             debug: false,

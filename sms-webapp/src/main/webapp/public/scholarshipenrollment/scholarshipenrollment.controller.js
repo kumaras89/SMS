@@ -14,8 +14,8 @@
                 return calculateAge(birthdate);
             };
         })
-        .controller('ScholarshipEnrollmentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
-            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
+        .controller('ScholarshipEnrollmentListCtrl', ['$scope', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$http',
+            function ($scope, FlashService, ngTableParams, $state, AdminService, $timeout, $http) {
                 $scope.viewScholarshipEnrollment = function (userId) {
                     $state.go('home.scholarshipenrollment-detail' , {id: userId});
                 };
@@ -33,7 +33,8 @@
                 }, {
                     total: 0,           // length of data
                     getData: function($defer, params) {
-                        CrudService.scholarshipEnrollmentService.GetAll().then(function(data) {
+                        $http.get('/scholarshipEnrollment').then(function(res) {
+                            var data = res.data
                             if(data.message) {
                                 $scope.scholarshipEnrollment = [];
                                 FlashService.Error(data.message)
@@ -49,18 +50,19 @@
                     }
                 });
             }])
-        .controller('ScholarshipEnrollmentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
-            function ($scope, $stateParams, CrudService, AdminService, $location) {
+        .controller('ScholarshipEnrollmentDetailCtrl', ['$scope', '$stateParams', 'CrudService', '$http',
+            function ($scope, $stateParams, CrudService, $http) {
 
                 $scope.loadScholarshipEnrollment = function () {
-                    CrudService.scholarshipEnrollmentService.GetById($stateParams.id).then(function (res) {
-                        $scope.scholarshipEnrollment = res
+                    $http.get('/scholarshipEnrollment/'+$stateParams.id).then(function (res) {
+                        $scope.scholarshipEnrollment = res.data
                     })
                 }
                 $scope.loadScholarshipEnrollment();
+
             }])
-        .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
-            function ($scope, CrudService, FlashService, $state, AdminService) {
+        .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', '$http', 'FlashService', '$state', 'AdminService',
+            function ($scope, $http, FlashService, $state, AdminService) {
 
                 $scope.scholorshipEnrollment = [];
                 $scope.scholorshipEnrollment.educationDetails = [{},{},{},{}];
@@ -68,10 +70,10 @@
 
                 $scope.createNewScholarshipEnrollment = function () {
 
-                    CrudService.scholarshipEnrollmentService.Create($scope.scholarshipEnrollment).then(function () {
+                    $http.post('/scholarshipEnrollment', $scope.scholarshipSumarized).then(function(){
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
-                    });
+                    })
                 }
 
                 $scope.calculateAge = function (birthday) { // birthday is a date
@@ -85,12 +87,12 @@
                 }
 
                 $scope.updateScholarshipEnrollment = function(){
-                    $scope.scholarshipEnrollment.status = 'CREATED';
-                    $scope.scholarshipEnrollment = $scope.scholarshipEnrollment;
-                    $scope.scholarshipEnrollment.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
+                    $scope.scholarshipSumarized = $scope.scholorshipEnrollment;
+                    $scope.scholarshipSumarized.status = 'CREATED';
+                    // $scope.scholarshipEnrollment.branchCode = AdminService.getBranchCode($scope.student.branchName);
+                    $scope.scholarshipSumarized.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });
-
                 };
 
 

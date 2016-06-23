@@ -43,6 +43,7 @@ public class ErrorHandlingController {
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Error handleConstraintViolationException(ConstraintViolationException e) {
         final Error error = new Error();
         error.setErrorInfo(
@@ -60,6 +61,7 @@ public class ErrorHandlingController {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public String exception(AccessDeniedException e) {
         return "{\"status\":\"access denied\"}";
     }
