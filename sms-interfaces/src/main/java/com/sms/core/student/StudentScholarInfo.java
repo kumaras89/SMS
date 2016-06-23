@@ -19,14 +19,13 @@ public class StudentScholarInfo
     private int age;
     private String gender;
     private String maritalStatus;
-    private String phoneNumber;
-    private String alternatePhoneNumber;
-
+    private String studentPhoneNumber;
+    private String parentPhoneNumber;
+    private String fatherOrMotherName;
     private String nationality;
     private String caste;
     private String religion;
 
-    private Set<Guardian> guardians;
     private Set<EducationDetail> educationDetails;
     private Address address;
 
@@ -48,14 +47,14 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getAge, studentScholar.getAge())
                 .with(StudentScholarInfo::getGender, studentScholar.getGender().name())
                 .with(StudentScholarInfo::getMaritalStatus, studentScholar.getMaritalStatus().name())
-                .with(StudentScholarInfo::getPhoneNumber, studentScholar.getPhoneNumber())
-                .with(StudentScholarInfo::getAlternatePhoneNumber, studentScholar.getAlternatePhoneNumber())
-                .with(StudentScholarInfo::getGuardians, studentScholar.getGuardians())
+                .with(StudentScholarInfo::getStudentPhoneNumber, studentScholar.getStudentPhoneNumber())
+                .with(StudentScholarInfo::getParentPhoneNumber, studentScholar.getParentPhoneNumber())
                 .with(StudentScholarInfo::getEducationDetails, studentScholar.getEducationDetails())
                 .with(StudentScholarInfo::getAddress, studentScholar.getAddress())
                 .with(StudentScholarInfo::getCaste, studentScholar.getCaste().name())
                 .with(StudentScholarInfo::getReligion, studentScholar.getReligion().name())
-                .with(StudentScholarInfo::getNationality, studentScholar.getNationality());
+                .with(StudentScholarInfo::getNationality, studentScholar.getNationality())
+                .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName());
     }
 
     public Long getId() {
@@ -86,16 +85,12 @@ public class StudentScholarInfo
         return maritalStatus;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getStudentPhoneNumber() {
+        return studentPhoneNumber;
     }
 
-    public String getAlternatePhoneNumber() {
-        return alternatePhoneNumber;
-    }
-
-    public Set<Guardian> getGuardians() {
-        return guardians;
+    public String getParentPhoneNumber() {
+        return parentPhoneNumber;
     }
 
     public Set<EducationDetail> getEducationDetails() {
@@ -111,5 +106,9 @@ public class StudentScholarInfo
     public String getCaste() {return caste; }
 
     public String getReligion() {return religion; }
+
+    public String getFatherOrMotherName() {
+        return fatherOrMotherName;
+    }
 }
 
