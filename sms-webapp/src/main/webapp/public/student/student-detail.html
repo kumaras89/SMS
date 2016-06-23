@@ -208,6 +208,16 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
+                <td style="min-width: 20px;"><label class="control-label">Fees Particulars</label></td>
+                <td style="min-width: 20px;"><label class="control-label">Amount</label></td>
+            </tr>
+            <tr ng-repeat="feesInfo in student.feesInfos | orderBy: 'feesParticularCode'">
+                <td><label class="control-label">{{$index+1}}. {{getFeesParticularDesc(feesInfo.feesParticularCode)}}</label></td>
+                <td>
+                    <label class="control-label">{{feesInfo.amount | currency:'&#8377;'}}</label></label>
+                </td>
+            </tr>
+            <tr>
                 <td align="left"><a include-if-allowed operation="student" href="#/student-list">Student List</a><br></td>
                 <td align="right"><a ng-click="goToFms(student.code)" class="btn btn-small btn-primary">Manage Documents</a></td>
             </tr>

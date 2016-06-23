@@ -177,7 +177,7 @@
             var branches = getBranches0();
             var branch =  _.find(branches, function(branch) {
                 return branch.name == branchdesc
-            }).code
+            })
             console.log(branch);
             return branch != undefined ? branch.code : "";
         }
