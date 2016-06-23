@@ -135,7 +135,7 @@
             });
         }
         function getScholarshipEnrollment(success) {
-            StorageService.getFromStoarage('/scholoarshipEnrollment', function(data) {
+            StorageService.getFromStoarage('/scholarshipEnrollment', function(data) {
                 success(data);
             });
         }

@@ -20,9 +20,6 @@
                     $state.go('home.scholarshipenrollment-detail' , {id: userId});
                 };
 
-
-
-
                 $scope.createNewScholarshipEnrollment = function () {
                     $state.go('home.scholarshipenrollment-creation');
                 };
@@ -65,90 +62,51 @@
         .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
             function ($scope, CrudService, FlashService, $state, AdminService) {
 
-                $scope.educationDetails = [];
-                $scope.guardians = [];
+                $scope.scholorshipEnrollment = [];
+                $scope.scholorshipEnrollment.educationDetails = [{},{},{},{}];
 
-                // to load default once
-                $scope.educationDetails.push({
-                    examPassed: '',
-                    instituteName: '',
-                    groupName: '',
-                    passingYear: '',
-                    percentageObtained: '',
-                    remark: ''
-                });
-
-                $scope.guardians.push({
-                    isEmployed: '',
-                    name: '',
-                    occupation: '',
-                    monthlyIncome: '',
-                    annualIncome: '',
-                    gender: '',
-                    relationShip: '',
-                    phoneNumber: ''
-                });
 
                 $scope.createNewScholarshipEnrollment = function () {
 
-                    CrudService.scholarshipEnrollmentService.Create($scope.studentScholar).then(function () {
+                    CrudService.scholarshipEnrollmentService.Create($scope.scholarshipEnrollment).then(function () {
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
                     });
                 }
 
-                $scope.removeGuardian = function () {
-                    $scope.guardians.splice(-1, 1);
-                };
+                $scope.calculateAge = function (birthday) { // birthday is a date
+                    var today = new Date();
+                    var birthDate = new Date(birthday);
+                    var months = (today.getFullYear() - birthDate.getFullYear()) * 12;
+                    months -= birthDate.getMonth() + 1;
+                    months += today.getMonth();
+                    $scope.scholarshipEnrollment.age = Math.ceil(months <= 0 ? '' : months / 12) || '';
+                    return $scope.scholarshipEnrollment.age;
+                }
 
-
-
-                $scope.removeEducationDetail = function () {
-                    $scope.educationDetails.splice(-1, 1);
-                };
-
-                $scope.addEducationDetail = function () {
-                    $scope.educationDetails.push({
-                        examPassed: '',
-                        instituteName: '',
-                        groupName: '',
-                        passingYear: '',
-                        percentageObtained: '',
-                        remark: ''
+                $scope.updateStudent = function(){
+                    $scope.scholarshipEnrollment.status = 'CREATED';
+                    $scope.scholarshipEnrollment = $scope.scholarshipEnrollment;
+                    $scope.scholarshipEnrollment.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
+                        return  ed.examPassed != undefined && ed.examPassed != '';
                     });
+
                 };
 
-                $scope.getFeesParticularDesc = function (feesParticularCode){
-                    return AdminService.getFeesParticularDesc(feesParticularCode);
-                };
 
-                $scope.init = function () {
-
+                $scope.init = function ()
+                {
                     AdminService.getConstants(function (data) {
                         $scope.commonAttributes = data;
                     });
 
-                    AdminService.getMarketingEmployees(function (data) {
-                        $scope.marketingEmployees = data;
-                    });
-
-                    AdminService.getBranches(function (data) {
-                        $scope.branches = data;
-                        $scope.branchNames = _.pluck(data, "name")
-                    });
-
-                    AdminService.getSchemes(function (data) {
-                        $scope.schemes = data;
-                        $scope.schemeNames = _.pluck(data, "name")
-                    });
-
-                    AdminService.getCourses(function (data) {
-                        $scope.courseNames = _.pluck(data, "name")
+                    AdminService.getYearOfPassing(function (data) {
+                        $scope.yearOfPass = data;
                     });
                 }
-
                 $scope.init();
 
             }]);
 
-})();
+})();     
+    

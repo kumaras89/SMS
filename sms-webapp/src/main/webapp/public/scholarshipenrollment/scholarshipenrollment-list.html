@@ -31,9 +31,9 @@
                         <tbody>
                         <tr ng-repeat="student in $data | filter: student_filter" class="succcess">
                             <td>{{$index + 1 }}</td>
-                            <td sortable="code">{{ studentScholar.applicantNumber }}</td>
-                            <td sortable="name">{{ studentScholar.name }}</td>
-                            <td >{{ studentScholar.dateOfBirth}}</td>
+                            <td sortable="code">{{ scholarshipEnrollment.applicantNumber }}</td>
+                            <td sortable="name">{{ scholarshipEnrollment.name }}</td>
+                            <td >{{ scholarshipEnrollment.dateOfBirth}}</td>
 
                             <td>
                                 <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>

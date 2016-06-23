@@ -15,362 +15,397 @@
 
 <br>
 <br>
-<!--<div class="panel panel-default">
-    <div class="panel-heading">
-        Scholarship Enrollment
-    </div>
-    <br>
-    <br>-->
-    <div>
 
-        <form>
-            <div class="control-group">
-                <!-- #first_step -->
-                <div id="first_step">
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                        <div class="control-group,form">
-                            <table class="table table-striped table-condensed">
-                                <thead>
-                                    <tr>
-                                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><label class="control-label" for="applicantNumber">Applicant Number</label></td>
-                                        <td><input type="text" id="applicantNumber" ng-model="studentScholar.applicantNumber" placeholder="Applicant Number"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="name">Name of The Student</label></td>
-                                        <td><input type="text" id="name" ng-model="studentScholar.name" placeholder="Name"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                                        <td><input type="text" id="fatherOrMotherName" ng-model="studentScholar.fatherOrMotherName"
-                                                   placeholder="FatherOrMotherName"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                        <td><input type="date" id="dateOfBirth" ng-model="studentScholar.dateOfBirth" placeholder="Name"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label">Age</label></td>
-                                        <td>{{student.dateOfBirth | ageFilter}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="gender">Gender</label></td>
-                                        <td>
-                                            <input type="radio" name="gender" value="Male" ng-model="gender" id="gender">&nbsp;Male
-                                            &nbsp; <input type="radio" name="gender" value="Female" ng-model="gender" id="gender">&nbsp;Female
-                                        </td>
+<div class="panel-heading">
+    Scholarship Enrollment
+</div>
+<br>
+<br>
+<div>
 
-                                    </tr>
-
-                                    <tr>
-                                        <td><label class="control-label" for="nationality">Nationality</label></td>
-                                        <td><input type="text" id="nationality" ng-model="studentScholar.nationality" placeholder="nationality"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="religion">Religion</label></td>
-                                        <td>
-                                            <input type="text" ng-model="studentScholar.religion" list="religions" id="religion" placeholder="religion"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="caste">Cummunity</label></td>
-                                        <td>
-                                            <input type="text" ng-model="studentScholar.cummunity" list="castes" id="caste" placeholder="cummunity"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="caste">Caste</label></td>
-                                        <td>
-                                            <input type="text" ng-model="studentScholar.caste" placeholder="caste"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                                        <td>
-                                            <input type="radio" name="maritalStatus" value="Single" ng-model="maritalStatus" id="maritalStatus">&nbsp;Single
-                                            &nbsp; <input type="radio" name="maritalStatus" value="Married" ng-model="maritalStatus" id="maritalStatus">&nbsp;Married
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label">Annual income</label></td>
-                                        <td>
-                                            <input type="radio" name="annualIncome" value="Upto 50,000" ng-model="annualIncome">&nbsp;Upto 50,000
-                                            &nbsp; <input type="radio" name="annualIncome" value="Upto 1,00,000" ng-model="annualIncome">&nbsp;Upto 1,00,000
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <br>
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                        <table class="table table-striped table-condensed">
-                            <thead>
-                                <tr>
-                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.doorNumber" id="doorNumber" placeholder="address 1"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="streetName">Address 2</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.streetName" id="streetName" placeholder="address 2"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="city">City</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.city" id="city" placeholder="city"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="state">State</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.state" id="state" placeholder="state"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="country">Country</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.country" id="country" placeholder="country"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                                    <td><input type="text" ng-model="scholarshipenrollment.address.postalCode" id="postalCode" placeholder="postal code"/></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="mailId">Email Address</label></td>
-                                    <td>
-                                        <input type="email" ng-model="studentScholar.mailId" id="mailId" placeholder="mail Id"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                                    <td>
-                                        <input type="tel" ng-model="studentScholar.studentPhoneNumber" id="studentPhoneNumber" placeholder="Student mobile number"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                                    <td>
-                                        <input type="tel" ng-model="studentScholar.parentPhoneNumber" id="parentPhoneNumber" placeholder="Parent mobile number"/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <br><br>
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                        <table class="table table-striped table-condensed">
-                            <thead>
-                                <tr>
-                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Education Details</label></td>
-                                </tr>
-                                <tr>
-                                    <th>Examination</th>
-                                    <th>Name of Institue Studied</th>
-                                    <th>Group</th>
-                                    <th>Year of Passing</th>
-                                    <th>% of Marks</th>
-                                    <th>Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SSLC</td>
-                                    <td><input type="text" ng-model="studentScholar.sslc.instituteName" placeholder="Institue name"/></td>
-                                    <td><input type="text" ng-model="studentScholar.sslc.groupName" placeholder="Group"/></td>
-                                    <td><input type="text" ng-model="studentScholar.sslc.examPassed" width="10px" placeholder="Year"/></td>
-                                    <td><input type="text" ng-model="studentScholar.sslc.percentageObtained" placeholder="Percentage"/> </td>
-                                    <td><input type="text" ng-model="studentScholar.sslc.remark" placeholder="Remarks"/></td>
-                                </tr>
-                                <tr>
-                                    <td>HSC</td>
-                                    <td><input type="text" ng-model="studentScholar.hsc.instituteName" placeholder="Institue name"/></td>
-                                    <td><input type="text" ng-model="studentScholar.hsc.groupName" placeholder="Group"/></td>
-                                    <td><input type="text" ng-model="studentScholar.hsc.examPassed" width="10px" placeholder="Year"/></td>
-                                    <td><input type="text" ng-model="studentScholar.hsc.percentageObtained" placeholder="Percentage"/> </td>
-                                    <td><input type="text" ng-model="studentScholar.hsc.remark" placeholder="Remarks"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="right">
-                                        <input class="submit" type="submit" name="submit_first" id="submit_first" value="Next" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br><br>
-                </div>
-
-                <!-- #second_step -->
-                <div id="second_step">
+    <form class="form-horizontal">
+        <div class="control-group">
+            <!-- #first_step -->
+            <div id="first_step">
+                <div style="border-radius:20px;border: 2px solid #3dad9c;">
                     <div class="control-group,form">
-                        <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                            <table class="table table-striped table-condensed">
-                                <thead>
-                                    <tr>
-                                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><label class="control-label" for="applicantNumber">Applicant Number</label></td>
-                                        <td><label class="control-label">{{studentScholar.applicantNumber}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="name">Name of The Student</label></td>
-                                        <td><label class="control-label">{{studentScholar.name}}</label></td>
-                                    </tr>
-                                        <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                                        <td><label class="control-label">{{studentScholar.fatherOrMotherName}}</label></td>
-                                    <tr>
-                                        <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                        <td><label class="control-label">{{studentScholar.dateOfBirth}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label">Age</label></td>
-                                        <td><label class="control-label">{{studentScholar.dateOfBirth | ageFilter}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="gender">Gender</label></td>
-                                        <td><label class="control-label">{{gender}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="nationality">Nationality</label></td>
-                                        <td><label class="control-label">{{studentScholar.nationality}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="religion">Religion</label></td>
-                                        <td><label class="control-label">{{studentScholar.religion}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="caste">Cummunity</label></td>
-                                        <td><label class="control-label">{{studentScholar.cummunity}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="caste">Caste</label></td>
-                                        <td><label class="control-label">{{studentScholar.caste}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                                        <td><label class="control-label">{{maritalStatus}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label">Annual income</label></td>
-                                        <td><label class="control-label">{{annualIncome}}</label></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <br>
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
                         <table class="table table-striped table-condensed">
                             <thead>
+                                <tr>
+                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label class="control-label" for="code">Applicant Number</label></td>
+                                    <td><input type="text" id="code" ng-model="scholarshipEnrollment.code" placeholder="Applicant Number"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="name">Name of The Student</label></td>
+                                    <td><input type="text" id="name" ng-model="scholarshipEnrollment.name" placeholder="Name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
+                                    <td><input type="text" id="fatherOrMotherName" ng-model="scholarshipEnrollment.fatherOrMotherName"
+                                               placeholder="FatherOrMotherName"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
+                                    <td><input type="date" id="dateOfBirth" ng-model="scholarshipEnrollment.dateOfBirth" placeholder="Name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Age</label></td>
+                                    <td><label class="control-label">{{calculateAge(scholarshipEnrollment.dateOfBirth)}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="gender">Gender</label></td>
+                                    <td>
+                                        <label ng-repeat="gender in commonAttributes.gender">
+                                            <input type="radio" ng-model="scholarshipEnrollment.gender" id="gender"  placeholder="gender"
+                                                   value="{{gender}}"/>{{gender}}&nbsp;
+                                        </label>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td><label class="control-label" for="nationality">Nationality</label></td>
+                                    <td><input type="text" id="nationality" ng-model="scholarshipEnrollment.nationality" placeholder="nationality"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="religion">Religion</label></td>
+                                    <td>
+                                        <select ng-model="scholarshipEnrollment.religion" id="religion" placeholder="religion">
+                                            <option ng-repeat="religion in commonAttributes.religion" value="{{religion}}">{{religion}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="caste">Cummunity</label></td>
+                                    <td>
+                                        <select ng-model="scholarshipEnrollment.caste" id="caste" placeholder="Cummunity">
+                                            <option ng-repeat="caste in commonAttributes.caste" value="{{caste}}">{{caste}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="caste">Castee</label></td>
+                                    <td>
+                                        <input type="text" ng-model="scholarshipEnrollment.castee" placeholder="caste"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
+                                    <td>
+                                        <input type="radio" name="maritalStatus" value="Single" ng-model="scholarshipEnrollment.maritalStatus" id="maritalStatus">&nbsp;Single
+                                        &nbsp; <input type="radio" name="maritalStatus" value="Married" ng-model="scholarshipEnrollment.maritalStatus" id="maritalStatus">&nbsp;Married
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Annual income</label></td>
+                                    <td>
+                                        <input type="radio" name="annualIncome" value="Upto 50,000" ng-model="annualIncome">&nbsp;Upto 50,000
+                                        &nbsp; <input type="radio" name="annualIncome" value="Upto 1,00,000" ng-model="annualIncome">&nbsp;Upto 1,00,000
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                    <table class="table table-striped table-condensed">
+                        <thead>
                             <tr>
                                 <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
                             </tr>
-                            </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.doorNumber}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="streetName">Address 2</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.streetName}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="city">City</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.city}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="state">State</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.state}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="country">Country</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.country}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                                        <td><label class="control-label">{{studentScholar.address.postalCode}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="mailId">Email Address</label></td>
-                                        <td><label class="control-label">{{studentScholar.mailId}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                                        <td><label class="control-label">{{studentScholar.student.studentPhoneNumber}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                                        <td><label class="control-label">{{studentScholar.student.parentPhoneNumber}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                        <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                            <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
-                                <thead>
-                                    <tr>
-                                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Education Details</label></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Examination</th>
-                                        <th>Name of Institue Studied</th>
-                                        <th>Group</th>
-                                        <th>Year of Passing</th>
-                                        <th>% of Marks</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>SSLC</td>
-                                        <td><label class="control-label">{{student.sslc.instituteName}}</label></td>
-                                        <td><label class="control-label">{{student.sslc.groupName}}</label></td>
-                                        <td><label class="control-label">{{student.sslc.examPassed}}</label></td>
-                                        <td><label class="control-label">{{student.sslc.percentageObtained}}</label></td>
-                                        <td><label class="control-label">{{student.sslc.remark}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>HSC</td>
-                                        <td><label class="control-label">{{student.hsc.instituteName}}</label></td>
-                                        <td><label class="control-label">{{student.hsc.groupName}}</label></td>
-                                        <td><label class="control-label">{{student.hsc.examPassed}}</label></td>
-                                        <td><label class="control-label">{{student.hsc.percentageObtained}}</label></td>
-                                        <td><label class="control-label">{{student.hsc.remark}}</label></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="control-group">
-                            <div class="controls" align="left">
-                                <td align="left"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a ng-click="createNewScholarshipEnrollment()" class="btn btn-small btn-primary">Submit</a>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.doorNumber" id="doorNumber" placeholder="address 1"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="streetName">Address 2</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.streetName" id="streetName" placeholder="address 2"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="city">City</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.city" id="city" placeholder="city"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="state">State</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.state" id="state" placeholder="state"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="country">Country</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.country" id="country" placeholder="country"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                                <td><input type="text" ng-model="scholarshipEnrollment.address.postalCode" id="postalCode" placeholder="postal code"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="mailId">Email Address</label></td>
+                                <td>
+                                    <input type="email" ng-model="scholarshipEnrollment.mailId" id="mailId" placeholder="mail Id"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
+                                <td>
+                                    <input type="tel" ng-model="scholarshipEnrollment.studentPhoneNumber" id="studentPhoneNumber" placeholder="Student mobile number"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
+                                <td>
+                                    <input type="tel" ng-model="scholarshipEnrollment.parentPhoneNumber" id="parentPhoneNumber" placeholder="Parent mobile number"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                        <br><br>
+                <br><br>
+                <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Education Details</label></td>
+                            </tr>
+                            <tr>
+                                <td><label for="examPassed">Examination Passed</label></td>
+                                <td><label for="instituteName">Institute Name</label></td>
+                                <td><label for="groupName">Group Name</label></td>
+                                <td><label for="passingYear">Year Of Passing</label></td>
+                                <td><label for="percentageObtained">Percentage Obtained</label></td>
+                                <td><label for="remark">Remarks</label></td>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="educationDetail in scholorshipEnrollment.educationDetails">
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.examPassed" id="examPassed" placeholder="exam passed"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.instituteName"
+                                           id="instituteName" placeholder="institute name"/>
+                                </td>
+
+                                <td>
+                                    <input type="text" ng-model="educationDetail.groupName" id="groupName"
+                                           placeholder="group name"/>
+                                </td>
+                                <td>
+                                    <select ng-model="educationDetail.passingYear" id="passingYear">
+                                        <option ng-repeat="year in yearOfPass" value="{{year}}">{{year}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.percentageObtained"
+                                           id="percentageObtained" placeholder="percentage obtained"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.remark" id="remark"
+                                           placeholder="remark"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                        <tr>
+                            <td colspan="3" align="right">
+                                <input class="submit" type="submit" name="submit_first" id="submit_first" value="Next" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br><br>
+            </div>
+
+            <!-- #second_step -->
+            <div id="second_step">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label class="control-label" for="code">Applicant Number</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.code}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="name">Name of The Student</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.name}}</label></td>
+                                </tr>
+                                    <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.fatherOrMotherName}}</label></td>
+                                <tr>
+                                    <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.dateOfBirth}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Age</label></td>
+                                    <td><label class="control-label">{{calculateAge(scholarshipEnrollment.dateOfBirth)}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="gender">Gender</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.gender}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="nationality">Nationality</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.nationality}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="religion">Religion</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.religion}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="caste">Cummunity</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.caste}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="caste">Caste</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.castee}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.maritalStatus}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Annual income</label></td>
+                                    <td><label class="control-label">{{annualIncome}}</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-        </form>
-    </div>
-<!--</div>-->
+                <br>
+                <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                        </tr>
+                        </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.doorNumber}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="streetName">Address 2</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.streetName}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="city">City</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.city}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="state">State</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.state}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="country">Country</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.country}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.address.postalCode}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="mailId">Email Address</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.mailId}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.studentPhoneNumber}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
+                                    <td><label class="control-label">{{scholarshipEnrollment.parentPhoneNumber}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="educationDetail in scholorshipEnrollment.educationDetails track by $index">
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="examPassed">Examination Passed</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.examPassed}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="instituteName">Institute Name</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.instituteName}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="groupName">Group Name</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.groupName}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="passingYear">Year Of Passing</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.passingYear}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="percentageObtained">Percentage Obtained</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.percentageObtained}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label" for="remark">Remarks</label>
+                                    </td>
+                                    <td><label class="control-label">{{educationDetail.remark}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="control-group">
+                        <div class="controls" align="left">
+                            <input class="button" type="submit" name="submit_back_first" id="submit_back_first" value="Back" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a ng-click="createNewScholarshipEnrollment()" class="btn btn-small btn-primary">Submit</a>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <br><br>
+                </div>
+            </div>
+    </form>
+</div>
+
 
 <datalist id="religions">
     <option  data-ng-repeat="religion in commonAttributes.religion" value="{{religion}}">
