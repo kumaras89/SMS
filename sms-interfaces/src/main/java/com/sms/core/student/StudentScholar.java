@@ -27,11 +27,6 @@ public class StudentScholar extends BaseModel
     @Column(name = "ST_AGE")
     private int age;
 
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_GU_STUDENT_ID")
-    private Set<Guardian> guardians;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "ST_GENDER")
     private Gender gender;
@@ -45,10 +40,10 @@ public class StudentScholar extends BaseModel
     private Address address;
 
     @Column(name = "ST_PHONE_NUMBER")
-    private String phoneNumber;
+    private String studentPhoneNumber;
 
-    @Column(name = "ST_ALTERNATE_PHONE_NUMBER")
-    private String alternatePhoneNumber;
+    @Column(name = "ST_PARENT_PHONE_NUMBER")
+    private String parentPhoneNumber;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_ED_STUDENT_ID")
@@ -65,25 +60,29 @@ public class StudentScholar extends BaseModel
     @Column(name = "ST_RELIGION")
     private Religion religion;
 
+    @Column(name = "ST_PARENT_NAME")
+    private String fatherOrMotherName;
+
     public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
 
     public static Builder<StudentScholar> toBuilder(final StudentScholarInfo studentScholarInfo) {
         return builder()
                 .with(StudentScholar::getId, studentScholarInfo.getId())
-                .with(StudentScholar::getCode, studentScholarInfo.getCode())
+                .with(StudentScholar::getCode, studentScholarInfo.getCode())//change
                 .with(StudentScholar::getName, studentScholarInfo.getName())
                 .with(StudentScholar::getDateOfBirth, studentScholarInfo.getDateOfBirth())
                 .with(StudentScholar::getAge, studentScholarInfo.getAge())
                 .with(StudentScholar::getGender, Gender.valueOf(studentScholarInfo.getGender()))
                 .with(StudentScholar::getMaritalStatus, MaritalStatus.valueOf(studentScholarInfo.getMaritalStatus()))
-                .with(StudentScholar::getPhoneNumber, studentScholarInfo.getPhoneNumber())
-                .with(StudentScholar::getAlternatePhoneNumber, studentScholarInfo.getAlternatePhoneNumber())
-                .with(StudentScholar::getGuardians, studentScholarInfo.getGuardians())
+                .with(StudentScholar::getStudentPhoneNumber, studentScholarInfo.getStudentPhoneNumber())
+                .with(StudentScholar::getParentPhoneNumber, studentScholarInfo.getParentPhoneNumber())
                 .with(StudentScholar::getEducationDetails, studentScholarInfo.getEducationDetails())
                 .with(StudentScholar::getAddress, studentScholarInfo.getAddress())
                 .with(StudentScholar::getNationality, studentScholarInfo.getNationality())
                 .with(StudentScholar::getReligion, Religion.valueOf(studentScholarInfo.getReligion()))
-                .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()));
+                .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()))
+                .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName());
+
     }
 
     public String getCode() {
@@ -102,10 +101,6 @@ public class StudentScholar extends BaseModel
         return age;
     }
 
-    public Set<Guardian> getGuardians() {
-        return guardians;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -118,12 +113,12 @@ public class StudentScholar extends BaseModel
         return address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getStudentPhoneNumber() {
+        return studentPhoneNumber;
     }
 
-    public String getAlternatePhoneNumber() {
-        return alternatePhoneNumber;
+    public String getParentPhoneNumber() {
+        return parentPhoneNumber;
     }
 
     public Set<EducationDetail> getEducationDetails() {
@@ -140,5 +135,9 @@ public class StudentScholar extends BaseModel
 
     public Religion getReligion() {
         return religion;
+    }
+
+    public String getFatherOrMotherName() {
+        return fatherOrMotherName;
     }
 }
