@@ -24,6 +24,7 @@ public class StudentScholarInfo
     private String fatherOrMotherName;
     private String nationality;
     private String caste;
+    private String castee;//Added newly
     private String religion;
 
     private Set<EducationDetail> educationDetails;
@@ -54,7 +55,8 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getCaste, studentScholar.getCaste().name())
                 .with(StudentScholarInfo::getReligion, studentScholar.getReligion().name())
                 .with(StudentScholarInfo::getNationality, studentScholar.getNationality())
-                .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName());
+                .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName())
+                .with(StudentScholarInfo::getCastee,studentScholar.getCastee());
     }
 
     public Long getId() {
@@ -109,6 +111,10 @@ public class StudentScholarInfo
 
     public String getFatherOrMotherName() {
         return fatherOrMotherName;
+    }
+
+    public String getCastee() {
+        return castee;
     }
 }
 

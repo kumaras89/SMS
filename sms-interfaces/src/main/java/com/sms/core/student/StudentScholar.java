@@ -63,6 +63,9 @@ public class StudentScholar extends BaseModel
     @Column(name = "ST_PARENT_NAME")
     private String fatherOrMotherName;
 
+    @Column(name = "ST_CASTEE_OTHER")
+    private String castee;
+
     public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
 
     public static Builder<StudentScholar> toBuilder(final StudentScholarInfo studentScholarInfo) {
@@ -81,7 +84,8 @@ public class StudentScholar extends BaseModel
                 .with(StudentScholar::getNationality, studentScholarInfo.getNationality())
                 .with(StudentScholar::getReligion, Religion.valueOf(studentScholarInfo.getReligion()))
                 .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()))
-                .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName());
+                .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName())
+                .with(StudentScholar::getCastee,studentScholarInfo.getCastee());
 
     }
 
@@ -139,5 +143,9 @@ public class StudentScholar extends BaseModel
 
     public String getFatherOrMotherName() {
         return fatherOrMotherName;
+    }
+
+    public String getCastee() {
+        return castee;
     }
 }
