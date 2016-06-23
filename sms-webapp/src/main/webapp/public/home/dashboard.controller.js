@@ -49,7 +49,6 @@
                     CrudService.studentService.GetAll().then(function (res) {
                         if (res.message) {
                             $scope.students = []
-                            FlashService.Error(res.message)
                         } else {
                             $scope.students = res
                         }
