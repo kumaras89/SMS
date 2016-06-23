@@ -1,4 +1,4 @@
-﻿﻿(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -50,7 +50,6 @@
             var emp =  _.find(marketingEmployees, function(marketingEmployee) {
                 return marketingEmployee.code == marketingEmployeeCode
             })
-            console.log(emp);
             return emp != undefined ? emp.name : "";
         }
 
@@ -59,7 +58,6 @@
             var emp = _.find(marketingEmployees, function(marketingEmployee) {
                 return marketingEmployee.name == marketingEmployeeName
             })
-            console.log(emp);
             return emp != undefined ? emp.code : "";
         }
 
@@ -92,7 +90,6 @@
             var fees =  _.find(feesParticulars, function(feesParticular) {
                 return feesParticular.code == feesParticularCode
             })
-               console.log(fees);
             return fees != undefined ? fees.name : "";
         }
 
@@ -113,7 +110,6 @@
             var scheme =  _.find(schemes, function(scheme) {
                 return scheme.name == schemeName
             })
-            console.log(scheme);
             return scheme != undefined ? scheme.code : "";
         }
 
@@ -122,7 +118,6 @@
             var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
             })
-            console.log(scheme);
             return scheme != undefined ? scheme.name : "";
         }
 
@@ -131,7 +126,6 @@
             var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
             })
-            console.log(scheme);
             return scheme != undefined ? scheme.feesInfos : "";
         }
 
@@ -150,7 +144,6 @@
             var course =  _.find(courses, function(course) {
                 return course.name == courseName
             })
-            console.log(course);
             return course != undefined ? course.code : "";
         }
 
@@ -159,7 +152,6 @@
             var course =  _.find(courses, function(course) {
                 return course.code == courseCode
             })
-            console.log(course);
             return course != undefined ? course.name : "";
         }
 
@@ -178,7 +170,6 @@
             var branch =  _.find(branches, function(branch) {
                 return branch.name == branchdesc
             })
-            console.log(branch);
             return branch != undefined ? branch.code : "";
         }
 
@@ -187,7 +178,6 @@
             var branch =  _.find(branches, function(branch) {
                 return branch.code == branchCode
             })
-            console.log(branch);
             return branch != undefined ? branch.name : "";
         }
 
