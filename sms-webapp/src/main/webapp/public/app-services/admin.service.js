@@ -37,20 +37,28 @@
             getRoles(function(){})
             getFeesParticulars(function(){})
             getConstants(function(){})
+            getCourses(function(){})
+            getMarketingEmployees(function () {
+            })
+            getSchemes(function(){})
         }
 
         function getMarketingEmployeeName(marketingEmployeeCode) {
             var marketingEmployees = StorageService.getTrustedStoarage('/marketingEmployee');
-            return _.find(marketingEmployees, function(marketingEmployee) {
+            var emp =  _.find(marketingEmployees, function(marketingEmployee) {
                 return marketingEmployee.code == marketingEmployeeCode
-            }).name
+            })
+            console.log(emp);
+            return emp != undefined ? emp.name : "";
         }
 
         function getMarketingEmployeeCode(marketingEmployeeName) {
             var marketingEmployees = StorageService.getTrustedStoarage('/marketingEmployee');
-            return _.find(marketingEmployees, function(marketingEmployee) {
+            var emp = _.find(marketingEmployees, function(marketingEmployee) {
                 return marketingEmployee.name == marketingEmployeeName
-            }).code
+            })
+            console.log(emp);
+            return emp != undefined ? emp.code : "";
         }
 
         function getMarketingEmployees(success) {
@@ -79,9 +87,11 @@
 
         function getFeesParticularDesc(feesParticularCode) {
             var feesParticulars = StorageService.getTrustedStoarage('/feesParticular');
-            return _.find(feesParticulars, function(feesParticular) {
+            var fees =  _.find(feesParticulars, function(feesParticular) {
                 return feesParticular.code == feesParticularCode
-            }).name
+            })
+               console.log(fees);
+            return fees != undefined ? fees.name : "";
         }
 
          function getBranches(success) {
@@ -98,23 +108,29 @@
 
         function getSchemeCode(schemeName) {
             var schemes = StorageService.getTrustedStoarage('/scheme');
-            return _.find(schemes, function(scheme) {
+            var scheme =  _.find(schemes, function(scheme) {
                 return scheme.name == schemeName
-            }).code
+            })
+            console.log(scheme);
+            return scheme != undefined ? scheme.code : "";
         }
 
         function getSchemeDesc(schemeCode) {
             var schemes = StorageService.getTrustedStoarage('/scheme');
-            return _.find(schemes, function(scheme) {
+            var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
-            }).name
+            })
+            console.log(scheme);
+            return scheme != undefined ? scheme.name : "";
         }
 
         function getSchemeFeesInfo(schemeCode) {
             var schemes = StorageService.getTrustedStoarage('/scheme');
-            return _.find(schemes, function(scheme) {
+            var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
             }).feesInfos
+            console.log(scheme);
+            return scheme != undefined ? scheme.feesInfos : "";
         }
 
         function getCourses(success) {
@@ -125,16 +141,20 @@
 
         function getCourseCode(courseName) {
             var courses = StorageService.getTrustedStoarage('/course');
-            return _.find(courses, function(course) {
+            var course =  _.find(courses, function(course) {
                 return course.name == courseName
-            }).code
+            })
+            console.log(course);
+            return course != undefined ? course.code : "";
         }
 
         function getCourseDesc(courseCode) {
             var courses = StorageService.getTrustedStoarage('/course');
-            return _.find(courses, function(course) {
+            var course =  _.find(courses, function(course) {
                 return course.code == courseCode
-            }).name
+            })
+            console.log(course);
+            return course != undefined ? course.name : "";
         }
 
         function getRoles(success) {
@@ -149,9 +169,11 @@
 
         function getBranchCode(branchdesc) {
             var branches = getBranches0();
-            return _.find(branches, function(branch) {
+            var branch =  _.find(branches, function(branch) {
                 return branch.name == branchdesc
             }).code
+            console.log(branch);
+            return branch != undefined ? branch.code : "";
         }
 
         function getBranchDesc(branchCode) {
@@ -159,6 +181,7 @@
             var branch =  _.find(branches, function(branch) {
                 return branch.code == branchCode
             })
+            console.log(branch);
             return branch != undefined ? branch.name : "";
         }
 

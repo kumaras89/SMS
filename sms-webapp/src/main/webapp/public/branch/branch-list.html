@@ -23,7 +23,7 @@
                             <th>Code</th>
                             <th>Name</th>
                             <th>Active / Inactive</th>
-                            <th>City</th>
+                            <th>Taluk</th>
                             <th style="max-width: 30px">&nbsp;</th>
                         </tr>
                         </thead>
@@ -33,7 +33,7 @@
                             <td sortable="code">{{ branch.code }}</td>
                             <td sortable="name">{{ branch.name }}</td>
                             <td align="center"><i class="{{ branch.isActive == 0? 'fa fa-times-circle-o fa-fw' : 'fa fa-check-circle-o fa-fw' }}"></i></td>
-                            <td>{{ branch.address.city }}</td>
+                            <td>{{ branch.address.taluk }}</td>
                             <td><a ng-click="editBranch(branch.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
                                 <a ng-click="deleteBranch(branch.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>

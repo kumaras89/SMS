@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td><label class="control-label" for="fatherOrMotherName">Father/Mother Name</label></td>
-                        <td><label class="control-label">{{student.fatherOrMotherName | date}}</label></td>
+                        <td><label class="control-label">{{student.fatherOrMotherName}}</label></td>
                     </tr>
                     <tr>
                         <td><label class="control-label" for="age">Age</label></td>
@@ -90,16 +90,12 @@
                     <td><label class="control-label">{{student.address.streetName}}</label></td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="city">City</label></td>
-                    <td><label class="control-label">{{student.address.city}}</label></td>
+                    <td><label class="control-label" for="taluk">Taluk</label></td>
+                    <td><label class="control-label">{{student.address.taluk}}</label></td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="state">State</label></td>
-                    <td><label class="control-label">{{student.address.state}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="country">Country</label></td>
-                    <td><label class="control-label">{{student.address.country}}</label></td>
+                    <td><label class="control-label" for="state">District</label></td>
+                    <td><label class="control-label">{{student.address.district}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="postalCode">Postal Code</label></td>
@@ -173,28 +169,8 @@
                     <td><label class="control-label">{{guardian.relationShip}}</label></td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="gender">Gender</label></td>
-                    <td><label class="control-label">{{guardian.gender}}</label></td>
-                </tr>
-                <tr>
                     <td><label class="control-label" for="name">{{guardian.relationShip}}'s Name</label></td>
                     <td><label class="control-label">{{guardian.name}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="isEmployed">Is Employed</label></td>
-                    <td><label class="control-label">{{guardian.isEmployed == 1 ? 'Yes' : 'No'}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="occupation">Occupation</label></td>
-                    <td><label class="control-label">{{guardian.occupation}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="monthlyIncome">Monthly Income</label></td>
-                    <td><label class="control-label">{{guardian.monthlyIncome | currency:'&#8377;'}}</label></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="annualIncome">Annual Income</label></td>
-                    <td><label class="control-label">{{guardian.monthlyIncome * 12 | currency:'&#8377;'}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="phoneNumber">Phone Number</label></td>

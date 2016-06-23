@@ -122,7 +122,7 @@
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });
                     $scope.studentSumarized.guardians = _.filter($scope.student.guardians, function(ed){
-                        return  ed.examPassed != undefined && ed.relationShip != '';
+                        return  ed.relationShip != undefined && ed.relationShip != '';
                     });
                     $scope.studentSumarized.otherLanguages = _.filter($scope.student.otherLanguages, function(ed){
                        return  ed.name != undefined && ed.name != '';
