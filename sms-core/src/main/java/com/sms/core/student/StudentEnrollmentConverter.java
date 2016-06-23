@@ -34,8 +34,9 @@ public class StudentEnrollmentConverter {
             .with(Student::getCreatedDate, studentInfo.getCreatedDate())
             .with(Student::getLastModifiedDate, studentInfo.getLastModifiedDate())
             .with(Student::getCode, new StringBuilder(studentInfo.getBranchCode())
-                .append(LocalDateTime.now().getYear())
-                .toString())
+                                                  .append(studentInfo.getCourseCode())
+                                                  .append(LocalDateTime.now().getYear())
+                                                  .toString())
             .with(Student::getCreatedDate, new Date())
             .with(Student::getLastModifiedDate, new Date())
             .build();
