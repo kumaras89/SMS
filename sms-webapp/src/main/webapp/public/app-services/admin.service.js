@@ -25,7 +25,7 @@
         service.getBranchDesc = getBranchDesc
         service.getConstants = getConstants
         service.getMarketingEmployees = getMarketingEmployees
-        service.getScholarEnrollment = getScholarEnrollment
+        service.getScholarshipEnrollment = getScholarshipEnrollment
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
         service.getSchemeFeesInfo = getSchemeFeesInfo
@@ -39,9 +39,10 @@
             getFeesParticulars(function(){})
             getConstants(function(){})
             getCourses(function(){})
-            getMarketingEmployees(function () {
-            })
+            getMarketingEmployees(function () {})
+            getScholarshipEnrollment(function () {})
             getSchemes(function(){})
+
         }
 
         function getMarketingEmployeeName(marketingEmployeeCode) {
@@ -129,7 +130,7 @@
             var schemes = StorageService.getTrustedStoarage('/scheme');
             var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
-            }).feesInfos
+            })
             console.log(scheme);
             return scheme != undefined ? scheme.feesInfos : "";
         }
@@ -139,8 +140,8 @@
                 success(data);
             });
         }
-        function getScholarEnrollment(success) {
-            StorageService.getFromStoarage('/studentScholar', function(data) {
+        function getScholarshipEnrollment(success) {
+            StorageService.getFromStoarage('/scholoarshipEnrollment', function(data) {
                 success(data);
             });
         }
