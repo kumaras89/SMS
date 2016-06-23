@@ -93,7 +93,7 @@ public class Student extends BaseModel {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "SF_STUDENT_ID")
-    private List<StudentFees> studentFees;
+    private Set<StudentFees> studentFees;
 
     @ManyToOne
     @JoinColumn(name = "ST_COURSE_ID")
@@ -125,28 +125,8 @@ public class Student extends BaseModel {
         return Builder.of(Student.class);
     }
 
-    public static Builder<Student> toBuilder(final StudentInfo studentInfo) {
-        return builder()
-            .with(Student::getName, studentInfo.getName())
-            .with(Student::getAge, studentInfo.getAge())
-            .with(Student::getPhoneNumber, studentInfo.getPhoneNumber())
-            .with(Student::getFatherOrMotherName, studentInfo.getFatherOrMotherName())
-            .with(Student::getAlternatePhoneNumber, studentInfo.getAlternatePhoneNumber())
-            .with(Student::getDateOfBirth, studentInfo.getDateOfBirth())
-            .with(Student::getMailId, studentInfo.getMailId())
-            .with(Student::getGender, Gender.valueOf(studentInfo.getGender()))
-            .with(Student::getCaste, Caste.valueOf(studentInfo.getCaste()))
-            .with(Student::getOtherLanguages, studentInfo.getOtherLanguages())
-            .with(Student::getReligion, Religion.valueOf(studentInfo.getReligion()))
-            .with(Student::getGuardians, studentInfo.getGuardians())
-            .with(Student::getEducationDetails, studentInfo.getEducationDetails())
-            .with(Student::getAddress, studentInfo.getAddress())
-            .with(Student::getEnglishFluency, Rating.valueOf(studentInfo.getEnglishFluency()))
-            .with(Student::getMaritalStatus, MaritalStatus.valueOf(studentInfo.getMaritalStatus()))
-            .with(Student::getNationality, studentInfo.getNationality())
-            .with(Student::getStatus, StudentStatus.valueOf(studentInfo.getStatus()))
-            .with(Student::getCreatedDate, studentInfo.getCreatedDate())
-            .with(Student::getLastModifiedDate, studentInfo.getLastModifiedDate());
+    public static Builder<Student> builder(final Student student) {
+        return Builder.of(Student.class,student);
     }
 
     public String getCode() {
@@ -249,7 +229,7 @@ public class Student extends BaseModel {
         return otherLanguages;
     }
 
-    public List<StudentFees> getStudentFees() {
+    public Set<StudentFees> getStudentFees() {
         return studentFees;
     }
 }

@@ -1,0 +1,51 @@
+package com.sms.core.student;
+
+import com.sms.core.repositery.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by rmurugaian on 6/23/2016. <p></p>
+ */
+@Component
+public class StudentEnrollmentConfig {
+
+
+    @Autowired
+    private BranchRepository branchRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private SchemeRepository schemeRepository;
+    @Autowired
+    private MarketingEmployeeRepository marketingEmployeeRepository;
+    @Autowired
+    private FeesParticularRepository feesParticularRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+
+
+    public BranchRepository getBRepo() {
+        return branchRepository;
+    }
+
+    public CourseRepository getCRepo() {
+        return courseRepository;
+    }
+
+    public SchemeRepository getSRepo() {
+        return schemeRepository;
+    }
+
+    public MarketingEmployeeRepository getMERepo() {
+        return marketingEmployeeRepository;
+    }
+
+    public FeesParticularRepository getFPRepo() {
+        return feesParticularRepository;
+    }
+
+    public StudentRepository getStuRepo() {
+        return studentRepository;
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "code": "ME001",
+  "name": "Ramesh",
+  "designation": "TEAM_LEADER",
+  "phoneNumber": "9894444642",
+  "address": {
+    "doorNumber": "12",
+    "streetName": "Navarathana Garden",
+    "taluk": "ARANTHANGI",
+    "district": "PUDUKKOTTAI",
+    "postalCode": "600032"
+  }
+}

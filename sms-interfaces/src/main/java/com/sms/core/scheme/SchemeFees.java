@@ -7,10 +7,13 @@ import javax.persistence.Table;
 
 /**
  * Created by Ram on 17-06-2016.
+ * <p></p>
  */
 @Entity
 @Table(name = "SMS_TR_SCHEME_TO_FEES")
 public class SchemeFees extends Fees {
+    private static final long serialVersionUID = -6699305076957421496L;
+
     public static Builder<SchemeFees> builder() {
         return Builder.of(SchemeFees.class);
     }

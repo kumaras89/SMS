@@ -1,75 +1,55 @@
 package com.sms.core.student;
 
-import com.sms.core.BaseServiceConvertorImpl;
-import com.sms.core.common.Builder;
-import com.sms.core.repositery.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sms.core.common.Do;
+import com.sms.core.common.FunctionUtils;
+import com.sms.core.common.Reader;
+import com.sms.core.repositery.StudentRepository;
+import javaslang.Tuple;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
 @Service("studentEnrollmentService")
 @Transactional
-public class StudentEnrollmentServiceImpl extends BaseServiceConvertorImpl<StudentInfo, Student> {
+public class StudentEnrollmentServiceImpl implements StudentEnrollmentService {
 
-    private final BranchRepository branchRepository;
-    private final CourseRepository courseRepository;
-    private final SchemeRepository schemeRepository;
-    private final MarketingEmployeeRepository marketingEmployeeRepository;
-    private final FeesParticularRepository feesParticularRepository;
+    @Override
+    public Reader<StudentEnrollmentConfig, StudentInfo> save(final StudentInfo studentInfo) {
+        return Reader.of
+            (sec -> {
+                return Do.of(studentInfo)
+                        .then(StudentEnrollmentConverter::convertTo)
+                        .then(s -> StudentUpdater.updateStudent(studentInfo).apply(Tuple.of(sec,s)))
+                        .then(student -> sec.getStuRepo().save(student))
+                        .then(StudentEnrollmentConverter::convertTo).get();
+                }
+            );
+    }
 
-    @Autowired
-    public StudentEnrollmentServiceImpl(final StudentRepository studentRepository,
-                                        final BranchRepository branchRepository,
-                                        final CourseRepository courseRepository,
-                                        final SchemeRepository schemeRepository,
-                                        final MarketingEmployeeRepository marketingEmployeeRepository,
-                                        final FeesParticularRepository feesParticularRepository) {
 
-        super(studentRepository,
-                (studentInfo) ->
-                        Student.toBuilder(studentInfo)
-                                .with(Student::getCode, new StringBuilder(studentInfo.getBranchCode())
-                                        .append(studentInfo.getCourseCode())
-                                        .append(LocalDateTime.now().getYear())
-                                        .append(String.format("%06d", studentRepository.count() + 1))
-                                        .toString())
-                                .on(Student::getStudentFees ).set(
-                                                             studentInfo.getFeesInfos()
-                                                             .stream().map(feesInfo ->  StudentFees.toBuilder
-                                                                 (feesInfo).apply(feesParticularRepository
-                                                                 .findByCodeIgnoreCase(feesInfo.getFeesParticularCode())))
-                                                                 .map(Builder::build)
-                                                                 .collect(Collectors.toList()))
-                                .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
-                                .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
-                                .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
-                                .with(Student::getMarketingEmployee, marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode()))
-                                .with(Student::getCreatedDate, new Date())
-                                .with(Student::getLastModifiedDate, new Date())
-                                .build(),
-                (student) -> StudentInfo.toBuilder(student).build());
-        this.branchRepository = branchRepository;
-        this.courseRepository = courseRepository;
-        this.schemeRepository = schemeRepository;
-        this.marketingEmployeeRepository = marketingEmployeeRepository;
-        this.feesParticularRepository = feesParticularRepository;
+    @Override
+    public Reader<StudentEnrollmentConfig, List<StudentInfo>> delete() {
+        return Reader.of
+            (sec -> Do.of(sec.getStuRepo().findAll())
+                      .then(FunctionUtils
+                          .asList(
+                              StudentEnrollmentConverter::convertTo))
+                      .get()
+            );
     }
 
     @Override
-    protected Student buildToPersistObject(Long id, StudentInfo studentInfo) {
+    public Reader<StudentRepository, Void> delete(final Long id) {
+        return Reader.of(sec -> Do.of(id).thenVoid(v -> sec.delete(v)).get());
+    }
 
-        return Student.toBuilder(studentInfo)
-                .with(Student::getId, id)
-                .with(Student::getCode, studentInfo.getCode())
-                .with(Student::getBranch, branchRepository.findByCodeIgnoreCase(studentInfo.getBranchCode()))
-                .with(Student::getCourse, courseRepository.findByCodeIgnoreCase(studentInfo.getCourseCode()))
-                .with(Student::getScheme, schemeRepository.findByCodeIgnoreCase(studentInfo.getSchemeCode()))
-                .with(Student::getMarketingEmployee, marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode()))
-                .with(Student::getLastModifiedDate, new Date())
-                .build();
+    @Override
+    public Reader<StudentRepository, Optional<StudentInfo>> findById(final Long id) {
+        return Reader.of(sr -> Do.of(sr.findOne(id))
+                                    .then(StudentEnrollmentConverter::convertTo)
+                                    .then(Optional::ofNullable)
+            .get());
     }
 }

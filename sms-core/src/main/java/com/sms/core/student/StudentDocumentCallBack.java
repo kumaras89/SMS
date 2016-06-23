@@ -4,11 +4,11 @@ import com.sms.core.document.DocumentCallBack;
 import com.sms.core.document.UpdateInfo;
 import com.sms.core.repositery.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by Ganesan on 20/06/16.
+ * <p></p>
  */
 @Service(value = "STUDENT")
 public class StudentDocumentCallBack implements DocumentCallBack {
@@ -17,13 +17,13 @@ public class StudentDocumentCallBack implements DocumentCallBack {
     private StudentRepository studentRepository;
 
     @Override
-    public String getUploaderName(String uploaderId) {
-        Student student = studentRepository.findByCode(uploaderId);
+    public String getUploaderName(final String uploaderId) {
+        final Student student = studentRepository.findByCode(uploaderId);
         return student.getName();
     }
 
     @Override
-    public void updateUploader(UpdateInfo updateInfo) {
+    public void updateUploader(final UpdateInfo updateInfo) {
         studentRepository.updateStatus(updateInfo.getUploaderId(), updateInfo.getStatus());
     }
 }

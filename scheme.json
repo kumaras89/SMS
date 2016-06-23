@@ -1,0 +1,60 @@
+{
+  "code": "SC001",
+  "name": "BASIC",
+  "feesAmount": "25000",
+  "description": "TEST",
+  "feesInfos": [
+    {
+      "feesParticularCode": "FP001",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP002",
+      "amount": 5000
+    },
+    {
+      "feesParticularCode": "FP003",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP004",
+      "amount": 5000
+    },
+    {
+      "feesParticularCode": "FP005",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP006",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP007",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP008",
+      "amount": 2500
+    },
+    {
+      "feesParticularCode": "FP009",
+      "amount": 0
+    },
+    {
+      "feesParticularCode": "FP010",
+      "amount": 0
+    },
+    {
+      "feesParticularCode": "FP011",
+      "amount": 0
+    },
+    {
+      "feesParticularCode": "FP012",
+      "amount": 0
+    },
+    {
+      "feesParticularCode": "FP013",
+      "amount": 0
+    }
+  ]
+}

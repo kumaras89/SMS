@@ -2,7 +2,6 @@ package com.sms.core.student;
 
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,10 +18,13 @@ public class Address extends BaseModel {
     @NotNull(message = "door number is empty")
     @Size(min = 1,message = "door number is empty")
     @Column(name = "AD_ADDRESS_1")
-    private String doorNumber;
+    private String address1;
 
     @Column(name = "AD_ADDRESS_2")
-    private String streetName;
+    private String address2;
+
+    @Column(name = "AD_ADDRESS_3")
+    private String address3;
 
     @NotNull(message = "taluk is empty")
     @Size(min = 1,message = "taluk is empty")
@@ -49,22 +51,12 @@ public class Address extends BaseModel {
         return Builder.of(Address.class);
     }
 
-    public static Builder<Address> toBuilder(final Address address) {
-        return builder()
-                .with(Address::getId, address.getId())
-                .with(Address::getTaluk, address.getTaluk())
-                .with(Address::getDistrict, address.getDistrict())
-                .with(Address::getDoorNumber, address.getDoorNumber())
-                .with(Address::getPostalCode, address.getPostalCode())
-                .with(Address::getStreetName, address.getStreetName());
+    public String getAddress1() {
+        return address1;
     }
 
-    public String getDoorNumber() {
-        return doorNumber;
-    }
-
-    public String getStreetName() {
-        return streetName;
+    public String getAddress2() {
+        return address2;
     }
 
     public String getTaluk() {
@@ -77,5 +69,9 @@ public class Address extends BaseModel {
 
     public long getPostalCode() {
         return postalCode;
+    }
+
+    public String getAddress3() {
+        return address3;
     }
 }

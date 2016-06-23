@@ -14,12 +14,16 @@ public class MarkAdditionalDetails {
 
     @Column(name = "MS_REG_NUMBER")
     private String regNumber;
+
     @Column(name = "MS_YEAR_PASSING")
     private int yearOfPassing;
+
     @Column(name = "MS_SCHOOL_NAME")
     private String schoolName;
+
     @Column(name = "MS_PLACE_SCHOOL")
     private String placeOfSchool;
+
     @Column(name = "MS_BOARD_OF_EXAMINATION")
     private String boardOfExamination;
 
