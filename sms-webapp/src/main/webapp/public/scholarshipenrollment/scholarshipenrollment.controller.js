@@ -3,17 +3,6 @@
 
     angular
         .module('ScholarshipEnrollment')
-        .filter('ageFilter', function () {
-            function calculateAge(birthday) { // birthday is a date
-                var ageDifMs = Date.now() - new Date(birthday).getTime();
-                var ageDate = new Date(ageDifMs); // miliseconds from epoch
-                return Math.abs(ageDate.getUTCFullYear() - 1970);
-            }
-
-            return function (birthdate) {
-                return calculateAge(birthdate);
-            };
-        })
         .controller('ScholarshipEnrollmentListCtrl', ['$scope', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$http',
             function ($scope, FlashService, ngTableParams, $state, AdminService, $timeout, $http) {
                 $scope.viewScholarshipEnrollment = function (userId) {
@@ -55,7 +44,7 @@
 
                 $scope.loadScholarshipEnrollment = function () {
                     $http.get('/scholarshipEnrollment/'+$stateParams.id).then(function (res) {
-                        $scope.scholarshipEnrollment = res.data
+                        $scope.scholarshipSummarized = res.data
                     })
                 }
                 $scope.loadScholarshipEnrollment();
@@ -64,13 +53,13 @@
         .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', '$http', 'FlashService', '$state', 'AdminService',
             function ($scope, $http, FlashService, $state, AdminService) {
 
-                $scope.scholorshipEnrollment = [];
-                $scope.scholorshipEnrollment.educationDetails = [{},{},{},{}];
+                $scope.scholarshipEnrollment = [];
+                $scope.scholarshipEnrollment.educationDetails = [{},{},{},{}];
 
 
                 $scope.createNewScholarshipEnrollment = function () {
 
-                    $http.post('/scholarshipEnrollment', $scope.scholarshipSumarized).then(function(){
+                    $http.post('/scholarshipEnrollment', $scope.scholarshipSummarized).then(function(){
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
                     })
@@ -87,10 +76,10 @@
                 }
 
                 $scope.updateScholarshipEnrollment = function(){
-                    $scope.scholarshipSumarized = $scope.scholorshipEnrollment;
-                    $scope.scholarshipSumarized.status = 'CREATED';
+                    $scope.scholarshipSummarized = $scope.scholarshipEnrollment;
+                    $scope.scholarshipSummarized.status = 'CREATED';
                     // $scope.scholarshipEnrollment.branchCode = AdminService.getBranchCode($scope.student.branchName);
-                    $scope.scholarshipSumarized.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
+                    $scope.scholarshipSummarized.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });
                 };

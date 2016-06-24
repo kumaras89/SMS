@@ -9,49 +9,49 @@
                 <tbody>
                 <tr>
                     <td><label class="control-label" for="code">Applicant Number</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.code}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.code}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="name">Name of The Student</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.name}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.name}}</label></td>
                 </tr>
                 <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.fatherOrMotherName}}</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.fatherOrMotherName}}</label></td>
                 <tr>
                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.dateOfBirth}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.dateOfBirth}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Age</label></td>
-                    <td><label class="control-label">{{calculateAge(scholarshipEnrollment.dateOfBirth)}}</label></td>
+                    <td><label class="control-label">{{calculateAge(scholarshipSummarized.dateOfBirth)}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="gender">Gender</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.gender}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.gender}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="nationality">Nationality</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.nationality}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.nationality}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="religion">Religion</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.religion}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.religion}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="caste">Cummunity</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.caste}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.caste}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="caste">Caste</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.castee}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.castee}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                    <td><label class="control-label">{{scholarshipEnrollment.status}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.maritalStatus}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Annual income</label></td>
-                    <td><label class="control-label">{{annualIncome}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.annualIncome}}</label></td>
                 </tr>
                 </tbody>
             </table>
@@ -67,40 +67,40 @@
             </thead>
             <tbody>
             <tr>
-                <td><label class="control-label" for="doorNumber">Adddress 1</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.doorNumber}}</label></td>
+                <td><label class="control-label" for="address1">Adddress 1</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.address1}}</label></td>
             </tr>
             <tr>
-                <td><label class="control-label" for="streetName">Address 2</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.streetName}}</label></td>
+                <td><label class="control-label" for="address2">Address 2</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.address2}}</label></td>
             </tr>
             <tr>
-                <td><label class="control-label" for="city">City</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.city}}</label></td>
+                <td><label class="control-label" for="address3">Address 3</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.address3}}</label></td>
             </tr>
             <tr>
-                <td><label class="control-label" for="state">State</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.state}}</label></td>
+                <td><label class="control-label" for="taluk">Taluk</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.taluk}}</label></td>
             </tr>
             <tr>
-                <td><label class="control-label" for="country">Country</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.country}}</label></td>
+                <td><label class="control-label" for="district">District</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.district}}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.address.postalCode}}</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.address.postalCode}}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label" for="mailId">Email Address</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.mailId}}</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.mailId}}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.studentPhoneNumber}}</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.studentPhoneNumber}}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                <td><label class="control-label">{{scholarshipEnrollment.parentPhoneNumber}}</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.parentPhoneNumber}}</label></td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
@@ -116,7 +116,7 @@
                 <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
             </tr>
             </thead>
-            <tbody ng-repeat="educationDetail in scholorshipEnrollment.educationDetails track by $index">
+            <tbody ng-repeat="educationDetail in scholarshipSummarized.educationDetails track by $index">
             <tr>
                 <td>
                     <label class="control-label" for="examPassed">Examination Passed</label>
@@ -149,9 +149,9 @@
             </tr>
             <tr>
                 <td>
-                    <label class="control-label" for="remark">Remarks</label>
+                    <label class="control-label" for="remarks">Remarks</label>
                 </td>
-                <td><label class="control-label">{{educationDetail.remark}}</label></td>
+                <td><label class="control-label">{{educationDetail.remarks}}</label></td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
@@ -159,3 +159,5 @@
             </tbody>
         </table>
     </div>
+    <br>
+    <br>
