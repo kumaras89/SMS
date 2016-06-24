@@ -13,6 +13,7 @@
             $scope.deleteBranch = function (id) {
                 CrudService.branchService.Delete(id).then(function() {
                     FlashService.Success('Successfully Deleted');
+                    $scope.tableParams.reload()
                 });
 
             };
@@ -30,22 +31,28 @@
             }, {
                 total: 0,           // length of data
                 getData: function($defer, params) {
-                    CrudService.branchService.GetAll().then(function(data) {
-                        if(data.message) {
-                            $scope.branches = [];
-                            FlashService.Error(data.message)
+                    CrudService.branchService.GetAll().then(function (res) {
+                        if (res.message) {
+                            $scope.entities = []
+                            FlashService.Error(res.message)
                         } else {
-                            $timeout(function() {
-                                params.total(data.length);
-                                $defer.resolve(data);
-                            }, 10);
-
+                            $scope.entities = res;
                         }
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     }, function() {
-                        $scope.branches = []
+                        $scope.entities = []
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     })
-               }
+                }
             });
+
+
         }])
         .controller('BranchDetailCtrl', ['$scope', '$stateParams', 'CrudService','FlashService', '$state',
         function ($scope, $stateParams, CrudService,FlashService, $state) {

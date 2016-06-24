@@ -23,6 +23,7 @@
                 $scope.deleteScheme = function (id) {
                     CrudService.schemeService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
+                        $scope.tableParams.reload()
                     });
 
                 };
@@ -42,17 +43,21 @@
                     getData: function($defer, params) {
                     CrudService.schemeService.GetAll().then(function (res) {
                         if (res.message) {
-                            $scope.schemes = []
+                            $scope.entities = []
                             FlashService.Error(res.message)
                         } else {
-                            $timeout(function() {
-                                params.total(res.length);
-                                $defer.resolve(res);
-                            }, 10);
-
+                            $scope.entities = res;
                         }
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     }, function() {
-                        $scope.schemes = []
+                        $scope.entities = []
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     })
                     }
                 });

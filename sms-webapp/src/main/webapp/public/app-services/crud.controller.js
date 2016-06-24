@@ -35,8 +35,8 @@
             $scope.delete = function (id) {
                 $scope.service.Delete(id).then(function() {
                     FlashService.Success('Successfully Deleted');
-                    $scope.loadEntities();
                     $scope.clearCache();
+                    $scope.tableParams.reload()
                 });
             };
 
@@ -72,20 +72,23 @@
             }, {
                 total: 0,           // length of data
                 getData: function($defer, params) {
-                    $scope.service.GetAll().then(function(data) {
-                        if(data.message) {
-                            $scope.entities = [];
-                            FlashService.Error(data.message)
+                    $scope.service.GetAll().then(function (res) {
+                        if (res.message) {
+                            $scope.entities = []
+                            FlashService.Error(res.message)
                         } else {
-                            $scope.entities = data;
-                            $timeout(function() {
-                                params.total(data.length);
-                                $defer.resolve(data);
-                            }, 10);
-
+                            $scope.entities = res;
                         }
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     }, function() {
                         $scope.entities = []
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     })
                 }
             });

@@ -38,19 +38,23 @@
             }, {
                 total: 0,           // length of data
                 getData: function ($defer, params) {
-                    CrudService.userService.GetAll().then(function (data) {
-                        if (data.message) {
-                            $scope.users = [];
-                            FlashService.Error(data.message)
+                    CrudService.userService.GetAll().then(function (res) {
+                        if (res.message) {
+                            $scope.entities = []
+                            FlashService.Error(res.message)
                         } else {
-                            $timeout(function () {
-                                params.total(data.length);
-                                $defer.resolve(data);
-                            }, 10);
-
+                            $scope.entities = res;
                         }
-                    }, function () {
-                        $scope.users = []
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
+                    }, function() {
+                        $scope.entities = []
+                        $timeout(function() {
+                            params.total($scope.entities.length);
+                            $defer.resolve($scope.entities);
+                        }, 10);
                     })
                 }
             });

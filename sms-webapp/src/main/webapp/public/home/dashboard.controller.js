@@ -57,21 +57,8 @@
                     })
                 };
 
-                $scope.loadScholarshipEnrollments = function () {
-                    CrudService.scholarshipEnrollmentService.GetAll().then(function (res) {
-                        if (res.message) {
-                            $scope.scholarshipEnrollments = []
-                        } else {
-                            $scope.scholarshipEnrollments = res
-                        }
-                    }, function () {
-                        $scope.scholarshipEnrollments = []
-                    })
-                };
-
                 $scope.init = function () {
                     $scope.loadStudents();
-                    $scope.loadScholarshipEnrollments();
                     $scope.timedUpdate();
                     AdminService.getCourses(function (data) {
                         $scope.courses = data

@@ -12,6 +12,7 @@
                 $scope.deleteFeesParticular = function (id) {
                     CrudService.feesParticularService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
+                        $scope.tableParams.reload()
                     });
 
                 };
@@ -29,19 +30,23 @@
                 }, {
                     total: 0,           // length of data
                     getData: function ($defer, params) {
-                        CrudService.feesParticularService.GetAll().then(function (data) {
-                            if (data.message) {
-                                $scope.feesParticulars = [];
-                                FlashService.Error(data.message)
+                        CrudService.feesParticularService.GetAll().then(function (res) {
+                            if (res.message) {
+                                $scope.entities = []
+                                FlashService.Error(res.message)
                             } else {
-                                $timeout(function () {
-                                    params.total(data.length);
-                                    $defer.resolve(data);
-                                }, 10);
-
+                                $scope.entities = res;
                             }
-                        }, function () {
-                            $scope.feesParticulars = []
+                            $timeout(function() {
+                                params.total($scope.entities.length);
+                                $defer.resolve($scope.entities);
+                            }, 10);
+                        }, function() {
+                            $scope.entities = []
+                            $timeout(function() {
+                                params.total($scope.entities.length);
+                                $defer.resolve($scope.entities);
+                            }, 10);
                         })
                     }
                 });

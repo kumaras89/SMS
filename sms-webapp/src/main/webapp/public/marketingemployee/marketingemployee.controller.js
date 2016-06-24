@@ -13,6 +13,7 @@
                 $scope.deleteMarketingEmployee = function (id) {
                     CrudService.marketingEmployeeService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
+                        $scope.tableParams.reload()
                     });
 
                 };
@@ -30,19 +31,23 @@
                 }, {
                     total: 0,           // length of data
                     getData: function($defer, params) {
-                        CrudService.marketingEmployeeService.GetAll().then(function(data) {
-                            if(data.message) {
-                                $scope.marketingEmployees = [];
-                                FlashService.Error(data.message)
+                        CrudService.marketingEmployeeService.GetAll().then(function (res) {
+                            if (res.message) {
+                                $scope.entities = []
+                                FlashService.Error(res.message)
                             } else {
-                                $timeout(function() {
-                                    params.total(data.length);
-                                    $defer.resolve(data);
-                                }, 10);
-
+                                $scope.entities = res;
                             }
+                            $timeout(function() {
+                                params.total($scope.entities.length);
+                                $defer.resolve($scope.entities);
+                            }, 10);
                         }, function() {
-                            $scope.marketingEmployees = []
+                            $scope.entities = []
+                            $timeout(function() {
+                                params.total($scope.entities.length);
+                                $defer.resolve($scope.entities);
+                            }, 10);
                         })
                     }
                 });

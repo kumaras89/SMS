@@ -12,6 +12,7 @@
                 $scope.deleteCourse = function (id) {
                     CrudService.courseService.Delete(id).then(function () {
                         FlashService.Success('Successfully Deleted');
+                        $scope.tableParams.reload()
                     });
 
                 };

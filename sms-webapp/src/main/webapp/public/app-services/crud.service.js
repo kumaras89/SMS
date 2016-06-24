@@ -27,24 +27,24 @@
         function Service(path) {
             this.path = path;
             this.GetAll =  function() {
-                var res = $http.get('/'+this.path).then(handleSuccess, handleError(this.path + '  not found'))
+                var res = $http.get('/'+this.path).then(handleSuccess)
                 return res;
             }
 
             this.GetById = function(id) {
-                return $http.get( '/'+this.path +'/'+ id).then(handleSuccess, handleError('Error getting '+this.path+' by '+this.path+' id'));
+                return $http.get( '/'+this.path +'/'+ id).then(handleSuccess);
             }
 
             this.Create = function(data) {
-                return $http.post('/'+this.path, data).then(handleSuccess, handleError('Error creating '+this.path));
+                return $http.post('/'+this.path, data).then(handleSuccess);
             }
 
             this.Update = function(data) {
-                return $http.put('/'+path+'/' + data.id, data).then(handleSuccess, handleError('Error updating '+this.path));
+                return $http.put('/'+path+'/' + data.id, data).then(handleSuccess);
             }
 
             this.Delete = function(id) {
-                return $http.delete('/'+this.path+'/' + id).then(handleSuccess, handleError('Error deleting '+this.path));
+                return $http.delete('/'+this.path+'/' + id).then(handleSuccess);
             }
 
             // private functions
@@ -53,11 +53,6 @@
                 return res.data;
             }
 
-            function handleError(error) {
-                return function () {
-                    return { success: false, message: error };
-                };
-            }
         }
 
 
