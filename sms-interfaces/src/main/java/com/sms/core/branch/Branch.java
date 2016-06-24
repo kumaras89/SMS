@@ -20,15 +20,16 @@ public class Branch extends BaseModel {
     private String code;
 
     @NotNull(message = "Branch Name is empty")
-    @Size(min = 2, message = "Branch Name is empty")
+    @Size(min = 1, message = "Branch Name is empty")
     @Column(name = "BR_NAME")
     private String name;
 
     @NotNull(message = "isActive is not set")
-    @Min(value = 1,message = "isActive is not set")
     @Column(name = "BR_ACTIVE")
     private Integer isActive;
 
+
+    @NotNull(message = "Addresss is empty")
     @Valid
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "BR_ADDRESS_ID")

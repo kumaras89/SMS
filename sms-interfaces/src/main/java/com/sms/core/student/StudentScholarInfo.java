@@ -51,7 +51,6 @@ public class StudentScholarInfo
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")
-    @Size(min = 10,max=13, message = "Parent name is empty")
     private String fatherOrMotherName;
 
 

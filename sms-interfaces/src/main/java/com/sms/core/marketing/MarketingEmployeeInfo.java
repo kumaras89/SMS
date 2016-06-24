@@ -24,10 +24,10 @@ public class MarketingEmployeeInfo {
     private String designation;
 
     @Valid
-    @NotNull
+    @NotNull(message = "Address is empty")
     private Address address;
 
-    @NotNull(message = "Phone nnumber is empty")
+    @NotNull(message = "Phone number is empty")
     @Size(min = 10,max=13,message = "Phone number is invalid")
     private String phoneNumber;
 

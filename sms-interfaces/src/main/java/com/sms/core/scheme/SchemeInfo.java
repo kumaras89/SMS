@@ -28,8 +28,10 @@ public class SchemeInfo {
     private String description;
 
     @Valid
+    @NotNull(message = "Fee particular is empty")
     private Set<FeesInfo> feesInfos;
 
+    @NotNull(message = "Fee Amount is Empty")
     @Min( value = 1,message = "Fee Amount is empty")
     private BigDecimal feesAmount;
 

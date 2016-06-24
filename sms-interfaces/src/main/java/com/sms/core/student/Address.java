@@ -15,8 +15,8 @@ public class Address extends BaseModel {
     private static final long serialVersionUID = 8708958564726670901L;
 
 
-    @NotNull(message = "door number is empty")
-    @Size(min = 1,message = "door number is empty")
+    @NotNull(message = "Address is empty")
+    @Size(min = 1,message = "Address is empty")
     @Column(name = "AD_ADDRESS_1")
     private String address1;
 
@@ -36,10 +36,10 @@ public class Address extends BaseModel {
     @Column(name = "AD_DISTRICT")
     private String district;
 
-    
+
     @Max( value=999999, message="Postal Code is invalid")
     @Min( value=100000, message="Postal Code is invalid")
-    @NotNull(message = "Postal Code is Empty")
+
     @Column(name = "AD_POSTAL_CODE")
     private long postalCode;
 
