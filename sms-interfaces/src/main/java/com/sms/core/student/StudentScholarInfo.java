@@ -51,6 +51,7 @@ public class StudentScholarInfo
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")
+    @Size(min = 10,max=13, message = "Parent name is empty")
     private String fatherOrMotherName;
 
 
@@ -71,6 +72,10 @@ public class StudentScholarInfo
     @NotNull(message = "Religion is empty")
     @Size(min = 1, message = "Religion is empty")
     private String religion;
+
+    private String annualIncome;
+
+    private String emailId;
 
     @Valid
     @NotNull
@@ -165,6 +170,14 @@ public class StudentScholarInfo
 
     public String getCastee() {
         return castee;
+    }
+
+    public String getAnnualIncome() {
+        return annualIncome;
+    }
+
+    public String getEmailId() {
+        return emailId;
     }
 }
 
