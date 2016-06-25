@@ -2,10 +2,14 @@ package com.sms.core.payment;
 
 import com.sms.core.repositery.StudentRepository;
 import com.sms.core.student.Student;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Ganesan on 25/06/16.
  */
+@Service
+@Transactional
 public class PaymentServiceImpl implements PaymentService {
 
     private StudentRepository studentRepository;
