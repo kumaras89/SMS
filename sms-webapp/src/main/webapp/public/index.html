@@ -3,28 +3,29 @@
 <head>
     <meta charset="utf-8"/>
     <title>RGMIHM Hotel Management Login</title>
-    <link rel="stylesheet" href="/public/styles/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/public/styles/main.css">
-    <link rel="stylesheet" href="/public/styles/sb-admin-2.css">
-    <link rel="stylesheet" href="/public/styles/timeline.css">
-    <link rel="stylesheet" href="/public/styles/metisMenu.min.css">
-    <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/public/app-content/styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/public/app-content/styles/main.css">
+    <link rel="stylesheet" href="/public/app-content/styles/sb-admin-2.css">
+    <link rel="stylesheet" href="/public/app-content/styles/timeline.css">
+    <link rel="stylesheet" href="/public/app-content/styles/metisMenu.min.css">
+    <link rel="stylesheet" href="/public/app-content/font-awesome/css/font-awesome.css" type="text/css">
 
 
 
-    <script src="/public/js/jquery.min.js"></script>
-    <script src="/public/js/angular.js"></script>
-    <script src="/public/js/bootstrap.min.js"></script>
-    <script src="/public/js/angular-cookies.js"></script>
-    <script src="/public/js/angular-ui-router.min.js"></script>
-    <script src="/public/js/ui-bootstrap-tpls.min.js"></script>
-    <script src="/public/js/ocLazyLoad.min.js"></script>
-    <script src="/public/js/sb-admin-2.js"></script>
-    <script src="/public/js/Chart.min.js"></script>
-    <script src="/public/js/underscore-min.js"></script>
-    <script src="/public/js/json3.min.js"></script>
-    <script src="/public/js/metisMenu.min.js"></script>
-    <script src="/public/js/ng-table.min.js"></script>
+    <script src="/public/app-content/js/jquery.min.js"></script>
+    <script src="/public/app-content/js/angular.js"></script>
+    <script src="/public/app-content/js/angular-sanitize.js"></script>
+    <script src="/public/app-content/js/bootstrap.min.js"></script>
+    <script src="/public/app-content/js/angular-cookies.js"></script>
+    <script src="/public/app-content/js/angular-ui-router.min.js"></script>
+    <script src="/public/app-content/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="/public/app-content/js/ocLazyLoad.min.js"></script>
+    <script src="/public/app-content/js/sb-admin-2.js"></script>
+    <script src="/public/app-content/js/Chart.min.js"></script>
+    <script src="/public/app-content/js/underscore-min.js"></script>
+    <script src="/public/app-content/js/json3.min.js"></script>
+    <script src="/public/app-content/js/metisMenu.min.js"></script>
+    <script src="/public/app-content/js/ng-table.min.js"></script>
     <script src="/public/app.js"></script>
 
 
@@ -68,6 +69,7 @@
 </head>
 <body>
 <div ng-app="app">
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash && !loggedIn" ng-bind-html="flash.message"></div>
     <div ui-view></div>
 </div>
 </body>

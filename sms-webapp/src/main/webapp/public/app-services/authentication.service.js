@@ -32,6 +32,7 @@
         return service;
 
         function Logout() {
+            $rootScope.loggedIn = false;
             $http.post('/logout').then(function(response) {
                 if(response.data.result) {
                     ClearCredentials()

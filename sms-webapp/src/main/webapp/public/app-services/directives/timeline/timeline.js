@@ -9,7 +9,7 @@
 angular.module('app')
 	.directive('timeline',function() {
     return {
-        templateUrl:'/public/directives/timeline/timeline.html',
+        templateUrl:'/public/app-services/directives/timeline/timeline.html',
         restrict: 'E',
         replace: true,
     }

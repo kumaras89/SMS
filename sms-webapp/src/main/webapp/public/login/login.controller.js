@@ -5,8 +5,8 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', '$http' ,'AuthenticationService', 'FlashService'];
-    function LoginController($location, $http, AuthenticationService, FlashService) {
+    LoginController.$inject = ['$location', '$http' ,'AuthenticationService', 'FlashService', '$rootScope'];
+    function LoginController($location, $http, AuthenticationService, FlashService, $rootScope) {
         var vm = this;
 
         vm.login = login;
@@ -18,9 +18,13 @@
 
         function login() {
             vm.dataLoading = true;
+            $rootScope.loggedIn = false;
             AuthenticationService.Login(vm.username, vm.password, function () {
                 $location.path('/home/');
-            }, failure);
+                $rootScope.loggedIn = true;
+            }, function () {
+                vm.dataLoading = false;
+            });
         };
 
         function changePassword() {
@@ -30,14 +34,6 @@
                 oldPassword: vm.oldPassword,
                 newPassword : vm.newPassword,
                 reTypeNewPwd :  vm.reTypeNewPassword
-            };
-            var errorFunc = function(res) {
-                if (typeof res.data.error === 'string') {
-                    failure(res.data.error)
-                } else {
-                    failure(_.values(res.data.error).join('\n'))
-                }
-
             }
             $http.post('/login/changepassword', passwordInput)
                 .then(function(res) {
@@ -47,11 +43,9 @@
                         FlashService.Success('Password Succesfully Changed!!', true);
                         $location.path('/login');
                     }
-                },errorFunc);
-        };
-        var failure = function(msg){
-            FlashService.Error(msg);
-            vm.dataLoading = false;
+                }, function () {
+                    vm.dataLoading = false;
+                });
         }
     }
 

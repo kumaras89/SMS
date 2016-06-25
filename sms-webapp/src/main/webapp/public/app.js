@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
     'use strict';
 
     angular
@@ -6,6 +6,7 @@
             'ui.router',
             'ui.bootstrap',
             'ngCookies',
+            'ngSanitize',
             'Branch',
             'User',
             'Course',
@@ -35,17 +36,20 @@
             }
 
             function error(response) {
-                var msg = response.statusText+' on '+ response.config.url +'\n';
+                var standardMsg = response.statusText+' on '+ response.config.url;
 
                 if(response.data) {
-
+                    var msg = ''
                     var msgs = _.pluck(response.data.errorInfo, 'message');
                     _.each(msgs, function(m) {
-                        msg += m + ', '
+                        msg += m + '<br>'
                     })
+                    if(msg === '') {
+                        msg = standardMsg;
+                    }
                     FlashService.Error(msg);
                 } else {
-                    FlashService.Error(msg);
+                    FlashService.Error(standardMsg);
                 }
                 return $q.reject(response);
             }
@@ -68,8 +72,12 @@
             controller: 'LoginController',
             controllerAs: 'vm',
             url: '/login'
-        })
-            .state('home',{
+        }).state('changepassword', {
+            templateUrl: 'login/login-changepassword.view.html',
+            controller: 'LoginController',
+            controllerAs: 'vm',
+            url: '/changepassword'
+        }).state('home',{
                 url:'/home',
                 controller: 'HomeController',
                 controllerAs: 'vm',
@@ -79,10 +87,10 @@
                         return $ocLazyLoad.load({
                             name:'app',
                             files:[
-                                '/public/directives/header/header.js',
-                                '/public/directives/header/header-notification/header-notification.js',
-                                '/public/directives/sidebar/sidebar.js',
-                                '/public/directives/sidebar/sidebar-search/sidebar-search.js',
+                                '/public/app-services/directives/header/header.js',
+                                '/public/app-services/directives/header/header-notification/header-notification.js',
+                                '/public/app-services/directives/sidebar/sidebar.js',
+                                '/public/app-services/directives/sidebar/sidebar-search/sidebar-search.js',
                             ]
                         })
                     }
@@ -97,12 +105,12 @@
                         return $ocLazyLoad.load({
                             name:'app',
                             files:[
-                                '/public/styles/morris.css',
-                                '/public/js/moment.js',
-                                '/public/js/raphael-min.js',
-                                '/public/js/morris.min.js',
-                                '/public/directives/notifications/notifications.js',
-                                '/public/directives/dashboard/stats/stats.js'
+                                '/public/app-content/styles/morris.css',
+                                '/public/app-content/js/moment.js',
+                                '/public/app-content/js/raphael-min.js',
+                                '/public/app-content/js/morris.min.js',
+                                '/public/app-services/directives/notifications/notifications.js',
+                                '/public/app-services/directives/dashboard/stats/stats.js'
                             ]
                         })
                     }
@@ -156,8 +164,8 @@
                 resource = path.substr(6, hyphenInedex - 6);
             }
             AuthenticationService.isAuthorized(resource, function() {}, function() {
-                    FlashService.Error('Not Authorized to access \"'+ resource+'\"', true);
-                    $location.path('/login');
+                FlashService.Error('Not Authorized to access \"'+ resource+'\"', true);
+                AuthenticationService.Logout()
             });
 
         });

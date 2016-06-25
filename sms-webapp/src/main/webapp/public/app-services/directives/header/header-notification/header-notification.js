@@ -7,9 +7,9 @@
  * # adminPosHeader
  */
 angular.module('app')
-	.directive('notifications',function(){
+	.directive('headerNotification',function(){
 		return {
-        templateUrl:'/public/directives/notifications/notifications.html',
+        templateUrl:'/public/app-services/directives/header/header-notification/header-notification.html',
         restrict: 'E',
         replace: true
     	}

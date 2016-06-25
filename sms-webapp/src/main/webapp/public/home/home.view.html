@@ -10,7 +10,7 @@
 
     <div id="page-wrapper" style="min-height: 561px;">
         <br>
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash && loggedIn" ng-bind-html="flash.message"></div>
         <div ui-view></div>
 
     </div>

@@ -39,7 +39,7 @@ public class ErrorHandlingController {
     @ResponseBody
     Error handleServerException(final SmsException e) {
         final Error error = new Error();
-        error.setErrorInfo(Arrays.asList(e.getErrorInfo()));
+        error.setErrorInfo(e.getErrorInfo());
         return error;
     }
 
@@ -67,4 +67,5 @@ public class ErrorHandlingController {
     public String exception(AccessDeniedException e) {
         return "{\"status\":\"access denied\"}";
     }
+
 }

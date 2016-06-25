@@ -50,8 +50,8 @@
                     }
                 });
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
-            function ($scope, $stateParams, CrudService, AdminService, $location) {
+        .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$state',
+            function ($scope, $stateParams, CrudService, AdminService, $state) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($stateParams.id).then(function (res) {
@@ -80,7 +80,7 @@
                 };
 
                 $scope.goToFms = function(code) {
-                    $location.path('/fms/STUDENT/'+code);
+                    $state.go('fms', { category : 'STUDENT', uploaderid : code });
                 }
 
 

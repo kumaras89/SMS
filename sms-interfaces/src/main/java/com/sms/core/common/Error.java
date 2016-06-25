@@ -1,5 +1,6 @@
 package com.sms.core.common;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,5 +16,8 @@ public class Error
 
     public void setErrorInfo(List<ErrorInfo> errorInfo) {
         this.errorInfo = errorInfo;
+    }
+    public void setErrorInfo(ErrorInfo errorInfo) {
+        this.errorInfo = Arrays.asList(errorInfo);
     }
 }

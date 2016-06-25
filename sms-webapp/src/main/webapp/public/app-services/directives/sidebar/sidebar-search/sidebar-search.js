@@ -10,7 +10,7 @@
 angular.module('app')
   .directive('sidebarSearch',function() {
     return {
-      templateUrl:'/public/directives/sidebar/sidebar-search/sidebar-search.html',
+      templateUrl:'/public/app-services/directives/sidebar/sidebar-search/sidebar-search.html',
       restrict: 'E',
       replace: true,
       scope: {

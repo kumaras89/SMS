@@ -10,7 +10,7 @@
 angular.module('app')
   .directive('sidebar',['$location',function() {
     return {
-      templateUrl:'/public/directives/sidebar/sidebar.html',
+      templateUrl:'/public/app-services/directives/sidebar/sidebar.html',
       restrict: 'E',
       replace: true,
       scope: {

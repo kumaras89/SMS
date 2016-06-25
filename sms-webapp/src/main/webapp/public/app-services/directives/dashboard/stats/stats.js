@@ -9,7 +9,7 @@
 angular.module('app')
     .directive('stats',function() {
     	return {
-  		templateUrl:'/public/directives/dashboard/stats/stats.html',
+  		templateUrl:'/public/app-services/directives/dashboard/stats/stats.html',
   		restrict:'E',
   		replace:true,
   		scope: {
