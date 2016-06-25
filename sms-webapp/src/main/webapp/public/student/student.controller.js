@@ -55,7 +55,7 @@
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($stateParams.id).then(function (res) {
-                        $scope.student = res
+                        $scope.studentSumarized = res
                     })
                 }
 

@@ -53,7 +53,7 @@
         .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', '$http', 'FlashService', '$state', 'AdminService',
             function ($scope, $http, FlashService, $state, AdminService) {
 
-                $scope.scholarshipEnrollment = [];
+                $scope.scholarshipEnrollment = {};
                 $scope.scholarshipEnrollment.educationDetails = [{},{},{},{}];
 
 
@@ -76,7 +76,9 @@
                 }
 
                 $scope.updateScholarshipEnrollment = function(){
-                    $scope.scholarshipSummarized = $scope.scholarshipEnrollment;
+                    $scope.scholarshipEnrollment.age =  $scope.calculateAge($scope.scholarshipEnrollment.dateOfBirth)
+                    $scope.scholarshipSummarized = {}
+                    angular.copy($scope.scholarshipEnrollment, $scope.scholarshipSummarized);
                     $scope.scholarshipSummarized.status = 'CREATED';
                     // $scope.scholarshipEnrollment.branchCode = AdminService.getBranchCode($scope.student.branchName);
                     $scope.scholarshipSummarized.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){

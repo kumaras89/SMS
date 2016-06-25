@@ -24,7 +24,7 @@
         service.scholarshipEnrollmentService= service.of('scholarshipEnrollment')
         service.studentService = service.of('student')
         service.marketingEmployeeService = service.of('marketingEmployee')
-
+        service.scholarshipEnrollmentService = service.of('scholarshipEnrollment')
         return service;
 
         function Service(path) {

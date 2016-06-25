@@ -27,11 +27,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="scholarshipEnrollment in $data | filter: student_filter" class="success">
+                        <tr ng-repeat="scholarshipEnrollment in $data | filter: student_filter" class="succcess">
                             <td>{{$index + 1 }}</td>
                             <td sortable="code">{{ scholarshipEnrollment.code }}</td>
                             <td sortable="name">{{ scholarshipEnrollment.name }}</td>
-                            <td >{{ scholarshipEnrollment.dateOfBirth | date}}</td>
+                            <td >{{ scholarshipEnrollment.dateOfBirth|date }}</td>
 
                             <td>
                                 <a ng-click="viewScholarshipEnrollment(scholarshipEnrollment.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>

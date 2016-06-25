@@ -12,64 +12,64 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "SMS_STD_SCHR")
+@Table(name = "SMS_TR_STUDENT_SCHOLARSHIP")
 public class StudentScholar extends BaseModel
 {
-    @Column(name = "ST_CODE",unique = true)
+    @Column(name = "STS_CODE",unique = true)
     private String code;
 
-    @Column(name = "ST_NAME")
+    @Column(name = "STS_NAME")
     private String name;
 
-    @Column(name = "ST_DATE_OF_BIRTH")
+    @Column(name = "STS_DATE_OF_BIRTH")
     private Date dateOfBirth;
 
-    @Column(name = "ST_AGE")
+    @Column(name = "STS_AGE")
     private int age;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ST_GENDER")
+    @Column(name = "STS_GENDER")
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ST_MARITAL_STATUS")
+    @Column(name = "STS_MARITAL_STATUS")
     private MaritalStatus maritalStatus;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_ADDRESS_ID")
+    @JoinColumn(name = "STS_ADDRESS_ID")
     private Address address;
 
-    @Column(name = "ST_PHONE_NUMBER")
+    @Column(name = "STS_PHONE_NUMBER")
     private String studentPhoneNumber;
 
-    @Column(name = "ST_PARENT_PHONE_NUMBER")
+    @Column(name = "STS_PARENT_PHONE_NUMBER")
     private String parentPhoneNumber;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_ED_STUDENT_ID")
+    @JoinColumn(name = "STS_ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
-    @Column(name = "ST_NATIONALITY")
+    @Column(name = "STS_NATIONALITY")
     private String nationality;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ST_CASTE")
+    @Column(name = "STS_CASTE")
     private Caste caste;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ST_RELIGION")
+    @Column(name = "STS_RELIGION")
     private Religion religion;
 
-    @Column(name = "ST_PARENT_NAME")
+    @Column(name = "STS_PARENT_NAME")
     private String fatherOrMotherName;
 
-    @Column(name = "ST_CASTEE_OTHER")
-    private String castee;
+    @Column(name = "STS_CASTEDESCRIPTION")
+    private String casteDescription;
 
-    @Column(name = "ST_ANNUAL_INCOME")
+    @Column(name = "STS_ANNUAL_INCOME")
     private String annualIncome;
 
-    @Column(name = "ST_EMAILID")
+    @Column(name = "STS_EMAILID" ,unique = true)
     private String emailId;
 
 
@@ -92,7 +92,7 @@ public class StudentScholar extends BaseModel
                 .with(StudentScholar::getReligion, Religion.valueOf(studentScholarInfo.getReligion()))
                 .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()))
                 .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName())
-                .with(StudentScholar::getCastee,studentScholarInfo.getCastee())
+                .with(StudentScholar::getCasteDescription,studentScholarInfo.getCasteDescription())
                 .with(StudentScholar::getAnnualIncome,studentScholarInfo.getAnnualIncome())
                 .with(StudentScholar::getEmailId,studentScholarInfo.getEmailId());
     }
@@ -153,8 +153,8 @@ public class StudentScholar extends BaseModel
         return fatherOrMotherName;
     }
 
-    public String getCastee() {
-        return castee;
+    public String getCasteDescription() {
+        return casteDescription;
     }
 
     public String getAnnualIncome() {

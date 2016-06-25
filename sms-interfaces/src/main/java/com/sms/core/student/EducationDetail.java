@@ -14,33 +14,33 @@ import java.util.Optional;
 @Table(name = "SMS_TR_EDUCATION_DETAIL")
 public class EducationDetail extends BaseModel {
 
-    @NotNull(message = "Exam Passed  is empty")
+    /*@NotNull(message = "Exam Passed  is empty")
     @Size(min = 1, message = "Exam Passed is empty")
     @Column(name = "ED_EXAM_PASSED")
-    private String examPassed;
+    */private String examPassed;
 
-    @NotNull(message = "Institute Name  is empty")
+    /*@NotNull(message = "Institute Name  is empty")
     @Size(min = 1, message = "Institute Name is empty")
-    @Column(name = "ED_INSTITUTE_NAME")
+    @Column(name = "ED_INSTITUTE_NAME")*/
     private String instituteName;
 
-    @NotNull(message = "Group Name  is empty")
+    /*@NotNull(message = "Group Name  is empty")
     @Size(min = 1, message = "Group Name is empty")
-    @Column(name = "ED_GROUP_NAME")
+    @Column(name = "ED_GROUP_NAME")*/
     private String groupName;
 
 
-    @Min(value = 1980,message = "Passing year is invalid")
-    @Column(name = "ED_PASSING_YEAR")
+    /*@Min(value = 1980,message = "Passing year is invalid")
+    @Column(name = "ED_PASSING_YEAR")*/
     private Long passingYear;
 
-    @NotNull(message = "Percentage is empty")
+    /*@NotNull(message = "Percentage is empty")
     @Min(value = 1, message = "Percentage is empty")
-    @Column(name = "ED_PERCENTAGE_OBTAINED")
+    @Column(name = "ED_PERCENTAGE_OBTAINED")*/
     private Integer percentageObtained;
 
 
-    @Column(name = "ED_REMARK")
+    //@Column(name = "ED_REMARK")
     private String remark;
 
     public EducationDetail() {

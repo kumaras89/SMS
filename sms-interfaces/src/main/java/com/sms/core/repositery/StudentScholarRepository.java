@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface StudentScholarRepository extends JpaRepository<StudentScholar ,Long>
 {
-    StudentScholar findByCodeIgnoreCase(final String code,final String id);
+    StudentScholar findByCodeIgnoreCase(final String code);
 }

@@ -19,11 +19,11 @@
                 <td><label class="control-label">{{scholarshipSummarized.fatherOrMotherName}}</label></td>
                 <tr>
                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                    <td><label class="control-label">{{scholarshipSummarized.dateOfBirth}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.dateOfBirth | date}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Age</label></td>
-                    <td><label class="control-label">{{calculateAge(scholarshipSummarized.dateOfBirth)}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.age}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="gender">Gender</label></td>
@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td><label class="control-label" for="caste">Caste</label></td>
-                    <td><label class="control-label">{{scholarshipSummarized.castee}}</label></td>
+                    <td><label class="control-label">{{scholarshipSummarized.casteDescription}}</label></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
@@ -91,8 +91,8 @@
                 <td><label class="control-label">{{scholarshipSummarized.address.postalCode}}</label></td>
             </tr>
             <tr>
-                <td><label class="control-label" for="mailId">Email Address</label></td>
-                <td><label class="control-label">{{scholarshipSummarized.mailId}}</label></td>
+                <td><label class="control-label" for="emailId">Email Address</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.emailId}}</label></td>
             </tr>
             <tr>
                 <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
@@ -149,9 +149,9 @@
             </tr>
             <tr>
                 <td>
-                    <label class="control-label" for="remarks">Remarks</label>
+                    <label class="control-label" for="remark">Remarks</label>
                 </td>
-                <td><label class="control-label">{{educationDetail.remarks}}</label></td>
+                <td><label class="control-label">{{educationDetail.remark}}</label></td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>

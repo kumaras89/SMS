@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,9 +37,10 @@ public class ErrorHandlingController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public
     @ResponseBody
-    String handleServerException(final SmsException e) {
-
-        return String.format("{ \"%s\" : \"%s\" }", "error", e.getMessage());
+    Error handleServerException(final SmsException e) {
+        final Error error = new Error();
+        error.setErrorInfo(Arrays.asList(e.getErrorInfo()));
+        return error;
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

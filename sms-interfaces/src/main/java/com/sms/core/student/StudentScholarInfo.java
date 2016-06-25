@@ -1,13 +1,11 @@
 package com.sms.core.student;
 
 import com.sms.core.common.Builder;
+import org.hibernate.validator.constraints.Email;
 
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -51,7 +49,7 @@ public class StudentScholarInfo
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")
-    @Size(min = 10,max=13, message = "Parent name is empty")
+    @Size(min = 1,max=13, message = "Parent name is empty")
     private String fatherOrMotherName;
 
 
@@ -66,19 +64,22 @@ public class StudentScholarInfo
 
     @NotNull(message = "Caste is empty")
     @Size(min = 1, message = "Caste is empty")
-    private String castee;//Added newly
+    private String casteDescription;//Added newly
 
 
     @NotNull(message = "Religion is empty")
     @Size(min = 1, message = "Religion is empty")
     private String religion;
 
+    @NotNull(message = "Annual Income is Empty")
     private String annualIncome;
 
+    @NotNull(message = "EmailId is Empty")
+    @Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
     private String emailId;
 
     @Valid
-    @NotNull
+    @NotNull(message = "Enter atleast one Educational Details")
     private Set<EducationDetail> educationDetails;
 
     @Valid
@@ -111,7 +112,9 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getReligion, studentScholar.getReligion().name())
                 .with(StudentScholarInfo::getNationality, studentScholar.getNationality())
                 .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName())
-                .with(StudentScholarInfo::getCastee,studentScholar.getCastee());
+                .with(StudentScholarInfo::getCasteDescription,studentScholar.getCasteDescription())
+                .with(StudentScholarInfo::getEmailId,studentScholar.getEmailId())
+                .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome());
     }
 
     public Long getId() {
@@ -168,8 +171,8 @@ public class StudentScholarInfo
         return fatherOrMotherName;
     }
 
-    public String getCastee() {
-        return castee;
+    public String getCasteDescription() {
+        return casteDescription;
     }
 
     public String getAnnualIncome() {

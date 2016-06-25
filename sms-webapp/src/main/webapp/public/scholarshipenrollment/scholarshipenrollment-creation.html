@@ -83,7 +83,7 @@
                                 <tr>
                                     <td><label class="control-label" for="castee">Caste</label></td>
                                     <td>
-                                        <input type="text" ng-model="scholarshipEnrollment.castee" id="castee" placeholder="Caste"/>
+                                        <input type="text" ng-model="scholarshipEnrollment.casteDescription" id="casteDescription" placeholder="Caste"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -98,8 +98,8 @@
                                 <tr>
                                     <td><label class="control-label">Annual income</label></td>
                                     <td>
-                                        <label class="control-label">Upto 50,000</label>&nbsp;<input type="radio" name="annualIncome" value="1" ng-model="scholarshipEnrollment.annualIncome">
-                                        <label class="control-label">Upto 1,00,000</label>&nbsp;<input type="radio" name="annualIncome" value="0" ng-model="scholarshipEnrollment.annualIncome">
+                                        <label class="control-label">Upto 50,000</label>&nbsp;<input type="radio" name="annualIncome" value=" Upto 50000" ng-model="scholarshipEnrollment.annualIncome">
+                                        <label class="control-label">Upto 1,00,000</label>&nbsp;<input type="radio" name="annualIncome" value="Upto 100000" ng-model="scholarshipEnrollment.annualIncome">
                                     </td>
                                 </tr>
                             </tbody>
@@ -141,9 +141,9 @@
                                 <td><input type="text" ng-model="scholarshipEnrollment.address.postalCode" id="postalCode" placeholder="Postal code"/></td>
                             </tr>
                             <tr>
-                                <td><label class="control-label" for="mailId">Email Address</label></td>
+                                <td><label class="control-label" for="emailId">Email Address</label></td>
                                 <td>
-                                    <input type="email" ng-model="scholarshipEnrollment.mailId" id="mailId" placeholder="Mail Id"/>
+                                    <input type="email" ng-model="scholarshipEnrollment.emailId" id="emailId" placeholder="Mail Id"/>
                                 </td>
                             </tr>
                             <tr>
@@ -175,7 +175,7 @@
                                 <td><label for="groupName">Group Name</label></td>
                                 <td><label for="passingYear">Year Of Passing</label></td>
                                 <td><label for="percentageObtained">Percentage Obtained</label></td>
-                                <td><label for="remarks">Remarks</label></td>
+                                <td><label for="remark">Remarks</label></td>
                             </tr>
                         </thead>
                         <tbody ng-repeat="educationDetail in scholarshipEnrollment.educationDetails">
@@ -202,7 +202,7 @@
                                            id="percentageObtained" placeholder="Percentage obtained"/>
                                 </td>
                                 <td>
-                                    <input type="text" ng-model="educationDetail.remarks" id="remarks"
+                                    <input type="text" ng-model="educationDetail.remark" id="remark"
                                            placeholder="Remark"/>
                                 </td>
                             </tr>
@@ -267,7 +267,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="caste">Caste</label></td>
-                                    <td><label class="control-label">{{scholarshipSummarized.castee}}</label></td>
+                                    <td><label class="control-label">{{scholarshipSummarized.casteDescription}}</label></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
@@ -315,8 +315,8 @@
                                 <td><label class="control-label">{{scholarshipSummarized.address.postalCode}}</label></td>
                             </tr>
                             <tr>
-                                <td><label class="control-label" for="mailId">Email Address</label></td>
-                                <td><label class="control-label">{{scholarshipSummarized.mailId}}</label></td>
+                                <td><label class="control-label" for="emailId">Email Address</label></td>
+                                <td><label class="control-label">{{scholarshipSummarized.emailId}}</label></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
@@ -373,9 +373,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label class="control-label" for="remarks">Remarks</label>
+                                    <label class="control-label" for="remark">Remarks</label>
                                 </td>
-                                <td><label class="control-label">{{educationDetail.remarks}}</label></td>
+                                <td><label class="control-label">{{educationDetail.remark}}</label></td>
                             </tr>
                             <tr>
                                 <td colspan="2">&nbsp;</td>

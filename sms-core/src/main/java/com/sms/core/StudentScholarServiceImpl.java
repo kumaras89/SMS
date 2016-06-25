@@ -46,6 +46,10 @@ public class StudentScholarServiceImpl implements IStudentScholarService
 
     @Override
     public Optional<StudentScholarInfo> save(StudentScholarInfo entityType) {
+        StudentScholar alreadyexist = studentScholarRepository.findByCodeIgnoreCase(entityType.getCode());
+        if(alreadyexist != null) {
+            throw new SmsException("code", String.format("Scholarship already exist for %s application number", entityType.getCode()));
+        }
         return  Optional.of(studentScholarRepository.saveAndFlush(sourceConverter.convert(entityType))).map(destinationConverter::convert);
     }
 

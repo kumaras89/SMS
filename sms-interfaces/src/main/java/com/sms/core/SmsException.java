@@ -1,25 +1,23 @@
 package com.sms.core;
 
+import com.sms.core.common.ErrorInfo;
+
 @SuppressWarnings("serial")
 public class SmsException extends RuntimeException {
 
-	public SmsException() {
-		super();
-	}
-
-	public SmsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+	private ErrorInfo errorInfo;
 
 	public SmsException(String message, Throwable cause) {
 		super(message, cause);
+		errorInfo = new ErrorInfo(null, message);
 	}
 
-	public SmsException(String message) {
+	public SmsException(String fieldName, String message) {
 		super(message);
+		errorInfo = new ErrorInfo(fieldName , message);
 	}
 
-	public SmsException(Throwable cause) {
-		super(cause);
+	public ErrorInfo getErrorInfo() {
+		return errorInfo;
 	}
 }

@@ -35,17 +35,17 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     public void changePassword(final Password password) {
 
         if(!password.getNewPassword().equals(password.getReTypeNewPwd())) {
-            throw new SmsException("New Password and Retype New Password not matches");
+            throw new SmsException("reTypeNewPwd","New Password and Retype New Password not matches");
         }
 
         final User user = userRepository.findByNameIgnoreCase(password.getUserName());
         if(user == null) {
-            throw new SmsException("user name not found");
+            throw new SmsException("userName","user name not found");
         }
         if (isPasswordMatches(password.getOldPassword(), user.getPassword())) {
             userRepository.changePassword(encoder.encode(password.getNewPassword()), user.getName());
         } else {
-            throw new SmsException(passwordNotMatchErrorMsg);
+            throw new SmsException("password", passwordNotMatchErrorMsg);
         }
     }
 
