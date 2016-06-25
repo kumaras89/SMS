@@ -121,7 +121,8 @@
                     $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
                     $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
                     $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
-                    $scope.studentSumarized = $scope.student;
+                    $scope.studentSumarized = {};
+                    angular.copy($scope.student,$scope.studentSumarized);
                     $scope.studentSumarized.educationDetails = _.filter($scope.student.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });
