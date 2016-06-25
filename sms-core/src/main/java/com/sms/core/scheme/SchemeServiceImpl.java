@@ -1,6 +1,7 @@
 package com.sms.core.scheme;
 
 import com.sms.core.BaseServiceConvertorImpl;
+import com.sms.core.feesparticular.Fees;
 import com.sms.core.repositery.FeesParticularRepository;
 import com.sms.core.repositery.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

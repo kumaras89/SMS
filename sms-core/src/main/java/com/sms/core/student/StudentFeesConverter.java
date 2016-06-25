@@ -2,7 +2,7 @@ package com.sms.core.student;
 
 import com.sms.core.common.Builder;
 import com.sms.core.repositery.FeesParticularRepository;
-import com.sms.core.scheme.FeesInfo;
+import com.sms.core.feesparticular.FeesInfo;
 
 import java.util.List;
 import java.util.Set;

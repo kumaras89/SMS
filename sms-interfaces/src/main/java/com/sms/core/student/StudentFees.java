@@ -1,7 +1,7 @@
 package com.sms.core.student;
 
 import com.sms.core.common.Builder;
-import com.sms.core.scheme.Fees;
+import com.sms.core.feesparticular.Fees;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -1,8 +1,7 @@
-package com.sms.core.scheme;
+package com.sms.core.feesparticular;
 
 import com.sms.core.common.Builder;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;

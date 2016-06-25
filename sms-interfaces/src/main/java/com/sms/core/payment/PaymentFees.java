@@ -1,8 +1,8 @@
 package com.sms.core.payment;
 
 import com.sms.core.common.Builder;
-import com.sms.core.scheme.Fees;
-import com.sms.core.scheme.FeesInfo;
+import com.sms.core.feesparticular.Fees;
+import com.sms.core.feesparticular.FeesInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -1,9 +1,7 @@
-package com.sms.core.scheme;
+package com.sms.core.feesparticular;
 
-import com.sms.core.feesparticular.FeesParticular;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.io.Serializable;
 import java.math.BigDecimal;
 

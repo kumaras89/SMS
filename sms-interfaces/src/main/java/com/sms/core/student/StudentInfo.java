@@ -2,13 +2,11 @@ package com.sms.core.student;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sms.core.common.Builder;
-import com.sms.core.common.FunctionUtils;
-import com.sms.core.scheme.FeesInfo;
+import com.sms.core.feesparticular.FeesInfo;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentInfo {

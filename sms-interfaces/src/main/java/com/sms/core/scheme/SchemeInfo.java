@@ -1,6 +1,7 @@
 package com.sms.core.scheme;
 
 import com.sms.core.common.Builder;
+import com.sms.core.feesparticular.FeesInfo;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;

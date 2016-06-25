@@ -5,6 +5,7 @@ import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
 import com.sms.core.course.Course;
 import com.sms.core.marketing.MarketingEmployee;
+import com.sms.core.payment.Payment;
 import com.sms.core.scheme.Scheme;
 
 import javax.persistence.*;
@@ -64,6 +65,10 @@ public class Student extends BaseModel {
     private Set<EducationDetail> educationDetails;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "SP_STUDENT_ID")
+    private Set<Payment> payments;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "MD_STUDENT_ID")
     private List<MarkDetails> markDetailses;
 
@@ -74,6 +79,8 @@ public class Student extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "ST_BRANCH_ID")
     private Branch branch;
+
+
 
     @Column(name = "ST_NATIONALITY")
     private String nationality;
