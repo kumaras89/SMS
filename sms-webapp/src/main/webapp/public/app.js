@@ -42,9 +42,9 @@
                     _.each(msgs, function(m) {
                         msg += m + ', '
                     })
-                    FlashService.Error(msg, true);
+                    FlashService.Error(msg);
                 } else {
-                    FlashService.Error(msg, true);
+                    FlashService.Error(msg);
                 }
                 return $q.reject(response);
             }
