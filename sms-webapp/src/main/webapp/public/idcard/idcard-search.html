@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-credit-card fa-fw"></i>Id Cards</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Filter Criteria</h1>
+            </div>
+            <div class="col-lg-3">
+                <label>Unique Code : </label>
+                <input ng-model="idcard.uploaderId" type="text" class="form-control"/>
+            </div>
+            <div class="col-lg-3">
+                <label>Status : </label>
+                <input ng-model="idcard.status" type="text" class="form-control"/>
+            </div>
+            <div class="col-lg-3">
+                <label>Category : </label>
+                <input ng-model="idcard.uploaderCategory" type="text" class="form-control"/>
+            </div>
+            <div class="col-lg-3">
+                <label>Year : </label>
+                <input ng-model="idcard.year" type="text" class="form-control"/>
+            </div>
+            <br>
+            <div align="right" class="col-lg-12 page-header">
+                <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="clearfix"></div>
+            <div class="table-responsive" loading-container="tableParams.settings().$loading">
+                <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Code</th>
+                        <th>Category</th>
+                        <th>Requested Date</th>
+                        <th>Status</th>
+                        <th>Validity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="idCard in $data | filter: feesComponents_filter" class="success">
+                        <td>{{$index + 1 }}</td>
+                        <td sortable="uploaderId">{{ idCard.uploaderId }}</td>
+                        <td sortable="uploaderCategory">{{ idCard.uploaderCategory }}</td>
+                        <td sortable="name">{{ idCard.createdDate | date }}</td>
+                        <td sortable="name">{{ idCard.status }}</td>
+                        <td sortable="name">{{ idCard.validUpto | date }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

@@ -8,7 +8,7 @@
     <div class="panel-body">
         <div class="row">
 
-            <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="home.scholarshipenrollment-list"></stats>
+            <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="{{home.scholarshipenrollment-list}}"></stats>
             <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap"></stats>
             <stats number="{{(students | filter: { status: 'CREATED' }).length}}"
                    comments="Student Enrolment - Halfway!" colour="red" type="empire"></stats>

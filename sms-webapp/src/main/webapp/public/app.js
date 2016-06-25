@@ -18,7 +18,8 @@
             'Student',
             'MarketingEmployee',
             'FMS',
-            'ScholarshipEnrollment'])
+            'ScholarshipEnrollment',
+            'IDCard'])
         .config(config)
         .run(run);
 

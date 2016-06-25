@@ -24,6 +24,8 @@
         service.scholarshipEnrollmentService= service.of('scholarshipEnrollment')
         service.studentService = service.of('student')
         service.marketingEmployeeService = service.of('marketingEmployee')
+        service.idcardService = service.of('idcard')
+
         service.scholarshipEnrollmentService = service.of('scholarshipEnrollment')
         return service;
 
@@ -48,6 +50,10 @@
 
             this.Delete = function(id) {
                 return $http.delete('/'+this.path+'/' + id).then(handleSuccess);
+            }
+
+            this.Search =  function(data) {
+                return $http.post('/'+this.path,data).then(handleSuccess)
             }
 
             // private functions
