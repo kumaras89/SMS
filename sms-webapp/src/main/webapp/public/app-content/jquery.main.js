@@ -35,7 +35,7 @@ $(function(){
                     return false;
             } else {   
                 //update progress bar
-                $('#progress_text').html('25% Complete');
+                $('#progress_text').html('20% Complete');
                 $('#progress').css('width','100px');
                 
                 //slide steps
@@ -65,6 +65,11 @@ $(function(){
         $('#fourth_step').slideDown();
     });
 
+    $('#submit_back_fifth').click(function(){
+        $('#sixth_step').slideUp();
+        $('#fifth_step').slideDown();
+    });
+
     $('#submit_second').click(function(){
         //remove classes
         $('#second_step input').removeClass('error').removeClass('valid');
@@ -86,7 +91,7 @@ $(function(){
 
         if(!error) {
                 //update progress bar
-                $('#progress_text').html('50% Complete');
+                $('#progress_text').html('40% Complete');
                 $('#progress').css('width','200px');
                 
                 //slide steps
@@ -99,7 +104,7 @@ $(function(){
 
     $('#submit_third').click(function(){
         //update progress bar
-        $('#progress_text').html('75% Complete');
+        $('#progress_text').html('60% Complete');
         $('#progress').css('width','300px');
 
         //slide steps
@@ -109,11 +114,21 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //update progress bar
-        $('#progress_text').html('100% Complete');
+        $('#progress_text').html('80% Complete');
         $('#progress').css('width','400px');
 
         //slide steps
         $('#fourth_step').slideUp();
         $('#fifth_step').slideDown();
+    });
+
+    $('#submit_fifth').click(function(){
+        //update progress bar
+        $('#progress_text').html('100% Complete');
+        $('#progress').css('width','400px');
+
+        //slide steps
+        $('#fifth_step').slideUp();
+        $('#sixth_step').slideDown();
     });
 });

@@ -79,7 +79,7 @@ public class DocumentFacade {
     public static Reader<String, Promise<Long>> delete( Long theId) {
 
         return Reader.of(fmsServer -> React.of(theId)
-                .thenLF(id -> asycTemp().exchange(fmsServer + "/delete/" + id, HttpMethod.DELETE, getEmptyRequestEntity(), Long.class))
+                .thenLF(id -> asycTemp().exchange(fmsServer + "/findAll/" + id, HttpMethod.DELETE, getEmptyRequestEntity(), Long.class))
                 .getPromise());
     }
 

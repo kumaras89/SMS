@@ -16,14 +16,11 @@ import java.util.Optional;
 public class StudentRestController {
 
     @Autowired
-    private StudentEnrollmentConfig seConfig;
-
-    @Autowired
-    private StudentEnrollmentService service;
+    private StudentFacade studentFacade;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<StudentInfo>> listAll() {
-        return Optional.ofNullable(service.delete().with(seConfig))
+        return Optional.ofNullable(studentFacade.findAll())
             .filter(e -> !e.isEmpty())
             .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -31,8 +28,7 @@ public class StudentRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentInfo> get(@PathVariable("id") final Long id) {
-        return service.findById(id)
-                        .with(seConfig.getStuRepo())
+        return studentFacade.findById(id)
                         .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                         .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -40,13 +36,13 @@ public class StudentRestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid final StudentInfo entityObject,
                                                     final UriComponentsBuilder ucBuilder) {
-        final Optional<StudentInfo> t = Optional.ofNullable(service.save(entityObject).with(seConfig));
+        final Optional<StudentInfo> t = Optional.ofNullable(studentFacade.save(entityObject));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<StudentInfo> delete(@PathVariable("id") final Long id) {
-        service.delete(id).with(seConfig.getStuRepo());
+        studentFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

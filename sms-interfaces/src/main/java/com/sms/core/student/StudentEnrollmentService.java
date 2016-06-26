@@ -19,13 +19,13 @@ public interface StudentEnrollmentService {
     /**
      * @return
      */
-    Reader<StudentEnrollmentConfig, List<StudentInfo>> delete();
+    Reader<StudentEnrollmentConfig, List<StudentInfo>> findAll();
 
     /**
      * @param id
      * @return
      */
-    Reader<StudentRepository, Void> delete(final Long id);
+    Reader<StudentRepository, Void> findAll(final Long id);
 
     /**
      *

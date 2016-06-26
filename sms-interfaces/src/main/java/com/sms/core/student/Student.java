@@ -68,9 +68,13 @@ public class Student extends BaseModel {
     @JoinColumn(name = "SP_STUDENT_ID")
     private Set<Payment> payments;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "MD_STUDENT_ID")
-    private List<MarkDetails> markDetailses;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ST_MD_SSLC_ID")
+    private SSLCMarkDetails sslcMarkDetails;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ST_MD_HSC_ID")
+    private HSCMarkDetails hscMarkDetails;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_ADDRESS_ID")
@@ -79,8 +83,6 @@ public class Student extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "ST_BRANCH_ID")
     private Branch branch;
-
-
 
     @Column(name = "ST_NATIONALITY")
     private String nationality;
@@ -238,5 +240,13 @@ public class Student extends BaseModel {
 
     public Set<StudentFees> getStudentFees() {
         return studentFees;
+    }
+
+    public SSLCMarkDetails getSslcMarkDetails() {
+        return sslcMarkDetails;
+    }
+
+    public HSCMarkDetails getHscMarkDetails() {
+        return hscMarkDetails;
     }
 }

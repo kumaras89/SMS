@@ -30,7 +30,7 @@ public class StudentEnrollmentServiceImpl implements StudentEnrollmentService {
 
 
     @Override
-    public Reader<StudentEnrollmentConfig, List<StudentInfo>> delete() {
+    public Reader<StudentEnrollmentConfig, List<StudentInfo>> findAll() {
         return Reader.of
             (sec -> Do.of(sec.getStuRepo().findAll())
                       .then(FunctionUtils
@@ -41,7 +41,7 @@ public class StudentEnrollmentServiceImpl implements StudentEnrollmentService {
     }
 
     @Override
-    public Reader<StudentRepository, Void> delete(final Long id) {
+    public Reader<StudentRepository, Void> findAll(final Long id) {
         return Reader.of(sec -> Do.of(id).thenVoid(v -> sec.delete(v)).get());
     }
 

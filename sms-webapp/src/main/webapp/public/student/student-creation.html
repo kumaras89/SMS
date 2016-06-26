@@ -1,6 +1,6 @@
-﻿<script type="text/javascript" src="/public/app-content/jquery.main.js"></script>
+﻿﻿<script type="text/javascript" src="/public/app-content/jquery.main.js"></script>
 <style>
-    .container #first_step, #second_step, #third_step, #fourth_step, #fifth_step { display: none; }
+    .container #first_step, #second_step, #third_step, #fourth_step, #fifth_step,#sixth_step { display: none; }
     .container #first_step { display: block; }
 
     .container input.error { border: 1px solid red; }
@@ -55,302 +55,7 @@
         <div class="control-group">
 
             <!-- #first_step -->
-        <div id="first_step">
-            <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                <div class="control-group,form">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><label class="control-label" for="branchName">Branch:</label></td>
-                            <td><input type="text" ng-model="student.branchName" list="branchNames" id="branchName"
-                                       placeholder="Branch"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="name">Name of The Student</label></td>
-                            <td><input type="text" id="name" ng-model="student.name" placeholder="Name"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                            <td><input type="text" id="fatherOrMotherName" ng-model="student.fatherOrMotherName"
-                                       placeholder="FatherOrMotherName"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                            <td><input type="date" id="dateOfBirth" ng-model="student.dateOfBirth" placeholder="Name"/></td>
-                        </tr>
-           <!--             <tr>
-                            <td><label class="control-label" >Age</label></td>
-                            <td><label class="control-label">{{calculateAge(student.dateOfBirth)}}</label></td>
-                        </tr>
-           -->             <tr>
-                            <td><label class="control-label" for="gender">Gender</label></td>
-                            <td>
-                                <label ng-repeat="gender in commonAttributes.gender">
-                                    <input type="radio" ng-model="student.gender" id="gender"  placeholder="gender"
-                                           value="{{gender}}"/>{{gender}}&nbsp;
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="nationality">Nationality</label></td>
-                            <td><input type="text" id="nationality" ng-model="student.nationality" placeholder="nationality"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="religion">Religion</label></td>
-                            <td>
-                                <select ng-model="student.religion" id="religion" placeholder="religion">
-                                    <option ng-repeat="religion in commonAttributes.religion" value="{{religion}}">{{religion}}</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="caste">Caste</label></td>
-                            <td>
-                                <input type="text" ng-model="student.caste" list="castes" id="caste" placeholder="caste"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                            <td>
-                                <input type="text" ng-model="student.maritalStatus" list="maritalState" id="maritalStatus" placeholder="marital status"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="mailId">Email Address</label></td>
-                            <td>
-                                <input type="email" ng-model="student.mailId" id="mailId" placeholder="mail Id"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
-                            <td>
-                                <input type="tel" ng-model="student.phoneNumber" id="phoneNumber" placeholder="mobile number"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
-                            <td>
-                                <input type="tel" ng-model="student.alternatePhoneNumber" id="alternatePhoneNumber" placeholder="alternate mobile number"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="englishFluency">Fluency in english</label></td>
-                            <td>
-                                <input type="text" ng-model="student.englishFluency" list="ratings" id="englishFluency" placeholder="english fluency"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><label class="control-label" for="otherLanguages">Other languages Known To Speak</label></td>
-                        </tr>
-                        <tbody ng-repeat="otherLanguage in student.otherLanguages">
-                        <tr>
-                            <td>
-                                <input type="text" ng-model="otherLanguage.name" id="otherLanguages"
-                                       placeholder="other languages"/>
-                            </td>
-                            <td><label>Read:&nbsp;<input type="checkbox" ng-model="otherLanguage.canRead"></label>&nbsp;&nbsp;
-                            <label>Speak:&nbsp;<input type="checkbox" ng-model="otherLanguage.canSpeak"></label>&nbsp;&nbsp;
-                            <label>Write:&nbsp;<input type="checkbox" ng-model="otherLanguage.canWrite"></label></td>
-                        </tr>
-                        </tbody>
-                        </tr>
-                        </tbody>
-                        <tr>
-                            <td colspan="2" align="right">
-                                <input class="submit" type="submit" name="submit_first" id="submit_first" value="Next" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- #second_step -->
-        <div id="second_step">
-            <div class="control-group,form">
-
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><label class="control-label" for="address1">Address 1</label></td>
-                            <td><input type="text" ng-model="student.address.address1" id="address1"
-                                       placeholder="address 1"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="address2">Address 2</label></td>
-                            <td><input type="text" ng-model="student.address.address2" id="address2"
-                                       placeholder="address 2"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="address3">Address 3</label></td>
-                            <td><input type="text" ng-model="student.address.address3" id="address3"
-                                       placeholder="address 3"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="taluk">Taluk</label></td>
-                            <td><input type="text" ng-model="student.address.taluk" id="taluk" placeholder="taluk"/></td>
-                        </tr>
-                        <tr>
-                        <tr>
-                            <td><label class="control-label" for="district">District</label></td>
-                            <td><input type="text" ng-model="student.address.district" id="district"
-                                       placeholder="district"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                            <td><input type="text" ng-model="student.address.postalCode" id="postalCode"
-                                       placeholder="postal code"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td style="min-width: 20px;" align="center" colspan="6"><label class="control-label">Qualification Details</label></td>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <td><label for="examPassed">Examination Passed</label></td>
-                            <td><label for="instituteName">Institute Name</label></td>
-                            <td><label for="groupName">Group Name</label></td>
-                            <td><label for="passingYear">Year Of Passing</label></td>
-                            <td><label for="percentageObtained">Percentage Obtained</label></td>
-                            <td><label for="remark">Remarks</label></td>
-                        </tr>
-                        <tbody ng-repeat="educationDetail in student.educationDetails">
-                        <tr>
-                            <td>
-                                <input type="text" ng-model="educationDetail.examPassed" id="examPassed" placeholder="exam passed"/>
-                            </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.instituteName"
-                                       id="instituteName" placeholder="institute name"/>
-                            </td>
-
-                            <td>
-                                <input type="text" ng-model="educationDetail.groupName" id="groupName"
-                                       placeholder="group name"/>
-                            </td>
-                            <td>
-                                <select ng-model="educationDetail.passingYear" id="passingYear">
-                                    <option ng-repeat="year in yearOfPass" value="{{year}}">{{year}}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.percentageObtained"
-                                       id="percentageObtained" placeholder="percentage obtained"/>
-                            </td>
-                            <td>
-                                <input type="text" ng-model="educationDetail.remark" id="remark"
-                                       placeholder="remark"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;</td>
-                        </tr>
-                        </tbody>
-                        <tr>
-                            <td align="left" colspan="3"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
-                            <td align="right" colspan="3"><input class="submit" type="submit" name="submit_second" id="submit_second" value="Next" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- #third_step -->
-        <div id="third_step">
-            <div class="control-group,form">
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td style="min-width: 20px;" align="center" colspan="4"><label class="control-label">Family Details</label></td>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <td><label class="control-label" for="relationShip">RelationShip</label></td>
-                            <td><label class="control-label" for="name">Name</label></td>
-                            <td><label class="control-label" for="occupation">Occupation</label></td>
-                            <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
-                        </tr>
-                        <tbody ng-repeat="guardian in student.guardians">
-                        <tr>
-                            <td><input type="text" ng-model="guardian.relationShip" list="relations" id="relationShip" placeholder="relation ship"/></td>
-                            <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
-                            <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="occupation"/></td>
-                            <td><input type="text" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="phone number"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        </tbody>
-                        <tr>
-                            <td align="left" colspan="2"><input class="submit" type="submit" name="submit_back_second" id="submit_back_second" value="Back" /></td>
-                            <td align="right" colspan="2"><input class="submit" type="submit" name="submit_third" id="submit_third" value="Next" /></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- #fourth step -->
-        <div id="fourth_step">
-            <div class="control-group,form">
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referal Details</label></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><label class="control-label">Course Name</label></td>
-                            <td><input type="text" ng-model="student.courseName" list="courseNames" id="courseName"
-                                       placeholder="course"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">Fees Scheme Name</label></td>
-                            <td><input type="text" ng-model="student.schemeName" list="schemeList" id="schemeName"
-                                       placeholder="scheme"/></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">Referred By</label></td>
-                            <td><input type="text" ng-model="student.referalName" list="marketingEmployeeList"
-                                       id="referalName" placeholder="referal name"/></td>
-                        </tr>
-                        <tr>
-                            <td align="left"><input class="button" type="button" name="submit_back_third"
-                                                    id="submit_back_third" value="Back" /></td>
-                            <td align="right"><input class="button" type="button" ng-click="updateStudent()"
-                                                     name="submit_fourth"
-                                                     id="submit_fourth" value="Next" /></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-            </div>
-        </div>
-
-        <!-- #fifth_step -->
-        <div id="fifth_step">
-            <div class="control-group,form">
+            <div id="first_step">
                 <div style="border-radius:20px;border: 2px solid #3dad9c;">
                     <div class="control-group,form">
                         <table class="table table-striped table-condensed">
@@ -362,55 +67,609 @@
                             <tbody>
                             <tr>
                                 <td><label class="control-label" for="branchName">Branch:</label></td>
-                                <td><label class="control-label">{{studentSumarized.branchName}}</label></td>
+                                <td><input type="text" ng-model="student.branchName" list="branchNames" id="branchName"
+                                           placeholder="Branch"/></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="name">Name of The Student</label></td>
-                                <td><label class="control-label">{{studentSumarized.name}}</label></td>
+                                <td><input type="text" id="name" ng-model="student.name" placeholder="Name"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
+                                <td><input type="text" id="fatherOrMotherName" ng-model="student.fatherOrMotherName"
+                                           placeholder="FatherOrMotherName"/></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                <td><label class="control-label">{{studentSumarized.dateOfBirth | date}}</label></td>
+                                <td><input type="date" id="dateOfBirth" ng-model="student.dateOfBirth" placeholder="Name"/></td>
                             </tr>
-       <!--                     <tr>
-                                <td><label class="control-label" for="age">Age</label></td>
-                                <td><label class="control-label">{{studentSumarized.age}}</label></td>
+                            <tr>
+                                <td><label class="control-label" >Age</label></td>
+                                <td><label class="control-label">{{calculateAge(student.dateOfBirth)}}</label></td>
                             </tr>
-       -->                     <tr>
+                            <tr>
                                 <td><label class="control-label" for="gender">Gender</label></td>
-                                <td><label class="control-label">{{studentSumarized.gender}}</label></td>
+                                <td>
+                                    <label ng-repeat="gender in commonAttributes.gender">
+                                        <input type="radio" ng-model="student.gender" id="gender"  placeholder="gender"
+                                               value="{{gender}}"/>{{gender}}&nbsp;
+                                    </label>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="nationality">Nationality</label></td>
-                                <td><label class="control-label">{{studentSumarized.nationality}}</label></td>
+                                <td><input type="text" id="nationality" ng-model="student.nationality" placeholder="nationality"/></td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="religion">Religion</label></td>
-                                <td><label class="control-label">{{studentSumarized.religion}}</label></td>
+                                <td>
+                                    <select ng-model="student.religion" id="religion" placeholder="religion">
+                                        <option ng-repeat="religion in commonAttributes.religion" value="{{religion}}">{{religion}}</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="caste">Caste</label></td>
-                                <td><label class="control-label">{{studentSumarized.caste}}</label></td>
+                                <td>
+                                    <input type="text" ng-model="student.caste" list="castes" id="caste" placeholder="caste"/>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
-                                <td><label class="control-label">{{studentSumarized.maritalStatus}}</label></td>
+                                <td>
+                                    <input type="text" ng-model="student.maritalStatus" list="maritalState" id="maritalStatus" placeholder="marital status"/>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="mailId">Email Address</label></td>
-                                <td><label class="control-label">{{studentSumarized.mailId}}</label></td>
+                                <td>
+                                    <input type="email" ng-model="student.mailId" id="mailId" placeholder="mail Id"/>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
-                                <td><label class="control-label">{{studentSumarized.phoneNumber}}</label></td>
+                                <td>
+                                    <input type="tel" ng-model="student.phoneNumber" id="phoneNumber" placeholder="mobile number"/>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
-                                <td><label class="control-label">{{studentSumarized.alternatePhoneNumber}}</label></td>
+                                <td>
+                                    <input type="tel" ng-model="student.alternatePhoneNumber" id="alternatePhoneNumber" placeholder="alternate mobile number"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td><label class="control-label" for="englishFluency">English Fluency</label></td>
-                                <td><label class="control-label">{{studentSumarized.englishFluency}}</label></td>
+                                <td><label class="control-label" for="englishFluency">Fluency in english</label></td>
+                                <td>
+                                    <input type="text" ng-model="student.englishFluency" list="ratings" id="englishFluency" placeholder="english fluency"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label class="control-label" for="otherLanguages">Other languages Known To Speak</label></td>
+                            </tr>
+                            <tbody ng-repeat="otherLanguage in student.otherLanguages">
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="otherLanguage.name" id="otherLanguages"
+                                           placeholder="other languages"/>
+                                </td>
+                                <td><label>Read:&nbsp;<input type="checkbox" ng-model="otherLanguage.canRead"></label>&nbsp;&nbsp;
+                                    <label>Speak:&nbsp;<input type="checkbox" ng-model="otherLanguage.canSpeak"></label>&nbsp;&nbsp;
+                                    <label>Write:&nbsp;<input type="checkbox" ng-model="otherLanguage.canWrite"></label></td>
+                            </tr>
+                            </tbody>
+                            </tr>
+                            </tbody>
+                            <tr>
+                                <td colspan="2" align="right">
+                                    <input class="submit" type="submit" name="submit_first" id="submit_first" value="Next" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #second_step -->
+            <div id="second_step">
+                <div class="control-group,form">
+
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label class="control-label" for="address1">Address 1</label></td>
+                                <td><input type="text" ng-model="student.address.address1" id="address1"
+                                           placeholder="address 1"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="address2">Address 2</label></td>
+                                <td><input type="text" ng-model="student.address.address2" id="address2"
+                                           placeholder="address 2"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="address3">Address 3</label></td>
+                                <td><input type="text" ng-model="student.address.address3" id="address3"
+                                           placeholder="address 3"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="taluk">Taluk</label></td>
+                                <td><input type="text" ng-model="student.address.taluk" id="taluk" placeholder="taluk"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="district">District</label></td>
+                                <td><input type="text" ng-model="student.address.district" id="district"
+                                           placeholder="district"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                                <td><input type="text" ng-model="student.address.postalCode" id="postalCode"
+                                           placeholder="postal code"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td style="min-width: 20px;" align="center" colspan="6"><label class="control-label">Qualification Details</label></td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td><label for="examPassed">Examination Passed</label></td>
+                                <td><label for="instituteName">Institute Name</label></td>
+                                <td><label for="groupName">Group Name</label></td>
+                                <td><label for="passingYear">Year Of Passing</label></td>
+                                <td><label for="percentageObtained">Percentage Obtained</label></td>
+                                <td><label for="remark">Remarks</label></td>
+                            </tr>
+                            <tbody ng-repeat="educationDetail in student.educationDetails">
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.examPassed" id="examPassed" placeholder="exam passed"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.instituteName"
+                                           id="instituteName" placeholder="institute name"/>
+                                </td>
+
+                                <td>
+                                    <input type="text" ng-model="educationDetail.groupName" id="groupName"
+                                           placeholder="group name"/>
+                                </td>
+                                <td>
+                                    <select ng-model="educationDetail.passingYear" id="passingYear">
+                                        <option ng-repeat="year in yearOfPass" value="{{year}}">{{year}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.percentageObtained"
+                                           id="percentageObtained" placeholder="percentage obtained"/>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="educationDetail.remark" id="remark"
+                                           placeholder="remark"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                            <tr>
+                                <td align="left" colspan="3"><input class="submit" type="submit" name="submit_back_first" id="submit_back_first" value="Back" /></td>
+                                <td align="right" colspan="3"><input class="submit" type="submit" name="submit_second" id="submit_second" value="Next" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!--#third_step-->
+            <div id="third_step">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <div class="row">
+                            <h3 align="center">Student SSLC Details</h3>
+                            <div class="col-lg-6 col-md-6">
+                                <table class=" table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Subject</th>
+                                        <th>Total marks</th>
+                                        <th>Secured marks</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="subject in student.sslcMarkDetails.subjects">
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td><input type="text" id="sslcName" ng-model="subject.name" value="{{subject.name}}"/></td>
+                                        <td><input type="number" id="totalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
+                                        <td><input type="number" id="securedMark" ng-model="subject.securedMark"></td>
+                                    </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td></td>
+                                        <td>{{ sslcTotalMark(student.sslcMarkDetails.subjects)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Presentage/Class</td>
+                                        <td></td>
+                                        <td><input type="number" id="sslcPercentage" ng-model="sslcMarkDetails.percentage" value="{{sslcMarkDetails.percentage}}"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <table class=" table-condensed" float="right">
+                                    <br>
+                                    <br>
+                                    <tbody>
+                                    <tr>
+                                        <td>Registered no</td>
+                                        <td><input type="text" id="regNo" ng-model="student.sslcMarkDetails.additionalDetails.regNumber"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year of Passing</td>
+                                        <td><input type="text" ng-model="student.sslcMarkDetails.additionalDetails.yearOfPassing"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>School Name</td>
+                                        <td><input type="text" ng-model="student.sslcMarkDetails.additionalDetails.schoolName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Place of school</td>
+                                        <td><input type="text" ng-model="student.sslcMarkDetails.additionalDetails.placeOfSchool"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Board of Examination</td>
+                                        <td><input type="text" ng-model="student.sslcMarkDetails.additionalDetails.boardOfExamination"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <div class="row">
+                            <h3 align="center">Student HSC Details</h3>
+                            <div class="col-lg-6 col-md-6">
+                                <table class=" table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Subject</th>
+                                        <th>Total marks</th>
+                                        <th>Secures marks</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="subject in student.hscMarkDetails.subjects">
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td><input type="text" id="hscName" ng-model="subject.name" value="{{subject.name}}"/></td>
+                                        <td><input type="number" id="hsctotalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
+                                        <td><input type="number" id="hscsecuredMark" ng-model="subject.securedMark"></td>
+                                    </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td></td>
+                                        <td>{{hscTotalMark(student.hscMarkDetails.subjects)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Presentage/Class</td>
+                                        <td></td>
+                                        <td><input type="number" id="hscPercentage" ng-model="hscMarkDetails.percentage" value="{{hscMarkDetails.percentage}}"/></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <table class=" table-condensed" float="right">
+                                    <br>
+                                    <br>
+                                    <tbody>
+                                    <tr>
+                                        <td>Registered no</td>
+                                        <td><input type="text" id="hscRegNo" ng-model="student.hscMarkDetails.additionalDetails.regNumber"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year of Passing</td>
+                                        <td><input type="text" id="hscYear" ng-model="student.hscMarkDetails.additionalDetails.yearOfPassing"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>School Name</td>
+                                        <td><input type="text" id="hscSchoolName" ng-model="student.hscMarkDetails.additionalDetails.schoolName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Place of school</td>
+                                        <td><input type="text" id="hscPlaceOfSchool" ng-model="student.hscMarkDetails.additionalDetails.placeOfSchool"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Board of Examination</td>
+                                        <td><input type="text" id="hscBoard" ng-model="student.hscMarkDetails.additionalDetails.boardOfExamination"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <tr>
+                            <td align="left" colspan="3"><input class="submit" type="submit" name="submit_back_second" id="submit_back_second" value="Back" /></td>
+                            <td align="right" colspan="3"><input class="submit" type="submit" name="submit_third" id="submit_third" value="Next" /></td>
+                        </tr>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <!-- #fourth_step -->
+            <div id="fourth_step">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td style="min-width: 20px;" align="center" colspan="4"><label class="control-label">Family Details</label></td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td><label class="control-label" for="relationShip">RelationShip</label></td>
+                                <td><label class="control-label" for="name">Name</label></td>
+                                <td><label class="control-label" for="occupation">Occupation</label></td>
+                                <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
+                            </tr>
+                            <tbody ng-repeat="guardian in student.guardians">
+                            <tr>
+                                <td><input type="text" ng-model="guardian.relationShip" list="relations" id="relationShip" placeholder="relation ship"/></td>
+                                <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
+                                <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="occupation"/></td>
+                                <td><input type="text" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="phone number"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                            <tr>
+                                <td align="left" colspan="2"><input class="submit" type="submit" name="submit_back_third" id="submit_back_third" value="Back" /></td>
+                                <td align="right" colspan="2"><input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="Next" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #fourth step -->
+            <div id="fifth_step">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referal Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label class="control-label">Course Name</label></td>
+                                <td><input type="text" ng-model="student.courseName" list="courseNames" id="courseName"
+                                           placeholder="course"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Fees Scheme Name</label></td>
+                                <td><input type="text" ng-model="student.schemeName" list="schemeList" id="schemeName"
+                                           placeholder="scheme"/></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Referred By</label></td>
+                                <td><input type="text" ng-model="student.referalName" list="marketingEmployeeList"
+                                           id="referalName" placeholder="referal name"/></td>
+                            </tr>
+                            <tr>
+                                <td align="left" colspan="2"><input class="submit" type="submit" name="submit_back_fourth" id="submit_back_fourth" value="Back" /></td>
+                                <td align="right" colspan="2"><input class="submit" type="submit" ng-click="updateStudent()" name="submit_fifth" id="submit_fifth" value="Next" /></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <!-- #sixth_step -->
+            <div id="sixth_step">
+                <div class="control-group,form">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <div class="control-group,form">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Personal Details</label></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><label class="control-label" for="branchName">Branch:</label></td>
+                                    <td><label class="control-label">{{studentSumarized.branchName}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="name">Name of The Student</label></td>
+                                    <td><label class="control-label">{{studentSumarized.name}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
+                                    <td><label class="control-label">{{studentSumarized.dateOfBirth | date}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="age">Age</label></td>
+                                    <td><label class="control-label">{{studentSumarized.age}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="gender">Gender</label></td>
+                                    <td><label class="control-label">{{studentSumarized.gender}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="nationality">Nationality</label></td>
+                                    <td><label class="control-label">{{studentSumarized.nationality}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="religion">Religion</label></td>
+                                    <td><label class="control-label">{{studentSumarized.religion}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="caste">Caste</label></td>
+                                    <td><label class="control-label">{{studentSumarized.caste}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
+                                    <td><label class="control-label">{{studentSumarized.maritalStatus}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="mailId">Email Address</label></td>
+                                    <td><label class="control-label">{{studentSumarized.mailId}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
+                                    <td><label class="control-label">{{studentSumarized.phoneNumber}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
+                                    <td><label class="control-label">{{studentSumarized.alternatePhoneNumber}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" for="englishFluency">English Fluency</label></td>
+                                    <td><label class="control-label">{{studentSumarized.englishFluency}}</label></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label class="control-label">Adddress 1</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.address1}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" >Address 2</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.address2}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" >Address 3</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.address3}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="taluk">Taluk</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.taluk}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="district">District</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.district}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="postalCode">Postal Code</label></td>
+                                <td><label class="control-label">{{studentSumarized.address.postalCode}}</label></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="educationDetail in studentSumarized.educationDetails track by $index">
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="examPassed">Examination Passed</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.examPassed}}</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="instituteName">Institute Name</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.instituteName}}</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="groupName">Group Name</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.groupName}}</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="passingYear">Year Of Passing</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.passingYear}}</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="percentageObtained">Percentage Obtained</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.percentageObtained}}</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="remark">Remarks</label>
+                                </td>
+                                <td><label class="control-label">{{educationDetail.remark}}</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Family Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="guardian in studentSumarized.guardians">
+                            <tr>
+                                <td><label class="control-label" for="relationShip">RelationShip with Student</label></td>
+                                <td><label class="control-label">{{guardian.relationShip}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="name">{{guardian.relationShip}}'s Name</label></td>
+                                <td><label class="control-label">{{guardian.name}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="occupation">Occupation</label></td>
+                                <td><label class="control-label">{{guardian.occupation}}</label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
+                                <td><label class="control-label">{{guardian.phoneNumber}}</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
                             </tr>
                             </tbody>
                         </table>
@@ -421,169 +680,50 @@
                     <table class="table table-striped table-condensed">
                         <thead>
                         <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referral Details</label></td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><label class="control-label">Adddress 1</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.address1}}</label></td>
+                            <td><label class="control-label">Course Name</label></td>
+                            <td><label class="control-label">{{studentSumarized.courseName}}</label></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" >Address 2</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.address2}}</label></td>
+                            <td><label class="control-label">Referred By</label></td>
+                            <td><label class="control-label">{{studentSumarized.referalName}}</label></td>
                         </tr>
                         <tr>
-                            <td><label class="control-label" >Address 3</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.address3}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="taluk">Taluk</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.taluk}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="district">District</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.district}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                            <td><label class="control-label">{{studentSumarized.address.postalCode}}</label></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Qualification Details</label></td>
-                        </tr>
-                        </thead>
-                        <tbody ng-repeat="educationDetail in studentSumarized.educationDetails track by $index">
-                        <tr>
-                            <td>
-                                <label class="control-label" for="examPassed">Examination Passed</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.examPassed}}</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="instituteName">Institute Name</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.instituteName}}</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="groupName">Group Name</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.groupName}}</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="passingYear">Year Of Passing</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.passingYear}}</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="percentageObtained">Percentage Obtained</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.percentageObtained}}</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="remark">Remarks</label>
-                            </td>
-                            <td><label class="control-label">{{educationDetail.remark}}</label></td>
+                            <td><label class="control-label">Scheme Type and Amount</label></td>
+                            <td ng-repeat="scheme in schemes | filter: { name: schemeName }"><label class="control-label">{{scheme.name}} - {{scheme.feesAmount | currency:'&#8377;'}}</label></td>
                         </tr>
                         <tr>
                             <td colspan="2">&nbsp;</td>
                         </tr>
                         </tbody>
-                    </table>
-                </div>
-                <br>
-                <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                    <table class="table table-striped table-condensed">
-                        <thead>
                         <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Family Details</label></td>
+                            <td style="min-width: 20px;"><label class="control-label">Fees Particulars</label></td>
+                            <td style="min-width: 20px;"><label class="control-label">Amount</label></td>
                         </tr>
-                        </thead>
-                        <tbody ng-repeat="guardian in studentSumarized.guardians">
-                        <tr>
-                            <td><label class="control-label" for="relationShip">RelationShip with Student</label></td>
-                            <td><label class="control-label">{{guardian.relationShip}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="name">{{guardian.relationShip}}'s Name</label></td>
-                            <td><label class="control-label">{{guardian.name}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="occupation">Occupation</label></td>
-                            <td><label class="control-label">{{guardian.occupation}}</label></td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="phoneNumber">Phone Number</label></td>
-                            <td><label class="control-label">{{guardian.phoneNumber}}</label></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br>
-            <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                <table class="table table-striped table-condensed">
-                    <thead>
-                    <tr>
-                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Course,Fees and Referral Details</label></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><label class="control-label">Course Name</label></td>
-                        <td><label class="control-label">{{studentSumarized.courseName}}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Referred By</label></td>
-                        <td><label class="control-label">{{studentSumarized.referalName}}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Scheme Type and Amount</label></td>
-                        <td ng-repeat="scheme in schemes | filter: { name: schemeName }"><label class="control-label">{{scheme.name}} - {{scheme.feesAmount | currency:'&#8377;'}}</label></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">&nbsp;</td>
-                    </tr>
-                    </tbody>
-                    <tr>
-                        <td style="min-width: 20px;"><label class="control-label">Fees Particulars</label></td>
-                        <td style="min-width: 20px;"><label class="control-label">Amount</label></td>
-                    </tr>
                         <tr ng-repeat="feesInfo in studentSumarized.feesInfos | orderBy: 'feesParticularCode'">
                             <td><label class="control-label">{{$index+1}}. {{getFeesParticularDesc(feesInfo.feesParticularCode)}}</label></td>
                             <td>
                                 <label class="control-label">{{feesInfo.amount | currency:'&#8377;'}}</label></label>
                             </td>
                         </tr>
-                </table>
-            </div>
-            <br>
-            <br>
-            <div class="control-group">
-                <div class="controls" align="left">
-                    <input class="button" type="button" name="submit_back_fourth" id="submit_back_fourth"
-                           value="Back" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a ng-click="createNewStudent()" class="btn btn-small btn-primary">Submit</a>
+                    </table>
                 </div>
-                <br><br>
+                <br>
+                <br>
+                <div class="control-group">
+                    <div class="controls" align="left">
+                        <input class="button" type="button" name="submit_back_fifth" id="submit_back_fifth"
+                               value="Back" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a ng-click="createNewStudent()" class="btn btn-small btn-primary">Submit</a>
+                    </div>
+                    <br><br>
+                </div>
             </div>
-        </div>
         </div>
     </form>
 </div>

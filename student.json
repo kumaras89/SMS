@@ -2,44 +2,18 @@
   "educationDetails": [
     {
       "examPassed": "10",
-      "instituteName": "GBHSS",
-      "groupName": "MATHS",
+      "instituteName": "test",
+      "groupName": "test",
       "passingYear": "2015",
-      "percentageObtained": "85",
-      "remark": "PASS"
-    },
-    {
-      "examPassed": "12",
-      "instituteName": "GBHSS",
-      "groupName": "MATHS",
-      "passingYear": "2016",
-      "percentageObtained": "75",
-      "remark": "PASS"
+      "percentageObtained": "89",
+      "remark": "test"
     }
   ],
   "guardians": [
     {
       "relationShip": "MOTHER",
-      "name": "Kalaiselvi",
-      "occupation": "house wife",
-      "phoneNumber": "9894444642"
-    },
-    {
-      "relationShip": "BROTHER",
-      "name": "Prabhu",
-      "occupation": "sales person",
-      "phoneNumber": "9841815484"
-    },
-    {
-      "relationShip": "SISTER",
-      "name": "Renu",
-      "occupation": "House Wife",
-      "phoneNumber": "9894444642"
-    },
-    {
-      "relationShip": "SISTER",
-      "name": "Revathi",
-      "occupation": "House Wife",
+      "name": "kalaa",
+      "occupation": "test",
       "phoneNumber": "9894444642"
     }
   ],
@@ -49,17 +23,79 @@
       "canRead": true,
       "canSpeak": true,
       "canWrite": true
-    },
-    {
-      "name": "HINDHI",
-      "canRead": true,
-      "canWrite": true
     }
   ],
+  "sslcMarkDetails": {
+    "additionalDetails": {},
+    "subjects": [
+      {
+        "name": "Tamil",
+        "totalMark": 100,
+        "securedMark": 89
+      },
+      {
+        "name": "English",
+        "totalMark": 100,
+        "securedMark": 89
+      },
+      {
+        "name": "Maths",
+        "totalMark": 100,
+        "securedMark": 89
+      },
+      {
+        "name": "Science",
+        "totalMark": 100,
+        "securedMark": 89
+      },
+      {
+        "name": "Social Science",
+        "totalMark": 100,
+        "securedMark": 89
+      }
+    ],
+    "totalMarks": 445
+  },
+  "hscMarkDetails": {
+    "additionalDetails": {},
+    "subjects": [
+      {
+        "name": "Tamil",
+        "totalMark": 200,
+        "securedMark": 189
+      },
+      {
+        "name": "English",
+        "totalMark": 200,
+        "securedMark": 189
+      },
+      {
+        "name": "S",
+        "totalMark": 200,
+        "securedMark": 189
+      },
+      {
+        "name": "SS",
+        "totalMark": 200,
+        "securedMark": 189
+      },
+      {
+        "name": "SSS",
+        "totalMark": 200,
+        "securedMark": 189
+      },
+      {
+        "name": "SSSS",
+        "totalMark": 200,
+        "securedMark": 189
+      }
+    ],
+    "totalMarks": 1134
+  },
   "age": 27,
   "branchName": "GINGEE BRANCH",
-  "name": "Ram",
-  "fatherOrMotherName": "Murugaian",
+  "name": "Ramachandran M",
+  "fatherOrMotherName": "Murugaian R",
   "dateOfBirth": "1989-12-21",
   "gender": "MALE",
   "nationality": "INDIAN",
@@ -71,82 +107,83 @@
   "alternatePhoneNumber": "9894444642",
   "englishFluency": "EXCELLENT",
   "address": {
-    "address1": "12, Navarathna Garden",
-    "address2": "Ekkaduthngal",
-    "taluk": "chennai",
-    "district": "chennai",
-    "postalCode": "600032"
+    "address1": "test",
+    "address2": "test",
+    "address3": "test",
+    "taluk": "test",
+    "district": "test",
+    "postalCode": "600613"
   },
   "courseName": "Hotel Management",
   "schemeName": "BASIC",
-  "referalName": "Ramesh",
+  "referalName": "Vijay",
   "status": "CREATED",
   "schemeCode": "SC001",
   "feesInfos": [
     {
-      "id": 4,
-      "feesParticularCode": "FP010",
-      "amount": 0
-    },
-    {
       "id": 12,
-      "feesParticularCode": "FP009",
-      "amount": 0
-    },
-    {
-      "id": 3,
-      "feesParticularCode": "FP002",
-      "amount": 5000
-    },
-    {
-      "id": 8,
-      "feesParticularCode": "FP006",
-      "amount": 5000
-    },
-    {
-      "id": 1,
-      "feesParticularCode": "FP004",
-      "amount": 5000
-    },
-    {
-      "id": 2,
-      "feesParticularCode": "FP013",
-      "amount": 0
-    },
-    {
-      "id": 11,
-      "feesParticularCode": "FP005",
-      "amount": 5000
-    },
-    {
-      "id": 6,
       "feesParticularCode": "FP012",
       "amount": 0
     },
     {
-      "id": 10,
-      "feesParticularCode": "FP003",
-      "amount": 5000
-    },
-    {
-      "id": 9,
-      "feesParticularCode": "FP008",
-      "amount": 0
-    },
-    {
-      "id": 13,
-      "feesParticularCode": "FP007",
+      "id": 6,
+      "feesParticularCode": "FP013",
       "amount": 0
     },
     {
       "id": 5,
+      "feesParticularCode": "FP008",
+      "amount": 2500
+    },
+    {
+      "id": 3,
+      "feesParticularCode": "FP003",
+      "amount": 2500
+    },
+    {
+      "id": 9,
+      "feesParticularCode": "FP007",
+      "amount": 2500
+    },
+    {
+      "id": 8,
+      "feesParticularCode": "FP010",
+      "amount": 2500
+    },
+    {
+      "id": 7,
+      "feesParticularCode": "FP004",
+      "amount": 2500
+    },
+    {
+      "id": 4,
       "feesParticularCode": "FP011",
       "amount": 0
     },
     {
-      "id": 7,
+      "id": 11,
+      "feesParticularCode": "FP009",
+      "amount": 2500
+    },
+    {
+      "id": 10,
+      "feesParticularCode": "FP002",
+      "amount": 2500
+    },
+    {
+      "id": 2,
+      "feesParticularCode": "FP005",
+      "amount": 2500
+    },
+    {
+      "id": 1,
       "feesParticularCode": "FP001",
-      "amount": 5000
+      "amount": 2500
+    },
+    {
+      "id": 13,
+      "feesParticularCode": "FP006",
+      "amount": 2500
     }
   ],
   "branchCode": "GNE01",

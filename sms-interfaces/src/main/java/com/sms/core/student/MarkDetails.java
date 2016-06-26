@@ -10,6 +10,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "SMS_TR_MARK_DETAILS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "CLASS")
 public class MarkDetails {
 
     @Id
@@ -17,7 +19,7 @@ public class MarkDetails {
     @Column(name = "MD_ID")
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "SU_MD_ID")
     private List<Subject> subjects;
 

@@ -50,8 +50,8 @@
                     }
                 });
             }])
-        .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$state',
-            function ($scope, $stateParams, CrudService, AdminService, $state) {
+        .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
+            function ($scope, $stateParams, CrudService, AdminService, $location) {
 
                 $scope.loadStudent = function () {
                     CrudService.studentService.GetById($stateParams.id).then(function (res) {
@@ -80,7 +80,7 @@
                 };
 
                 $scope.goToFms = function(code) {
-                    $state.go('fms', { category : 'STUDENT', uploaderid : code });
+                    $location.path('/fms/STUDENT/'+code);
                 }
 
 
@@ -92,6 +92,21 @@
                 $scope.student.educationDetails = [{},{},{},{}];
                 $scope.student.guardians = [{},{},{},{}];
                 $scope.student.otherLanguages = [{},{},{}];
+
+                $scope.student.sslcMarkDetails = {};
+                $scope.student.sslcMarkDetails.additionalDetails = {};
+                $scope.student.hscMarkDetails = {};
+                $scope.student.hscMarkDetails.additionalDetails = {};
+                $scope.student.sslcMarkDetails.subjects = [{'name':'Tamil','totalMark':100},
+                                                           {'name':'English','totalMark':100},
+                                                           {'name':'Maths','totalMark':100},
+                                                           {'name':'Science','totalMark':100},
+                                                           {'name':'Social Science','totalMark':100},
+                                                           {}
+                                                          ];
+                $scope.student.hscMarkDetails.subjects = [{'name':'Tamil','totalMark':200},
+                                                          {'name':'English','totalMark':200}
+                                                           ,{},{},{},{},{},{}];
 
                 $scope.createNewStudent = function () {
                     CrudService.studentService.Create($scope.studentSumarized).then(function () {
@@ -108,7 +123,27 @@
                     months += today.getMonth();
                     $scope.student.age = Math.ceil(months <= 0 ? '' : months / 12) || '';
                     return $scope.student.age;
-                }
+                };
+
+                $scope.totalValue = function (subjects) {
+                    var sum = 0;
+                    angular.forEach(subjects, function (subject, index) {
+                        if (subject.securedMark) {
+                            sum += subject.securedMark;
+                        }
+                    });
+                    return sum;
+                };
+
+                $scope.sslcTotalMark = function (subjects) {
+                    $scope.student.sslcMarkDetails.totalMarks = $scope.totalValue(subjects);
+                    return $scope.student.sslcMarkDetails.totalMarks;
+                };
+
+                $scope.hscTotalMark = function (subjects) {
+                    $scope.student.hscMarkDetails.totalMarks = $scope.totalValue(subjects);
+                    return $scope.student.hscMarkDetails.totalMarks;
+                };
 
                 $scope.getFeesParticularDesc = function (feesParticularCode){
                     return AdminService.getFeesParticularDesc(feesParticularCode);
@@ -132,6 +167,14 @@
                     $scope.studentSumarized.otherLanguages = _.filter($scope.student.otherLanguages, function(ed){
                        return  ed.name != undefined && ed.name != '';
                    });
+
+                    $scope.studentSumarized.sslcMarkDetails.subjects = _.filter($scope.student.sslcMarkDetails.subjects, function(ed){
+                        return  ed.name != undefined && ed.name != '';
+                    });
+
+                    $scope.studentSumarized.hscMarkDetails.subjects = _.filter($scope.student.hscMarkDetails.subjects, function(ed){
+                        return  ed.name != undefined && ed.name != '';
+                    });
 
                 };
 

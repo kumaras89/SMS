@@ -39,6 +39,8 @@ public class StudentEnrollmentConverter {
                                                   .toString())
             .with(Student::getCreatedDate, new Date())
             .with(Student::getLastModifiedDate, new Date())
+            .on(Student::getSslcMarkDetails).set(studentInfo.getSslcMarkDetails())
+            .on(Student::getHscMarkDetails).set(studentInfo.getHscMarkDetails())
             .build();
     }
 
@@ -69,7 +71,11 @@ public class StudentEnrollmentConverter {
             .with(StudentInfo::getStatus, student.getStatus().name())
             .with(StudentInfo::getCreatedDate, student.getCreatedDate())
             .with(StudentInfo::getLastModifiedDate, student.getLastModifiedDate())
-            .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode()).build();
+            .with(StudentInfo::getMarketingEmployeeCode, student.getMarketingEmployee().getCode())
+            .on(StudentInfo::getHscMarkDetails).set(student.getHscMarkDetails())
+            .on(StudentInfo::getSslcMarkDetails).set(student.getSslcMarkDetails())
+            .on(StudentInfo::getOtherLanguages).set(student.getOtherLanguages())
+                .build();
     }
 
 }

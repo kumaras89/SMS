@@ -26,8 +26,8 @@ public class StudentInfo {
     private String mailId;
     private String englishFluency;
     private Set<OtherLanguage> otherLanguages;
-    private MarkDetails tenthMarkDetails;
-    private MarkDetails tewelthMarkDetails;
+    private SSLCMarkDetails sslcMarkDetails;
+    private HSCMarkDetails hscMarkDetails;
     private String phoneNumber;
     private String alternatePhoneNumber;
     private Set<EducationDetail> educationDetails;
@@ -156,11 +156,11 @@ public class StudentInfo {
         return feesInfos;
     }
 
-    public MarkDetails getTenthMarkDetails() {
-        return tenthMarkDetails;
+    public SSLCMarkDetails getSslcMarkDetails() {
+        return sslcMarkDetails;
     }
 
-    public MarkDetails getTewelthMarkDetails() {
-        return tewelthMarkDetails;
+    public HSCMarkDetails getHscMarkDetails() {
+        return hscMarkDetails;
     }
 }
