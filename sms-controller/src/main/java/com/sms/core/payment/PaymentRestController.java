@@ -1,8 +1,11 @@
 package com.sms.core.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by Ganesan on 25/06/16.
@@ -18,13 +21,15 @@ public class PaymentRestController {
     }
 
 
-    public ResponseEntity<PaymentDetail> makePayment(PaymentInfo paymentInfo) {
-//        return paymentService.makePayment(paymentInfo);
-        return null;
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public PaymentDetail makePayment(@RequestBody @Valid PaymentInfo paymentInfo) {
+        return paymentService.makePayment(paymentInfo);
+
     }
 
-    public ResponseEntity<PaymentDetail> paymentDetail(String studentId) {
-//        return paymentService.makePayment(paymentInfo);
-        return null;
+    @RequestMapping(value = "/{studentId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public PaymentDetail paymentDetail(@PathVariable("studentId")  String studentId) {
+        return paymentService.getPaymentDetail(studentId);
+
     }
 }

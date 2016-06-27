@@ -249,4 +249,8 @@ public class Student extends BaseModel {
     public HSCMarkDetails getHscMarkDetails() {
         return hscMarkDetails;
     }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
 }

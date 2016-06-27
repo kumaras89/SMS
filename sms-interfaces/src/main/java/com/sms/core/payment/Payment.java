@@ -1,6 +1,9 @@
 package com.sms.core.payment;
 
 import com.sms.core.common.Builder;
+import com.sms.core.common.FList;
+import com.sms.core.common.Reader;
+import com.sms.core.feesparticular.FeesInfo;
 import com.sms.core.student.Student;
 
 import javax.persistence.*;
@@ -87,8 +90,33 @@ public class Payment {
         return admittedBy;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
     public static Builder<Payment> builder() {
         return Builder.of(Payment.class);
+    }
+
+    public static Builder<Payment> builder(Payment payment) {
+        return Builder.of(Payment.class, payment);
+    }
+
+    public static Payment build(PaymentInfo payment) {
+        return builder()
+                .on(Payment::getAmount).set(payment.getAmount())
+                .on(Payment::getDdNumber).set(payment.getDdNumber())
+                .on(Payment::getBankName).set(payment.getBankName())
+                .on(Payment::getPaidDate).set(payment.getPaidDate())
+                .on(Payment::getBankBranchName).set(payment.getBankBranchName())
+                .on(Payment::getAdmittedOrRejectedBy).set(payment.getAdmittedOrRejectedBy())
+                .on(Payment::getApprovedBy).set(payment.getApprovedBy())
+                .on(Payment::getAdmittedBy).set(payment.getAdmittedBy())
+                .build();
     }
 
 

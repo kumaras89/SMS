@@ -1,5 +1,7 @@
 package com.sms.core.payment;
 
+import com.sms.core.common.Builder;
+import com.sms.core.common.FList;
 import com.sms.core.feesparticular.FeesInfo;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -60,6 +62,22 @@ public class PaymentInfo {
 
     public String getAdmittedBy() {
         return admittedBy;
+    }
+
+
+    public static PaymentInfo build(Payment payment) {
+        return Builder.of(PaymentInfo.class)
+                .on(PaymentInfo::getStudentCode).set(payment.getStudent().getCode())
+                .on(PaymentInfo::getAmount).set(payment.getAmount())
+                .on(PaymentInfo::getFeesInfos).set(FList.of(payment.getPaymentFees()).map(FeesInfo::build).get())
+                .on(PaymentInfo::getDdNumber).set(payment.getDdNumber())
+                .on(PaymentInfo::getBankName).set(payment.getBankName())
+                .on(PaymentInfo::getPaidDate).set(payment.getPaidDate())
+                .on(PaymentInfo::getBankBranchName).set(payment.getBankBranchName())
+                .on(PaymentInfo::getAdmittedOrRejectedBy).set(payment.getAdmittedOrRejectedBy())
+                .on(PaymentInfo::getApprovedBy).set(payment.getApprovedBy())
+                .on(PaymentInfo::getAdmittedBy).set(payment.getAdmittedBy())
+                .build();
     }
 
 

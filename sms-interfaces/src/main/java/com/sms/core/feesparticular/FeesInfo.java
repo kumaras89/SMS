@@ -17,6 +17,13 @@ public class FeesInfo {
     @NotNull(message = "Amount is Empty")
     private BigDecimal amount;
 
+    public FeesInfo() {
+    }
+
+    public FeesInfo(String feesParticularCode, BigDecimal amount) {
+        this.feesParticularCode = feesParticularCode;
+        this.amount = amount;
+    }
 
     public static Builder<FeesInfo> builder() {
         return Builder.of(FeesInfo.class);
@@ -27,6 +34,10 @@ public class FeesInfo {
                 .with(FeesInfo::getId, fees.getId())
                 .with(FeesInfo::getFeesParticularCode, fees.getFeesParticular().getCode())
                 .with(FeesInfo::getAmount, fees.getAmount());
+    }
+
+    public static FeesInfo build(Fees fees) {
+        return toBuilder(fees).build();
     }
 
     public String getFeesParticularCode() {

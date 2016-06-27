@@ -3,6 +3,7 @@ package com.sms.core.common;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -15,7 +16,7 @@ public class FunctionUtils {
         return t -> Optional.of(function.apply(t.get()));
     }
 
-    public static <T, R> Function<List<T>, List<R>> asList(final Function<T, R> mapper) {
+    public static <T, R> Function<Collection<? extends T>, List<R>> asList(final Function<T, R> mapper) {
         return t -> t.stream().map(mapper).collect(Collectors.toList());
     }
 
