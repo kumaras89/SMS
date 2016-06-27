@@ -1,11 +1,9 @@
 package com.sms.core.payment;
 
-import com.sms.core.common.Do;
 import com.sms.core.common.FList;
 import com.sms.core.repositery.FeesParticularRepository;
 import com.sms.core.repositery.StudentRepository;
 import com.sms.core.student.Student;
-import com.sms.core.student.StudentFeesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,12 +37,12 @@ public class PaymentServiceImpl implements PaymentService {
                 .build();
         student.getPayments().add(payment);
         studentRepository.saveAndFlush(student);
-        return PaymentDetailCalculator.getPaymentDetail(student);
+        return PaymentDetailCalculator.calculatePaymentDetail(student);
     }
 
 
     @Override
     public PaymentDetail getPaymentDetail(String studentCode) {
-        return PaymentDetailCalculator.getPaymentDetail(studentRepository.findByCode(studentCode));
+        return PaymentDetailCalculator.calculatePaymentDetail(studentRepository.findByCode(studentCode));
     }
 }

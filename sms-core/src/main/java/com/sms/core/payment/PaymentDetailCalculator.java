@@ -25,18 +25,8 @@ public class PaymentDetailCalculator {
                 .then(PaymentDetailCalculator::add).get();
     }
 
-    public static FeesDetail minus(FeesDetail first, FeesDetail second) {
-        return Do.of(FList.of(Arrays.asList(first, second))
-                .map(PaymentDetailCalculator::feesDetailToMap)
-                .get())
-                .then(maps -> mapsToMap(maps, BigDecimal::subtract))
-                .then(PaymentDetailCalculator::mapToFeesDetail)
-                .get();
-    }
-
-    public static PaymentDetail getPaymentDetail(Student student) {
-        return Do.of(PaymentDetail.builder()
-                .on(PaymentDetail::getActualPaymentDetail).set(actualPaymentDetail(student.getStudentFees()))
+    public static PaymentDetail calculatePaymentDetail(Student student) {
+        return Do.of(PaymentDetail.builder().on(PaymentDetail::getActualPaymentDetail).set(actualPaymentDetail(student.getStudentFees()))
                 .on(PaymentDetail::getPaidDetail).set(paidDetail(student.getPayments()))
                 .on(PaymentDetail::getPaymentHistory).set(FList.of(student.getPayments()).map(PaymentInfo::build).get())
                 .build())
@@ -47,41 +37,18 @@ public class PaymentDetailCalculator {
                 .get();
     }
 
-    public static Map<String, BigDecimal> mapsToMap(List<Map<String, BigDecimal>> maps, BinaryOperator<BigDecimal> merger) {
-        return maps.stream()
-                .map(Map::entrySet)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        merger
-                ));
-    }
-
-
     public static Map<String, BigDecimal> feesDetailToMap(FeesDetail feesDetail) {
         return feesDetail.getDetailedFees().stream().collect(Collectors.toMap(FeesInfo::getFeesParticularCode, FeesInfo::getAmount));
     }
 
-    public static Map<String, BigDecimal> feesDetailsToMap(List<FeesDetail> feesDetails) {
-        return Do.of(feesDetails)
-                .then(fd -> FList.of(fd)
-                        .map(PaymentDetailCalculator::feesDetailToMap)
-                        .get())
-                .then(maps -> mapsToMap(maps, BigDecimal::add))
+    public static FeesDetail minus(FeesDetail first, FeesDetail second) {
+        return Do.of(FList.of(Arrays.asList(first, second))
+                .map(PaymentDetailCalculator::feesDetailToMap)
+                .get())
+                .then(maps -> mapsToMap(maps, BigDecimal::subtract))
+                .then(PaymentDetailCalculator::mapToFeesDetail)
                 .get();
     }
-
-    private static FeesDetail mapToFeesDetail(Map<String, BigDecimal> map) {
-        return Do.of(map)
-                .then(merged -> merged.entrySet()
-                        .stream()
-                        .map(e -> new FeesInfo(e.getKey(), e.getValue()))
-                        .collect(Collectors.toList()))
-                .then(PaymentDetailCalculator::asFeesDetail)
-                .get();
-    }
-
 
     public static FeesDetail add(List<FeesDetail> feesDetails) {
         return Do.of(feesDetails)
@@ -105,11 +72,43 @@ public class PaymentDetailCalculator {
                 .get();
     }
 
-    public static FeesDetail asFeesDetail(List<FeesInfo> feesInfos) {
+    //private utility methods
+
+    private static FeesDetail asFeesDetail(List<FeesInfo> feesInfos) {
         return new FeesDetail(feesInfos.stream().map(FeesInfo::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add), feesInfos);
     }
 
-    public static List<FeesInfo> convertAsFeesInfo(Collection<? extends Fees> fees) {
+    private static List<FeesInfo> convertAsFeesInfo(Collection<? extends Fees> fees) {
         return FList.of(fees).map(FeesInfo::build).get();
+    }
+
+    private static Map<String, BigDecimal> feesDetailsToMap(List<FeesDetail> feesDetails) {
+        return Do.of(feesDetails)
+                .then(fd -> FList.of(fd)
+                        .map(PaymentDetailCalculator::feesDetailToMap)
+                        .get())
+                .then(maps -> mapsToMap(maps, BigDecimal::add))
+                .get();
+    }
+
+    private static FeesDetail mapToFeesDetail(Map<String, BigDecimal> map) {
+        return Do.of(map)
+                .then(merged -> merged.entrySet()
+                        .stream()
+                        .map(e -> new FeesInfo(e.getKey(), e.getValue()))
+                        .collect(Collectors.toList()))
+                .then(PaymentDetailCalculator::asFeesDetail)
+                .get();
+    }
+
+    private static Map<String, BigDecimal> mapsToMap(List<Map<String, BigDecimal>> maps, BinaryOperator<BigDecimal> merger) {
+        return maps.stream()
+                .map(Map::entrySet)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        merger
+                ));
     }
 }

@@ -29,7 +29,7 @@ public class Student extends BaseModel {
     private String fatherOrMotherName;
 
     @Column(name = "ST_AGE")
-    private int age;
+    private Integer age;
 
     @Column(name = "ST_PHONE_NUMBER")
     private String phoneNumber;
@@ -146,7 +146,7 @@ public class Student extends BaseModel {
         return name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
