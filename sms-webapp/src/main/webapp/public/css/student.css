@@ -1,0 +1,14 @@
+.content-box{
+    border-radius:20px;
+    border: 2px solid #3dad9c;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.sno{width: 5px;}
+.subject{width: 15px;}
+.total{width: 15px;}
+.score{width: 15px;}
