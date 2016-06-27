@@ -15,12 +15,12 @@ public class StudentEnrollmentService {
     public static Reader<StudentEnrollmentConfig, StudentInfo> save(final StudentInfo studentInfo) {
         return Reader.of
             (sec -> {
-                return Do.of(studentInfo)
-                        .then(StudentEnrollmentConverter::convertTo)
-                        .then(s -> StudentUpdater.updateStudent(studentInfo).apply(Tuple.of(sec,s)))
-                        .then(student -> sec.getStuRepo().save(student))
-                        .then(StudentEnrollmentConverter::convertTo).get();
-                }
+                        return Do.of(studentInfo)
+                                .then(StudentEnrollmentConverter::convert)
+                                .then(s -> StudentUpdater.updateStudent(studentInfo).apply(Tuple.of(sec, s)))
+                                .then(student -> sec.getStuRepo().save(student))
+                                .then(StudentEnrollmentConverter::convertTo).get();
+                    }
             );
     }
 

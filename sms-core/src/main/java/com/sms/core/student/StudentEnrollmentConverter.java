@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class StudentEnrollmentConverter {
 
-    public static Student convertTo(final StudentInfo studentInfo) {
+    public static Student convert(final StudentInfo studentInfo) {
 
         return Student.builder()
             .with(Student::getName, studentInfo.getName())
