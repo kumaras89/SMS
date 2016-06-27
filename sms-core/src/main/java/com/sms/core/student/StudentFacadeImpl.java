@@ -17,27 +17,23 @@ public class StudentFacadeImpl implements StudentFacade {
     @Autowired
     private StudentEnrollmentConfig seConfig;
 
-    @Autowired
-    private StudentEnrollmentService service;
-
-
     @Override
     public StudentInfo save(final StudentInfo studentInfo) {
-        return service.save(studentInfo).with(seConfig);
+        return StudentEnrollmentService.save(studentInfo).with(seConfig);
     }
 
     @Override
     public List<StudentInfo> findAll() {
-        return service.findAll().with(seConfig);
+        return StudentEnrollmentService.findAll().with(seConfig);
     }
 
     @Override
     public Void delete(final Long id) {
-        return service.findAll(id).with(seConfig.getStuRepo());
+        return StudentEnrollmentService.findAll(id).with(seConfig.getStuRepo());
     }
 
     @Override
     public Optional<StudentInfo> findById(final Long id) {
-        return service.findById(id).with(seConfig.getStuRepo());
+        return StudentEnrollmentService.findById(id).with(seConfig.getStuRepo());
     }
 }

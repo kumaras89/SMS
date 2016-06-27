@@ -31,6 +31,10 @@ public class IdCardInfo {
                 .with(IdCardInfo::getLastModifiedDate, idCard.getLastModifiedDate());
     }
 
+    public static IdCardInfo build(final IdCard idCard) {
+        return toBuilder(idCard).build();
+    }
+
     public Long getId() {
         return id;
     }

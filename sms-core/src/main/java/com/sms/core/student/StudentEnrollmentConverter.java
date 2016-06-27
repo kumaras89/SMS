@@ -2,7 +2,6 @@ package com.sms.core.student;
 
 import com.sms.core.common.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -33,10 +32,6 @@ public class StudentEnrollmentConverter {
             .with(Student::getStatus, StudentStatus.valueOf(studentInfo.getStatus()))
             .with(Student::getCreatedDate, studentInfo.getCreatedDate())
             .with(Student::getLastModifiedDate, studentInfo.getLastModifiedDate())
-            .with(Student::getCode, new StringBuilder(studentInfo.getBranchCode())
-                                                  .append(studentInfo.getCourseCode())
-                                                  .append(LocalDateTime.now().getYear())
-                                                  .toString())
             .with(Student::getCreatedDate, new Date())
             .with(Student::getLastModifiedDate, new Date())
             .on(Student::getSslcMarkDetails).set(studentInfo.getSslcMarkDetails())
