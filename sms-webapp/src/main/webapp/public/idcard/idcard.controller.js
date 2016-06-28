@@ -7,6 +7,20 @@
             function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
 
                 $scope.search = function () {
+                    $scope.idcard = {};
+                    if($scope.uploaderId !== ''){
+                        $scope.idcard.uploaderId = $scope.uploaderId;
+                    }
+                    if($scope.status !== ''){
+                        $scope.idcard.status = $scope.status;
+                    }
+                    if($scope.uploaderCategory !== ''){
+                        $scope.idcard.uploaderCategory = $scope.uploaderCategory;
+                    }
+                    if($scope.year !== ''){
+                        $scope.idcard.year = $scope.year;
+                    }
+
                     $scope.tableParams.reload()
                 };
 

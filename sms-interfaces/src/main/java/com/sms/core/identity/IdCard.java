@@ -3,9 +3,7 @@ package com.sms.core.identity;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -22,15 +20,18 @@ public class IdCard extends BaseModel {
     private Long fmsId;
 
     @Column(name = "IC_VALIDITY")
+    @Temporal(TemporalType.DATE)
     private Date validUpto;
 
     @Column(name = "IC_STATUS")
     private String status;
 
     @Column(name = "IC_CREATED_DATE")
+    @Temporal(TemporalType.DATE)
     private Date createdDate;
 
     @Column(name = "IC_LAST_MODIFIED_DATE")
+    @Temporal(TemporalType.DATE)
     private Date lastModifiedDate;
 
     public static Builder<IdCard> builder() {
