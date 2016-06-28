@@ -157,7 +157,10 @@
                     $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
                     $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
                     $scope.studentSumarized = {};
+
+                    //deep copy of student
                     angular.copy($scope.student,$scope.studentSumarized);
+
                     $scope.studentSumarized.educationDetails = _.filter($scope.student.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });

@@ -22,7 +22,26 @@
             'ScholarshipEnrollment',
             'IDCard'])
         .config(config)
-        .run(run);
+        .run(run)
+        .directive("branchName", ['$rootScope','AdminService', function ($rootScope, AdminService) {
+            return {
+                restrict: 'A',
+                scope :{
+                    bn : '=bn'
+                },
+                controller:function($scope){
+                    $scope.user_role = $rootScope.globals.currentUser.otherDetails.role;
+                },
+                link: function(scope){
+                    alert();
+                    $scope.$watch('bn',function(data){
+                       console.log(data)
+                    },true)
+                },
+                templateUrl: 'student-admin-user.html'
+            }
+        }])
+    ;
 
     config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider'];
     function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
