@@ -46,7 +46,7 @@ public class StudentScholarInfo
     private String studentPhoneNumber;
 
     @NotNull(message = "Parent Phone number is empty")
-    @Size(min = 10,max=13, message = "parent Phone number is empty")
+    @Size(min = 0, message = "parent Phone number is empty")
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")

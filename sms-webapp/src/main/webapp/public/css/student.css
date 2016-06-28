@@ -12,3 +12,11 @@
 .subject{width: 15px;}
 .total{width: 15px;}
 .score{width: 15px;}
+.table-condensed>tbody>tr>td>.firstcol{
+    padding: 5px;
+    width: 60%;
+}
+.firstcol{
+    padding: 5px;
+    width: 60%;
+}
