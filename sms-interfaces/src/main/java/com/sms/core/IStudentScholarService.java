@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface IStudentScholarService
 {
 
-    Optional<StudentScholarInfo> findById(final Long id);
+    Optional<StudentScholarInfo> findById(final String applicationNumber);
 
     List<StudentScholarInfo> findAll();
 

@@ -15,8 +15,8 @@ import java.util.Set;
 @Table(name = "SMS_TR_STUDENT_SCHOLARSHIP")
 public class StudentScholar extends BaseModel
 {
-    @Column(name = "STS_CODE",unique = true)
-    private String code;
+    @Column(name = "STS_APPLICATION_NUMBER",unique = true)
+    private String applicationNumber;
 
     @Column(name = "STS_NAME")
     private String name;
@@ -72,13 +72,19 @@ public class StudentScholar extends BaseModel
     @Column(name = "STS_EMAILID" ,unique = true)
     private String emailId;
 
+    @Column(name = "STS_CREATION_DATE")
+    private Date createdDate;
+
+    @Column(name = "STS_LAST_MODIFIED_DATE")
+    private Date lastModifiedDate;
+
 
     public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
 
     public static Builder<StudentScholar> toBuilder(final StudentScholarInfo studentScholarInfo) {
         return builder()
                 .with(StudentScholar::getId, studentScholarInfo.getId())
-                .with(StudentScholar::getCode, studentScholarInfo.getCode())//change
+                .with(StudentScholar::getApplicationNumber, studentScholarInfo.getApplicationNumber())//change
                 .with(StudentScholar::getName, studentScholarInfo.getName())
                 .with(StudentScholar::getDateOfBirth, studentScholarInfo.getDateOfBirth())
                 .with(StudentScholar::getAge, studentScholarInfo.getAge())
@@ -94,11 +100,13 @@ public class StudentScholar extends BaseModel
                 .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName())
                 .with(StudentScholar::getCasteDescription,studentScholarInfo.getCasteDescription())
                 .with(StudentScholar::getAnnualIncome,studentScholarInfo.getAnnualIncome())
-                .with(StudentScholar::getEmailId,studentScholarInfo.getEmailId());
+                .with(StudentScholar::getEmailId,studentScholarInfo.getEmailId())
+                .on(StudentScholar::getLastModifiedDate).set(new Date())
+                .on(StudentScholar::getCreatedDate).set(new Date());
     }
 
-    public String getCode() {
-        return code;
+    public String getApplicationNumber() {
+        return applicationNumber;
     }
 
     public String getName() {
@@ -163,5 +171,13 @@ public class StudentScholar extends BaseModel
 
     public String getEmailId() {
         return emailId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
     }
 }

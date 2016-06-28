@@ -40,15 +40,15 @@ public class StudentScholarServiceImpl implements IStudentScholarService
     }
 
     @Override
-    public Optional<StudentScholarInfo> findById(Long id) {
-        return Optional.of(this.studentScholarRepository.findOne(id)).map(destinationConverter::convert);
+    public Optional<StudentScholarInfo> findById(String applicationNumber) {
+        return Optional.of(this.studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber)).map(destinationConverter::convert);
     }
 
     @Override
     public Optional<StudentScholarInfo> save(StudentScholarInfo entityType) {
-        StudentScholar alreadyexist = studentScholarRepository.findByCodeIgnoreCase(entityType.getCode());
+        StudentScholar alreadyexist = studentScholarRepository.findByApplicationNumberIgnoreCase(entityType.getApplicationNumber());
         if(alreadyexist != null) {
-            throw new SmsException("code", String.format("Scholarship already exist for %s application number", entityType.getCode()));
+            throw new SmsException("applicationNumber", String.format("Scholarship already exist for %s application number", entityType.getApplicationNumber()));
         }
         return  Optional.of(studentScholarRepository.saveAndFlush(sourceConverter.convert(entityType))).map(destinationConverter::convert);
     }

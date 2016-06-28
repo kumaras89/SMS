@@ -4,6 +4,7 @@ import com.sms.core.common.Builder;
 import org.hibernate.validator.constraints.Email;
 
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
@@ -18,7 +19,7 @@ public class StudentScholarInfo
 
     @NotNull(message = "Scholar code is empty")
     @Size(min = 1, message = "Scholar code is empty")
-    private String code;
+    private String applicationNumber;
 
     @NotNull(message = "Scholar name is empty")
     @Size(min = 1, message = "Scholar name is empty")
@@ -49,7 +50,7 @@ public class StudentScholarInfo
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")
-    @Size(min = 1,max=13, message = "Parent name is empty")
+    @Size(min = 1,max=50, message = "Parent name is Exceeds")
     private String fatherOrMotherName;
 
 
@@ -82,8 +83,13 @@ public class StudentScholarInfo
     @NotNull(message = "Enter atleast one Educational Details")
     private Set<EducationDetail> educationDetails;
 
+
+    private Date createdDate;
+
+    private Date lastModifiedDate;
+
     @Valid
-    @NotNull
+    @NotNull(message = "Address is Empty")
     private Address address;
 
     public StudentScholarInfo()
@@ -98,7 +104,7 @@ public class StudentScholarInfo
     public static Builder<StudentScholarInfo> toBuilder(final StudentScholar studentScholar) {
         return builder()
                 .with(StudentScholarInfo::getId, studentScholar.getId())
-                .with(StudentScholarInfo::getCode, studentScholar.getCode())
+                .with(StudentScholarInfo::getApplicationNumber, studentScholar.getApplicationNumber())
                 .with(StudentScholarInfo::getName, studentScholar.getName())
                 .with(StudentScholarInfo::getDateOfBirth, studentScholar.getDateOfBirth())
                 .with(StudentScholarInfo::getAge, studentScholar.getAge())
@@ -114,15 +120,17 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName())
                 .with(StudentScholarInfo::getCasteDescription,studentScholar.getCasteDescription())
                 .with(StudentScholarInfo::getEmailId,studentScholar.getEmailId())
-                .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome());
+                .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome())
+                .on(StudentScholarInfo::getLastModifiedDate).set(studentScholar.getLastModifiedDate())
+                .on(StudentScholarInfo::getCreatedDate).set(studentScholar.getCreatedDate());
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getCode() {
-        return code;
+    public String getApplicationNumber() {
+        return applicationNumber;
     }
 
     public String getName() {
@@ -181,6 +189,14 @@ public class StudentScholarInfo
 
     public String getEmailId() {
         return emailId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
     }
 }
 

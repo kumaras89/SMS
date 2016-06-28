@@ -46,10 +46,10 @@ public class StudentScholarRestController
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StudentScholarInfo> get(@PathVariable("id") long id) {
+    @RequestMapping(value = "/{applicationNumber}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StudentScholarInfo> get(@PathVariable("applicationNumber") String applicationNumber) {
         return studentScholar.
-                findById(id).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                findById(applicationNumber).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
