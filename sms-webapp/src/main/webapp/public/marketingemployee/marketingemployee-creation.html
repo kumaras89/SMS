@@ -9,20 +9,20 @@
         <table width="75%" class="table table-striped table-bordered table-hover">
             <tr class="even gradeA">
                 <td><label class="control-label" for="code">Code:</label></td>
-                <td><input type="text" id="code" ng-model="marketingEmployee.code" placeholder="Code"/></td>
+                <td><input type="text" id="code" ng-model="marketingEmployee.code" placeholder="Code"  maxlength="10" style="width:94px" /></td>
             </tr>
 
             <tr class="even gradeA">
                 <td><label class="control-label" for="name">Name:</label></td>
-                <td><input type="text" id="name" ng-model="marketingEmployee.name" placeholder="Name"/></td>
+                <td><input type="text" id="name" ng-model="marketingEmployee.name" placeholder="Name" maxlength="30" style="width:275px" /></td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="designation">Designation:</label></td>
-                <td><input type="text" id="designation" ng-model="marketingEmployee.designation" list="designationList" placeholder="Designation"/></td>
+                <td><input type="text" id="designation" ng-model="marketingEmployee.designation" list="designationList" placeholder="Designation" maxlength="20"  style="width:188px" /></td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="phoneNumber">Phone Number:</label></td>
-                <td><input type="text" id="phoneNumber" ng-model="marketingEmployee.phoneNumber" placeholder="phone number"/></td>
+                <td><input type="tel" id="phoneNumber" ng-model="marketingEmployee.phoneNumber" placeholder="Phone number" maxlength="13" style="width:125px" /></td>
             </tr>
         </table>
         <br>
@@ -36,30 +36,31 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><label class="control-label" for="address1">Address 1</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address1" id="address1" placeholder="address 1"/></td>
+                    <td><label class="control-label" for="address1">Address Line 1</label></td>
+                    <td><input type="text" ng-model="marketingEmployee.address.address1" id="address1" placeholder="Address Line 1" maxlength="20" style="width:188px"/></td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="address2">Address 2</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address2" id="address2" placeholder="address 2"/></td>
+                    <td><label class="control-label" for="address2">Address Line 2</label></td>
+                    <td><input type="text" ng-model="marketingEmployee.address.address2" id="address2" placeholder="Address Line 2" maxlength="20" style="width:188px"/></td>
                 </tr>
                 <tr>
-                    <td><label class="control-label" for="address3">Address 3</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address3" id="address3" placeholder="address 3"/></td>
+                    <td><label class="control-label" for="address3">Address Line 3</label></td>
+                    <td><input type="text" ng-model="marketingEmployee.address.address3" id="address3" placeholder="Address Line 3" maxlength="20" style="width:188px"/></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="taluk">Taluk</label></td>
                     <td><input type="text" ng-model="marketingEmployee.address.taluk" id="taluk"
-                               placeholder="taluk"/></td>
+                               placeholder="Taluk" maxlength="25" style="width:233px"/></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="district">District</label></td>
                     <td><input type="text" ng-model="marketingEmployee.address.district" id="district"
-                               placeholder="district"/></td>
+                               placeholder="District" maxlength="25" style="width:233px"/></td>
                 </tr>
                 <tr>
                     <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.postalCode" id="postalCode" placeholder="postal code"/></td>
+                    <td><input type="text" ng-model="marketingEmployee.address.postalCode" id="postalCode" placeholder="Postal code"
+                               maxlength="6" style="width:90px"/></td>
                 </tr>
                 </tbody>
             </table>
