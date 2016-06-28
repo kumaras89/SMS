@@ -12,16 +12,16 @@ import spock.lang.Specification
  */
 class PaymentDetailCalculatorSpec extends Specification {
 
-    def getFees = { Class<Fees> feesClass, code, amount  ->
+    def getFeesObj = { Class<Fees> feesClass, code, amount  ->
         return Builder.of(feesClass)
-                .on({f -> f.getAmount() }).set(amount)
+                .on({f -> f.getAmount() }).set(new BigDecimal(amount))
                 .on({f -> f.getFeesParticular()}).set(FeesParticular.builder().on({ fp -> fp.getCode()}).set(code).build())
                 .build();
     }
 
-    def getStudFees = { code, amount -> getFees(StudentFees.class, code, amount ) }
-
-    def getPaymentFees = { code, amount -> getFees(PaymentFees.class, code, amount ) }
+    def getFees( Class<Fees> feesClass, amount1, amount2) {
+        return new LinkedHashSet<>(Arrays.asList(getFeesObj(feesClass, "one", amount1), getFeesObj(feesClass, "two", amount2)))
+    }
 
     //how to reuse the assert?
     def void assertFeesDetail(feesDet, tot, amount1, amount2) {
@@ -42,15 +42,15 @@ class PaymentDetailCalculatorSpec extends Specification {
     def getPayment = { amount1, amount2 ->
         return Payment.builder()
                 .on({p -> p.getPaymentFees() })
-                .set(new LinkedHashSet<>(Arrays.asList(getPaymentFees("one", amount1), getPaymentFees("two", amount2))))
+                .set(getFees(PaymentFees.class, amount1, amount2))
                 .on({p -> p.getStudent() }).set(Student.builder().on({s -> s.getCode()}).set("Set").build())
                 .build();
 
     }
 
-    def "feesToFeesDetail with happy path" () {
+    def "feesToFeesDetail" () {
         when:
-        def feesList = Arrays.asList(getStudFees("one", new BigDecimal("100")), getStudFees("two", new BigDecimal("200")))
+        def feesList = getFees(PaymentFees.class, "100", "200")
         def feesDetail = PaymentDetailCalculator.feesToFeesDetail(feesList)
         then:
         assertFeesDetail(feesDetail, 300, 100, 200)
@@ -58,7 +58,7 @@ class PaymentDetailCalculatorSpec extends Specification {
 
     def "paymentToFeesDetail" () {
         when:
-        def feesSet = new LinkedHashSet<>(Arrays.asList(getPaymentFees("one", new BigDecimal("100")), getPaymentFees("two", new BigDecimal("200"))))
+        def feesSet = getFees(PaymentFees.class, "100", "200")
         def feesDetail = PaymentDetailCalculator.paymentToFeesDetail(Payment.builder().on({p -> p.getPaymentFees()}).set(feesSet).build())
         then:
         assertFeesDetail(feesDetail, 300, 100, 200)
@@ -66,7 +66,7 @@ class PaymentDetailCalculatorSpec extends Specification {
 
     def "feesDetailToMap"() {
         when:
-        def feesList = Arrays.asList(getStudFees("one", new BigDecimal("100")), getStudFees("two", new BigDecimal("200")))
+        def feesList = getFees(PaymentFees.class, "100", "200")
         def feesDetail = PaymentDetailCalculator.feesToFeesDetail(feesList)
         def map = PaymentDetailCalculator.feesDetailToMap(feesDetail)
         then:
@@ -77,9 +77,9 @@ class PaymentDetailCalculatorSpec extends Specification {
 
     def "add with two fees Detail"() {
         when:
-        def feesList = Arrays.asList(getStudFees("one", new BigDecimal("100")), getStudFees("two", new BigDecimal("200")))
+        def feesList = getFees(PaymentFees.class, "100", "200")
         def feesDetail1 = PaymentDetailCalculator.feesToFeesDetail(feesList)
-        def feesList2 = Arrays.asList(getStudFees("one", new BigDecimal("50")), getStudFees("two", new BigDecimal("100")))
+        def feesList2 = getFees(PaymentFees.class, "50", "100")
         def feesDetail2 = PaymentDetailCalculator.feesToFeesDetail(feesList2)
         def added = PaymentDetailCalculator.add(Arrays.asList(feesDetail1, feesDetail2))
         then:
@@ -88,9 +88,9 @@ class PaymentDetailCalculatorSpec extends Specification {
 
     def "minus with two fees Detail"() {
         when:
-        def feesList = Arrays.asList(getStudFees("one", new BigDecimal("100")), getStudFees("two", new BigDecimal("200")))
+        def feesList = getFees(PaymentFees.class, "100", "200")
         def feesDetail1 = PaymentDetailCalculator.feesToFeesDetail(feesList)
-        def feesList2 = Arrays.asList(getStudFees("one", new BigDecimal("50")), getStudFees("two", new BigDecimal("100")))
+        def feesList2 = getFees(PaymentFees.class, "50", "100")
         def feesDetail2 = PaymentDetailCalculator.feesToFeesDetail(feesList2)
         def subtracted = PaymentDetailCalculator.minus(feesDetail1, feesDetail2)
         then:
@@ -101,9 +101,9 @@ class PaymentDetailCalculatorSpec extends Specification {
         when:
           def student =  Student.builder()
                   .on({s -> s.getStudentFees()})
-                  .set(new LinkedHashSet<>(Arrays.asList(getStudFees("one", new BigDecimal("500")), getStudFees("two", new BigDecimal("1000")))))
+                  .set(getFees(StudentFees.class, "500", "1000"))
                   .on({s -> s.getPayments()})
-                  .set(new LinkedHashSet<>(Arrays.asList(getPayment(new BigDecimal("100"), new BigDecimal("0")), getPayment(new BigDecimal("100"), new BigDecimal("550")))))
+                  .set(new LinkedHashSet<>(Arrays.asList(getPayment("100", "0"), getPayment("100","550"))))
                   .build()
            def paymentDetail = PaymentDetailCalculator.calculatePaymentDetail(student);
         then:
