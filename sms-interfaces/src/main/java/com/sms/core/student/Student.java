@@ -69,11 +69,11 @@ public class Student extends BaseModel {
     private Set<Payment> payments;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_MD_SSLC_ID")
+    @JoinColumn(name = "ST_MD_SSLC_ID",unique = true)
     private SSLCMarkDetails sslcMarkDetails;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_MD_HSC_ID")
+    @JoinColumn(name = "ST_MD_HSC_ID",unique = true)
     private HSCMarkDetails hscMarkDetails;
 
     @ManyToOne(cascade = CascadeType.ALL)
