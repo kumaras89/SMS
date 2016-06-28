@@ -4,6 +4,7 @@ import com.sms.core.common.Builder;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ram on 6/20/2016. <p></p>
@@ -21,7 +22,7 @@ public class MarkDetails {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "SU_MD_ID")
-    private List<Subject> subjects;
+    private Set<Subject> subjects;
 
     @Embedded
     private MarkAdditionalDetails additionalDetails;
@@ -33,7 +34,7 @@ public class MarkDetails {
     private int percentage;
 
 
-    public List<Subject> getSubjects() {
+    public Set<Subject> getSubjects() {
         return subjects;
     }
 
