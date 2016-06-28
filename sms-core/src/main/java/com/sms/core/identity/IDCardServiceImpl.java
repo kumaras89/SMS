@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("idCardService")
 @Transactional
 public class IDCardServiceImpl implements IDCardService {
 
     @Override
-    public Reader<IdCardRepository, List<IdCardInfo>> search(final IdCardSearchCriteria idCardSearchCriteria) {
+    public Reader<IdCardRepository, List<IdCardInfo>> search(final Optional<IdCardSearchCriteria> idCardSearchCriteria) {
         return Reader.of
                 (idCardRepository -> FList.of(idCardRepository.findAll(IDCardSpecification.isLongTermCustomer(idCardSearchCriteria)))
                                 .map(IdCardInfo::build)

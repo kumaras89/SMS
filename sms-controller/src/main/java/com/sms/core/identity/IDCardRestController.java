@@ -29,7 +29,7 @@ public class IDCardRestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<List<IdCardInfo>> listAll(@RequestBody @Valid IdCardSearchCriteria idCardInfo) {
 
-        return Optional.ofNullable(idCardService.search(idCardInfo).with(idCardRepository))
+        return Optional.ofNullable(idCardService.search(Optional.ofNullable(idCardInfo)).with(idCardRepository))
                 .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
