@@ -23,7 +23,7 @@
                 <input ng-model="uploaderCategory" type="text" class="form-control"/>
             </div>
             <div class="col-lg-3">
-                <label>Year : </label>
+                <label>Requested Year : </label>
                 <input ng-model="year" type="text" class="form-control"/>
             </div>
             <br>
@@ -43,6 +43,7 @@
                         <th>Requested Date</th>
                         <th>Status</th>
                         <th>Validity</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,6 +54,7 @@
                         <td sortable="name">{{ idCard.createdDate | date }}</td>
                         <td sortable="name">{{ idCard.status }}</td>
                         <td sortable="name">{{ idCard.validUpto | date }}</td>
+                        <td><a ng-click="view(idCard.id,idCard.uploaderId)" class="btn btn-group-sm btn-primary"><i class="fa fa-eye fa-fw"></i>View</a></td>
                     </tr>
                     </tbody>
                 </table>

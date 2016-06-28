@@ -14,4 +14,9 @@ angular.module('IDCard', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies
                 controller: 'IDCardListCtrl',
                 url: '/idcard-search'
             })
+            .state('home.idcard-detail', {
+                templateUrl: 'idcard/idcard-detail.html',
+                controller: 'IDCardDetailCtrl',
+                url: '/idcard-detail/:id/:userCode'
+            })
     }]);

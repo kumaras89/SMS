@@ -6,6 +6,10 @@
         .controller('IDCardListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
             function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
 
+                $scope.view = function (idCardId,uploaderId) {
+                    $state.go('home.idcard-detail',{id:idCardId, userCode: uploaderId});
+                };
+
                 $scope.search = function () {
                     $scope.idcard = {};
                     if($scope.uploaderId !== ''){
@@ -51,5 +55,19 @@
                         })
                     }
                 })
+            }])
+        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService','FlashService', '$state',
+            function ($scope, $stateParams, CrudService,FlashService, $state) {
+
+                $scope.loadIDCard = function() {
+
+                    $scope.src ="http://1.bp.blogspot.com/-vdi34NMKeQo/Urcomf2Jh9I/AAAAAAAAAFs/wv0JOotax64/s1600/passport+size+copy.jpg";
+
+                    CrudService.idcardService.GetById($stateParams.id).then(function(res) {
+                        $scope.idCardDetail = res
+                    })
+                }
+
+                $scope.loadIDCard();
             }]);
 })();
