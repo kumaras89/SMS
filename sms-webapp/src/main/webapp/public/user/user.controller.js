@@ -12,7 +12,7 @@
             $scope.deleteUser = function (id) {
                 CrudService.userService.Delete(id).then(function() {
                     FlashService.Success('Successfully Deleted');
-                    $scope.loadUsers();
+                    $scope.tableParams.reload()
                 });
 
             };

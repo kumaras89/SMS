@@ -148,7 +148,10 @@
                                 <tr>
                                     <td><label class="control-label" for="englishFluency">Fluency in english</label></td>
                                     <td>
-                                        <input type="text" ng-model="student.englishFluency" list="ratings" id="englishFluency" placeholder="English fluency"/>
+                                        <label ng-repeat="rating in commonAttributes.rating">
+                                            <input type="radio" ng-model="student.englishFluency" id="englishFluency" placeholder="English fluency"
+                                                            value="{{rating}}"/> {{rating}}&nbsp;&nbsp;&nbsp;
+                                        </label>
                                     </td>
                                 </tr>
                                 <tr>
