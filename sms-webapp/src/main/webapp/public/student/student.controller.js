@@ -193,11 +193,6 @@
                         $scope.marketingEmployees = data;
                     });
 
-                    AdminService.getBranches(function (data) {
-                        $scope.branches = data;
-                        $scope.branchNames = _.pluck(data, "name")
-                    });
-
                     AdminService.getSchemes(function (data) {
                         $scope.schemes = data;
                         $scope.schemeNames = _.pluck(data, "name")

@@ -23,25 +23,46 @@
             'IDCard'])
         .config(config)
         .run(run)
-        .directive("branchName", ['$rootScope','AdminService', function ($rootScope, AdminService) {
+        .directive("branchName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
             return {
                 restrict: 'A',
                 scope :{
                     bn : '=bn'
                 },
-                controller:function($scope){
-                    $scope.user_role = $rootScope.globals.currentUser.otherDetails.role;
+                controller: function($scope){
+                    if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){
+                        var name = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
+                        $timeout(function () {
+                            $scope.$apply(function () {
+                                $scope.bn = name;
+                            })
+                        });
+                    }
+
+                    AdminService.getBranches(function (data) {
+                        $scope.branches = data;
+                        $scope.branchNames = _.pluck(data, "name")
+                    });
                 },
-                link: function(scope){
-                    alert();
-                    $scope.$watch('bn',function(data){
-                       console.log(data)
-                    },true)
-                },
-                templateUrl: 'student-admin-user.html'
+                template: function(){
+                    if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
+                        return '<datalist id="branchNames">   <option  data-ng-repeat="bName in branchNames" value="{{bName}}"></datalist>'
+                            +'<input type="text" ng-model="bn" typeahead="bName in branchNames" id="branchName" '+' placeholder="Branch"/>'
+                    }else{
+                        return '<input type="text" ng-model="bn" readonly>'
+                    }
+                }
             }
         }])
-    ;
+        .directive("addressTemplate",function(){
+            return{
+                restrict: 'A',
+                scope:{
+                    data:"="
+                },
+                templateUrl : 'common/address-template.html'
+            }
+        });
 
     config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider'];
     function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {

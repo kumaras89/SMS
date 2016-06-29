@@ -69,8 +69,7 @@
                             <tbody>
                                 <tr>
                                     <td><label class="control-label" for="branchName">Branch:</label></td>
-                                    <td><input type="text" ng-model="student.branchName" list="branchNames" id="branchName"
-                                               placeholder="Branch"/></td>
+                                    <td><span branch-name bn="student.branchName"></span></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="name">Name of the Student</label></td>
@@ -183,47 +182,7 @@
             <!-- #second_step -->
             <div id="second_step">
                 <div class="control-group,form">
-
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                        <table class="table table-striped table-condensed">
-                            <thead>
-                            <tr>
-                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><label class="control-label" for="address1">Adddress Line 1</label></td>
-                                <td><input type="text" ng-model="student.address.address1" id="address1"
-                                           placeholder="Adddress Line 1"/></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="address2">Adddress Line 2</label></td>
-                                <td><input type="text" ng-model="student.address.address2" id="address2"
-                                           placeholder="Adddress Line 2"/></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="address3">Adddress Line 3</label></td>
-                                <td><input type="text" ng-model="student.address.address3" id="address3"
-                                           placeholder="Adddress Line 3"/></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="taluk">Taluk</label></td>
-                                <td><input type="text" ng-model="student.address.taluk" id="taluk" placeholder="Taluk"/></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="district">District</label></td>
-                                <td><input type="text" ng-model="student.address.district" id="district"
-                                           placeholder="District"/></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                                <td><input type="text" ng-model="student.address.postalCode" id="postalCode"
-                                           placeholder="Postal code"/></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <span address-template data="student"> </span>
                     <br>
                     <div style="border-radius:20px;border: 2px solid #3dad9c;">
                         <table class="table table-striped table-condensed">
@@ -857,22 +816,6 @@
         </div>
     </form>
 </div>
-
-<datalist id="castes">
-    <option  data-ng-repeat="caste in commonAttributes.caste" value="{{caste}}">
-</datalist>
-
-<datalist id="maritalState">
-    <option  data-ng-repeat="status in commonAttributes.maritalStatus" value="{{status}}">
-</datalist>
-
-<datalist id="branchNames">
-    <option  data-ng-repeat="bn in branchNames" value="{{bn}}">
-</datalist>
-
-<datalist id="ratings">
-    <option  data-ng-repeat="rating in commonAttributes.rating" value="{{rating}}">
-</datalist>
 
 <datalist id="relations">
     <option  data-ng-repeat="relation in commonAttributes.relation" value="{{relation}}">
