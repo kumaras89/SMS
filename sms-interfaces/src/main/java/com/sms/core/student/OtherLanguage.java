@@ -3,6 +3,8 @@ package com.sms.core.student;
 import com.sms.core.common.Builder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Ram on 6/20/2016. <P></>
@@ -15,8 +17,11 @@ public class OtherLanguage {
     @GeneratedValue
     private Long id;
 
+    @NotNull(message = "Language name is empty")
+    @Size(min = 1, message = "Language name is empty")
     @Column(name = "OL_NAME")
     private String name;
+
 
     @Column(name = "OL_READ")
     private boolean canRead;

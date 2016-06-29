@@ -3,6 +3,10 @@ package com.sms.core.student;
 import com.sms.core.common.Builder;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -20,16 +24,23 @@ public class MarkDetails {
     @Column(name = "MD_ID")
     private Long id;
 
+    @NotNull(message = "Subject Details is empty")
+    @Valid
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "SU_MD_ID")
     private Set<Subject> subjects;
 
+    @NotNull(message = "Additional education details is empty")
+    @Valid
     @Embedded
     private MarkAdditionalDetails additionalDetails;
 
+    @Min(value = 1, message = "Total Mark is empty")
     @Column(name = "MD_TOTAL_MARKS")
     private Long totalMarks;
 
+    @Min(value = 1,message = "Percentage is empty")
+    @Max(value = 100, message = "Percentage is invalid")
     @Column(name = "MD_PERCENTAGE")
     private int percentage;
 
