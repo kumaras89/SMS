@@ -1,4 +1,4 @@
-﻿﻿(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -65,10 +65,9 @@
 
                 $scope.loadIDCard = function() {
 
-                    $scope.src ="http://1.bp.blogspot.com/-vdi34NMKeQo/Urcomf2Jh9I/AAAAAAAAAFs/wv0JOotax64/s1600/passport+size+copy.jpg";
-
                     CrudService.idcardService.GetById($stateParams.id).then(function(res) {
                         $scope.idCardDetail = res
+                        $scope.src ='/document/download/'+$scope.idCardDetail.fmsId+'/photo.jpg';
                     })
                 }
 
