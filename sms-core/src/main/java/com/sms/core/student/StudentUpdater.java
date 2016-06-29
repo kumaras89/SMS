@@ -30,7 +30,7 @@ public class StudentUpdater {
             .on(Student::getCode).set(new StringBuilder(info.getBranchCode())
                         .append(info.getCourseCode())
                         .append(LocalDateTime.now().getYear())
-                        .append(String.format("%6d",tuple._1.getStuRepo().count() + 1))
+                        .append(String.format("%6d",tuple._1.getStuRepo().count() + 1).replace(' ', '0'))
                         .toString())
             .build();
     }

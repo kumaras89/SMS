@@ -19,23 +19,22 @@ class PaymentDetailCalculatorSpec extends Specification {
                 .build();
     }
 
-    def getFees( Class<Fees> feesClass, amount1, amount2) {
+    def getFees(Class<Fees> feesClass, amount1, amount2) {
         return new LinkedHashSet<>(Arrays.asList(getFeesObj(feesClass, "one", amount1), getFeesObj(feesClass, "two", amount2)))
     }
 
-    //how to reuse the assert?
+    def void assertFeesPurticular(feesPurticular, code, amount1) {
+        with(feesPurticular){
+            assert feesParticularCode == code
+            assert amount == amount1
+        }
+    }
     def void assertFeesDetail(feesDet, tot, amount1, amount2) {
         with(feesDet){
             assert amount == tot
             assert detailedFees.size() == 2
-            with(detailedFees.get(0)){
-                assert feesParticularCode == "one"
-                assert amount == amount1
-            }
-            with(detailedFees.get(1)){
-                assert feesParticularCode == "two"
-                assert amount == amount2
-            }
+            assertFeesPurticular(detailedFees.get(0), "one", amount1)
+            assertFeesPurticular(detailedFees.get(1), "two", amount2)
         }
     }
 

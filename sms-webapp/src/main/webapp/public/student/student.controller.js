@@ -80,7 +80,7 @@
                 };
 
                 $scope.goToFms = function(code) {
-                    $location.path('/fms/STUDENT/'+code);
+                    $location.path('/home/fms/STUDENT/'+code);
                 }
 
 

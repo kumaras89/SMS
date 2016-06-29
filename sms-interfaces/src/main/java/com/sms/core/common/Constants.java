@@ -1,18 +1,11 @@
 package com.sms.core.common;
 
+import com.sms.core.identity.IdCardStatus;
 import com.sms.core.student.Relation;
 import com.sms.core.student.StudentStatus;
 
 public class Constants {
 
-    private Caste[] caste;
-    private Religion[] religion;
-    private Gender[] gender;
-    private MaritalStatus[] maritalStatus;
-    private Rating[] rating;
-    private Designation[] designation;
-    private Relation[] relation;
-    private StudentStatus[] studentStatuses;
 
     public Caste[] getCaste() {
         return Caste.values();
@@ -44,5 +37,9 @@ public class Constants {
 
     public StudentStatus[] getStudentStatuses() {
         return StudentStatus.values();
+    }
+
+    public IdCardStatus[] getIdCardStatuses() {
+        return IdCardStatus.values();
     }
 }

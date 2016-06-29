@@ -55,7 +55,7 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public DeferredResult<ResponseEntity<Void>> update(@RequestParam UpdateInfo updateInfo) {
+    public DeferredResult<ResponseEntity<Void>> update(@RequestBody UpdateInfo updateInfo) {
         return DeferredResultProvider
                 .createDeferredResult(
                         React.of(updateInfo.getCategory())

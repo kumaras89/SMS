@@ -4,13 +4,13 @@
     angular
         .module('FMS')
         .controller('FMSCtrl', ['$scope', '$http', '$stateParams', '$window', 'FlashService',
-            function ($scope,$http, $stateParams, $window, FlashService) {
+            function ($scope, $http, $stateParams, $window, FlashService) {
 
                 $scope.init = function() {
                     $scope.cateory = $stateParams.category;
                     $scope.uploaderid = $stateParams.uploaderid;
                     $scope.docs = {};
-                    $http.get('/uploadername/'+$scope.cateory+'/'+$scope.uploaderid).then(function(res){
+                    $http.get('/document/uploadername/'+$scope.cateory+'/'+$scope.uploaderid).then(function(res){
                         $scope.uploaderName = res.data
                         $http.get('/document/doctypes/'+ $scope.cateory).then(
                             function(res) {
@@ -55,7 +55,14 @@
                 }
 
                 $scope.uploadCommpleted = function () {
-
+                    $http.put('/document/update',{
+                        category : $scope.cateory,
+                        uploaderId: $scope.uploaderid,
+                        status: 'DOC_UPLOADED'
+                    })
+                        .then(function(res){
+                            FlashService.Success('Updated succesfully!!')
+                        })
                 }
 
                 $scope.upload = function (key) {
@@ -81,9 +88,6 @@
                     success(function (data, status, headers, config) {
                         $scope.docs[key].doc = data;
                         FlashService.Success('Succesfully Uploaded!')
-                    }).
-                    error(function (data, status, headers, config) {
-                        FlashService.Error('Upload Failed')
                     });
 
                 }

@@ -110,6 +110,18 @@ public class DocumentFacade {
         return requestEntity;
     }
 
+    public static Reader<String, Long> getDocIdOfType(String uploaderId, String category, String docType) {
+        return Reader.of(fmsServer -> 1L);
+//        return Reader.of(
+//                fmsServer ->
+//                        React.of(category)
+//                .thenP(s -> getAllDocTypes(s).with(fmsServer))
+//                .then(docTypes -> docTypes.stream().filter(docType1 -> docType1.getType().equals(docType)).findFirst())
+//                .then()
+//        )
+
+    }
+
     private static AsyncRestTemplate asycTemp() {
         return new AsyncRestTemplate();
     }

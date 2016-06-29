@@ -4,7 +4,7 @@ public class IdCardSearchCriteria {
 
     private String uploaderId;
     private String uploaderCategory;
-    private String status;
+    private IdCardStatus status;
     private Integer year;
 
     public String getUploaderId() {
@@ -15,7 +15,7 @@ public class IdCardSearchCriteria {
         return uploaderCategory;
     }
 
-    public String getStatus() {
+    public IdCardStatus getStatus() {
         return status;
     }
 

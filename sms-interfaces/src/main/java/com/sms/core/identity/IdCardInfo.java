@@ -26,7 +26,7 @@ public class IdCardInfo {
                 .with(IdCardInfo::getUploaderCategory, idCard.getUploaderCategory())
                 .with(IdCardInfo::getFmsId, idCard.getFmsId())
                 .with(IdCardInfo::getValidUpto, idCard.getValidUpto())
-                .with(IdCardInfo::getStatus, idCard.getStatus())
+                .with(IdCardInfo::getStatus, idCard.getStatus().name())
                 .with(IdCardInfo::getCreatedDate, idCard.getCreatedDate())
                 .with(IdCardInfo::getLastModifiedDate, idCard.getLastModifiedDate());
     }

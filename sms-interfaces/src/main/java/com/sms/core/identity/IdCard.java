@@ -24,7 +24,8 @@ public class IdCard extends BaseModel {
     private Date validUpto;
 
     @Column(name = "IC_STATUS")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private IdCardStatus status;
 
     @Column(name = "IC_CREATED_DATE")
     @Temporal(TemporalType.DATE)
@@ -66,7 +67,7 @@ public class IdCard extends BaseModel {
         return validUpto;
     }
 
-    public String getStatus() {
+    public IdCardStatus getStatus() {
         return status;
     }
 
