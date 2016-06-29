@@ -5,47 +5,52 @@
             <li ui-sref-active="active">
                 <a ui-sref="home.dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
-            <li include-if-allowed operation="branch"ui-sref-active="active">
-                &nbsp;
-            </li>
             <li ui-sref-active="active">
-                <a include-if-allowed operation="branch" ui-sref="home.branch-list"><i class="fa fa-bank fa-fw"></i> Branch</a>
+                &nbsp;&nbsp;Admin
+                <ul class="nav nav-second-level">
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="branch" ui-sref="home.branch-list"><i class="fa fa-bank fa-fw"></i> Branch</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="user" ui-sref="home.user-list"><i class="fa fa-users fa-fw"></i> Manage Users</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="marketingemployee" ui-sref="home.marketingemployee-list"><i class="fa fa-male fa-fw"></i> Marketing Employees</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="course" ui-sref="home.course-list"><i class="fa fa-anchor fa-fw"></i> Course</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="feesparticular" ui-sref="home.feesparticular-list"><i class="fa fa-bars fa-fw"></i> Fees Components</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="scheme" ui-sref="home.scheme-list"><i class="fa fa-pencil fa-fw"></i> Scheme</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="role" ui-sref="home.role-list"><i class="fa fa-gears fa-fw"></i> Roles</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="securedoperation" ui-sref="home.securedoperation-list"><i class="fa fa-bar-chart-o fa-fw"></i> Operations</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="roleoperationlink" ui-sref="home.roleoperationlink-list"><i class="fa fa-wrench fa-fw"></i> Access Privileges</a>
+                    </li>
+                </ul>
             </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="user" ui-sref="home.user-list"><i class="fa fa-users fa-fw"></i> Manage Users</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="marketingemployee" ui-sref="home.marketingemployee-list"><i class="fa fa-male fa-fw"></i> Marketing Employees</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="course" ui-sref="home.course-list"><i class="fa fa-anchor fa-fw"></i> Course</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="feesparticular" ui-sref="home.feesparticular-list"><i class="fa fa-bars fa-fw"></i> Fees Components</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="scheme" ui-sref="home.scheme-list"><i class="fa fa-pencil fa-fw"></i> Scheme</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="role" ui-sref="home.role-list"><i class="fa fa-gears fa-fw"></i> Roles</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="securedoperation" ui-sref="home.securedoperation-list"><i class="fa fa-bar-chart-o fa-fw"></i> Operations</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="roleoperationlink" ui-sref="home.roleoperationlink-list"><i class="fa fa-wrench fa-fw"></i> Access Privileges</a>
-            </li>
-            <li include-if-allowed operation="branch"ui-sref-active="active">
-                &nbsp;
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="scholarshipenrollment" ui-sref="home.scholarshipenrollment-list" ><i class="fa fa-shield fa-fw"></i> Scholarship Enrollment</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="student" ui-sref="home.student-list"><i class="fa fa-graduation-cap fa-fw"></i> Students</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="idcard" ui-sref="home.idcard-search"><i class="fa fa-credit-card fa-fw"></i> Id Card</a>
+
+            <li include-if-allowed operation="branch" ui-sref-active="active">
+                &nbsp;&nbsp; Operations
+                <ul class="nav nav-second-level">
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="scholarshipenrollment" ui-sref="home.scholarshipenrollment-list" ><i class="fa fa-shield fa-fw"></i> Scholarship Enrollment</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="student" ui-sref="home.student-list"><i class="fa fa-graduation-cap fa-fw"></i> Students</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="idcard" ui-sref="home.idcard-search"><i class="fa fa-credit-card fa-fw"></i> Id Card</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
