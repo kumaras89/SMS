@@ -2,6 +2,7 @@ package com.sms.core.identity;
 
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
+import com.sms.core.student.Address;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,11 +11,8 @@ import java.util.Date;
 @Table(name = "SMS_TR_ID_CARD")
 public class IdCard extends BaseModel {
 
-    @Column(name = "IC_UPLOADER_ID")
-    private String uploaderId;
-
-    @Column(name = "IC_UPLOADER_CATEGORY")
-    private String uploaderCategory;
+    @Column(name = "IC_IDENTITY_CODE")
+    private String identityCode;
 
     @Column(name = "IC_FMS_ID")
     private Long fmsId;
@@ -35,6 +33,13 @@ public class IdCard extends BaseModel {
     @Temporal(TemporalType.DATE)
     private Date lastModifiedDate;
 
+    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(name = "IC_ADDRESS_ID")
+    private Address address;
+
+    @Column(name = "IC_NAME")
+    private String name;
+
     public static Builder<IdCard> builder() {
         return Builder.of(IdCard.class);
     }
@@ -42,21 +47,22 @@ public class IdCard extends BaseModel {
     public static Builder<IdCard> toBuilder(final IdCardInfo idCard) {
         return builder()
                 .with(IdCard::getId, idCard.getId())
-                .with(IdCard::getUploaderId, idCard.getUploaderId())
-                .with(IdCard::getUploaderCategory, idCard.getUploaderCategory())
+                .with(IdCard::getIdentityCode, idCard.getIdentityCode())
+                .with(IdCard::getName, idCard.getName())
                 .with(IdCard::getFmsId, idCard.getFmsId())
                 .with(IdCard::getValidUpto, idCard.getValidUpto())
                 .with(IdCard::getStatus, idCard.getStatus())
                 .with(IdCard::getCreatedDate, idCard.getCreatedDate())
-                .with(IdCard::getLastModifiedDate, idCard.getLastModifiedDate());
+                .with(IdCard::getLastModifiedDate, idCard.getLastModifiedDate())
+                .with(IdCard::getAddress, idCard.getAddress());
     }
 
-    public String getUploaderId() {
-        return uploaderId;
+    public String getIdentityCode() {
+        return identityCode;
     }
 
-    public String getUploaderCategory() {
-        return uploaderCategory;
+    public String getName() {
+        return name;
     }
 
     public Long getFmsId() {
@@ -77,5 +83,9 @@ public class IdCard extends BaseModel {
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

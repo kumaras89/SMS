@@ -10,4 +10,6 @@ public interface IDCardService {
 
     Reader<IdCardRepository, List<IdCardInfo>> search(final Optional<IdCardSearchCriteria> idCardSearchCriteria);
 
+    Reader<IdCardRepository, Optional<IdCardInfo>> findById(final Long id);
+
 }

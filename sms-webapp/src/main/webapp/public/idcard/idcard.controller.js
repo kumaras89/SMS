@@ -3,28 +3,28 @@
 
     angular
         .module('IDCard')
-        .controller('IDCardListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
-            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
+        .controller('IDCardListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout', 'AdminService',
+            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout, AdminService) {
 
-                $scope.view = function (idCardId,uploaderId) {
-                    $state.go('home.idcard-detail',{id:idCardId, userCode: uploaderId});
+                $scope.view = function (idCardId) {
+                    $state.go('home.idcard-detail', {id: idCardId});
                 };
 
                 $scope.search = function () {
                     $scope.idcard = {};
-                    if($scope.uploaderId !== ''){
-                        $scope.idcard.uploaderId = $scope.uploaderId;
+                    if ($scope.identityCode !== '') {
+                        $scope.idcard.identityCode = $scope.identityCode;
                     }
-                    if($scope.status !== ''){
+                    if ($scope.status !== '') {
                         $scope.idcard.status = $scope.status;
                     }
-                    if($scope.uploaderCategory !== ''){
-                        $scope.idcard.uploaderCategory = $scope.uploaderCategory;
+                    if ($scope.name !== '') {
+                        $scope.idcard.name = $scope.name;
                     }
-                    if($scope.year !== ''){
+                    if ($scope.year !== '') {
                         $scope.idcard.year = $scope.year;
                     }
-                    if($scope.tableParams){
+                    if ($scope.tableParams) {
                         $scope.tableParams.reload()
                     } else {
                         $scope.tableParams = new ngTableParams({
@@ -58,16 +58,31 @@
 
                 };
 
+                $scope.init = function () {
+
+                    AdminService.getConstants(function (data) {
+                        $scope.commonAttributes = data;
+                    });
+                }
+
+                $scope.init();
 
             }])
-        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService','FlashService', '$state',
-            function ($scope, $stateParams, CrudService,FlashService, $state) {
+        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state',
+            function ($scope, $stateParams, CrudService, FlashService, $state) {
 
-                $scope.loadIDCard = function() {
+                $scope.updateStatus = function (status) {
+                    $scope.idCardDetail.status = status;
+                    CrudService.idcardService.Update($scope.branch).then(function(){
+                        $state.go('home.idcard-search');
+                    });
 
-                    CrudService.idcardService.GetById($stateParams.id).then(function(res) {
+                }
+
+                $scope.loadIDCard = function () {
+                    CrudService.idcardService.GetById($stateParams.id).then(function (res) {
                         $scope.idCardDetail = res
-                        $scope.src ='/document/download/'+$scope.idCardDetail.fmsId+'/photo.jpg';
+                        $scope.src = '/document/download/' + $scope.idCardDetail.fmsId + '/photo.jpg';
                     })
                 }
 
