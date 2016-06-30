@@ -81,3 +81,19 @@ body {
 text-decoration: none;
 background-color: #eee;
 }
+
+.bar{
+  width: 100%;
+  padding: 15px;
+  column-count: 2;
+  clear: both;
+  overflow: hidden;
+}
+.left{
+  clear: both;
+  float: left;
+}
+.right{
+  clear: both;
+  float: right;
+}

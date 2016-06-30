@@ -47,7 +47,7 @@
                 template: function(){
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                         return '<datalist id="branchNames">   <option  data-ng-repeat="bName in branchNames" value="{{bName}}"></datalist>'
-                            +'<input type="text" ng-model="bn" typeahead="bName in branchNames" id="branchName" '+' placeholder="Branch"/>'
+                            +'<input type="text" ng-model="bn" list="branchNames" typeahead="bName in branchNames" id="branchName" '+' placeholder="Branch"/>'
                     }else{
                         return '<input type="text" ng-model="bn" readonly>'
                     }

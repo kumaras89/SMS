@@ -6,3 +6,32 @@
     padding: 5px;
     width: 60%;
 }
+.education
+{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #bbb;
+}
+.education>tbody>tr>td,
+.education>thead>tr>th{
+    padding: 5px;
+}
+.education>thead>tr>th.exam{
+    width:10%;
+}
+.education>thead>tr>th.institute{
+    width: 40%;
+}
+.education>thead>tr>th.group{
+    width: 30%;
+}
+.education>thead>tr>th.year{
+    width: 5%;
+}
+.education>thead>tr>th.percentage{
+    width: 5%;
+}
+.education>thead>tr>th.remark{
+    width: 10%;
+}

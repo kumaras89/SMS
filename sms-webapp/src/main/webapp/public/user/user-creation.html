@@ -26,22 +26,15 @@
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="branch">Branch:</label></td>
-                <td><input type="text" ng-model="user.branch" list="branchNames" id="branch" placeholder="Branch" style="width:284px;"/></td>
+                <td><span branch-name bn="user.branchName" style="width:284px;" ng-required/></span></td>
             </tr>
-
-
         </table>
         <datalist id="roles">
             <option  data-ng-repeat="role in roles" value="{{role}}">
         </datalist>
-        <datalist id="branchNames">
-            <option  data-ng-repeat="bn in branchNames" value="{{bn}}">
-        </datalist>
-        <br>
-        <br>
         <div class="well">
             <div class="controls">
-                <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
+                <a ng-disabled="user.$invalid" class="btn btn-small btn-primary">create new user</a>
                 <a ui-sref="home.user-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Users</a>
             </div>
         </div>

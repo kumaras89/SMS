@@ -122,6 +122,7 @@
 
             $scope.init = function() {
                 AdminService.getRoles(function(data) {
+                    $scope.roles = data;
                     $scope.roles = _.pluck(data, "name");
                 })
                 AdminService.getBranches(function(data) {

@@ -196,6 +196,11 @@
                         $scope.commonAttributes = data;
                     });
 
+                   /* AdminService.getBranches(function (data) {
+                       $scope.branches = data;
+                       $scope.branchNames = _.pluck(data, "name")
+                     });*/
+
                     AdminService.getMarketingEmployees(function (data) {
                         $scope.marketingEmployees = data;
                     });
