@@ -16,7 +16,7 @@ public class IDCardServiceImpl implements IDCardService {
     @Override
     public Reader<IdCardRepository, List<IdCardInfo>> search(final Optional<IdCardSearchCriteria> idCardSearchCriteria) {
         return Reader.of
-                (idCardRepository -> FList.of(idCardRepository.findAll(IDCardSpecification.isLongTermCustomer(idCardSearchCriteria)))
+                (idCardRepository -> FList.of(idCardRepository.findAll(IDCardSpecification.idCardRequest(idCardSearchCriteria)))
                                 .map(IdCardInfo::build)
                                 .get()
                 );
