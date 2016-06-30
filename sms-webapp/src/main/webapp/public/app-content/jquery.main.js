@@ -36,7 +36,7 @@ $(function(){
             } else {   
                 //update progress bar
                 $('#progress_text').html('20% Complete');
-                $('#progress').css('width','100px');
+                $('#progress').css('width','80px');
                 
                 //slide steps
                 $('#first_step').slideUp();
@@ -92,7 +92,7 @@ $(function(){
         if(!error) {
                 //update progress bar
                 $('#progress_text').html('40% Complete');
-                $('#progress').css('width','200px');
+                $('#progress').css('width','160px');
                 
                 //slide steps
                 $('#second_step').slideUp();
@@ -105,7 +105,7 @@ $(function(){
     $('#submit_third').click(function(){
         //update progress bar
         $('#progress_text').html('60% Complete');
-        $('#progress').css('width','300px');
+        $('#progress').css('width','240px');
 
         //slide steps
         $('#third_step').slideUp();
@@ -115,7 +115,7 @@ $(function(){
     $('#submit_fourth').click(function(){
         //update progress bar
         $('#progress_text').html('80% Complete');
-        $('#progress').css('width','400px');
+        $('#progress').css('width','320px');
 
         //slide steps
         $('#fourth_step').slideUp();
