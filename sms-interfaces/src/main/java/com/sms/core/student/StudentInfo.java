@@ -1,6 +1,7 @@
 package com.sms.core.student;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sms.core.common.Builder;
 import com.sms.core.feesparticular.FeesInfo;
 
@@ -70,12 +71,10 @@ public class StudentInfo {
     @Valid
     private Set<OtherLanguage> otherLanguages;
 
-    @NotNull(message = "SSLC Mark Details is empty")
-    @Valid
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private SSLCMarkDetails sslcMarkDetails;
 
-    @NotNull(message = "HSC Mark Details is empty")
-    @Valid
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private HSCMarkDetails hscMarkDetails;
 
     @NotNull(message = "Phone number is empty")

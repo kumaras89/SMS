@@ -43,7 +43,7 @@ public class EducationDetail extends BaseModel {
     private Integer percentageObtained;
 
 
-    //@Column(name = "ED_REMARK")
+    @Column(name = "ED_REMARK")
     private String remark;
 
     public EducationDetail() {

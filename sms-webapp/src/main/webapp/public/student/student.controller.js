@@ -179,6 +179,13 @@
                         return  ed.name != undefined && ed.name != '';
                     });
 
+                    if(! $scope.sslcEnable){
+                        $scope.studentSumarized.sslcMarkDetails = null;
+                    }
+                    if(! $scope.hscEnable){
+                        $scope.studentSumarized.hscMarkDetails = null;
+                    }
+
                 };
 
 
