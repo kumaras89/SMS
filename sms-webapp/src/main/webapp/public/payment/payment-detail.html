@@ -76,9 +76,8 @@
                         </td>
                     </tr>
                     <tr ng-repeat-end ng-show="isShown($index)">
-                        <td colspan="6">
+                        <td colspan="6" style="border:1px solid #d5d5d5">
                             <table width="75%" class="table table-striped table-bordered table-hover">
-                                <tbody>
                                 <tr class="even gradeA">
                                     <td><label class="control-label">DD No:</label></td>
                                     <td><label class="control-label">Bank:</label></td>
@@ -93,7 +92,6 @@
                                     <td>{{pt.admittedBy }}</td>
                                     <td>{{pt.approvedBy }}</td>
                                 </tr>
-                                </tbody>
                             </table>
                             <section>
                                 <div class="ui-amount-container" ng-repeat="feesInfo in pt.feesInfos">

@@ -100,7 +100,7 @@ background-color: #eee;
 
 .ui-arrow-down {
   color: gray;
-  transform: rotate(-180deg);
+  transform: rotate(0deg);
   font-size:2em;
   writing-mode: tb-rl;
   cursor: pointer;
