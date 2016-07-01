@@ -99,14 +99,16 @@ background-color: #eee;
 }
 
 .ui-arrow-down {
-  padding: 10px;
   color: gray;
-  transform: rotate(-90deg);
-  font-size:5em;
+  transform: rotate(0deg);
+  font-size:2em;
+  writing-mode: tb-rl;
+  cursor: pointer;
 }
 .ui-arrow-up{
-  padding: 10px;
   color: gray;
-  transform: rotate(90deg);
-  font-size:5em;
+  transform: rotate(180deg);
+  font-size:2em;
+  writing-mode: tb-rl;
+  cursor: pointer;
 }
