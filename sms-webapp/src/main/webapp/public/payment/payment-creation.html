@@ -42,7 +42,7 @@
                 <tr ng-repeat="feesInfo in payment.feesInfos" class="even gradeA">
                     <td>{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}}</td>
                     <td>
-                        <input ng-disabled="isDisabled(feesInfo.feesParticularCode)" type="number" id="amount" ng-model="feesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
+                        <input ng-disabled="isDisabled(feesInfo)" type="number" id="amount" ng-model="feesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
                     </td>
                 </tr>
                 <tr class="even gradeA">

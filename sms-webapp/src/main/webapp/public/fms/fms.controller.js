@@ -11,43 +11,50 @@
                     $scope.uploaderid = $stateParams.uploaderid;
                     $scope.docs = {};
                     $http.get('/document/uploadername/'+$scope.cateory+'/'+$scope.uploaderid).then(function(res){
-                        $scope.uploaderName = res.data
-                        $http.get('/document/doctypes/'+ $scope.cateory).then(
-                            function(res) {
-                                var doctypes = res.data;
-                                _.each(doctypes, function(dt) {
-                                    $scope.docs[dt.id+'-'+0] = {};
-                                    $scope.docs[dt.id+'-'+0].docType = dt;
-                                    $scope.docs[dt.id+'-'+0].fileSequence = 0;
-                                    $scope.docs[dt.id+'-'+0].lastSequence = 0;
-
-                                });
-                                $http.get('/document/documents/'+ $scope.uploaderid).then(
-                                    function(res) {
-                                        var documents = res.data;
-                                        _.each(documents, function(doc) {
-                                            var key = doc.documentTypeId+'-'+doc.fileSequence;
-                                            var foundDoc = $scope.docs[key];
-                                            if(foundDoc === undefined) {
-                                                $scope.docs[key] = {}
-                                                $scope.docs[key].docType = $scope.docs[doc.documentTypeId+'-'+0].docType;
-                                            }
-                                            $scope.docs[key].doc = doc;
-                                            $scope.docs[key].fileSequence = doc.fileSequence;
-                                            if(doc.fileSequence > $scope.docs[doc.documentTypeId+'-'+0].lastSequence) {
-                                                $scope.docs[doc.documentTypeId+'-'+0].lastSequence = doc.fileSequence;
-                                            }
-                                        });
-                                    }
-                                );
-                            }
-                        );
+                        $scope.uploaderName = res.data.name
                     }, function(e) {
                         FlashService.Error('Uploader Not found!!')
                     })
 
+                    $http.get('/document/doctypes/'+ $scope.cateory).then(
+                        function(res) {
+                            var doctypes = res.data;
+                            _.each(doctypes, function(dt) {
+                                $scope.docs[dt.id+'-'+0] = {};
+                                $scope.docs[dt.id+'-'+0].docType = dt;
+                                $scope.docs[dt.id+'-'+0].fileSequence = 0;
+                                $scope.docs[dt.id+'-'+0].lastSequence = 0;
+                            });
+                            $scope.toDocArray();
+                            $http.get('/document/documents/'+ $scope.uploaderid).then(
+                                function(res) {
+                                    var documents = res.data;
+                                    _.each(documents, function(doc) {
+                                        var key = doc.documentTypeId+'-'+doc.fileSequence;
+                                        var foundDoc = $scope.docs[key];
+                                        if(foundDoc === undefined) {
+                                            $scope.docs[key] = {}
+                                            $scope.docs[key].docType = $scope.docs[doc.documentTypeId+'-'+0].docType;
+                                        }
+                                        $scope.docs[key].doc = doc;
+                                        $scope.docs[key].fileSequence = doc.fileSequence;
+                                        if(doc.fileSequence > $scope.docs[doc.documentTypeId+'-'+0].lastSequence) {
+                                            $scope.docs[doc.documentTypeId+'-'+0].lastSequence = doc.fileSequence;
+                                        }
+                                    });
+                                    $scope.toDocArray();
+                                }
+                            );
+                        }
+                    );
+                }
 
-
+                $scope.toDocArray = function() {
+                    var arr = []
+                    for (var key in $scope.docs) {
+                        arr.push({ key: key, value: $scope.docs[key] })
+                    }
+                    $scope.docsArray = arr
                 }
 
                 $scope.isPresent = function(key) {
@@ -100,12 +107,14 @@
                     $scope.docs[newKey].docType = doc.docType
                     $scope.docs[newKey].fileSequence = newSeq
                     $scope.docs[doc.docType.id+'-'+0].lastSequence = newSeq
+                    $scope.toDocArray();
                 }
                 
                 $scope.deleteRow = function(key) {
                     var doc = $scope.docs[key]
                     delete($scope.docs[key])
                     $scope.docs[doc.docType.id+'-'+0].lastSequence = doc.fileSequence - 1
+                    $scope.toDocArray();
 
                 }
 

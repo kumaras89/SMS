@@ -57,7 +57,7 @@ public class Student extends BaseModel {
     @JoinColumn(name = "GU_STUDENT_ID")
     private Set<Guardian> guardians;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
@@ -73,7 +73,7 @@ public class Student extends BaseModel {
     @JoinColumn(name = "ST_MD_HSC_ID",unique = true)
     private HSCMarkDetails hscMarkDetails;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_ADDRESS_ID")
     private Address address;
 

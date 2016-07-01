@@ -10,20 +10,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="(key, value) in docs | orderBy : 'key' ">
-            <td>{{key}} - {{value.docType.desc }}</td>
-            <td ng-if="!isPresent(key)">
-                <input type="text" ng-model="value.fileInfo" placeholder="File Info">
+        <tr ng-repeat="da in docsArray | orderBy:'key' ">
+            <td>{{da.key}} - {{da.value.docType.desc }}</td>
+            <td ng-if="!isPresent(da.key)">
+                <input type="text" ng-model="da.value.fileInfo" placeholder="File Info">
             </td>
-            <td ng-if="!isPresent(key)"><input type="file" fileread="value.file"></td>
-            <td ng-if="!isPresent(key)"><a ng-click="upload(key)" class="btn btn-small btn-primary">upload</a></td>
+            <td ng-if="!isPresent(da.key)"><input type="file" fileread="da.value.file"></td>
+            <td ng-if="!isPresent(da.key)"><a ng-click="upload(da.key)" class="btn btn-small btn-primary">upload</a></td>
 
-            <td ng-if="isPresent(key)">{{ value.doc.fileInfo }} </td>
-            <td ng-if="isPresent(key)"><a ng-click="download(key)" class="btn btn-small btn-primary">download</a></td>
-            <td ng-if="isPresent(key)"><a ng-click="delete(key)" class="btn btn-small btn-danger">delete</a></td>
-            <td ng-if="value.docType.multiple && docs[value.docType.id+'-'+0].lastSequence === value.fileSequence">
-                <a ng-click="addRow(key)" class="btn btn-small btn-primary">+</a>
-                <a ng-if="!isPresent(key) && value.fileSequence !== 0" ng-click="deleteRow(key)" class="btn btn-small btn-danger">-</a>
+            <td ng-if="isPresent(da.key)">{{ da.value.doc.fileInfo }} </td>
+            <td ng-if="isPresent(da.key)"><a ng-click="download(da.key)" class="btn btn-small btn-primary">download</a></td>
+            <td ng-if="isPresent(da.key)"><a ng-click="delete(da.key)" class="btn btn-small btn-danger">delete</a></td>
+            <td ng-if="da.value.docType.multiple && docs[da.value.docType.id+'-'+0].lastSequence === da.value.fileSequence">
+                <a ng-click="addRow(da.key)" class="btn btn-small btn-primary">+</a>
+                <a ng-if="!isPresent(da.key) && value.fileSequence !== 0" ng-click="deleteRow(da.key)" class="btn btn-small btn-danger">-</a>
             </td>
         </tr>
         <tr>
@@ -39,5 +39,5 @@
         </tbody>
 
     </table>
-    <a href="#/home" class="btn btn-small">Home</a>
+    <a ng-click="goBack()" class="btn btn-small">Go Back</a>
 </div>

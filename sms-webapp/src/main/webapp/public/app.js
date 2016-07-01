@@ -24,15 +24,6 @@
             'Payment'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
                 return {
-                    request: function(config){
-                        return config || $q.when(config);
-                    },
-                    requestError: function(request){
-                        return $q.reject(request);
-                    },
-                    response: function (response) {
-                        return response || $q.when(response);
-                    },
                     responseError: function (response) {
                         var standardMsg = response.statusText+' on '+ response.config.url;
                         if(response.data) {
@@ -172,12 +163,22 @@
 
     }
 
-    run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http', 'AdminServiceProvider'];
+    run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http', 'AdminServiceProvider', '$state'];
     
-    function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http, AdminServiceProvider) {
+    function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http, AdminServiceProvider, $state) {
 
         $rootScope.adminService = function() {
             return AdminServiceProvider.initService();
+        }
+
+        $rootScope.goBack = function() {
+            $state.go($rootScope.previousState.stateName, $rootScope.previousState.stateParams)
+        }
+
+        $rootScope.greaterThan = function(prop, val){
+            return function(item){
+                return item[prop] > val;
+            }
         }
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -213,12 +214,11 @@
         });
 
         $rootScope.previousState;
-        $rootScope.currentState;
         $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
-            $rootScope.previousState = from.name;
-            $rootScope.currentState = to.name;
-            console.log('Previous state:'+$rootScope.previousState)
-            console.log('Current state:'+$rootScope.currentState)
+            $rootScope.previousState = {
+                stateName : from.name,
+                stateParams : fromParams
+            }
         });
     }
 

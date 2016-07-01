@@ -15,7 +15,8 @@
                         $scope.payment = {}
                         $scope.payment.studentCode = $scope.studentId
                         $scope.payment.amount = $scope.paymentDetail.remainingPaymentDetail.amount
-                        $scope.payment.feesInfos = $scope.paymentDetail.remainingPaymentDetail.detailedFees
+                        $scope.payment.feesInfos = []
+                        angular.copy($scope.paymentDetail.remainingPaymentDetail.detailedFees, $scope.payment.feesInfos)
                     })
                     $http.get('/student/code/'+$scope.studentId).then(function(res){
                         $scope.student = res.data;
@@ -70,6 +71,10 @@
                     })
                     $scope.payment.amount = sum
                     return sum
+                }
+
+                $scope.isDisabled = function(feesInfo) {
+                    return $scope.getFeesPurtDetailAmt($scope.paymentDetail.remainingPaymentDetail, feesInfo) == 0
                 }
 
                 $scope.toggleHistoryDetail = function(index) {

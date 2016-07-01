@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -49,9 +50,14 @@ public class DocumentRestController {
     }
 
     @RequestMapping(value = "/uploadername/{category}/{uploaderid}", method = RequestMethod.GET)
-    public DeferredResult<ResponseEntity<String>> getUploaderName(@PathVariable String category,@PathVariable String uploaderid) {
+    public DeferredResult<ResponseEntity<Map<String, String>>> getUploaderName(@PathVariable String category,@PathVariable String uploaderid) {
         return DeferredResultProvider.createDeferredResult(React.of(category).then(documentCallBacks::get)
-                .then(dcb -> dcb.getUploaderName(uploaderid)).getPromise(), HttpStatus.OK);
+                .then(dcb -> dcb.getUploaderName(uploaderid))
+                .then(name -> {
+                    Map<String,String> map = new HashMap<String, String>();
+                    map.put("name", name);
+                    return map;
+                }).getPromise(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)

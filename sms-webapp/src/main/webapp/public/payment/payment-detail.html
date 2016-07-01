@@ -94,7 +94,7 @@
                                 </tr>
                             </table>
                             <section>
-                                <div class="ui-amount-container" ng-repeat="feesInfo in pt.feesInfos">
+                                <div class="ui-amount-container" ng-repeat="feesInfo in pt.feesInfos | filter: greaterThan('amount', 0)">
                                     <span class="ui-amount-info">{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}} :</span>
                                     <span class="ui-amount">{{feesInfo.amount | currency:'&#8377;' }}</span>
                                 </div>
