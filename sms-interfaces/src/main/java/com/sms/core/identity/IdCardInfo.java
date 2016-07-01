@@ -16,6 +16,7 @@ public class IdCardInfo {
     private Date lastModifiedDate;
     private Address address;
     private String name;
+    private String branchName;
 
     public static Builder<IdCardInfo> builder() {
         return Builder.of(IdCardInfo.class);
@@ -31,7 +32,8 @@ public class IdCardInfo {
                 .with(IdCardInfo::getStatus, idCard.getStatus().name())
                 .with(IdCardInfo::getCreatedDate, idCard.getCreatedDate())
                 .with(IdCardInfo::getLastModifiedDate, idCard.getLastModifiedDate())
-                .with(IdCardInfo::getAddress, idCard.getAddress());
+                .with(IdCardInfo::getAddress, idCard.getAddress())
+                .on(IdCardInfo::getBranchName).set(idCard.getBranchName());
     }
 
     public static IdCardInfo build(final IdCard idCard) {
@@ -72,5 +74,9 @@ public class IdCardInfo {
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public String getBranchName() {
+        return branchName;
     }
 }

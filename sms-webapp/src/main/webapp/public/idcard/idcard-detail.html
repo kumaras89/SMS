@@ -29,7 +29,17 @@
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label">Address</label></td>
-                    <td>{{address}}</td>
+                    <td>
+                        <br>
+                        <label class="control-label">{{idCardDetail.branchName}}</label><br>
+                        {{idCardDetail.address.address1}}<br>
+                        {{idCardDetail.address.address2}}<br>
+                        {{idCardDetail.address.address3}}<br>
+                        {{idCardDetail.address.taluk}}<br>
+                        {{idCardDetail.address.district}}<br>
+                        {{idCardDetail.address.postalCode}}
+                        <br>
+                    </td>
                 </tr>
              </table>
 

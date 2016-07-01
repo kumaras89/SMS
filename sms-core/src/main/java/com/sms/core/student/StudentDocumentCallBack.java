@@ -46,6 +46,7 @@ public class StudentDocumentCallBack implements DocumentCallBack {
         IdCard idCard = IdCard.builder()
                 .on(IdCard::getIdentityCode).set(updateInfo.getUploaderId())
                 .on(IdCard::getName).set(student.getName())
+                .on(IdCard::getBranchName).set(student.getBranch().getName())
                 .on(IdCard::getAddress).set(student.getBranch().getAddress())
                 .on(IdCard::getCreatedDate).set(new Date())
                 .on(IdCard::getLastModifiedDate).set(new Date())
