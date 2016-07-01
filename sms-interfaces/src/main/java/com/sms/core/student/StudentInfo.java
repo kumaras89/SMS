@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sms.core.common.Builder;
 import com.sms.core.feesparticular.FeesInfo;
 
-import javax.persistence.MapsId;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -122,6 +124,8 @@ public class StudentInfo {
     @NotNull(message = "Marketing employee code is empty")
     @Size(min = 1, message = "Marketing employee code is empty")
     private String marketingEmployeeCode;
+
+    private Long fmsPhotoId;
 
     public StudentInfo() {
     }
@@ -248,5 +252,9 @@ public class StudentInfo {
 
     public String getApplicationNumber() {
         return applicationNumber;
+    }
+
+    public Long getFmsPhotoId() {
+        return fmsPhotoId;
     }
 }

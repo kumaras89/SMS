@@ -17,6 +17,7 @@
             <div class="col-lg-3">
                 <label>Status : </label>
                 <select ng-model="status" id="status" class="form-control">
+                    <option value="">ALL</option>
                     <option ng-repeat="status in commonAttributes.idCardStatuses" value="{{status}}">{{status}}</option>
                 </select>
             </div>
