@@ -3,19 +3,8 @@
 
     angular
         .module('Student')
-        .filter('mySum', function () {
-            return function (items) {
-                var sum = 0;
-                angular.forEach(items, function (item, index) {
-                    if (item.amount) {
-                        sum += item.amount;
-                    }
-                })
-                return sum;
-            }
-        })
-        .controller('PaymentCtrl', ['$scope', '$stateParams', 'FlashService', '$state', '$http',
-            function ($scope, $stateParams, FlashService, $state, $http) {
+        .controller('PaymentCtrl', ['$scope', '$stateParams', 'FlashService', '$state', '$http', '$timeout',
+            function ($scope, $stateParams, FlashService, $state, $http, $timeout) {
 
                 $scope.shownHistory = []
 
@@ -39,7 +28,14 @@
                 }
 
                 $scope.goToPaymentCreation = function () {
-                    $state.go('home.payment-creation' , {studentid: $scope.studentId });
+                    var amt = $scope.calcTotalAmount();
+                    if(amt == 0) {
+                        FlashService.Success("All Payment Due are already paid!");
+                    } else {
+                        $state.go('home.payment-creation' , {studentid: $scope.studentId });
+                    }
+
+
                 }
 
                 $scope.goToPaymentDetail = function () {
@@ -63,6 +59,17 @@
                         amt = 0;
                     }
                     return amt;
+                }
+
+                $scope.calcTotalAmount = function() {
+                    var sum = 0
+                    angular.forEach($scope.payment.feesInfos, function (item, index) {
+                        if (item.amount) {
+                            sum += item.amount
+                        }
+                    })
+                    $scope.payment.amount = sum
+                    return sum
                 }
 
                 $scope.toggleHistoryDetail = function(index) {
