@@ -9,6 +9,7 @@ import java.util.Optional;
 
 /**
  * Created by Ram on 6/26/2016.
+ * <p></p>
  */
 @Service
 @Transactional
@@ -38,7 +39,12 @@ public class StudentFacadeImpl implements StudentFacade {
     }
 
     @Override
-    public Optional<StudentInfo> findByCode(String code) {
+    public Optional<StudentInfo> findByCode(final String code) {
         return StudentEnrollmentService.findByCode(code).with(seConfig.getStuRepo());
+    }
+
+    @Override
+    public Optional<StudentInfo> findByScholarship(final String applicationNumber) {
+        return StudentEnrollmentService.findByStudentScholarship(applicationNumber).with(seConfig.getStudScholarServ());
     }
 }

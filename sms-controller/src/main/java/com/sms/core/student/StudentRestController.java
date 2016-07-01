@@ -29,20 +29,20 @@ public class StudentRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentInfo> get(@PathVariable("id") final Long id) {
         return studentFacade.findById(id)
-                        .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/code/{code}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentInfo> get(@PathVariable("code") final String code) {
         return studentFacade.findByCode(code)
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid final StudentInfo entityObject,
-                                                    final UriComponentsBuilder ucBuilder) {
+        final UriComponentsBuilder ucBuilder) {
         final Optional<StudentInfo> t = Optional.ofNullable(studentFacade.save(entityObject));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -51,5 +51,12 @@ public class StudentRestController {
     public ResponseEntity<StudentInfo> delete(@PathVariable("id") final Long id) {
         studentFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "studentScholarship/{applicationNumber}", method = RequestMethod.GET)
+    public ResponseEntity<StudentInfo> findStudentFromScholarship(@PathVariable("applicationNumber") final String applicationNumber) {
+        return studentFacade.findByScholarship(applicationNumber)
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

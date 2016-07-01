@@ -9,11 +9,8 @@ import com.sms.core.payment.Payment;
 import com.sms.core.scheme.Scheme;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT")
@@ -125,6 +122,9 @@ public class Student extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "ST_MARKETING_EMPLOYEE_ID")
     private MarketingEmployee marketingEmployee;
+
+    @Column(name = "ST_FMS_PHOTO_ID")
+    private Long fmsPhotoId;
 
     public Student() {
         super();
@@ -252,5 +252,9 @@ public class Student extends BaseModel {
 
     public Set<Payment> getPayments() {
         return payments;
+    }
+
+    public Long getFmsPhotoId() {
+        return fmsPhotoId;
     }
 }

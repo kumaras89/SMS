@@ -40,6 +40,9 @@ public class IdCard extends BaseModel {
     @Column(name = "IC_NAME")
     private String name;
 
+    @Column(name = "IC_BRANCH_NAME")
+    private String branchName;
+
     public static Builder<IdCard> builder() {
         return Builder.of(IdCard.class);
     }
@@ -54,7 +57,8 @@ public class IdCard extends BaseModel {
                 .with(IdCard::getStatus, IdCardStatus.valueOf(idCard.getStatus()))
                 .with(IdCard::getCreatedDate, idCard.getCreatedDate())
                 .with(IdCard::getLastModifiedDate, idCard.getLastModifiedDate())
-                .with(IdCard::getAddress, idCard.getAddress());
+                .with(IdCard::getAddress, idCard.getAddress())
+                .on(IdCard::getBranchName).set(idCard.getBranchName());
     }
 
     public String getIdentityCode() {
@@ -87,5 +91,9 @@ public class IdCard extends BaseModel {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getBranchName() {
+        return branchName;
     }
 }

@@ -12,6 +12,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student findByCode(String code);
 
     @Modifying
-    @Query("UPDATE Student s SET s.status = :status WHERE s.code = :code")
-    int updateStatus(@Param("code") String code, @Param("status") StudentStatus status);
+    @Query("UPDATE Student s SET s.status = :status, s.fmsPhotoId = :fmsPhotoId WHERE s.code = :code")
+    int updateStatus(@Param("code") String code, @Param("status") StudentStatus status, @Param("fmsPhotoId") Long fmsPhotoId);
 }

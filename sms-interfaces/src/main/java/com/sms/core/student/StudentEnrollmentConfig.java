@@ -1,6 +1,7 @@
 package com.sms.core.student;
 
 import com.sms.core.repositery.*;
+import com.sms.core.scholarship.StudentScholarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,8 @@ public class StudentEnrollmentConfig {
     private FeesParticularRepository feesParticularRepository;
     @Autowired
     private StudentRepository studentRepository;
-
+    @Autowired
+    private StudentScholarService studentScholarService;
 
     public BranchRepository getBRepo() {
         return branchRepository;
@@ -48,4 +50,6 @@ public class StudentEnrollmentConfig {
     public StudentRepository getStuRepo() {
         return studentRepository;
     }
+
+    public StudentScholarService getStudScholarServ(){return studentScholarService;}
 }

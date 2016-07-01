@@ -36,6 +36,7 @@ public class StudentEnrollmentConverter {
             .with(Student::getLastModifiedDate, new Date())
             .on(Student::getSslcMarkDetails).set(studentInfo.getSslcMarkDetails())
             .on(Student::getHscMarkDetails).set(studentInfo.getHscMarkDetails())
+             .on(Student::getFmsPhotoId).set(studentInfo.getFmsPhotoId())
             .build();
     }
 
@@ -70,6 +71,7 @@ public class StudentEnrollmentConverter {
             .on(StudentInfo::getHscMarkDetails).set(student.getHscMarkDetails())
             .on(StudentInfo::getSslcMarkDetails).set(student.getSslcMarkDetails())
             .on(StudentInfo::getOtherLanguages).set(student.getOtherLanguages())
+            .on(StudentInfo::getFmsPhotoId).set(student.getFmsPhotoId())
                 .build();
     }
 
