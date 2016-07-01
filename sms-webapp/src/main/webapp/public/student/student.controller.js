@@ -17,20 +17,16 @@
             function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout, $uibModal) {
 
                 $scope.applicationNumber = '';
-                $scope.showPopupBeforeSubmit = function() {
+
+                $scope.searchStudentScholarship = function() {
                     var modalInstance = $uibModal.open({
                         animation: true,
-                        templateUrl: 'myModalContent.html',
-                        controller: 'StudentModalCtrl',
-                        resolve: {
-                            instanceArguments: function () {
-                                // return $scope.items;
-                            }
-                        }
+                        templateUrl: 'ScholarshipPopup.html',
+                        controller: 'StudentModalCtrl'
                     });
 
                     modalInstance.result.then(function (applicationNumber) {
-                        $scope.applicationNumber = remark;
+                        $scope.applicationNumber = applicationNumber;
                     }, function () {
                         //$log.info('Modal dismissed at: ' + new Date());
                     });
@@ -51,10 +47,6 @@
 
                 $scope.getSchemeDesc = function (schemeCode){
                     return AdminService.getSchemeDesc(schemeCode);
-                };
-
-                $scope.createNewStudent = function () {
-                    $state.go('home.student-creation');
                 };
 
                 $scope.tableParams = new ngTableParams({
@@ -131,7 +123,7 @@
                     if ($stateParams.applicationNumber != undefined && $stateParams.applicationNumber != '') {
                         $http.get('/student/studentScholarship/' + $stateParams.applicationNumber).then(function (res) {
                             if (res.data) {
-                                angular.extend($scope.student,res.data);
+                                $scope.student = res.data;
                                 $scope.initialize();
                             }
                         })
