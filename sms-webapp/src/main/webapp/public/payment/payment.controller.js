@@ -17,6 +17,8 @@
         .controller('PaymentCtrl', ['$scope', '$stateParams', 'FlashService', '$state', '$http',
             function ($scope, $stateParams, FlashService, $state, $http) {
 
+                $scope.shownHistory = []
+
                 $scope.loadPaymentDetail = function () {
                     $scope.studentId = $stateParams.studentid
                     $http.get('/payment/'+$scope.studentId).then(function(res){
@@ -61,7 +63,19 @@
                         amt = 0;
                     }
                     return amt;
+                }
 
+                $scope.toggleHistoryDetail = function(index) {
+                    var i = $scope.shownHistory.indexOf(index);
+                    if (i > -1) {
+                        $scope.shownHistory.splice(i, 1);
+                    } else {
+                        $scope.shownHistory.push(index);
+                    }
+                }
+
+                $scope.isShown = function(index) {
+                    return $scope.shownHistory.indexOf(index) > -1
                 }
 
 

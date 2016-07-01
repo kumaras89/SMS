@@ -46,13 +46,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="payment in paymentDetail.paymentHistory" class="success">
-                        <td>{{$index + 1 }}</td>
-                        <td>{{ payment.amount }}</td>
-                        <td>{{ payment.approvedBy }}</td>
-                        <td>{{ payment.paidDate }}</td>
-                        <td>{{ payment.bankName }}</td>
-                        <td>Detail</td>
+                    <tr ng-if="paymentDetail.paymentHistory.length == 0">
+                        <td colspan="6" class="success">No Record Found</td>
+                    </tr>
+                    <tr ng-repeat-start="pt in paymentDetail.paymentHistory" class="success">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ pt.amount }}</td>
+                        <td>{{ pt.approvedBy }}</td>
+                        <td>{{ pt.paidDate }}</td>
+                        <td>{{ pt.bankName }}</td>
+                        <td>
+                            <div class="btn btn-small" ng-click="toggleHistoryDetail($index)">
+                                <div ng-class="isShown($index)?'ui-arrow-down':'ui-arrow-up'">&#x2039;</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-repeat-end ng-show="isShown($index)">
+                        <td colspan="6">
+                            {{pt}}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
