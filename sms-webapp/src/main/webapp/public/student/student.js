@@ -22,6 +22,6 @@ angular.module('Student', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
             .state('home.student-creation', {
                 templateUrl: 'student/student-creation.html',
                 controller: 'StudentCreationCtrl',
-                url: '/student-creation'
+                url: '/student-creation/:applicationNumber'
             })
     }]);

@@ -15,6 +15,7 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentInfo {
 
+
     private Long id;
 
 
@@ -27,6 +28,8 @@ public class StudentInfo {
     @NotNull(message = "Date of Birth is empty")
     @Past(message = "Check Date of Birth")
     private Date dateOfBirth;
+
+    private String applicationNumber;
 
     @Min(value = 1, message = "Age is empty")
     private int age;
@@ -241,5 +244,9 @@ public class StudentInfo {
 
     public HSCMarkDetails getHscMarkDetails() {
         return hscMarkDetails;
+    }
+
+    public String getApplicationNumber() {
+        return applicationNumber;
     }
 }

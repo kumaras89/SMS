@@ -2,9 +2,41 @@
     'use strict';
 
     angular
-        .module('Student')
-        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout',
-            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout) {
+        .module('Student').directive('innerHtmlBind', function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    inner_html: '=innerHtml'
+                },
+                link: function (scope, element, attrs) {
+                    scope.inner_html = element.html();
+                }
+            }
+        })
+        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$uibModal',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout, $uibModal) {
+
+                $scope.applicationNumber = '';
+                $scope.showPopupBeforeSubmit = function() {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'myModalContent.html',
+                        controller: 'StudentModalCtrl',
+                        resolve: {
+                            instanceArguments: function () {
+                                // return $scope.items;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (applicationNumber) {
+                        $scope.applicationNumber = remark;
+                    }, function () {
+                        //$log.info('Modal dismissed at: ' + new Date());
+                    });
+                };
+
+
                 $scope.viewStudent = function (userId) {
                     $state.go('home.student-detail' , {id: userId});
                 };
@@ -90,27 +122,44 @@
 
                 $scope.loadStudent();
             }])
-        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
-            function ($scope, CrudService, FlashService, $state, AdminService) {
-                $scope.student = {};
-                $scope.student.educationDetails = [{},{},{},{}];
-                $scope.student.guardians = [{},{},{},{}];
-                $scope.student.otherLanguages = [{},{},{}];
+        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$stateParams','$http',
+            function ($scope, CrudService, FlashService, $state, AdminService, $stateParams, $http) {
 
-                $scope.student.sslcMarkDetails = {};
-                $scope.student.sslcMarkDetails.additionalDetails = {};
-                $scope.student.hscMarkDetails = {};
-                $scope.student.hscMarkDetails.additionalDetails = {};
-                $scope.student.sslcMarkDetails.subjects = [{'name':'Tamil','totalMark':100},
-                                                           {'name':'English','totalMark':100},
-                                                           {'name':'Maths','totalMark':100},
-                                                           {'name':'Science','totalMark':100},
-                                                           {'name':'Social Science','totalMark':100},
-                                                           {}
-                                                          ];
-                $scope.student.hscMarkDetails.subjects = [{'name':'Tamil','totalMark':200},
-                                                          {'name':'English','totalMark':200}
-                                                           ,{},{},{},{},{},{}];
+                $scope.student = {};
+
+                $scope.loadStudentScholarShip = function () {
+                    if ($stateParams.applicationNumber != undefined && $stateParams.applicationNumber != '') {
+                        $http.get('/student/studentScholarship/' + $stateParams.applicationNumber).then(function (res) {
+                            if (res.data) {
+                                angular.extend($scope.student,res.data);
+                                $scope.initialize();
+                            }
+                        })
+                    } else {
+                        $scope.initialize();
+                        $scope.student.educationDetails = [{}, {}, {}, {}];
+                    }
+                };
+
+                $scope.initialize = function(){
+                    $scope.student.guardians = [{}, {}, {}, {}];
+                    $scope.student.otherLanguages = [{}, {}, {}];
+                    $scope.student.sslcMarkDetails = {};
+                    $scope.student.sslcMarkDetails.additionalDetails = {};
+                    $scope.student.hscMarkDetails = {};
+                    $scope.student.hscMarkDetails.additionalDetails = {};
+                    $scope.student.sslcMarkDetails.subjects = [{'name': 'Tamil', 'totalMark': 100},
+                        {'name': 'English', 'totalMark': 100},
+                        {'name': 'Maths', 'totalMark': 100},
+                        {'name': 'Science', 'totalMark': 100},
+                        {'name': 'Social Science', 'totalMark': 100},
+                        {}
+                    ];
+                    $scope.student.hscMarkDetails.subjects = [{'name': 'Tamil', 'totalMark': 200},
+                        {'name': 'English', 'totalMark': 200}
+                        , {}, {}, {}, {}, {}, {}];
+
+                };
 
                 $scope.createNewStudent = function () {
                     CrudService.studentService.Create($scope.studentSumarized).then(function () {
@@ -224,7 +273,26 @@
                 }
 
                 $scope.init();
+                $scope.loadStudentScholarShip();
 
-            }]);
+            }])
+        .controller("StudentModalCtrl", function ($scope, $uibModalInstance, instanceArguments, $state) {
+            $scope.ok = function () {
+                if($scope.applicationNumber != undefined && $scope.applicationNumber != ''){
+                    $state.go('home.student-creation',{applicationNumber: $scope.applicationNumber});
+                    $uibModalInstance.close();
+                }
+            };
+
+            $scope.continue = function () {
+                $state.go('home.student-creation');
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+    });
+
 
 })();

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 /**
  * Created by Ram on 6/26/2016.
+ * <p></p>
  */
 public interface StudentFacade {
 
@@ -31,5 +32,17 @@ public interface StudentFacade {
      */
     Optional<StudentInfo> findById(Long id);
 
+    /**
+     *
+     * @param code
+     * @return
+     */
     Optional<StudentInfo> findByCode(String code);
+
+    /**
+     *
+     * @param applicationNumber
+     * @return
+     */
+    Optional<StudentInfo> findByScholarship(final String applicationNumber);
 }

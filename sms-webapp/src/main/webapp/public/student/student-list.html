@@ -52,8 +52,25 @@
                 </div>
             </div>
         </div>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3>Student Enrollment</h3>
+            </div>
+            <div class="modal-body">
+                <div class="input-div">
+                    <label>Application Number : </label>
+                    <input type="text" ng-model="applicationNumber"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="continue()"
+                        title="Continuw without scholarship application number">Continue</button>
+                <button class="btn btn-primary" ng-click="ok()" title="Search Student">OK</button>
+            </div>
+        </script>
         <div class="well">
-            <a ng-click="createNewStudent()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
+            <a ng-click="showPopupBeforeSubmit()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
         </div>
     </div>
 </div>
