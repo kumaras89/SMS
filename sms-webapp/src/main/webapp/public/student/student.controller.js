@@ -268,7 +268,7 @@
                 $scope.loadStudentScholarShip();
 
             }])
-        .controller("StudentModalCtrl", function ($scope, $uibModalInstance, instanceArguments, $state) {
+        .controller("StudentModalCtrl", function ($scope, $uibModalInstance, $state) {
             $scope.ok = function () {
                 if($scope.applicationNumber != undefined && $scope.applicationNumber != ''){
                     $state.go('home.student-creation',{applicationNumber: $scope.applicationNumber});
