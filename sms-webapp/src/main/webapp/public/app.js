@@ -131,8 +131,7 @@
                                 '/public/app-services/directives/header/header.js',
                                 '/public/app-services/directives/header/header-notification/header-notification.js',
                                 '/public/app-services/directives/sidebar/sidebar.js',
-                                '/public/app-services/directives/sidebar/sidebar-search/sidebar-search.js',
-                                '/public/app-services/directives/modal/modal.js',
+                                '/public/app-services/directives/sidebar/sidebar-search/sidebar-search.js'
                             ]
                         })
                     }
