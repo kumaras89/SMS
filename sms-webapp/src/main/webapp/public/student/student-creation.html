@@ -53,7 +53,7 @@
     </div>
     <br>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" novalidate="novalidate">
         <div class="control-group">
 
             <!-- #first_step -->
@@ -240,9 +240,9 @@
                 <div class="control-group,form">
                     <div>
                         Do you want to enter SSLC details :
-                        <input type="checkbox" ng-true-value="E" ng-false-value="D" ng-model="sslcEnable"/>
+                        <input type="checkbox" ng-model="sslcEnable"/>
                     </div>
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;" ng-show="sslcEnable === 'E'">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;" ng-show="sslcEnable">
                         <div class="row">
                             <h3 align="center">Student SSLC Details</h3>
                             <div class="col-md-7">
@@ -310,9 +310,9 @@
                     <br>
                     <div>
                         Do you want to enter HSC details :
-                        <input type="checkbox" ng-true-value="E" ng-false-value="D" ng-model="hscEnable"/>
+                        <input type="checkbox" ng-model="hscEnable"/>
                     </div>
-                    <div style="border-radius:20px;border: 2px solid #3dad9c;" ng-show="hscEnable == 'E'">
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;" ng-show="hscEnable">
                         <div class="row">
                             <div class="col-md-7">
                                 <table class="table-condensed">

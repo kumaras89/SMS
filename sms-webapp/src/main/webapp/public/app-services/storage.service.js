@@ -31,6 +31,7 @@
 
         service.clearStorage = function(url) {
             localStorage.removeItem(url);
+            this.getFromStoarage(url,function(){});
         }
 
         return service;

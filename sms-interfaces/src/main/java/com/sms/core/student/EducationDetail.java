@@ -15,6 +15,7 @@ import java.util.Optional;
 @Table(name = "SMS_TR_EDUCATION_DETAIL")
 public class EducationDetail extends BaseModel {
 
+    private static final long serialVersionUID = 533778750992658222L;
     @NotNull(message = "Exam Passed  is empty")
     @Size(min = 1, message = "Exam Passed is empty")
     @Column(name = "ED_EXAM_PASSED")

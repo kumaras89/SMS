@@ -347,6 +347,8 @@
             <tr>
                 <td align="left"><a include-if-allowed operation="student" href="#/student-list">Student List</a><br></td>
                 <td align="right"><a ng-click="goToPayment(student.code)" class="btn btn-small btn-primary">Manage Payments</a></td>
+                <td align="left"><a include-if-allowed operation="student" ui-sref="home.student-list"
+                                    href="#/student-list">Student List</a><br></td>
                 <td align="right"><a ng-click="goToFms(student.code)" class="btn btn-small btn-primary">Manage Documents</a></td>
             </tr>
             </tbody>

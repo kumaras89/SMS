@@ -5,8 +5,8 @@
         .module('app')
         .factory('CrudService', CrudService);
 
-    CrudService.$inject = ['$http'];
-    function CrudService($http) {
+    CrudService.$inject = ['$http','StorageService'];
+    function CrudService($http, StorageService) {
 
         
         
@@ -41,11 +41,15 @@
             }
 
             this.Create = function(data) {
-                return $http.post('/'+this.path, data).then(handleSuccess);
+                var res = $http.post('/'+this.path, data).then(handleSuccess);
+                StorageService.clearStorage('/'+this.path);
+                return res;
             }
 
             this.Update = function(data) {
-                return $http.put('/'+path+'/' + data.id, data).then(handleSuccess);
+                var res =  $http.put('/'+path+'/' + data.id, data).then(handleSuccess);
+                StorageService.clearStorage('/'+this.path);
+                return res;
             }
 
             this.Delete = function(id) {
@@ -59,6 +63,7 @@
             // private functions
 
             function handleSuccess(res) {
+
                 return res.data;
             }
 

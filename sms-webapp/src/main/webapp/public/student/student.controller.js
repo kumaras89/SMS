@@ -184,10 +184,10 @@
                     });
 
                     if(! $scope.sslcEnable){
-                        $scope.studentSumarized.sslcMarkDetails = null;
+                        delete $scope.studentSumarized.sslcMarkDetails;
                     }
                     if(! $scope.hscEnable){
-                        $scope.studentSumarized.hscMarkDetails = null;
+                        delete $scope.studentSumarized.hscMarkDetails;
                     }
 
                 };

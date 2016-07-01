@@ -42,13 +42,13 @@
 
                     AdminService.getBranches(function (data) {
                         $scope.branches = data;
-                        $scope.branchNames = _.pluck(data, "name")
+                        $scope.branchNames = _.pluck(data, "name");
                     });
                 },
                 template: function(){
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
-                        return '<datalist id="branchNames">   <option  data-ng-repeat="bName in branchNames" value="{{bName}}"></datalist>'
-                            +'<input type="text" ng-model="bn" list="branchNames" typeahead="bName in branchNames" id="branchName" '+' placeholder="Branch"/>'
+                        return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
+                                       '| limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />'
                     }else{
                         return '<input type="text" ng-model="bn" readonly>'
                     }
@@ -101,7 +101,7 @@
 
         }];
 
-        $httpProvider.responseInterceptors.push(interceptor);
+        $httpProvider.interceptors.push(interceptor);
 
         $ocLazyLoadProvider.config({
             debug: false,
