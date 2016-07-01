@@ -22,6 +22,36 @@
             'ScholarshipEnrollment',
             'IDCard',
             'Payment'])
+           .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
+                return {
+                    request: function(config){
+                        return config || $q.when(config);
+                    },
+                    requestError: function(request){
+                        return $q.reject(request);
+                    },
+                    response: function (response) {
+                        return response || $q.when(response);
+                    },
+                    responseError: function (response) {
+                        var standardMsg = response.statusText+' on '+ response.config.url;
+                        if(response.data) {
+                            var msg = ''
+                            var msgs = _.pluck(response.data.errorInfo, 'message');
+                            _.each(msgs, function(m) {
+                                msg += m + '<br>'
+                            })
+                            if(msg === '') {
+                                msg = standardMsg;
+                            }
+                            FlashService.Error(msg);
+                        } else {
+                            FlashService.Error(standardMsg);
+                        }
+                        return $q.reject(response);
+                    }
+                };
+         }])
         .config(config)
         .run(run)
         .directive("branchName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
@@ -69,39 +99,7 @@
     function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
 
         localStorage.clear();
-
-        var interceptor = ['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
-
-            function success(response) {
-                return response;
-            }
-
-            function error(response) {
-                var standardMsg = response.statusText+' on '+ response.config.url;
-
-                if(response.data) {
-                    var msg = ''
-                    var msgs = _.pluck(response.data.errorInfo, 'message');
-                    _.each(msgs, function(m) {
-                        msg += m + '<br>'
-                    })
-                    if(msg === '') {
-                        msg = standardMsg;
-                    }
-                    FlashService.Error(msg);
-                } else {
-                    FlashService.Error(standardMsg);
-                }
-                return $q.reject(response);
-            }
-
-            return function (promise) {
-                return promise.then(success, error);
-            }
-
-        }];
-
-        $httpProvider.interceptors.push(interceptor);
+        $httpProvider.interceptors.push('errorInterceptor');
 
         $ocLazyLoadProvider.config({
             debug: false,
