@@ -30,4 +30,6 @@ public interface StudentFacade {
      * @return
      */
     Optional<StudentInfo> findById(Long id);
+
+    Optional<StudentInfo> findByCode(String code);
 }

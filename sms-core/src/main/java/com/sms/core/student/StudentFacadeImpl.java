@@ -36,4 +36,9 @@ public class StudentFacadeImpl implements StudentFacade {
     public Optional<StudentInfo> findById(final Long id) {
         return StudentEnrollmentService.findById(id).with(seConfig.getStuRepo());
     }
+
+    @Override
+    public Optional<StudentInfo> findByCode(String code) {
+        return StudentEnrollmentService.findByCode(code).with(seConfig.getStuRepo());
+    }
 }

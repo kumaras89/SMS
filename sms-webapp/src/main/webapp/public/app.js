@@ -20,7 +20,8 @@
             'MarketingEmployee',
             'FMS',
             'ScholarshipEnrollment',
-            'IDCard'])
+            'IDCard',
+            'Payment'])
         .config(config)
         .run(run)
         .directive("branchName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
@@ -173,10 +174,13 @@
 
     }
 
-    run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http'];
+    run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http', 'AdminServiceProvider'];
     
-    function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http) {
+    function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http, AdminServiceProvider) {
 
+        $rootScope.adminService = function() {
+            return AdminServiceProvider.initService();
+        }
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {

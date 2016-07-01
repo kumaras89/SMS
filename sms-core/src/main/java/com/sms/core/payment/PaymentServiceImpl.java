@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +37,7 @@ public class PaymentServiceImpl implements PaymentService {
                         .map(feesInfo -> PaymentFees.build(feesInfo).with(feesParticularRepository))
                         .get(Collectors.toSet()))
                 .build();
-        student.getPayments().add(payment);
+        Optional.ofNullable(student.getPayments()).orElse(new HashSet<>()).add(payment);
         studentRepository.saveAndFlush(student);
         return PaymentDetailCalculator.calculatePaymentDetail(student);
     }

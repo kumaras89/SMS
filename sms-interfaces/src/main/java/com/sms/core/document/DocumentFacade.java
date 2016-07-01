@@ -111,14 +111,13 @@ public class DocumentFacade {
     }
 
     public static Reader<String, Long> getDocIdOfType(String uploaderId, String category, String docType) {
-        return Reader.of(fmsServer -> 1L);
-//        return Reader.of(
-//                fmsServer ->
-//                        React.of(category)
-//                .thenP(s -> getAllDocTypes(s).with(fmsServer))
-//                .then(docTypes -> docTypes.stream().filter(docType1 -> docType1.getType().equals(docType)).findFirst())
-//                .then()
-//        )
+        return Reader.of(fmsServer ->
+                        React.of(category)
+                                .thenP(s -> getAllDocTypes(s).with(fmsServer))
+                                .then(docTypes -> docTypes.stream().filter(docType1 -> docType1.getType().equals(docType)).findFirst().get())
+                                .thenR(docType1 -> React.of(getAllDocs(uploaderId).with(fmsServer))
+                                        .then(docs -> docs.stream().filter(doc -> doc.getDocumentTypeId().equals(docType1.getId())).findFirst().get()))
+                                .then(doc -> doc.getId()).get().join());
 
     }
 

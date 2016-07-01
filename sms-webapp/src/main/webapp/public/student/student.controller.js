@@ -83,6 +83,10 @@
                     $location.path('/home/fms/STUDENT/'+code);
                 }
 
+                $scope.goToPayment = function(code) {
+                    $location.path('/home/payment-detail/'+code);
+                }
+
 
                 $scope.loadStudent();
             }])

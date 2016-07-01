@@ -45,4 +45,11 @@ public class StudentEnrollmentService {
                                     .then(Optional::ofNullable)
             .get());
     }
+
+    public static Reader<StudentRepository, Optional<StudentInfo>> findByCode(final String code) {
+        return Reader.of(sr -> Do.of(sr.findByCode(code))
+                .then(StudentEnrollmentConverter::convertTo)
+                .then(Optional::ofNullable)
+                .get());
+    }
 }

@@ -33,6 +33,13 @@ public class StudentRestController {
                         .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @RequestMapping(value = "/code/{code}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StudentInfo> get(@PathVariable("code") final String code) {
+        return studentFacade.findByCode(code)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid final StudentInfo entityObject,
                                                     final UriComponentsBuilder ucBuilder) {

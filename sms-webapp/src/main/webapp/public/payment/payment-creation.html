@@ -1,0 +1,81 @@
+﻿<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Make Payment of {{student.name}}
+    </div>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="code">Student :</label></td>
+                    <td><input type="hidden" id="code" ng-model="payment.studentCode" value="{{student.code}}" placeholder="Code" maxlength="10" style="width:94px;"/>
+                        {{student.name}}
+                    </td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="feesAmount">Total Fees Amount:</label></td>
+                    <td><input type="number"  id="feesAmount" ng-model="payment.amount" placeholder="Amount" value="0"   min ="0" style="width: 100px;"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="ddNumber">DD No:</label></td>
+                    <td><input type="text" id="ddNumber" ng-model="payment.ddNumber" placeholder="DD Number" maxlength="20" style="width:188px;"/></td>
+                </tr>
+
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="bankName">Bank Name:</label></td>
+                    <td><input type="text"  id="bankName" ng-model="payment.bankName" placeholder="Bank Name" style="width: 188px;"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="bankBranchName">Bank Branch Name:</label></td>
+                    <td><input type="text"  id="bankBranchName" ng-model="payment.bankBranchName" placeholder="Bank Branch Name" style="width: 188px;"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="admittedBy">Admitted By:</label></td>
+                    <td><input type="text"  id="admittedBy" ng-model="payment.admittedBy" placeholder="Admitted By" style="width: 188px;"/></td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="approvedBy">Approved By:</label></td>
+                    <td><input type="text"  id="approvedBy" ng-model="payment.approvedBy" placeholder="Approved By" style="width: 188px;"/></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+
+            <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Fees Category</label></td>
+                    </tr>
+                    <tr>
+                        <th style="min-width: 20px;">Particulars</th>
+                        <th style="min-width: 20px;">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="feesInfo in payment.feesInfos" class="success">
+                        <td>{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}}</td>
+                        <td>
+                            <input type="number" id="amount" ng-model="feesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="min-width: 20px;">Total</td>
+                        <td style="min-width: 20px;">{{ payment.feesInfos | mySum}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="goToPaymentDetail()" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Payment Detail</a>
+                    <a ng-click="makePayment()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Insert Payment</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

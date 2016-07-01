@@ -111,7 +111,7 @@ public class Payment {
                 .on(Payment::getAmount).set(payment.getAmount())
                 .on(Payment::getDdNumber).set(payment.getDdNumber())
                 .on(Payment::getBankName).set(payment.getBankName())
-                .on(Payment::getPaidDate).set(payment.getPaidDate())
+                .on(Payment::getPaidDate).set(new Date())
                 .on(Payment::getBankBranchName).set(payment.getBankBranchName())
                 .on(Payment::getAdmittedOrRejectedBy).set(payment.getAdmittedOrRejectedBy())
                 .on(Payment::getApprovedBy).set(payment.getApprovedBy())

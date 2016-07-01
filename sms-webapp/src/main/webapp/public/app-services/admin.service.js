@@ -3,15 +3,22 @@
 
     angular
         .module('app')
-        .factory('AdminService', AdminService);
+        .factory('AdminService', AdminService)
+        .factory('AdminServiceProvider', AdminServiceProvider);
 
-    AdminService.$inject = ['StorageService'];
-    function AdminService(StorageService) {
+    AdminServiceProvider.$inject = ['StorageService'];
+
+    AdminService.$inject = ['AdminServiceProvider'];
+
+    function AdminService(AdminServiceProvider){
+        return AdminServiceProvider.initService();
+
+    }
+
+    function AdminServiceProvider(StorageService) {
 
         var service = {};
         
-        initService();
-
         service.getRoles = getRoles
         service.getBranches = getBranches
         service.getSchemes = getSchemes
@@ -31,7 +38,16 @@
         service.getSchemeFeesInfo = getSchemeFeesInfo
         service.getYearOfPassing = getYearOfPassing
 
-        return service;
+        return {
+            serviceImpl : null,
+            initService : function() {
+                if(this.serviceImpl == null){
+                    initService()
+                    this.serviceImpl = service;
+                }
+                return this.serviceImpl;
+            }
+        };
         
         function initService() {
             getBranches(function(){})

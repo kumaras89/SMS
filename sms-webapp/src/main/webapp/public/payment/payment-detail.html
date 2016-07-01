@@ -1,0 +1,70 @@
+<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Payment Detail of {{student.name }}
+    </div>
+
+    <div class="panel-body">
+        <form novalidate="novalidate" class="form-horizontal">
+            <div class="table-responsive">
+                <table show-filter="true" class="table ng-scope ng-table">
+                    <thead>
+                    <tr>
+                        <th>Fees Purticular</th>
+                        <th>Actual</th>
+                        <th>Paid</th>
+                        <th>Remaining</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="feesInfo in student.feesInfos" class="success">
+                        <td>{{ adminService().getFeesParticularDesc(feesInfo.feesParticularCode) }}</td>
+                        <td>{{ getFeesPurtDetailAmt(paymentDetail.actualPaymentDetail,feesInfo) }}</td>
+                        <td>{{ getFeesPurtDetailAmt(paymentDetail.paidDetail,feesInfo) }}</td>
+                        <td>{{ getFeesPurtDetailAmt(paymentDetail.remainingPaymentDetail,feesInfo) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{ paymentDetail.actualPaymentDetail.amount }}</td>
+                        <td>{{ paymentDetail.paidDetail.amount }}</td>
+                        <td>{{ paymentDetail.remainingPaymentDetail.amount }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table show-filter="true" class="table ng-scope ng-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Amount</th>
+                        <th>Approved By</th>
+                        <th>Paid Date</th>
+                        <th>Bank Name</th>
+                        <th style="max-width: 30px">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="payment in paymentDetail.paymentHistory" class="success">
+                        <td>{{$index + 1 }}</td>
+                        <td>{{ payment.amount }}</td>
+                        <td>{{ payment.approvedBy }}</td>
+                        <td>{{ payment.paidDate }}</td>
+                        <td>{{ payment.bankName }}</td>
+                        <td>Detail</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="goToPaymentCreation()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Make payment</a>
+                    <a ng-click="viewStudent()" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Go Back</a>
+                </div>
+            </div>
+        </form>
+     </div>
+</div>
