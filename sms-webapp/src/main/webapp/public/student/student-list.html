@@ -53,8 +53,9 @@
             </div>
         </div>
         <div class="well">
-            <a ng-click="createNewStudent()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
+            <a data-toggle="modal" data-target="#enrolmentModal" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
         </div>
     </div>
 </div>
 <br>
+<modal id="enrolmentModal" title="Pre Erollment Information" eventname="Verify" content="<input type='text'>" goto="createNewStudent()"/>

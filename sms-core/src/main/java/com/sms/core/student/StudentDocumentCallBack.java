@@ -1,8 +1,6 @@
 package com.sms.core.student;
 
 import com.sms.core.common.DateUtils;
-import com.sms.core.common.Promise;
-import com.sms.core.document.DocInfo;
 import com.sms.core.document.DocumentCallBack;
 import com.sms.core.document.DocumentFacade;
 import com.sms.core.document.UpdateInfo;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Ganesan on 20/06/16.
@@ -46,8 +43,9 @@ public class StudentDocumentCallBack implements DocumentCallBack {
         final Student student = studentRepository.findByCode(updateInfo.getUploaderId());
         studentRepository.updateStatus(updateInfo.getUploaderId(), StudentStatus.valueOf(updateInfo.getStatus()));
         IdCard idCard = IdCard.builder()
-                .on(IdCard::getUploaderId).set(updateInfo.getUploaderId())
-                .on(IdCard::getUploaderCategory).set(updateInfo.getCategory())
+                .on(IdCard::getIdentityCode).set(updateInfo.getUploaderId())
+                .on(IdCard::getName).set(student.getName())
+                .on(IdCard::getAddress).set(student.getBranch().getAddress())
                 .on(IdCard::getCreatedDate).set(new Date())
                 .on(IdCard::getLastModifiedDate).set(new Date())
                 .on(IdCard::getValidUpto).set(DateUtils.addYear(student.getCreatedDate(), 2))

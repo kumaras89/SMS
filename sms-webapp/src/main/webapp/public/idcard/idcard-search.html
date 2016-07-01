@@ -12,15 +12,17 @@
             </div>
             <div class="col-lg-3">
                 <label>Unique Code : </label>
-                <input ng-model="uploaderId" type="text" class="form-control"/>
+                <input ng-model="identityCode" type="text" class="form-control"/>
             </div>
             <div class="col-lg-3">
                 <label>Status : </label>
-                <input ng-model="status" type="text" class="form-control"/>
+                <select ng-model="status" id="status" class="form-control">
+                    <option ng-repeat="status in commonAttributes.idCardStatuses" value="{{status}}">{{status}}</option>
+                </select>
             </div>
             <div class="col-lg-3">
-                <label>Category : </label>
-                <input ng-model="uploaderCategory" type="text" class="form-control"/>
+                <label>Name : </label>
+                <input ng-model="name" type="text" class="form-control"/>
             </div>
             <div class="col-lg-3">
                 <label>Requested Year : </label>
@@ -39,7 +41,7 @@
                     <tr>
                         <th>#</th>
                         <th>Code</th>
-                        <th>Category</th>
+                        <th>Name</th>
                         <th>Requested Date</th>
                         <th>Status</th>
                         <th>Validity</th>
@@ -49,12 +51,12 @@
                     <tbody>
                     <tr ng-repeat="idCard in $data | filter: feesComponents_filter" class="success">
                         <td>{{$index + 1 }}</td>
-                        <td sortable="uploaderId">{{ idCard.uploaderId }}</td>
-                        <td sortable="uploaderCategory">{{ idCard.uploaderCategory }}</td>
+                        <td sortable="uploaderId">{{ idCard.identityCode }}</td>
+                        <td sortable="uploaderCategory">{{ idCard.name }}</td>
                         <td sortable="name">{{ idCard.createdDate | date }}</td>
                         <td sortable="name">{{ idCard.status }}</td>
                         <td sortable="name">{{ idCard.validUpto | date }}</td>
-                        <td><a ng-click="view(idCard.id,idCard.uploaderId)" class="btn btn-group-sm btn-primary"><i class="fa fa-eye fa-fw"></i>View</a></td>
+                        <td><a ng-click="view(idCard.id)" class="btn btn-group-sm btn-primary"><i class="fa fa-eye fa-fw"></i>View</a></td>
                     </tr>
                     </tbody>
                 </table>

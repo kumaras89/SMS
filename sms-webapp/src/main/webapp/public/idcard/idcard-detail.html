@@ -9,27 +9,27 @@
         <form novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td colspan="2" align="center"><img ng-src="{{src}}" style="height:200px;width:160px;"/></td>
+                    <td colspan="2" align="center"><img ng-src="{{src}}" style="height:200px;width:160px;" alt="Photo not uploaded!"/></td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label">Name:</label></td>
-                    <td>{{}}</td>
+                    <td><label class="control-label">Name</label></td>
+                    <td>{{idCardDetail.name}}</td>
                 </tr>
                 <tr class="odd gradeA">
-                    <td><label class="control-label">Phone Number:</label></td>
-                    <td>{{}}</td>
+                    <td><label class="control-label">Identity Code</label></td>
+                    <td>{{idCardDetail.identityCode}}</td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label">Course:</label></td>
-                    <td>{{}}</td>
+                    <td><label class="control-label">Validity</label></td>
+                    <td>{{idCardDetail.validUpto | date}}</td>
                 </tr>
                 <tr class="odd gradeA">
-                    <td><label class="control-label">Branch:</label></td>
-                    <td>{{}}</td>
+                    <td><label class="control-label">Request Created Date</label></td>
+                    <td>{{idCardDetail.createdDate | date}}</td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label">Address:</label></td>
-                    <td>{{}}</td>
+                    <td><label class="control-label">Address</label></td>
+                    <td>{{address}}</td>
                 </tr>
              </table>
 
@@ -38,6 +38,9 @@
             <div class="well">
                 <div class="controls">
                     <a ui-sref="home.idcard-search" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Back to Search</a>
+                    <a ng-if="idCardDetail.status == 'REQUESTED'" ng-click="updateStatus('PRINTED')" class="btn btn-group-sm btn-primary"><i class="fa fa-print fa-fw"></i>Printed</a>
+                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus('MISSED')" class="btn btn-group-sm btn-primary"><i class="fa fa-dropbox fa-fw"></i>Missed</a>
+                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus('RECEIVED')" class="btn btn-group-sm btn-primary"><i class="fa fa-hand-o-up fa-fw"></i>Received</a>
                  </div>
             </div>
         </form>

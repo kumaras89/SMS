@@ -1,19 +1,21 @@
 package com.sms.core.identity;
 
 import com.sms.core.common.Builder;
+import com.sms.core.student.Address;
 
 import java.util.Date;
 
 public class IdCardInfo {
 
     private Long id;
-    private String uploaderId;
-    private String uploaderCategory;
+    private String identityCode;
     private Long fmsId;
     private Date validUpto;
     private String status;
     private Date createdDate;
     private Date lastModifiedDate;
+    private Address address;
+    private String name;
 
     public static Builder<IdCardInfo> builder() {
         return Builder.of(IdCardInfo.class);
@@ -22,13 +24,14 @@ public class IdCardInfo {
     public static Builder<IdCardInfo> toBuilder(final IdCard idCard) {
         return builder()
                 .with(IdCardInfo::getId, idCard.getId())
-                .with(IdCardInfo::getUploaderId, idCard.getUploaderId())
-                .with(IdCardInfo::getUploaderCategory, idCard.getUploaderCategory())
+                .with(IdCardInfo::getIdentityCode, idCard.getIdentityCode())
+                .with(IdCardInfo::getName, idCard.getName())
                 .with(IdCardInfo::getFmsId, idCard.getFmsId())
                 .with(IdCardInfo::getValidUpto, idCard.getValidUpto())
                 .with(IdCardInfo::getStatus, idCard.getStatus().name())
                 .with(IdCardInfo::getCreatedDate, idCard.getCreatedDate())
-                .with(IdCardInfo::getLastModifiedDate, idCard.getLastModifiedDate());
+                .with(IdCardInfo::getLastModifiedDate, idCard.getLastModifiedDate())
+                .with(IdCardInfo::getAddress, idCard.getAddress());
     }
 
     public static IdCardInfo build(final IdCard idCard) {
@@ -39,12 +42,16 @@ public class IdCardInfo {
         return id;
     }
 
-    public String getUploaderId() {
-        return uploaderId;
+    public String getName() {
+        return name;
     }
 
-    public String getUploaderCategory() {
-        return uploaderCategory;
+    public String getIdentityCode() {
+        return identityCode;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public Long getFmsId() {

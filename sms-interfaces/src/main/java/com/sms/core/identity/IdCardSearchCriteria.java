@@ -2,17 +2,17 @@ package com.sms.core.identity;
 
 public class IdCardSearchCriteria {
 
-    private String uploaderId;
-    private String uploaderCategory;
+    private String identityCode;
+    private String name;
     private IdCardStatus status;
     private Integer year;
 
-    public String getUploaderId() {
-        return uploaderId;
+    public String getIdentityCode() {
+        return identityCode;
     }
 
-    public String getUploaderCategory() {
-        return uploaderCategory;
+    public String getName() {
+        return name;
     }
 
     public IdCardStatus getStatus() {
