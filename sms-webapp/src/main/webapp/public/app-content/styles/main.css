@@ -97,3 +97,16 @@ background-color: #eee;
   clear: both;
   float: right;
 }
+
+.ui-arrow-down {
+  padding: 10px;
+  color: gray;
+  transform: rotate(-90deg);
+  font-size:5em;
+}
+.ui-arrow-up{
+  padding: 10px;
+  color: gray;
+  transform: rotate(90deg);
+  font-size:5em;
+}
