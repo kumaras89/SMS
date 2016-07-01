@@ -51,7 +51,7 @@ public class IdCard extends BaseModel {
                 .with(IdCard::getName, idCard.getName())
                 .with(IdCard::getFmsId, idCard.getFmsId())
                 .with(IdCard::getValidUpto, idCard.getValidUpto())
-                .with(IdCard::getStatus, idCard.getStatus())
+                .with(IdCard::getStatus, IdCardStatus.valueOf(idCard.getStatus()))
                 .with(IdCard::getCreatedDate, idCard.getCreatedDate())
                 .with(IdCard::getLastModifiedDate, idCard.getLastModifiedDate())
                 .with(IdCard::getAddress, idCard.getAddress());

@@ -68,15 +68,15 @@
                 $scope.init();
 
             }])
-        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state',
-            function ($scope, $stateParams, CrudService, FlashService, $state) {
+        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', '$http',
+            function ($scope, $stateParams, CrudService, FlashService, $state, $http) {
 
-                $scope.updateStatus = function (status) {
+                $scope.updateStatus = function (id,status) {
                     $scope.idCardDetail.status = status;
-                    CrudService.idcardService.Update($scope.branch).then(function(){
+
+                    $http.put('/idcard/' + id, $scope.idCardDetail).then(function(response) {
                         $state.go('home.idcard-search');
                     });
-
                 }
 
                 $scope.loadIDCard = function () {

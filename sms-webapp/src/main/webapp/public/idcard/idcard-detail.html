@@ -38,9 +38,9 @@
             <div class="well">
                 <div class="controls">
                     <a ui-sref="home.idcard-search" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Back to Search</a>
-                    <a ng-if="idCardDetail.status == 'REQUESTED'" ng-click="updateStatus('PRINTED')" class="btn btn-group-sm btn-primary"><i class="fa fa-print fa-fw"></i>Printed</a>
-                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus('MISSED')" class="btn btn-group-sm btn-primary"><i class="fa fa-dropbox fa-fw"></i>Missed</a>
-                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus('RECEIVED')" class="btn btn-group-sm btn-primary"><i class="fa fa-hand-o-up fa-fw"></i>Received</a>
+                    <a ng-if="idCardDetail.status == 'REQUESTED'" ng-click="updateStatus(idCardDetail.id, 'PRINTED')" class="btn btn-group-sm btn-primary"><i class="fa fa-print fa-fw"></i>Printed</a>
+                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus(idCardDetail.id, 'MISSED')" class="btn btn-group-sm btn-primary"><i class="fa fa-dropbox fa-fw"></i>Missed</a>
+                    <a ng-if="idCardDetail.status == 'PRINTED'" ng-click="updateStatus(idCardDetail.id, 'RECEIVED')" class="btn btn-group-sm btn-primary"><i class="fa fa-hand-o-up fa-fw"></i>Received</a>
                  </div>
             </div>
         </form>

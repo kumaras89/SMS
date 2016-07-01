@@ -12,4 +12,5 @@ public interface IDCardService {
 
     Reader<IdCardRepository, Optional<IdCardInfo>> findById(final Long id);
 
+    Reader<IdCardRepository, Optional<IdCardInfo>> update(long id, IdCardInfo idCardInfo);
 }

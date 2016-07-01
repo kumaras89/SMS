@@ -40,4 +40,13 @@ public class IDCardRestController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<IdCardInfo> update(@PathVariable("id") long id,
+                                    @RequestBody @Valid IdCardInfo entityObject) {
+        return idCardService.update(id, entityObject).with(idCardRepository)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
+    }
+
 }

@@ -30,4 +30,16 @@ public class IDCardServiceImpl implements IDCardService {
                 .then(Optional::ofNullable)
                 .get());
     }
+
+    @Override
+    public Reader<IdCardRepository, Optional<IdCardInfo>> update(long id, IdCardInfo idCardInfo) {
+        return Reader.of(idCardRepository -> Do.of(idCardInfo)
+                .then(IdCard::toBuilder)
+                .then(idCardBuilder -> idCardBuilder.on(IdCard::getId).set(id))
+                .then(idCardBuilder -> idCardBuilder.build())
+                .then(idCardRepository::saveAndFlush)
+                .then(IdCardInfo::build)
+                .then(Optional::ofNullable)
+                .get());
+    }
 }
