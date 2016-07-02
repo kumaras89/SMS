@@ -4,6 +4,7 @@ import com.sms.core.BaseModel;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
 import com.sms.core.marketing.MarketingEmployee;
+import com.sms.core.scholarship.ScholarStatus;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -90,6 +91,9 @@ public class StudentScholar extends BaseModel
     @JoinColumn(name = "STS_MARKETING_EMPLOYEE_ID")
     private MarketingEmployee marketingEmployee;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STS_STATUS")
+    private ScholarStatus status;
 
     public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
 
@@ -102,6 +106,7 @@ public class StudentScholar extends BaseModel
                 .with(StudentScholar::getAge, studentScholarInfo.getAge())
                 .with(StudentScholar::getGender, Gender.valueOf(studentScholarInfo.getGender()))
                 .with(StudentScholar::getMaritalStatus, MaritalStatus.valueOf(studentScholarInfo.getMaritalStatus()))
+                .on(StudentScholar::getStatus).set(ScholarStatus.valueOf(studentScholarInfo.getStatus()))
                 .with(StudentScholar::getStudentPhoneNumber, studentScholarInfo.getStudentPhoneNumber())
                 .with(StudentScholar::getParentPhoneNumber, studentScholarInfo.getParentPhoneNumber())
                 .with(StudentScholar::getEducationDetails, studentScholarInfo.getEducationDetails())
@@ -200,5 +205,9 @@ public class StudentScholar extends BaseModel
 
     public MarketingEmployee getMarketingEmployee() {
         return marketingEmployee;
+    }
+
+    public ScholarStatus getStatus() {
+        return status;
     }
 }

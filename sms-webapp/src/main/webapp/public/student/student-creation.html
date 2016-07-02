@@ -91,7 +91,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" >Age</label></td>
-                                    <td><label class="control-label">{{calculateAge(student.dateOfBirth)}}</label></td>
+                                    <td><label class="control-label" id="age">{{calculateAge(student.dateOfBirth)}}</label></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="gender">Gender</label></td>
@@ -487,7 +487,7 @@
                                     </tr>
                                     <tr>
                                         <td class="firstcol"><label class="control-label" for="age">Age</label></td>
-                                        <td><label class="control-label">{{studentSumarized.age}}</label></td>
+                                        <td><label class="control-label">{{calculateAge(studentSumarized.dateOfBirth)}}</label></td>
                                     </tr>
                                     <tr>
                                         <td class="firstcol"><label class="control-label" for="gender">Gender</label></td>

@@ -99,6 +99,7 @@ public class StudentScholarInfo
 
     private Date lastModifiedDate;
 
+    private String status;
 
     public StudentScholarInfo()
     {
@@ -118,6 +119,7 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getAge, studentScholar.getAge())
                 .with(StudentScholarInfo::getGender, studentScholar.getGender().name())
                 .with(StudentScholarInfo::getMaritalStatus, studentScholar.getMaritalStatus().name())
+                .on(StudentScholarInfo::getStatus).set(studentScholar.getStatus().name())
                 .with(StudentScholarInfo::getStudentPhoneNumber, studentScholar.getStudentPhoneNumber())
                 .with(StudentScholarInfo::getParentPhoneNumber, studentScholar.getParentPhoneNumber())
                 .with(StudentScholarInfo::getEducationDetails, studentScholar.getEducationDetails())
@@ -215,6 +217,10 @@ public class StudentScholarInfo
 
     public String getMarketingEmployeeCode() {
         return marketingEmployeeCode;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
 

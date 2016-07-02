@@ -115,9 +115,10 @@
                         FlashService.Success("Successfuly Inserted !!", true);
                         $location.path('/home/user-list');
                     }
-                }, function(res) {
+                }
+                /*, function(res) {
                     FlashService.Error(res.message);
-                });
+                }*/);
             }
 
             $scope.init = function() {

@@ -14,9 +14,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "SMS_MA_BRANCH")
 public class Branch extends BaseModel {
+
     @NotNull(message = "Branch Code is empty")
     @Size(min = 1, message = "Branch Code is empty")
-    @Column(name = "BR_CODE", unique = true)
+    @Column(name = "BR_CODE",unique = true)
     private String code;
 
     @NotNull(message = "Branch Name is empty")

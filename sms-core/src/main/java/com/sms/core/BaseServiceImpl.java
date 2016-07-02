@@ -1,5 +1,6 @@
 package com.sms.core;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,8 @@ public abstract class BaseServiceImpl<T> implements IStudentPortalService<T> {
     }
 
     public Optional<T> save(final T entityObject) {
-        final Optional<T> value =  Optional.of((T) jpaRepository.saveAndFlush(entityObject));
-        return value;
+            final Optional<T> value = Optional.of((T) jpaRepository.saveAndFlush(entityObject));
+            return value;
     }
 
     public Optional<T> update(final Long id, final T entityObject) {
