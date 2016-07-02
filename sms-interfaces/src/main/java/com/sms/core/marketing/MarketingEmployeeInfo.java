@@ -31,6 +31,9 @@ public class MarketingEmployeeInfo {
     @Size(min = 10,max=13,message = "Phone number is invalid")
     private String phoneNumber;
 
+    @NotNull(message = "User is empty")
+    private String linkedUser;
+
     public static Builder<MarketingEmployeeInfo> builder() {
         return Builder.of(MarketingEmployeeInfo.class);
     }
@@ -42,7 +45,8 @@ public class MarketingEmployeeInfo {
                 .with(MarketingEmployeeInfo::getDesignation, marketingEmployee.getDesignation().name())
                 .with(MarketingEmployeeInfo::getName, marketingEmployee.getName())
                 .with(MarketingEmployeeInfo::getAddress, marketingEmployee.getAddress())
-                .with(MarketingEmployeeInfo::getPhoneNumber, marketingEmployee.getPhoneNumber());
+                .with(MarketingEmployeeInfo::getPhoneNumber, marketingEmployee.getPhoneNumber())
+                .with(MarketingEmployeeInfo::getLinkedUser, marketingEmployee.getLinkedUser().getName());
     }
 
     public Long getId() {
@@ -67,5 +71,9 @@ public class MarketingEmployeeInfo {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getLinkedUser() {
+        return linkedUser;
     }
 }

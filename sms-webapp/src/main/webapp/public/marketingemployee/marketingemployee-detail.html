@@ -16,12 +16,20 @@
                 <td><input type="text" id="code" ng-model="marketingEmployee.code" placeholder="Code" maxlength="10" style="width:94px"/></td>
             </tr>
             <tr class="even gradeA">
+                <td><label class="control-label" for="name">Linked User:</label></td>
+                <td><input type="text" id="linkedUser" ng-model="marketingEmployee.linkedUser" placeholder="Name" maxlength="30" style="width:275px" /></td>
+            </tr>
+            <tr class="even gradeA">
                 <td><label class="control-label" for="name">Name:</label></td>
                 <td><input type="text" id="name" ng-model="marketingEmployee.name" placeholder="Name" maxlength="30" style="width:275px" /></td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="designation">Designation:</label></td>
-                <td><input type="text" id="designation" ng-model="marketingEmployee.designation" list="designationList" placeholder="Designation" maxlength="20"  style="width:188px"/></td>
+                <td>
+                    <select ng-model="marketingEmployee.designation" id="designation">
+                        <option ng-repeat="designation in commonAttributes.designation" value="{{designation}}">{{designation}}</option>
+                    </select>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="phoneNumber">Phone Number:</label></td>
@@ -78,6 +86,3 @@
     </form>
 </div>
 <br>
-<datalist id="designationList">
-    <option  data-ng-repeat="designation in commonAttributes.designation" value="{{designation}}">
-</datalist>

@@ -3,13 +3,13 @@ package com.sms.core;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-@Service
 public abstract class BaseServiceConvertorImpl<SOURCE, TARGET> implements IStudentPortalService<SOURCE> {
 
     private final Converter<SOURCE, TARGET> sourceConverter;

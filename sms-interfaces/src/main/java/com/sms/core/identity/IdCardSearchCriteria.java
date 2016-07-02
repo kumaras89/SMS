@@ -6,6 +6,11 @@ public class IdCardSearchCriteria {
     private String name;
     private IdCardStatus status;
     private Integer year;
+    private String branch;
+
+    public String getBranch() {
+        return branch;
+    }
 
     public String getIdentityCode() {
         return identityCode;

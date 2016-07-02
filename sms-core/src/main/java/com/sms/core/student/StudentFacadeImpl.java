@@ -47,4 +47,12 @@ public class StudentFacadeImpl implements StudentFacade {
     public Optional<StudentInfo> findByScholarship(final String applicationNumber) {
         return StudentEnrollmentService.findByStudentScholarship(applicationNumber).with(seConfig.getStudScholarServ());
     }
+
+    @Override
+    public List<StudentInfo> search(StudentSearchCriteria studentSearchCriteria) {
+        return StudentSearchService
+                .search(studentSearchCriteria)
+                .local(StudentEnrollmentConfig::getStuRepo)
+                .with(seConfig);
+    }
 }

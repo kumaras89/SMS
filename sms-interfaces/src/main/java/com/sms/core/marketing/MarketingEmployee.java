@@ -1,6 +1,7 @@
 package com.sms.core.marketing;
 
 import com.sms.core.BaseModel;
+import com.sms.core.admin.User;
 import com.sms.core.common.Builder;
 import com.sms.core.common.Designation;
 import com.sms.core.student.Address;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 public class MarketingEmployee extends BaseModel {
 
 
-    @Column(name = "ME_CODE")
+    @Column(name = "ME_CODE", unique = true)
     private String code;
 
     @Column(name = "ME_NAME")
@@ -28,6 +29,10 @@ public class MarketingEmployee extends BaseModel {
 
     @Column(name = "ME_PHONE_NUMBER")
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "ME_USER_ID", unique = true)
+    private User linkedUser;
 
     public static Builder<MarketingEmployee> builder() {
         return Builder.of(MarketingEmployee.class);
@@ -61,5 +66,9 @@ public class MarketingEmployee extends BaseModel {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public User getLinkedUser() {
+        return linkedUser;
     }
 }

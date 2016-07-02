@@ -1,20 +1,18 @@
-package com.sms.core;
+package com.sms.core.scholarship;
 
+import com.sms.core.SmsException;
 import com.sms.core.common.FList;
 import com.sms.core.repositery.BranchRepository;
 import com.sms.core.repositery.MarketingEmployeeRepository;
 import com.sms.core.repositery.StudentScholarRepository;
-import com.sms.core.scholarship.StudentScholarService;
 import com.sms.core.student.StudentScholar;
 import com.sms.core.student.StudentScholarInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

@@ -15,7 +15,7 @@ public class UserRole extends BaseModel {
 
 	@NotNull(message = "Role  Name is empty")
 	@Size(min = 1, message = "Role Name is empty")
-	@Column(name = "UR_NAME")
+	@Column(name = "UR_NAME",unique = true)
 	private String name;
 
 	@NotNull(message = "Role Desc is empty")

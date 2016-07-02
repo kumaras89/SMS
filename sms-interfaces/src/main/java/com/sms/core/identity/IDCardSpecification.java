@@ -17,6 +17,7 @@ public class IDCardSpecification {
                 .map(IdCardSearchCriteria::getIdentityCode, identityCode -> builder.like(builder.upper(root.<String>get("identityCode")), "%" + identityCode + "%"))
                 .map(IdCardSearchCriteria::getStatus, status -> builder.equal(root.<String>get("status"), status))
                 .map(IdCardSearchCriteria::getName, name -> builder.like(root.<String>get("name"), "%" + name + "%"))
+                .map(IdCardSearchCriteria::getBranch, name -> builder.like(root.<String>get("branch"), "%" + name + "%"))
                 .map(IdCardSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
                                                                     DateUtils.fromYear(Year.of(year), Month.JANUARY, 1),
                                                                     DateUtils.fromYear(Year.of(year), Month.DECEMBER, 31)))

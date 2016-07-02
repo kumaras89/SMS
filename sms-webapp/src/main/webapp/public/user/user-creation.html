@@ -29,8 +29,8 @@
                 <td><input type="text" ng-model="user.role" list="roles"  id="role" placeholder="Role" style="width:141px;"/></td>
             </tr>
             <tr class="even gradeA">
-                <td><label class="control-label" for="branch">Branch:</label></td>
-                <td><span branch-name bn="user.branchName" style="width:284px;" ng-required/></span></td>
+                <td><label class="control-label">Branch:</label></td>
+                <td><span branch-name bn="user.branch" style="width:284px;" ng-required/></span></td>
             </tr>
         </table>
         <datalist id="roles">
@@ -38,7 +38,7 @@
         </datalist>
         <div class="well">
             <div class="controls">
-                <a ng-disabled="user.$invalid" class="btn btn-small btn-primary">create new user</a>
+                <a ng-disabled="user.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
                 <a ui-sref="home.user-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Users</a>
             </div>
         </div>

@@ -1,5 +1,7 @@
 package com.sms.core.student;
 
+import com.sms.core.identity.IdCardInfo;
+import com.sms.core.identity.IdCardSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,6 +42,7 @@ public class StudentRestController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid final StudentInfo entityObject,
         final UriComponentsBuilder ucBuilder) {
@@ -58,5 +61,13 @@ public class StudentRestController {
         return studentFacade.findByScholarship(applicationNumber)
             .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<List<StudentInfo>> search(@RequestBody @Valid StudentSearchCriteria criteria) {
+        return Optional.ofNullable(studentFacade.search(criteria))
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

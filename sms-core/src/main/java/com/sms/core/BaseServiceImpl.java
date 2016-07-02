@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public abstract class BaseServiceImpl<T> implements IStudentPortalService<T> {
 
     private final JpaRepository<T, Long> jpaRepository;

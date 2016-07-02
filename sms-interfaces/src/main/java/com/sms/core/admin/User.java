@@ -24,7 +24,7 @@ public class User extends BaseModel {
 	private String branch;
 
 
-	@Column(name = "US_NAME")
+	@Column(name = "US_NAME", unique = true)
 	private String name;
 
 
