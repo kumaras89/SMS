@@ -74,7 +74,7 @@
                             <tbody>
                                 <tr>
                                     <td><label class="control-label" >Branch:</label></td>
-                                    <td><span branch-name bn="student.branchName"></span></td>
+                                    <td><span branch-name bn="student.branch"></span></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="name">Name of the Student</label></td>
@@ -195,8 +195,8 @@
                                 <td><label for="examPassed">Examination Passed</label></td>
                                 <td><label for="instituteName">Institute Name</label></td>
                                 <td><label for="groupName">Group Name</label></td>
-                                <td><label for="passingYear">Year Of Passing</label></td>
-                                <td><label for="percentageObtained">Percentage Obtained</label></td>
+                                <td style="word-wrap: break-word;"><label  for="passingYear">Year Of Passing</label></td>
+                                <td style="word-wrap: break-word;"><label for="percentageObtained">Percentage Obtained</label></td>
                                 <td><label for="remark">Remarks</label></td>
                             </tr>
                             <tbody ng-repeat="educationDetail in student.educationDetails">
@@ -219,8 +219,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" ng-model="educationDetail.percentageObtained"
-                                               id="percentageObtained" placeholder="Percentage obtained"/>
+                                        <input class="percentage" type="number" ng-model="educationDetail.percentageObtained"
+                                               id="percentageObtained" placeholder="%"/>
                                     </td>
                                     <td>
                                         <input type="text" ng-model="educationDetail.remark" id="remark"
@@ -293,7 +293,7 @@
                                         </tr>
                                         <tr>
                                             <td>Year of Passing</td>
-                                            <td><input type="text" ng-model="student.sslcMarkDetails.additionalDetails.yearOfPassing"></td>
+                                            <td><input type="number" ng-model="student.sslcMarkDetails.additionalDetails.yearOfPassing"></td>
                                         </tr>
                                         <tr>
                                             <td>School Name</td>
@@ -364,7 +364,7 @@
                                         </tr>
                                         <tr>
                                             <td>Year of Passing</td>
-                                            <td><input type="text" id="hscYear" ng-model="student.hscMarkDetails.additionalDetails.yearOfPassing"></td>
+                                            <td><input type="number" id="hscYear" ng-model="student.hscMarkDetails.additionalDetails.yearOfPassing"></td>
                                         </tr>
                                         <tr>
                                             <td>School Name</td>
@@ -409,7 +409,11 @@
                             </tr>
                             <tbody ng-repeat="guardian in student.guardians">
                             <tr>
-                                <td><input type="text" ng-model="guardian.relationShip" list="relations" id="relationShip" placeholder="Relationship"/></td>
+                                <td>
+                                    <select ng-model="guardian.relationShip" id="relationShip">
+                                        <option ng-repeat="relation in commonAttributes.relation" value="{{relation}}"> {{relation}}</option>
+                                    </select>
+                                </td>
                                 <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
                                 <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="Occupation"/></td>
                                 <td><input type="tel" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="Phone number"/></td>
@@ -437,18 +441,27 @@
                             <tbody>
                             <tr>
                                 <td><label class="control-label">Course Name</label></td>
-                                <td><input type="text" ng-model="student.courseName" list="courseNames" id="courseName"
-                                           placeholder="Course"/></td>
+                                <td>
+                                    <select ng-model="student.courseName" id="courseName">
+                                        <option ng-repeat="courseName in courseNames" value="{{courseName}}">{{courseName}}</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label">Fees Scheme Name</label></td>
-                                <td><input type="text" ng-model="student.schemeName" list="schemeList" id="schemeName"
-                                           placeholder="Scheme"/></td>
+                                <td>
+                                    <select ng-model="student.schemeName" id="schemeName">
+                                        <option ng-repeat="scheme in schemes" value="{{scheme.name}}">{{scheme.name}}</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td><label class="control-label">Referred By</label></td>
-                                <td><input type="text" ng-model="student.referalName" list="marketingEmployeeList"
-                                           id="referalName" placeholder="Referal name"/></td>
+                                <td>
+                                    <select ng-model="student.referalName" id="referalName">
+                                        <option ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">{{marketingEmployee.name}}</option>
+                                    </select>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -821,21 +834,5 @@
     </form>
 </div>
 <br>
-<datalist id="relations">
-    <option  data-ng-repeat="relation in commonAttributes.relation" value="{{relation}}">
-</datalist>
-
-<datalist id="schemeList">
-    <option  data-ng-repeat="scheme in schemes" value="{{scheme.name}}">
-</datalist>
-
-<datalist id="courseNames">
-    <option  data-ng-repeat="courseName in courseNames" value="{{courseName}}">
-</datalist>
-
-<datalist id="marketingEmployeeList">
-    <option  data-ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">
-</datalist>
-
 </body>
 </html>

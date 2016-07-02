@@ -31,7 +31,7 @@ public class MarketingEmployee extends BaseModel {
     private String phoneNumber;
 
     @ManyToOne
-    @JoinColumn(name = "ME_USER_ID", unique = true)
+    @JoinColumn(name = "ME_USER_ID")
     private User linkedUser;
 
     public static Builder<MarketingEmployee> builder() {

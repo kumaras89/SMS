@@ -155,8 +155,8 @@
                             <td><label for="examPassed">Examination Passed</label></td>
                             <td><label for="instituteName">Institute Name</label></td>
                             <td><label for="groupName">Group Name</label></td>
-                            <td><label for="passingYear">Year Of Passing</label></td>
-                            <td><label for="percentageObtained">Percentage Obtained</label></td>
+                            <td style="word-wrap: break-word;"><label style="word-wrap: break-word;" for="passingYear">Year Of Passing</label></td>
+                            <td style="word-wrap: break-word;"><label  for="percentageObtained">Percentage <br> Obtained</label></td>
                             <td><label for="remark">Remarks</label></td>
                         </tr>
                         <tbody ng-repeat="educationDetail in scholarshipEnrollment.educationDetails">
@@ -179,8 +179,8 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" ng-model="educationDetail.percentageObtained"
-                                           id="percentageObtained" placeholder="Percentage obtained"/>
+                                    <input class="percentage" type="number" ng-model="educationDetail.percentageObtained"
+                                           id="percentageObtained" placeholder="%"/>
                                 </td>
                                 <td>
                                     <input type="text" ng-model="educationDetail.remark" id="remark"
@@ -389,18 +389,5 @@
     </form>
 </div>
 <br>
-
-<datalist id="religions">
-    <option  data-ng-repeat="religion in commonAttributes.religion" value="{{religion}}">
-</datalist>
-
-<datalist id="castes">
-    <option  data-ng-repeat="caste in commonAttributes.caste" value="{{caste}}">
-</datalist>
-
-<datalist id="marketingEmployeeList">
-    <option  data-ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">
-</datalist>
-
 
 
