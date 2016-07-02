@@ -33,10 +33,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
                                     <td><label class="control-label" for="code">Applicant Number</label></td>
                                     <td><input type="text" id="code" ng-model="scholarshipEnrollment.applicationNumber" placeholder="Applicant Number"/></td>
                                 </tr>
+                                <tr>
+                                    <td><label class="control-label">Branch</label></td>
+                                    <td><span branch-name bn="scholarshipEnrollment.branch"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Marketing Employee</label></td>
+                                    <td><input type="text" id="scholarshipEnrollment.marketingEmployee" ng-model="scholarshipEnrollment.marketingEmployee" list="marketingEmployeeList"
+                                               placeholder="marketingEmployee"/>
+
+                                        <!--<select ng-model="scholrshipEnrollment.marketingEmployee" id="marketingEmployee" >
+                                            <option ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee}}">{{marketingEmployee}}</option>
+                                        </select>-->
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <td><label class="control-label" for="name">Name of the Student</label></td>
                                     <td><input type="text" id="name" ng-model="scholarshipEnrollment.name" placeholder="Name"/></td>
@@ -199,6 +215,14 @@
                                     <td class="firstcol"><label class="control-label" for="code">Applicant Number</label></td>
                                     <td><label class="control-label">{{scholarshipSummarized.applicationNumber}}</label></td>
                                 </tr>
+                                <tr>
+                                    <td class="firstcol"><label class="control-label">Branch</label></td>
+                                    <td><label class="control-label">{{scholarshipSummarized.branch}}</label></td>
+                                </tr><!--{{ adminService().getBranchCode(scholarshipEnrollment.branchName)}}-->
+                                <tr>
+                                    <td class="firstcol"><label class="control-label">Marketing Employee</label></td>
+                                    <td><label class="control-label">{{scholarshipSummarized.marketingEmployee}}</label></td>
+                                </tr><!--{{ adminService().getBranchCode(scholarshipEnrollment.marketingEmployee)}}-->
                                 <tr>
                                     <td class="firstcol"><label class="control-label" for="name">Name of the Student</label></td>
                                     <td><label class="control-label">{{scholarshipSummarized.name}}</label></td>
@@ -372,6 +396,10 @@
 
 <datalist id="castes">
     <option  data-ng-repeat="caste in commonAttributes.caste" value="{{caste}}">
+</datalist>
+
+<datalist id="marketingEmployeeList">
+    <option  data-ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">
 </datalist>
 
 

@@ -79,8 +79,9 @@
                     $scope.scholarshipEnrollment.age =  $scope.calculateAge($scope.scholarshipEnrollment.dateOfBirth)
                     $scope.scholarshipSummarized = {}
                     angular.copy($scope.scholarshipEnrollment, $scope.scholarshipSummarized);
-                    $scope.scholarshipSummarized.status = 'CREATED';
-                    // $scope.scholarshipEnrollment.branchCode = AdminService.getBranchCode($scope.student.branchName);
+                    $scope.scholarshipSummarized.status = 'INSERTED';
+                    $scope.scholarshipSummarized.branchCode = AdminService.getBranchCode($scope.scholarshipEnrollment.branch);
+                    $scope.scholarshipSummarized.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.scholarshipEnrollment.marketingEmployee);
                     $scope.scholarshipSummarized.educationDetails = _.filter($scope.scholarshipEnrollment.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
                     });
@@ -96,6 +97,12 @@
                     AdminService.getYearOfPassing(function (data) {
                         $scope.yearOfPass = data;
                     });
+                    AdminService.getMarketingEmployees(function (data) {
+                        $scope.marketingEmployees = data;
+                    });
+                    $scope.getBranchDesc = function (branchCode){
+                        return AdminService.getBranchDesc(branchCode);
+                    };
                 }
                 $scope.init();
 

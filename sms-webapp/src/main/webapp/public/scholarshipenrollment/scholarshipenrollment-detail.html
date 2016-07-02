@@ -20,6 +20,13 @@
                     <td><label class="control-label">{{scholarshipSummarized.applicationNumber}}</label></td>
                 </tr>
                 <tr>
+                    <td class="firstcol"><label class="control-label">Branch</label></td>
+                    <td><label class="control-label">{{adminService().getBranchDesc(scholarshipSummarized.branchCode)}}</label></td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><label class="control-label">Marketing Employee</label></td>
+                    <td><label class="control-label">{{adminService().getMarketingEmployeeName(scholarshipSummarized.marketingEmployeeCode)}}</label></td>
+                </tr>
                     <td class="firstcol"><label class="control-label" for="name">Name of the Student</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.name}}</label></td>
                 </tr>
