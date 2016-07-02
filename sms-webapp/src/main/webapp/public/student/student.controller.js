@@ -206,6 +206,7 @@
 
                 $scope.updateStudent = function(){
                     $scope.student.status = 'CREATED';
+                    $scope.student.age = $scope.calculateAge($scope.student.dateOfBirth)
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.student.schemeName);
                     $scope.student.feesInfos = AdminService.getSchemeFeesInfo($scope.student.schemeCode);
                     $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
@@ -215,6 +216,8 @@
 
                     //deep copy of student
                     angular.copy($scope.student,$scope.studentSumarized);
+
+                    ;
 
                     $scope.studentSumarized.educationDetails = _.filter($scope.student.educationDetails, function(ed){
                         return  ed.examPassed != undefined && ed.examPassed != '';
