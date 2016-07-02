@@ -56,6 +56,21 @@ public class ErrorHandlingController {
 
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Error handleConstraintViolationException(Exception e) {
+        Error error = new Error();
+        if(e.getCause() instanceof ConstraintViolationException) {
+            error = handleConstraintViolationException((ConstraintViolationException) e.getCause());
+        } else {
+            error.setErrorInfo(getErrorInfo("all", e.getMessage()));
+        }
+
+        return error;
+
+    }
+
 
     private ErrorInfo getErrorInfo(final String fieldName, final String erroMsg) {
         return ErrorInfo.builder().with(ErrorInfo::getFieldName, fieldName).with(ErrorInfo::getMessage, erroMsg).build();

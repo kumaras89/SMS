@@ -1,9 +1,13 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseModel;
+import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
+import com.sms.core.marketing.MarketingEmployee;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -78,6 +82,14 @@ public class StudentScholar extends BaseModel
     @Column(name = "STS_LAST_MODIFIED_DATE")
     private Date lastModifiedDate;
 
+    @ManyToOne
+    @JoinColumn(name = "STS_BRANCH_ID")
+    private Branch branch;
+
+    @ManyToOne
+    @JoinColumn(name = "STS_MARKETING_EMPLOYEE_ID")
+    private MarketingEmployee marketingEmployee;
+
 
     public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
 
@@ -103,6 +115,7 @@ public class StudentScholar extends BaseModel
                 .with(StudentScholar::getEmailId,studentScholarInfo.getEmailId())
                 .on(StudentScholar::getLastModifiedDate).set(new Date())
                 .on(StudentScholar::getCreatedDate).set(new Date());
+
     }
 
     public String getApplicationNumber() {
@@ -179,5 +192,13 @@ public class StudentScholar extends BaseModel
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public MarketingEmployee getMarketingEmployee() {
+        return marketingEmployee;
     }
 }

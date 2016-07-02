@@ -1,6 +1,8 @@
 package com.sms.core.student;
 
+import com.sms.core.branch.Branch;
 import com.sms.core.common.Builder;
+import com.sms.core.marketing.MarketingEmployee;
 import org.hibernate.validator.constraints.Email;
 
 
@@ -17,8 +19,8 @@ public class StudentScholarInfo
 {
     private Long id;
 
-    @NotNull(message = "Scholar code is empty")
-    @Size(min = 1, message = "Scholar code is empty")
+    @NotNull(message = "Application Number is empty")
+    @Size(min = 1, message = "Application Number is empty")
     private String applicationNumber;
 
     @NotNull(message = "Scholar name is empty")
@@ -83,14 +85,20 @@ public class StudentScholarInfo
     @NotNull(message = "Enter atleast one Educational Details")
     private Set<EducationDetail> educationDetails;
 
+    @Valid
+    @NotNull(message = "Address is Empty")
+    private Address address;
+
+    @NotNull(message = "Branch is Empty")
+    private String branchCode;
+
+    @NotNull(message = "Marketing Employee is Empty")
+    private String marketingEmployeeCode;
 
     private Date createdDate;
 
     private Date lastModifiedDate;
 
-    @Valid
-    @NotNull(message = "Address is Empty")
-    private Address address;
 
     public StudentScholarInfo()
     {
@@ -122,7 +130,9 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getEmailId,studentScholar.getEmailId())
                 .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome())
                 .on(StudentScholarInfo::getLastModifiedDate).set(studentScholar.getLastModifiedDate())
-                .on(StudentScholarInfo::getCreatedDate).set(studentScholar.getCreatedDate());
+                .on(StudentScholarInfo::getCreatedDate).set(studentScholar.getCreatedDate())
+                .on(StudentScholarInfo::getMarketingEmployeeCode).set(studentScholar.getMarketingEmployee().getName())
+                .on(StudentScholarInfo::getBranchCode).set(studentScholar.getBranch().getName());
     }
 
     public Long getId() {
@@ -197,6 +207,14 @@ public class StudentScholarInfo
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    public String getBranchCode() {
+        return branchCode;
+    }
+
+    public String getMarketingEmployeeCode() {
+        return marketingEmployeeCode;
     }
 }
 
