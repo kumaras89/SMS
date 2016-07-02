@@ -3,6 +3,7 @@ package com.sms.core.student;
 import com.sms.core.common.*;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Created by rmurugaian on 6/23/2016. <p></>
@@ -24,8 +25,8 @@ public class StudentEnrollmentConverter {
             .with(Student::getOtherLanguages, studentInfo.getOtherLanguages())
             .with(Student::getReligion, Religion.valueOf(studentInfo.getReligion()))
             .with(Student::getGuardians, studentInfo.getGuardians())
-            .with(Student::getEducationDetails, studentInfo.getEducationDetails())
-            .with(Student::getAddress, studentInfo.getAddress())
+            .with(Student::getEducationDetails, FList.of(studentInfo.getEducationDetails()).map(ed -> Builder.of(EducationDetail.class, ed).on(EducationDetail::getId).set(null).build()).get(Collectors.toSet()))
+            .with(Student::getAddress, Builder.of(Address.class, studentInfo.getAddress()).on(Address::getId).set(null).build() )
             .with(Student::getEnglishFluency, Rating.valueOf(studentInfo.getEnglishFluency()))
             .with(Student::getMaritalStatus, MaritalStatus.valueOf(studentInfo.getMaritalStatus()))
             .with(Student::getNationality, studentInfo.getNationality())

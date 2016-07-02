@@ -22,7 +22,7 @@
                 }, {
                     total: 0,           // length of data
                     getData: function($defer, params) {
-                        $http.get('/scholarshipEnrollment').then(function(res) {
+                        $http.get('/scholarshipenrollment').then(function(res) {
                             var data = res.data
                             if(data.message) {
                                 $scope.scholarshipEnrollment = [];
@@ -43,7 +43,7 @@
             function ($scope, $stateParams, CrudService, $http) {
 
                 $scope.loadScholarshipEnrollment = function () {
-                    $http.get('/scholarshipEnrollment/'+$stateParams.id).then(function (res) {
+                    $http.get('/scholarshipenrollment/'+$stateParams.id).then(function (res) {
                         $scope.scholarshipSummarized = res.data
                     })
                 }
@@ -59,7 +59,7 @@
 
                 $scope.createNewScholarshipEnrollment = function () {
 
-                    $http.post('/scholarshipEnrollment', $scope.scholarshipSummarized).then(function(){
+                    $http.post('/scholarshipenrollment', $scope.scholarshipSummarized).then(function(){
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
                     })

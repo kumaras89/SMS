@@ -125,7 +125,16 @@
                         $http.get('/student/studentScholarship/' + $stateParams.applicationNumber).then(function (res) {
                             if (res.data) {
                                 $scope.student = res.data;
+                                $scope.student.dateOfBirth = new Date(res.data.dateOfBirth)
                                 $scope.initialize();
+                                if(!$scope.student.educationDetails) {
+                                    $scope.student.educationDetails = []
+                                }
+                                if($scope.student.educationDetails.length < 4) {
+                                    for (var i = $scope.student.educationDetails.length; i < 4; i++) {
+                                        $scope.student.educationDetails.push({})
+                                    }
+                                }
                             }
                         })
                     } else {

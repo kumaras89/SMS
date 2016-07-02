@@ -27,6 +27,8 @@ public class StudentEnrollmentConfig {
     @Autowired
     private StudentScholarService studentScholarService;
 
+
+
     public BranchRepository getBRepo() {
         return branchRepository;
     }
