@@ -133,8 +133,8 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome())
                 .on(StudentScholarInfo::getLastModifiedDate).set(studentScholar.getLastModifiedDate())
                 .on(StudentScholarInfo::getCreatedDate).set(studentScholar.getCreatedDate())
-                .on(StudentScholarInfo::getMarketingEmployeeCode).set(studentScholar.getMarketingEmployee().getName())
-                .on(StudentScholarInfo::getBranchCode).set(studentScholar.getBranch().getName());
+                .on(StudentScholarInfo::getMarketingEmployeeCode).set(studentScholar.getMarketingEmployee().getCode())
+                .on(StudentScholarInfo::getBranchCode).set(studentScholar.getBranch().getCode());
     }
 
     public Long getId() {
