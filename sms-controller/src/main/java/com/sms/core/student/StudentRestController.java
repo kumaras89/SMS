@@ -63,7 +63,7 @@ public class StudentRestController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/search", method = RequestMethod.POST)
     public ResponseEntity<List<StudentInfo>> search(@RequestBody @Valid StudentSearchCriteria criteria) {
         return Optional.ofNullable(studentFacade.search(criteria))
                 .filter(e -> !e.isEmpty())

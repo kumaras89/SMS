@@ -1,5 +1,7 @@
 package com.sms.core.student;
 
+import com.sms.core.scholarship.StudentScholarFacade;
+import com.sms.core.scholarship.StudentScholarSearchCriteria;
 import com.sms.core.scholarship.StudentScholarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,10 +20,12 @@ import java.util.Optional;
 @RequestMapping("/scholarshipenrollment")
 public class StudentScholarRestController {
     private final StudentScholarService studentScholar;
+    private final StudentScholarFacade studentScholarFacade;
 
     @Autowired
-    public StudentScholarRestController(final StudentScholarService studentScholarEnrollment) {
+    public StudentScholarRestController(final StudentScholarService studentScholarEnrollment, StudentScholarFacade facade) {
         studentScholar = studentScholarEnrollment;
+        this.studentScholarFacade = facade;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -49,6 +53,14 @@ public class StudentScholarRestController {
             findByApplicationNumber(applicationNumber).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
+    }
+
+    @RequestMapping(value="/search", method = RequestMethod.POST)
+    public ResponseEntity<List<StudentScholarInfo>> search(@RequestBody @Valid StudentScholarSearchCriteria criteria) {
+        return Optional.ofNullable(studentScholarFacade.search(criteria))
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

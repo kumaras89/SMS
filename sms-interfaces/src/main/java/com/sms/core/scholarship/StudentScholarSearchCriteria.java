@@ -7,7 +7,7 @@ public class StudentScholarSearchCriteria {
 
     private String studentName;
     private String branchName;
-    private String status;
+    private ScholarStatus status;
     private String marketingEmployeeName;
     private Integer year;
 
@@ -23,7 +23,7 @@ public class StudentScholarSearchCriteria {
         return year;
     }
 
-    public String getStatus() {
+    public ScholarStatus getStatus() {
         return status;
     }
 

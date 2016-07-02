@@ -23,7 +23,7 @@ public class StudentScholarSearchService {
         return (root, query, builder) -> builder.and(PredicateBuilder.of(Optional.ofNullable(criteria))
                 .map(StudentScholarSearchCriteria::getStudentName, identityCode -> builder.like(builder.upper(root.<String>get("name")), "%" + identityCode + "%"))
                 .map(StudentScholarSearchCriteria::getStatus, status -> builder.equal(root.<String>get("status"), status))
-                .map(StudentScholarSearchCriteria::getMarketingEmployeeName, status -> builder.equal(root.<String>get("code"), status))
+                .map(StudentScholarSearchCriteria::getMarketingEmployeeName, name -> builder.like(root.join("marketingEmployee",  JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(StudentScholarSearchCriteria::getBranchName, name -> builder.like(root.join("branch",  JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(StudentScholarSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
                         DateUtils.fromYear(Year.of(year), Month.JANUARY, 1),
