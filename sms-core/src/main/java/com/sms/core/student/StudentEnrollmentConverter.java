@@ -38,6 +38,7 @@ public class StudentEnrollmentConverter {
             .on(Student::getSslcMarkDetails).set(studentInfo.getSslcMarkDetails())
             .on(Student::getHscMarkDetails).set(studentInfo.getHscMarkDetails())
              .on(Student::getFmsPhotoId).set(studentInfo.getFmsPhotoId())
+                .on(Student::getScholarAppNo).set(studentInfo.getApplicationNumber())
             .build();
     }
 
@@ -73,6 +74,7 @@ public class StudentEnrollmentConverter {
             .on(StudentInfo::getSslcMarkDetails).set(student.getSslcMarkDetails())
             .on(StudentInfo::getOtherLanguages).set(student.getOtherLanguages())
             .on(StudentInfo::getFmsPhotoId).set(student.getFmsPhotoId())
+                .on(StudentInfo::getApplicationNumber).set(student.getScholarAppNo())
                 .build();
     }
 

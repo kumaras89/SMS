@@ -31,7 +31,7 @@ public class PredicateBuilder<C> {
     }
 
     public <P> PredicateBuilder<C> map(Function<C, P> getter, Function<P, Predicate> predicateFunction) {
-        Predicate predicate = criteria.map(getter).map(p -> predicateFunction.apply(p)).orElse(null);
+        Predicate predicate = criteria.map(getter).filter(p -> p instanceof String && ((String)p).isEmpty() ) .map(p -> predicateFunction.apply(p)).orElse(null);
         if(predicate != null){
             predicates.add(predicate);
         }

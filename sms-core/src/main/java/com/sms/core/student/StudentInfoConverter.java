@@ -33,6 +33,8 @@ public class StudentInfoConverter {
             .on(StudentInfo::getFatherOrMotherName).set(studentScholarInfo.getFatherOrMotherName())
             .on(StudentInfo::getMailId).set(studentScholarInfo.getEmailId())
             .on(StudentInfo::getLastModifiedDate).set(studentScholarInfo.getLastModifiedDate())
-            .on(StudentInfo::getCreatedDate).set(studentScholarInfo.getCreatedDate()).build();
+            .on(StudentInfo::getCreatedDate).set(studentScholarInfo.getCreatedDate())
+                .on(StudentInfo::getBranchCode).set(studentScholarInfo.getBranchCode())
+                .on(StudentInfo::getMarketingEmployeeCode).set(studentScholarInfo.getMarketingEmployeeCode()).build();
     }
 }

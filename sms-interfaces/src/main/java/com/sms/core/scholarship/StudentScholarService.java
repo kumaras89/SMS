@@ -27,4 +27,6 @@ public interface StudentScholarService {
      */
     Optional<StudentScholarInfo> save(final StudentScholarInfo entityType);
 
+    Optional<StudentScholarInfo> studentEnrolled(final String applicationNumber);
+
 }

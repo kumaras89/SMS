@@ -49,6 +49,7 @@
                         name : data.user.firstName + ' ' + data.user.lastName,
                         role : data.user.role,
                         branch: data.user.branch,
+                        marketingEmployee : data.user.markettingEmployee,
                         allowedOperations : data.user.allowedOperations
                     });
                     success(data);

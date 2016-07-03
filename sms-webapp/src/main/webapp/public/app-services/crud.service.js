@@ -41,19 +41,26 @@
             }
 
             this.Create = function(data) {
-                var res = $http.post('/'+this.path, data).then(handleSuccess);
-                StorageService.clearStorage('/'+this.path);
+                var res = $http.post('/'+this.path, data).then(function(res){
+                    StorageService.clearStorage('/'+path)
+                    return handleSuccess(res)
+                });
                 return res;
             }
 
             this.Update = function(data) {
-                var res =  $http.put('/'+path+'/' + data.id, data).then(handleSuccess);
-                StorageService.clearStorage('/'+this.path);
+                var res =  $http.put('/'+path+'/' + data.id, data).then(function(res){
+                    StorageService.clearStorage('/'+path)
+                    return handleSuccess(res)
+                });
                 return res;
             }
 
             this.Delete = function(id) {
-                return $http.delete('/'+this.path+'/' + id).then(handleSuccess);
+                return $http.delete('/'+this.path+'/' + id).then(function(res){
+                    StorageService.clearStorage('/'+path)
+                    return handleSuccess(res)
+                });
             }
 
             this.Search =  function(data) {

@@ -1,6 +1,7 @@
 package com.sms.core.common;
 
 import com.sms.core.identity.IdCardStatus;
+import com.sms.core.scholarship.ScholarStatus;
 import com.sms.core.student.Relation;
 import com.sms.core.student.StudentStatus;
 
@@ -41,5 +42,9 @@ public class Constants {
 
     public IdCardStatus[] getIdCardStatuses() {
         return IdCardStatus.values();
+    }
+
+    public ScholarStatus[] getScholarStatuses() {
+        return ScholarStatus.values();
     }
 }

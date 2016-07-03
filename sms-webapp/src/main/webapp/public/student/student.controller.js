@@ -13,10 +13,11 @@
                 }
             }
         })
-        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$uibModal',
-            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout, $uibModal) {
+        .controller('StudentListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$uibModal','$http',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, AdminService, $timeout, $uibModal, $http) {
 
                 $scope.applicationNumber = '';
+                $scope.searchCriteria = {}
 
                 $scope.searchStudentScholarship = function() {
                     var modalInstance = $uibModal.open({
@@ -49,30 +50,36 @@
                     return AdminService.getSchemeDesc(schemeCode);
                 };
 
-                $scope.tableParams = new ngTableParams({
-                    page: 1,            // show first pagez
-                    count: 10,          // count per page
-                    sorting: {
-                        name: 'asc'     // initial sorting
-                    }
-                }, {
-                    total: 0,           // length of data
-                    getData: function($defer, params) {
-                        CrudService.studentService.GetAll().then(function(data) {
-                            if(data.message) {
-                                $scope.students = [];
-                                FlashService.Error(data.message)
-                            } else {
-                                $timeout(function() {
-                                    params.total(data.length);
-                                    $defer.resolve(data);
-                                }, 10);
+                $scope.search = function () {
+                    if ($scope.tableParams) {
+                        $scope.tableParams.reload()
+                    } else {
+                        $scope.tableParams = new ngTableParams({
+                            page: 1,            // show first pagez
+                            count: 10,          // count per page
+                            sorting: {
+                                name: 'asc'     // initial sorting
                             }
-                        }, function() {
-                            $scope.students = []
-                        })
+                        }, {
+                            total: 0,           // length of data
+                            getData: function($defer, params) {
+                                $http.post('/student/search', $scope.searchCriteria).then(function(res) {
+                                    var data = res.data
+                                    $timeout(function() {
+                                        params.total(data.length);
+                                        $defer.resolve(data);
+                                    }, 10);
+                                }, function() {
+                                    $scope.entities = []
+                                    $timeout(function() {
+                                        params.total($scope.entities.length);
+                                        $defer.resolve($scope.entities);
+                                    }, 10);
+                                })
+                            }
+                        });
                     }
-                });
+                }
             }])
         .controller('StudentDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'AdminService', '$location',
             function ($scope, $stateParams, CrudService, AdminService, $location) {
@@ -125,6 +132,7 @@
                         $http.get('/student/studentScholarship/' + $stateParams.applicationNumber).then(function (res) {
                             if (res.data) {
                                 $scope.student = res.data;
+                                $scope.student.applicationNumber = $stateParams.applicationNumber
                                 $scope.student.dateOfBirth = new Date(res.data.dateOfBirth)
                                 $scope.initialize();
                                 if(!$scope.student.educationDetails) {

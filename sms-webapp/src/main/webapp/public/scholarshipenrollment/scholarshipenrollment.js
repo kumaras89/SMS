@@ -1,7 +1,36 @@
 'use strict';
 
-angular.module('ScholarshipEnrollment', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies', 'ngTable']).
-    config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+angular.module('ScholarshipEnrollment', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies', 'ngTable'])
+    .directive("marketingEmployee", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
+        return {
+            restrict: 'A',
+            scope :{
+                mn : '=mn'
+            },
+            controller: function($scope){
+                var logInUserDet = $rootScope.globals.currentUser.otherDetails;
+                if(logInUserDet.role != 'SUPER_ADMIN'){
+                    var name = AdminService.getMarketingEmployeeName(logInUserDet.marketingEmployee);
+                    $timeout(function () {
+                        $scope.$apply(function () {
+                            $scope.mn = name;
+                        })
+                    });
+                }
+
+                AdminService.getMarketingEmployees(function (data) {
+                    $scope.marketingEmployeeNames = _.pluck(data, "name");
+                });
+            },
+            template: function(){
+                if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
+                    return '<input type="text" ng-model="mn" uib-typeahead="mName for mName in marketingEmployeeNames | filter:$viewValue | limitTo:8" id="markettingEmployeeName" placeholder="Marketting Employee Name" autocomplete="off" />'
+                }else{
+                    return '<input type="text" ng-model="mn" readonly >'
+                }
+            }
+        }
+    }]).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
             debug: false,

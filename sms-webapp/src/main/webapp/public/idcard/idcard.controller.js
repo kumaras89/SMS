@@ -11,19 +11,6 @@
                 };
 
                 $scope.search = function () {
-                    $scope.idcard = {};
-                    if ($scope.identityCode !== '') {
-                        $scope.idcard.identityCode = $scope.identityCode;
-                    }
-                    if ($scope.status !== '') {
-                        $scope.idcard.status = $scope.status;
-                    }
-                    if ($scope.name !== '') {
-                        $scope.idcard.name = $scope.name;
-                    }
-                    if ($scope.year !== '') {
-                        $scope.idcard.year = $scope.year;
-                    }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
                     } else {
@@ -36,15 +23,11 @@
                         }, {
                             total: 0,           // length of data
                             getData: function ($defer, params) {
-                                CrudService.idcardService.Search($scope.idcard).then(function (data) {
-                                    if (data.message) {
-                                        FlashService.Error(data.message)
-                                    } else {
-                                        $timeout(function () {
-                                            params.total(data.length);
-                                            $defer.resolve(data);
-                                        }, 10);
-                                    }
+                                CrudService.idcardService.Search($scope.searchCriteria).then(function (data) {
+                                    $timeout(function () {
+                                        params.total(data.length);
+                                        $defer.resolve(data);
+                                    }, 10);
                                 }, function () {
                                     $scope.entities = []
                                     $timeout(function () {
@@ -63,6 +46,7 @@
                     AdminService.getConstants(function (data) {
                         $scope.commonAttributes = data;
                     });
+                    $scope.searchCriteria = {}
                 }
 
                 $scope.init();

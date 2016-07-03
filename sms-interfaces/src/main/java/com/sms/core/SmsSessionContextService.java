@@ -1,18 +1,19 @@
 package com.sms.core;
 
 import com.sms.core.admin.*;
+import com.sms.core.marketing.MarketingEmployee;
+import com.sms.core.repositery.MarketingEmployeeRepository;
 import com.sms.core.repositery.RoleOperationLinkRepository;
 import com.sms.core.repositery.SecuredOperationRepository;
 import com.sms.core.repositery.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Ganesan on 25/05/16.
@@ -30,6 +31,9 @@ public class SmsSessionContextService {
     private RoleOperationLinkRepository roleOperationLinkRepository;
 
     @Autowired
+    private MarketingEmployeeRepository marketingEmployeeRepository;
+
+    @Autowired
     private SecuredOperationRepository securedOperationRepository;
 
     public SmsSessionContext initSessionContext(String userName) {
@@ -41,6 +45,7 @@ public class SmsSessionContextService {
         List<SecuredOperation> allowedOperationsForUser = findListOfSecuredOperation(getSecuredOperationByUser(user.getRole().getId()), securedOperations);
         sessionContext.setAllowedOperations(getSecuredByType(OPERATION).apply(allowedOperationsForUser));
         sessionContext.setAllowedUrls(getSecuredByType(URL).apply(allowedOperationsForUser));
+        sessionContext.setMarkettingEmployeeCode(Optional.ofNullable(marketingEmployeeRepository.findByUserName(userName)).map(MarketingEmployee::getCode).orElse(null));
         return sessionContext;
     }
 

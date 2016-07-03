@@ -1,9 +1,6 @@
 package com.sms.core;
 
 import com.sms.core.admin.UserInfo;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +15,15 @@ public class SmsSessionContext implements Serializable {
     private List<String> allowedOperations;
     private List<String> securedOperations;
     private List<String> allowedUrls;
+    private String markettingEmployeeCode;
+
+    public String getMarkettingEmployeeCode() {
+        return markettingEmployeeCode;
+    }
+
+    public void setMarkettingEmployeeCode(String markettingEmployeeCode) {
+        this.markettingEmployeeCode = markettingEmployeeCode;
+    }
 
     public boolean isContextIntialized() {
         return contextIntialized;

@@ -9,6 +9,7 @@ import javaslang.Tuple;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class StudentEnrollmentService {
 
@@ -19,14 +20,19 @@ public class StudentEnrollmentService {
      */
     public static Reader<StudentEnrollmentConfig, StudentInfo> save(final StudentInfo studentInfo) {
         return Reader.of
-            (sec -> {
-                        return Do.of(studentInfo)
+            (sec -> Do.of(studentInfo)
                                 .then(StudentEnrollmentConverter::convert)
                                 .then(s -> StudentUpdater.updateStudent(studentInfo).apply(Tuple.of(sec, s)))
                                 .then(student -> sec.getStuRepo().save(student))
-                                .then(StudentEnrollmentConverter::convertTo).get();
-                    }
-            );
+                                .then(StudentEnrollmentConverter::convertTo)
+                                .then(si -> {
+                                    if(si.getApplicationNumber() != null && !si.getApplicationNumber().isEmpty()) {
+                                        sec.getStudScholarServ().studentEnrolled(si.getApplicationNumber());
+                                    }
+                                    return si;
+                                })
+                                .get()
+                    );
     }
 
 

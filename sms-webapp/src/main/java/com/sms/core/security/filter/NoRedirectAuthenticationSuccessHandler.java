@@ -34,6 +34,8 @@ public class NoRedirectAuthenticationSuccessHandler extends SavedRequestAwareAut
             jsonResult.put("result", true);
             jsonResult.put("message", "Successfully logged in!!");
             Map<String, Object> userJson = new HashMap<>();
+
+            userJson.put("markettingEmployee", context.getMarkettingEmployeeCode());
             userJson.put("firstName", context.getLoggedInUserInfo().getFirstName());
             userJson.put("lastName", context.getLoggedInUserInfo().getLastName());
             userJson.put("role", context.getLoggedInUserInfo().getRole());

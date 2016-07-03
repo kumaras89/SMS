@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.List;
@@ -56,17 +57,17 @@ public class ErrorHandlingController {
 
     }
 
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Error handleConstraintViolationException(Exception e) {
+    public Error handlePersistanceException(PersistenceException e) throws Exception{
         Error error = new Error();
         if(e.getCause() instanceof ConstraintViolationException) {
             error = handleConstraintViolationException((ConstraintViolationException) e.getCause());
         } else {
             error.setErrorInfo(getErrorInfo("all", e.getMessage()));
         }
-
         return error;
 
     }

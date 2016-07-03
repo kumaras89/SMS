@@ -40,16 +40,12 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label">Branch</label></td>
-                                    <td><span branch-name bn="scholarshipEnrollment.branch"></span></td>
+                                    <td><input type="text" ng-model="scholarshipEnrollment.branch" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" /></span></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label">Marketing Employee</label></td>
-                                    <td><input type="text" id="scholarshipEnrollment.marketingEmployee" ng-model="scholarshipEnrollment.marketingEmployee" list="marketingEmployeeList"
-                                               placeholder="marketingEmployee"/>
-
-                                        <!--<select ng-model="scholrshipEnrollment.marketingEmployee" id="marketingEmployee" >
-                                            <option ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee}}">{{marketingEmployee}}</option>
-                                        </select>-->
+                                    <td>
+                                        <span marketing-employee mn="scholarshipEnrollment.marketingEmployee"></span>
                                     </td>
                                 </tr>
 

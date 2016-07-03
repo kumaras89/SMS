@@ -5,39 +5,59 @@
         .module('ScholarshipEnrollment')
         .controller('ScholarshipEnrollmentListCtrl', ['$scope', 'FlashService', 'ngTableParams', '$state', 'AdminService', '$timeout','$http',
             function ($scope, FlashService, ngTableParams, $state, AdminService, $timeout, $http) {
+
+                $scope.init = function() {
+                    AdminService.getBranches(function (data) {
+                        $scope.branches = data;
+                        $scope.branchNames = _.pluck(data, "name");
+                    });
+
+                    AdminService.getConstants(function (data) {
+                        $scope.statusList = data.scholarStatuses;
+                    });
+                    $scope.searchCriteria = {}
+                }
+
                 $scope.viewScholarshipEnrollment = function (userId) {
                     $state.go('home.scholarshipenrollment-detail' , {id: userId});
-                };
+                }
 
                 $scope.createNewScholarshipEnrollment = function () {
                     $state.go('home.scholarshipenrollment-creation');
-                };
+                }
 
-                $scope.tableParams = new ngTableParams({
-                    page: 1,            // show first pagez
-                    count: 10,          // count per page
-                    sorting: {
-                        name: 'asc'     // initial sorting
-                    }
-                }, {
-                    total: 0,           // length of data
-                    getData: function($defer, params) {
-                        $http.get('/scholarshipenrollment').then(function(res) {
-                            var data = res.data
-                            if(data.message) {
-                                $scope.scholarshipEnrollment = [];
-                                FlashService.Error(data.message)
-                            } else {
-                                $timeout(function() {
-                                    params.total(data.length);
-                                    $defer.resolve(data);
-                                }, 10);
+                $scope.search = function () {
+                    if ($scope.tableParams) {
+                        $scope.tableParams.reload()
+                    } else {
+                        $scope.tableParams = new ngTableParams({
+                            page: 1,            // show first pagez
+                            count: 10,          // count per page
+                            sorting: {
+                                name: 'asc'     // initial sorting
                             }
-                        }, function() {
-                            $scope.scholarshipEnrollment = []
-                        })
+                        }, {
+                            total: 0,           // length of data
+                            getData: function($defer, params) {
+                                $http.post('/scholarshipenrollment/search', $scope.searchCriteria).then(function(res) {
+                                    var data = res.data
+                                    $timeout(function() {
+                                        params.total(data.length);
+                                        $defer.resolve(data);
+                                    }, 10);
+                                }, function() {
+                                    $scope.entities = []
+                                    $timeout(function() {
+                                        params.total($scope.entities.length);
+                                        $defer.resolve($scope.entities);
+                                    }, 10);
+                                })
+                            }
+                        });
                     }
-                });
+                }
+
+                $scope.init()
             }])
         .controller('ScholarshipEnrollmentDetailCtrl', ['$scope', '$stateParams', 'CrudService', '$http',
             function ($scope, $stateParams, CrudService, $http) {
@@ -103,6 +123,9 @@
                     $scope.getBranchDesc = function (branchCode){
                         return AdminService.getBranchDesc(branchCode);
                     };
+                    AdminService.getBranches(function (data) {
+                        $scope.branchNames = _.pluck(data, "name");
+                    });
                 }
                 $scope.init();
 

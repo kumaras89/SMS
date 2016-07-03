@@ -22,6 +22,9 @@ public class Student extends BaseModel {
     @Column(name = "ST_NAME")
     private String name;
 
+    @Column(name = "ST_SCHOLAR_APP_NO")
+    private String scholarAppNo;
+
     @Column(name = "ST_FATHER_OR_MOTHER_NAME")
     private String fatherOrMotherName;
 
@@ -256,5 +259,9 @@ public class Student extends BaseModel {
 
     public Long getFmsPhotoId() {
         return fmsPhotoId;
+    }
+
+    public String getScholarAppNo() {
+        return scholarAppNo;
     }
 }
