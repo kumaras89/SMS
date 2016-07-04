@@ -3,16 +3,20 @@ package com.sms.core.student;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_ADDRESS")
-public class Address extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_AD",name = "SMS_SQ_AD")
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 8708958564726670901L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_AD")
+    protected Long id;
 
 
     @NotNull(message = "Address is empty")
@@ -73,5 +77,9 @@ public class Address extends BaseModel {
 
     public String getAddress3() {
         return address3;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

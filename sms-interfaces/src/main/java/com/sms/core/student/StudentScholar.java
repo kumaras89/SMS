@@ -9,6 +9,7 @@ import com.sms.core.scholarship.ScholarStatus;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -18,8 +19,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT_SCHOLARSHIP")
-public class StudentScholar extends BaseModel
+@SequenceGenerator(name = "SMS_SQ_STS",sequenceName = "SMS_SQ_STS")
+public class StudentScholar implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_STS")
+    protected Long id;
+
     @Column(name = "STS_APPLICATION_NUMBER",unique = true)
     private String applicationNumber;
 
@@ -209,5 +215,9 @@ public class StudentScholar extends BaseModel
 
     public ScholarStatus getStatus() {
         return status;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

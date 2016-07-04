@@ -11,10 +11,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "SMS_TR_OTHER_LANGUAGE")
+@SequenceGenerator(sequenceName = "SMS_SQ_OL",name = "SMS_SQ_OL")
 public class OtherLanguage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SMS_SQ_OL")
     private Long id;
 
     @NotNull(message = "Language name is empty")
@@ -46,6 +47,10 @@ public class OtherLanguage {
 
     public boolean isCanSpeak() {
         return canSpeak;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public static Builder<OtherLanguage> builder() {

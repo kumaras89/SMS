@@ -8,11 +8,16 @@ import com.sms.core.student.Address;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_MARKETING_EMPLOYEE")
-public class MarketingEmployee extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_ME",name = "SMS_SQ_ME")
+public class MarketingEmployee implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ME")
+    protected Long id;
 
     @Column(name = "ME_CODE", unique = true)
     private String code;
@@ -70,5 +75,9 @@ public class MarketingEmployee extends BaseModel {
 
     public User getLinkedUser() {
         return linkedUser;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

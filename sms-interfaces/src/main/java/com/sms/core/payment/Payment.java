@@ -7,6 +7,7 @@ import com.sms.core.feesparticular.FeesInfo;
 import com.sms.core.student.Student;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -16,10 +17,11 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "SMS_TR_PAYMENT")
-public class Payment {
+@SequenceGenerator(name = "SMS_SQ_PY",sequenceName = "SMS_SQ_PY")
+public class Payment implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SMS_SQ_PY")
     private Long id;
     @Column(name = "SP_AMOUNT")
     private BigDecimal amount;
@@ -97,6 +99,7 @@ public class Payment {
     public Student getStudent() {
         return student;
     }
+
 
     public static Builder<Payment> builder() {
         return Builder.of(Payment.class);

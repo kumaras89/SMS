@@ -2,20 +2,26 @@ package com.sms.core.student;
 
 import com.sms.core.BaseModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Optional;
 
 @Entity
 @Table(name = "SMS_TR_EDUCATION_DETAIL")
-public class EducationDetail extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_ED",sequenceName = "SMS_SQ_ED")
+public class EducationDetail implements Serializable {
 
     private static final long serialVersionUID = 533778750992658222L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ED")
+    protected Long id;
+
+
     @NotNull(message = "Exam Passed  is empty")
     @Size(min = 1, message = "Exam Passed is empty")
     @Column(name = "ED_EXAM_PASSED")
@@ -142,5 +148,9 @@ public class EducationDetail extends BaseModel {
         }
 
 
+    }
+
+    public Long getId() {
+        return id;
     }
 }

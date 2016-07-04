@@ -3,13 +3,24 @@ package com.sms.core.admin;
 import com.sms.core.BaseModel;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Ganesan on 25/05/16.
  */
 @Entity
 @Table(name = "SMS_MA_ROLE_OPERATION_LINK")
-public class RoleOperationLink extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_ROL",name = "SMS_SQ_ROL")
+public class RoleOperationLink implements Serializable {
+
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ROL")
+    protected Long id;
+
 
     @Column(name = "ROL_UR_ID")
     private Long userRoleId;
@@ -32,5 +43,9 @@ public class RoleOperationLink extends BaseModel {
 
     public Long getSecuredOperationId() {
         return securedOperationId;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

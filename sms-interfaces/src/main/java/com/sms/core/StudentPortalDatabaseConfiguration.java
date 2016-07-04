@@ -58,7 +58,6 @@ public class StudentPortalDatabaseConfiguration {
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.POSTGRESQL);
-        vendorAdapter.setGenerateDdl(true);
         em.setJpaProperties(hibernateProperties());
         em.afterPropertiesSet();
         return em.getObject();

@@ -3,21 +3,29 @@ package com.sms.core.student;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by Ram on 6/20/2016.
  */
 @Entity
 @Table(name = "SMS_TR_SUBJECT")
-public class Subject extends BaseModel{
+@SequenceGenerator(sequenceName = "SMS_SQ_SU",name = "SMS_SQ_SU")
+public class Subject implements Serializable{
 
     private static final long serialVersionUID = 5945573733224049850L;
+
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_SU")
+    protected Long id;
 
     @NotNull(message = "Subject is Empty")
     @Size(min = 1,message = "Subject is Empty")
@@ -42,6 +50,10 @@ public class Subject extends BaseModel{
 
     public Long getSecuredMark() {
         return securedMark;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public static Builder<Subject> builder() {

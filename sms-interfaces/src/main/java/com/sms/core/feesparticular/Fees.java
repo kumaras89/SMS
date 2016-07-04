@@ -8,11 +8,6 @@ import java.math.BigDecimal;
 @MappedSuperclass
 public abstract class Fees implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-
-
     @ManyToOne
     @JoinColumn(name = "FC_FEES_PARTICULAR_ID")
     private FeesParticular feesParticular;
@@ -33,7 +28,6 @@ public abstract class Fees implements Serializable{
         return feesParticular;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public abstract Long getId();
+
 }

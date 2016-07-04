@@ -3,15 +3,24 @@ package com.sms.core.feesparticular;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_FEES_PARTICULAR")
-public class FeesParticular extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_FP",sequenceName = "SMS_SQ_FP")
+public class FeesParticular implements Serializable {
+
+
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_FP")
+    protected Long id;
 
     @NotNull(message = "Fee Particular Code is empty")
     @Size(min = 1, message = "Fee Particular Code is empty")
@@ -46,4 +55,7 @@ public class FeesParticular extends BaseModel {
         return name;
     }
 
+    public Long getId() {
+        return id;
+    }
 }

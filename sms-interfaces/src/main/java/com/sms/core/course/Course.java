@@ -3,13 +3,22 @@ package com.sms.core.course;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_COURSE")
-public class Course extends BaseModel {
+@SequenceGenerator(name ="SMS_SQ_CO" ,sequenceName = "SMS_SQ_CO")
+public class Course  implements Serializable
+{
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_CO")
+    protected Long id;
+
 
 
     @Column(name = "CO_CODE", unique = true)
@@ -51,5 +60,7 @@ public class Course extends BaseModel {
         return description;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 }

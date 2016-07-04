@@ -3,10 +3,12 @@ package com.sms.core.student;
 import com.sms.core.common.Builder;
 
 import javax.persistence.*;
+import javax.sound.midi.Sequence;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -17,10 +19,11 @@ import java.util.Set;
 @Table(name = "SMS_TR_MARK_DETAILS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "CLASS")
-public class MarkDetails {
+@SequenceGenerator(name = "SMS_SQ_MD",sequenceName = "SMS_SQ_MD")
+public class MarkDetails implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SMS_SQ_MD")
     @Column(name = "MD_ID")
     private Long id;
 
@@ -59,6 +62,10 @@ public class MarkDetails {
 
     public int getPercentage() {
         return percentage;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public static Builder<MarkDetails> builder() {

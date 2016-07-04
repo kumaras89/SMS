@@ -9,12 +9,18 @@ import com.sms.core.payment.Payment;
 import com.sms.core.scheme.Scheme;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT")
-public class Student extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_ST",sequenceName = "SMS_SQ_ST")
+public class Student implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ST")
+    protected Long id;
 
     @Column(name = "ST_CODE", unique = true)
     private String code;
@@ -263,5 +269,9 @@ public class Student extends BaseModel {
 
     public String getScholarAppNo() {
         return scholarAppNo;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

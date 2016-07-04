@@ -6,13 +6,23 @@ import com.sms.core.common.Builder;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by Ganesan on 25/05/16.
  */
 @Entity
 @Table(name = "SMS_MA_SECURED_OPERATION")
-public class SecuredOperation extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_SO",name = "SMS_SQ_SO")
+public class SecuredOperation implements Serializable {
+
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_SO")
+    protected Long id;
 
     @NotNull(message = "Operation  is empty")
     @Size(min = 1, message = "Operation is empty")
@@ -46,4 +56,7 @@ public class SecuredOperation extends BaseModel {
         return Builder.of(SecuredOperation.class);
     }
 
+    public Long getId() {
+        return id;
+    }
 }

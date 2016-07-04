@@ -5,11 +5,17 @@ import com.sms.core.common.Builder;
 import com.sms.core.student.Address;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "SMS_TR_ID_CARD")
-public class IdCard extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_IC",sequenceName = "SMS_SQ_IC")
+public class IdCard implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_IC")
+    protected Long id;
 
     @Column(name = "IC_IDENTITY_CODE")
     private String identityCode;
@@ -95,5 +101,9 @@ public class IdCard extends BaseModel {
 
     public String getBranchName() {
         return branchName;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

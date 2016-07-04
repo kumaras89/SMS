@@ -10,10 +10,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_BRANCH")
-public class Branch extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_BR",name = "SMS_SQ_BR")
+public class Branch  implements Serializable{
+
+    /**
+     * <p>
+     * Field names constants used in DAOs <br>
+     * and Column names constants used in ORM annotations
+     * </p>
+     */
+
+    /**
+     * The Constant serialVersionUID.
+     */
+    private static final long serialVersionUID = 5418291380983718474L;
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_BR")
+    protected Long id;
+
 
     @NotNull(message = "Branch Code is empty")
     @Size(min = 1, message = "Branch Code is empty")
@@ -69,5 +91,7 @@ public class Branch extends BaseModel {
         return address;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 }

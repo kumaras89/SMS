@@ -6,16 +6,24 @@ import com.sms.core.feesparticular.Fees;
 import com.sms.core.feesparticular.FeesInfo;
 import com.sms.core.repositery.FeesParticularRepository;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Ram on 18-06-2016.
  */
 @Entity
 @Table(name = "SMS_TR_PAYMENT_FEES")
-public class PaymentFees extends Fees {
+@SequenceGenerator(sequenceName = "SMS_SQ_PF",name = "SMS_SQ_PF")
+public class PaymentFees extends Fees implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SMS_SQ_PF")
+    protected Long id;
+
+    public Long getId() {
+        return id;
+    }
 
     public static Builder<PaymentFees> builder() {
         return Builder.of(PaymentFees.class);

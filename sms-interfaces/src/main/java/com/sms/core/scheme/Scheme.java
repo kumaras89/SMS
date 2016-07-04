@@ -8,12 +8,25 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
 @Table(name = "SMS_MA_SCHEME", uniqueConstraints = {@UniqueConstraint(columnNames = "SC_CODE")})
-public class Scheme extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_SC",sequenceName = "SMS_SQ_SC")
+public class Scheme implements Serializable {
+
+
+
+
+    /**
+     * The id.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_SC")
+    protected Long id;
+
 
     @Column(name = "SC_CODE", unique = true)
     private String code;
@@ -67,5 +80,7 @@ public class Scheme extends BaseModel {
         return feesAmount;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 }

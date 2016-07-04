@@ -6,11 +6,20 @@ import com.sms.core.common.Builder;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_USER")
-public class User extends BaseModel {
+@SequenceGenerator(name = "SMS_SQ_US",sequenceName = "SMS_SQ_US")
+public class User implements Serializable {
 
+
+	/**
+	 * The id.
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_US")
+	protected Long id;
 
 	@Column(name = "US_FIRST_NAME")
 	private String firstName;
@@ -82,6 +91,7 @@ public class User extends BaseModel {
 		return branch;
 	}
 
-
-
+	public Long getId() {
+		return id;
+	}
 }

@@ -3,17 +3,22 @@ package com.sms.core.student;
 import com.sms.core.BaseModel;
 import com.sms.core.common.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_GUARDIAN")
-public class Guardian extends BaseModel {
+@SequenceGenerator(sequenceName = "SMS_SQ_GU",name = "SMS_SQ_GU")
+public class Guardian implements Serializable {
 
     private static final long serialVersionUID = -1244139837839355531L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_GU")
+    protected Long id;
+
 
     @NotNull(message = "Guardian name is empty")
     @Size(min = 1,message = "Guardian name is empty")
@@ -52,5 +57,9 @@ public class Guardian extends BaseModel {
 
     public static Builder<Guardian> builder() {
         return Builder.of(Guardian.class);
+    }
+
+    public Long getId() {
+        return id;
     }
 }
