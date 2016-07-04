@@ -21,12 +21,12 @@
         service.courseService = service.of('course')
         service.schemeService = service.of('scheme')
         service.feesParticularService = service.of('feesParticular')
-        service.scholarshipEnrollmentService= service.of('scholarshipEnrollment')
+        service.scholarshipEnrollmentService= service.of('scholarshipenrollment')
         service.studentService = service.of('student')
         service.marketingEmployeeService = service.of('marketingEmployee')
         service.idcardService = service.of('idcard')
 
-        service.scholarshipEnrollmentService = service.of('scholarshipEnrollment')
+        service.scholarshipEnrollmentService = service.of('scholarshipenrollment')
         return service;
 
         function Service(path) {
