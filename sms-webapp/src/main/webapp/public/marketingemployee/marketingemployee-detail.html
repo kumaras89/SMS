@@ -9,78 +9,63 @@
         <h3>Marketing Employee Detail</h3>
     </div>
 
-    <form novalidate="novalidate" class="form-horizontal">
-        <table class="table table-striped table-condensed">
+    <form name="marketingForm" novalidate="novalidate" class="form-horizontal">
+        <table width="75%" class="table table-striped table-bordered table-hover">
             <tr class="even gradeA">
                 <td><label class="control-label" for="code">Code:</label></td>
-                <td><input type="text" id="code" ng-model="marketingEmployee.code" placeholder="Code" maxlength="10" style="width:94px"/></td>
+                <td><input type="text" name="code" id="code" ng-model="marketingEmployee.code" placeholder="Code"  maxlength="10" style="width:94px" required/>
+                    <div class="error" ng-messages="marketingForm.code.$error" ng-if="marketingForm.code.$touched">
+                        <span ng-message="required">Code is required.</span>
+                    </div>
+                </td>
             </tr>
+
             <tr class="even gradeA">
                 <td><label class="control-label" for="name">Linked User:</label></td>
-                <td><input type="text" id="linkedUser" ng-model="marketingEmployee.linkedUser" placeholder="Name" maxlength="30" style="width:275px" /></td>
+                <td><input type="text" name="linkedUser" id="linkedUser" ng-model="marketingEmployee.linkedUser" placeholder="Name" maxlength="30" style="width:275px" required/>
+                    <div class="error" ng-messages="marketingForm.linkedUser.$error" ng-if="marketingForm.linkedUser.$touched">
+                        <span ng-message="required">Linked user is required.</span>
+                    </div>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="name">Name:</label></td>
-                <td><input type="text" id="name" ng-model="marketingEmployee.name" placeholder="Name" maxlength="30" style="width:275px" /></td>
+                <td><input type="text" name="name" id="name" ng-model="marketingEmployee.name" placeholder="Name" maxlength="30" style="width:275px" required/>
+                    <div class="error" ng-messages="marketingForm.name.$error" ng-if="marketingForm.name.$touched">
+                        <span ng-message="required">Name is required.</span>
+                    </div>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="designation">Designation:</label></td>
                 <td>
-                    <select ng-model="marketingEmployee.designation" id="designation">
+                    <select ng-model="marketingEmployee.designation" name="designation" id="designation" required>
                         <option ng-repeat="designation in commonAttributes.designation" value="{{designation}}">{{designation}}</option>
                     </select>
+                    <div class="error" ng-messages="marketingForm.designation.$error" ng-if="marketingForm.designation.$touched">
+                        <span ng-message="required">Designation is required.</span>
+                    </div>
                 </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="phoneNumber">Phone Number:</label></td>
-                <td><input type="text" id="phoneNumber" ng-model="marketingEmployee.phoneNumber" placeholder="Phone number" maxlength="13" style="width:125px"/></td>
+                <td><input type="tel" name="phoneNumber" id="phoneNumber" ng-model="marketingEmployee.phoneNumber"  ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="13" style="width:125px" required/>
+                    <div class="error" ng-messages="marketingForm.phoneNumber.$error" ng-if="marketingForm.phoneNumber.$touched">
+                        <span ng-message="required">Phone Number is required.</span>
+                        <span ng-message="pattern">Invalid Phone number.</span>
+                    </div>
+                </td>
             </tr>
         </table>
         <br>
         <br>
-        <div style="border-radius:20px;border: 2px solid #3dad9c;">
-            <table class="table table-striped table-condensed">
-                <thead>
-                <tr>
-                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><label class="control-label" for="address1">Address Line 1</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address1" id="address1" placeholder="Address Line 1" maxlength="20" style="width:188px"/></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="address2">Address Line 2</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address2" id="address2" placeholder="Address Line 2" maxlength="20" style="width:188px"/></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="address3">Address Line 3</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.address3" id="address3" placeholder="Address Line 3" maxlength="20" style="width:188px"/></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="taluk">Taluk</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.taluk" id="taluk"
-                               placeholder="Taluk" maxlength="25" style="width:233px"/></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="district">District</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.district" id="district"
-                               placeholder="District" maxlength="25" style="width:233px"/></td>
-                </tr>
-                <tr>
-                    <td><label class="control-label" for="postalCode">Postal Code</label></td>
-                    <td><input type="text" ng-model="marketingEmployee.address.postalCode" id="postalCode" placeholder="Postal code"
-                               maxlength="6" style="width:90px"/></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <br><br>
+        <span address-template addfrm="marketingForm" data="marketingEmployee"> </span>
+        <br>
+        <br>
         <div class="control-group">
             <div class="controls">
                 <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="updateMarketingEmployee()" class="btn btn-small btn-primary">update Marketing Employee</a>
+                <a ng-click="updateMarketingEmployee()" ng-class="{linkdisabled: marketingForm.$invalid}" class="btn btn-small btn-primary">update Marketing Employee</a>
             </div>
         </div>
     </form>

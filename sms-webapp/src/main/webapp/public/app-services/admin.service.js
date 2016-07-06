@@ -35,6 +35,7 @@
         service.getScholarshipEnrollment = getScholarshipEnrollment
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
+        service.getUsers=getUsers
         service.getSchemeFeesInfo = getSchemeFeesInfo
         service.getYearOfPassing = getYearOfPassing
 
@@ -58,6 +59,7 @@
             getMarketingEmployees(function () {})
             getScholarshipEnrollment(function () {})
             getSchemes(function(){})
+            getUsers(function () {})
 
         }
 
@@ -195,6 +197,12 @@
                 return branch.code == branchCode
             })
             return branch != undefined ? branch.name : "";
+        }
+        function getUsers(success) {
+            StorageService.getFromStoarage('/user', function(data) {
+                success(data);
+            });
+
         }
 
     }

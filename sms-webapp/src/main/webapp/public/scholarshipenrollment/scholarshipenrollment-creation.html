@@ -6,11 +6,7 @@
     .container input.valid { border: 1px solid #1FFF00; }
     .container{ width: 100%;}
 </style>
-<!--<script type="text/javascript">
-    function updateAnnualIncome(val) {
-        document.getElementById("annualIncome").value = (eval(val * 12));
-    }
-</script>-->
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-shield fa-fw"></i> Scholarship Enrollment</h1>
@@ -35,32 +31,55 @@
                             <tbody>
 
                                 <tr>
-                                    <td><label class="control-label" for="code">Applicant Number</label></td>
-                                    <td><input type="text" id="code" ng-model="scholarshipEnrollment.applicationNumber" placeholder="Applicant Number"/></td>
+                                    <td class="firstcol"><label class="control-label" for="code">Applicant Number</label></td>
+                                    <td><input type="text" name="code" id="code" ng-model="scholarshipEnrollment.applicationNumber" maxlength="10" ng-minlength="4" placeholder="Applicant Number" required/>
+                                        <div class="error" ng-messages="scholarship.code.$error" ng-if="scholarship.code.$touched">
+                                            <span ng-message="minlength">Applicant number is too short. Enter 4-10 characters.</span>
+                                            <span ng-message="required">Applicant number is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label class="control-label">Branch</label></td>
-                                    <td><input type="text" ng-model="scholarshipEnrollment.branch" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" /></span></td>
+                                    <td><label name="branch" class="control-label">Branch</label></td>
+                                    <td><input type="text" ng-model="scholarshipEnrollment.branch" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" required />
+                                        <div class="error" ng-messages="scholarship.branch.$error" ng-if="scholarship.branch.$touched">
+                                            <span ng-message="required">Branch is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label">Marketing Employee</label></td>
                                     <td>
-                                        <span marketing-employee mn="scholarshipEnrollment.marketingEmployee"></span>
+                                        <span name="employee" marketing-employee mn="scholarshipEnrollment.marketingEmployee" required></span>
+                                        <div class="error" ng-messages="scholarship.employee.$error" ng-if="scholarship.employee.$touched">
+                                            <span ng-message="required">Marketing Employee is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><label class="control-label" for="name">Name of the Student</label></td>
-                                    <td><input type="text" id="name" ng-model="scholarshipEnrollment.name" placeholder="Name"/></td>
+                                    <td><input name="name" type="text" id="name" ng-model="scholarshipEnrollment.name" placeholder="Name" required/>
+                                       <div class="error" ng-messages="scholarship.name.$error" ng-if="scholarship.name.$touched">
+                                            <span ng-message="required">Student name is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
-                                    <td><input type="text" id="fatherOrMotherName" ng-model="scholarshipEnrollment.fatherOrMotherName"
-                                               placeholder="FatherOrMotherName"/></td>
+                                    <td><input type="text" name="fatherOrMotherName" id="fatherOrMotherName" ng-model="scholarshipEnrollment.fatherOrMotherName" placeholder="FatherOrMotherName" required/>
+                                        <div class="error" ng-messages="scholarship.fatherOrMotherName.$error" ng-if="scholarship.fatherOrMotherName.$touched">
+                                            <span ng-message="required">Father name is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                    <td><input type="date" id="dateOfBirth" ng-model="scholarshipEnrollment.dateOfBirth"/></td>
+                                    <td><input type="date" name="dateOfBirth" id="dateOfBirth" ng-model="scholarshipEnrollment.dateOfBirth" required/>
+                                        <div class="error" ng-messages="scholarship.dateOfBirth.$error" ng-if="scholarship.dateOfBirth.$touched">
+                                            <span ng-message="required">Date of Birth is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label">Age</label></td>
@@ -70,66 +89,103 @@
                                     <td><label class="control-label" for="gender">Gender</label></td>
                                     <td>
                                         <label ng-repeat="gender in commonAttributes.gender">
-                                            <input type="radio" ng-model="scholarshipEnrollment.gender" id="gender"  placeholder="Gender"
-                                                   value="{{gender}}"/> {{gender}}&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" ng-model="scholarshipEnrollment.gender" name="gender" id="gender"  placeholder="Gender"
+                                                   value="{{gender}}" required/> {{gender}}&nbsp;&nbsp;&nbsp;
                                         </label>
+                                        <div class="error" ng-messages="scholarship.gender.$error" ng-if="scholarship.gender.$touched">
+                                            <span ng-message="required">Gender is required.</span>
+                                        </div>
                                     </td>
 
                                 </tr>
 
                                 <tr>
                                     <td><label class="control-label" for="nationality">Nationality</label></td>
-                                    <td><input type="text" id="nationality" ng-model="scholarshipEnrollment.nationality" placeholder="Nationality"/></td>
+                                    <td><input type="text" name="nationality" id="nationality" ng-model="scholarshipEnrollment.nationality" placeholder="Nationality" required/>
+                                        <div class="error" ng-messages="scholarship.nationality.$error" ng-if="scholarship.nationality.$touched">
+                                            <span ng-message="required">Nationality is required.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="religion">Religion</label></td>
                                     <td>
-                                        <select ng-model="scholarshipEnrollment.religion" id="religion" placeholder="Religion">
+                                        <select ng-model="scholarshipEnrollment.religion" name="religion" id="religion" placeholder="Religion" required>
                                             <option ng-repeat="religion in commonAttributes.religion" value="{{religion}}">{{religion}}</option>
                                         </select>
+                                        <div class="error" ng-messages="scholarship.religion.$error" ng-if="scholarship.religion.$touched">
+                                            <span ng-message="required">Religion is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="caste">Cummunity</label></td>
                                     <td>
-                                        <select ng-model="scholarshipEnrollment.caste" id="caste" placeholder="Cummunity">
+                                        <select ng-model="scholarshipEnrollment.caste" name="caste" id="caste" placeholder="Cummunity" required>
                                             <option ng-repeat="caste in commonAttributes.caste" value="{{caste}}">{{caste}}</option>
                                         </select>
+                                        <div class="error" ng-messages="scholarship.caste.$error" ng-if="scholarship.caste.$touched">
+                                            <span ng-message="required">Cummunity is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="casteDescription">Caste</label></td>
                                     <td>
-                                        <input type="text" ng-model="scholarshipEnrollment.casteDescription" id="casteDescription" placeholder="Caste"/>
+                                        <input type="text" ng-model="scholarshipEnrollment.casteDescription" name="casteDescription" id="casteDescription" placeholder="Caste" required/>
+                                        <div class="error" ng-messages="scholarship.casteDescription.$error" ng-if="scholarship.casteDescription.$touched">
+                                            <span ng-message="required">Caste is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
                                     <td>
                                         <label ng-repeat="status in commonAttributes.maritalStatus">
-                                            <input type="radio" ng-model="scholarshipEnrollment.maritalStatus" id="maritalStatus"
-                                                   value="{{status}}"/> {{status}}&nbsp;&nbsp;
+                                            <input type="radio" ng-model="scholarshipEnrollment.maritalStatus" name="maritalStatus" id="maritalStatus"
+                                                   value="{{status}}" required/> {{status}}&nbsp;&nbsp;
                                         </label>
+                                        <div class="error" ng-messages="scholarship.maritalStatus.$error" ng-if="scholarship.maritalStatus.$touched">
+                                            <span ng-message="required">Status is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label">Annual income</label></td>
                                     <td>
-                                        <input type="radio" name="annualIncome" value="Upto 50000" ng-model="scholarshipEnrollment.annualIncome"><label class="control-label">&nbsp; Upto 50,000</label>&nbsp;
+                                        <input type="radio" name="annualIncome" value="Upto 50000" ng-model="scholarshipEnrollment.annualIncome" required><label class="control-label">&nbsp; Upto 50,000</label>&nbsp;
                                         <input type="radio" name="annualIncome" value="Upto 100000" ng-model="scholarshipEnrollment.annualIncome"><label class="control-label">&nbsp; Upto 1,00,000</label>&nbsp;
+                                        <div class="error" ng-messages="scholarship.annualIncome.$error" ng-if="scholarship.annualIncome.$touched">
+                                            <span ng-message="required">Annual Income is required.</span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                    <td><label class="control-label" for="emailId">Email Address</label></td>
-                                   <td><input type="email" ng-model="scholarshipEnrollment.emailId" id="emailId" placeholder="Mail Id"/></td>
+                                   <td><input type="email" ng-model="scholarshipEnrollment.emailId" name="emailId" id="emailId" placeholder="Mail Id" required/>
+                                       <div class="error" ng-messages="scholarship.emailId.$error" ng-if="scholarship.emailId.$touched">
+                                           <span ng-message="required">Email Address is required.</span>
+                                           <span ng-message="email">This needs to be a valid email</span>
+                                       </div>
+                                   </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                                    <td><input type="tel" ng-model="scholarshipEnrollment.studentPhoneNumber" id="studentPhoneNumber" placeholder="Student mobile number"/></td>
+                                    <td><input type="number" ng-model="scholarshipEnrollment.studentPhoneNumber" name="studentPhoneNumber" id="studentPhoneNumber"  min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Student mobile number" required/>
+                                        <div class="error" ng-messages="scholarship.studentPhoneNumber.$error" ng-if="scholarship.studentPhoneNumber.$touched">
+                                            <span ng-message="required">Student Phone number is required.</span>
+                                            <span ng-message="pattern">Student Phone number is invalid.</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                      <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                                     <td><input type="tel" ng-model="scholarshipEnrollment.parentPhoneNumber" id="parentPhoneNumber" placeholder="Parent mobile number"/></td>
+                                     <td><input type="number" ng-model="scholarshipEnrollment.parentPhoneNumber" name="parentPhoneNumber" id="parentPhoneNumber" min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Parent mobile number" required/>
+                                         <div class="error" ng-messages="scholarship.parentPhoneNumber.$error" ng-if="scholarship.parentPhoneNumber.$touched">
+                                             <span ng-message="required">Parent Phone number is required.</span>
+                                             <span ng-message="pattern">Parent Phone number is invalid.</span>
+                                         </div>
+                                     </td>
                                  </tr>
                             </tbody>
                         </table>
@@ -137,7 +193,7 @@
                 </div>
                 <br>
                 <!--Address deatils-->
-                <span address-template data="scholarshipEnrollment"> </span>
+                <span address-template addfrm = "scholarship" data="scholarshipEnrollment"> </span>
                 <br>
                 <!--Education details-->
                 <div style="border-radius:20px;border: 2px solid #3dad9c;">
@@ -176,7 +232,7 @@
                                 </td>
                                 <td>
                                     <input class="percentage" type="number" ng-model="educationDetail.percentageObtained"
-                                           id="percentageObtained" placeholder="%"/>
+                                           id="percentageObtained" maxlength="3" placeholder="%"/>
                                 </td>
                                 <td>
                                     <input type="text" ng-model="educationDetail.remark" id="remark"
@@ -374,7 +430,7 @@
                     <div class="controls" align="left">
                         <input class="button" type="submit" name="submit_back_first" id="submit_back_first" value="Back" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a ng-click="createNewScholarshipEnrollment()" class="btn btn-small btn-primary">Submit</a>
+                        <a ng-click="createNewScholarshipEnrollment()" ng-class="{linkdisabled: scholarship.$invalid}" class="btn btn-small btn-primary">Submit</a>
                     </div>
                 </div>
                 <br>

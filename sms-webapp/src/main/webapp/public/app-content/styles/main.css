@@ -112,3 +112,10 @@ background-color: #eee;
   writing-mode: tb-rl;
   cursor: pointer;
 }
+.error{
+  color: red;
+}
+.linkdisabled{
+  cursor: not-allowed;
+  pointer-events: none;
+}

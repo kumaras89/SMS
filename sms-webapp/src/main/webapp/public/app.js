@@ -6,7 +6,7 @@
             'ui.router',
             'ui.bootstrap',
             'ngCookies',
-            'ngSanitize',
+            'ngSanitize','ngMessages',
             'Branch',
             'User',
             'Course',
@@ -80,7 +80,8 @@
             return{
                 restrict: 'A',
                 scope:{
-                    data:"="
+                    data:"=",
+                    addfrm:"="
                 },
                 templateUrl : 'common/address-template.html'
             }

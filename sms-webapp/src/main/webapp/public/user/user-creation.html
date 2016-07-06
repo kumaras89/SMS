@@ -10,36 +10,55 @@
     </div>
 <div class="panel-body">
 
-    <form novalidate="novalidate" class="form-horizontal">
+    <form name="userForm" novalidate="novalidate" class="form-horizontal">
         <table width="75%" class="table table-striped table-bordered table-hover">
             <tr class="even gradeA">
                 <td><label class="control-label" for="name">User Name:</label></td>
-                <td><input type="text" id="name" ng-model="user.name" placeholder="User Name" maxlength="10" style="width:94px;"/></td>
+                <td><input type="text" name="name" id="name" ng-model="user.name" placeholder="User Name" maxlength="10" style="width:94px;" required/>
+                    <div class="error" ng-messages="userForm.name.$error" ng-if="userForm.name.$touched">
+                        <span ng-message="required">User name is required.</span>
+                    </div>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="firstName">First Name:</label></td>
-                <td><input type="text" id="firstName" ng-model="user.firstName" placeholder="First Name" maxlength="15" style="width:141px;"/></td>
+                <td><input type="text" name="firstName" id="firstName" ng-model="user.firstName" placeholder="First Name" maxlength="15" style="width:141px;" required/>
+                    <div class="error" ng-messages="userForm.firstName.$error" ng-if="userForm.firstName.$touched">
+                        <span ng-message="required">Name is required.</span>
+                    </div>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="lastName">Last Name:</label></td>
-                <td><input type="text" id="lastName" ng-model="user.lastName" placeholder="Last Name" maxlength="15" style="width:141px;" /></td>
+                <td><input type="text" name="lastName" id="lastName" ng-model="user.lastName" placeholder="Last Name" maxlength="15" style="width:141px;" required/>
+                    <div class="error" ng-messages="userForm.lastName.$error" ng-if="userForm.lastName.$touched">
+                        <span ng-message="required">Last name is required.</span>
+                    </div>
+                </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label" for="role">Role : </label></td>
                 <td>
-                    <select  ng-model="user.role" id="role">
+                    <select  ng-model="user.role" name="role" id="role" required>
                        <option ng-repeat="role in roles" value="{{role}}">{{role}}</option>
                     </select>
+                    <div class="error" ng-messages="userForm.role.$error" ng-if="userForm.role.$touched">
+                        <span ng-message="required">Role is required.</span>
+                    </div>
                 </td>
             </tr>
             <tr class="even gradeA">
                 <td><label class="control-label">Branch:</label></td>
-                <td><span branch-name bn="user.branch" style="width:284px;" ng-required/></span></td>
+                <td><span branch-name name="branch" bn="user.branch" style="width:284px;" required/></span>
+                    <div class="error" ng-messages="userForm.branch.$error" ng-if="userForm.branch.$touched">
+                        <span ng-message="required">Branch is required.</span>
+                    </div>
+                </td>
             </tr>
         </table>
         <div class="well">
             <div class="controls">
-                <a ng-disabled="user.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
+                <a ng-click="createNewUser()" ng-class="{linkdisabled: userForm.$invalid}" class="btn btn-small btn-primary">create new user</a>
                 <a ui-sref="home.user-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Users</a>
             </div>
         </div>
