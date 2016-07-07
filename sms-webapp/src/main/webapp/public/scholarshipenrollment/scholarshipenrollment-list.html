@@ -67,7 +67,8 @@
                     <th>#</th>
                     <th>Applicant Number</th>
                     <th>Name</th>
-                    <th>Date of Birth</th>
+                    <th>Date of Creation</th>
+                    <th>Status</th>
                     <th>&nbsp;</th>
                 </tr>
                 </thead>
@@ -76,8 +77,8 @@
                     <td>{{$index + 1 }}</td>
                     <td sortable="code">{{ scholarshipEnrollment.applicationNumber }}</td>
                     <td sortable="name">{{ scholarshipEnrollment.name }}</td>
-                    <td >{{ scholarshipEnrollment.dateOfBirth|date }}</td>
-
+                    <td >{{ scholarshipEnrollment.createdDate|date }}</td>
+                    <td >{{ scholarshipEnrollment.status }}</td>
                     <td>
                         <a ng-click="viewScholarshipEnrollment(scholarshipEnrollment.applicationNumber)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
                     </td>

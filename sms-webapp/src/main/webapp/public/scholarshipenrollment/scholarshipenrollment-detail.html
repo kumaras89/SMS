@@ -16,7 +16,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="code">Applicant Number</label></td>
+                    <td class="firstcol"><label class="control-label">Applicant Number</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.applicationNumber}}</label></td>
                 </tr>
                 <tr>
@@ -27,13 +27,18 @@
                     <td class="firstcol"><label class="control-label">Marketing Employee</label></td>
                     <td><label class="control-label">{{adminService().getMarketingEmployeeName(scholarshipSummarized.marketingEmployeeCode)}}</label></td>
                 </tr>
-                    <td class="firstcol"><label class="control-label" for="name">Name of the Student</label></td>
+                    <td class="firstcol"><label class="control-label" >Name of the Student</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.name}}</label></td>
                 </tr>
-                <td class="firstcol"><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
+
+                </tr>
+                <td class="firstcol"><label class="control-label" >Status</label></td>
+                <td><label class="control-label">{{scholarshipSummarized.status}}</label></td>
+                </tr>
+                <td class="firstcol"><label class="control-label" >Father/Mother's Name</label></td>
                 <td><label class="control-label">{{scholarshipSummarized.fatherOrMotherName}}</label></td>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
+                    <td class="firstcol"><label class="control-label" >Date Of Birth</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.dateOfBirth | date}}</label></td>
                 </tr>
                 <tr>
@@ -41,27 +46,27 @@
                     <td><label class="control-label">{{scholarshipSummarized.age}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="gender">Gender</label></td>
+                    <td class="firstcol"><label class="control-label">Gender</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.gender}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="nationality">Nationality</label></td>
+                    <td class="firstcol"><label class="control-label" >Nationality</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.nationality}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="religion">Religion</label></td>
+                    <td class="firstcol"><label class="control-label">Religion</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.religion}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="caste">Cummunity</label></td>
+                    <td class="firstcol"><label class="control-label">Cummunity</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.caste}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="caste">Caste</label></td>
+                    <td class="firstcol"><label class="control-label">Caste</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.casteDescription}}</label></td>
                 </tr>
                 <tr>
-                    <td class="firstcol"><label class="control-label" for="maritalStatus">Marital Status</label></td>
+                    <td class="firstcol"><label class="control-label">Marital Status</label></td>
                     <td><label class="control-label">{{scholarshipSummarized.maritalStatus}}</label></td>
                 </tr>
                 <tr>
