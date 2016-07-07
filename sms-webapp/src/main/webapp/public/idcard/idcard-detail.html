@@ -13,7 +13,10 @@
         <form novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td colspan="2" align="center"><img ng-src="{{src}}" style="height:200px;width:160px;" alt="Photo not uploaded!"/></td>
+                    <td colspan="2" align="center">
+                        <img ng-src="{{src}}" style="height:200px;width:160px;" alt="Photo not uploaded!"/>
+                        <div ng-click="download()" style="cursor: pointer;"><i class="fa fa-cloud-download fa-fw"></i></div>
+                    </td>
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label">Name</label></td>

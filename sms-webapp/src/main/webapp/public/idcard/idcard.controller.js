@@ -52,8 +52,8 @@
                 $scope.init();
 
             }])
-        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', '$http',
-            function ($scope, $stateParams, CrudService, FlashService, $state, $http) {
+        .controller('IDCardDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', '$http', '$window',
+            function ($scope, $stateParams, CrudService, FlashService, $state, $http,$window) {
 
                 $scope.updateStatus = function (id,status) {
                     $scope.idCardDetail.status = status;
@@ -66,8 +66,12 @@
                 $scope.loadIDCard = function () {
                     CrudService.idcardService.GetById($stateParams.id).then(function (res) {
                         $scope.idCardDetail = res
-                        $scope.src = '/document/download/' + $scope.idCardDetail.fmsId + '/photo.jpg';
+                        $scope.src = '/document/download/' + $scope.idCardDetail.fmsId + '/'+$scope.idCardDetail.name +'.jpg';
                     })
+                }
+
+                $scope.download = function () {
+                    $window.open($scope.src);
                 }
 
                 $scope.loadIDCard();
