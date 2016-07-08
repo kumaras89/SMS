@@ -36,9 +36,10 @@
                             <td>{{ getBranchDesc(user.branch) }}</td>
                             <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a ng-click="deleteUser(user.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
-                                &nbsp;
                                 <a ng-click="resetPassword(user.id)" class="btn btn-small btn-primary"><i class="fa fa-refresh fa-fw"></i>Reset Password</a>
+                                &nbsp;
+                                <!--disabling the deletion functionality of SUPER_ADMIN role based user to prevent deleting ADMIN  by itself.-->
+                                <a ng-if="user.role!= 'SUPER_ADMIN'" ng-click="deleteUser(user.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
                             </td>
                         </tr>
                         <tr>
