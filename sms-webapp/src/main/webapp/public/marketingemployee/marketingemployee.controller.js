@@ -3,19 +3,32 @@
 
     angular
         .module('MarketingEmployee')
-        .controller('MarketingEmployeeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
-            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
+        .controller('MarketingEmployeeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout', '$uibModal',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout, $uibModal) {
 
                 $scope.editMarketingEmployee = function (userId) {
                     $state.go('home.marketingemployee-detail' ,{id: userId});
                 };
 
-                $scope.deleteMarketingEmployee = function (id) {
-                    CrudService.marketingEmployeeService.Delete(id).then(function () {
-                        FlashService.Success('Successfully Deleted');
-                        $scope.tableParams.reload()
+                $scope.deleteMarketingEmployee = function(marketingEmployee) {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'confirmation-popup.html',
+                        controller: 'MarketingEmployeeCtrl',
+                        resolve: {
+                            getMarketingEmployee: function () {
+                                return marketingEmployee;
+                            },
+                            getTableParams: function () {
+                                return $scope.tableParams;
+                            }
+                        }
                     });
 
+                    modalInstance.result.then(function () {
+                    }, function () {
+                        //$log.info('Modal dismissed at: ' + new Date());
+                    });
                 };
 
                 $scope.createNewMarketingEmployee = function () {
@@ -106,6 +119,23 @@
                         $state.go('home.marketingemployee-list');
                     });
                 }
-            }]);
+            }])
+        .controller("MarketingEmployeeCtrl", function ($scope, $uibModalInstance, CrudService, getMarketingEmployee, FlashService, $state, getTableParams) {
+            $scope.commonAttribute = getMarketingEmployee.name;
+            $scope.tableParams = getTableParams;
+
+            $scope.ok = function () {
+                CrudService.marketingEmployeeService.Delete(getMarketingEmployee.id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", true);
+                    $scope.tableParams.reload();
+                });
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        });
+
 
 })();

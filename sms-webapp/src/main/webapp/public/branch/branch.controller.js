@@ -3,19 +3,32 @@
 
     angular
         .module('Branch')
-        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
-        function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
+        .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout', '$uibModal',
+        function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout , $uibModal) {
 
             $scope.editBranch = function (userId) {
                 $state.go('home.branch-detail',{id: userId});
             };
-
-            $scope.deleteBranch = function (id) {
-                CrudService.branchService.Delete(id).then(function() {
-                    FlashService.Success('Successfully Deleted');
-                    $scope.tableParams.reload()
+            
+            $scope.deleteBranch = function(branch) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'confirmation-popup.html',
+                    controller: 'BranchModalCtrl',
+                    resolve: {
+                        getBranch: function () {
+                            return branch;
+                        },
+                        getTableParams: function () {
+                            return $scope.tableParams;
+                        }
+                    }
                 });
 
+                modalInstance.result.then(function () {
+                }, function () {
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
             };
 
             $scope.createNewBranch = function () {
@@ -87,6 +100,23 @@
                 });
 
             }
-        }]);
+        }])
+        .controller("BranchModalCtrl", function ($scope, $uibModalInstance, CrudService, getBranch, FlashService, $state, getTableParams) {
+            $scope.commonAttribute = getBranch.name;
+            $scope.tableParams = getTableParams;
+
+            $scope.ok = function () {
+                CrudService.branchService.Delete(getBranch.id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", true);
+                    $scope.tableParams.reload();
+                });
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        });
+
 
 })();

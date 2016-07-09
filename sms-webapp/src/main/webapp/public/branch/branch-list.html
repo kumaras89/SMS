@@ -36,7 +36,7 @@
                             <td>{{ branch.address.taluk }}</td>
                             <td><a ng-click="editBranch(branch.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a ng-click="deleteBranch(branch.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
+                                <a ng-click="deleteBranch(branch)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">
@@ -48,6 +48,7 @@
                 </div>
             </div>
         </div>
+        <span confirmation-popup ></span>
         <div class="well">
             <a ng-click="createNewBranch()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Branch</a>
         </div>

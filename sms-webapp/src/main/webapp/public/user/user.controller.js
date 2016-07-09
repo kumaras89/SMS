@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
     'use strict';
 
     angular
@@ -150,7 +150,7 @@
             }])
         .controller("UserModalCtrl", function ($scope, $uibModalInstance, CrudService, getUser, FlashService, $state, getTableParams) {
 
-            $scope.commonAttribue = getUser.name;
+            $scope.commonAttribute = getUser.name;
             $scope.tableParams = getTableParams;
 
             $scope.ok = function () {
