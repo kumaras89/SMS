@@ -14,18 +14,32 @@
                 return sum;
             }
         })
-        .controller('SchemeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout',
-            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout) {
+        .controller('SchemeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout','$uibModal',
+            function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout, $uibModal) {
                 $scope.editScheme = function (userId) {
                     $state.go('home.scheme-detail' ,{id: userId});
                 };
 
-                $scope.deleteScheme = function (id) {
-                    CrudService.schemeService.Delete(id).then(function () {
-                        FlashService.Success('Successfully Deleted');
-                        $scope.tableParams.reload()
+                $scope.deleteScheme = function (scheme) {
+
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'confirmation-popup.html',
+                        controller: 'deleteSchemeModalCtrl',
+                        resolve: {
+                            getScheme: function () {
+                                return scheme;
+                            },
+                            getTableParams: function () {
+                                return $scope.tableParams;
+                            }
+                        }
                     });
 
+                    modalInstance.result.then(function () {
+                    }, function () {
+                        //$log.info('Modal dismissed at: ' + new Date());
+                    });
                 };
 
                 $scope.createNewScheme = function () {
@@ -93,6 +107,23 @@
 
                 $scope.loadScheme();
             }])
+        .controller("deleteSchemeModalCtrl", function ($scope, $uibModalInstance, CrudService, getScheme, FlashService, $state, getTableParams) {
+
+            $scope.commonAttribue = getScheme.name;
+            $scope.tableParams = getTableParams;
+
+            $scope.ok = function () {
+                CrudService.schemeService.Delete(getScheme.id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", true);
+                    $scope.tableParams.reload();
+                });
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        })
         .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$state','AdminService',
             function ($scope, CrudService, SchemeService, FlashService, $state, AdminService) {
 
