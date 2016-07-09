@@ -35,7 +35,7 @@
                                 <td sortable="desc">{{ so.operationDesc }}</td>
                                 <td><a ng-click="goToEdit(so.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                     &nbsp;
-                                    <a ng-click="delete(so.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
+                                    <a ng-click="deleteSecureConfirmation(so)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
                             </tr>
                             <tr>
                                 <td ng-show="$data.length==0" class="info no_data" colspan="9">
@@ -47,6 +47,7 @@
                     </div>
                 </div>
             </div>
+            <span confirmation-popup > </span>
             <div class="well">
                 <a ng-click="goToCreate()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Secured Operation</a>
             </div>

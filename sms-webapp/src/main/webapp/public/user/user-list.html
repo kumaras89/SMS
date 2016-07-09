@@ -1,4 +1,4 @@
-﻿<div class="row">
+﻿﻿<div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-users fa-fw"></i> Users</h1>
     </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/ng-template" id="userDeletePopup.html">
+        <!--<<script type="text/ng-template" id="userDeletePopup.html">
             <div class="modal-header">
                 <h3>Do you want to Delete {{user.name}}?</h3>
             </div>
@@ -60,7 +60,8 @@
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                 <button class="btn btn-primary" ng-click="ok()" title="Deleting to the User">Delete</button>
             </div>
-        </script>
+        </script>-->
+        <span confirmation-popup > </span>
         <div class="well">
             <a ng-click="createNewUser()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New User</a>
         </div>
