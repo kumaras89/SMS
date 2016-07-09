@@ -139,7 +139,7 @@
         }])
     .controller("deleteRoleModalCtrl", function ($scope, $uibModalInstance, CrudService, getRole, FlashService, $state, getTableParams) {
 
-        $scope.commonAttribue = getRole.name;
+        $scope.commonAttribute = getRole.name;
         $scope.tableParams = getTableParams;
 
         $scope.ok = function () {
@@ -156,7 +156,7 @@
     })
     .controller("deleteSecuredModalCtrl", function ($scope, $uibModalInstance, CrudService, getSo, FlashService, $state, getTableParams) {
 
-        $scope.commonAttribue = getSo.operation;
+        $scope.commonAttribute = getSo.operation;
         $scope.tableParams = getTableParams;
 
         $scope.ok = function () {

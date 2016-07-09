@@ -1,4 +1,4 @@
-﻿﻿(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -22,27 +22,27 @@
             'ScholarshipEnrollment',
             'IDCard',
             'Payment'])
-        .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
-            return {
-                responseError: function (response) {
-                    var standardMsg = response.statusText+' on '+ response.config.url;
-                    if(response.data) {
-                        var msg = ''
-                        var msgs = _.pluck(response.data.errorInfo, 'message');
-                        _.each(msgs, function(m) {
-                            msg += m + '<br>'
-                        })
-                        if(msg === '') {
-                            msg = standardMsg;
+           .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
+                return {
+                    responseError: function (response) {
+                        var standardMsg = response.statusText+' on '+ response.config.url;
+                        if(response.data) {
+                            var msg = ''
+                            var msgs = _.pluck(response.data.errorInfo, 'message');
+                            _.each(msgs, function(m) {
+                                msg += m + '<br>'
+                            })
+                            if(msg === '') {
+                                msg = standardMsg;
+                            }
+                            FlashService.Error(msg);
+                        } else {
+                            FlashService.Error(standardMsg);
                         }
-                        FlashService.Error(msg);
-                    } else {
-                        FlashService.Error(standardMsg);
+                        return $q.reject(response);
                     }
-                    return $q.reject(response);
-                }
-            };
-        }])
+                };
+         }])
         .config(config)
         .run(run)
         .directive("branchName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
@@ -69,7 +69,7 @@
                 template: function(){
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                         return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
-                            '| limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />'
+                                       '| limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />'
                     }else{
                         return '<input type="text" ng-model="bn" readonly>'
                     }
@@ -87,13 +87,14 @@
             }
         })
         .directive("confirmationPopup",function(){
-            return{
-                restrict: 'A',
-                scope:{
-                },
-                templateUrl : 'common/confirmation-popup.html'
-            }
-        });
+        return{
+            restrict: 'A',
+            scope:{
+                data:"="
+            },
+            templateUrl : 'common/confirmation-popup.html'
+        }
+    });
 
     config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider'];
     function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
@@ -117,24 +118,24 @@
             controllerAs: 'vm',
             url: '/changepassword'
         }).state('home',{
-            url:'/home',
-            controller: 'HomeController',
-            controllerAs: 'vm',
-            templateUrl:'home/home.view.html',
-            resolve: {
-                loadMyFiles:function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name:'app',
-                        files:[
-                            '/public/app-services/directives/header/header.js',
-                            '/public/app-services/directives/header/header-notification/header-notification.js',
-                            '/public/app-services/directives/sidebar/sidebar.js',
-                            '/public/app-services/directives/sidebar/sidebar-search/sidebar-search.js'
-                        ]
-                    })
+                url:'/home',
+                controller: 'HomeController',
+                controllerAs: 'vm',
+                templateUrl:'home/home.view.html',
+                resolve: {
+                    loadMyFiles:function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name:'app',
+                            files:[
+                                '/public/app-services/directives/header/header.js',
+                                '/public/app-services/directives/header/header-notification/header-notification.js',
+                                '/public/app-services/directives/sidebar/sidebar.js',
+                                '/public/app-services/directives/sidebar/sidebar-search/sidebar-search.js'
+                            ]
+                        })
+                    }
                 }
-            }
-        })
+            })
             .state('home.dashboard',{
                 url:'/',
                 controller: 'DashBoardCtrl',
@@ -173,7 +174,7 @@
     }
 
     run.$inject = ['$rootScope','FlashService','AuthenticationService', '$location', '$cookieStore', '$http', 'AdminServiceProvider', '$state'];
-
+    
     function run($rootScope, FlashService, AuthenticationService, $location, $cookieStore, $http, AdminServiceProvider, $state) {
 
         $rootScope.adminService = function() {

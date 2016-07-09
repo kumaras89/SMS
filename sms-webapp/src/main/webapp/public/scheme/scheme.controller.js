@@ -1,4 +1,4 @@
-﻿﻿(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -109,7 +109,7 @@
             }])
         .controller("deleteSchemeModalCtrl", function ($scope, $uibModalInstance, CrudService, getScheme, FlashService, $state, getTableParams) {
 
-            $scope.commonAttribue = getScheme.name;
+            $scope.commonAttribute = getScheme.name;
             $scope.tableParams = getTableParams;
 
             $scope.ok = function () {
@@ -153,5 +153,6 @@
 
                 $scope.init();
             }]);
+
 
 })();
