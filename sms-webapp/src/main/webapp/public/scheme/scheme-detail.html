@@ -13,35 +13,35 @@
         <form name="schemeForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="code">Code:</label></td>
+                    <td class="firstcol"><label class="control-label" for="code">Code:</label></td>
                     <td><input type="text" name="code" id="code" ng-model="scheme.code" placeholder="Code" maxlength="10" style="width:94px;" required/>
-                        <div class="error" ng-messages="schemeForm.code.$error" ng-if="schemeForm.code.$touched">
+                        <span class="error" ng-messages="schemeForm.code.$error" ng-if="schemeForm.code.$touched">
                             <span ng-message="required">Code is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="name">Name:</label></td>
+                    <td class="firstcol"><label class="control-label" for="name">Name:</label></td>
                     <td><input type="text" name="name" id="name" ng-model="scheme.name" placeholder="Name" maxlength="20" style="width:188px;" required/>
-                        <div class="error" ng-messages="schemeForm.name.$error" ng-if="schemeForm.name.$touched">
+                        <span class="error" ng-messages="schemeForm.name.$error" ng-if="schemeForm.name.$touched">
                             <span ng-message="required">Name is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="feesAmount">Total Fees Amount:</label></td>
+                    <td class="firstcol"><label class="control-label" for="feesAmount">Total Fees Amount:</label></td>
                     <td><input type="number" name="feesAmount" id="feesAmount" ng-model="scheme.feesAmount" placeholder="amount" value="0"   min ="0" style="width: 100px;" required/>
-                        <div class="error" ng-messages="schemeForm.feesAmount.$error" ng-if="schemeForm.feesAmount.$touched">
+                        <span class="error" ng-messages="schemeForm.feesAmount.$error" ng-if="schemeForm.feesAmount.$touched">
                             <span ng-message="required">Total Fees Amount is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="description">Description:</label></td>
+                    <td class="firstcol"><label class="control-label" for="description">Description:</label></td>
                     <td><textarea name="description" id="description" ng-model="scheme.description" placeholder="Description" style="width: 188px;" required/>
-                        <div class="error" ng-messages="schemeForm.description.$error" ng-if="schemeForm.description.$touched">
+                        <span class="error" ng-messages="schemeForm.description.$error" ng-if="schemeForm.description.$touched">
                             <span ng-message="required">Description is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
             </table>

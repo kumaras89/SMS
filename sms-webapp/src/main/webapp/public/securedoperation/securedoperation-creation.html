@@ -12,15 +12,15 @@
         <form name="operationForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td> <label class="control-label" for="operation">Secured Operation :</label></td>
+                    <td class="firstcol"> <label class="control-label" for="operation">Secured Operation :</label></td>
                     <td><input type="text" name="operation" id="operation" ng-model="entity.operation" placeholder="Secured Operation" maxlength="40" style="width: 376px " required/>
-                        <div class="error" ng-messages="operationForm.operation.$error" ng-if="operationForm.operation.$touched">
+                        <span class="error" ng-messages="operationForm.operation.$error" ng-if="operationForm.operation.$touched">
                             <span ng-message="required">Secured Operation is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td> <label class="control-label" >Type :</label></td>
+                    <td class="firstcol"> <label class="control-label" >Type :</label></td>
                     <td>
                         <div class="radio" required>
                             <label>
@@ -32,17 +32,17 @@
                                 <input type="radio" name="type" value="URL" ng-model="entity.type">URL
                             </label>
                         </div>
-                        <div class="error" ng-messages="operationForm.type.$error" ng-if="operationForm.type.$touched">
-                            <span ng-message="required">Type is required.</span>
-                        </div>
+                        <span class="error" ng-messages="operationForm.type.$error" ng-if="operationForm.type.$touched">
+                            <span ng-message="required">Select any one.</span>
+                        </span>
                    </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="operationDesc">Desc:</label></td>
+                    <td class="firstcol"><label class="control-label" for="operationDesc">Desc:</label></td>
                     <td><textarea type="text" name="operationDesc" id="operationDesc" ng-model="entity.operationDesc" placeholder="Desc" style="width: 376px" required/>
-                        <div class="error" ng-messages="operationForm.operationDesc.$error" ng-if="operationForm.operationDesc.$touched">
+                        <span class="error" ng-messages="operationForm.operationDesc.$error" ng-if="operationForm.operationDesc.$touched">
                             <span ng-message="required">Describtion is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
             </table>

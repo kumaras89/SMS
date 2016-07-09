@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html class="no-js">
+<style>
+   .alert{
+       margin-bottom:0;
+   }
+</style>
 <head>
     <meta charset="utf-8"/>
     <title>RGMIHM Hotel Management Login</title>
@@ -72,8 +77,8 @@
 </head>
 <body>
 <div ng-app="app">
-    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash && !loggedIn" ng-bind-html="flash.message"></div>
-    <div ui-view></div>
+    <div ng-class="{'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash && !loggedIn" ng-bind-html="flash.message" style="margin-bottom: 0;"></div>
+    <div ui-view style="background: #ececec";></div>
 </div>
 </body>
 </html>

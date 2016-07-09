@@ -12,27 +12,30 @@
         <form name="branchForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="code">Code</label></td>
+                    <td  class="firstcol"><label class="control-label" for="code">Code</label></td>
                     <td><input type="text" name="code" id="code" ng-model="branch.code" placeholder="Code" maxlength="10" ng-minlength="5" required style="width:94px;"/>
-                        <div class="error" ng-messages="branchForm.code.$error" ng-if="branchForm.code.$touched">
+                        <span class="error" ng-messages="branchForm.code.$error" ng-if="branchForm.code.$touched">
                             <span ng-message="required">Code is required.</span>
                             <span ng-message="minlength">Code is too short</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="name">Name</label></td>
+                    <td class="firstcol"><label class="control-label" for="name">Name</label></td>
                     <td><input type="text" name="name" id="name" ng-model="branch.name" placeholder="Name"  maxlength="30" style="width:282px;" required/>
-                        <div class="error" ng-messages="branchForm.name.$error" ng-if="branchForm.name.$touched">
+                        <span class="error" ng-messages="branchForm.name.$error" ng-if="branchForm.name.$touched">
                             <span ng-message="required">Name is required.</span>
-                        </div>
+                        </span>
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label">Active/Inactive</label></td>
+                    <td class="firstcol"><label class="control-label">Active/Inactive</label></td>
                     <td>
-                        <label class="control-label">Active</label>&nbsp;<input type="radio" name="isActive" value="1" ng-model="branch.isActive">
-                        <label class="control-label">In Active</label>&nbsp;<input type="radio" name="isActive" value="0" ng-model="branch.isActive">
+                        <label class="control-label">Active</label>&nbsp;<input type="radio" name="isActive" value="1" ng-model="branch.isActive" required>
+                        <label class="control-label">In Active</label>&nbsp;<input type="radio" name="isActive" value="0" ng-model="branch.isActive" required>
+                        <span class="error" ng-messages="branchForm.isActive.$error" ng-if="branchForm.isActive.$touched">
+                            <span ng-message="required">Select any one.</span>
+                        </span>
                     </td>
                 </tr>
             </table>

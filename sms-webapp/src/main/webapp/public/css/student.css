@@ -14,11 +14,7 @@
 .score{width: 15px;}
 .table-condensed>tbody>tr>td>.firstcol{
     padding: 5px;
-    width: 60%;
-}
-.firstcol{
-    padding: 5px;
-    width: 60%;
+    width: 50%;
 }
 .percentage{
     width: 50px;

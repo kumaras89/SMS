@@ -119,3 +119,10 @@ background-color: #eee;
   cursor: not-allowed;
   pointer-events: none;
 }
+.firstcol{
+  padding: 5px;
+  width: 50%;
+}
+.toper{
+  background:#f44336;
+}

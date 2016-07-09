@@ -1,5 +1,4 @@
-﻿﻿
-<script type="text/javascript" src="/public/app-content/jquery.main.js" xmlns="http://java.sun.com/jsf/html"></script>
+﻿<script type="text/javascript" src="/public/app-content/jquery.main.js" xmlns="http://java.sun.com/jsf/html"></script>
 <link rel="stylesheet" href="/public/css/student.css">
 <style>
     .container #first_step, #second_step, #third_step, #fourth_step, #fifth_step,#sixth_step { display: none; }
@@ -75,34 +74,34 @@
                                 <tr>
                                     <td class="firstcol"><label class="control-label" >Branch:</label></td>
                                     <td><span branch-name bn="student.branchName" name="branch" required></span>
-                                        <div class="error" ng-messages="studentForm.branch.$error" ng-if="studentForm.branch.$touched">
+                                        <span class="error" ng-messages="studentForm.branch.$error" ng-if="studentForm.branch.$touched">
                                             <span ng-message="required">Branch is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="name">Name of the Student</label></td>
                                     <td><input type="text" name="name" id="name" ng-model="student.name" placeholder="Name" required/>
-                                        <div class="error" ng-messages="studentForm.name.$error" ng-if="studentForm.name.$touched">
+                                        <span class="error" ng-messages="studentForm.name.$error" ng-if="studentForm.name.$touched">
                                             <span ng-message="required">Name of the Student is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
                                     <td><input type="text" name="fatherOrMotherName" id="fatherOrMotherName" ng-model="student.fatherOrMotherName"
                                                placeholder="FatherOrMotherName" required/>
-                                        <div class="error" ng-messages="studentForm.fatherOrMotherName.$error" ng-if="studentForm.fatherOrMotherName.$touched">
+                                        <span class="error" ng-messages="studentForm.fatherOrMotherName.$error" ng-if="studentForm.fatherOrMotherName.$touched">
                                             <span ng-message="required">Father/Mother's Name is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
                                     <td><input type="date" name="dateOfBirth" id="dateOfBirth" ng-model="student.dateOfBirth" name="DateOfBirth" required/>
-                                        <div class="error" ng-messages="studentForm.dateOfBirth.$error" ng-if="studentForm.dateOfBirth.$touched">
+                                        <span class="error" ng-messages="studentForm.dateOfBirth.$error" ng-if="studentForm.dateOfBirth.$touched">
                                             <span ng-message="required">Date Of Birth is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -116,17 +115,17 @@
                                             <input type="radio" name="gender" ng-model="student.gender" id="gender"  placeholder="Gender"
                                                    value="{{gender}}" required/> {{gender}}&nbsp;&nbsp;&nbsp;
                                         </label>
-                                        <div class="error" ng-messages="studentForm.gender.$error" ng-if="studentForm.gender.$touched">
+                                        <span class="error" ng-messages="studentForm.gender.$error" ng-if="studentForm.gender.$touched">
                                             <span ng-message="required">Gender is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="nationality">Nationality</label></td>
                                     <td><input type="text" name="nationality" id="nationality" ng-model="student.nationality" placeholder="Nationality" required/>
-                                        <div class="error" ng-messages="studentForm.nationality.$error" ng-if="studentForm.nationality.$touched">
+                                        <span class="error" ng-messages="studentForm.nationality.$error" ng-if="studentForm.nationality.$touched">
                                             <span ng-message="required">Nationality is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -135,9 +134,9 @@
                                         <select ng-model="student.religion" name="religion" id="religion" placeholder="Religion" required>
                                             <option ng-repeat="religion in commonAttributes.religion" value="{{religion}}">{{religion}}</option>
                                         </select>
-                                        <div class="error" ng-messages="studentForm.religion.$error" ng-if="studentForm.religion.$touched">
+                                        <span class="error" ng-messages="studentForm.religion.$error" ng-if="studentForm.religion.$touched">
                                             <span ng-message="required">Religion is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -146,9 +145,9 @@
                                         <select ng-model="student.caste" name="caste" id="caste" placeholder="Caste" required>
                                             <option ng-repeat="caste in commonAttributes.caste" value="{{caste}}">{{caste}}</option>
                                         </select>
-                                        <div class="error" ng-messages="studentForm.caste.$error" ng-if="studentForm.caste.$touched">
+                                        <span class="error" ng-messages="studentForm.caste.$error" ng-if="studentForm.caste.$touched">
                                             <span ng-message="required">Caste is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -158,29 +157,29 @@
                                             <input type="radio" ng-model="student.maritalStatus" name="maritalStatus" id="maritalStatus"  placeholder="Marital Status"
                                                    value="{{status}}" required/> {{status}}&nbsp;&nbsp;
                                         </label>
-                                        <div class="error" ng-messages="studentForm.maritalStatus.$error" ng-if="studentForm.maritalStatus.$touched">
+                                        <span class="error" ng-messages="studentForm.maritalStatus.$error" ng-if="studentForm.maritalStatus.$touched">
                                             <span ng-message="required">Status is required.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="mailId">Email Address</label></td>
                                     <td>
                                         <input type="email" ng-model="student.mailId" name="mailId" id="mailId" placeholder="Mail Id" required/>
-                                        <div class="error" ng-messages="studentForm.mailId.$error" ng-if="studentForm.mailId.$touched">
+                                        <span class="error" ng-messages="studentForm.mailId.$error" ng-if="studentForm.mailId.$touched">
                                             <span ng-message="required">Email Address is required.</span>
                                             <span ng-message="email">This needs to be a valid email</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
                                     <td>
                                         <input type="tel" ng-model="student.phoneNumber" name="phoneNumber" id="phoneNumber" min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Mobile number" required/>
-                                        <div class="error" ng-messages="studentForm.phoneNumber.$error" ng-if="studentForm.phoneNumber.$touched">
+                                        <span class="error" ng-messages="studentForm.phoneNumber.$error" ng-if="studentForm.phoneNumber.$touched">
                                             <span ng-message="required">Mobile Number is required.</span>
                                             <span ng-message="pattern">Mobile Number is invalid.</span>
-                                        </div>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -495,14 +494,14 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><label class="control-label">Course Name</label></td>
+                                <td class="firstcol"><label class="control-label">Course Name</label></td>
                                 <td>
                                     <select ng-model="student.courseName" name="courseName" id="courseName" required>
                                         <option ng-repeat="courseName in courseNames" value="{{courseName}}">{{courseName}}</option>
                                     </select>
-                                    <div class="error" ng-messages="studentForm.courseName.$error" ng-if="studentForm.courseName.$touched">
+                                    <span class="error" ng-messages="studentForm.courseName.$error" ng-if="studentForm.courseName.$touched">
                                         <span ng-message="required">Course Name is required.</span>
-                                    </div>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -511,9 +510,9 @@
                                     <select ng-model="student.schemeName" name="schemeName" id="schemeName" required>
                                         <option ng-repeat="scheme in schemes" value="{{scheme.name}}">{{scheme.name}}</option>
                                     </select>
-                                    <div class="error" ng-messages="studentForm.schemeName.$error" ng-if="studentForm.schemeName.$touched">
+                                    <span class="error" ng-messages="studentForm.schemeName.$error" ng-if="studentForm.schemeName.$touched">
                                         <span ng-message="required">Fees Scheme Name is required.</span>
-                                    </div>
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -522,9 +521,9 @@
                                     <select ng-model="student.referalName" name="referalName" id="referalName" required>
                                         <option ng-repeat="marketingEmployee in marketingEmployees" value="{{marketingEmployee.name}}">{{marketingEmployee.name}}</option>
                                     </select>
-                                    <div class="error" ng-messages="studentForm.referalName.$error" ng-if="studentForm.referalName.$touched">
+                                    <span class="error" ng-messages="studentForm.referalName.$error" ng-if="studentForm.referalName.$touched">
                                         <span ng-message="required">Referred By is required.</span>
-                                    </div>
+                                    </span>
                                 </td>
                             </tr>
                             </tbody>

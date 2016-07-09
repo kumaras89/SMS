@@ -10,18 +10,18 @@
             <td class="firstcol"><label class="control-label" for="address1">Adddress Line 1</label></td>
             <td><input type="text" ng-model="data.address.address1" id="address1" name="address1"
                        placeholder="Adddress Line 1" required/>
-                <div class="error" ng-messages="addfrm.address1.$error" ng-if="addfrm.address1.$touched">
+                <span class="error" ng-messages="addfrm.address1.$error" ng-if="addfrm.address1.$touched">
                     <span ng-message="required">Adddress Line 1 is required.</span>
-                </div>
+                </span>
             </td>
         </tr>
         <tr>
             <td class="firstcol"><label class="control-label" for="address2">Adddress Line 2</label></td>
             <td><input type="text" ng-model="data.address.address2" id="address2" name="address2"
                        placeholder="Adddress Line 2" required/>
-                <div class="error" ng-messages="addfrm.address2.$error" ng-if="addfrm.address2.$touched">
+                <span class="error" ng-messages="addfrm.address2.$error" ng-if="addfrm.address2.$touched">
                     <span ng-message="required">Adddress Line 2 is required.</span>
-                </div>
+                </span>
 
             </td>
         </tr>
@@ -29,37 +29,36 @@
             <td class="firstcol"><label class="control-label" for="address3">Adddress Line 3</label></td>
             <td><input type="text" ng-model="data.address.address3" id="address3" name="address3"
                        placeholder="Adddress Line 3" required/>
-                <div class="error" ng-messages="addfrm.address3.$error" ng-if="addfrm.address3.$touched">
+                <span class="error" ng-messages="addfrm.address3.$error" ng-if="addfrm.address3.$touched">
                     <span ng-message="required">Adddress Line 3 is required.</span>
-                </div>
+                </span>
             </td>
         </tr>
         <tr>
             <td class="firstcol"><label class="control-label" for="taluk">Taluk</label></td>
             <td><input type="text" ng-model="data.address.taluk" name="taluk" id="taluk" placeholder="Taluk" required/>
-                <div class="error" ng-messages="addfrm.taluk.$error" ng-if="addfrm.taluk.$touched">
+                <span class="error" ng-messages="addfrm.taluk.$error" ng-if="addfrm.taluk.$touched">
                     <span ng-message="required">Taluk is required.</span>
-                </div>
+                </span>
             </td>
         </tr>
         <tr>
             <td class="firstcol"><label class="control-label" for="district">District</label></td>
             <td><input type="text" ng-model="data.address.district" id="district" name="district"
                        placeholder="District" required/>
-                <div class="error" ng-messages="addfrm.district.$error" ng-if="addfrm.district.$touched">
+                <span class="error" ng-messages="addfrm.district.$error" ng-if="addfrm.district.$touched">
                     <span ng-message="required">District is required.</span>
-                </div>
+                </span>
             </td>
         </tr>
         <tr>
             <td class="firstcol"><label class="control-label" for="postalCode">Postal Code</label></td>
             <td><input type="number" ng-model="data.address.postalCode" id="postalCode" name="postalCode"
                        placeholder="Postal code" ng-pattern="/^[1-9][0-9]{5}$/" required/>
-                <div class="error" ng-messages="addfrm.postalCode.$error" ng-if="addfrm.postalCode.$touched">
+                <span class="error" ng-messages="addfrm.postalCode.$error" ng-if="addfrm.postalCode.$touched">
                     <span ng-message="required">PostalCode is required.</span>
                     <span ng-message="pattern">PostalCode is invalid.</span>
-
-                </div>
+                </span>
             </td>
         </tr>
         </tbody>
