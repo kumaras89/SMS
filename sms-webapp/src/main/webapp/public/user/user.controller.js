@@ -3,18 +3,32 @@
 
     angular
         .module('User')
-        .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http', 'ngTableParams', '$timeout',
-        function ($scope, CrudService,AdminService, FlashService, $location,$http, ngTableParams, $timeout) {
+        .controller('UserListCtrl', ['$scope', 'CrudService','AdminService', 'FlashService', '$location','$http', 'ngTableParams', '$timeout','$uibModal',
+        function ($scope, CrudService,AdminService, FlashService, $location,$http, ngTableParams, $timeout, $uibModal) {
+
             $scope.editUser = function (userId) {
                 $location.path('/home/user-detail/' + userId);
             };
 
-            $scope.deleteUser = function (id) {
-                CrudService.userService.Delete(id).then(function() {
-                    FlashService.Success('Successfully Deleted');
-                    $scope.tableParams.reload()
+            $scope.searchStudentScholarship = function(id) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'ScholarshipPopup.html',
+                    controller: 'UserModalCtrl',
+                    resolve: {
+                        getId: function () {
+                            return id;
+                        },
+                        getTableParams: function () {
+                            return $scope.tableParams;
+                        }
+                    }
                 });
 
+                modalInstance.result.then(function () {
+                }, function () {
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
             };
 
             $scope.resetPassword = function(id) {
@@ -133,6 +147,24 @@
             }
 
             $scope.init();
-        }]);
+        }])
+        .controller("UserModalCtrl", function ($scope, $uibModalInstance, CrudService, getId, FlashService, $state, getTableParams) {
+
+            $scope.id = getId;
+            $scope.tableParams = getTableParams;
+
+            $scope.ok = function () {
+                CrudService.userService.Delete($scope.id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", true);
+                    $scope.tableParams.reload();
+                });
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        });
+
 
 })();

@@ -39,7 +39,7 @@
                                 <a ng-click="resetPassword(user.id)" class="btn btn-small btn-primary"><i class="fa fa-refresh fa-fw"></i>Reset Password</a>
                                 &nbsp;
                                 <!--disabling the deletion functionality of SUPER_ADMIN role based user to prevent deleting ADMIN  by itself.-->
-                                <a ng-if="user.role!= 'SUPER_ADMIN'" ng-click="deleteUser(user.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
+                                <a ng-if="user.role!= 'SUPER_ADMIN'" ng-click="searchStudentScholarship(user.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
                             </td>
                         </tr>
                         <tr>
@@ -52,6 +52,15 @@
                 </div>
             </div>
         </div>
+        <script type="text/ng-template" id="ScholarshipPopup.html">
+            <div class="modal-header">
+                <h3>Student Enrollment</h3>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="ok()" title="Search Student scholar ship enrollment">OK</button>
+            </div>
+        </script>
         <div class="well">
             <a ng-click="createNewUser()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New User</a>
         </div>
