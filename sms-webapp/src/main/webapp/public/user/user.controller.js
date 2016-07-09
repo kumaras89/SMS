@@ -10,14 +10,14 @@
                 $location.path('/home/user-detail/' + userId);
             };
 
-            $scope.searchStudentScholarship = function(id) {
+            $scope.deleteUser = function(user) {
                 var modalInstance = $uibModal.open({
                     animation: true,
-                    templateUrl: 'ScholarshipPopup.html',
+                    templateUrl: 'userDeletePopup.html',
                     controller: 'UserModalCtrl',
                     resolve: {
-                        getId: function () {
-                            return id;
+                        getUser: function () {
+                            return user;
                         },
                         getTableParams: function () {
                             return $scope.tableParams;
@@ -148,13 +148,13 @@
 
             $scope.init();
         }])
-        .controller("UserModalCtrl", function ($scope, $uibModalInstance, CrudService, getId, FlashService, $state, getTableParams) {
+        .controller("UserModalCtrl", function ($scope, $uibModalInstance, CrudService, getUser, FlashService, $state, getTableParams) {
 
-            $scope.id = getId;
+            $scope.user = getUser;
             $scope.tableParams = getTableParams;
 
             $scope.ok = function () {
-                CrudService.userService.Delete($scope.id).then(function(){
+                CrudService.userService.Delete($scope.user.id).then(function(){
                     FlashService.Success("Successfuly Deleted !!", true);
                     $scope.tableParams.reload();
                 });
