@@ -3,8 +3,8 @@
 
     angular
         .module('app')
-        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
-        function ($scope,$stateParams, CrudService, FlashService, $state, ngTableParams,  $timeout) {
+        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout','$uibModal',
+        function ($scope,$stateParams, CrudService, FlashService, $state, ngTableParams,  $timeout, $uibModal) {
 
             $scope.init = function(path, clearCachePaths) {
                 $scope.path = path;
@@ -62,7 +62,49 @@
                     $scope.entity = res;
                 })
             }
+            //this for using both Secured Operation and Role for deleting confirmation
+            $scope.deleteRoleConfirmation = function(role) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'confirmation-popup.html',
+                    controller: 'deleteRoleModalCtrl',
+                    resolve: {
+                        getRole: function () {
+                            return role;
+                        },
+                        getTableParams: function () {
+                            return $scope.tableParams;
+                        }
+                    }
+                });
 
+                modalInstance.result.then(function () {
+                }, function () {
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+            };
+
+            $scope.deleteSecureConfirmation = function(so) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'confirmation-popup.html',
+                    controller: 'deleteSecuredModalCtrl',
+                    resolve: {
+                        getSo: function () {
+                            return so;
+                        },
+                        getTableParams: function () {
+                            return $scope.tableParams;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function () {
+                }, function () {
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+            };
+            
             $scope.tableParams = new ngTableParams({
                 page: 1,            // show first pagez
                 count: 10,          // count per page
@@ -94,6 +136,39 @@
             });
 
 
-        }]);
+        }])
+    .controller("deleteRoleModalCtrl", function ($scope, $uibModalInstance, CrudService, getRole, FlashService, $state, getTableParams) {
 
+        $scope.commonAttribute = getRole.name;
+        $scope.tableParams = getTableParams;
+
+        $scope.ok = function () {
+            CrudService.roleService.Delete(getRole.id).then(function(){
+                FlashService.Success("Successfuly Deleted !!", true);
+                $scope.tableParams.reload();
+            });
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    })
+    .controller("deleteSecuredModalCtrl", function ($scope, $uibModalInstance, CrudService, getSo, FlashService, $state, getTableParams) {
+
+        $scope.commonAttribute = getSo.operation;
+        $scope.tableParams = getTableParams;
+
+        $scope.ok = function () {
+            CrudService.securedOperationService.Delete(getSo.id).then(function(){
+                FlashService.Success("Successfuly Deleted !!", true);
+                $scope.tableParams.reload();
+            });
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    });
 })();

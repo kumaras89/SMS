@@ -26,6 +26,11 @@
         service.marketingEmployeeService = service.of('marketingEmployee')
         service.idcardService = service.of('idcard')
 
+        //added for confirmation deletion
+
+        service.roleService = service.of('role');
+        service.securedOperationService = service.of('securedoperation');
+
         service.scholarshipEnrollmentService = service.of('scholarshipenrollment')
         return service;
 

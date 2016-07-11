@@ -3,18 +3,32 @@
 
     angular
         .module('Course')
-        .controller('CourseListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
-            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout) {
+        .controller('CourseListCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout', '$uibModal',
+            function ($scope, CrudService, FlashService, $state, ngTableParams, $timeout,  $uibModal) {
                 $scope.editCourse = function (userId) {
                     $state.go('home.course-detail', {id: userId});
                 };
 
-                $scope.deleteCourse = function (id) {
-                    CrudService.courseService.Delete(id).then(function () {
-                        FlashService.Success('Successfully Deleted');
-                        $scope.tableParams.reload()
+
+                $scope.deleteCourse = function(course) {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'confirmation-popup.html',
+                        controller: 'CourseModalCtrl',
+                        resolve: {
+                            getCourse: function () {
+                                return course;
+                            },
+                            getTableParams: function () {
+                                return $scope.tableParams;
+                            }
+                        }
                     });
 
+                    modalInstance.result.then(function () {
+                    }, function () {
+                        //$log.info('Modal dismissed at: ' + new Date());
+                    });
                 };
 
                 $scope.createNewCourse = function () {
@@ -79,5 +93,22 @@
                         $state.go('home.course-list');
                     });
                 }
-            }]);
+            }])
+
+        .controller("CourseModalCtrl", function ($scope, $uibModalInstance, CrudService, getCourse, FlashService, $state, getTableParams) {
+            $scope.commonAttribute = getCourse.name;
+            $scope.tableParams = getTableParams;
+
+            $scope.ok = function () {
+                CrudService.courseService.Delete(getCourse.id).then(function(){
+                    FlashService.Success("Successfully Deleted !!", true);
+                    $scope.tableParams.reload();
+                });
+                $uibModalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        });
 })();

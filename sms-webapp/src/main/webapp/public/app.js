@@ -85,7 +85,16 @@
                 },
                 templateUrl : 'common/address-template.html'
             }
-        });
+        })
+        .directive("confirmationPopup",function(){
+        return{
+            restrict: 'A',
+            scope:{
+                data:"="
+            },
+            templateUrl : 'common/confirmation-popup.html'
+        }
+    });
 
     config.$inject = ['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider', '$httpProvider'];
     function config($stateProvider,$urlRouterProvider,$ocLazyLoadProvider, $httpProvider) {
