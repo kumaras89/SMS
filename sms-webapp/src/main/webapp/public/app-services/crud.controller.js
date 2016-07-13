@@ -63,40 +63,17 @@
                 })
             }
             //this for using both Secured Operation and Role for deleting confirmation
-            $scope.deleteRoleConfirmation = function(role) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'confirmation-popup.html',
-                    controller: 'deleteRoleModalCtrl',
-                    resolve: {
-                        getRole: function () {
-                            return role;
-                        },
-                        getTableParams: function () {
-                            return $scope.tableParams;
-                        }
-                    }
-                });
-
-                modalInstance.result.then(function () {
-                }, function () {
-                    //$log.info('Modal dismissed at: ' + new Date());
+            $scope.deleteRole = function(id) {
+                CrudService.roleService.Delete(id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", false);
+                    $scope.tableParams.reload();
                 });
             };
 
-            $scope.deleteSecureConfirmation = function(so) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'confirmation-popup.html',
-                    controller: 'deleteSecuredModalCtrl',
-                    resolve: {
-                        getSo: function () {
-                            return so;
-                        },
-                        getTableParams: function () {
-                            return $scope.tableParams;
-                        }
-                    }
+            $scope.deleteSecure = function(id) {
+                CrudService.securedOperationService.Delete(id).then(function(){
+                    FlashService.Success("Successfuly Deleted !!", false);
+                    $scope.tableParams.reload();
                 });
 
                 modalInstance.result.then(function () {
@@ -136,39 +113,5 @@
             });
 
 
-        }])
-    .controller("deleteRoleModalCtrl", function ($scope, $uibModalInstance, CrudService, getRole, FlashService, $state, getTableParams) {
-
-        $scope.commonAttribute = getRole.name;
-        $scope.tableParams = getTableParams;
-
-        $scope.ok = function () {
-            CrudService.roleService.Delete(getRole.id).then(function(){
-                FlashService.Success("Successfuly Deleted !!", true);
-                $scope.tableParams.reload();
-            });
-            $uibModalInstance.close();
-        };
-
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    })
-    .controller("deleteSecuredModalCtrl", function ($scope, $uibModalInstance, CrudService, getSo, FlashService, $state, getTableParams) {
-
-        $scope.commonAttribute = getSo.operation;
-        $scope.tableParams = getTableParams;
-
-        $scope.ok = function () {
-            CrudService.securedOperationService.Delete(getSo.id).then(function(){
-                FlashService.Success("Successfuly Deleted !!", true);
-                $scope.tableParams.reload();
-            });
-            $uibModalInstance.close();
-        };
-
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    });
+        }]);
 })();

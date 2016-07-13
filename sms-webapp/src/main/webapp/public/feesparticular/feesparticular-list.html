@@ -32,7 +32,7 @@
                             <td sortable="name">{{ feesParticular.name }}</td>
                             <td><a ng-click="editFeesParticular(feesParticular.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a ng-click="deleteFeesParticular(feesParticular)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
+                                <a confirm="Do you want to delete {{feesParticular.name}} ?" confirm-title=" Fees Particular Delete Confirmation" ng-click="deleteFeesParticular(feesParticular.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">
@@ -44,7 +44,6 @@
                 </div>
             </div>
         </div>
-        <span confirmation-popup ></span>
         <div class="well">
             <a ng-click="createNewFeesParticular()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Fees Component</a>
         </div>

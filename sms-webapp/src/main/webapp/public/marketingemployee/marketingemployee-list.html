@@ -38,7 +38,7 @@
                             <td>{{ marketingEmployee.phoneNumber }}</td>
                             <td><a ng-click="editMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a ng-click="deleteMarketingEmployee(marketingEmployee)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a></td>
+                                <a confirm="Do you want to delete {{marketingEmployee.name}} ?" confirm-title="Marketing Employee Delete Confirmation" ng-click="deleteMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">
@@ -50,7 +50,6 @@
                 </div>
             </div>
         </div>
-        <span confirmation-popup ></span>
         <div class="well">
             <a ng-click="createNewMarketingEmployee()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Marketing Employee</a>
         </div>

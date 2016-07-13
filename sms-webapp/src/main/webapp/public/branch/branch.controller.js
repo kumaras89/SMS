@@ -10,19 +10,10 @@
                 $state.go('home.branch-detail',{id: userId});
             };
             
-            $scope.deleteBranch = function(branch) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'confirmation-popup.html',
-                    controller: 'BranchModalCtrl',
-                    resolve: {
-                        getBranch: function () {
-                            return branch;
-                        },
-                        getTableParams: function () {
-                            return $scope.tableParams;
-                        }
-                    }
+            $scope.deleteBranch = function(id) {
+                CrudService.branchService.Delete(id).then(function(){
+                    FlashService.Success("Successfully Deleted !!", false);
+                    $scope.tableParams.reload();
                 });
 
                 modalInstance.result.then(function () {
@@ -100,23 +91,8 @@
                 });
 
             }
-        }])
-        .controller("BranchModalCtrl", function ($scope, $uibModalInstance, CrudService, getBranch, FlashService, $state, getTableParams) {
-            $scope.commonAttribute = getBranch.name;
-            $scope.tableParams = getTableParams;
-
-            $scope.ok = function () {
-                CrudService.branchService.Delete(getBranch.id).then(function(){
-                    FlashService.Success("Successfuly Deleted !!", true);
-                    $scope.tableParams.reload();
-                });
-                $uibModalInstance.close();
-            };
-
-            $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-            };
-        });
+        }]);
+        
 
 
 })();

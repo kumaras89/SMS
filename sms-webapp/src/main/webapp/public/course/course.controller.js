@@ -10,25 +10,11 @@
                 };
 
 
-                $scope.deleteCourse = function(course) {
-                    var modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'confirmation-popup.html',
-                        controller: 'CourseModalCtrl',
-                        resolve: {
-                            getCourse: function () {
-                                return course;
-                            },
-                            getTableParams: function () {
-                                return $scope.tableParams;
-                            }
-                        }
-                    });
-
-                    modalInstance.result.then(function () {
-                    }, function () {
-                        //$log.info('Modal dismissed at: ' + new Date());
-                    });
+               $scope.deleteCourse = function(id) {
+                   CrudService.courseService.Delete(id).then(function(){
+                       FlashService.Success("Successfully Deleted !!", false);
+                       $scope.tableParams.reload();
+                   });
                 };
 
                 $scope.createNewCourse = function () {
@@ -49,14 +35,20 @@
                                 $scope.courses = [];
                                 FlashService.Error(data.message)
                             } else {
-                                $timeout(function () {
-                                    params.total(data.length);
-                                    $defer.resolve(data);
+                                $scope.courses = data;
+                            }
+                            $timeout(function () {
+                                params.total($scope.courses.length);
+                                $defer.resolve($scope.courses);
+                            }, 10);
+                        }, function() {
+                                $scope.courses = []
+                                $timeout(function() {
+                                    params.total($scope.courses.length);
+                                    $defer.resolve($scope.courses);
                                 }, 10);
 
-                            }
-                        }, function () {
-                            $scope.courses = []
+
                         })
                     }
                 });
@@ -93,22 +85,7 @@
                         $state.go('home.course-list');
                     });
                 }
-            }])
+            }]);
 
-        .controller("CourseModalCtrl", function ($scope, $uibModalInstance, CrudService, getCourse, FlashService, $state, getTableParams) {
-            $scope.commonAttribute = getCourse.name;
-            $scope.tableParams = getTableParams;
-
-            $scope.ok = function () {
-                CrudService.courseService.Delete(getCourse.id).then(function(){
-                    FlashService.Success("Successfully Deleted !!", true);
-                    $scope.tableParams.reload();
-                });
-                $uibModalInstance.close();
-            };
-
-            $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-            };
-        });
+      
 })();

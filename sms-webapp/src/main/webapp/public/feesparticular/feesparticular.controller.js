@@ -9,24 +9,10 @@
                     $state.go('home.feesparticular-detail', {id: userId});
                 };
 
-                $scope.deleteFeesParticular = function(feesParticular) {
-                    var modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'confirmation-popup.html',
-                        controller: 'FeesParticularModalCtrl',
-                        resolve: {
-                            getFeesParticular: function () {
-                                return feesParticular;
-                            },
-                            getTableParams: function () {
-                                return $scope.tableParams;
-                            }
-                        }
-                    });
-
-                    modalInstance.result.then(function () {
-                    }, function () {
-                        //$log.info('Modal dismissed at: ' + new Date());
+                $scope.deleteFeesParticular = function(id) {
+                    CrudService.feesParticularService.Delete(id).then(function(){
+                        FlashService.Success("Successfuly Deleted !!", false);
+                        $scope.tableParams.reload();
                     });
                 };
 
@@ -97,25 +83,7 @@
                     });
 
                 }
-            }])
-
-        .controller("FeesParticularModalCtrl", function ($scope, $uibModalInstance, CrudService, getFeesParticular, FlashService, $state, getTableParams) {
-            $scope.commonAttribute = getFeesParticular.name;
-            $scope.tableParams = getTableParams;
-
-            $scope.ok = function () {
-                CrudService.feesParticularService.Delete(getFeesParticular.id).then(function(){
-                    FlashService.Success("Successfuly Deleted !!", true);
-                    $scope.tableParams.reload();
-                });
-                $uibModalInstance.close();
-            };
-
-            $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-            };
-        });
-
+            }]);
 
 
 })();

@@ -1,4 +1,4 @@
-﻿﻿(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -10,24 +10,10 @@
                     $location.path('/home/user-detail/' + userId);
                 };
 
-                $scope.deleteUser = function(user) {
-                    var modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'confirmation-popup.html',
-                        controller: 'UserModalCtrl',
-                        resolve: {
-                            getUser: function () {
-                                return user;
-                            },
-                            getTableParams: function () {
-                                return $scope.tableParams;
-                            }
-                        }
-                    });
-
-                    modalInstance.result.then(function () {
-                    }, function () {
-                        //$log.info('Modal dismissed at: ' + new Date());
+                $scope.deleteUser = function(id) {
+                    CrudService.userService.Delete(id).then(function(){
+                        FlashService.Success("Successfuly Deleted !!", false);
+                        $scope.tableParams.reload();
                     });
                 };
 
@@ -140,31 +126,16 @@
                         $scope.roles = data;
                         $scope.roles = _.pluck(data, "name");
                     })
-                    AdminService.getBranches(function(data) {
+                   /* Abhijit- already defined in the branchName directive in app.js */
+                  /*  AdminService.getBranches(function(data) {
                         $scope.branches = data;
                         $scope.branchNames = _.pluck(data,"name")
-                    })
+                    })*/
+                    
                 }
 
                 $scope.init();
-            }])
-        .controller("UserModalCtrl", function ($scope, $uibModalInstance, CrudService, getUser, FlashService, $state, getTableParams) {
-
-            $scope.commonAttribute = getUser.name;
-            $scope.tableParams = getTableParams;
-
-            $scope.ok = function () {
-                CrudService.userService.Delete(getUser.id).then(function(){
-                    FlashService.Success("Successfuly Deleted !!", true);
-                    $scope.tableParams.reload();
-                });
-                $uibModalInstance.close();
-            };
-
-            $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-            };
-        });
+            }]);
 
 
 })();
