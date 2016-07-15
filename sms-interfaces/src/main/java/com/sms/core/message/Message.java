@@ -27,8 +27,9 @@ public class Message
     @Column(name = "MS_MESSAGE")
     private String message;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "MS_STATUS")
-    private String stauts;
+    private MessageStatus stauts;
 
     public static Builder<Message> builder() {
         return Builder.of(Message.class);
@@ -40,7 +41,7 @@ public class Message
                 .on(Message::getToReceiver).set(messageInfo.getToReceiver())
                 .on(Message::getSendingDate).set(new Date())
                 .on(Message::getMessage).set(messageInfo.getMessage())
-                .on(Message::getStauts).set(messageInfo.getStauts());
+                .on(Message::getStauts).set(MessageStatus.valueOf(messageInfo.getStauts()));
     }
 
     public int getId() {
@@ -59,7 +60,7 @@ public class Message
         return message;
     }
 
-    public String getStauts() {
+    public MessageStatus getStauts() {
         return stauts;
     }
 }

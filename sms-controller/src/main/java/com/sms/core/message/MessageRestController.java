@@ -27,11 +27,20 @@ public class MessageRestController
         this.messageService = messageService;
     }
 
-    @RequestMapping(value = "/sendall",method = RequestMethod.POST)
-    public ResponseEntity<List> sendAllStudentScholar(@RequestBody @Valid final MessageInfo entityObject,
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> sendAllStudentScholar(@RequestBody @Valid final MessageInfo entityObject,
                                                       final UriComponentsBuilder ucBuilder)
     {
         messageService.sendMessageToAll(entityObject);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<MessageInfo>> listAll() {
+        return Optional.ofNullable(messageService.listAll())
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity(e, HttpStatus.OK))
+                .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
+
+    }
+
 }

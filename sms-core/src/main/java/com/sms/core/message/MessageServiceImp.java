@@ -111,4 +111,9 @@ public class MessageServiceImp implements MessageService
             SendMessage.sendingMessageToParticular(messageInfo.getToReceiver(),messageInfo.getMessage());
         }
     }
+
+    @Override
+    public List<MessageInfo> listAll() {
+        return FList.of(this.messageRepository.findAll()).map(MessageServiceImp::messageToInfo).get();
+    }
 }

@@ -35,7 +35,7 @@ public class MessageInfo
                 .on(MessageInfo::getToReceiver).set(message.getToReceiver())
                 .on(MessageInfo::getMessage).set(message.getMessage())
                 .on(MessageInfo::getSendingDate).set(message.getSendingDate())
-                .on(MessageInfo::getStauts).set(message.getStauts());
+                .on(MessageInfo::getStauts).set(message.getStauts().name());
     }
 
     public int getId() {

@@ -46,12 +46,11 @@ public class MessageServiceProvider
             }
             rd.close();
 
-
+            //JsonArray jsonArray = rd.toString();
             //System.out.println(line);
         }
         catch (Exception e) {
-            throw new SmsException("SMS Error", String
-                    .format("Some error Persists in the message sending process.",e.getCause()));
+            throw new SmsException("SMS Error", e.getCause());
         }
     }
 }

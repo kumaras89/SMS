@@ -8,4 +8,6 @@ import java.util.List;
 public interface MessageService
 {
     void sendMessageToAll(MessageInfo messageInfo);
+
+    List<MessageInfo> listAll();
 }
