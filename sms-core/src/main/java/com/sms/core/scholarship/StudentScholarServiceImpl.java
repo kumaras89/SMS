@@ -10,6 +10,7 @@ import com.sms.core.student.Student;
 import com.sms.core.student.StudentScholar;
 import com.sms.core.student.StudentScholarInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final StudentScholarRepository studentScholarRepository;
     private final MarketingEmployeeRepository marketingEmployeeRepository;
     private final BranchRepository branchRepository;
+
+    @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
+    private static String WELCOME_MESSAGE;
 
     @Autowired
     public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository, MarketingEmployeeRepository marketingEmployeeRepository ,BranchRepository branchRepository) {
@@ -72,6 +76,8 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 .on(StudentScholar::getMarketingEmployee).set(marketingEmployeeRepository.findByCodeIgnoreCase(entityType.getMarketingEmployeeCode()))
                 .on(StudentScholar::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
                 .build();
+        //SendMessage.sendingMessageToParticular(entityType.getStudentPhoneNumber(),WELCOME_MESSAGE);
+
         return Optional.of(studentScholarRepository.saveAndFlush(scholar))
             .map(StudentScholarServiceImpl::scholarToInfo);
     }

@@ -1,6 +1,6 @@
 package com.sms.core.student;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +15,19 @@ import java.util.Optional;
 @Transactional
 public class StudentFacadeImpl implements StudentFacade {
 
+    @Value("${JOINED_WELCOME_MESSAGE_FOR_STUDENT}")
+    private static String WELCOME_MESSAGE;
+
     @Autowired
     private StudentEnrollmentConfig seConfig;
 
     @Override
     public StudentInfo save(final StudentInfo studentInfo) {
+
+        //Sending Message to Student scholars
+        /*System.out.println("Hard coded value"+WELCOME_MESSAGE);
+        SendMessage.sendingMessageToParticular(studentInfo.getPhoneNumber(),WELCOME_MESSAGE);*/
+
         return StudentEnrollmentService.save(studentInfo).with(seConfig);
     }
 
