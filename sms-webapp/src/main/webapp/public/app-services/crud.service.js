@@ -25,6 +25,7 @@
         service.studentService = service.of('student')
         service.marketingEmployeeService = service.of('marketingEmployee')
         service.idcardService = service.of('idcard')
+        service.messageService = service.of('messageservice')
 
         //added for confirmation deletion
 

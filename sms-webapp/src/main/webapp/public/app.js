@@ -22,7 +22,8 @@
             'ScholarshipEnrollment',
             'IDCard',
             'Payment',
-            'angular-confirm'])
+            'angular-confirm',
+            'MessageService'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
                 return {
                     responseError: function (response) {

@@ -22,9 +22,9 @@ public class MessageServiceProvider
     private String hash ;*/
 
 
-    private static String user = "username="+"acharysatish56@gmail.com";
+    private static String user = "username="+"abhiamazon001@gmail.com";
 
-    private static String hash  = "&hash="+"2b70539cebcfc4f049e997d6720af821c9f4b84d";
+    private static String hash  = "&hash="+"c4144cf2fb437288af3610e95e9b2185f8ad2f93";
 
     private static String sender= "&sender="+"TXTLCL";
 
@@ -47,7 +47,7 @@ public class MessageServiceProvider
             rd.close();
 
             //JsonArray jsonArray = rd.toString();
-            //System.out.println(line);
+            System.out.println(stringBuffer);
         }
         catch (Exception e) {
             throw new SmsException("SMS Error", e.getCause());

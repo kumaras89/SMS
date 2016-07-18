@@ -33,6 +33,7 @@
         service.getConstants = getConstants
         service.getMarketingEmployees = getMarketingEmployees
         service.getScholarshipEnrollment = getScholarshipEnrollment
+        service.getMessageService = getMessageService
         service.getMarketingEmployeeCode = getMarketingEmployeeCode
         service.getMarketingEmployeeName = getMarketingEmployeeName
         service.getUsers=getUsers
@@ -60,6 +61,7 @@
             getScholarshipEnrollment(function () {})
             getSchemes(function(){})
             getUsers(function () {})
+            getMessageService(function () {})
 
         }
 
@@ -200,6 +202,11 @@
         }
         function getUsers(success) {
             StorageService.getFromStoarage('/user', function(data) {
+                success(data);
+            });
+        }
+        function getMessageService(success) {
+            StorageService.getFromStoarage('/messageService', function(data) {
                 success(data);
             });
 
