@@ -1,5 +1,7 @@
-package com.sms.core.hotel;
+package com.sms.core.hotelHr;
 
+import com.sms.core.hotel.HotelInfo;
+import com.sms.core.hotel.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,18 +15,18 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by sathish on 7/15/2016.
+ * Created by sathish on 7/18/2016.
  */
 @RestController
-@RequestMapping("/hotel")
-public class HotelRestController
+@RequestMapping("/hotelhr")
+public class HotelHrRestController
 {
     @Autowired
-    private HotelService hotelService;
+    private HotelHrService hotelHrService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<HotelInfo>> listAll() {
-        return Optional.ofNullable(hotelService.findAll())
+        return Optional.ofNullable(hotelHrService.findAll())
                 .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity(e, HttpStatus.OK))
                 .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
@@ -32,27 +34,27 @@ public class HotelRestController
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid final HotelInfo entityObject,
+    public ResponseEntity<Void> create(@RequestBody @Valid final HotelHrInfo entityObject,
                                        final UriComponentsBuilder ucBuilder) {
-        hotelService.save(entityObject);
+        hotelHrService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HotelInfo> get(@PathVariable("id")
-                                         final long hotelId) {
-        return hotelService.
-                findById(hotelId).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+    public ResponseEntity<HotelHrInfo> get(@PathVariable("id")
+                                         final long id) {
+        return hotelHrService.
+                findById(id).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<HotelInfo> update(@PathVariable("id") long id,
-                                            @RequestBody @Valid HotelInfo entityObject) {
-        return hotelService.update(id, entityObject)
+    public ResponseEntity<HotelHrInfo> update(@PathVariable("id") long id,
+                                            @RequestBody @Valid HotelHrInfo entityObject) {
+        return hotelHrService.update(id, entityObject)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();
     }

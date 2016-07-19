@@ -9,5 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface HotelRepository extends JpaRepository<Hotel,String>
 {
-   Hotel findByHotelCode(String hotelCode);
+   Hotel findByHotelCodeIgnoreCase(String hotelCode);
+   Hotel findById(long id);
 }

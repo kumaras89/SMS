@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface HotelService
 {
 
-    Optional<HotelInfo> findById(String hotelCode);
+    Optional<HotelInfo> findById(long hotelId);
 
     /**
      * @return
@@ -24,4 +24,12 @@ public interface HotelService
      */
     Optional<HotelInfo> save(final HotelInfo entityType);
 
+    /**
+     *
+     * @param id
+     * @param entityType
+     * @return
+     */
+
+    Optional<HotelInfo> update(final Long id, final HotelInfo entityType);
 }

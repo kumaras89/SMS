@@ -23,19 +23,19 @@ public class MessageInfo
     @Size(max = 279,min = 1,message = "Check your entered character it should be in between {min} to {max}")
     private String message;
 
-    private String stauts;
+    private String status;
 
     public static Builder<MessageInfo> builder() {
         return Builder.of(MessageInfo.class);
     }
 
-    public static Builder<MessageInfo> toBuilder(final Message message) {
+    public static MessageInfo toBuilder(final Message message) {
         return builder()
                 .with(MessageInfo::getId, message.getId())
                 .on(MessageInfo::getToReceiver).set(message.getToReceiver())
                 .on(MessageInfo::getMessage).set(message.getMessage())
                 .on(MessageInfo::getSendingDate).set(message.getSendingDate())
-                .on(MessageInfo::getStauts).set(message.getStauts().name());
+                .on(MessageInfo::getStatus).set(message.getStatus().name()).build();
     }
 
     public int getId() {
@@ -54,7 +54,7 @@ public class MessageInfo
         return message;
     }
 
-    public String getStauts() {
-        return stauts;
+    public String getStatus() {
+        return status;
     }
 }

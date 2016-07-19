@@ -32,7 +32,7 @@ public class HotelInfo
     private Address address;
 
     @NotNull(message = "Branch Name is Empty")
-    private long branchId;
+    private String branchCode;
 
     private String status;
 
@@ -51,7 +51,7 @@ public class HotelInfo
         return builder()
                 .on(HotelInfo::getId).set(hotel.getId())
                 .on(HotelInfo::getAddress).set(hotel.getAddress())
-                .on(HotelInfo::getBranchId).set(hotel.getBranch().getId())
+                .on(HotelInfo::getBranchCode).set(hotel.getBranch().getCode())
                 .on(HotelInfo::getHotelCode).set(hotel.getHotelCode())
                 .on(HotelInfo::getStatus).set(hotel.getStatus().name())
                 .on(HotelInfo::getHotelName).set(hotel.getHotelName())
@@ -79,8 +79,8 @@ public class HotelInfo
         return address;
     }
 
-    public long getBranchId() {
-        return branchId;
+    public String getBranchCode() {
+        return branchCode;
     }
 
     public String getStatus() {

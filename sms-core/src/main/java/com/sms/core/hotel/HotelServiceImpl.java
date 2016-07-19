@@ -1,6 +1,7 @@
 package com.sms.core.hotel;
 
 import com.sms.core.IStudentPortalService;
+import com.sms.core.SmsException;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.FList;
 import com.sms.core.repositery.BranchRepository;
@@ -36,9 +37,9 @@ public class HotelServiceImpl implements HotelService
     }
 
     @Override
-    public Optional<HotelInfo> findById(String hotelCode)
+    public Optional<HotelInfo> findById(long hotelId)
     {
-        return Optional.of(this.hotelRepository.findByHotelCode(hotelCode))
+        return Optional.of(this.hotelRepository.findById(hotelId))
                 .map(HotelServiceImpl::hotelToInfo);
     }
 
@@ -54,9 +55,21 @@ public class HotelServiceImpl implements HotelService
                 (
                         Hotel.toBuilder(entityType)
                         .on(Hotel::getBranch)
-                        .set(branchRepository.getOne(entityType.getBranchId()))
+                        .set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
                         .build()
                 )
                 ).map(HotelServiceImpl::hotelToInfo);
+    }
+
+    @Override
+    public Optional<HotelInfo> update(Long id, HotelInfo entityType) {
+        Hotel hotel = hotelRepository.findById(id);
+        if(hotel!=null)
+        {
+            return save(entityType);
+        }
+        else {
+            throw new SmsException("Hotel Update Error", "What you trying to do Upadate its not available");
+        }
     }
 }
