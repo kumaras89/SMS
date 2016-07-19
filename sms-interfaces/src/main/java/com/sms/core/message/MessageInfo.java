@@ -11,13 +11,17 @@ public class MessageInfo implements Serializable {
 
     private static final long serialVersionUID = -69442450730074854L;
     private int id;
+
     @NotNull(message = "Receiver is Empty")
     private String toReceiver;
+
     private Date sendingDate;
+
     @NotNull(message = "Message is Empty")
     @Size(max = 279, min = 1, message = "Check your entered character it should be in between {min} to {max}")
     private String message;
     private String status;
+
     private String phoneNumber;
 
     public static Builder<MessageInfo> builder() {
@@ -30,7 +34,8 @@ public class MessageInfo implements Serializable {
             .on(MessageInfo::getToReceiver).set(theMessage.getToReceiver())
             .on(MessageInfo::getMessage).set(theMessage.getMessage())
             .on(MessageInfo::getSendingDate).set(theMessage.getSendingDate())
-            .on(MessageInfo::getStatus).set(theMessage.getStauts().name());
+            .on(MessageInfo::getStatus).set(theMessage.getStauts().name())
+            .on(MessageInfo::getPhoneNumber).set(theMessage.getPhoneNumber());
     }
 
     public int getId() {

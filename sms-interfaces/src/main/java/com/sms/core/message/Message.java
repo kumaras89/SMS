@@ -31,6 +31,9 @@ public class Message
     @Column(name = "MS_STATUS")
     private MessageStatus stauts;
 
+    @Column(name = "MS_PHONENUMBER")
+    private String phoneNumber;
+
     public static Builder<Message> builder() {
         return Builder.of(Message.class);
     }
@@ -41,7 +44,8 @@ public class Message
                 .on(Message::getToReceiver).set(messageInfo.getToReceiver())
                 .on(Message::getSendingDate).set(new Date())
                 .on(Message::getMessage).set(messageInfo.getMessage())
-                .on(Message::getStauts).set(MessageStatus.valueOf(messageInfo.getStatus()));
+                .on(Message::getStauts).set(MessageStatus.valueOf(messageInfo.getStatus()))
+                .on(Message::getPhoneNumber).set(messageInfo.getPhoneNumber());
     }
 
     public int getId() {
@@ -62,5 +66,9 @@ public class Message
 
     public MessageStatus getStauts() {
         return stauts;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
