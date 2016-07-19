@@ -258,7 +258,4 @@ public class StudentInfo {
         return fmsPhotoId;
     }
 
-
-
-
 }

@@ -19,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/scholarshipenrollment")
 public class StudentScholarRestController {
+
     private final StudentScholarService studentScholar;
     private final StudentScholarFacade studentScholarFacade;
 
