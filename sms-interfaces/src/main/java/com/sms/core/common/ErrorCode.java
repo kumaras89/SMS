@@ -4,7 +4,7 @@ import javax.validation.Payload;
 
 public enum ErrorCode implements Payload {
 
-    FILE_WRTING_FAILED("FMS_0002");
+    FILE_WRITING_FAILED("FMS_0002");
 
 
     ErrorCode(final String status) {

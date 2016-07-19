@@ -1,16 +1,22 @@
 package com.sms.core.message;
 
 /**
- * Created by sathish on 7/12/2016.
+ * Created by rmurugaian on 7/19/2016.
+ * <p></p>
  */
-public class SenderDetails
-{
+public class SMSDetails {
     private String name;
+    private String message;
     private String phoneNumber;
 
-    public SenderDetails(String name, String phoneNumber) {
+    public SMSDetails(final String name, final String message, final String phoneNumber) {
         this.name = name;
+        this.message = message;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public String getName() {
@@ -20,5 +26,4 @@ public class SenderDetails
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
 }

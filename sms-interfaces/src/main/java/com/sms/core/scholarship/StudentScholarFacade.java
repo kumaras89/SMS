@@ -8,5 +8,9 @@ import java.util.List;
  * Created by Ganesan on 02/07/16.
  */
 public interface StudentScholarFacade {
-    List<StudentScholarInfo> search(StudentScholarSearchCriteria studentSearchCriteria);
+    /**
+     * @param studentSearchCriteria
+     * @return
+     */
+    List<StudentScholarInfo> search(final StudentScholarSearchCriteria studentSearchCriteria);
 }

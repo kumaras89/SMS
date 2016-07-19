@@ -29,7 +29,7 @@ public class Message
 
     @Enumerated(EnumType.STRING)
     @Column(name = "MS_STATUS")
-    private MessageStatus status;
+    private MessageStatus stauts;
 
     public static Builder<Message> builder() {
         return Builder.of(Message.class);
@@ -41,7 +41,7 @@ public class Message
                 .on(Message::getToReceiver).set(messageInfo.getToReceiver())
                 .on(Message::getSendingDate).set(new Date())
                 .on(Message::getMessage).set(messageInfo.getMessage())
-                .on(Message::getStatus).set(MessageStatus.valueOf(messageInfo.getStatus()));
+                .on(Message::getStauts).set(MessageStatus.valueOf(messageInfo.getStatus()));
     }
 
     public int getId() {
@@ -60,7 +60,7 @@ public class Message
         return message;
     }
 
-    public MessageStatus getStatus() {
-        return status;
+    public MessageStatus getStauts() {
+        return stauts;
     }
 }

@@ -22,6 +22,7 @@ public interface TwoTrack<T> {
     <R> TwoTrack<R> map(Function<T, R> function);
 
     void onSuccess(Consumer<T> success);
+
     void onFailure(Consumer<ErrorCodeAndParam> failure);
 
     class SuccessTrack<T> implements TwoTrack<T> {

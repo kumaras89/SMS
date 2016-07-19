@@ -1,15 +1,22 @@
 package com.sms.core.message;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
- * Created by sathish on 7/16/2016.
+ * Created by rmurugaian on 7/19/2016.
+ * <p></p>
  */
 public interface SenderDetailsProvider {
 
     /**
-     *
+     * @param messageInfo
      * @return
      */
-    List<SenderDetails> createDetails();
+    Function<MessageConfig,List<SMSDetails>> senderDetails(final MessageInfo messageInfo);
+
+    /**
+     * @return
+     */
+    String getType();
 }

@@ -16,26 +16,26 @@ public class PredicateBuilder<C> {
     private final List<Predicate> predicates;
     private final Optional<C> criteria;
 
-    private PredicateBuilder(Optional<C> criteria,List<Predicate> predicates) {
+    private PredicateBuilder(final Optional<C> criteria, final List<Predicate> predicates) {
         this.criteria = criteria;
         this.predicates = predicates;
     }
 
 
-    public static <T, C> PredicateBuilder<C> of(Optional<C> criteria) {
+    public static <T, C> PredicateBuilder<C> of(final Optional<C> criteria) {
         return new PredicateBuilder<>(criteria, new ArrayList<>());
     }
 
-    public static <T, C> PredicateBuilder<C> of(Optional<C> criteria, List<Predicate> predicates) {
+    public static <T, C> PredicateBuilder<C> of(final Optional<C> criteria, final List<Predicate> predicates) {
         return new PredicateBuilder<>(criteria, predicates);
     }
 
-    public <P> PredicateBuilder<C> map(Function<C, P> getter, Function<P, Predicate> predicateFunction) {
-        Predicate predicate = criteria.map(getter)
-                .filter(p -> p instanceof String ? !((String)p).isEmpty() : true)
-                .map(p -> predicateFunction.apply(p))
-                .orElse(null);
-        if(predicate != null){
+    public <P> PredicateBuilder<C> map( final Function<C, P> getter, final Function<P, Predicate> predicateFunction) {
+        final Predicate predicate = criteria.map(getter)
+            .filter(p -> p instanceof String ? !((String) p).isEmpty() : true)
+            .map(p -> predicateFunction.apply(p))
+            .orElse(null);
+        if (predicate != null) {
             predicates.add(predicate);
         }
         return of(criteria, new ArrayList<>(predicates));
