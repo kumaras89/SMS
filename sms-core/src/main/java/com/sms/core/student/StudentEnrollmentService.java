@@ -9,7 +9,6 @@ import javaslang.Tuple;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class StudentEnrollmentService {
 
@@ -27,7 +26,7 @@ public class StudentEnrollmentService {
                                 .then(StudentEnrollmentConverter::convertTo)
                                 .then(si -> {
                                     if(si.getApplicationNumber() != null && !si.getApplicationNumber().isEmpty()) {
-                                        sec.getStudScholarServ().studentEnrolled(si.getApplicationNumber());
+                                        sec.getStudScholarServ().enrollStudent(si.getApplicationNumber());
                                     }
                                     return si;
                                 })

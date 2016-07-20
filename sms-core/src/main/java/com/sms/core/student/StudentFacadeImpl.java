@@ -1,4 +1,6 @@
 package com.sms.core.student;
+import com.sms.core.message.SMSDetails;
+import com.sms.core.message.SMSSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,19 +18,18 @@ import java.util.Optional;
 public class StudentFacadeImpl implements StudentFacade {
 
     @Value("${JOINED_WELCOME_MESSAGE_FOR_STUDENT}")
-    private static String WELCOME_MESSAGE;
+    private String welcomeMessage;
 
     @Autowired
     private StudentEnrollmentConfig seConfig;
 
     @Override
     public StudentInfo save(final StudentInfo studentInfo) {
-
-        //Sending Message to Student scholars
-        /*System.out.println("Hard coded value"+WELCOME_MESSAGE);
-        SendMessage.sendingMessageToParticular(studentInfo.getPhoneNumber(),WELCOME_MESSAGE);*/
-
-        return StudentEnrollmentService.save(studentInfo).with(seConfig);
+        final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
+        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
+                                              .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
+                                              .on(SMSDetails::getMessage).set(welcomeMessage).build());
+        return newStudentInfo;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class StudentFacadeImpl implements StudentFacade {
     }
 
     @Override
-    public List<StudentInfo> search(StudentSearchCriteria studentSearchCriteria) {
+    public List<StudentInfo> search(final StudentSearchCriteria studentSearchCriteria) {
         return StudentSearchService
                 .search(studentSearchCriteria)
                 .local(StudentEnrollmentConfig::getStuRepo)

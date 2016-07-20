@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MarketingEmployeeServiceImpl extends BaseServiceConvertorImpl<MarketingEmployeeInfo, MarketingEmployee> {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public MarketingEmployeeServiceImpl(final MarketingEmployeeRepository marketingEmployeeRepository, final UserRepository userRepository) {
@@ -25,7 +25,7 @@ public class MarketingEmployeeServiceImpl extends BaseServiceConvertorImpl<Marke
     }
 
     @Override
-    protected MarketingEmployee buildToPersistObject(Long id, MarketingEmployeeInfo marketingEmployeeInfo) {
+    protected MarketingEmployee buildToPersistObject(final Long id,final MarketingEmployeeInfo marketingEmployeeInfo) {
 
         return MarketingEmployee.toBuilder(marketingEmployeeInfo)
                 .with(MarketingEmployee::getLinkedUser, userRepository.findByNameIgnoreCase(marketingEmployeeInfo.getLinkedUser()))

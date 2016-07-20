@@ -15,6 +15,11 @@ public class MessageService {
         return MessageInfo.toBuilder(source).build();
     }
 
+    /**
+     *
+     * @param messageInfo
+     * @return
+     */
     public static Reader<MessageConfig, List<String>> sendMessage(final MessageInfo messageInfo) {
         return Reader.of( messageConfig -> Do.of(Message.toBuilder(messageInfo).build())
                                              .then(message -> messageConfig.getMessageRepository().save(message))
@@ -30,6 +35,10 @@ public class MessageService {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public static Reader<MessageConfig,List<MessageInfo>> listAll() {
         return Reader.of( messageConfig ->  FList.of(messageConfig.getMessageRepository().findAll()).map(MessageService::messageToInfo).get());
     }

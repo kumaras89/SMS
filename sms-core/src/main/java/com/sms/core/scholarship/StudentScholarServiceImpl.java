@@ -3,6 +3,9 @@ package com.sms.core.scholarship;
 import com.sms.core.SmsException;
 import com.sms.core.common.Builder;
 import com.sms.core.common.FList;
+import com.sms.core.message.MessageConfig;
+import com.sms.core.message.SMSDetails;
+import com.sms.core.message.SMSSender;
 import com.sms.core.repositery.BranchRepository;
 import com.sms.core.repositery.MarketingEmployeeRepository;
 import com.sms.core.repositery.StudentScholarRepository;
@@ -26,19 +29,25 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final StudentScholarRepository studentScholarRepository;
     private final MarketingEmployeeRepository marketingEmployeeRepository;
     private final BranchRepository branchRepository;
+    private final MessageConfig messageConfig;
+
 
     @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
-    private static String WELCOME_MESSAGE;
+    private String welcomeMessage;
 
     @Autowired
-    public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository, MarketingEmployeeRepository marketingEmployeeRepository ,BranchRepository branchRepository) {
+    public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository,
+                                     final MarketingEmployeeRepository marketingEmployeeRepository ,
+                                     final BranchRepository branchRepository,
+                                     final MessageConfig messageConfig) {
         this.studentScholarRepository = studentScholarRepository;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.branchRepository = branchRepository;
+        this.messageConfig = messageConfig;
     }
 
 
-    private static StudentScholarInfo scholarToInfo(StudentScholar source) {
+    private static StudentScholarInfo scholarToInfo(final StudentScholar source) {
         return StudentScholarInfo.toBuilder(source).build();
     }
 
@@ -53,9 +62,10 @@ public class StudentScholarServiceImpl implements StudentScholarService {
             .map(StudentScholarServiceImpl::scholarToInfo);
     }
 
-    public Optional<StudentScholarInfo> studentEnrolled(final String applicationNumber) {
-        StudentScholar studentScholar = this.studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber);
-        StudentScholar studentScholarModified = studentScholarRepository.saveAndFlush(Builder.of(StudentScholar.class, studentScholar)
+    @Override
+    public Optional<StudentScholarInfo> enrollStudent(final String applicationNumber) {
+        final StudentScholar studentScholar = this.studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber);
+        final StudentScholar studentScholarModified = studentScholarRepository.saveAndFlush(Builder.of(StudentScholar.class, studentScholar)
                 .on(StudentScholar::getStatus).set(ScholarStatus.ENROLLED)
                 .on(StudentScholar::getLastModifiedDate).set(new Date()).build());
         return Optional.of(studentScholarModified)
@@ -65,21 +75,28 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
 
     @Override
-    public Optional<StudentScholarInfo> save(StudentScholarInfo entityType) {
-        final StudentScholar alreadyexist =
-            studentScholarRepository.findByApplicationNumberIgnoreCase(entityType.getApplicationNumber());
-        if (alreadyexist != null) {
-            throw new SmsException("applicationNumber", String
-                .format("Scholarship already exist for %s application number", entityType.getApplicationNumber()));
-        }
-        StudentScholar scholar = StudentScholar.toBuilder(entityType)
+    public Optional<StudentScholarInfo> save(final StudentScholarInfo entityType) {
+        Optional.ofNullable(studentScholarRepository
+                                                      .findByApplicationNumberIgnoreCase(entityType.getApplicationNumber()))
+                                                      .orElseThrow( () ->
+                                                          new SmsException("applicationNumber", String
+                .format("Scholarship already exist for %s application number", entityType.getApplicationNumber())));
+
+
+        final StudentScholar scholar = StudentScholar.toBuilder(entityType)
                 .on(StudentScholar::getMarketingEmployee).set(marketingEmployeeRepository.findByCodeIgnoreCase(entityType.getMarketingEmployeeCode()))
                 .on(StudentScholar::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
                 .build();
-        //SendMessage.sendingMessageToParticular(entityType.getStudentPhoneNumber(),WELCOME_MESSAGE);
 
-        return Optional.of(studentScholarRepository.saveAndFlush(scholar))
-            .map(StudentScholarServiceImpl::scholarToInfo);
+
+        final Optional<StudentScholarInfo> newStudent = Optional.of(studentScholarRepository
+                                                                          .saveAndFlush(scholar))
+                                                                 .map(StudentScholarServiceImpl::scholarToInfo);
+
+        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(scholar.getName())
+            .on(SMSDetails::getPhoneNumber).set(scholar.getStudentPhoneNumber())
+            .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(messageConfig);
+        return newStudent;
     }
 
 }

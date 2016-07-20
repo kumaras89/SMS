@@ -2,12 +2,16 @@ package com.sms.core.message;
 
 
 import com.sms.core.common.Do;
+import javaslang.Tuple;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.function.Function;
@@ -21,24 +25,21 @@ public class SMSSender {
     public static Function<MessageConfig, String> sendSms(final SMSDetails senderDetails) {
         return messageConfig -> Do.of(senderDetails)
             .then(sd -> {
-                final Map<String, String> uriVariables = new WeakHashMap<>();
-                uriVariables.put("pass", messageConfig.getSmsLoginDetails().getPassword());
-                uriVariables.put("sender", messageConfig.getSmsLoginDetails().getSenderId());
-                uriVariables.put("user", messageConfig.getSmsLoginDetails().getUser());
-                uriVariables.put("text", senderDetails.getMessage());
-                uriVariables.put("phone", senderDetails.getPhoneNumber());
-                uriVariables.put("priority", messageConfig.getSmsLoginDetails().getPriority());
-                uriVariables.put("stype",messageConfig.getSmsLoginDetails().getSmstype());
+                final MultiValueMap<String, String> uriVariables = new LinkedMultiValueMap<>();
+                uriVariables.add("username", messageConfig.getSmsLoginDetails().getUsername());
+                uriVariables.add("hash",messageConfig.getSmsLoginDetails().getHash());
+                uriVariables.add("message", senderDetails.getMessage());
+                uriVariables.add("sender", messageConfig.getSmsLoginDetails().getSender());
+                uriVariables.add("numbers", senderDetails.getPhoneNumber());
+                final URI uri = UriComponentsBuilder
+                                                  .fromHttpUrl(messageConfig.getSmsLoginDetails().getSmsServer())
+                                                  .queryParams(uriVariables).build().toUri();
                 final MultiValueMap<String,String> headers = new HttpHeaders();
-                headers.add("","");
-                headers.add("","");
-                return new HttpEntity<>(uriVariables,headers);
+                headers.add("Content-Length",Integer.toString(senderDetails.getMessage().length()));
+                final HttpEntity<Object> request =  new HttpEntity<>(headers);
+                return Tuple.of(uri,request);
             })
-            .then(httpEntity -> getAsyncRestTemplate().exchange(
-                messageConfig.getSmsLoginDetails().getSmsServer(),
-                HttpMethod.POST,
-                httpEntity,
-                String.class))
+            .then(tuple ->  getAsyncRestTemplate().exchange(tuple._1,HttpMethod.POST,tuple._2,String.class))
             .then(response -> response.getBody())
             .get();
     }

@@ -17,19 +17,17 @@ import java.util.stream.Collectors;
  * <p></p>
  */
 @Configuration
-public class StuddentPortalCoreConfiguration {
+public class StudentPortalCoreConfiguration {
 
 
     @Value("${SMS_USERNAME}")
     private String user ;
     @Value("${SMS_PASSWORD}")
     private String password ;
-    @Value("${SMS_SENDERID}")
+    @Value("${SMS_SENDER}")
     private String senderId;
-    @Value("${SMS_PRIORITY}")
-    private String priority;
-    @Value("${SMS_SMSTYPE}")
-    private String smstype;
+    @Value("${SMS_HASHCODE}")
+    private String hash;
     @Value("${api.sms.server}")
     private String smsServer;
 
@@ -48,10 +46,9 @@ public class StuddentPortalCoreConfiguration {
     @Bean(name = "smsLoginDetails")
     public SMSLoginDetails smsLoginDetails() {
         return SMSLoginDetails.builder().on(SMSLoginDetails::getPassword).set(password)
-                                        .on(SMSLoginDetails::getPriority).set(priority)
-                                        .on(SMSLoginDetails::getSenderId).set(senderId)
-                                        .on(SMSLoginDetails::getSmstype).set(smstype)
-                                        .on(SMSLoginDetails::getUser).set(user)
+                                        .on(SMSLoginDetails::getHash).set(hash)
+                                        .on(SMSLoginDetails::getSender).set(senderId)
+                                        .on(SMSLoginDetails::getUsername).set(user)
                                         .on(SMSLoginDetails::getSmsServer).set(smsServer)
                                         .build();
 

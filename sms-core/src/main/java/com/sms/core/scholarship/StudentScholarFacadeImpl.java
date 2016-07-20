@@ -16,15 +16,15 @@ import java.util.List;
 @Transactional
 public class StudentScholarFacadeImpl implements StudentScholarFacade {
 
-    private StudentScholarRepository studentScholarRepository;
+    private final StudentScholarRepository studentScholarRepository;
 
     @Autowired
-    public StudentScholarFacadeImpl(StudentScholarRepository studentScholarRepository) {
+    public StudentScholarFacadeImpl(final StudentScholarRepository studentScholarRepository) {
         this.studentScholarRepository = studentScholarRepository;
     }
 
     @Override
-    public List<StudentScholarInfo> search(StudentScholarSearchCriteria studentSearchCriteria) {
+    public List<StudentScholarInfo> search(final StudentScholarSearchCriteria studentSearchCriteria) {
         return StudentScholarSearchService
                 .search(studentSearchCriteria)
                 .with(studentScholarRepository);
