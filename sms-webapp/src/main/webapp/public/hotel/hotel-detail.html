@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-graduation-cap fa-fw"></i> Hotels</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<br>
+
+
+</div>
+<br>
+
+<br>
+<div class="control-group,form">
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <div class="control-group,form">
+            <table class="table table-striped table-condensed">
+                <thead>
+                <tr>
+                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Hotel Details</label></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="firstcol"><label class="control-label" >Hotel Name:</label></td>
+                    <td><label class="control-label">{{ hotel.hotelName }}</label></td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><label class="control-label" >Hotel Code</label></td>
+                    <td><label class="control-label">{{hotel.hotelCode}}</label></td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><label class="control-label">Branch Name</label></td>
+                    <td><label class="control-label">{{getBranchDesc(hotel.branchCode)}}</label></td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><label class="control-label">Phone Number</label></td>
+                    <td><label class="control-label">{{hotel.phoneNumber}}</label></td>
+                </tr>
+                <tr>
+                    <td class="firstcol"><label class="control-label" for="age">Status</label></td>
+                    <td><label class="control-label">{{hotel.status}}</label></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <table class="table table-striped table-condensed">
+            <thead>
+            <tr>
+                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="firstcol"><label class="control-label">Address 1</label></td>
+                <td><label class="control-label">{{hotel.address.address1}}</label></td>
+            </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label" >Address 2</label></td>
+                <td><label class="control-label">{{hotel.address.address2}}</label></td>
+            </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label" >Address 3</label></td>
+                <td><label class="control-label">{{hotel.address.address3}}</label></td>
+            </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label">Taluk</label></td>
+                <td><label class="control-label">{{hotel.address.taluk}}</label></td>
+            </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label">District</label></td>
+                <td><label class="control-label">{{hotel.address.district}}</label></td>
+            </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label">Postal Code</label></td>
+                <td><label class="control-label">{{hotel.address.postalCode}}</label></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <table class="table table-striped table-condensed">
+            <thead>
+            <tr>
+                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">HR Details</label></td>
+            </tr>
+            <tr>
+                <td style="min-width: 20px;padding-left: 20px;" ><label class="control-label">Hotel HR Name</label></td>
+                <td style="min-width: 20px;" ><label class="control-label">Phone Number</label></td>
+            </tr>
+            </thead>
+            <tbody ng-repeat="hr in hrs" ng-if="hr.hotelCode==hotel.hotelCode">
+            <tr>
+                <td><label class="control-label">{{hr.name}}</label></td>
+                <td><label class="control-label">{{hr.phoneNumber}}</label></td>
+            </tr>
+            </tbody>
+        </table>
+</div>
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <table class="table table-striped table-condensed">
+            <tbody>
+            <tr>
+                <td align="left"><a ui-sref="home.hotel-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Hotel</a><br></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>

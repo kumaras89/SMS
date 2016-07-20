@@ -26,13 +26,12 @@
         service.marketingEmployeeService = service.of('marketingEmployee')
         service.idcardService = service.of('idcard')
         service.messageService = service.of('messageservice')
-
-        //added for confirmation deletion
-
         service.roleService = service.of('role');
         service.securedOperationService = service.of('securedoperation');
-
         service.scholarshipEnrollmentService = service.of('scholarshipenrollment')
+        service.hotelService = service.of('hotel')
+        service.hotelHrService = service.of('hotelhr')
+        service.hotelTrackerService= service.of('hoteltracker')
         return service;
 
         function Service(path) {

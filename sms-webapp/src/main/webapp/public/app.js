@@ -22,6 +22,9 @@
             'ScholarshipEnrollment',
             'IDCard',
             'Payment',
+            'Hotel',
+            'HotelHr',
+            'HotelTracker',
             'angular-confirm',
             'MessageService'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {

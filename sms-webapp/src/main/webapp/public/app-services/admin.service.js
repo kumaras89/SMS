@@ -18,7 +18,7 @@
     function AdminServiceProvider(StorageService) {
 
         var service = {};
-        
+
         service.getRoles = getRoles
         service.getBranches = getBranches
         service.getSchemes = getSchemes
@@ -39,6 +39,12 @@
         service.getUsers=getUsers
         service.getSchemeFeesInfo = getSchemeFeesInfo
         service.getYearOfPassing = getYearOfPassing
+        service.getHotels=getHotels
+        service.getHotelHrs=getHotelHrs
+        service.getHotelCode=getHotelCode
+        service.getStudents = getStudents
+        service.getHotelName=getHotelName
+        service.getHotelTrackers=getHotelTrackers
 
         return {
             serviceImpl : null,
@@ -50,7 +56,7 @@
                 return this.serviceImpl;
             }
         };
-        
+
         function initService() {
             getBranches(function(){})
             getRoles(function(){})
@@ -61,8 +67,13 @@
             getScholarshipEnrollment(function () {})
             getSchemes(function(){})
             getUsers(function () {})
+            getHotels(function () {})
+            getHotelCode(function () {})
+            getHotelHrs(function () {})
+            getStudents(function () {})
             getMessageService(function () {})
-
+            getHotelName(function () {})
+            getHotelTrackers(function () {})
         }
 
         function getMarketingEmployeeName(marketingEmployeeCode) {
@@ -211,7 +222,50 @@
             });
 
         }
+        function getHotels(success) {
+            StorageService.getFromStoarage('/hotel', function(data) {
+                success(data);
+            });
+        }
+        function getHotelHrs(success) {
+            StorageService.getFromStoarage('/hotelhr', function(data) {
+                success(data);
+            });
 
+        }
+
+        function getHotelCode(hotelName) {
+            var hotels = StorageService.getTrustedStoarage('/hotel');
+            var hotel =  _.find(hotels, function(hotel) {
+                return hotel.hotelName == hotelName
+            })
+            return hotel != undefined ? hotel.hotelCode : "";
+        }
+
+
+        function getStudents(success) {
+            StorageService.getFromStoarage('/student', function(data) {
+                success(data);
+            });
+
+        }
+
+        function getHotelName(hotelCode) {
+            var hotels = StorageService.getTrustedStoarage('/hotel');
+            var emp =  _.find(hotels, function(hotel) {
+                return hotel.hotelCode == hotelCode
+            })
+            return emp != undefined ? emp.hotelName : "";
+        }
+
+        function getHotelTrackers(success) {
+            StorageService.getFromStoarage('/hoteltracker', function(data) {
+                success(data);
+            });
+
+        }
     }
+
+
 
 })();
