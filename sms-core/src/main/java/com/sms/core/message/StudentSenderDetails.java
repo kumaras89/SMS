@@ -10,7 +10,9 @@ public class StudentSenderDetails implements SenderDetailsProvider {
     @Override
     public Function<MessageConfig, List<SMSDetails>> senderDetails(final MessageInfo messageInfo) {
         return messageConfig -> messageConfig.getStudentFacade().findAll().stream().map(
-            studentInfo -> new SMSDetails(studentInfo.getName(), studentInfo.getPhoneNumber(), messageInfo.getMessage())
+            studentInfo -> SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
+                    .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
+                    .on(SMSDetails::getMessage).set(messageInfo.getMessage()).build()
         ).collect(Collectors.toList());
     }
 

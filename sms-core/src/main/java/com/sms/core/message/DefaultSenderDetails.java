@@ -17,7 +17,9 @@ public class DefaultSenderDetails implements SenderDetailsProvider {
     public Function<MessageConfig, List<SMSDetails>> senderDetails(final MessageInfo messageInfo) {
         return messageConfig -> {
             final List<SMSDetails> senderDetails = new ArrayList<>();
-            senderDetails.add(Optional.ofNullable(messageInfo).map(mi -> new SMSDetails(messageInfo.getToReceiver(),messageInfo.getPhoneNumber(),messageInfo.getMessage())).get());
+            senderDetails.add(Optional.ofNullable(messageInfo).map(mi -> SMSDetails.builder().on(SMSDetails::getName).set(messageInfo.getToReceiver())
+                    .on(SMSDetails::getPhoneNumber).set(messageInfo.getPhoneNumber())
+                    .on(SMSDetails::getMessage).set(messageInfo.getMessage()).build()).get());
             return senderDetails;
         };
     }

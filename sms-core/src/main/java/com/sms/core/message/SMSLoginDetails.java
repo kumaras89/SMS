@@ -10,17 +10,12 @@ import com.sms.core.common.Builder;
 public class SMSLoginDetails {
 
     private String username;
-    private String password;
     private String sender;
     private String hash;
     private String smsServer;
 
     public static Builder<SMSLoginDetails> builder() {
         return Builder.of(SMSLoginDetails.class);
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getSender() {

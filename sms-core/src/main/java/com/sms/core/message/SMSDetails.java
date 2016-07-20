@@ -11,6 +11,7 @@ public class SMSDetails {
     private String message;
     private String phoneNumber;
 
+
     public String getMessage() {
         return message;
     }

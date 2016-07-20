@@ -22,8 +22,6 @@ public class StudentPortalCoreConfiguration {
 
     @Value("${SMS_USERNAME}")
     private String user ;
-    @Value("${SMS_PASSWORD}")
-    private String password ;
     @Value("${SMS_SENDER}")
     private String senderId;
     @Value("${SMS_HASHCODE}")
@@ -45,8 +43,7 @@ public class StudentPortalCoreConfiguration {
 
     @Bean(name = "smsLoginDetails")
     public SMSLoginDetails smsLoginDetails() {
-        return SMSLoginDetails.builder().on(SMSLoginDetails::getPassword).set(password)
-                                        .on(SMSLoginDetails::getHash).set(hash)
+        return SMSLoginDetails.builder().on(SMSLoginDetails::getHash).set(hash)
                                         .on(SMSLoginDetails::getSender).set(senderId)
                                         .on(SMSLoginDetails::getUsername).set(user)
                                         .on(SMSLoginDetails::getSmsServer).set(smsServer)

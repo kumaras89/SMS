@@ -15,9 +15,9 @@ public class MarketingEmpSenderDetails implements SenderDetailsProvider {
     @Override
     public Function<MessageConfig, List<SMSDetails>> senderDetails(final MessageInfo messageInfo) {
         return messageConfig -> messageConfig.getMarketingEmployeeService().findAll().stream().map(
-            marketingEmployeeInfo -> new SMSDetails(marketingEmployeeInfo.getName(),
-                marketingEmployeeInfo.getPhoneNumber(),
-                messageInfo.getMessage()))
+            marketingEmployeeInfo -> SMSDetails.builder().on(SMSDetails::getName).set(marketingEmployeeInfo.getName())
+                    .on(SMSDetails::getPhoneNumber).set(marketingEmployeeInfo.getPhoneNumber())
+                    .on(SMSDetails::getMessage).set(messageInfo.getMessage()).build())
             .collect(Collectors.toList());
     }
 
