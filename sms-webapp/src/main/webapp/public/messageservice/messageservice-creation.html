@@ -23,8 +23,8 @@
                         </span>
                         <input ng-model="messageService.phoneNumber" ng-if="messageService.toReceiver=='Others'" type="tel" ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="10" required/>
                         <span class="error" ng-messages="messageService.phoneNumber.$error" ng-if="messageService.phoneNumber.$touched">
-                            <span ng-message="required">Student Phone number is required.</span>
-                            <span ng-message="pattern">Student Phone number is invalid.</span>
+                            <span ng-message="required">Phone number is required.</span>
+                            <span ng-message="pattern">Phone number is invalid.</span>
                         </span>
                     </td>
                 </div>
@@ -45,10 +45,12 @@
                     <td><input class="btn btn-primary success" type="submit"  ng-click="sendMessage()" /></td>
                 </tr>
             </table>
-            <!-- </div>
-             <div class="col-md-6">
-             </div>
-         </div>-->
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ui-sref="home.messageservice-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Messages History</a>
+                </div>
         </form>
     </div>
 </div>

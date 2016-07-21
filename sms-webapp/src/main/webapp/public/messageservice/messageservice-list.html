@@ -21,13 +21,16 @@
                         <tr>
                             <th>#</th>
                             <th>Receiver</th>
+                            <th style="width: 70%;">Message</th>
                             <th>Sent Date</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="messageService in $data | filter: messageService_filter" class="success">
                             <td>{{$index + 1 }}</td>
-                            <td sortable="toReceiver">{{ messageService.toReceiver }}</td>
+                            <td ng-if="messageService.toReceiver=='Others'" sortable="phoneNumber">{{messageService.phoneNumber}}</td>
+                            <td ng-if="messageService.toReceiver!='Others'" sortable="toReceiver">{{messageService.toReceiver}}</td>
+                            <td>{{messageService.message}}</td>
                             <td sortable="createdDate">{{ messageService.sendingDate|date }}</td>
                         </tr>
                         <tr>

@@ -5,107 +5,107 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-            <div style="border-radius:20px;border: 2px solid #3dad9c;">
-                <div class="control-group,form">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                        <tr>
-                            <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Search Criteria</label></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><label class="control-label" for="studentName">Student Name</label></td>
-                            <td>
-                                <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="studentCode">Student Code</label></td>
-                            <td>
-                                <input type="text" id="studentCode" ng-model="searchCriteria.studentCode" placeholder="Student Code"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">Branch</label></td>
-                            <td>
-                                <span branch-name bn="searchCriteria.branchName"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label" for="year">Year</label></td>
-                            <td>
-                                <input  ng-model="searchCriteria.year" id="year" type="number" placeholder="Year" maxlength="4"  />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2" style="text-align: right">
-                                <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-            <div class="table-responsive" loading-container="tableParams.settings().$loading">
-                <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
+        <div class="well">
+            <a ng-click="searchStudentScholarship()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
+        </div>
+        <div style="border-radius:20px;border: 2px solid #3dad9c;">
+            <div class="control-group,form">
+                <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Branch Name</th>
-                        <th>Course Name</th>
-                        <th>Scheme Name</th>
-                        <th>Joining Date</th>
-                        <th>&nbsp;</th>
+                        <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Search Criteria</label></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="student in $data | filter: student_filter" class="success">
-                        <td>{{$index + 1 }}</td>
-                        <td sortable="code">{{ student.code }}</td>
-                        <td sortable="name">{{ student.name }}</td>
-                        <td sortable="branchCode">{{ getBranchDesc(student.branchCode) }}</td>
-                        <td sortable="courseCode">{{ getCourseDesc(student.courseCode) }}</td>
-                        <td sortable="schemeCode">{{ getSchemeDesc(student.schemeCode) }}</td>
-                        <td sortable="createdDate">{{ student.createdDate | date }}</td>
+                    <tr>
+                        <td><label class="control-label" for="studentName">Student Name</label></td>
                         <td>
-                            <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
+                            <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
                         </td>
                     </tr>
                     <tr>
-                        <td ng-show="$data.length==0" class="info no_data" colspan="9">
-                            No Record Found
+                        <td><label class="control-label" for="studentCode">Student Code</label></td>
+                        <td>
+                            <input type="text" id="studentCode" ng-model="searchCriteria.studentCode" placeholder="Student Code"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label">Branch</label></td>
+                        <td>
+                            <span branch-name bn="searchCriteria.branchName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label" for="year">Year</label></td>
+                        <td>
+                            <input  ng-model="searchCriteria.year" id="year" type="number" placeholder="Year" maxlength="4"  />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" style="text-align: right">
+                            <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
 
-            <script type="text/ng-template" id="ScholarshipPopup.html">
-                <div class="modal-header">
-                    <h3>Student Enrollment</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="input-div">
-                        <label>Application Number : </label>
-                        <input type="text" ng-model="applicationNumber"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                    <button class="btn btn-primary" ng-click="continue()"
-                            title="Continue without scholarship application number">Continue</button>
-                    <button class="btn btn-primary" ng-click="ok()" title="Search Student scholar ship enrollment">OK</button>
-                </div>
-            </script>
-            <div class="well">
-                <a ng-click="searchStudentScholarship()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
+        <div class="clearfix"></div>
+        <div class="table-responsive" loading-container="tableParams.settings().$loading">
+            <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Branch Name</th>
+                    <th>Course Name</th>
+                    <th>Scheme Name</th>
+                    <th>Joining Date</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in $data | filter: student_filter" class="success">
+                    <td>{{$index + 1 }}</td>
+                    <td sortable="code">{{ student.code }}</td>
+                    <td sortable="name">{{ student.name }}</td>
+                    <td sortable="branchCode">{{ getBranchDesc(student.branchCode) }}</td>
+                    <td sortable="courseCode">{{ getCourseDesc(student.courseCode) }}</td>
+                    <td sortable="schemeCode">{{ getSchemeDesc(student.schemeCode) }}</td>
+                    <td sortable="createdDate">{{ student.createdDate | date }}</td>
+                    <td>
+                        <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td ng-show="$data.length==0" class="info no_data" colspan="9">
+                        No Record Found
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script type="text/ng-template" id="ScholarshipPopup.html">
+            <div class="modal-header">
+                <h3>Student Enrollment</h3>
             </div>
+            <div class="modal-body">
+                <div class="input-div">
+                    <label>Application Number : </label>
+                    <input type="text" ng-model="applicationNumber"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="continue()"
+                        title="Continue without scholarship application number">Continue</button>
+                <button class="btn btn-primary" ng-click="ok()" title="Search Student scholar ship enrollment">OK</button>
+            </div>
+        </script>
     </div>
 </div>
 <br>
