@@ -77,9 +77,8 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     @Override
     public Optional<StudentScholarInfo> save(final StudentScholarInfo entityType) {
         Optional.ofNullable(studentScholarRepository
-                                                      .findByApplicationNumberIgnoreCase(entityType.getApplicationNumber()))
-                                                      .orElseThrow( () ->
-                                                          new SmsException("applicationNumber", String
+                                        .findByApplicationNumberIgnoreCase(entityType.getApplicationNumber()))
+                                        .ifPresent( studentScholar -> new SmsException("applicationNumber", String
                 .format("Scholarship already exist for %s application number", entityType.getApplicationNumber())));
 
 
