@@ -13,50 +13,45 @@ import java.util.Optional;
 
 /**
  * Created by sathish on 7/19/2016.
+ * <p></p>
  */
 @RestController
 @RequestMapping("/hoteltracker")
-public class HotelTrackerRestController
-{
+public class HotelTrackerRestController {
+
     @Autowired
     private HotelTrackerService hotelTrackerService;
 
     @Autowired
     private HotelTrackerFacade hotelTrackerFacade;
 
-    @Autowired
-    public HotelTrackerRestController(final HotelTrackerService studentScholarEnrollment, HotelTrackerFacade facade) {
-        this.hotelTrackerService = studentScholarEnrollment;
-        this.hotelTrackerFacade = facade;
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<HotelTrackerInfo>> listAll() {
         return Optional.ofNullable(hotelTrackerService.findAll())
-                .filter(e -> !e.isEmpty())
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                       .filter(e -> !e.isEmpty())
+                       .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                       .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HotelTrackerInfo> get(@PathVariable("id") final Long id) {
         return hotelTrackerService.findById(id)
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid final HotelTrackerInfo entityObject,
-                                       final UriComponentsBuilder ucBuilder) {
-        hotelTrackerService.save(entityObject);
+    public ResponseEntity<Void> create(@RequestBody @Valid final HotelTrackerInfo hotelTrackerInfo) {
+        hotelTrackerService.save(hotelTrackerInfo);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/search", method = RequestMethod.POST)
-    public ResponseEntity<List<HotelTrackerInfo>> search(@RequestBody @Valid HotelTrackerSearchCriteria criteria) {
-        return Optional.ofNullable(hotelTrackerFacade.search(criteria))
-                .filter(e -> !e.isEmpty())
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResponseEntity<List<HotelTrackerInfo>> search(@RequestBody @Valid
+                                                          final HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
+        return Optional.ofNullable(hotelTrackerFacade.search(hotelTrackerSearchCriteria))
+                       .filter(e -> !e.isEmpty())
+                       .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                       .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

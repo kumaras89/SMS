@@ -14,47 +14,46 @@ import java.util.Optional;
 
 /**
  * Created by sathish on 7/15/2016.
+ * <p></p>
  */
 @RestController
 @RequestMapping("/hotel")
-public class HotelRestController
-{
+public class HotelRestController {
+
     @Autowired
     private HotelService hotelService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<HotelInfo>> listAll() {
         return Optional.ofNullable(hotelService.findAll())
-                .filter(e -> !e.isEmpty())
-                .map(e -> new ResponseEntity(e, HttpStatus.OK))
-                .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
+                       .filter(e -> !e.isEmpty())
+                       .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                       .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid final HotelInfo entityObject,
-                                       final UriComponentsBuilder ucBuilder) {
-        hotelService.save(entityObject);
+    public ResponseEntity<Void> create(@RequestBody @Valid final HotelInfo hotelInfo ) {
+        hotelService.save(hotelInfo);
         final HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HotelInfo> get(@PathVariable("id")
-                                         final long hotelId) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HotelInfo> get(@PathVariable("id")final long hotelId) {
         return hotelService.
-                findById(hotelId).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                            findById(hotelId)
+                            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<HotelInfo> update(@PathVariable("id") long id,
-                                            @RequestBody @Valid HotelInfo entityObject) {
-        return hotelService.update(id, entityObject)
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .get();
+    public ResponseEntity<HotelInfo> update(@PathVariable("id") final long id,
+                                            @RequestBody @Valid final HotelInfo hotelInfo) {
+        return hotelService.update(id, hotelInfo)
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .get();
     }
 
 }

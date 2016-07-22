@@ -12,19 +12,19 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class HotelTrackerFacadeImpl implements HotelTrackerFacade
-{
-    private HotelTrackerRepository hotelTrackerRepository;
+public class HotelTrackerFacadeImpl implements HotelTrackerFacade {
+
+    private final HotelTrackerRepository hotelTrackerRepository;
 
     @Autowired
-    public HotelTrackerFacadeImpl(HotelTrackerRepository hotelTrackerRepository) {
+    public HotelTrackerFacadeImpl(final HotelTrackerRepository hotelTrackerRepository) {
         this.hotelTrackerRepository = hotelTrackerRepository;
     }
 
     @Override
-    public List<HotelTrackerInfo> search(HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
+    public List<HotelTrackerInfo> search(final HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
         return HotelTrackerSearchService
-                .search(hotelTrackerSearchCriteria)
-                .with(hotelTrackerRepository);
+            .search(hotelTrackerSearchCriteria)
+            .with(hotelTrackerRepository);
     }
 }

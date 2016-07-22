@@ -5,11 +5,11 @@ import java.util.Optional;
 
 /**
  * Created by sathish on 7/19/2016.
+ * <p></p>
  */
-public interface HotelTrackerService
-{
+public interface HotelTrackerService {
+
     /**
-     *
      * @param hotelTrackerInfo
      */
     void save(final HotelTrackerInfo hotelTrackerInfo);
@@ -24,11 +24,5 @@ public interface HotelTrackerService
      * @return
      */
     Optional<HotelTrackerInfo> findById(Long id);
-
-    /**
-     *
-     * @param hotelTrackerSearchCriteria
-     * @return
-     */
 
 }
