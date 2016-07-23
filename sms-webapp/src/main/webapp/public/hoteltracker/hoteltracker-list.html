@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿<link rel="stylesheet" href="/public/css/hoteltracker.css">
+<div class="row">
     <div class="col-lg-12">
         <h3 class="page-header"><i class="fa fa-shield fa-fw"></i>Student  Hotel  Tracking</h3>
     </div>
@@ -15,21 +16,21 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><label class="control-label" for="studentName">Student Name</label></td>
+                        <td><label class="control-label" for="student">Student Name</label></td>
                         <td>
-                            <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
+                            <input type="text" ng-model="searchCriteria.studentName" uib-typeahead="sName for sName in studentNames | filter:$viewValue | limitTo:8" id="student" placeholder="Student Name" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="branchName">Branch</label></td>
+                        <td><label class="control-label" >Branch</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.branchName" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />
+                            <span branch-name bn="searchCriteria.branchName"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Hotel name</label></td>
                         <td>
-                            <span marketing-employee mn="searchCriteria.hotelName" ></span>
+                            <input type="text" ng-model="searchCriteria.hotelName" uib-typeahead="ht for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" />
                         </td>
                     </tr>
 
@@ -37,18 +38,17 @@
                         <td><label class="control-label" for="status">Status</label></td>
                         <td>
                             <select ng-model="searchCriteria.status" id="status" class="selectpicker">
-                                <option value="">ALL</option>
+                                <option value="">Select Status</option>
                                 <option ng-repeat="status in statusList" value="{{status}}">{{status}}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="hr">HR</label></td>
+                        <td><label class="control-label">HR name</label></td>
                         <td>
-                            <input  ng-model="searchCriteria.hr" id="hr" type="text" placeholder="Hr"   />
+                            <input type="text" ng-model="searchCriteria.hotelHrName" uib-typeahead="hr for hr in hrs | filter:$viewValue | limitTo:8" id="hr" placeholder="HR Name" autocomplete="off" />
                         </td>
                     </tr>
-
                     <tr>
                         <td colspan="2" style="text-align: right">
                             <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
@@ -59,30 +59,32 @@
             </div>
         </div>
         <div class="clearfix"></div>
+
         <div class="table-responsive" loading-container="tableParams.settings().$loading">
             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Student</th>
-                    <th>Branch</th>
-                    <th>Hotel</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Remaining </th>
-                    <th>Remaining days</th>
+                    <th align="center">Student</th>
+                    <th align="center">Branch</th>
+                    <th align="center">Hotel</th>
+                    <th align="center">From</th>
+                    <th align="center">To</th>
+                    <th align="center">Remaining days</th>
+                    <th align="center">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="succcess">
+                <tr ng-click="changeLocation(hoteltracker.id)" ng-class="{suspended: hoteltracker.status=='SUSPENDED' , mapped:hoteltracker.status=='MAPPED', datecrossed: calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)=='Date crosed'}" ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="sucess" style="cursor: hand; cursor: pointer;">
+
                     <td>{{$index + 1 }}</td>
-                    <td sortable="code">{{ scholarshipEnrollment.applicationNumber }}</td>
-                    <td sortable="name">{{ scholarshipEnrollment.name }}</td>
-                    <td >{{ scholarshipEnrollment.createdDate|date }}</td>
-                    <td >{{ scholarshipEnrollment.status }}</td>
-                    <td>
-                        <a ng-click="viewScholarshipEnrollment(scholarshipEnrollment.applicationNumber)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
-                    </td>
+                    <td sortable="code">{{ getStudentName(hoteltracker.studentCode)}}</td>
+                    <td sortable="name">{{ getBranchDesc(hoteltracker.branchCode)}}</td>
+                    <td sortable="name">{{ getHotelName(hoteltracker.hotelCode)}}</td>
+                    <td >{{ hoteltracker.durationFrom|date}}</td>
+                    <td >{{ hoteltracker.durationTo|date}}</td>
+                    <td >{{ calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)}}</td>
+                    <td >{{ hoteltracker.status}}</td>
                 </tr>
                 <tr>
                     <td ng-show="$data.length==0" class="info no_data" colspan="9">
@@ -94,7 +96,7 @@
         </div>
 
         <div class="well">
-            <a ng-click="hotelTrackerCreate()" class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
+            <a ng-click="hotelTrackerCreate()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Student Mapping</a>
         </div>
     </div>
 </div>

@@ -17,12 +17,12 @@
                     $state.go('home.hotelhr-registration');
                 };
 
-                $scope.deleteHotel = function(id) {
+               /* $scope.deleteHotel = function(id) {
                     CrudService.hotelService.Delete(id).then(function () {
                         FlashService.Success("Successfully Deleted !!", false);
                         $scope.tableParams.reload();
                     });
-                };
+                };*/
 
                 $scope.viewHotel = function (id) {
                     $state.go('home.hotel-detail',{id: id});

@@ -20,6 +20,14 @@
                     </span>
                     </td>
                 </tr>
+                <!--<tr class="even gradeA">
+                    <td><label class="control-label" for="code"> HR Code:</label></td>
+                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hotelhr.hrCode" placeholder="HR Code" required/>
+                    <span class="error" ng-messages="hotelhrForm.code.$error" ng-if="hotelhrForm.code.$touched">
+                        <span ng-message="required">HR Code is required.</span>
+                    </span>
+                    </td>
+                </tr>-->
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hotel">Hotel : </label></td>
                     <td>
@@ -45,7 +53,7 @@
 
                 </tr>
                 <tr class="even gradeA">
-                    <td colspan="2"><span address-template addfrm="hotelhrForm" data="hotelhr"> </span></td>
+                    <td colspan="2"><span address-template addfrm="hotelhrForm" data="hotelhr" required> </span></td>
                 </tr>
 
             </table>
@@ -53,8 +61,8 @@
 
             <div class="well">
                 <div class="controls">
-                    <a ng-click="createNewHr()"  class="btn btn-small btn-primary">create new HR</a>
-                    <a ui-sref="home.hotelhr-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>HR</a>
+                    <a ng-click="createNewHr()"  ng-class="{linkdisabled: hotelhrForm.$invalid}"  class="btn btn-small btn-primary">Create New HR</a>
+                    <a ui-sref="home.hotelhr-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>HR List</a>
                 </div>
             </div>
         </form>

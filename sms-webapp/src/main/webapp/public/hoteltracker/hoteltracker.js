@@ -20,4 +20,17 @@ config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function 
             controller: 'HotelTrackerListCtrl',
             url: '/hoteltracker-list'
         })
+        .state('home.hoteltracker-detail', {
+            templateUrl: 'hoteltracker/hoteltracker-detail.html',
+            controller: 'HotelTrackerDetailCtrl',
+            url: '/hoteltracker-detail/:id'
+        })
+
+        .state('home.hoteltracker-update', {
+            templateUrl: 'hoteltracker/hoteltracker-update.html',
+            controller: 'HotelTrackerUpdateCtrl',
+            url: '/hoteltracker-update/:id'
+        })
+
+
 }]);

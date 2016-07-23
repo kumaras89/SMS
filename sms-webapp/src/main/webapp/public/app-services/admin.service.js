@@ -45,6 +45,10 @@
         service.getStudents = getStudents
         service.getHotelName=getHotelName
         service.getHotelTrackers=getHotelTrackers
+        service.getStudentName=getStudentName
+        service.getStudentByCode=getStudentByCode
+        service.getHotelByCode=getHotelByCode
+        service.getHrById=getHrById
 
         return {
             serviceImpl : null,
@@ -74,6 +78,11 @@
             getMessageService(function () {})
             getHotelName(function () {})
             getHotelTrackers(function () {})
+            getStudentName(function (){})
+            getStudentByCode(function () {})
+            getHotelByCode(function () {})
+            getHrById=getHrById(function () {})
+
         }
 
         function getMarketingEmployeeName(marketingEmployeeCode) {
@@ -249,6 +258,13 @@
             });
 
         }
+        function getStudentName(studentCode) {
+            var students = StorageService.getTrustedStoarage('/student');
+            var student =  _.find(students, function(student) {
+                return student.code == studentCode
+            })
+            return student != undefined ? student.name : "";
+        }
 
         function getHotelName(hotelCode) {
             var hotels = StorageService.getTrustedStoarage('/hotel');
@@ -259,10 +275,33 @@
         }
 
         function getHotelTrackers(success) {
-            StorageService.getFromStoarage('/hoteltracker', function(data) {
+            StorageService.getTrustedStoarage('/hoteltracker', function(data) {
                 success(data);
             });
 
+        }
+
+        function getStudentByCode(studentCode) {
+            var students = StorageService.getTrustedStoarage('/student');
+            var emp =  _.find(students, function(student) {
+                return student.code == studentCode
+            })
+            return emp;
+        }
+        function getHotelByCode(hotelCode) {
+            var hotels = StorageService.getTrustedStoarage('/hotel');
+            var emp =  _.find(hotels, function(hotel) {
+                return hotel.hotelCode == hotelCode
+            })
+            return emp;
+        }
+
+        function getHrById(hrId) {
+            var hrs = StorageService.getTrustedStoarage('/hotelhr');
+            var emp =  _.find(hrs, function(hr) {
+                return hr.id == hrId
+            })
+            return emp;
         }
     }
 

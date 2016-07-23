@@ -1,5 +1,6 @@
 package com.sms.core.common;
 
+import com.sms.core.hotelTracker.HotelTrackerStatus;
 import com.sms.core.identity.IdCardStatus;
 import com.sms.core.scholarship.ScholarStatus;
 import com.sms.core.student.Relation;
@@ -47,4 +48,6 @@ public class Constants {
     public ScholarStatus[] getScholarStatuses() {
         return ScholarStatus.values();
     }
+
+    public HotelTrackerStatus [] getHotelTrackerStatus() {return HotelTrackerStatus.values();}
 }

@@ -56,8 +56,8 @@
 
             <div class="well">
                 <div class="controls">
-                    <a ng-click="createNewHotel()"  class="btn btn-small btn-primary">create new Hotel</a>
-                    <a ui-sref="home.hotel-list" class="btn btn-small  btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Hotel</a>
+                    <a ng-click="createNewHotel()"  ng-class="{linkdisabled: hotelForm.$invalid}" class="btn btn-small btn-primary">Create New Hotel</a>
+                    <a ui-sref="home.hotel-list" class="btn btn-small  btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Hotel List</a>
                 </div>
             </div>
         </form>

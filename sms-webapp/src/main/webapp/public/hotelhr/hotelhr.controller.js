@@ -72,7 +72,7 @@
         .controller('HotelHrUpdateCtrl', ['$scope','$stateParams', 'FlashService','CrudService', 'ngTableParams', '$state', 'AdminService',
             function ($scope,$stateParams, FlashService,CrudService, ngTableParams, $state, AdminService) {
                 $scope.updateHotelHr = function () {
-                    CrudService.hotelHrService.Update(hotelhr).then(function(){
+                    CrudService.hotelHrService.Update($scope.hotelhr).then(function(){
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.hotelhr-list');
                     });
