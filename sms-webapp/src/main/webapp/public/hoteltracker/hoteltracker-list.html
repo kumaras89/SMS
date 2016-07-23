@@ -75,7 +75,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-click="changeLocation(hoteltracker.id)" ng-class="{suspended: hoteltracker.status=='SUSPENDED' , mapped:hoteltracker.status=='MAPPED', datecrossed: calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)=='Date crosed'}" ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="sucess" style="cursor: hand; cursor: pointer;">
+                <tr ng-click="changeLocation(hoteltracker.id)" ng-class="{suspended: hoteltracker.status=='SUSPENDED' , mapped:hoteltracker.status=='MAPPED', datecrossed: calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)=='Date crosed'}" ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="active" style="cursor: hand; cursor: pointer;">
 
                     <td>{{$index + 1 }}</td>
                     <td sortable="code">{{ getStudentName(hoteltracker.studentCode)}}</td>

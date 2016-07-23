@@ -33,7 +33,7 @@
                 $scope.init();
                 $scope.hotelTrackerCreate = function () {
                     var hoteltracker = $.extend(hoteltracker, $scope.hoteltracker);
-                        hoteltracker.status='SUSPENDED';
+                        hoteltracker.status='MAPPED';
                     CrudService.hotelTrackerService.Create(hoteltracker).then(function (res) {
                         if (res.message) {
                             FlashService.Error(res.message);
