@@ -1,5 +1,6 @@
 package com.sms.core.hotelTracker;
 
+import com.sms.core.hotel.HotelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,5 +54,13 @@ public class HotelTrackerRestController {
                        .filter(e -> !e.isEmpty())
                        .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<HotelTrackerInfo> update(@PathVariable("id") final long id,
+                                            @RequestBody @Valid final HotelTrackerInfo hotelTrackerInfo) {
+        return hotelTrackerService.update(id, hotelTrackerInfo)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
     }
 }

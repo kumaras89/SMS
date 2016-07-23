@@ -2,6 +2,7 @@ package com.sms.core.hotelTracker;
 
 import com.sms.core.common.Builder;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -11,24 +12,35 @@ public class HotelTrackerInfo
 {
     private long id;
 
+    @NotNull(message = "HotelTrackerCode is Empty")
+    private String hotelTrackerCode;
+
+    @NotNull(message = "Branch Name is Empty")
     private String branchCode;
 
+    @NotNull(message = "Hotel Name is Empty")
     private String hotelCode;
 
+    @NotNull(message = "Hotel Hr Name is Empty")
     private long hotelHrId;
 
+    @NotNull(message = "Student Name is Empty")
     private String studentCode;
 
+    @NotNull(message = "DurationTo is Empty")
     private Date durationTo;
 
+    @NotNull(message = "DurationFrom is Empty")
     private Date durationFrom;
 
     private Date createdDate;
 
     private Date modifiedDate;
 
+    @NotNull(message = "Status is Empty")
     private String status;
 
+    @NotNull(message = "Remarks is Empty")
     private String remarks;
 
     public HotelTrackerInfo()
@@ -51,7 +63,8 @@ public class HotelTrackerInfo
                 .on(HotelTrackerInfo::getCreatedDate).set(hotelTracker.getCreatedDate())
                 .on(HotelTrackerInfo::getModifiedDate).set(hotelTracker.getModifiedDate())
                 .on(HotelTrackerInfo::getStatus).set(hotelTracker.getStatus().name())
-                .on(HotelTrackerInfo::getRemarks).set(hotelTracker.getRemarks());
+                .on(HotelTrackerInfo::getRemarks).set(hotelTracker.getRemarks())
+                .on(HotelTrackerInfo::getHotelTrackerCode).set(hotelTracker.getHotelTrackerCode());
     }
 
 
@@ -97,5 +110,9 @@ public class HotelTrackerInfo
 
     public String getRemarks() {
         return remarks;
+    }
+
+    public String getHotelTrackerCode() {
+        return hotelTrackerCode;
     }
 }

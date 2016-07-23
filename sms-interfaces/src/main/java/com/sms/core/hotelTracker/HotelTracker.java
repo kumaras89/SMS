@@ -21,6 +21,9 @@ public class HotelTracker
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_HT")
     private long id;
 
+    @Column(name = "HT_CODE")
+    private String hotelTrackerCode;
+
     @ManyToOne
     @JoinColumn(name = "HT_BRANCH_ID")
     private Branch branchName;
@@ -71,7 +74,8 @@ public class HotelTracker
                 .on(HotelTracker::getCreatedDate).set(new Date())
                 .on(HotelTracker::getId).set(hotelTrackerInfo.getId())
                 .on(HotelTracker::getDurationFrom).set(hotelTrackerInfo.getDurationFrom())
-                .on(HotelTracker::getDurationTo).set(hotelTrackerInfo.getDurationTo());
+                .on(HotelTracker::getDurationTo).set(hotelTrackerInfo.getDurationTo())
+                .on(HotelTracker::getHotelTrackerCode).set(hotelTrackerInfo.getHotelTrackerCode());
 
     }
 
@@ -117,5 +121,9 @@ public class HotelTracker
 
     public String getRemarks() {
         return remarks;
+    }
+
+    public String getHotelTrackerCode() {
+        return hotelTrackerCode;
     }
 }

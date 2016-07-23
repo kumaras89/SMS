@@ -23,6 +23,9 @@ public class HotelHrInfo
     @NotNull(message = "Phonenumber is Empty")
     private String phoneNumber;
 
+    @NotNull(message = "HrCode is Empty")
+    private String hrCode;
+
     @NotNull(message = "Hotel Name is Empty")
     private String hotelCode;
 
@@ -43,7 +46,8 @@ public class HotelHrInfo
                 .on(HotelHrInfo::getAddress).set(hotelHr.getAddress())
                 .on(HotelHrInfo::getHotelCode).set(hotelHr.getHotel().getHotelCode())
                 .on(HotelHrInfo::getName).set(hotelHr.getName())
-                .on(HotelHrInfo::getPhoneNumber).set(hotelHr.getPhoneNumber());
+                .on(HotelHrInfo::getPhoneNumber).set(hotelHr.getPhoneNumber())
+                .on(HotelHrInfo::getHrCode).set(hotelHr.getHrCode());
     }
 
 
@@ -65,5 +69,9 @@ public class HotelHrInfo
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getHrCode() {
+        return hrCode;
     }
 }

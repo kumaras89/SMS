@@ -21,6 +21,9 @@ public class HotelHr
     @Column(name = "HR_NAME")
     private String name;
 
+    @Column(name = "HR_CODE")
+    private String hrCode;
+
     @Column(name = "HR_PHONE_NUMBER")
     private String phoneNumber;
 
@@ -42,7 +45,8 @@ public class HotelHr
                 .with(HotelHr::getId, hotelHrInfo.getId())
                 .on(HotelHr::getAddress).set(hotelHrInfo.getAddress())
                 .on(HotelHr::getName).set(hotelHrInfo.getName())
-                .on(HotelHr::getPhoneNumber).set(hotelHrInfo.getPhoneNumber());
+                .on(HotelHr::getPhoneNumber).set(hotelHrInfo.getPhoneNumber())
+                .on(HotelHr::getHrCode).set(hotelHrInfo.getHrCode());
     }
 
     public long getId() {
@@ -63,5 +67,9 @@ public class HotelHr
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getHrCode() {
+        return hrCode;
     }
 }

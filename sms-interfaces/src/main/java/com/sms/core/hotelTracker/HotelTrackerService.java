@@ -12,7 +12,7 @@ public interface HotelTrackerService {
     /**
      * @param hotelTrackerInfo
      */
-    void save(final HotelTrackerInfo hotelTrackerInfo);
+    Optional<HotelTrackerInfo> save(final HotelTrackerInfo hotelTrackerInfo);
 
     /**
      * @return
@@ -24,5 +24,8 @@ public interface HotelTrackerService {
      * @return
      */
     Optional<HotelTrackerInfo> findById(Long id);
+
+
+    Optional<HotelTrackerInfo> update(final Long id, final HotelTrackerInfo hotelTrackerInfo);
 
 }
