@@ -113,7 +113,7 @@
                                     <td>
                                         <label ng-repeat="gender in commonAttributes.gender">
                                             <input type="radio" name="gender" ng-model="student.gender" id="gender"  placeholder="Gender"
-                                                   value="{{gender}}" required/> {{gender}}&nbsp;&nbsp;&nbsp;
+                                                   value="{{gender}}" ng-checked="gender=='MALE'" required/> {{gender}}&nbsp;&nbsp;&nbsp;
                                         </label>
                                         <span class="error" ng-messages="studentForm.gender.$error" ng-if="studentForm.gender.$touched">
                                             <span ng-message="required">Gender is required.</span>
@@ -155,7 +155,7 @@
                                     <td>
                                         <label ng-repeat="status in commonAttributes.maritalStatus">
                                             <input type="radio" ng-model="student.maritalStatus" name="maritalStatus" id="maritalStatus"  placeholder="Marital Status"
-                                                   value="{{status}}" required/> {{status}}&nbsp;&nbsp;
+                                                   value="{{status}}" ng-checked="status=='MARRIED'" required/> {{status}}&nbsp;&nbsp;
                                         </label>
                                         <span class="error" ng-messages="studentForm.maritalStatus.$error" ng-if="studentForm.maritalStatus.$touched">
                                             <span ng-message="required">Status is required.</span>
@@ -193,7 +193,7 @@
                                     <td>
                                         <label ng-repeat="rating in commonAttributes.rating">
                                             <input type="radio" ng-model="student.englishFluency" id="englishFluency" placeholder="English fluency"
-                                                            value="{{rating}}" required/> {{rating}}&nbsp;&nbsp;&nbsp;
+                                                            value="{{rating}}" ng-checked="rating=='EXCELLENT'" required/> {{rating}}&nbsp;&nbsp;&nbsp;
                                         </label>
                                     </td>
                                 </tr>

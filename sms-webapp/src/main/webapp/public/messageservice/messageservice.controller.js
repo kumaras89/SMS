@@ -43,15 +43,10 @@
             function ($scope, CrudService, FlashService, $state) {
               
                 $scope.sendMessage = function () {
-                    
                     $scope.messageService.status = 'SENT';
-                    /*if ($scope.messageService.toReceiver==="Others") {
-                        $scope.messageService.toReceiver = $scope.messageService.phoneNumber;
-                    }
-                    */
                     CrudService.messageService.Create($scope.messageService).then(function () {
                     FlashService.Success("Message sent Successfuly !!", true);
-                    $state.go('home.messageservice-list');
+                    $state.reload('home.messageservice-list');
                     });
                 }
 

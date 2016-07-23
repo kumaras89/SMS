@@ -90,7 +90,7 @@
                                     <td>
                                         <label ng-repeat="gender in commonAttributes.gender">
                                             <input type="radio" ng-model="scholarshipEnrollment.gender" name="gender" id="gender"  placeholder="Gender"
-                                                   value="{{gender}}" required/> {{gender}}&nbsp;&nbsp;&nbsp;
+                                                   value="{{gender}}" ng-checked="gender=='MALE'" required/> {{gender}}&nbsp;&nbsp;&nbsp;
                                         </label>
                                         <span class="error" ng-messages="scholarship.gender.$error" ng-if="scholarship.gender.$touched">
                                             <span ng-message="required">Gender is required.</span>
@@ -143,7 +143,7 @@
                                     <td>
                                         <label ng-repeat="status in commonAttributes.maritalStatus">
                                             <input type="radio" ng-model="scholarshipEnrollment.maritalStatus" name="maritalStatus" id="maritalStatus"
-                                                   value="{{status}}" required/> {{status}}&nbsp;&nbsp;
+                                                   value="{{status}}" ng-checked="status=='MARRIED'" required/> {{status}}&nbsp;&nbsp;
                                         </label>
                                         <span class="error" ng-messages="scholarship.maritalStatus.$error" ng-if="scholarship.maritalStatus.$touched">
                                             <span ng-message="required">Status is required.</span>
@@ -153,7 +153,7 @@
                                 <tr>
                                     <td><label class="control-label">Annual income</label></td>
                                     <td>
-                                        <input type="radio" name="annualIncome" value="Upto 50000" ng-model="scholarshipEnrollment.annualIncome" required><label class="control-label">&nbsp; Upto 50,000</label>&nbsp;
+                                        <input type="radio" name="annualIncome" value="Upto 50000" ng-model="scholarshipEnrollment.annualIncome"  ng-checked="value='Upto 50000'" required><label class="control-label">&nbsp; Upto 50,000</label>&nbsp;
                                         <input type="radio" name="annualIncome" value="Upto 100000" ng-model="scholarshipEnrollment.annualIncome"><label class="control-label">&nbsp; Upto 1,00,000</label>&nbsp;
                                         <span class="error" ng-messages="scholarship.annualIncome.$error" ng-if="scholarship.annualIncome.$touched">
                                             <span ng-message="required">Annual Income is required.</span>

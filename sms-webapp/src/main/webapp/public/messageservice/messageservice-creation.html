@@ -1,3 +1,9 @@
+<style>
+   @font-face {
+    font-family: Bamini;
+    src: url('../fonts/Bamini.TTF');
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-bell fa-fw"></i> Message Service</h1>
@@ -6,35 +12,33 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <form name="messageServiceForm" novalidate="novalidate" class="form-horizontal">
-            <!-- <div class="row">
-                 <div class="col-md-6">-->
+        <form name="messageForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
-                <div>
-                    <td><label class="control-label">Group</label></td></td>
-                    <td><select  ng-model="messageService.toReceiver" required>
-                        <option value="Scholarship Students">Scholarship Students</option>
-                        <option value="Marketing Employees">Marketing Employees</option>
-                        <option value="Enrolled Students">Enrolled Students</option>
-                        <option value="Others">Others</option>
-                    </select>
-                         <span class="error" ng-messages="messageService.toReceiver.$error" ng-if="messageService.toReceiver.$touched">
+                <tr class="even gradeA">
+                    <td><label class="control-label">Group</label></td>
+                    <td><select  ng-model="messageService.toReceiver" name="toReceiver" required>
+                            <option value="Scholarship Students">Scholarship Students</option>
+                            <option value="Marketing Employees">Marketing Employees</option>
+                            <option value="Enrolled Students">Enrolled Students</option>
+                            <option value="Others">Others</option>
+                         </select>
+                         <span class="error" ng-messages="messageForm.toReceiver.$error" ng-if="messageForm.toReceiver.$touched">
                             <span ng-message="required">Receiver is required.</span>
                         </span>
-                        <input ng-model="messageService.phoneNumber" ng-if="messageService.toReceiver=='Others'" type="tel" ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="10" required/>
-                        <span class="error" ng-messages="messageService.phoneNumber.$error" ng-if="messageService.phoneNumber.$touched">
+                        <input ng-model="messageService.phoneNumber" name="phoneNumber" ng-if="messageService.toReceiver=='Others'"
+                               type="tel" ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="10" required/>
+                        <span class="error" ng-messages="messageForm.phoneNumber.$error" ng-if="messageForm.phoneNumber.$touched">
                             <span ng-message="required">Phone number is required.</span>
                             <span ng-message="pattern">Phone number is invalid.</span>
                         </span>
                     </td>
-                </div>
-                <tr>
+                </tr>
+                <tr class="even gradeA">
                     <td style="width: 40%"><label class="control-label">Message</label></td>
-                    <td>
-                        <textarea id="message" ng-model="messageService.message" placeholder="Message" ng-trim="false" maxlength="272"
-                                        style="width: 100%;height: 100px" required/>
+                    <td > <textarea id="message" font face="Bamini"  name="message" class="" ng-model="messageService.message" placeholder="Message"
+                                  ng-trim="false" maxlength="272" style="width: 100%;height: 100px" required/>
                         <span>{{272 - messageService.message.length}} characters remaining.</span>
-                        <span class="error" ng-messages="messageService.message.$error" ng-if="messageService.message.$touched">
+                        <span class="error" ng-messages="messageForm.message.$error" ng-if="messageForm.message.$touched">
                             <span ng-message="required">Message is required.</span>
                         </span>
 
