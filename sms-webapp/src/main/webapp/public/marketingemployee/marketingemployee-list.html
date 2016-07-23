@@ -32,7 +32,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="marketingEmployee in $data | filter: marketing_filter" class="active">
+                        <tr ng-repeat="marketingEmployee in $data | filter: marketing_filter" class="success">
                             <td>{{$index + 1 }}</td>
                             <td sortable="code">{{ marketingEmployee.code }}</td>
                             <td sortable="name">{{ marketingEmployee.name }}</td>
