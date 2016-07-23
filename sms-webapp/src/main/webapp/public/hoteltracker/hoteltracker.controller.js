@@ -6,7 +6,6 @@
         .controller('HotelTrackerCreationCtrl', ['$scope', 'FlashService', '$state', 'AdminService','CrudService',
             function ($scope, FlashService, $state, AdminService,CrudService) {
 
-
                 $scope.branchChanged = function() {
 
                         return hoteltracker.branchCode == $scope.hoteltracker.branchCode;
@@ -15,7 +14,7 @@
 
                     return hoteltracker.hotelCode == $scope.hoteltracker.hotelCode;
                 }
-
+                
                 $scope.init = function() {
                     AdminService.getHotels(function(data) {
                         $scope.hotels = data;
@@ -174,7 +173,7 @@
                                 ).asDays()
                             ) +1 + ' Days';
                     }
-                    else return 'Date crosed'
+                    else return 'Date crossed'
                 };
 
 
@@ -216,6 +215,9 @@
                         var hoteltracker = res;
                         $scope.branchName=AdminService.getBranchDesc(res.branchCode)
                         $scope.studentName = AdminService.getStudentName(res.studentCode);
+                        hoteltracker.durationFrom = new Date(res.durationFrom);
+                        hoteltracker.hotelHrId= (AdminService.getHrById(res.hotelHrId)).name;
+                        hoteltracker.durationTo = new Date(res.durationTo);
                         $scope.hoteltracker = hoteltracker;
                     })
                 };

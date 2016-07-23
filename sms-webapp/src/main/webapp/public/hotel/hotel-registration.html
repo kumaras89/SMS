@@ -40,6 +40,7 @@
                     <td><input type="text" name="phoneNumber" id="phoneNumber" ng-model="hotel.phoneNumber" placeholder="Contact Number " ng-pattern="/^[0-9]{10}$/" maxlength="10" style="width:141px;" required/>
                     <span class="error" ng-messages="hotelForm.phoneNumber.$error" ng-if="hotelForm.phoneNumber.$touched">
                         <span ng-message="required">Contact number is required.</span>
+                        <span ng-message="pattern">Contact number is invalid.</span>
                     </span>
                     </td>
                 </tr>

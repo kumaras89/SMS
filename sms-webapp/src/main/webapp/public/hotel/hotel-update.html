@@ -22,7 +22,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label" for="code"> Hotel Code:</label></td>
-                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hotel.hotelCode" placeholder="Hotel Code" required/>
+                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hotel.hotelCode" placeholder="Hotel Code" required readonly/>
                     <span class="error" ng-messages="hotelForm.code.$error" ng-if="hotelForm.code.$touched">
                         <span ng-message="required">Hotel code is required.</span>
                     </span>

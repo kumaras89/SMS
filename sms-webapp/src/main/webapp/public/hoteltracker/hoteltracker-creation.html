@@ -14,7 +14,7 @@
             <table width="75%" class="table table-striped table-bordered table-hover">
               <tr class="even gradeA">
                     <td><label class="control-label" for="code"> Hotel Tracker Code:</label></td>
-                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hoteltracker.hotelTrackerCode" placeholder="Tracker Code" maxlength="10"  style="width:94px;" required/>
+                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hoteltracker.hotelTrackerCode" placeholder="Hotel Tracker Code" maxlength="10"  style="width:94px;" required/>
                     <span class="error" ng-messages="trackForm.code.$error" ng-if="trackForm.code.$touched">
                         <span ng-message="required">Hotel Tracker Code is required.</span>
                     </span>
@@ -81,12 +81,14 @@
                             <input type="date" name="durationFrom" id="durationFrom" ng-model="hoteltracker.durationFrom" required/>
                             <span class="error" ng-messages="trackForm.durationFrom.$error" ng-if="trackForm.durationFrom.$touched">
                                 <div ng-message="required">Duration From is required.</div>
+                                <div ng-message="invalid">Duration From is invalid.</div>
                             </span>
                         </div>
                         <div  class="right" >
                             <input type="date" name="durationTo" id="durationTo" ng-model="hoteltracker.durationTo" required/>
                             <span class="error" ng-messages="trackForm.durationTo.$error" ng-if="trackForm.durationTo.$touched">
                                 <div ng-message="required">Duration To is required.</div>
+                                <div ng-message="invalid">Duration To is invalid.</div>
                             </span>
                          </div>
                     </td>
