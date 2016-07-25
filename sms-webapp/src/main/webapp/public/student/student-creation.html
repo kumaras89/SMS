@@ -112,12 +112,9 @@
                                     <td><label class="control-label" for="gender">Gender</label></td>
                                     <td>
                                         <label ng-repeat="gender in commonAttributes.gender">
-                                            <input type="radio" name="gender" ng-model="student.gender" id="gender"  placeholder="Gender"
-                                                   value="{{gender}}" ng-checked="gender=='MALE'" required/> {{gender}}&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="gender" ng-model="student.gender" id="gender"
+                                                   value="{{gender}}" /> {{gender}}&nbsp;&nbsp;&nbsp;
                                         </label>
-                                        <span class="error" ng-messages="studentForm.gender.$error" ng-if="studentForm.gender.$touched">
-                                            <span ng-message="required">Gender is required.</span>
-                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -154,12 +151,9 @@
                                     <td><label class="control-label" for="maritalStatus">Marital Status</label></td>
                                     <td>
                                         <label ng-repeat="status in commonAttributes.maritalStatus">
-                                            <input type="radio" ng-model="student.maritalStatus" name="maritalStatus" id="maritalStatus"  placeholder="Marital Status"
-                                                   value="{{status}}" ng-checked="status=='MARRIED'" required/> {{status}}&nbsp;&nbsp;
+                                            <input type="radio" ng-model="student.maritalStatus" name="maritalStatus" id="maritalStatus"
+                                                   value="{{status}}" required/> {{status}}&nbsp;&nbsp;
                                         </label>
-                                        <span class="error" ng-messages="studentForm.maritalStatus.$error" ng-if="studentForm.maritalStatus.$touched">
-                                            <span ng-message="required">Status is required.</span>
-                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -192,8 +186,8 @@
                                     <td><label class="control-label" for="englishFluency">Fluency in english</label></td>
                                     <td>
                                         <label ng-repeat="rating in commonAttributes.rating">
-                                            <input type="radio" ng-model="student.englishFluency" id="englishFluency" placeholder="English fluency"
-                                                            value="{{rating}}" ng-checked="rating=='EXCELLENT'" required/> {{rating}}&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" ng-model="student.englishFluency" id="englishFluency"
+                                                            value="{{rating}}"  required/> {{rating}}&nbsp;&nbsp;&nbsp;
                                         </label>
                                     </td>
                                 </tr>

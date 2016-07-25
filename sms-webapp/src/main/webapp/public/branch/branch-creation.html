@@ -31,11 +31,8 @@
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label">Active/Inactive</label></td>
                     <td>
-                        <input type="radio" name="isActive" value="1" ng-model="branch.isActive" ng-checked="value=='1'" required><label class="control-label">&nbsp; Active</label>&nbsp;
-                        <input type="radio" name="isActive" value="0" ng-model="branch.isActive" required><label class="control-label">&nbsp; In Active</label>&nbsp;
-                        <span class="error" ng-messages="branchForm.isActive.$error" ng-if="branchForm.isActive.$touched">
-                            <span ng-message="required">Select any one.</span>
-                        </span>
+                        <input type="radio" name="isActive" value="1" ng-model="branch.isActive" /><label class="control-label">&nbsp; Active</label>&nbsp;
+                        <input type="radio" name="isActive" value="0" ng-model="branch.isActive"/><label class="control-label">&nbsp; In Active</label>&nbsp;
                     </td>
                 </tr>
             </table>

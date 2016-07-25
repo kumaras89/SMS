@@ -152,6 +152,9 @@
                 };
 
                 $scope.initialize = function(){
+                    $scope.student.gender='MALE';
+                    $scope.student.maritalStatus='MARRIED';
+                    $scope.student.englishFluency='EXCELLENT';
                     $scope.student.guardians = [{}, {}, {}, {}];
                     $scope.student.otherLanguages = [{}, {}, {}];
                     $scope.student.sslcMarkDetails = {};

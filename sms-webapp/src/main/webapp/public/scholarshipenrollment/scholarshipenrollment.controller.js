@@ -73,8 +73,14 @@
         .controller('ScholarshipEnrollmentCreationCtrl', ['$scope', '$http', 'FlashService', '$state', 'AdminService',
             function ($scope, $http, FlashService, $state, AdminService) {
 
-                $scope.scholarshipEnrollment = {};
-                $scope.scholarshipEnrollment.educationDetails = [{},{},{},{}];
+                $scope.initialize = function(){
+                    $scope.scholarshipEnrollment = {};
+                    $scope.scholarshipEnrollment.educationDetails = [{},{},{},{}];
+                    $scope.scholarshipEnrollment.gender='MALE';
+                    $scope.scholarshipEnrollment.maritalStatus='MARRIED';
+                    $scope.scholarshipEnrollment.annualIncome='Upto 50000';
+                };
+                $scope.initialize();
 
 
                 $scope.createNewScholarshipEnrollment = function () {
