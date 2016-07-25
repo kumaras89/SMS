@@ -46,7 +46,7 @@
                     $scope.messageService.status = 'SENT';
                     CrudService.messageService.Create($scope.messageService).then(function () {
                     FlashService.Success("Message sent Successfuly !!", true);
-                    $state.reload('home.messageservice-list');
+                    $state.reload();
                     });
                 }
 
