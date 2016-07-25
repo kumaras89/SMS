@@ -28,7 +28,7 @@ public class MessageService {
                                              .then(senderDetails ->
                                                  senderDetails.stream().map(
                                                      senderDetail ->
-                                                         SMSSender.sendSms(senderDetail).apply(messageConfig)
+                                                         SMSSender.sendSms(senderDetail).apply(messageConfig.getSmsConfig())
                                                  ).collect(Collectors.toList())
                                              ).get());
 
