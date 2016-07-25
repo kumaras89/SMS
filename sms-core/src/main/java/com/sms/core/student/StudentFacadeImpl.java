@@ -1,4 +1,5 @@
 package com.sms.core.student;
+import com.sms.core.message.SMSConfig;
 import com.sms.core.message.SMSDetails;
 import com.sms.core.message.SMSSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,15 @@ public class StudentFacadeImpl implements StudentFacade {
     @Autowired
     private StudentEnrollmentConfig seConfig;
 
+    @Autowired
+    private SMSConfig smsConfig;
+
     @Override
     public StudentInfo save(final StudentInfo studentInfo) {
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
                                               .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
-                                              .on(SMSDetails::getMessage).set(welcomeMessage).build());
+                                              .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
         return newStudentInfo;
     }
 

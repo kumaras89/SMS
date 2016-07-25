@@ -4,6 +4,7 @@ import com.sms.core.SmsException;
 import com.sms.core.common.Builder;
 import com.sms.core.common.FList;
 import com.sms.core.message.MessageConfig;
+import com.sms.core.message.SMSConfig;
 import com.sms.core.message.SMSDetails;
 import com.sms.core.message.SMSSender;
 import com.sms.core.repositery.BranchRepository;
@@ -29,7 +30,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final StudentScholarRepository studentScholarRepository;
     private final MarketingEmployeeRepository marketingEmployeeRepository;
     private final BranchRepository branchRepository;
-    private final MessageConfig messageConfig;
+    private final SMSConfig smsConfig;
 
 
     @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
@@ -39,11 +40,11 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository,
                                      final MarketingEmployeeRepository marketingEmployeeRepository ,
                                      final BranchRepository branchRepository,
-                                     final MessageConfig messageConfig) {
+                                     final SMSConfig smsConfig) {
         this.studentScholarRepository = studentScholarRepository;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.branchRepository = branchRepository;
-        this.messageConfig = messageConfig;
+        this.smsConfig = smsConfig;
     }
 
 
@@ -94,7 +95,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(scholar.getName())
             .on(SMSDetails::getPhoneNumber).set(scholar.getStudentPhoneNumber())
-            .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(messageConfig);
+            .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
         return newStudent;
     }
 

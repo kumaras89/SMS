@@ -34,8 +34,8 @@ public class MessageRestController {
     public ResponseEntity<List<MessageInfo>> listAll() {
         return Optional.ofNullable(messageFacade.listAll())
                        .filter(messageInfos -> !messageInfos.isEmpty())
-                       .map(messageInfos -> new ResponseEntity(messageInfos,HttpStatus.ACCEPTED))
-                       .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
+                       .map(messageInfos -> new ResponseEntity<>(messageInfos,HttpStatus.ACCEPTED))
+                       .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 

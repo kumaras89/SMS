@@ -22,7 +22,7 @@ public class SMSSender {
      * @param senderDetails
      * @return
      */
-    public static Function<MessageConfig, String> sendSms(final SMSDetails senderDetails) {
+    public static Function<SMSConfig, String> sendSms(final SMSDetails senderDetails) {
         return messageConfig -> Do.of(senderDetails)
             .then(sd -> {
                 final MultiValueMap<String, String> uriVariables = new LinkedMultiValueMap<>();

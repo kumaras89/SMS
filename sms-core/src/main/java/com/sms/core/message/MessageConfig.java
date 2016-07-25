@@ -34,8 +34,7 @@ public class MessageConfig {
     private StudentScholarService studentScholarService;
 
     @Autowired
-    private SMSLoginDetails smsLoginDetails;
-
+    private SMSConfig smsConfig;
 
     public MessageRepository getMessageRepository() {
         return messageRepository;
@@ -43,10 +42,6 @@ public class MessageConfig {
 
     public Map<String, SenderDetailsProvider> getDetailsProviders() {
         return deatailProviders;
-    }
-
-    public SMSLoginDetails getSmsLoginDetails() {
-        return smsLoginDetails;
     }
 
     public IStudentPortalService<MarketingEmployeeInfo> getMarketingEmployeeService() {
@@ -59,5 +54,9 @@ public class MessageConfig {
 
     public StudentScholarService getStudentScholarService() {
         return studentScholarService;
+    }
+
+    public SMSConfig getSmsConfig() {
+        return smsConfig;
     }
 }
