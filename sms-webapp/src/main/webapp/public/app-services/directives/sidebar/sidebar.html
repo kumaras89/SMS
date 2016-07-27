@@ -16,11 +16,16 @@
             <li ui-sref-active="active">
                 <a include-if-allowed operation="course" ui-sref="home.course-list"><i class="fa fa-book fa-fw"></i> Course</a>
             </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="feesparticular" ui-sref="home.feesparticular-list"><i class="fa fa-bars fa-fw"></i> Fees Components</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="scheme" ui-sref="home.scheme-list"><i class="fa fa-pencil fa-fw"></i> Scheme</a>
+            <li ui-sref-active="active"><a ui-sref="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-list-ul"></i> Fees and Scheme<i style="float: right" class="fa fa-sort-desc" aria-hidden="true"></i></a>
+
+                <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="feesparticular" ui-sref="home.feesparticular-list"><i class="fa fa-bars fa-fw"></i> Fees Components</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="scheme" ui-sref="home.scheme-list"><i class="fa fa-pencil fa-fw"></i> Scheme</a>
+                    </li>
+                </ul>
             </li>
             <li ui-sref-active="active">
                 <a include-if-allowed operation="role" ui-sref="home.role-list"><i class="fa fa-gears fa-fw"></i> Roles</a>
@@ -40,11 +45,16 @@
             <li ui-sref-active="active">
                 <a include-if-allowed operation="idcard" ui-sref="home.idcard-search"><i class="fa fa-credit-card fa-fw"></i> Id Card</a>
             </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="hotel" ui-sref="home.hotel-list"><i class="fa fa-credit-card fa-fw"></i> Hotels</a>
-            </li>
-            <li ui-sref-active="active">
-                <a include-if-allowed operation="hoteltracker" ui-sref="home.hoteltracker-list"><i class="fa fa-credit-card fa-fw"></i> Training Tracker</a>
+            <li ui-sref-active="active"><a ui-sref="#" id="btn-1" data-toggle="collapse" data-target="#submenu2" aria-expanded="false"><i class="fa fa-list-ul"></i> Hotels and Training<i style="float: right" class="fa fa-sort-desc" aria-hidden="true"></i></a>
+
+                <ul class="nav collapse" id="submenu2" role="menu" aria-labelledby="btn-1">
+                    <li ui-sref-active="active" >
+                        <a include-if-allowed operation="hotel" ui-sref="home.hotel-list"><i class="fa fa-credit-card fa-fw"></i> Hotels</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a include-if-allowed operation="hoteltracker" ui-sref="home.hoteltracker-list"><i class="fa fa-credit-card fa-fw"></i> Training Tracker</a>
+                    </li>
+                </ul>
             </li>
             <li ui-sref-active="active">
                 <a include-if-allowed operation="messageservice" ui-sref="home.messageservice-creation"><i class="fa fa-bell fa-fw"></i> Message Service</a>

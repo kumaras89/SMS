@@ -13,16 +13,12 @@
         <form name="courseForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="code">Code:</label></td>
-                    <td><input type="text" name="code" id="code" ng-model="course.code" placeholder="Code" maxlength="10" style="width:94px;" required/>
-                        <span class="error" ng-messages="courseForm.code.$error" ng-if="courseForm.code.$touched">
-                            <span ng-message="required">Code is required.</span>
-                        </span>
-                    </td>
+                    <td class="firstcol"><label class="control-label">Code:</label></td>
+                    <td><label class="control-label">{{course.code}}</label></td>
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="name">Name:</label></td>
-                    <td><input type="text" name="name" id="name" ng-model="course.name" placeholder="Name" maxlength="25" style="width:233px;" required/>
+                    <td><input type="text" name="name" id="name" ng-model="course.name" placeholder="Name" maxlength="50" style="width:233px;" required/>
                         <span class="error" ng-messages="courseForm.name.$error" ng-if="courseForm.name.$touched">
                             <span ng-message="required">Name is required.</span>
                         </span>

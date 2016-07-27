@@ -14,7 +14,47 @@
 
                     return hoteltracker.hotelCode == $scope.hoteltracker.hotelCode;
                 }
-                
+
+                $scope.startChange = function () {
+                    var startDate = hoteltracker.durationFrom.value(),
+                        endDate = hoteltracker.durationTo.value()
+                    if(hoteltracker.durationFrom){
+                        startDate = new Date(startDate);
+                        startDate.setDate(startDate.getDate());
+                        hoteltracker.durationTo.min(startDate);
+                    }else if(endDate){
+                        hoteltracker.durationFrom.max(new Date(endDate));
+                    }else{
+                        endDate = new Date();
+                        hoteltracker.durationFrom.max(endDate);
+                        hoteltracker.durationTo.min(endDate);
+                    }
+                }
+                $scope.endChange = function () {
+
+                    var endDate = hoteltracker.durationTo.value(),
+                        startDate = hoteltracker.durationFrom.value();
+
+                    if (endDate) {
+                        endDate = new Date(endDate);
+                        endDate.setDate(endDate.getDate());
+                        hoteltracker.durationFrom.max(endDate);
+                    } else if (startDate) {
+                        hoteltracker.durationTo.min(new Date(startDate));
+                    } else {
+                        endDate = new Date();
+                        hoteltracker.durationFrom.max(endDate);
+                        hoteltracker.durationTo.min(endDate);
+                    }
+                }
+                $scope.today = new date();
+                $hoteltracker.durationFrom = $(input)() {
+                    
+
+                }
+
+
+
                 $scope.init = function() {
                     AdminService.getHotels(function(data) {
                         $scope.hotels = data;

@@ -116,13 +116,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><label class="control-label" for="caste">Cummunity</label></td>
+                                    <td><label class="control-label" for="caste">Community</label></td>
                                     <td>
-                                        <select ng-model="scholarshipEnrollment.caste" name="caste" id="caste" placeholder="Cummunity" required>
+                                        <select ng-model="scholarshipEnrollment.caste" name="caste" id="caste" placeholder="Community" required>
                                             <option ng-repeat="caste in commonAttributes.caste" value="{{caste}}">{{caste}}</option>
                                         </select>
                                         <span class="error" ng-messages="scholarship.caste.$error" ng-if="scholarship.caste.$touched">
-                                            <span ng-message="required">Cummunity is required.</span>
+                                            <span ng-message="required">Community is required.</span>
                                         </span>
                                     </td>
                                 </tr>
@@ -293,7 +293,7 @@
                                     <td><label class="control-label">{{scholarshipSummarized.religion}}</label></td>
                                 </tr>
                                 <tr>
-                                    <td class="firstcol"><label class="control-label" for="caste">Cummunity</label></td>
+                                    <td class="firstcol"><label class="control-label" for="caste">Community</label></td>
                                     <td><label class="control-label">{{scholarshipSummarized.caste}}</label></td>
                                 </tr>
                                 <tr>

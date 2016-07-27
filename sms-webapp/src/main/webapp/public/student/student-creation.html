@@ -316,7 +316,7 @@
                                         <td></td>
                                         <td>Presentage/Class</td>
                                         <td></td>
-                                        <td><input type="number" id="sslcPercentage" ng-model="student.sslcMarkDetails.percentage" value="{{student.sslcMarkDetails.percentage}}"/></td>
+                                        <td><input type="text" id="sslcPercentage" ng-model="student.sslcMarkDetails.percentage" value="{{student.sslcMarkDetails.percentage}}"/></td>
                                     </tr>
                                 </table>
                             </div>
@@ -389,7 +389,7 @@
                                             <td></td>
                                             <td>Presentage/Class</td>
                                             <td></td>
-                                            <td><input type="number" id="hscPercentage"
+                                            <td><input type="text" id="hscPercentage"
                                                        ng-model="student.hscMarkDetails.percentage"
                                                        value="{{student.hscMarkDetails.percentage}}"/></td>
                                         </tr>
@@ -858,7 +858,7 @@
                                 </tr>
                                 <tr>
                                     <td class="firstcol"><label class="control-label">Scheme Type and Amount</label></td>
-                                    <td ng-repeat="scheme in schemes | filter: { name: schemeName }"><label class="control-label">{{scheme.name}} - {{scheme.feesAmount | currency:'&#8377;'}}</label></td>
+                                    <td ng-repeat="scheme in schemes | filter: { name: student.schemeName }"><label class="control-label">{{scheme.name}} - {{scheme.feesAmount | currency:'&#8377;'}}</label></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">&nbsp;</td>

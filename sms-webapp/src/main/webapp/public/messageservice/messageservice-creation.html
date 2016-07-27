@@ -1,9 +1,5 @@
-<style>
-   @font-face {
-    font-family: Bamini;
-    src: url('../fonts/Bamini.TTF');
-    }
-</style>
+<SCRIPT language=JavaScript src="http://www.higopi.com/script/ucedit/common.js"></SCRIPT>
+<SCRIPT language=JavaScript src="http://www.higopi.com/script/ucedit/tamil.js"></SCRIPT>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-bell fa-fw"></i> Message Service</h1>
@@ -35,8 +31,15 @@
                 </tr>
                 <tr class="even gradeA">
                     <td style="width: 40%"><label class="control-label">Message</label></td>
-                    <td > <textarea id="message" font face="Bamini"  name="message" class="" ng-model="messageService.message" placeholder="Message"
-                                  ng-trim="false" maxlength="272" style="width: 100%;height: 100px" required/>
+                    <td >
+                        <input type=radio name=keybrd value=roman onclick="toggleKBMode(event,this)" checked>Phonetic &nbsp;&nbsp;
+
+                        <input type=radio name=keybrd value=typewriter onclick="toggleKBMode(event,this)">Tamil Typewriter&nbsp;&nbsp;
+
+                        <input type=radio name=keybrd value=english onclick="toggleKBMode(event,this)"> English <br>
+
+                        <textarea id="message" font face="Bamini"  name="message" class="" ng-model="messageService.message" placeholder="Message"
+                                  ng-trim="false" maxlength="272" style="width: 100%;height: 100px" charset="utf-8" onKeyDown="toggleKBMode(event)" onKeyPress="javascript:convertThis(event)" required/>
                         <span>{{272 - messageService.message.length}} characters remaining.</span>
                         <span class="error" ng-messages="messageForm.message.$error" ng-if="messageForm.message.$touched">
                             <span ng-message="required">Message is required.</span>
