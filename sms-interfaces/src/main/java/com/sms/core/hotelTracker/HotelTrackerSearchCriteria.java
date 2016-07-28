@@ -1,5 +1,7 @@
 package com.sms.core.hotelTracker;
 
+import java.util.Date;
+
 /**
  * Created by sathish on 7/19/2016.
  */
@@ -10,6 +12,9 @@ public class HotelTrackerSearchCriteria
     private HotelTrackerStatus status;
     private String hotelHrName;
     private String studentName;
+    private Date durationFrom;
+    private Date durationTo;
+
 
     public String getHotelName() {
         return hotelName;
@@ -31,4 +36,11 @@ public class HotelTrackerSearchCriteria
         return studentName;
     }
 
+    public Date getDurationFrom() {
+        return durationFrom;
+    }
+
+    public Date getDurationTo() {
+        return durationTo;
+    }
 }

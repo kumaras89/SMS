@@ -54,7 +54,7 @@ public class HotelTrackerServiceImpl implements HotelTrackerService {
 
         if(hotelTrackers!=null)
         {
-            throw new SmsException("Insertion Error","Which Student You are mapping that is already mapped.");
+            throw new SmsException("Mapping Error","Student Name : "+hotelTrackers.getStudentName().getName()+"is already mapped.");
         }
         else
         {
@@ -93,6 +93,6 @@ public class HotelTrackerServiceImpl implements HotelTrackerService {
     public Optional<HotelTrackerInfo> update(Long id, final HotelTrackerInfo entityType) {
         return Optional.ofNullable(hotelTrackerRepository.findById(id))
                 .map(tracker -> this.CommonSave(entityType))
-                .orElseThrow(() ->  new SmsException("HotelTracker Update Error", "What you trying to do Update its not available"));
+                .orElseThrow(() ->  new SmsException("HotelTracker Update Error", "What you trying to Update its not available"));
     }
 }
