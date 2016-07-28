@@ -98,7 +98,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="dateOfBirth">Date Of Birth</label></td>
-                                    <td><input type="date" name="dateOfBirth" id="dateOfBirth" ng-model="student.dateOfBirth" name="DateOfBirth" required/>
+                                    <td><input type="date" name="dateOfBirth" id="dateOfBirth" ng-model="student.dateOfBirth" name="DateOfBirth" max="{{today}}" required/>
                                         <span class="error" ng-messages="studentForm.dateOfBirth.$error" ng-if="studentForm.dateOfBirth.$touched">
                                             <span ng-message="required">Date Of Birth is required.</span>
                                         </span>

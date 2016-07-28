@@ -3,8 +3,8 @@
 
     angular
         .module('app')
-        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout','$uibModal',
-        function ($scope,$stateParams, CrudService, FlashService, $state, ngTableParams,  $timeout, $uibModal) {
+        .controller('CrudCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$state', 'ngTableParams', '$timeout',
+        function ($scope,$stateParams, CrudService, FlashService, $state, ngTableParams,  $timeout) {
 
             $scope.init = function(path, clearCachePaths) {
                 $scope.path = path;
@@ -76,10 +76,6 @@
                     $scope.tableParams.reload();
                 });
 
-                modalInstance.result.then(function () {
-                }, function () {
-                    //$log.info('Modal dismissed at: ' + new Date());
-                });
             };
             
             $scope.tableParams = new ngTableParams({

@@ -59,7 +59,7 @@
                     <td class="firstcol"><label class="control-label" for="student">Student : </label></td>
                     <td class="secondcol">
                         <select  ng-model="hoteltracker.studentCode" ng-change= name="student" id="student" required>
-                            <option ng-repeat="student in students" ng-if="student.branchCode == hoteltracker.branchCode" value="{{student.code}}">{{student.name}}</option>
+                            <option ng-repeat="student in students" ng-if="student.branchCode == hoteltracker.branchCode" value="{{student.code}}">Name: {{student.name}} ; Application Number: {{student.applicationNumber}}</option>
                         </select>
                     <span class="error" ng-messages="trackForm.student.$error" ng-if="trackForm.student.$touched">
                         <span ng-message="required">Student is required.</span>

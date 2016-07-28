@@ -41,7 +41,7 @@
                     <td class="firstcol"><label class="control-label" for="hr">HR : </label></td>
                     <td class="secondcol">
                         <select  ng-model="hoteltracker.hotelHrId"  name="hr" id="hr" required>
-                            <option ng-repeat="hr in hrs" ng-if="hr.hotelCode == hoteltracker.hotelCode"  value="{{hr.id}}">{{hr.name}}</option>
+                            <option ng-repeat="hr in hrs" ng-if="hr.hotelCode == hoteltracker.hotelCode" ng-selected="hr.name == hrName" value="{{hr.id}}">{{hr.name}}</option>
                         </select>
                     <span class="error" ng-messages="trackForm.hr.$error" ng-if="trackForm.hr.$touched">
                         <span ng-message="required">HR is required.</span>

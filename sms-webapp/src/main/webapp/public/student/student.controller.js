@@ -152,6 +152,7 @@
                 };
 
                 $scope.initialize = function(){
+                    $scope.today=moment().format("YYYY-MM-DD");
                     $scope.student.gender='MALE';
                     $scope.student.maritalStatus='MARRIED';
                     $scope.student.englishFluency='EXCELLENT';

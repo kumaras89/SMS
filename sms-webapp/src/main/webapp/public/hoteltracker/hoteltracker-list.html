@@ -21,7 +21,7 @@
                     <tr>
                         <td><label class="control-label" for="student">Student Name</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.studentName" uib-typeahead="sName for sName in studentNames | filter:$viewValue | limitTo:8" id="student" placeholder="Student Name" autocomplete="off" />
+                            <input type="text" ng-model="searchCriteria.studentName" ng-change="upper(searchCriteria.studentName)" id="student" placeholder="Student Name"  />
                         </td>
                     </tr>
                     <tr>
