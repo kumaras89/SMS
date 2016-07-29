@@ -82,7 +82,7 @@
             <br>
             <tr>
                 <a ui-sref="home.hoteltracker-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Student Hotel Tracker </a> &nbsp;
-                <a ng-click="updateTracker(hoteltracker.id)" class="btn btn-small btn-primary"><i class=" fa fa-edit fa-fw"></i> Edit Mapping</a>
+                <a ng-click="updateTracker(hoteltracker.id)" ng-if="hoteltracker.status != 'SUSPENDED' " class="btn btn-small btn-primary"><i class=" fa fa-edit fa-fw"></i> Edit Mapping</a>
             </tr>
             </tbody>
         </table>

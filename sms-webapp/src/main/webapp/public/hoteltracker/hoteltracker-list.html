@@ -10,7 +10,7 @@
             <a ng-click="hotelTrackerCreate()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Student Mapping</a>
         </div>
         <div style="border-radius:20px;border: 2px solid #3dad9c;">
-            <div class="control-group,form">
+            <div class="control-group,form" ng-form name="trackerForm">
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
@@ -18,8 +18,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><label class="control-label" for="student">Student Name</label></td>
+                    <tr >
+                        <td class="firstcol"><label class="control-label" for="student">Student Name</label></td>
                         <td>
                             <input type="text" ng-model="searchCriteria.studentName" ng-change="upper(searchCriteria.studentName)" id="student" placeholder="Student Name"  />
                         </td>
@@ -53,8 +53,23 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><label class="control-label">From</label></td>
+                        <td>
+                                <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="control-label">To</label></td>
+                        <td>
+                                <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}"/>
+                            <span class="error" ng-show="trackerForm.durationTo.$error.min">Invalid From date !</span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
                         <td colspan="2" style="text-align: right">
-                            <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                            <a ng-click="search()" ng-class="{linkdisabled: trackerForm.$invalid}" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>
@@ -73,21 +88,23 @@
                     <th align="center">Hotel</th>
                     <th align="center">From</th>
                     <th align="center">To</th>
-                    <th align="center">Remaining days</th>
                     <th align="center">Status</th>
+                    <th align="center">Remaining days</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-click="changeLocation(hoteltracker.id)" ng-class="{suspended: hoteltracker.status=='SUSPENDED' , mapped:hoteltracker.status=='MAPPED', datecrossed: calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)=='Date crosed'}" ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="active" style="cursor: hand; cursor: pointer;">
 
                     <td>{{$index + 1 }}</td>
-                    <td sortable="code">{{ getStudentName(hoteltracker.studentCode)}}</td>
-                    <td sortable="name">{{ getBranchDesc(hoteltracker.branchCode)}}</td>
-                    <td sortable="name">{{ getHotelName(hoteltracker.hotelCode)}}</td>
+                    <td sortable="studentCode">{{ getStudentName(hoteltracker.studentCode)}}</td>
+                    <td sortable="branchCode">{{ getBranchDesc(hoteltracker.branchCode)}}</td>
+                    <td sortable="hotelCode">{{ getHotelName(hoteltracker.hotelCode)}}</td>
                     <td >{{ hoteltracker.durationFrom|date}}</td>
                     <td >{{ hoteltracker.durationTo|date}}</td>
-                    <td >{{ calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)}}</td>
                     <td >{{ hoteltracker.status}}</td>
+                    <td ng-if="hoteltracker.status !='SUSPENDED'">{{ calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)}}</td>
+                    <td ng-if="hoteltracker.status =='SUSPENDED'"></td>
                 </tr>
                 <tr>
                     <td ng-show="$data.length==0" class="info no_data" colspan="9">

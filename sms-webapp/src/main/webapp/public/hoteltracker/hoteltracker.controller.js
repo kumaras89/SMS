@@ -5,19 +5,25 @@
         .module('HotelTracker')
         .controller('HotelTrackerCreationCtrl', ['$scope', 'FlashService', '$state', 'AdminService','CrudService','$http',
             function ($scope, FlashService, $state, AdminService,CrudService,$http) {
+                $scope.hoteltracker = {};
+                $scope.branchname = '';
 
-                $scope.branchChanged = function() {
-                        var branchName= AdminService.getBranchDesc($scope.hoteltracker.branchCode);
-                        $scope.getStudents(branchName);
-                        return hoteltracker.branchCode == $scope.hoteltracker.branchCode;
-
-                    }
-                $scope.hotelChanged = function() {
-
-                    return hoteltracker.hotelCode == $scope.hoteltracker.hotelCode;
+                $scope.branchChanged = function () {
+                    var branchName = AdminService.getBranchDesc($scope.hoteltracker.branchCode);
+                    return hoteltracker.branchCode == $scope.hoteltracker.branchCode;
                 }
 
+                $scope.yr= function(){
+                    var years = [];
+                for (var i = 2014; i <= moment().year(); i++) {
+                    years.push(i);
+                }
+                $scope.years = years;
+                }
+                $scope.yr();
+
                 $scope.getStudents= function (branchName) {
+                    $scope.students={};
                     var searchCriteria = $.extend(searchCriteria, $scope.searchCriteria);
                     searchCriteria.branchName=branchName;
 
@@ -27,7 +33,10 @@
                             })
                 }
                 
+                
+                
                 $scope.init = function() {
+                    $scope.hoteltracker.durationFrom = new Date();
                     AdminService.getHotels(function(data) {
                         $scope.hotels = data;
                     })
@@ -55,9 +64,6 @@
             }])
         .controller('HotelTrackerListCtrl', ['$scope','$http', '$timeout','ngTableParams', 'FlashService', '$state', 'AdminService',
             function ($scope,$http, $timeout, ngTableParams, FlashService, $state, AdminService) {
-                $scope.upper = function(test){
-                    $scope.searchCriteria.studentName = test.toUpperCase();
-                }
                 $scope.searchCriteria = {};
                 $scope.getBranchDesc = AdminService.getBranchDesc;
                 $scope.getStudentName= AdminService.getStudentName;
@@ -95,11 +101,6 @@
                     });
                     AdminService.getHotels(function(data) {
                         $scope.hotels= _.pluck(data,"hotelName")
-
-                    })
-                    AdminService.getStudents(function(data) {
-                        $scope.studentNames=data;
-                        $scope.studentNames = _.pluck(data,"name")
                     })
                     AdminService.getHotelHrs(function(data) {
                         $scope.hrs= _.pluck(data,"name")
@@ -107,7 +108,6 @@
                     AdminService.getBranches(function(data) {
                         $scope.branches= _.pluck(data,"name")
                     })
-
                 }
                 $scope.init();
 
