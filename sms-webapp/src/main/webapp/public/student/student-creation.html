@@ -302,8 +302,14 @@
                                         <tr>
                                             <td>{{$index + 1}}</td>
                                             <td><input type="text" id="sslcName" ng-model="subject.name" value="{{subject.name}}"/></td>
-                                            <td><input type="number" id="totalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
-                                            <td><input type="number" id="securedMark" ng-model="subject.securedMark"></td>
+                                            <td><input type="number" id="totalMark" name="totalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
+                                            <td><input type="number" id="securedMark" name="securedMark" ng-model="subject.securedMark" max="{{subject.totalMark}}" required>
+                                                <div class="error" ng-messages="studentForm.securedMark.$error" ng-if="studentForm.securedMark.$touched && (subject.totalMark > subject.securedMark).$invalid">
+                                                     <span ng-message="required">Secured mark is Required.</span>
+                                                    <span ng-message="invalid">Invalid.</span>
+                                                </div>
+                                                <!--<div class="error" ng-if="studentForm.subject.totalMark > studentForm.subject.securedMark">Invalid</div>-->
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tr>
@@ -327,12 +333,17 @@
                                     <tbody>
                                         <tr>
                                             <td>Registered no</td>
-                                            <td><input type="text" id="regNo" ng-model="student.sslcMarkDetails.additionalDetails.regNumber"/></td>
+                                            <td><input type="text" name="regNo" id="regNo" ng-model="student.sslcMarkDetails.additionalDetails.regNumber" required/>
+                                                <div class="error" ng-messages="studentForm.regNo.$error" ng-if="studentForm.regNo.$touched">
+                                                    <span ng-message="required">Registered no is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Year of Passing</td>
-                                            <td><input type="number" name="sslcYear" ng-model="student.sslcMarkDetails.additionalDetails.yearOfPassing" minlength="4" maxlength="4">
+                                            <td><input type="number" name="sslcYear" ng-model="student.sslcMarkDetails.additionalDetails.yearOfPassing" minlength="4" maxlength="4" required/>
                                                 <div class="error" ng-messages="studentForm.sslcYear.$error" ng-if="studentForm.sslcYear.$touched">
+                                                    <span ng-message="required">Year of Passing is required.</span>
                                                     <span ng-message="minlength">Invalid year.</span>
                                                     <span ng-message="maxlength">Invalid year.</span>
                                                 </div>
@@ -340,15 +351,27 @@
                                         </tr>
                                         <tr>
                                             <td>School Name</td>
-                                            <td><input type="text" id="sslcSchoolName" ng-model="student.sslcMarkDetails.additionalDetails.schoolName"></td>
+                                            <td><input type="text" id="sslcSchoolName" name="sslcSchoolName" ng-model="student.sslcMarkDetails.additionalDetails.schoolName" required/>
+                                                <div class="error" ng-messages="studentForm.sslcSchoolName.$error" ng-if="studentForm.sslcSchoolName.$touched">
+                                                    <span ng-message="required">School Name is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Place of school</td>
-                                            <td><input type="text" id="sslcPlaceOfSchool" ng-model="student.sslcMarkDetails.additionalDetails.placeOfSchool"></td>
+                                            <td><input type="text" id="sslcPlaceOfSchool" name="sslcPlaceOfSchool" ng-model="student.sslcMarkDetails.additionalDetails.placeOfSchool" required/>
+                                                <div class="error" ng-messages="studentForm.sslcPlaceOfSchool.$error" ng-if="studentForm.sslcPlaceOfSchool.$touched">
+                                                    <span ng-message="required">Place of school is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Board of Examination</td>
-                                            <td><input type="text" id="sslcBoard" ng-model="student.sslcMarkDetails.additionalDetails.boardOfExamination"></td>
+                                            <td><input type="text" id="sslcBoard" name="sslcBoard" ng-model="student.sslcMarkDetails.additionalDetails.boardOfExamination" required/>
+                                                <div class="error" ng-messages="studentForm.sslcBoard.$error" ng-if="studentForm.sslcBoard.$touched">
+                                                    <span ng-message="required">Board of Examination is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -362,6 +385,7 @@
                     </div>
                     <div style="border-radius:20px;border: 2px solid #3dad9c;" ng-show="hscEnable">
                         <div class="row">
+                            <h3 align="center">Student HSC Details</h3>
                             <div class="col-md-7">
                                 <table class="table-condensed">
                                     <thead>
@@ -377,7 +401,12 @@
                                             <td>{{$index + 1}}</td>
                                             <td><input type="text" id="hscName" ng-model="subject.name" value="{{subject.name}}"/></td>
                                             <td><input type="number" id="hsctotalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
-                                            <td><input type="number" id="hscsecuredMark" ng-model="subject.securedMark"></td>
+                                            <td><input type="number" name="hscsecuredMark" id="hscsecuredMark" ng-model="subject.securedMark" required>
+                                                <div class="error" ng-messages="studentForm.hscsecuredMark.$error" ng-if="studentForm.hscsecuredMark.$touched">
+                                                    <span ng-message="required">Secured mark is required.</span>
+                                                    <span ng-message="maxlength">Invalid year.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -403,12 +432,17 @@
                                     <tbody>
                                         <tr>
                                             <td>Registered no</td>
-                                            <td><input type="text" id="hscRegNo" ng-model="student.hscMarkDetails.additionalDetails.regNumber"/></td>
+                                            <td><input type="text" name="hscRegNo" id="hscRegNo" ng-model="student.hscMarkDetails.additionalDetails.regNumber" required/>
+                                                <div class="error" ng-messages="studentForm.hscRegNo.$error" ng-if="studentForm.hscRegNo.$touched">
+                                                    <span ng-message="required">Registered no is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Year of Passing</td>
-                                            <td><input type="number" name="hscYear" id="hscYear" ng-model="student.hscMarkDetails.additionalDetails.yearOfPassing">
+                                            <td><input type="number" name="hscYear" id="hscYear" ng-model="student.hscMarkDetails.additionalDetails.yearOfPassing" required/>
                                                 <div class="error" ng-messages="studentForm.hscYear.$error" ng-if="studentForm.hscYear.$touched">
+                                                    <span ng-message="required">Year of Passing is required.</span>
                                                     <span ng-message="minlength">Invalid year.</span>
                                                     <span ng-message="maxlength">Invalid year.</span>
                                                 </div>
@@ -416,15 +450,27 @@
                                         </tr>
                                         <tr>
                                             <td>School Name</td>
-                                            <td><input type="text" id="hscSchoolName" ng-model="student.hscMarkDetails.additionalDetails.schoolName"></td>
+                                            <td><input type="text" id="hscSchoolName" name="hscSchoolName" ng-model="student.hscMarkDetails.additionalDetails.schoolName" required/>
+                                                <div class="error" ng-messages="studentForm.hscSchoolName.$error" ng-if="studentForm.hscSchoolName.$touched">
+                                                    <span ng-message="required">School Name is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Place of school</td>
-                                            <td><input type="text" id="hscPlaceOfSchool" ng-model="student.hscMarkDetails.additionalDetails.placeOfSchool"></td>
+                                            <td><input type="text" id="hscPlaceOfSchool" name="hscPlaceOfSchool" ng-model="student.hscMarkDetails.additionalDetails.placeOfSchool" required/>
+                                                <div class="error" ng-messages="studentForm.hscPlaceOfSchool.$error" ng-if="studentForm.hscPlaceOfSchool.$touched">
+                                                    <span ng-message="required">Place of school is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Board of Examination</td>
-                                            <td><input type="text" id="hscBoard" ng-model="student.hscMarkDetails.additionalDetails.boardOfExamination"></td>
+                                            <td><input type="text" id="hscBoard" name="hscBoard" ng-model="student.hscMarkDetails.additionalDetails.boardOfExamination" required/>
+                                                <div class="error" ng-messages="studentForm.hscBoard.$error" ng-if="studentForm.hscBoard.$touched">
+                                                    <span ng-message="required">Board of Examination is required.</span>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
