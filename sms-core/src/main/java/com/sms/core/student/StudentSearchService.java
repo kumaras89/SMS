@@ -19,7 +19,7 @@ public class StudentSearchService {
     public static Specification<Student> idCardRequest(final StudentSearchCriteria criteria) {
 
         return (root, query, builder) -> builder.and(PredicateBuilder.of(Optional.ofNullable(criteria))
-                .map(StudentSearchCriteria::getStudentName, identityCode -> builder.like(builder.upper(root.<String>get("name")), "%" + identityCode + "%"))
+                .map(StudentSearchCriteria::getStudentName, identityCode -> builder.like(builder.upper(root.<String>get("name")), "%" + identityCode.toUpperCase() + "%"))
                 .map(StudentSearchCriteria::getStudentCode, status -> builder.equal(root.<String>get("code"), status))
                 .map(StudentSearchCriteria::getBranchName, name -> builder.like(root.join("branch",  JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(StudentSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
