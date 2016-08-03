@@ -18,7 +18,13 @@
 
                 $scope.applicationNumber = '';
                 $scope.searchCriteria = {}
-
+                $scope.printToCart = function(printSectionId) {
+                    var innerContents = document.getElementById(printSectionId).innerHTML;
+                    var popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+                    popupWinindow.document.open();
+                    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + innerContents + '</html>');
+                    popupWinindow.document.close();
+                };
                 $scope.searchStudentScholarship = function() {
                     var modalInstance = $uibModal.open({
                         animation: true,
@@ -122,8 +128,8 @@
 
                 $scope.loadStudent();
             }])
-        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$stateParams','$http',
-            function ($scope, CrudService, FlashService, $state, AdminService, $stateParams, $http) {
+        .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$stateParams','$http', '$uibModal',
+            function ($scope, CrudService, FlashService, $state, AdminService, $stateParams, $http,$uibModal) {
 
                 $scope.student = {};
 
@@ -176,9 +182,25 @@
                 };
 
                 $scope.createNewStudent = function () {
-                    CrudService.studentService.Create($scope.studentSumarized).then(function () {
-                        FlashService.Success("Successfuly Inserted !!", true);
-                        $state.go('home.student-list');
+                    $http.post('/student', $scope.studentSumarized).then(function (res) {
+                    /*    FlashService.Success("Successfuly Inserted !!", true);*/
+                            var data = res.data
+                        var modalInstance = $uibModal.open({
+                            animation: true,
+                            templateUrl: 'createStudent.html',
+                            controller: 'CreateModalCtrl',
+                            resolve: {
+                                data: function () {
+                                    return data;
+                                }
+                            }
+                        });
+
+                        modalInstance.result.then(function () {
+
+                        }, function () {
+                            //$log.info('Modal dismissed at: ' + new Date());
+                        });
                     });
                 }
 
@@ -304,7 +326,25 @@
             $scope.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
             };
-    });
+    })
+        .controller("CreateModalCtrl", function ($scope, $uibModalInstance, $state,data,AdminService) {
+            $scope.code = data.code;
+            $scope.branchName='';
+            $scope.studentName = data.name;
+            $scope.branchName = AdminService.getBranchDesc(data.branchCode);
+            $scope.ok = function () {
+                    $state.go('home.student-list');
+                    $uibModalInstance.close();
+
+            };
+
+            $scope.continue = function () {
+            };
+
+            $scope.cancel = function () {
+
+            };
+        });
 
 
 })();

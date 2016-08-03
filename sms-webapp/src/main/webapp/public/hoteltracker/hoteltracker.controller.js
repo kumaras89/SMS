@@ -72,7 +72,7 @@
                     var start = moment(new Date(start));
                     var end = moment(new Date(end));
 
-                    if( moment()<start) {
+                    if( moment().isBefore(start)) {
                       return   parseInt(
                             moment.duration(
                                 moment(end).diff(
@@ -80,16 +80,19 @@
                                 )
                             ).asDays()
                         ) + 1+ ' Days';
-
                     }
-                    else if(moment()<end){
+
+                    else if( end.isSame(moment(), 'day')){
+                        return '1 Day';
+                    }
+                    else if(moment().isBefore(end)){
                         return parseInt(
                             moment.duration(
                                 moment(end).diff(
                                     moment()
                                 )
                             ).asDays()
-                        ) +1 + ' Days';
+                        ) +2 + ' Days';
                     }
                     else return 'Date crosed'
                 };

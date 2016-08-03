@@ -13,12 +13,8 @@
         <form name="userForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="name">User Name:</label></td>
-                    <td><input type="text" name="name" id="name" ng-model="user.name" placeholder="User Name" maxlength="10" style="width:94px;" required/>
-                        <span class="error" ng-messages="userForm.name.$error" ng-if="userForm.name.$touched">
-                            <span ng-message="required">User name is required.</span>
-                        </span>
-                    </td>
+                    <td class="firstcol"><label class="control-label">User Name:</label></td>
+                    <td><label class="control-label">{{user.name}}</label></td>
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="firstName">First Name:</label></td>

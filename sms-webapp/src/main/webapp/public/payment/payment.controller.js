@@ -6,7 +6,10 @@
         .controller('PaymentCtrl', ['$scope', '$stateParams', 'FlashService', '$state', '$http', '$timeout',
             function ($scope, $stateParams, FlashService, $state, $http, $timeout) {
 
-                $scope.shownHistory = []
+                $scope.shownHistory = [];
+                $scope.paymentChanged = function () {
+                    $scope.paymentMode=$scope.paymentMode;
+                }
 
                 $scope.loadPaymentDetail = function () {
                     $scope.studentId = $stateParams.studentid
@@ -17,6 +20,7 @@
                         $scope.payment.amount = $scope.paymentDetail.remainingPaymentDetail.amount
                         $scope.payment.feesInfos = []
                         angular.copy($scope.paymentDetail.remainingPaymentDetail.detailedFees, $scope.payment.feesInfos)
+                        $scope.paymentMode='cash';
                     })
                     $http.get('/student/code/'+$scope.studentId).then(function(res){
                         $scope.student = res.data;
@@ -44,6 +48,12 @@
                 }
 
                 $scope.makePayment = function() {
+                    if($scope.paymentMode='cash'){
+                        $scope.payment.ddNumber='Cash Transaction';
+                        $scope.payment.bankName='Cash Transaction';
+                        $scope.payment.bankBranchName='Cash Transaction';
+
+                    }
                     $http.post('/payment', $scope.payment).then(function(){
                         $scope.goToPaymentDetail()
                         FlashService.Success("Payment Inserted Succesfully!!", true);

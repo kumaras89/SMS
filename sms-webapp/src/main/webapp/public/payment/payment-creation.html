@@ -9,41 +9,59 @@
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
                     <td><label class="control-label" for="code">Student :</label></td>
-                    <td><input type="hidden" id="code" ng-model="payment.studentCode" value="{{student.code}}" placeholder="Code" maxlength="10" style="width:94px;"/>
+                    <td colspan="3"><input type="hidden" id="code" ng-model="payment.studentCode" value="{{student.code}}" placeholder="Code" maxlength="10" style="width:94px;"/>
                         {{student.name}}
                     </td>
                 </tr>
 
-                <tr class="even gradeA">
+                <tr>
+                    <td><label class="control-label" >Payment Mode :</label></td>
+                    <td colspan="3">
+                        <select ng-model="paymentMode" on-change="paymentChanged()">
+                            <option value="cash"> Cash </option>
+                            <option value="dd"> Demand Draft </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr ng-show="paymentMode == 'dd'" class="even gradeA">
                     <td><label class="control-label" for="ddNumber">DD No:</label></td>
-                    <td><input type="text" id="ddNumber" ng-model="payment.ddNumber" placeholder="DD Number" maxlength="20" style="width:188px;"/></td>
+                    <td colspan="3"><input type="text" id="ddNumber" ng-model="payment.ddNumber" placeholder="DD Number" maxlength="20" style="width:188px;"/></td>
+                </tr>
+
+                <tr ng-show="paymentMode == 'dd'" class="even gradeA">
+                    <td><label class="control-label" for="bankName">Bank Name:</label></td>
+                    <td colspan="3"><input type="text"  id="bankName" ng-model="payment.bankName" placeholder="Bank Name" style="width: 188px;"/></td>
+                </tr>
+                <tr ng-show="paymentMode == 'dd'" class="even gradeA">
+                    <td><label class="control-label" for="bankBranchName">Bank Branch Name:</label></td>
+                    <td colspan="3"><input type="text"  id="bankBranchName" ng-model="payment.bankBranchName" placeholder="Bank Branch Name" style="width: 188px;"/></td>
                 </tr>
 
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="bankName">Bank Name:</label></td>
-                    <td><input type="text"  id="bankName" ng-model="payment.bankName" placeholder="Bank Name" style="width: 188px;"/></td>
-                </tr>
-                <tr class="even gradeA">
-                    <td><label class="control-label" for="bankBranchName">Bank Branch Name:</label></td>
-                    <td><input type="text"  id="bankBranchName" ng-model="payment.bankBranchName" placeholder="Bank Branch Name" style="width: 188px;"/></td>
-                </tr>
-                <tr class="even gradeA">
                     <td><label class="control-label" for="admittedBy">Admitted By:</label></td>
-                    <td><input type="text"  id="admittedBy" ng-model="payment.admittedBy" placeholder="Admitted By" style="width: 188px;"/></td>
+                    <td colspan="3"><input type="text"  id="admittedBy" ng-model="payment.admittedBy" placeholder="Admitted By" style="width: 188px;"/></td>
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label" for="approvedBy">Approved By:</label></td>
-                    <td><input type="text"  id="approvedBy" ng-model="payment.approvedBy" placeholder="Approved By" style="width: 188px;"/></td>
+                    <td colspan="3"><input type="text"  id="approvedBy" ng-model="payment.approvedBy" placeholder="Approved By" style="width: 188px;"/></td>
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label" for="approvedBy">Fees Purticular</label></td>
                     <td><label class="control-label" for="approvedBy">Amount</label></td>
+                    <td><label class="control-label" for="approvedBy">Remainig</label></td>
+                    <td><label class="control-label" for="approvedBy">Actual</label></td>
                 </tr>
                 <tr ng-repeat="feesInfo in payment.feesInfos" class="even gradeA">
                     <td>{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}}</td>
                     <td>
                         <input ng-disabled="isDisabled(feesInfo)" type="number" id="amount" ng-model="feesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
                     </td>
+                    <td>{{ getFeesPurtDetailAmt(paymentDetail.remainingPaymentDetail,feesInfo) | currency:'&#8377;' }}</td>
+                    <td>{{ getFeesPurtDetailAmt(paymentDetail.actualPaymentDetail,feesInfo) | currency:'&#8377;'}}</td>
+
+                </tr>
+
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label">Total Fees Amount:</label></td>

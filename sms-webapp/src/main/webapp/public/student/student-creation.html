@@ -927,7 +927,7 @@
                             <input class="button" type="button" name="submit_back_fifth" id="submit_back_fifth"
                                    value="Back" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a ng-click="createNewStudent()" ng-class="{linkdisabled: studentForm.$invalid}" class="btn btn-small btn-primary">Submit</a>
+                            <a ng-click="createNewStudent()"  class="btn btn-small btn-primary">Submit</a>
                         </div>
                         <br><br>
                     </div>
@@ -936,6 +936,21 @@
         </div>
     </form>
 </div>
+<script type="text/ng-template" id="createStudent.html">
+    <div style="color: #F6F7EC; background-color: #58D68D; height: 54px; padding: 5px 0px 5px 122px;" class="modal-header">
+        <h4>Successfully Enrolled</h4>
+    </div>
+
+        <div style="text-align:center" class="modal-body">
+            <label>Student Code : {{code}} </label> <br>
+            <label>Student Name : {{studentName}}</label> <br>
+            <label>Branch Name : {{branchName}}</label>
+
+        </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" >OK</button>
+    </div>
+</script>
 <br>
 </body>
 </html>

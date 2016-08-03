@@ -51,9 +51,9 @@
                 </table>
             </div>
         </div>
-
+        <button ng-click="printToCart('printSectionId')" class="fa fa-print ">Print</button>
         <div class="clearfix"></div>
-        <div class="table-responsive" loading-container="tableParams.settings().$loading">
+        <div id="printSectionId" class="table-responsive" loading-container="tableParams.settings().$loading">
             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
                 <thead>
                 <tr>

@@ -3,9 +3,10 @@
 
     angular
         .module('app')
-        .controller('DashBoardCtrl', ['$scope', 'CrudService', 'FlashService', '$location', 'AdminService', '$cookieStore',
-            function ($scope, CrudService, FlashService, $location, AdminService, $cookieStore) {
-
+        .controller('DashBoardCtrl', ['$rootScope','$scope', 'CrudService', 'FlashService', '$location', 'AdminService', '$cookieStore',
+            function ($rootScope,$scope, CrudService, FlashService, $location, AdminService, $cookieStore) {
+                $scope.loggedUser='';
+                $scope.loggedUser = $rootScope.globals.currentUser.username;
                 $scope.loggedInBranchCode = $cookieStore.get('globals').currentUser.otherDetails.branch;
 
                 $scope.getBranchDesc = function (branchCode) {
