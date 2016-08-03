@@ -44,10 +44,11 @@ public class StudentRestController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid final StudentInfo entityObject,
+    public ResponseEntity<StudentInfo> create(@RequestBody @Valid final StudentInfo entityObject,
         final UriComponentsBuilder ucBuilder) {
-        final Optional<StudentInfo> t = Optional.ofNullable(studentFacade.save(entityObject));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return studentFacade.save(entityObject)
+                .map(e->new ResponseEntity<>(e, HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

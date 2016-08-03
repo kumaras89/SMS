@@ -28,12 +28,12 @@ public class StudentFacadeImpl implements StudentFacade {
     private SMSConfig smsConfig;
 
     @Override
-    public StudentInfo save(final StudentInfo studentInfo) {
+    public Optional<StudentInfo> save(final StudentInfo studentInfo) {
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
                                               .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
                                               .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
-        return newStudentInfo;
+        return Optional.of(newStudentInfo);
     }
 
     @Override
