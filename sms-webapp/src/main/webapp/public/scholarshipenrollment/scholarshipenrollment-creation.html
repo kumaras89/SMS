@@ -153,9 +153,8 @@
                                 </tr>
                                 <tr>
                                    <td><label class="control-label" for="emailId">Email Address</label></td>
-                                   <td><input type="email" ng-model="scholarshipEnrollment.emailId" name="emailId" id="emailId" placeholder="Mail Id" required/>
-                                       <span class="error" ng-messages="scholarship.emailId.$error" ng-if="scholarship.emailId.$touched">
-                                           <span ng-message="required">Email Address is required.</span>
+                                   <td><input type="email" ng-model="scholarshipEnrollment.emailId" name="emailId" id="emailId" placeholder="Mail Id"/>
+                                       <span class="error" ng-messages="scholarship.emailId.$error">
                                            <span ng-message="email">This needs to be a valid email</span>
                                        </span>
                                    </td>

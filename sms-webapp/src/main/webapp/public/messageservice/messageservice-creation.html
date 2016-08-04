@@ -38,12 +38,14 @@
 
                         <input type=radio name=keybrd value=english onclick="toggleKBMode(event,this)"> English <br>
 
-                        <textarea id="message" font face="Bamini"  name="message" class="" ng-model="messageService.message" placeholder="Message"
-                                  ng-trim="false" maxlength="272" style="width: 100%;height: 100px" charset="utf-8" onKeyDown="toggleKBMode(event)" onKeyPress="javascript:convertThis(event)" required/>
+                        <textarea name="message" charset="utf-8" id="message" ng-model="messageService.message" ng-trim="false" maxlength="272" style="width: 100%;height: 100px"  placeholder="Message" onKeyDown="toggleKBMode(event)" onKeyPress="javascript:convertThis(event)"></textarea>
                         <span>{{272 - messageService.message.length}} characters remaining.</span>
                         <span class="error" ng-messages="messageForm.message.$error" ng-if="messageForm.message.$touched">
                             <span ng-message="required">Message is required.</span>
                         </span>
+                        <!--<textarea name="message" class="" ng-model="messageService.message" placeholder="Message"
+                                  ng-trim="false" maxlength="272" style="width: 100%;height: 100px" charset="utf-8" onKeyDown="toggleKBMode(event)" onKeyPress="javascript:convertThis(event)" required/>-->
+
 
                     </td>
                 </tr>

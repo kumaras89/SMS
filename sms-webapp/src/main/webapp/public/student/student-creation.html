@@ -159,9 +159,8 @@
                                 <tr>
                                     <td><label class="control-label" for="mailId">Email Address</label></td>
                                     <td>
-                                        <input type="email" ng-model="student.mailId" name="mailId" id="mailId" placeholder="Mail Id" required/>
-                                        <span class="error" ng-messages="studentForm.mailId.$error" ng-if="studentForm.mailId.$touched">
-                                            <span ng-message="required">Email Address is required.</span>
+                                        <input type="email" ng-model="student.mailId" name="mailId" id="mailId" placeholder="Mail Id"/>
+                                        <span class="error" ng-messages="studentForm.mailId.$error">
                                             <span ng-message="email">This needs to be a valid email</span>
                                         </span>
                                     </td>
@@ -303,12 +302,17 @@
                                             <td>{{$index + 1}}</td>
                                             <td><input type="text" id="sslcName" ng-model="subject.name" value="{{subject.name}}"/></td>
                                             <td><input type="number" id="totalMark" name="totalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
-                                            <td><input type="number" id="securedMark" name="securedMark" ng-model="subject.securedMark" max="{{subject.totalMark}}" required>
-                                                <div class="error" ng-messages="studentForm.securedMark.$error" ng-if="studentForm.securedMark.$touched && (subject.totalMark > subject.securedMark).$invalid">
+                                            <td><input type="number" id="securedMark" name="securedMark" ng-model="subject.securedMark" max="{{subject.totalMark}}">
+                                               <!-- <div class="error" ng-messages="studentForm.securedMark.$error" ng-if="studentForm.securedMark.$touched && (subject.totalMark > subject.securedMark).$invalid">
                                                      <span ng-message="required">Secured mark is Required.</span>
                                                     <span ng-message="invalid">Invalid.</span>
-                                                </div>
-                                                <!--<div class="error" ng-if="studentForm.subject.totalMark > studentForm.subject.securedMark">Invalid</div>-->
+                                                </div>-->
+                                               <!-- <div ng-show="studentForm.securedMark.$dirty && studentForm.securedMark.$invalid"s>
+                                                    <span ng-show="studentForm.securedMark.$error.required">This field is required</span>
+                                                    <span ng-show="studentForm.securedMark.$invalid.required">required</span>
+
+                                                 </div>-->
+                                               <!-- <div class="error" ng-if="studentForm.subject.totalMark > studentForm.subject.securedMark">Invalid</div>-->
                                             </td>
                                         </tr>
                                     </tbody>
@@ -401,11 +405,11 @@
                                             <td>{{$index + 1}}</td>
                                             <td><input type="text" id="hscName" ng-model="subject.name" value="{{subject.name}}"/></td>
                                             <td><input type="number" id="hsctotalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
-                                            <td><input type="number" name="hscsecuredMark" id="hscsecuredMark" ng-model="subject.securedMark" required>
-                                                <div class="error" ng-messages="studentForm.hscsecuredMark.$error" ng-if="studentForm.hscsecuredMark.$touched">
+                                            <td><input type="number" name="hscsecuredMark" id="hscsecuredMark" ng-model="subject.securedMark">
+                                                <!--<div class="error" ng-messages="studentForm.hscsecuredMark.$error" ng-if="studentForm.hscsecuredMark.$touched">
                                                     <span ng-message="required">Secured mark is required.</span>
                                                     <span ng-message="maxlength">Invalid year.</span>
-                                                </div>
+                                                </div>-->
                                             </td>
                                         </tr>
                                         <tr>
@@ -937,7 +941,7 @@
     </form>
 </div>
 <script type="text/ng-template" id="createStudent.html">
-    <div style="color: #F6F7EC; background-color: #58D68D; height: 54px; padding: 5px 0px 5px 122px;" class="modal-header">
+    <div style="color: #F6F7EC; text-align: center; background-color: #58D68D; padding: 0;" class="modal-header">
         <h4>Successfully Enrolled</h4>
     </div>
 
@@ -947,7 +951,7 @@
             <label>Branch Name : {{branchName}}</label>
 
         </div>
-    <div class="modal-footer">
+    <div class="modal-footer" style="text-align: center; padding: 5px;">
         <button class="btn btn-primary" ng-click="ok()" >OK</button>
     </div>
 </script>

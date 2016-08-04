@@ -341,7 +341,6 @@
 
             $scope.continue = function () {
             };
-
             $scope.cancel = function () {
 
             };
