@@ -64,8 +64,6 @@ public class StudentInfo {
     @NotNull(message = "Address is empty")
     private Address address;
 
-    @NotNull(message = "Mail id  is empty")
-    @Size(min = 1, message = "Mail id is empty")
     private String mailId;
 
     @NotNull(message = "English empty")
@@ -86,8 +84,6 @@ public class StudentInfo {
     @Size(min = 10, max = 13,message = "Invalid Phone number")
     private String phoneNumber;
 
-    @NotNull(message = "Alternate Phone number is empty")
-    @Size(min = 10, max = 13,message = "Invalid Alternative Phone number")
     private String alternatePhoneNumber;
 
 

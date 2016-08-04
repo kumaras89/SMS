@@ -77,8 +77,7 @@ public class StudentScholarInfo
     @NotNull(message = "Annual Income is Empty")
     private String annualIncome;
 
-    @NotNull(message = "EmailId is Empty")
-    @Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
+
     private String emailId;
 
     @Valid

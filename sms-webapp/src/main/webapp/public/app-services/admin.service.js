@@ -166,7 +166,7 @@
             var scheme =  _.find(schemes, function(scheme) {
                 return scheme.code == schemeCode
             })
-            return scheme != undefined ? scheme.feesInfos : "";
+            return scheme != undefined ? scheme.feesInfos : [];
         }
 
         function getCourses(success) {

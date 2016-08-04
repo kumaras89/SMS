@@ -30,6 +30,7 @@
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
                 return {
                     responseError: function (response) {
+                        window.scrollTo(0,0);
                         var standardMsg = response.statusText+' on '+ response.config.url;
                         if(response.data) {
                             var msg = ''

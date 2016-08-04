@@ -70,7 +70,7 @@
                             total: 0,           // length of data
                             getData: function($defer, params) {
                                 $http.post('/student/search', $scope.searchCriteria).then(function(res) {
-                                    var data = res.data
+                                    var data = res.data;
                                     $timeout(function() {
                                         params.total(data.length);
                                         $defer.resolve(data);
@@ -189,6 +189,7 @@
                             animation: true,
                             templateUrl: 'createStudent.html',
                             controller: 'CreateModalCtrl',
+                            backdrop: 'static',
                             resolve: {
                                 data: function () {
                                     return data;
