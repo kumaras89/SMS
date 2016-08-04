@@ -13,7 +13,7 @@ public interface StudentFacade {
      * @param studentInfo
      * @return
      */
-    StudentInfo save(final StudentInfo studentInfo);
+    Optional<StudentInfo> save(final StudentInfo studentInfo);
 
     /**
      * @return
