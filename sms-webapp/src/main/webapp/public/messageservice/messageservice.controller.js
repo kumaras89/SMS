@@ -41,7 +41,10 @@
             }])
         .controller('MessageServiceCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state',
             function ($scope, CrudService, FlashService, $state) {
-              
+
+                var text = document.getElementById("message").value;
+                text = text.replace(message+" "+" "+" "+" ");
+
                 $scope.sendMessage = function () {
                     $scope.messageService.status = 'SENT';
                     CrudService.messageService.Create($scope.messageService).then(function () {

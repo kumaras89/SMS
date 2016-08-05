@@ -25,6 +25,7 @@
             'Hotel',
             'HotelHr',
             'HotelTracker',
+            'Attendance',
             'angular-confirm',
             'MessageService'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
@@ -75,9 +76,9 @@
                 template: function(){
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                         return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
-                                       '| limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />'
+                                       '| limitTo:8" id="branchName" style="width: 42%;" placeholder="Branch" autocomplete="off" />'
                     }else{
-                        return '<input type="text" ng-model="bn" readonly>'
+                        return '<input type="text" style="width: 42%; ng-model="bn" readonly>'
                     }
                 }
             }
