@@ -3,7 +3,7 @@
 
     angular
         .module('Scheme')
-        .filter('mySum', function () {
+        /*.filter('mySum', function () {
             return function (items) {
                 var sum = 0;
                 angular.forEach(items, function (item, index) {
@@ -13,7 +13,7 @@
                 })
                 return sum;
             }
-        })
+        })*/
         .controller('SchemeListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout','$uibModal',
             function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout, $uibModal) {
                 $scope.editScheme = function (userId) {
@@ -97,6 +97,16 @@
 
         .controller('SchemeCreationCtrl', ['$scope', 'CrudService', 'SchemeService', 'FlashService', '$state','AdminService',
             function ($scope, CrudService, SchemeService, FlashService, $state, AdminService) {
+                $scope.total=0;
+
+                $scope.calcTotal=function (items) {
+                    $scope.total=0;
+                    angular.forEach(items, function (item, index) {
+                        if (item.amount) {
+                            $scope.total += item.amount;
+                        }
+                    })
+                }
 
                 $scope.createNewScheme = function () {
 

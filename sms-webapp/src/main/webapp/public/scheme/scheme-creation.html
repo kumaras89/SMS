@@ -30,7 +30,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="feesAmount">Total Fees Amount:</label></td>
-                    <td><input type="number" name="feesAmount" id="feesAmount" ng-model="scheme.feesAmount" placeholder="amount" value="0"   min ="0" style="width: 100px;" required/>
+                    <td><input type="number" name="feesAmount" id="feesAmount" ng-model="scheme.feesAmount" placeholder="amount" value="{{scheme.feesAmount}}" ng-match="sum"  min ="0" style="width: 100px;" required/>
                         <span class="error" ng-messages="schemeForm.feesAmount.$error" ng-if="schemeForm.feesAmount.$touched">
                             <span ng-message="required">Total Fees Amount is required.</span>
                         </span>
@@ -61,16 +61,23 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="schemeFeesInfo in feesInfos track by $index">
-                        <td>{{getFeesParticularDesc(schemeFeesInfo.feesParticularCode)}}</td>
+                        <td style="width: 70%;">{{getFeesParticularDesc(schemeFeesInfo.feesParticularCode)}}</td>
                         <td>
                             <input type="hidden" id="feesParticularCode" ng-model="schemeFeesInfo.feesParticularCode" value="{{schemeFeesInfo.feesParticularCode}}"/>
-                            <input type="number" id="amount" ng-model="schemeFeesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
+                            <input type="number" id="amount" ng-model="schemeFeesInfo.amount" ng-change="calcTotal(feesInfos)" placeholder="0" min="0" style="width:100px;"/>
                         </td>
                     </tr>
-                    <tr>
+                   <!-- <tr>
                         <td style="min-width: 20px;">Total</td>
                         <td style="min-width: 20px;">{{ feesInfos | mySum}}</td>
+                    </tr>-->
+                    <tr>
+                        <td style="min-width: 20px;">Total</td>
+                        <td style="min-width: 20px;"><label class="control-label">{{total}}</label>
+                        <div class="error" ng-show=" total != scheme.feesAmount">Total Fees is not matched</div>
+                        </td>
                     </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -79,7 +86,7 @@
 
             <div class="well">
                 <div class="controls">
-                    <a ng-click="createNewScheme()" ng-class="{linkdisabled: schemeForm.$invalid}" class="btn btn-small btn-primary">create new scheme</a>
+                    <a ng-click="createNewScheme()" ng-class="{linkdisabled: schemeForm.$invalid}" class="btn btn-small btn-primary">Submit</a>
                 </div>
             </div>
         </form>

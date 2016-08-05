@@ -29,8 +29,9 @@
                     <td class="firstcol"><label class="control-label" for="hotelCode">Hotel : </label></td>
                     <td>
                         <select ng-model="hotelhr.hotelCode" name="hotel" id="hotelCode" required>
-                            <option ng-repeat="hotel in hotels" value="{{hotel.hotelCode}}">{{hotel.hotelName}}</option>
+                            <option ng-repeat="hotel in hotels" ng-selected="hotelhr.hotelCode==hotel.hotelName" value="{{hotel.hotelCode}}">{{hotel.hotelName}}</option>
                         </select>
+                        <!--<select  ng-model="hotelhr.hotelCode" ng-options="hotel.hotelCode as hotel.hotelName for hotel in hotels" name="hotel" id="hotelCode" required/>-->
                         <span class="error" ng-messages="hotelhrForm.hotelCode.$error" ng-if="hotelhrForm.hotelCode.$touched">
                             <span ng-message="required">Hotel is required.</span>
                         </span>
@@ -57,7 +58,7 @@
 
             <div class="well">
                 <div class="controls">
-                    <a ng-click="updateHotelHr()"  class="btn btn-small btn-primary">Update HR</a>
+                    <a ng-click="updateHotelHr()"  class="btn btn-small btn-primary">Submit</a>
                     <a ui-sref="home.hotelhr-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>HR List</a>
                 </div>
             </div>

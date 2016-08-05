@@ -55,7 +55,7 @@
                 <tr ng-repeat="feesInfo in payment.feesInfos" class="even gradeA">
                     <td>{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}}</td>
                     <td>
-                        <input ng-disabled="isDisabled(feesInfo)" type="number" id="amount" ng-model="feesInfo.amount" placeholder="0" min="0" style="width:100px;"/>
+                        <input ng-disabled="isDisabled(feesInfo)" type="number" id="amount" ng-model="feesInfo.amount" ng-focus="feesInfo.amount=0" placeholder="0" min="0" style="width:100px;"/>
                     </td>
                     <td>{{ getFeesPurtDetailAmt(paymentDetail.remainingPaymentDetail,feesInfo) | currency:'&#8377;' }}</td>
                     <td>{{ getFeesPurtDetailAmt(paymentDetail.actualPaymentDetail,feesInfo) | currency:'&#8377;'}}</td>
@@ -68,6 +68,8 @@
                     <td>
                         {{calcTotalAmount()}}
                     </td>
+                    <td>{{ paymentDetail.remainingPaymentDetail.amount | currency:'&#8377;' }}</td>
+                    <td>{{ paymentDetail.actualPaymentDetail.amount | currency:'&#8377;' }}</td>
                 </tr>
             </table>
             <br>
