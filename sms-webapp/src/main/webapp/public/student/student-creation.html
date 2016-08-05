@@ -302,17 +302,8 @@
                                             <td>{{$index + 1}}</td>
                                             <td><input type="text" id="sslcName" ng-model="subject.name" value="{{subject.name}}"/></td>
                                             <td><input type="number" id="totalMark" name="totalMark" ng-model="subject.totalMark" value="{{subject.totalMark}}"/> </td>
-                                            <td><input type="number" id="securedMark" name="securedMark" ng-model="subject.securedMark" max="{{subject.totalMark}}">
-                                               <!-- <div class="error" ng-messages="studentForm.securedMark.$error" ng-if="studentForm.securedMark.$touched && (subject.totalMark > subject.securedMark).$invalid">
-                                                     <span ng-message="required">Secured mark is Required.</span>
-                                                    <span ng-message="invalid">Invalid.</span>
-                                                </div>-->
-                                               <!-- <div ng-show="studentForm.securedMark.$dirty && studentForm.securedMark.$invalid"s>
-                                                    <span ng-show="studentForm.securedMark.$error.required">This field is required</span>
-                                                    <span ng-show="studentForm.securedMark.$invalid.required">required</span>
-
-                                                 </div>-->
-                                               <!-- <div class="error" ng-if="studentForm.subject.totalMark > studentForm.subject.securedMark">Invalid</div>-->
+                                            <td><input type="number" id="securedMark" name="securedMark" ng-model="subject.securedMark">
+                                               <div class="error" style="position:absolute; left:100%;" ng-if="subject.totalMark &lt; subject.securedMark">Invalid</div>
                                             </td>
                                         </tr>
                                     </tbody>
