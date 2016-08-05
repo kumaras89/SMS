@@ -12,6 +12,7 @@
             
             $scope.deleteBranch = function(id) {
                 CrudService.branchService.Delete(id).then(function(){
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfully Deleted !!", false);
                     $scope.tableParams.reload();
                 });
@@ -63,6 +64,7 @@
 
             $scope.updateBranch = function () {
                 CrudService.branchService.Update($scope.branch).then(function(){
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Modified !!", true);
                     $state.go('home.branch-list');
                 });
@@ -86,6 +88,7 @@
 
             $scope.createNewBranch = function () {
                 CrudService.branchService.Create($scope.branch).then(function () {
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Inserted !!", true);
                     $state.go('home.branch-list');
                 });

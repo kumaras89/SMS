@@ -34,6 +34,7 @@
 
             $scope.delete = function (id) {
                 $scope.service.Delete(id).then(function() {
+                    window.scrollTo(0,0);
                     FlashService.Success('Successfully Deleted');
                     $scope.clearCache();
                     $scope.tableParams.reload()
@@ -42,6 +43,7 @@
 
             $scope.update = function () {
                 $scope.service.Update($scope.entity).then(function(){
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Modified !!", true);
                     $scope.goToList()
                     $scope.clearCache();
@@ -51,6 +53,7 @@
 
             $scope.save = function () {
                 $scope.service.Create($scope.entity).then(function () {
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Inserted !!", true);
                     $scope.goToList()
                     $scope.clearCache();
@@ -65,6 +68,7 @@
             //this for using both Secured Operation and Role for deleting confirmation
             $scope.deleteRole = function(id) {
                 CrudService.roleService.Delete(id).then(function(){
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Deleted !!", false);
                     $scope.tableParams.reload();
                 });
@@ -72,6 +76,7 @@
 
             $scope.deleteSecure = function(id) {
                 CrudService.securedOperationService.Delete(id).then(function(){
+                    window.scrollTo(0,0);
                     FlashService.Success("Successfuly Deleted !!", false);
                     $scope.tableParams.reload();
                 });

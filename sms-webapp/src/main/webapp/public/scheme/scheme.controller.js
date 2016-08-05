@@ -22,6 +22,7 @@
 
                 $scope.deleteScheme = function (id) {
                     CrudService.schemeService.Delete(id).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Deleted !!", false);
                         $scope.tableParams.reload();
                     });
@@ -66,6 +67,7 @@
 
                 $scope.updateScheme = function () {
                     CrudService.schemeService.Update($scope.scheme).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.scheme-list');
                     });
@@ -101,6 +103,7 @@
                     $scope.scheme.feesInfos = $scope.feesInfos;
 
                     CrudService.schemeService.Create($scope.scheme).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scheme-list');
                     });

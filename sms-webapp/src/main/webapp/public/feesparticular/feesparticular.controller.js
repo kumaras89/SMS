@@ -11,6 +11,7 @@
 
                 $scope.deleteFeesParticular = function(id) {
                     CrudService.feesParticularService.Delete(id).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Deleted !!", false);
                         $scope.tableParams.reload();
                     });
@@ -55,6 +56,7 @@
 
                 $scope.updateFeesParticular = function () {
                     CrudService.feesParticularService.Update($scope.feesParticular).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.feesparticular-list');
                     });
@@ -78,6 +80,7 @@
 
                 $scope.createNewFeesParticular = function () {
                     CrudService.feesParticularService.Create($scope.feesParticular).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.feesparticular-list');
                     });

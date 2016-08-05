@@ -12,6 +12,7 @@
 
                 $scope.deleteUser = function(id) {
                     CrudService.userService.Delete(id).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Deleted !!", false);
                         $scope.tableParams.reload();
                     });
@@ -19,6 +20,7 @@
 
                 $scope.resetPassword = function(id) {
                     $http.put('/user/resetpassword/' + id).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success('Password Resetted!!')
                     }, function (res) {
                         FlashService.Error(res.message)
@@ -75,6 +77,7 @@
                     var user = $.extend(user, $scope.user);
                     user.branch = AdminService.getBranchCode($scope.user.branch);
                     CrudService.userService.Update(user).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $location.path('/home/user-list');
                     });
@@ -109,6 +112,7 @@
                     var user = $.extend(user, $scope.user);
                     user.branch = AdminService.getBranchCode($scope.user.branch);
                     CrudService.userService.Create(user).then(function (res) {
+                            window.scrollTo(0,0);
                             if(res.message) {
                                 FlashService.Error(res.message);
                             } else {

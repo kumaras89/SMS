@@ -48,6 +48,7 @@
                 $scope.sendMessage = function () {
                     $scope.messageService.status = 'SENT';
                     CrudService.messageService.Create($scope.messageService).then(function () {
+                    window.scrollTo(0,0);
                     FlashService.Success("Message sent Successfuly !!", true);
                     $state.reload();
                     });

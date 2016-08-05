@@ -72,6 +72,7 @@
                         var hotel = $.extend(hotel, $scope.hotel);
                         hotel.branchCode = AdminService.getBranchCode($scope.hotel.branchCode);
                         CrudService.hotelService.Create(hotel).then(function (res) {
+                            window.scrollTo(0,0);
                             if (res.message) {
                                 FlashService.Error(res.message);
                             } else {
@@ -88,6 +89,7 @@
                     var hotel = $.extend(hotel, $scope.hotel);
                     hotel.branchCode = AdminService.getBranchCode($scope.hotel.branch);
                     CrudService.hotelService.Update(hotel).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.hotel-list');
                     });

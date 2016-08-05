@@ -12,6 +12,7 @@
 
                $scope.deleteCourse = function(id) {
                    CrudService.courseService.Delete(id).then(function(){
+                       window.scrollTo(0,0);
                        FlashService.Success("Successfully Deleted !!", false);
                        $scope.tableParams.reload();
                    });
@@ -58,6 +59,7 @@
 
                 $scope.updateCourse = function () {
                     CrudService.courseService.Update($scope.course).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.course-list');
                     });
@@ -81,6 +83,7 @@
 
                 $scope.createNewCourse = function () {
                     CrudService.courseService.Create($scope.course).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.course-list');
                     });

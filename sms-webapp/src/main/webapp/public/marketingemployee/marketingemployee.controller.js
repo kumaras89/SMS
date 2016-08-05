@@ -12,6 +12,7 @@
 
                 $scope.deleteMarketingEmployee = function(id) {
                     CrudService.marketingEmployeeService.Delete(id).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfully Deleted !!", false);
                         $scope.tableParams.reload();
                     });
@@ -56,6 +57,7 @@
 
                 $scope.updateMarketingEmployee = function () {
                     CrudService.marketingEmployeeService.Update($scope.marketingEmployee).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.marketingemployee-list');
                     });
@@ -101,6 +103,7 @@
 
                 $scope.createNewMarketingEmployee = function () {
                     CrudService.marketingEmployeeService.Create($scope.marketingEmployee).then(function () {
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.marketingemployee-list');
                     });

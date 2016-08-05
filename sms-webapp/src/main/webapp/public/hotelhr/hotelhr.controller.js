@@ -53,6 +53,7 @@
 
                 $scope.createNewHr = function () {
                     CrudService.hotelHrService.Create($scope.hotelhr).then(function (res) {
+                        window.scrollTo(0,0);
                         if(res.message) {
                             FlashService.Error(res.message);
                         } else {
@@ -73,6 +74,7 @@
             function ($scope,$stateParams, FlashService,CrudService, ngTableParams, $state, AdminService) {
                 $scope.updateHotelHr = function () {
                     CrudService.hotelHrService.Update($scope.hotelhr).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.hotelhr-list');
                     });

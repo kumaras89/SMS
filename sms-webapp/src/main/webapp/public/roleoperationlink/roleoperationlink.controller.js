@@ -8,6 +8,7 @@
 
                 $scope.save = function() {
                     $http.post('/roleoperationlink', $scope.rol).then(function() {
+                        window.scrollTo(0,0);
                         FlashService.Success('Successfully Modified!!');
                         $scope.loadRol();
                     })

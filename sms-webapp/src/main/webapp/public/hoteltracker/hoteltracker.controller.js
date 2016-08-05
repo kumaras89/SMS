@@ -53,6 +53,7 @@
                     var hoteltracker = $.extend(hoteltracker, $scope.hoteltracker);
                         hoteltracker.status='MAPPED';
                     CrudService.hotelTrackerService.Create(hoteltracker).then(function (res) {
+                        window.scrollTo(0,0);
                         if (res.message) {
                             FlashService.Error(res.message,false);
                         } else {
@@ -204,6 +205,7 @@
             function ($scope,$stateParams, FlashService,CrudService, ngTableParams, $state, AdminService) {
                 $scope.updateTracker = function () {
                     CrudService.hotelTrackerService.Update($scope.hoteltracker).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Modified !!", true);
                         $state.go('home.hoteltracker-list');
                     });
