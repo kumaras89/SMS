@@ -18,8 +18,10 @@ import java.util.Optional;
 @Transactional
 public class StudentFacadeImpl implements StudentFacade {
 
-    @Value("${JOINED_WELCOME_MESSAGE_FOR_STUDENT}")
-    private String welcomeMessage;
+    /*
+        @Value("${JOINED_WELCOME_MESSAGE_FOR_STUDENT}")
+        private String welcomeMessage;
+    */
 
     @Autowired
     private StudentEnrollmentConfig seConfig;
@@ -29,10 +31,13 @@ public class StudentFacadeImpl implements StudentFacade {
 
     @Override
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
+
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
+
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
                                               .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
-                                              .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
+                                              .on(SMSDetails::getMessage).set(SMSSender.MessageTemplate(studentInfo.getName())).build()).apply(smsConfig);
+
         return Optional.of(newStudentInfo);
     }
 

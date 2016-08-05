@@ -28,9 +28,10 @@ public class SMSSender {
                 final MultiValueMap<String, String> uriVariables = new LinkedMultiValueMap<>();
                 uriVariables.add("username", messageConfig.getSmsLoginDetails().getUsername());
                 uriVariables.add("hash",messageConfig.getSmsLoginDetails().getHash());
-                uriVariables.add("message", senderDetails.getMessage());
+                uriVariables.add("message", encodeMessage(senderDetails.getMessage()));
                 uriVariables.add("sender", messageConfig.getSmsLoginDetails().getSender());
                 uriVariables.add("numbers", senderDetails.getPhoneNumber());
+                uriVariables.add("unicode", "1");
                 final URI uri = UriComponentsBuilder
                                                   .fromHttpUrl(messageConfig.getSmsLoginDetails().getSmsServer())
                                                   .queryParams(uriVariables).build().toUri();
@@ -45,6 +46,28 @@ public class SMSSender {
     }
 
     /**
+     * @return
+     */
+    public static String encodeMessage(final String message) {
+        StringBuilder newMessage = new StringBuilder();
+        newMessage.append("@U");
+        for (char c : message.toCharArray()) {
+            String charHex = String.format("%1$4s", Integer.toHexString(c));
+            newMessage.append(charHex);
+        }
+        String message_result = newMessage.toString();
+        return message_result;
+    }
+
+    //Welcome message for Student and Scholarship registration
+    public static String MessageTemplate(final String studentName)
+    {
+        String welcomeMessgae="RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.";
+        String messageTemplate = "Hi"+studentName+","+"\n";
+        return messageTemplate+welcomeMessgae;
+    }
+    /**
+     *
      * @return
      */
     private static RestTemplate getAsyncRestTemplate() {

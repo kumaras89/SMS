@@ -33,8 +33,10 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final SMSConfig smsConfig;
 
 
-    @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
-    private String welcomeMessage;
+    /*
+        @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
+        private String welcomeMessage;
+    */
 
     @Autowired
     public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository,
@@ -95,8 +97,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(scholar.getName())
             .on(SMSDetails::getPhoneNumber).set(scholar.getStudentPhoneNumber())
-            .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
+            .on(SMSDetails::getMessage).set(SMSSender.MessageTemplate(entityType.getName())).build()).apply(smsConfig);
         return newStudent;
     }
-
 }
