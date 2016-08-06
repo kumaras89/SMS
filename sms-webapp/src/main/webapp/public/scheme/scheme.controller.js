@@ -3,7 +3,7 @@
 
     angular
         .module('Scheme')
-        /*.filter('mySum', function () {
+/*        .filter('mySum', function () {
             return function (items) {
                 var sum = 0;
                 angular.forEach(items, function (item, index) {
@@ -65,6 +65,15 @@
         .controller('SchemeDetailCtrl', ['$scope', '$stateParams', 'CrudService', 'SchemeService', 'FlashService', '$state', 'AdminService',
             function ($scope, $stateParams, CrudService, SchemeService, FlashService, $state, AdminService) {
 
+                    $scope.calcTotal=function (items) {
+                        $scope.total=0;
+                        angular.forEach(items, function (item, index) {
+                            if (item.amount) {
+                                $scope.total += item.amount;
+                            }
+                        })
+                    }
+                                   
                 $scope.updateScheme = function () {
                     CrudService.schemeService.Update($scope.scheme).then(function () {
                         window.scrollTo(0,0);
@@ -85,6 +94,7 @@
                 $scope.loadScheme = function () {
                     CrudService.schemeService.GetById($stateParams.id).then(function (res) {
                         $scope.scheme = res
+                        $scope.calcTotal($scope.scheme.feesInfos);
                     })
 
                     SchemeService.getFeesParticulars(function (data) {

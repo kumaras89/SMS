@@ -56,16 +56,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="schemeFeesInfo in scheme.feesInfos | orderBy:'feesParticularCode'">
-                        <td>{{getFeesParticularDesc(schemeFeesInfo.feesParticularCode)}}</td>
+                    <tr style="width: 70%;" ng-repeat="schemeFeesInfo in scheme.feesInfos | orderBy:'feesParticularCode'">
+                        <td  style="width: 70%;">{{getFeesParticularDesc(schemeFeesInfo.feesParticularCode)}}</td>
                         <td>
                             <input type="hidden" id="feesParticularCode" ng-model="schemeFeesInfo.feesParticularCode" value="{{schemeFeesInfo.feesParticularCode}}"/>
-                            <input type="number" id="amount" ng-model="schemeFeesInfo.amount"  min="0" style="width: 100px"/>
+                            <input type="number" id="amount" ng-model="schemeFeesInfo.amount" ng-change="calcTotal(scheme.feesInfos)" placeholder="0" min="0" style="width:100px;"/>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td style="min-width: 20px;">Total</td>
                         <td style="min-width: 20px;">{{ scheme.feesInfos | mySum}}</td>
+                    </tr>-->
+                    <tr>
+                        <td style="min-width: 20px;">Total</td>
+                        <td style="min-width: 20px;"><label class="control-label">{{total}}</label>
+                            <div class="error" ng-show=" total != scheme.feesAmount">Total Fees is not matched</div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
