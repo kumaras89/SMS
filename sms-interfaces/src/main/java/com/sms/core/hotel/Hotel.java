@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "SMS_TR_HOTEL")
-@SequenceGenerator(name = "SMS_SQ_HL", sequenceName = "SMS_SQ_HL")
+@SequenceGenerator(name = "SMS_SQ_HL", sequenceName = "SMS_SQ_HL",allocationSize = 1)
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_HL")

@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "SMS_TR_ID_CARD")
-@SequenceGenerator(name = "SMS_SQ_IC",sequenceName = "SMS_SQ_IC")
+@SequenceGenerator(name = "SMS_SQ_IC",sequenceName = "SMS_SQ_IC",allocationSize = 1)
 public class IdCard implements Serializable {
 
     @Id

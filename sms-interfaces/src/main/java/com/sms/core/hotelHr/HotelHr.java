@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SMS_TR_HOTEL_HR")
-@SequenceGenerator(name = "SMS_SQ_HR",sequenceName = "SMS_SQ_HR")
+@SequenceGenerator(name = "SMS_SQ_HR",sequenceName = "SMS_SQ_HR",allocationSize = 1)
 public class HotelHr
 {
     @Id

@@ -23,9 +23,6 @@ public class HotelTrackerRestController {
     @Autowired
     private HotelTrackerService hotelTrackerService;
 
-    @Autowired
-    private HotelTrackerFacade hotelTrackerFacade;
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<HotelTrackerInfo>> listAll() {
         return Optional.ofNullable(hotelTrackerService.findAll())
@@ -50,7 +47,7 @@ public class HotelTrackerRestController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<HotelTrackerInfo>> search(@RequestBody @Valid
                                                           final HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
-        return Optional.ofNullable(hotelTrackerFacade.search(hotelTrackerSearchCriteria))
+        return Optional.ofNullable(hotelTrackerService.search(hotelTrackerSearchCriteria))
                        .filter(e -> !e.isEmpty())
                        .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

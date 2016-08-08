@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "SMS_TR_OTHER_LANGUAGE")
-@SequenceGenerator(sequenceName = "SMS_SQ_OL",name = "SMS_SQ_OL")
+@SequenceGenerator(sequenceName = "SMS_SQ_OL",name = "SMS_SQ_OL", allocationSize = 1)
 public class OtherLanguage {
 
     @Id

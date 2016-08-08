@@ -16,9 +16,9 @@ import java.util.Optional;
  * <p></p>
  */
 public class HotelTrackerSearchService {
-    public static Specification<HotelTracker> hotelSearchSpec(final HotelTrackerSearchCriteria criteria) {
 
-
+    public static Specification<HotelTracker> hotelSearchSpec(final HotelTrackerSearchCriteria criteria)
+    {
         return (root, query, builder) -> builder.and(PredicateBuilder.of(Optional.ofNullable(criteria))
             .map(
                 HotelTrackerSearchCriteria::getStudentName,

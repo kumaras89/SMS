@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SMS_TR_SCHEME_TO_FEES")
-@SequenceGenerator(name = "SMS_SQ_SF",sequenceName ="SMS_SQ_SF" )
+@SequenceGenerator(name = "SMS_SQ_SF",sequenceName ="SMS_SQ_SF" , allocationSize = 1)
 public class SchemeFees extends Fees {
     private static final long serialVersionUID = -6699305076957421496L;
 

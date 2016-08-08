@@ -95,4 +95,11 @@ public class HotelTrackerServiceImpl implements HotelTrackerService {
                 .map(tracker -> this.CommonSave(entityType))
                 .orElseThrow(() ->  new SmsException("HotelTracker Update Error", "What you trying to Update its not available"));
     }
+
+    @Override
+    public List<HotelTrackerInfo> search(final HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
+        return HotelTrackerSearchService
+                .search(hotelTrackerSearchCriteria)
+                .with(hotelTrackerRepository);
+    }
 }

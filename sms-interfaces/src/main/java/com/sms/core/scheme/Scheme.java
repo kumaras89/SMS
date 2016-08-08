@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SMS_MA_SCHEME", uniqueConstraints = {@UniqueConstraint(columnNames = "SC_CODE")})
-@SequenceGenerator(name = "SMS_SQ_SC",sequenceName = "SMS_SQ_SC")
+@SequenceGenerator(name = "SMS_SQ_SC",sequenceName = "SMS_SQ_SC",allocationSize = 1)
 public class Scheme implements Serializable {
 
 

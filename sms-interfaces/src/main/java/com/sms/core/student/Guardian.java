@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_GUARDIAN")
-@SequenceGenerator(sequenceName = "SMS_SQ_GU",name = "SMS_SQ_GU")
+@SequenceGenerator(sequenceName = "SMS_SQ_GU",name = "SMS_SQ_GU", allocationSize = 1)
 public class Guardian implements Serializable {
 
     private static final long serialVersionUID = -1244139837839355531L;

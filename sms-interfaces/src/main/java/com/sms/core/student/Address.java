@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_ADDRESS")
-@SequenceGenerator(sequenceName = "SMS_SQ_AD",name = "SMS_SQ_AD")
+@SequenceGenerator(sequenceName = "SMS_SQ_AD",name = "SMS_SQ_AD" , allocationSize = 1)
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 8708958564726670901L;

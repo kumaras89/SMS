@@ -34,4 +34,5 @@ public interface StudentScholarService {
      */
     Optional<StudentScholarInfo> enrollStudent(final String applicationNumber);
 
+    List<StudentScholarInfo> search(final StudentScholarSearchCriteria studentSearchCriteria);
 }

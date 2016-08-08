@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "SMS_TR_MARK_DETAILS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "CLASS")
-@SequenceGenerator(name = "SMS_SQ_MD",sequenceName = "SMS_SQ_MD")
+@SequenceGenerator(name = "SMS_SQ_MD",sequenceName = "SMS_SQ_MD", allocationSize = 1)
 public class MarkDetails implements Serializable{
 
     @Id

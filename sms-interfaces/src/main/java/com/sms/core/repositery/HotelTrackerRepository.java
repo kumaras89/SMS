@@ -20,4 +20,5 @@ public interface HotelTrackerRepository extends JpaRepository<HotelTracker,Long>
 
     @Query("select hotelTracker from HotelTracker hotelTracker where hotelTracker.studentName.id = :studentId and hotelTracker.status = :status ")
     HotelTracker findByUserName(@Param("studentId") final long studentId, @Param("status") final HotelTrackerStatus status);
+
 }

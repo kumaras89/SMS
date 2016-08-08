@@ -1,6 +1,5 @@
 package com.sms.core.student;
 
-import com.sms.core.scholarship.StudentScholarFacade;
 import com.sms.core.scholarship.StudentScholarSearchCriteria;
 import com.sms.core.scholarship.StudentScholarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,10 @@ import java.util.Optional;
 public class StudentScholarRestController {
 
     private final StudentScholarService studentScholar;
-    private final StudentScholarFacade studentScholarFacade;
 
     @Autowired
-    public StudentScholarRestController(final StudentScholarService studentScholarEnrollment, StudentScholarFacade facade) {
+    public StudentScholarRestController(final StudentScholarService studentScholarEnrollment) {
         studentScholar = studentScholarEnrollment;
-        this.studentScholarFacade = facade;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -58,7 +55,7 @@ public class StudentScholarRestController {
 
     @RequestMapping(value="/search", method = RequestMethod.POST)
     public ResponseEntity<List<StudentScholarInfo>> search(@RequestBody @Valid StudentScholarSearchCriteria criteria) {
-        return Optional.ofNullable(studentScholarFacade.search(criteria))
+        return Optional.ofNullable(studentScholar.search(criteria))
                 .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "SMS_TR_HOTEL_TRACKER")
-@SequenceGenerator(name = "SMS_SQ_HT",sequenceName = "SMS_SQ_HT")
+@SequenceGenerator(name = "SMS_SQ_HT",sequenceName = "SMS_SQ_HT" ,allocationSize = 1)
 public class HotelTracker
 {
     @Id

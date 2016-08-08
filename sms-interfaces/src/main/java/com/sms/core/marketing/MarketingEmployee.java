@@ -12,8 +12,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_TR_MARKETING_EMPLOYEE")
-@SequenceGenerator(sequenceName = "SMS_SQ_ME",name = "SMS_SQ_ME")
-public class MarketingEmployee implements Serializable {
+@SequenceGenerator(sequenceName = "SMS_SQ_ME",name = "SMS_SQ_ME", allocationSize = 1)
+public class MarketingEmployee implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ME")

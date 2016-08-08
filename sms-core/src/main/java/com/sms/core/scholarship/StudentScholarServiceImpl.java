@@ -100,4 +100,11 @@ public class StudentScholarServiceImpl implements StudentScholarService {
             .on(SMSDetails::getMessage).set(SMSSender.MessageTemplate(entityType.getName())).build()).apply(smsConfig);
         return newStudent;
     }
+
+    @Override
+    public List<StudentScholarInfo> search(final StudentScholarSearchCriteria studentSearchCriteria) {
+        return StudentScholarSearchService
+                .search(studentSearchCriteria)
+                .with(studentScholarRepository);
+    }
 }

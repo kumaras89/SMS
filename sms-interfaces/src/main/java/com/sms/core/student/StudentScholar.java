@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT_SCHOLARSHIP")
-@SequenceGenerator(name = "SMS_SQ_STS",sequenceName = "SMS_SQ_STS")
+@SequenceGenerator(name = "SMS_SQ_STS",sequenceName = "SMS_SQ_STS", allocationSize = 1)
 public class StudentScholar implements Serializable
 {
     @Id

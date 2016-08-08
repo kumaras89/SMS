@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "SMS_MA_ROLE_OPERATION_LINK")
-@SequenceGenerator(sequenceName = "SMS_SQ_ROL",name = "SMS_SQ_ROL")
+@SequenceGenerator(sequenceName = "SMS_SQ_ROL",name = "SMS_SQ_ROL", allocationSize = 1)
 public class RoleOperationLink implements Serializable {
 
 

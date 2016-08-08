@@ -28,4 +28,6 @@ public interface HotelTrackerService {
 
     Optional<HotelTrackerInfo> update(final Long id, final HotelTrackerInfo hotelTrackerInfo);
 
+    List<HotelTrackerInfo> search(final HotelTrackerSearchCriteria hotelTrackerSearchCriteria);
+
 }

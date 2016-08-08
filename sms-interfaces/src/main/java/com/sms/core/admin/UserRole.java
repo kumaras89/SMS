@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_USER_ROLE")
-@SequenceGenerator(name = "SMS_SQ_UR",sequenceName = "SMS_SQ_UR")
+@SequenceGenerator(name = "SMS_SQ_UR",sequenceName = "SMS_SQ_UR",allocationSize = 1)
 public class UserRole implements Serializable{
 
 	@Id

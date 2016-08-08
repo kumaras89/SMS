@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT")
-@SequenceGenerator(name = "SMS_SQ_ST",sequenceName = "SMS_SQ_ST")
+@SequenceGenerator(name = "SMS_SQ_ST",sequenceName = "SMS_SQ_ST", allocationSize = 1)
 public class Student implements Serializable {
 
     @Id

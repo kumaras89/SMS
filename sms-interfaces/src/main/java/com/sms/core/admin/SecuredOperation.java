@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "SMS_MA_SECURED_OPERATION")
-@SequenceGenerator(sequenceName = "SMS_SQ_SO",name = "SMS_SQ_SO")
+@SequenceGenerator(sequenceName = "SMS_SQ_SO",name = "SMS_SQ_SO", allocationSize = 1)
 public class SecuredOperation implements Serializable {
 
 

@@ -9,4 +9,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue(value = "SSLC")
 public class SSLCMarkDetails extends MarkDetails{
+
 }

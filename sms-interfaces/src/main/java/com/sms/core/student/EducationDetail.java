@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "SMS_TR_EDUCATION_DETAIL")
-@SequenceGenerator(name = "SMS_SQ_ED",sequenceName = "SMS_SQ_ED")
+@SequenceGenerator(name = "SMS_SQ_ED",sequenceName = "SMS_SQ_ED",allocationSize = 1)
 public class EducationDetail implements Serializable {
 
     private static final long serialVersionUID = 533778750992658222L;

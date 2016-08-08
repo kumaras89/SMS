@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_COURSE")
-@SequenceGenerator(name ="SMS_SQ_CO" ,sequenceName = "SMS_SQ_CO")
+@SequenceGenerator(name ="SMS_SQ_CO" ,sequenceName = "SMS_SQ_CO",allocationSize = 1)
 public class Course  implements Serializable
 {
 

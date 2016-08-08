@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_USER")
-@SequenceGenerator(name = "SMS_SQ_US",sequenceName = "SMS_SQ_US")
+@SequenceGenerator(name = "SMS_SQ_US",sequenceName = "SMS_SQ_US",allocationSize = 1)
 public class User implements Serializable {
 
 

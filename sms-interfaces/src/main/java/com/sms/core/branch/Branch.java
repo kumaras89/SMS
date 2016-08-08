@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_BRANCH")
-@SequenceGenerator(sequenceName = "SMS_SQ_BR",name = "SMS_SQ_BR")
+@SequenceGenerator(sequenceName = "SMS_SQ_BR",name = "SMS_SQ_BR" , allocationSize = 1)
 public class Branch  implements Serializable{
 
     /**

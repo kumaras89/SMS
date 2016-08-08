@@ -1,22 +1,19 @@
 package com.sms.core.student;
 
-import com.sms.core.branch.Branch;
 import com.sms.core.common.Builder;
-import com.sms.core.marketing.MarketingEmployee;
-import org.hibernate.validator.constraints.Email;
 
-
-import javax.persistence.Column;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
 /**
  * Created by sathish on 6/20/2016.
  */
-public class StudentScholarInfo
-{
+public class StudentScholarInfo {
     private Long id;
 
     @NotNull(message = "Application Number is empty")
@@ -52,7 +49,7 @@ public class StudentScholarInfo
     private String parentPhoneNumber;
 
     @NotNull(message = "Parent name is empty")
-    @Size(min = 1,max=50, message = "Parent name is Exceeds")
+    @Size(min = 1, max = 50, message = "Parent name is Exceeds")
     private String fatherOrMotherName;
 
 
@@ -100,8 +97,7 @@ public class StudentScholarInfo
 
     private String status;
 
-    public StudentScholarInfo()
-    {
+    public StudentScholarInfo() {
 
     }
 
@@ -127,9 +123,9 @@ public class StudentScholarInfo
                 .with(StudentScholarInfo::getReligion, studentScholar.getReligion().name())
                 .with(StudentScholarInfo::getNationality, studentScholar.getNationality())
                 .with(StudentScholarInfo::getFatherOrMotherName, studentScholar.getFatherOrMotherName())
-                .with(StudentScholarInfo::getCasteDescription,studentScholar.getCasteDescription())
-                .with(StudentScholarInfo::getEmailId,studentScholar.getEmailId())
-                .with(StudentScholarInfo::getAnnualIncome,studentScholar.getAnnualIncome())
+                .with(StudentScholarInfo::getCasteDescription, studentScholar.getCasteDescription())
+                .with(StudentScholarInfo::getEmailId, studentScholar.getEmailId())
+                .with(StudentScholarInfo::getAnnualIncome, studentScholar.getAnnualIncome())
                 .on(StudentScholarInfo::getLastModifiedDate).set(studentScholar.getLastModifiedDate())
                 .on(StudentScholarInfo::getCreatedDate).set(studentScholar.getCreatedDate())
                 .on(StudentScholarInfo::getMarketingEmployeeCode).set(studentScholar.getMarketingEmployee().getCode())
@@ -180,11 +176,17 @@ public class StudentScholarInfo
         return address;
     }
 
-    public String getNationality() {return nationality; }
+    public String getNationality() {
+        return nationality;
+    }
 
-    public String getCaste() {return caste; }
+    public String getCaste() {
+        return caste;
+    }
 
-    public String getReligion() {return religion; }
+    public String getReligion() {
+        return religion;
+    }
 
     public String getFatherOrMotherName() {
         return fatherOrMotherName;

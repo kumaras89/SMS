@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "SMS_MA_FEES_PARTICULAR")
-@SequenceGenerator(name = "SMS_SQ_FP",sequenceName = "SMS_SQ_FP")
+@SequenceGenerator(name = "SMS_SQ_FP",sequenceName = "SMS_SQ_FP",allocationSize = 1)
 public class FeesParticular implements Serializable {
 
 

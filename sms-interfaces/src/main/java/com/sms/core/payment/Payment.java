@@ -17,7 +17,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "SMS_TR_PAYMENT")
-@SequenceGenerator(name = "SMS_SQ_PY",sequenceName = "SMS_SQ_PY")
+@SequenceGenerator(name = "SMS_SQ_PY",sequenceName = "SMS_SQ_PY",allocationSize = 1)
 public class Payment implements Serializable{
 
     @Id

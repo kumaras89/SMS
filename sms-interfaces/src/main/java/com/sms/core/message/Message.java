@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "SMS_TR_MESSAGING_SERVICE")
-@SequenceGenerator(name = "SMS_SQ_MS",sequenceName = "SMS_SQ_MS")
+@SequenceGenerator(name = "SMS_SQ_MS",sequenceName = "SMS_SQ_MS",allocationSize = 1)
 public class Message
 {
     @Id

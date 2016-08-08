@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SMS_TR_STUDENT_FEES")
-@SequenceGenerator(sequenceName = "SMS_SQ_STF",name = "SMS_SQ_STF")
+@SequenceGenerator(sequenceName = "SMS_SQ_STF",name = "SMS_SQ_STF", allocationSize = 1)
 public class StudentFees extends Fees {
 
     @Id

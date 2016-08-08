@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "SMS_TR_SUBJECT")
-@SequenceGenerator(sequenceName = "SMS_SQ_SU",name = "SMS_SQ_SU")
+@SequenceGenerator(sequenceName = "SMS_SQ_SU",name = "SMS_SQ_SU",allocationSize = 1)
 public class Subject implements Serializable{
 
     private static final long serialVersionUID = 5945573733224049850L;
