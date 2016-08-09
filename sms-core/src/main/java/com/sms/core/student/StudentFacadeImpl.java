@@ -1,7 +1,13 @@
 package com.sms.core.student;
+import com.sms.core.SmsException;
+import com.sms.core.marketing.MarketingEmployee;
+import com.sms.core.message.Message;
 import com.sms.core.message.SMSConfig;
 import com.sms.core.message.SMSDetails;
 import com.sms.core.message.SMSSender;
+import com.sms.core.repositery.MarketingEmployeeRepository;
+import com.sms.core.repositery.MessageRepository;
+import com.sms.core.repositery.StudentScholarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,15 +35,32 @@ public class StudentFacadeImpl implements StudentFacade {
     @Autowired
     private SMSConfig smsConfig;
 
+    @Autowired
+    private MessageRepository messageRepository;
+
+    @Autowired
+    private MarketingEmployeeRepository marketingEmployeeRepository;
+
+    @Autowired
+    StudentScholarRepository studentScholarRepository;
+
     @Override
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
 
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
 
+        final MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(newStudentInfo.getMarketingEmployeeCode());
+
+        sendSmsToStudent(newStudentInfo.getPhoneNumber(),newStudentInfo);
+        sendSmsToMarket(marketingEmployee.getPhoneNumber(),newStudentInfo,marketingEmployee);
+        //sendSmsToStudent();
+        //sendSmsToStudent(newStudentInfo);
+     /*   final Message message = messageRepository.findById(700);
+
         SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
                                               .on(SMSDetails::getPhoneNumber).set(studentInfo.getPhoneNumber())
-                                              .on(SMSDetails::getMessage).set(SMSSender.MessageTemplate(studentInfo.getName())).build()).apply(smsConfig);
-
+                                              .on(SMSDetails::getMessage).set("Hi "+studentInfo.getName()+","+message.getMessage()).build()).apply(smsConfig);
+    */
         return Optional.of(newStudentInfo);
     }
 
@@ -72,5 +95,32 @@ public class StudentFacadeImpl implements StudentFacade {
                 .search(studentSearchCriteria)
                 .local(StudentEnrollmentConfig::getStuRepo)
                 .with(seConfig);
+    }
+    /*@Override
+    public Optional<StudentInfo> update(final long id,final StudentInfo studentInfo)
+    {
+        return Optional.ofNullable(StudentEnrollmentService.findById(id).with(seConfig.getStuRepo()))
+                .map(student -> this.save(studentInfo))
+                .orElseThrow(() ->  new SmsException("Student Updation Eror", "What you trying to do Update its not available"));
+    }*/
+
+    public void sendSmsToStudent(final String phoneNumber,StudentInfo studentInfo)
+    {
+        final Message message = messageRepository.findById(1);
+
+        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
+                .on(SMSDetails::getPhoneNumber).set(phoneNumber)
+                .on(SMSDetails::getMessage).set("Hi "+studentInfo.getName()+","+message.getMessage()).build()).apply(smsConfig);
+    }
+
+    public void sendSmsToMarket(final String phoneNumber, StudentInfo studentInfo, final MarketingEmployee marketingEmployee)
+    {
+        final Message message = messageRepository.findById(2);
+
+        final String welcomeMessage = "Hi "+marketingEmployee.getName()+",Name:"+studentInfo.getName()+",Application Number:"+studentInfo.getApplicationNumber()+message.getMessage();
+
+        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentInfo.getName())
+                .on(SMSDetails::getPhoneNumber).set(phoneNumber)
+                .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
     }
 }
