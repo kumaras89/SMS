@@ -14,7 +14,7 @@
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
                     <td  class="firstcol"><label class="control-label" for="hotelCode">Code</label></td>
-                    <td><input type="text" name="hotelCode" id="hotelCode" ng-model="hotel.hotelCode" placeholder="Hotel Code" maxlength="10" ng-minlength="5" required style="width:94px;"/>
+                    <td><input type="text" name="hotelCode" id="hotelCode" ng-model="hotel.hotelCode" placeholder="Hotel Code" maxlength="10" ng-minlength="3" required style="width:94px;"/>
                         <span class="error" ng-messages="hotelForm.hotelCode.$error" ng-if="hotelForm.hotelCode.$touched">
                             <span ng-message="required">Code is required.</span>
                             <span ng-message="minlength">Code is too short</span>
@@ -48,16 +48,12 @@
                     <td colspan="2" class="firstcol"><label class="control-label" >Hotel address :</label></td>
 
                 </tr>
-                <tr class="even gradeA">
-                    <td colspan="2"><span address-template addfrm="hotelForm" data="hotel"> </span></td>
-                </tr>
-
             </table>
-
-
+                <div><span address-template addfrm="hotelForm" data="hotel"></div>
+            <br>
             <div class="well">
                 <div class="controls">
-                    <a ng-click="createNewHotel()"  ng-class="{linkdisabled: hotelForm.$invalid}" class="btn btn-small btn-primary">Create New Hotel</a>
+                    <a ng-click="createNewHotel()"  ng-class="{linkdisabled: hotelForm.$invalid}" class="btn btn-small btn-primary">Submit</a>
                     <a ui-sref="home.hotel-list" class="btn btn-small  btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Hotel List</a>
                 </div>
             </div>

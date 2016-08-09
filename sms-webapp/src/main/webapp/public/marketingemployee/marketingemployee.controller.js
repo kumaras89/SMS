@@ -78,6 +78,9 @@
                     AdminService.getConstants(function (data) {
                         $scope.commonAttributes = data;
                     });
+                    AdminService.getUsers(function (data) {
+                        $scope.users = data;
+                    });
 
                     $scope.loadMarketingEmployee();
                 }

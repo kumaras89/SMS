@@ -22,7 +22,12 @@
                 </tr>
                 <tr class="even gradeA">
                     <td><label class="control-label"> Hotel Code:</label></td>
-                    <td><label class="control-label">{{hotel.hotelCode}}</label></td>
+                    <td><input type="text" name="hotelCode" id="hotelCode" ng-model="hotel.hotelCode" placeholder="Hotel Code" maxlength="10" ng-minlength="3" required style="width:94px;"/>
+                        <span class="error" ng-messages="hotelForm.hotelCode.$error" ng-if="hotelForm.hotelCode.$touched">
+                            <span ng-message="required">Code is required.</span>
+                            <span ng-message="minlength">Code is too short</span>
+                        </span>
+                    </td>
                 </tr>
                 <tr>
                     <td class="firstcol"><label class="control-label" >Branch:</label></td>
@@ -41,7 +46,6 @@
                 </tr>
                 <tr class="even gradeA">
                     <td colspan="2" class="firstcol"><label class="control-label" for="contactNo">Hotel address :</label></td>
-
                 </tr>
                 <tr class="even gradeA">
                     <td colspan="2"><span address-template addfrm="hotelForm" data="hotel"> </span></td>
@@ -52,7 +56,7 @@
 
             <div class="well">
                 <div class="controls">
-                    <a ng-click="updateHotel()"  ng-class="{linkdisabled: hotelForm.$invalid}" class="btn btn-small btn-primary">Submit</a>
+                    <a ng-click="updateHotel()"  ng-class="{linkdisabled: hotelForm.$invalid}" class="btn btn-small btn-primary">Update</a>
                     <a ui-sref="home.hotel-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Hotel List</a>
                 </div>
             </div>

@@ -13,7 +13,7 @@
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
                     <td  class="firstcol"><label class="control-label" for="code">Code</label></td>
-                    <td><input type="text" name="code" id="code" ng-model="branch.code" placeholder="Code" maxlength="10" ng-minlength="5" required style="width:94px;"/>
+                    <td><input type="text" name="code" id="code" ng-model="branch.code" placeholder="Code" maxlength="10" ng-minlength="3" required style="width:94px;"/>
                         <span class="error" ng-messages="branchForm.code.$error" ng-if="branchForm.code.$touched">
                             <span ng-message="required">Code is required.</span>
                             <span ng-message="minlength">Code is too short</span>
@@ -39,7 +39,7 @@
             <span address-template addfrm="branchForm" data="branch"> </span>
             <br>
             <div class="well">
-                <a  ng-click="createNewBranch()"  class="btn btn-small"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Submit</a>
+                <a  ng-click="createNewBranch()"  class="btn btn-small btn-primary"></i>Submit</a>
                 <a ui-sref="home.branch-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Branches</a>
             </div>
         </form>

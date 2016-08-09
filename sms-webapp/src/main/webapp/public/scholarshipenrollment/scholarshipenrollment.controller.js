@@ -86,6 +86,7 @@
                 $scope.createNewScholarshipEnrollment = function () {
 
                     $http.post('/scholarshipenrollment', $scope.scholarshipSummarized).then(function(){
+                        window.scrollTo(0,0);
                         FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.scholarshipenrollment-list');
                     })

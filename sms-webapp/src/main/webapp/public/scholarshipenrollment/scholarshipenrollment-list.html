@@ -76,7 +76,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="scholarshipEnrollment in $data | filter: student_filter" class="succcess">
+                <tr ng-repeat="scholarshipEnrollment in $data | filter: student_filter" ng-class="{ success:scholarshipEnrollment.status=='ENROLLED'}">
                     <td>{{$index + 1 }}</td>
                     <td sortable="code">{{ scholarshipEnrollment.applicationNumber }}</td>
                     <td sortable="name">{{ scholarshipEnrollment.name }}</td>
