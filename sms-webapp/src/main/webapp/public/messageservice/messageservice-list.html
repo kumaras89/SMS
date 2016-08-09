@@ -29,7 +29,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="messageService in $data | filter: messageService_filter" class="success">
+                        <tr ng-repeat="messageService in $data | filter: messageService_filter" ng-if="messageService.id !='1' && messageService.id !='2'" class="success">
                             <td>{{$index + 1 }}</td>
                             <td ng-if="messageService.toReceiver=='Others'" sortable="phoneNumber">{{messageService.phoneNumber}}</td>
                             <td ng-if="messageService.toReceiver!='Others'" sortable="toReceiver">{{messageService.toReceiver}}</td>

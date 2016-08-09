@@ -6,7 +6,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
+        <div include-if-allowed operation="marketingEmployeeCreation" class="well">
             <a ng-click="createNewMarketingEmployee()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Marketing Employee</a>
         </div>
         <div class="row">
@@ -39,9 +39,9 @@
                             <td sortable="name">{{ marketingEmployee.linkedUser }}</td>
                             <td sortable="designation">{{ marketingEmployee.designation }}</td>
                             <td>{{ marketingEmployee.phoneNumber }}</td>
-                            <td><a ng-click="editMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td><a include-if-allowed operation="marketingEmployeeEdit"  ng-click="editMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a confirm="Do you want to delete {{marketingEmployee.name}} ?" confirm-title="Marketing Employee Delete Confirmation" ng-click="deleteMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
+                                <a include-if-allowed operation="marketingEmployeeDelete"  confirm="Do you want to delete {{marketingEmployee.name}} ?" confirm-title="Marketing Employee Delete Confirmation" ng-click="deleteMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">

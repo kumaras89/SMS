@@ -6,7 +6,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
+        <div include-if-allowed operation="courseCreation" class="well">
             <a ng-click="createNewCourse()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Course</a>
         </div>
         <div class="row">
@@ -33,9 +33,9 @@
                             <td>{{$index + 1 }}</td>
                             <td sortable="code">{{ course.code }}</td>
                             <td sortable="name">{{ course.name }}</td>
-                            <td><a ng-click="editCourse(course.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td><a include-if-allowed operation="courseEdit" ng-click="editCourse(course.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a confirm="Do you want to delete {{course.name}} ?" confirm-title="Course Delete Confirmation" ng-click="deleteCourse(course.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
+                                <a include-if-allowed operation="courseDelete" confirm="Do you want to delete {{course.name}} ?" confirm-title="Course Delete Confirmation" ng-click="deleteCourse(course.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">

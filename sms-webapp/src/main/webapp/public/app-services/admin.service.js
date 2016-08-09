@@ -49,6 +49,7 @@
         service.getStudentByCode=getStudentByCode
         service.getHotelByCode=getHotelByCode
         service.getHrById=getHrById
+        service.getBranchById=getBranchById
 
         return {
             serviceImpl : null,
@@ -82,6 +83,7 @@
             getStudentByCode(function () {})
             getHotelByCode(function () {})
             getHrById=getHrById(function () {})
+            getBranchById=getBranchById(function (){})
 
         }
 
@@ -303,6 +305,14 @@
             })
             return emp;
         }
+        function getBranchById(branchId) {
+            var branches = StorageService.getTrustedStoarage('/branch');
+            var emp =  _.find(branches, function(branch) {
+                return branch.id == branchId
+            })
+            return emp;
+        }
+
     }
 
 

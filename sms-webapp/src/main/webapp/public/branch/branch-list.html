@@ -6,8 +6,8 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
-            <a ng-click="createNewBranch()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Branch</a>
+        <div include-if-allowed operation="branchCreation" class="well">
+            <a  ng-click="createNewBranch()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Branch</a>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -37,9 +37,11 @@
                             <td sortable="name">{{ branch.name }}</td>
                             <td align="center"><i class="{{ branch.isActive == 0? 'fa fa-times-circle-o fa-fw' : 'fa fa-check-circle-o fa-fw' }}"></i></td>
                             <td>{{ branch.address.taluk }}</td>
-                            <td><a ng-click="editBranch(branch.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td>
+                                <a ng-click="viewBranch(branch.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
+                                <a include-if-allowed operation="branchEdit" ng-click="editBranch(branch.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a  confirm="Do you want to delete {{branch.name}} ?" confirm-title="Branch Delete Confirmation" ng-click="deleteBranch(branch.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
+                                <a include-if-allowed operation="branchDelete" confirm="Do you want to delete {{branch.name}} ?" confirm-title="Branch Delete Confirmation" ng-click="deleteBranch(branch.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
                             </td>
                         </tr>
                         <tr>

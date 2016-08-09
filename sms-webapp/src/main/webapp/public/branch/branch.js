@@ -28,4 +28,10 @@ angular.module('Branch', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookies
                 controllerAs: 'vm',
                 url: '/branch-creation'
             })
+            .state('home.branch-view', {
+                templateUrl: 'branch/branch-view.html',
+                controller: 'BranchViewCtrl',
+                url: '/branch-view/:id'
+            })
+
     }]);

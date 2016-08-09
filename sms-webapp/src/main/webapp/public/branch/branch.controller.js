@@ -5,6 +5,9 @@
         .module('Branch')
         .controller('BranchListCtrl', ['$scope', 'CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout', '$uibModal',
         function ($scope, CrudService, FlashService, ngTableParams, $state, $timeout , $uibModal) {
+            $scope.viewBranch = function (branchId) {
+                $state.go('home.branch-view',{id: branchId});
+            };
 
             $scope.editBranch = function (userId) {
                 $state.go('home.branch-detail',{id: userId});
@@ -94,7 +97,17 @@
                 });
 
             }
-        }]);
+        }])
+        .controller('BranchViewCtrl', ['$scope', '$stateParams', 'AdminService', '$state',
+            function ($scope, $stateParams, AdminService , $state) {
+
+                $scope.loadBranch = function() {
+                    $scope.branch=AdminService.getBranchById($stateParams.id);
+                }
+
+                $scope.loadBranch();
+            }]);
+
         
 
 

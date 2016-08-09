@@ -6,7 +6,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
+        <div include-if-allowed operation="feesparticularCreation" class="well">
             <a ng-click="createNewFeesParticular()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Fees Component</a>
         </div>
         <div class="row">
@@ -33,9 +33,9 @@
                             <td>{{$index + 1 }}</td>
                             <td sortable="code">{{ feesParticular.code }}</td>
                             <td sortable="name">{{ feesParticular.name }}</td>
-                            <td><a ng-click="editFeesParticular(feesParticular.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td><a include-if-allowed operation="feesparticularEdit" ng-click="editFeesParticular(feesParticular.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
-                                <a confirm="Do you want to delete {{feesParticular.name}} ?" confirm-title=" Fees Particular Delete Confirmation" ng-click="deleteFeesParticular(feesParticular.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
+                                <a include-if-allowed operation="feesparticularDelete" confirm="Do you want to delete {{feesParticular.name}} ?" confirm-title=" Fees Particular Delete Confirmation" ng-click="deleteFeesParticular(feesParticular.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">

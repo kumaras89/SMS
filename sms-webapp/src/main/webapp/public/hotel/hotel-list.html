@@ -34,7 +34,7 @@
                             <td>{{ hotel.hotelCode }}</td>
                             <td>{{ getBranchDesc(hotel.branchCode) }}</td>
                             <td>{{ hotel.phoneNumber }}</td>
-                            <td><a ng-click="updateHotel(hotel.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td><a include-if-allowed operation="hotelEdit" ng-click="updateHotel(hotel.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 <a ng-click="viewHotel(hotel.id)" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>View</a>
                                <!-- &nbsp;
                                 <a confirm="Do you want to delete {{hotel.name}} ?" confirm-title="Hotel Delete Confirmation" ng-click="deleteHotel(hotel.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>-->
@@ -51,8 +51,8 @@
             </div>
         </div>
         <div class="well">
-            <a ng-click="createNewHotel()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Hotel</a>
-            <a ng-click="createNewHr()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Add HR</a>
+            <a include-if-allowed operation="hotelCreation" ng-click="createNewHotel()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Hotel</a>
+            <a include-if-allowed operation="hotelHrCreation" ng-click="createNewHr()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New HR</a>
             <a ng-click="hrList()" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i> HR List</a>
         </div>
     </div>
