@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface MessageRepository extends JpaRepository<Message,String>
 {
-
+    Message findById(final int id);
 }
