@@ -82,8 +82,8 @@
             <br>
             <tr><td>
                 <a ui-sref="home.hoteltracker-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Student Hotel Tracker </a> &nbsp;
-                <div include-if-allowed operation="hoteltrackerEdit" ><a  ng-click="updateTracker(hoteltracker.id)" ng-if="hoteltracker.status != 'SUSPENDED' " class="btn btn-small btn-primary"><i class=" fa fa-edit fa-fw"></i> Edit Mapping</a>
-                 </div>
+                <span include-if-allowed operation="hoteltrackerEdit" ><a  ng-click="updateTracker(hoteltracker.id)" ng-if="hoteltracker.status != 'SUSPENDED' " class="btn btn-small btn-primary"><i class=" fa fa-edit fa-fw"></i> Edit Mapping</a>
+                 </span>
             </td>
             </tr>
             </tbody>

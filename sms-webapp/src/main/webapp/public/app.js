@@ -58,14 +58,14 @@
                     bn : '=bn'
                 },
                 controller: function($scope){
-                    if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){
+                   /* if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){*/
                         var name = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
                         $timeout(function () {
                             $scope.$apply(function () {
                                 $scope.bn = name;
                             })
                         });
-                    }
+                   /* }*/
 
                     AdminService.getBranches(function (data) {
                         $scope.branches = data;
@@ -73,12 +73,12 @@
                     });
                 },
                 template: function(){
-                    if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
+                    /*if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){*/
                         return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
                                        '| limitTo:8" id="branchName" style="width: 42%;" placeholder="Branch" autocomplete="off" />'
-                    }else{
+                    /*}else{
                         return '<input type="text" style="width: 42%; ng-model="bn" readonly>'
-                    }
+                    }*/
                 }
             }
         }])

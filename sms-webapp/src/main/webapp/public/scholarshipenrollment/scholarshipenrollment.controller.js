@@ -27,6 +27,9 @@
                 }
 
                 $scope.search = function () {
+                    if( $scope.searchCriteria.status===""){
+                        $scope.searchCriteria={};
+                    }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
                     } else {

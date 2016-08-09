@@ -124,6 +124,8 @@
                 }
 
                 $scope.search = function () {
+                    if($scope.searchCriteria.status===""){
+                        $scope.searchCriteria={} ;                   }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
                     } else {
@@ -215,6 +217,10 @@
                     return hoteltracker.hotelCode == $scope.hoteltracker.hotelCode;
                 };
                 $scope.init = function() {
+                    AdminService.getBranches(function(data) {
+                        $scope.branches = data;
+                        $scope.branchNames = _.pluck(data, "name");
+                    })
                     AdminService.getHotels(function(data) {
                         $scope.hotels = data;
                     })
