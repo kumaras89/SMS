@@ -61,5 +61,13 @@ public class StudentScholarRestController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @RequestMapping(value = "/{applicationNumber}", method = RequestMethod.PUT)
+    public ResponseEntity<StudentScholarInfo> update(@PathVariable("applicationNumber") final String applicationNumber,
+                                              @RequestBody @Valid final StudentScholarInfo studentScholarInfo) {
+        return studentScholar.update(applicationNumber, studentScholarInfo)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
+    }
+
 }
 
