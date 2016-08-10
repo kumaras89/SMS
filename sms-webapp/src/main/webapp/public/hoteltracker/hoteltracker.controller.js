@@ -7,10 +7,14 @@
             function ($scope, FlashService, $state, AdminService,CrudService,$http) {
                 $scope.hoteltracker = {};
                 $scope.branchname = '';
-
+                $scope.durations= [1,2,3,4,5,6,7,8,9,10,11,12];
                 $scope.branchChanged = function () {
                     var branchName = AdminService.getBranchDesc($scope.hoteltracker.branchCode);
                     return hoteltracker.branchCode == $scope.hoteltracker.branchCode;
+                }
+                $scope.durationChanged=function () {
+                    var CurrentDate = moment($scope.hoteltracker.durationFrom);
+                   return $scope.hoteltracker.durationTo=new Date(CurrentDate.add($scope.duration, 'months'));
                 }
 
                 $scope.yr= function(){

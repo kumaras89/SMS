@@ -27,6 +27,8 @@ public class StudentScholarSearchService {
                 .map(StudentScholarSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
                         DateUtils.fromYear(Year.of(year), Month.JANUARY, 1),
                         DateUtils.fromYear(Year.of(year), Month.DECEMBER, 31)))
+                .map(StudentScholarSearchCriteria::getDurationFrom, durationFrom -> builder.greaterThanOrEqualTo(root.<Date>get("createdDate"),durationFrom))
+                .map(StudentScholarSearchCriteria::getDurationTo, durationTo -> builder.lessThanOrEqualTo(root.<Date>get("createdDate"),durationTo))
                 .getArray());
     }
 

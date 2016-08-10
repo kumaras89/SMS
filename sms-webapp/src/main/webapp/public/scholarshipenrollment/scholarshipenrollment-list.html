@@ -9,7 +9,7 @@
             <a ng-click="createNewScholarshipEnrollment()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Enrolment</a>
         </div>
         <div style="border-radius:20px;border: 2px solid #3dad9c;">
-            <div class="control-group,form">
+            <div class="control-group,form" ng-form name="scholarshipForm">
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
@@ -18,26 +18,26 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><label class="control-label" for="studentName">Student Name</label></td>
+                        <td class="firstcol"><label class="control-label" for="studentName">Student Name</label></td>
                         <td>
                             <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="branchName">Branch</label></td>
+                        <td class="firstcol"><label class="control-label" for="branchName">Branch</label></td>
                         <td>
                             <input type="text" style="width: 42%;" ng-model="searchCriteria.branchName" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label">Marketing Employee</label></td>
+                        <td class="firstcol"><label class="control-label">Marketing Employee</label></td>
                         <td>
                             <span marketing-employee mn="searchCriteria.marketingEmployeeName" ></span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td><label class="control-label" for="status">Status</label></td>
+                        <td class="firstcol"><label class="control-label" for="status">Status</label></td>
                         <td>
                             <select ng-model="searchCriteria.status" id="status" class="selectpicker">
                                 <option value="">ALL</option>
@@ -46,15 +46,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" for="year">Year</label></td>
+                        <td class="firstcol"><label class="control-label" for="year">Year</label></td>
                         <td>
                             <input  ng-model="searchCriteria.year" id="year" type="number" placeholder="Year" maxlength="4"  />
                         </td>
                     </tr>
 
                     <tr>
+                        <td class="firstcol"><label class="control-label">From</label></td>
+                        <td>
+                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol"><label class="control-label">To</label></td>
+                        <td>
+                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}"/>
+                            <span class="error" ng-show="scholarshipForm.durationTo.$error.min">Invalid From date !</span>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td colspan="2" style="text-align: right">
-                                <a ng-click="search()" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                                <a ng-click="search()" class="btn btn-group-sm btn-primary" ng-class="{linkdisabled: scholarshipForm.$invalid}" ><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>

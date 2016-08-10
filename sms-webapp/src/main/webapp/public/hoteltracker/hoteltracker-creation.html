@@ -81,21 +81,27 @@
                 <tr>
                     <td rowspan="2"><label class="control-label" >Duration</label></td>
 
-                    <td style="column-count: 2;clear: both;">
-                        <div class="left"><label class="control-label" for="durationFrom"> From</label></div>
-                        <div  class="right" ><label class="control-label" for="durationTo"> To</label></div>
+                    <td style="column-count: 3;clear: both;">
+                        <div style="width: 40%"><label class="control-label" for="durationFrom"> From</label></div>
+                        <div style="width: 20%" ><label class="control-label" for="durationFrom"> Month</label></div>
+                        <div style="width: 40%" ><label class="control-label" for="durationTo"> To</label></div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="column-count: 2;clear: both;">
-                        <div class="left">
-                            <input type="date" name="durationFrom" id="durationFrom" ng-model="hoteltracker.durationFrom" required/>
+                    <td style="column-count: 3;clear: both;">
+                        <div style="width: 40%">
+                            <input type="date" name="durationFrom" id="durationFrom" ng-model="hoteltracker.durationFrom" ng-change="durationChanged()" required/>
                             <span class="error" ng-messages="trackForm.durationFrom.$error" ng-if="trackForm.durationFrom.$touched">
                                 <div ng-message="required">Duration From is required.</div>
                                 <div ng-message="invalid">Duration From is invalid.</div>
                             </span>
                         </div>
-                        <div  class="right" >
+                        <div style="width: 20%; margin-top: 5%">
+                            <select ng-model="duration" ng-change="durationChanged()">
+                                <option  ng-repeat="duration in durations" value="{{duration}}">{{duration}}</option>
+                            </select>
+                        </div>
+                        <div   style="width: 40%">
                             <input type="date" name="durationTo" id="durationTo" ng-model="hoteltracker.durationTo" min="{{hoteltracker.durationFrom}}" required/>
                             <span class="error" ng-messages="trackForm.durationTo.$error" ng-if="trackForm.durationTo.$touched">
                                 <div ng-message="required">Duration To is required.</div>

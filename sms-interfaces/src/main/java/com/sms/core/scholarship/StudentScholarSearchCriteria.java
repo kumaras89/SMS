@@ -1,5 +1,7 @@
 package com.sms.core.scholarship;
 
+import java.util.Date;
+
 /**
  * Created by Ganesan on 02/07/16.
  */
@@ -10,6 +12,12 @@ public class StudentScholarSearchCriteria {
     private ScholarStatus status;
     private String marketingEmployeeName;
     private Integer year;
+    private Date durationFrom;
+    private Date durationTo;
+
+    public Date getDurationFrom() { return durationFrom;}
+
+    public Date getDurationTo() {return durationTo; }
 
     public String getStudentName() {
         return studentName;

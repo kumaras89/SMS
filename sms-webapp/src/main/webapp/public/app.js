@@ -58,14 +58,14 @@
                     bn : '=bn'
                 },
                 controller: function($scope){
-                   /* if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){*/
+                    if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){
                         var name = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
                         $timeout(function () {
                             $scope.$apply(function () {
                                 $scope.bn = name;
                             })
                         });
-                   /* }*/
+                    }
 
                     AdminService.getBranches(function (data) {
                         $scope.branches = data;

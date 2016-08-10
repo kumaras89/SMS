@@ -57,6 +57,9 @@
                 };
 
                 $scope.search = function () {
+                    if($scope.searchCriteria.durationTo){
+                        $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationTo).add(1,'days');
+                    }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
                     } else {
