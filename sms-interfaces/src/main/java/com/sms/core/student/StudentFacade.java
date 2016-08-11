@@ -47,4 +47,6 @@ public interface StudentFacade {
     Optional<StudentInfo> findByScholarship(final String applicationNumber);
 
     List<StudentInfo> search(StudentSearchCriteria studentSearchCriteria);
+
+    Optional<StudentInfo> update(final long id,final StudentInfo studentInfo);
 }
