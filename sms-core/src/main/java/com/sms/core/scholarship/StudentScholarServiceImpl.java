@@ -81,20 +81,6 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 .map(StudentScholarServiceImpl::scholarToInfo);
     }
 
-    public Optional<StudentScholarInfo> commonSave(final StudentScholarInfo entityType)
-    {
-        final StudentScholar scholar = StudentScholar.toBuilder(entityType)
-                .on(StudentScholar::getMarketingEmployee).set(marketingEmployeeRepository.findByCodeIgnoreCase(entityType.getMarketingEmployeeCode()))
-                .on(StudentScholar::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
-                .build();
-
-        final Optional<StudentScholarInfo> newStudent = Optional.of(studentScholarRepository
-                .saveAndFlush(scholar))
-                .map(StudentScholarServiceImpl::scholarToInfo);
-
-        return newStudent;
-    }
-
     @Override
     public Optional<StudentScholarInfo> save(final StudentScholarInfo entityType) {
 
@@ -102,8 +88,14 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 .findByApplicationNumberIgnoreCase(entityType.getApplicationNumber()))
                 .ifPresent( studentScholar -> new SmsException("applicationNumber", String
                         .format("Scholarship already exist for %s application number", entityType.getApplicationNumber())));
-        Optional<StudentScholarInfo> studentScholarInfo = this.commonSave(entityType);
+
+        Optional<StudentScholarInfo> studentScholarInfo = Optional.of(studentScholarRepository.saveAndFlush(StudentScholar.toBuilder(entityType)
+                .on(StudentScholar::getMarketingEmployee).set(marketingEmployeeRepository.findByCodeIgnoreCase(entityType.getMarketingEmployeeCode()))
+                .on(StudentScholar::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
+                .build())).map(StudentScholarServiceImpl::scholarToInfo);
+
         sendToAllImp.sendAll(SetAllDataForSendingDetails(entityType));
+
         return studentScholarInfo;
     }
 
@@ -117,8 +109,10 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     @Override
     public Optional<StudentScholarInfo> update(String applicationNumber, StudentScholarInfo studentScholarInfo)
     {
-        return Optional.ofNullable(studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber))
-                .map(scholar -> this.commonSave(studentScholarInfo))
-                .orElseThrow(() ->  new SmsException("Student Scholar Update Error", "What you trying to Update its not available"));
+        final StudentScholar studentExists = this.studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber);
+        final StudentScholar studentScholarModified = studentScholarRepository.saveAndFlush(Builder.of(StudentScholar.class, studentExists)
+                .on(StudentScholar::getLastModifiedDate).set(new Date()).build());
+        return Optional.of(studentScholarModified)
+                .map(StudentScholarServiceImpl::scholarToInfo);
     }
 }
