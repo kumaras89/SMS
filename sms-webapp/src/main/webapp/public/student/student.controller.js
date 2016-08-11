@@ -39,6 +39,9 @@
                     });
                 };
 
+                $scope.editStudent = function (userId) {
+                    $state.go('home.student-edit',{id: userId});
+                };
 
                 $scope.viewStudent = function (userId) {
                     $state.go('home.student-detail' , {id: userId});
@@ -131,6 +134,157 @@
 
                 $scope.loadStudent();
             }])
+        .controller('StudentEditCtrl',['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$stateParams','$http', '$uibModal',
+            function ($scope, CrudService, FlashService, $state, AdminService, $stateParams, $http,$uibModal) {
+
+                $scope.loadStudent = function () {
+                    CrudService.studentService.GetById($stateParams.id).then(function (res) {
+                        $scope.student = res
+                        $scope.student.branchName = AdminService.getBranchDesc(res.branchCode);
+                        $scope.student.dateOfBirth = new Date(res.dateOfBirth);
+                        $scope.student.courseName = AdminService.getCourseDesc(res.courseCode);
+                        $scope.student.schemeName = AdminService.getSchemeDesc(res.schemeCode);
+                        $scope.student.referalName = AdminService.getMarketingEmployeeName(res.marketingEmployeeCode);
+                        $scope.src = '/document/download/' + $scope.student.fmsPhotoId + '/photo.jpg';
+                    })
+                }
+
+                $scope.initialize = function(){
+                    $scope.today=moment().format("YYYY-MM-DD");
+                    $scope.student.guardians = [{}, {}, {}, {}];
+                    $scope.otherLanguages = [{}, {}, {}];
+                    $scope.student.sslcMarkDetails = {};
+                    $scope.student.sslcMarkDetails.additionalDetails = {};
+                    $scope.student.hscMarkDetails = {};
+                    $scope.student.hscMarkDetails.additionalDetails = {};
+                    $scope.student.sslcMarkDetails.subjects = [{'name': 'Tamil', 'totalMark': 100},
+                        {'name': 'English', 'totalMark': 100},
+                        {'name': 'Maths', 'totalMark': 100},
+                        {'name': 'Science', 'totalMark': 100},
+                        {'name': 'Social Science', 'totalMark': 100},
+                        {}
+                    ];
+                    $scope.student.hscMarkDetails.subjects = [{'name': 'Tamil', 'totalMark': 200},
+                        {'name': 'English', 'totalMark': 200}
+                        , {}, {}, {}, {}, {}, {}];
+
+                };
+
+                $scope.calculateAge = function (birthday) { // birthday is a date
+                    var today = new Date();
+                    var birthDate = new Date(birthday);
+                    var months = (today.getFullYear() - birthDate.getFullYear()) * 12;
+                    months -= birthDate.getMonth() + 1;
+                    months += today.getMonth();
+                    $scope.student.age = Math.ceil(months <= 0 ? '' : months / 12) || '';
+                    return $scope.student.age;
+                };
+
+                $scope.totalValue = function (subjects) {
+                    var sum = 0;
+                    angular.forEach(subjects, function (subject, index) {
+                        if (subject.securedMark) {
+                            sum += subject.securedMark;
+                        }
+                    });
+                    return sum;
+                };
+
+                $scope.sslcTotalMark = function (subjects) {
+                    $scope.student.sslcMarkDetails.totalMarks = $scope.totalValue(subjects);
+                    return $scope.student.sslcMarkDetails.totalMarks;
+                };
+
+                $scope.hscTotalMark = function (subjects) {
+                    $scope.student.hscMarkDetails.totalMarks = $scope.totalValue(subjects);
+                    return $scope.student.hscMarkDetails.totalMarks;
+                };
+
+                $scope.getFeesParticularDesc = function (feesParticularCode){
+                    return AdminService.getFeesParticularDesc(feesParticularCode);
+                };
+                $scope.updateStudent = function(){
+                    $scope.student.status = 'CREATED';
+                    $scope.student.age = $scope.calculateAge($scope.student.dateOfBirth)
+                    $scope.student.schemeCode = AdminService.getSchemeCode($scope.student.schemeName);
+                    $scope.student.feesInfos = AdminService.getSchemeFeesInfo($scope.student.schemeCode);
+                    $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
+                    $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
+                    $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
+                    $scope.studentSumarized = {};
+
+                    //deep copy of student
+                    angular.copy($scope.student,$scope.studentSumarized);
+
+                    ;
+
+                    $scope.studentSumarized.educationDetails = _.filter($scope.student.educationDetails, function(ed){
+                        return  ed.examPassed != undefined && ed.examPassed != '';
+                    });
+                    $scope.studentSumarized.guardians = _.filter($scope.student.guardians, function(ed){
+                        return  ed.relationShip != undefined && ed.relationShip != '';
+                    });
+                    $scope.studentSumarized.otherLanguages = _.filter($scope.student.otherLanguages, function(ed){
+                        return  ed.name != undefined && ed.name != '';
+                    });
+
+                    $scope.studentSumarized.sslcMarkDetails.subjects = _.filter($scope.student.sslcMarkDetails.subjects, function(ed){
+                        return  ed.name != undefined && ed.name != '';
+                    });
+
+                    $scope.studentSumarized.hscMarkDetails.subjects = _.filter($scope.student.hscMarkDetails.subjects, function(ed){
+                        return  ed.name != undefined && ed.name != '';
+                    });
+
+                    if(! $scope.sslcEnable){
+                        delete $scope.studentSumarized.sslcMarkDetails;
+                    }
+                    if(! $scope.hscEnable){
+                        delete $scope.studentSumarized.hscMarkDetails;
+                    }
+
+                };
+
+                $scope.modifiedStudent = function () {
+                    CrudService.studentService.Update($scope.student).then(function () {
+                    /*var res =  $http.put('/student'+'/' + $scope.studentSumarized.applicationNumber , $scope.studentSumarized).then(function(res){
+                        StorageService.clearStorage('/student')*/
+                        window.scrollTo(0,0);
+                        FlashService.Success("Successfuly Modified !!", true);
+                        $state.go('home.student-list');
+                    });
+
+                };
+
+
+                $scope.init = function () {
+
+                    AdminService.getConstants(function (data) {
+                        $scope.commonAttributes = data;
+                    });
+
+                    AdminService.getMarketingEmployees(function (data) {
+                        $scope.marketingEmployees = data;
+                    });
+
+                    AdminService.getSchemes(function (data) {
+                        $scope.schemes = data;
+                        $scope.schemeNames = _.pluck(data, "name")
+                    });
+
+                    AdminService.getCourses(function (data) {
+                        $scope.courseNames = _.pluck(data, "name")
+                    });
+
+                    AdminService.getYearOfPassing(function (data) {
+                        $scope.yearOfPass = data;
+                    });
+                }
+
+                $scope.init();
+                $scope.loadStudent();
+            }
+        ])
         .controller('StudentCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$stateParams','$http', '$uibModal',
             function ($scope, CrudService, FlashService, $state, AdminService, $stateParams, $http,$uibModal) {
 
@@ -142,7 +296,9 @@
                             if (res.data) {
                                 $scope.student = res.data;
                                 $scope.student.applicationNumber = $stateParams.applicationNumber
+                                $scope.student.branchName = AdminService.getBranchDesc(res.data.branchCode)
                                 $scope.student.dateOfBirth = new Date(res.data.dateOfBirth)
+                                $scope.student.referalName = AdminService.getMarketingEmployeeName(res.data.marketingEmployeeCode)
                                 $scope.initialize();
                                 if(!$scope.student.educationDetails) {
                                     $scope.student.educationDetails = []
@@ -162,9 +318,6 @@
 
                 $scope.initialize = function(){
                     $scope.today=moment().format("YYYY-MM-DD");
-                    $scope.student.gender='MALE';
-                    $scope.student.maritalStatus='MARRIED';
-                    $scope.student.englishFluency='EXCELLENT';
                     $scope.student.guardians = [{}, {}, {}, {}];
                     $scope.student.otherLanguages = [{}, {}, {}];
                     $scope.student.sslcMarkDetails = {};
@@ -311,6 +464,7 @@
                 }
 
                 $scope.init();
+                $scope.initialize();
                 $scope.loadStudentScholarShip();
 
             }])

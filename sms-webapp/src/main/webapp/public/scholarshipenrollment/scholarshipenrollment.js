@@ -48,6 +48,11 @@ angular.module('ScholarshipEnrollment', ['oc.lazyLoad', 'ui.router', 'ui.bootstr
                 controller: 'ScholarshipEnrollmentDetailCtrl',
                 url: '/scholarshipenrollment-detail/:id'
             })
+            .state('home.scholarshipenrollment-edit', {
+                templateUrl: 'scholarshipenrollment/scholarshipenrollment-edit.html',
+                controller: 'ScholarshipEnrollmentEditCtrl',
+                url: '/scholarshipenrollment-edit/:id'
+            })
             .state('home.scholarshipenrollment-creation', {
                 templateUrl: 'scholarshipenrollment/scholarshipenrollment-creation.html',
                 controller: 'ScholarshipEnrollmentCreationCtrl',

@@ -19,6 +19,11 @@ angular.module('Student', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
                 controller: 'StudentDetailCtrl',
                 url: '/student-detail/:id'
             })
+            .state('home.student-edit', {
+                templateUrl: 'student/student-edit.html',
+                controller: 'StudentEditCtrl',
+                url: '/student-edit/:id'
+            })
             .state('home.student-creation', {
                 templateUrl: 'student/student-creation.html',
                 controller: 'StudentCreationCtrl',

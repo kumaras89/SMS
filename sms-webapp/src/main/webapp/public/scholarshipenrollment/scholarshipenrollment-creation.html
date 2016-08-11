@@ -41,7 +41,7 @@
                                 </tr>
                                 <tr>
                                     <td><label name="branch" class="control-label">Branch</label></td>
-                                    <td><input type="text" ng-model="scholarshipEnrollment.branch" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" required />
+                                    <td><span branch-name bn="scholarshipEnrollment.branch" name="branch" required></span>
                                         <span class="error" ng-messages="scholarship.branch.$error" ng-if="scholarship.branch.$touched">
                                             <span ng-message="required">Branch is required.</span>
                                         </span>

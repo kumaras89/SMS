@@ -90,6 +90,7 @@
                     <td sortable="createdDate">{{ student.createdDate | date }}</td>
                     <td>
                         <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
+                        <a ng-click="editStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                     </td>
                 </tr>
                 <tr>
@@ -113,8 +114,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                <button class="btn btn-primary" ng-click="continue()"
-                        title="Continue without scholarship application number">Continue</button>
+                <!--<button class="btn btn-primary" ng-click="continue()"
+                        title="Continue without scholarship application number">Continue</button>-->
                 <button class="btn btn-primary" ng-click="ok()" title="Search Student scholar ship enrollment">OK</button>
             </div>
         </script>
