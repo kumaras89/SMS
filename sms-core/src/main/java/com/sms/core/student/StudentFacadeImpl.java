@@ -53,7 +53,7 @@ public class StudentFacadeImpl implements StudentFacade {
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
 
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
-        sendToAllImp.sendAll(SetAllDataForSendingDetails(studentInfo));
+        sendToAllImp.sendAll(SetAllDataForSendingDetails(newStudentInfo));
         return Optional.of(newStudentInfo);
     }
 
