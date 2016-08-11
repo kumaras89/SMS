@@ -55,17 +55,9 @@ public class SMSSender {
             String charHex = String.format("%1$4s", Integer.toHexString(c));
             newMessage.append(charHex);
         }
-        String message_result = newMessage.toString();
-        return message_result;
+        return newMessage.toString();
     }
 
-    //Welcome message for Student and Scholarship registration
-    public static String MessageTemplate(final String studentName)
-    {
-        String welcomeMessgae="RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.";
-        String messageTemplate = "Hi"+studentName+","+"\n";
-        return messageTemplate+welcomeMessgae;
-    }
     /**
      *
      * @return

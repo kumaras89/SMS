@@ -29,28 +29,32 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final StudentScholarRepository studentScholarRepository;
     private final MarketingEmployeeRepository marketingEmployeeRepository;
     private final BranchRepository branchRepository;
-    private final SMSConfig smsConfig;
-    private final MessageRepository messageRepository;
-
-    /*
-        @Value("${JOINED_WELCOME_MESSAGE_FOR_SCHOLARSHIP}")
-        private String welcomeMessage;
-    */
+    private final SendToAllImp sendToAllImp;
 
     @Autowired
     public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository,
                                      final MarketingEmployeeRepository marketingEmployeeRepository ,
                                      final BranchRepository branchRepository,
-                                     final SMSConfig smsConfig,
-                                     final MessageRepository messageRepository)
+                                     final SendToAllImp sendToAllImp)
     {
         this.studentScholarRepository = studentScholarRepository;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.branchRepository = branchRepository;
-        this.smsConfig = smsConfig;
-        this.messageRepository = messageRepository;
+        this.sendToAllImp = sendToAllImp;
     }
 
+    private SendingDetails SetAllDataForSendingDetails(StudentScholarInfo studentScholarInfo)
+    {
+        MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(studentScholarInfo.getMarketingEmployeeCode());
+
+        return SendingDetails.builder().on(SendingDetails::getGuardianPhoneNumber).set(studentScholarInfo.getParentPhoneNumber())
+                .on(SendingDetails::getStudentPhoneNumber).set(studentScholarInfo.getStudentPhoneNumber())
+                .on(SendingDetails::getStudentApplicationNumber).set(studentScholarInfo.getApplicationNumber())
+                .on(SendingDetails::getStudentName).set(studentScholarInfo.getName())
+                .on(SendingDetails::getMarketingEmployeeName).set(marketingEmployee.getName())
+                .on(SendingDetails::getMarketingEmployeePhonenumber).set(marketingEmployee.getPhoneNumber())
+                .build();
+    }
 
     private static StudentScholarInfo scholarToInfo(final StudentScholar source) {
         return StudentScholarInfo.toBuilder(source).build();
@@ -98,15 +102,8 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 .findByApplicationNumberIgnoreCase(entityType.getApplicationNumber()))
                 .ifPresent( studentScholar -> new SmsException("applicationNumber", String
                         .format("Scholarship already exist for %s application number", entityType.getApplicationNumber())));
-
         Optional<StudentScholarInfo> studentScholarInfo = this.commonSave(entityType);
-
-        MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(entityType.getMarketingEmployeeCode());
-
-        sendSmsToStudent(entityType.getStudentPhoneNumber(),entityType);
-        sendSmsToMarket(marketingEmployee.getPhoneNumber(),entityType,marketingEmployee);
-        sendSmsToStudent(entityType.getParentPhoneNumber(),entityType);
-
+        sendToAllImp.sendAll(SetAllDataForSendingDetails(entityType));
         return studentScholarInfo;
     }
 
@@ -123,24 +120,5 @@ public class StudentScholarServiceImpl implements StudentScholarService {
         return Optional.ofNullable(studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber))
                 .map(scholar -> this.commonSave(studentScholarInfo))
                 .orElseThrow(() ->  new SmsException("Student Scholar Update Error", "What you trying to Update its not available"));
-    }
-
-    public void sendSmsToStudent(final String phoneNumber,StudentScholarInfo studentScholarInfo)
-    {
-        final Message message = messageRepository.findById(1);
-
-        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentScholarInfo.getName())
-                .on(SMSDetails::getPhoneNumber).set(phoneNumber)
-                .on(SMSDetails::getMessage).set("Hi "+studentScholarInfo.getName()+",Application No:"+studentScholarInfo.getApplicationNumber()+","+message.getMessage()).build()).apply(smsConfig);
-    }
-    public void sendSmsToMarket(final String phoneNumber, StudentScholarInfo studentScholarInfo, final MarketingEmployee marketingEmployee)
-    {
-        final Message message = messageRepository.findById(2);
-
-        final String welcomeMessage = "Hi "+marketingEmployee.getName()+",Name:"+studentScholarInfo.getName()+",Application Number:"+studentScholarInfo.getApplicationNumber()+message.getMessage();
-
-        SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set(studentScholarInfo.getName())
-                .on(SMSDetails::getPhoneNumber).set(phoneNumber)
-                .on(SMSDetails::getMessage).set(welcomeMessage).build()).apply(smsConfig);
     }
 }
