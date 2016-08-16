@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_STUDENT")
-@SequenceGenerator(name = "SMS_SQ_ST",sequenceName = "SMS_SQ_ST", allocationSize = 1)
+@SequenceGenerator(name = "SMS_SQ_ST", sequenceName = "SMS_SQ_ST", allocationSize = 1)
 public class Student implements Serializable {
 
     @Id
@@ -62,24 +62,24 @@ public class Student implements Serializable {
     @Column(name = "ST_RELIGION")
     private Religion religion;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "GU_STUDENT_ID")
     private Set<Guardian> guardians;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "SP_STUDENT_ID")
     private Set<Payment> payments;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_MD_SSLC_ID",unique = true)
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "ST_MD_SSLC_ID", unique = true)
     private SSLCMarkDetails sslcMarkDetails;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ST_MD_HSC_ID",unique = true)
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "ST_MD_HSC_ID", unique = true)
     private HSCMarkDetails hscMarkDetails;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -102,11 +102,11 @@ public class Student implements Serializable {
     private Rating englishFluency;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "OL_STUDENT_ID")
     private Set<OtherLanguage> otherLanguages;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "SF_STUDENT_ID")
     private Set<StudentFees> studentFees;
 
@@ -135,6 +135,9 @@ public class Student implements Serializable {
     @Column(name = "ST_FMS_PHOTO_ID")
     private Long fmsPhotoId;
 
+    @Column(name = "ST_BATCH")
+    private String batch;
+
     public Student() {
         super();
     }
@@ -144,7 +147,7 @@ public class Student implements Serializable {
     }
 
     public static Builder<Student> builder(final Student student) {
-        return Builder.of(Student.class,student);
+        return Builder.of(Student.class, student);
     }
 
     public String getCode() {
@@ -273,5 +276,9 @@ public class Student implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getBatch() {
+        return batch;
     }
 }

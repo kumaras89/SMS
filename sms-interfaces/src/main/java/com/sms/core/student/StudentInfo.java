@@ -81,7 +81,7 @@ public class StudentInfo {
     private HSCMarkDetails hscMarkDetails;
 
     @NotNull(message = "Phone number is empty")
-    @Size(min = 10, max = 13,message = "Invalid Phone number")
+    @Size(min = 10, max = 13, message = "Invalid Phone number")
     private String phoneNumber;
 
     private String alternatePhoneNumber;
@@ -109,6 +109,9 @@ public class StudentInfo {
     @NotNull(message = "Scheme is empty")
     @Size(min = 1, message = "Scheme code is empty")
     private String schemeCode;
+
+    @NotNull(message = "Batch is Empty")
+    private String batch;
 
     private String status;
 
@@ -254,4 +257,7 @@ public class StudentInfo {
         return fmsPhotoId;
     }
 
+    public String getBatch() {
+        return batch;
+    }
 }
