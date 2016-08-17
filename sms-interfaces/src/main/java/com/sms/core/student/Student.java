@@ -62,23 +62,23 @@ public class Student implements Serializable {
     @Column(name = "ST_RELIGION")
     private Religion religion;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "GU_STUDENT_ID")
     private Set<Guardian> guardians;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ED_STUDENT_ID")
     private Set<EducationDetail> educationDetails;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "SP_STUDENT_ID")
     private Set<Payment> payments;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_MD_SSLC_ID", unique = true)
     private SSLCMarkDetails sslcMarkDetails;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ST_MD_HSC_ID", unique = true)
     private HSCMarkDetails hscMarkDetails;
 
@@ -102,11 +102,11 @@ public class Student implements Serializable {
     private Rating englishFluency;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "OL_STUDENT_ID")
     private Set<OtherLanguage> otherLanguages;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "SF_STUDENT_ID")
     private Set<StudentFees> studentFees;
 
