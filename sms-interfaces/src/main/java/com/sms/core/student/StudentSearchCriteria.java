@@ -44,7 +44,7 @@ public class StudentSearchCriteria {
         return courseName;
     }
 
-    public long getBatch() {
+    public Integer getBatch() {
         return batch;
     }
 }

@@ -111,7 +111,7 @@ public class StudentInfo {
     private String schemeCode;
 
     @NotNull(message = "Batch is Empty")
-    private String batch;
+    private Integer batch;
 
     private String status;
 
@@ -257,7 +257,7 @@ public class StudentInfo {
         return fmsPhotoId;
     }
 
-    public String getBatch() {
+    public Integer getBatch() {
         return batch;
     }
 }

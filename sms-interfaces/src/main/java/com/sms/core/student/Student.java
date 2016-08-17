@@ -136,7 +136,7 @@ public class Student implements Serializable {
     private Long fmsPhotoId;
 
     @Column(name = "ST_BATCH")
-    private String batch;
+    private Integer batch;
 
     public Student() {
         super();
@@ -278,7 +278,7 @@ public class Student implements Serializable {
         return id;
     }
 
-    public String getBatch() {
+    public Integer getBatch() {
         return batch;
     }
 }
