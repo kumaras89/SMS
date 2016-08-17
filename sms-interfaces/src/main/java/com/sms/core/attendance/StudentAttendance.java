@@ -41,7 +41,7 @@ public class StudentAttendance implements Serializable {
     private Course course;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "AD_ATTANDANCE_ID")
+    @JoinColumn(name = "AD_ATTENDANCE_ID")
     private Set<AttendanceDetails> attendanceDetails;
 
     @Column(name = "STA_CREATION_DATE")

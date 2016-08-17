@@ -19,7 +19,7 @@ public class AttendanceDetails implements Serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ATD")
-    private long id;
+    private Long id;
 
     @Column(name = "AD_STUDENT_NAME")
     @NotNull(message = "Student Name is Empty")
@@ -33,9 +33,6 @@ public class AttendanceDetails implements Serializable
     @NotNull(message = "Student Present is Empty")
     private boolean present;
 
-    @Column(name = "AD_ATTANDANCE_ID")
-    private long attendanceId;
-
     public AttendanceDetails() {
         super();
     }
@@ -44,7 +41,7 @@ public class AttendanceDetails implements Serializable
         return Builder.of(AttendanceDetails.class);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -60,7 +57,4 @@ public class AttendanceDetails implements Serializable
         return present;
     }
 
-    public long getAttendanceId() {
-        return attendanceId;
-    }
 }
