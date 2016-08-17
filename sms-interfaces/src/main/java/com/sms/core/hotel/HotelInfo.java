@@ -36,6 +36,8 @@ public class HotelInfo {
 
     private Date createdDate;
 
+    private Date modifiedDate;
+
     public HotelInfo() {
 
     }
@@ -46,14 +48,16 @@ public class HotelInfo {
 
     public static Builder<HotelInfo> toBuilder(final Hotel hotel) {
         return builder()
-            .on(HotelInfo::getId).set(hotel.getId())
-            .on(HotelInfo::getAddress).set(hotel.getAddress())
-            .on(HotelInfo::getBranchCode).set(hotel.getBranch().getCode())
-            .on(HotelInfo::getHotelCode).set(hotel.getHotelCode())
-            .on(HotelInfo::getStatus).set(hotel.getStatus().name())
-            .on(HotelInfo::getHotelName).set(hotel.getHotelName())
-            .on(HotelInfo::getPhoneNumber).set(hotel.getPhoneNumber())
-            .on(HotelInfo::getCreatedDate).set(hotel.getCreatedDate());
+                .on(HotelInfo::getId).set(hotel.getId())
+                .on(HotelInfo::getAddress).set(hotel.getAddress())
+                .on(HotelInfo::getBranchCode).set(hotel.getBranch().getCode())
+                .on(HotelInfo::getHotelCode).set(hotel.getHotelCode())
+                .on(HotelInfo::getStatus).set(hotel.getStatus().name())
+                .on(HotelInfo::getHotelName).set(hotel.getHotelName())
+                .on(HotelInfo::getPhoneNumber).set(hotel.getPhoneNumber())
+                .on(HotelInfo::getCreatedDate).set(hotel.getCreatedDate())
+                .on(HotelInfo::getModifiedDate).set(hotel.getModifiedDate());
+
     }
 
     public long getId() {
@@ -86,5 +90,9 @@ public class HotelInfo {
 
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
 }

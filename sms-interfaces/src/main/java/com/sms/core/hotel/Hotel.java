@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "SMS_TR_HOTEL")
-@SequenceGenerator(name = "SMS_SQ_HL", sequenceName = "SMS_SQ_HL",allocationSize = 1)
+@SequenceGenerator(name = "SMS_SQ_HL", sequenceName = "SMS_SQ_HL", allocationSize = 1)
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_HL")
@@ -40,6 +40,8 @@ public class Hotel {
     @Column(name = "HL_CREATEDDATE")
     private Date createdDate;
 
+    @Column(name = "HL_MODIFIEDDATE")
+    private Date modifiedDate;
 
     public static Builder<Hotel> builder() {
         return Builder.of(Hotel.class);
@@ -47,13 +49,14 @@ public class Hotel {
 
     public static Builder<Hotel> toBuilder(final HotelInfo hotelInfo) {
         return builder()
-            .on(Hotel::getStatus).set(HotelStatus.valueOf(hotelInfo.getStatus()))
-            .on(Hotel::getCreatedDate).set(new Date())
-            .on(Hotel::getHotelName).set(hotelInfo.getHotelName())
-            .on(Hotel::getPhoneNumber).set(hotelInfo.getPhoneNumber())
-            .on(Hotel::getId).set(hotelInfo.getId())
-            .on(Hotel::getHotelCode).set(hotelInfo.getHotelCode())
-            .on(Hotel::getAddress).set(hotelInfo.getAddress());
+                .on(Hotel::getStatus).set(HotelStatus.valueOf(hotelInfo.getStatus()))
+                .on(Hotel::getCreatedDate).set(new Date())
+                .on(Hotel::getModifiedDate).set(new Date())
+                .on(Hotel::getHotelName).set(hotelInfo.getHotelName())
+                .on(Hotel::getPhoneNumber).set(hotelInfo.getPhoneNumber())
+                .on(Hotel::getId).set(hotelInfo.getId())
+                .on(Hotel::getHotelCode).set(hotelInfo.getHotelCode())
+                .on(Hotel::getAddress).set(hotelInfo.getAddress());
 
     }
 
@@ -88,5 +91,9 @@ public class Hotel {
 
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
 }

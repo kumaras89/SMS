@@ -6,9 +6,11 @@ import com.sms.core.common.FList;
 import com.sms.core.repositery.BranchRepository;
 import com.sms.core.repositery.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,21 +47,31 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Optional<HotelInfo> save(final HotelInfo entityType) {
+        return save(entityType, new Date());
+    }
+
+    public Optional<HotelInfo> save(final HotelInfo entityType, final Date createdDate) {
         return Optional.ofNullable(
-                 Do.of(entityType)
-                 .then(hotelInfo -> Hotel.toBuilder(entityType)
-                                             .on(Hotel::getBranch).set(
-                                                     branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
-                                         .build())
-                 .then(hotel -> hotelRepository.saveAndFlush(hotel))
-                 .then(HotelServiceImpl::hotelToInfo).get()
+                Do.of(entityType)
+                        .then(hotelInfo -> Hotel.toBuilder(entityType)
+                                .on(Hotel::getBranch).set(
+                                        branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
+                                .on(Hotel::getCreatedDate).set(createdDate)
+                                .build())
+                        .then(hotel -> hotelRepository.saveAndFlush(hotel))
+                        .then(HotelServiceImpl::hotelToInfo).get()
         );
     }
 
     @Override
     public Optional<HotelInfo> update(final Long id, final HotelInfo entityType) {
-      return Optional.ofNullable(hotelRepository.findById(id))
-                              .map(hotel -> this.save(entityType))
-                              .orElseThrow(() ->  new SmsException("Hotel Update Error", "What you trying to do Update its not available"));
+
+        Hotel alreadyExist = hotelRepository.findById(id);
+
+        if (alreadyExist != null) {
+            return this.save(entityType, alreadyExist.getCreatedDate());
+        } else {
+            throw new SmsException("Hotel Update Error", "What you trying to do Update its not available");
+        }
     }
 }

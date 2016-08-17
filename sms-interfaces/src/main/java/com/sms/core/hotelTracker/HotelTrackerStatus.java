@@ -5,5 +5,5 @@ package com.sms.core.hotelTracker;
  */
 public enum HotelTrackerStatus
 {
-    MAPPED,SUSPENDED;
+    MAPPED,SUSPENDED,COMPLETED;
 }
