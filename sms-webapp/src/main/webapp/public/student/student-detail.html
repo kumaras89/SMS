@@ -364,7 +364,7 @@
             <tbody>
                 <tr>
                     <td align="left"><a ui-sref="home.student-list" class="btn btn-small btn-primary" >Student List</a><br></td>
-                    <td align="right"><a ng-click="goToPayment(student.code)" class="btn btn-small btn-primary">Manage Payments</a></td>
+                    <td include-if-allowed operation="makePayment" align="right"><a ng-click="goToPayment(student.code)" class="btn btn-small btn-primary">Manage Payments</a></td>
                     <td include-if-allowed operation="manageDocument"  align="right"><a include-if-allowed operation="manageDocument" ng-click="goToFms(student.code)" class="btn btn-small btn-primary">Manage Documents</a></td>
                 </tr>
             </tbody>

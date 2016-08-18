@@ -2,6 +2,7 @@ package com.sms.core.payment;
 
 import com.sms.core.common.FList;
 import com.sms.core.repositery.FeesParticularRepository;
+import com.sms.core.repositery.PaymentRepository;
 import com.sms.core.repositery.StudentRepository;
 import com.sms.core.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -19,13 +21,16 @@ import java.util.stream.Collectors;
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
 
+    private PaymentRepository paymentRepository;
     private StudentRepository studentRepository;
     private FeesParticularRepository feesParticularRepository;
 
     @Autowired
-    public PaymentServiceImpl(StudentRepository studentRepository, FeesParticularRepository feesParticularRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository,StudentRepository studentRepository, FeesParticularRepository feesParticularRepository) {
+        this.paymentRepository = paymentRepository;
         this.studentRepository = studentRepository;
         this.feesParticularRepository = feesParticularRepository;
+
     }
 
     @Override
@@ -46,5 +51,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public PaymentDetail getPaymentDetail(String studentCode) {
         return PaymentDetailCalculator.calculatePaymentDetail(studentRepository.findByCode(studentCode));
+    }
+
+    @Override
+    public List<PaymentSearchInfo> search(PaymentSearchCriteria paymentSearchCriteria) {
+        return PaymentSearchService
+                .search(paymentSearchCriteria)
+                .with(paymentRepository);
     }
 }

@@ -73,12 +73,12 @@
                     });
                 },
                 template: function(){
-                    /*if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){*/
+                    if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                         return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
                                        '| limitTo:8" id="branchName" style="width: 42%;" placeholder="Branch" autocomplete="off" />'
-                    /*}else{
-                        return '<input type="text" style="width: 42%; ng-model="bn" readonly>'
-                    }*/
+                    }else{
+                        return '<label class="control-label">{{bn}}</label>'
+                    }
                 }
             }
         }])
@@ -165,6 +165,17 @@
                 controllerAs: 'vm',
                 url: '/login'
             })
+            .state('home.student-dashboard', {
+                templateUrl: 'home/student-dashboard.html',
+                controller: 'StudentDashboardCtrl',
+                url: '/student-dashboard'
+            })
+            .state('home.income-dashboard', {
+                templateUrl: 'home/income-dashboard.html',
+                controller: 'IncomeDashboardCtrl',
+                url: '/income-dashboard'
+            })
+
 
         $urlRouterProvider.otherwise('/login');
 
@@ -217,7 +228,6 @@
                 FlashService.Error('Not Authorized to access \"'+ resource+'\"', true);
                 AuthenticationService.Logout()
             });
-
         });
 
         $rootScope.previousState;

@@ -10,12 +10,19 @@
     <div class="panel-body">
         <div class="row">
 
-            <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="{{home.scholarshipenrollment-list}}"></stats>
-            <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="{{home.student-list}}"></stats>
+           <!-- <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="home.scholarshipenrollment-list"></stats>-->
+            <stats number="{{enrolled.length}}"
+                   comments="Students Enrolled Today" colour="yellow" type="shield" goto="home.student-dashboard"></stats>
+
+
+            <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { status: 'CREATED' }).length}}"
-                   comments="Student Enrolment - Halfway!" colour="red" type="empire" goto="{{home.student-list}}"></stats>
+                   comments="Student Enrolment - Halfway!" colour="red" type="empire" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { branchCode: loggedInBranchCode }).length}}"
-                   comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn" goto="{{home.student-list}}"></stats>
+                   comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn" goto="home.student-list"></stats>
+
+            <stats ng-if="loggedUser == 'admin'" number="{{totalPayment}}"
+                   comments="Total Payment for Today" colour="green" type="rupee" goto="home.income-dashboard"></stats>
         </div>
 
         <div class="row">

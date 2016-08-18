@@ -1,10 +1,14 @@
 package com.sms.core.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Ganesan on 25/06/16.
@@ -31,5 +35,13 @@ public class PaymentRestController {
     public PaymentDetail paymentDetail(@PathVariable("studentId")  String studentId) {
         return paymentService.getPaymentDetail(studentId);
 
+    }
+
+    @RequestMapping(value="/search", method = RequestMethod.POST)
+    public ResponseEntity<List<PaymentSearchInfo>> search(@RequestBody @Valid PaymentSearchCriteria criteria) {
+        return Optional.ofNullable(paymentService.search(criteria))
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

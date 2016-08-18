@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-graduation-cap fa-fw"></i> Branch</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<br>
+
+
+</div>
+<br>
+
+<br>
+<div class="control-group,form">
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <div class="control-group,form">
+            <table class="table table-striped table-condensed">
+                <thead>
+                <tr>
+                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Enrolled  Details</label></td>
+                </tr>
+                <tr>
+                <th>Linded Users</th>  <th>Total Enrolled</th>
+                </tr>
+                </thead>
+                <tr ng-repeat="linkedUser in linkedUsers">
+                <td class="firstcol" ><label class="control-label" >{{linkedUser.name}} </label></td>
+                <td>{{ linkedUser.studNumber }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <!--<div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <table class="table table-striped table-condensed">
+            <tbody>
+            <br>
+            <tr><td>
+                <a ui-sref="home.branch-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Branch List </a> &nbsp;
+            </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>-->
+</div>
+<br>

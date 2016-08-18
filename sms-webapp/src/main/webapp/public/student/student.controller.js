@@ -61,7 +61,7 @@
 
                 $scope.search = function () {
                     if($scope.searchCriteria.durationTo){
-                        $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationTo).add(1,'days');
+                        $scope.searchCriteria.durationTo= new Date($scope.searchCriteria.durationTo).setHours(23,59,59,59);
                     }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()

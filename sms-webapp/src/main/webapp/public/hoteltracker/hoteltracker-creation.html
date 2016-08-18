@@ -14,7 +14,7 @@
             <table width="75%" class="table table-striped table-bordered table-hover">
               <tr class="even gradeA">
                     <td><label class="control-label" for="code"> Hotel Tracker Code:</label></td>
-                    <td class="firstcol"><input type="text" name="code" id="code" ng-model="hoteltracker.hotelTrackerCode" placeholder="Tracker Code" maxlength="10"  style="width:94px;" required/>
+                    <td colspan="3"><input type="text" name="code" id="code" ng-model="hoteltracker.hotelTrackerCode" placeholder="Tracker Code" maxlength="10"  style="width:94px;" required/>
                     <span class="error" ng-messages="trackForm.code.$error" ng-if="trackForm.code.$touched">
                         <span ng-message="required">Hotel Tracker Code is required.</span>
                     </span>
@@ -22,7 +22,7 @@
                 </tr>
             <tr class="even gradeA">
                 <td class="firstcol"><label class="control-label" for="branch">Branch : </label></td>
-                <td class="secondcol">
+                <td colspan="3">
                     <select  ng-model="hoteltracker.branchCode" ng-change="branchChanged()" name="branch" id="branch" required>
                         <option value="">-- select --</option>
                         <option ng-repeat="branch in branches"  value="{{branch.code}}">{{branch.name}}</option>
@@ -34,7 +34,7 @@
             </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hotel">Hotel : </label></td>
-                    <td class="secondcol">
+                    <td colspan="3">
                         <select  ng-model="hoteltracker.hotelCode" ng-change="hotelChanged()" name="hotel" id="hotel" required>
                             <option ng-repeat="hotel in hotels" ng-if="hotel.branchCode == hoteltracker.branchCode" value="{{hotel.hotelCode}}">{{hotel.hotelName}}</option>
                         </select>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hr">HR : </label></td>
-                    <td class="secondcol">
+                    <td colspan="3">
                         <select  ng-model="hoteltracker.hotelHrId"  name="hr" id="hr" required>
                             <option ng-repeat="hr in hrs" ng-if="hr.hotelCode == hoteltracker.hotelCode" value="{{hr.id}}">{{hr.name}}</option>
                         </select>
@@ -57,7 +57,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hr">Joinging year : </label></td>
-                    <td class="secondcol">
+                    <td colspan="3">
                         <select  ng-model="searchCriteria.year" ng-change="getStudents()" id="year" required>
                             <option ng-repeat="year in years"  value="{{year}}">{{year}}</option>
                         </select>
@@ -65,7 +65,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="student">Student : </label></td>
-                    <td class="secondcol">
+                    <td colspan="3">
                         <select  ng-model="hoteltracker.studentCode" ng-changed= name="student" id="student" required>
                             <option ng-repeat="student in students" ng-if="student.branchCode == hoteltracker.branchCode" value="{{student.code}}"> </label>
                                 <div style="float:left;width:50%;">Name: {{student.name}} ;</div>
@@ -81,38 +81,38 @@
                 <tr>
                     <td rowspan="2"><label class="control-label" >Duration</label></td>
 
-                    <td style="column-count: 3;clear: both;">
-                        <div style="width: 40%"><label class="control-label" for="durationFrom"> From</label></div>
-                        <div style="width: 20%" ><label class="control-label" for="durationFrom"> Month</label></div>
-                        <div style="width: 40%" ><label class="control-label" for="durationTo"> To</label></div>
-                    </td>
+
+                        <td ><label class="control-label" for="durationFrom"> From</label></td>
+                        <td  ><label class="control-label" for="durationFrom"> Month</label></td>
+                        <td ><label class="control-label" for="durationTo"> To</label></td>
+
                 </tr>
                 <tr>
-                    <td style="column-count: 3;clear: both;">
-                        <div style="width: 40%">
+
+                        <td >
                             <input type="date" name="durationFrom" id="durationFrom" ng-model="hoteltracker.durationFrom" ng-change="durationChanged()" required/>
                             <span class="error" ng-messages="trackForm.durationFrom.$error" ng-if="trackForm.durationFrom.$touched">
                                 <div ng-message="required">Duration From is required.</div>
                                 <div ng-message="invalid">Duration From is invalid.</div>
                             </span>
-                        </div>
-                        <div style="width: 20%; margin-top: 5%">
+                        </td>
+                        <td >
                             <select ng-model="duration" ng-change="durationChanged()">
                                 <option  ng-repeat="duration in durations" value="{{duration}}">{{duration}}</option>
                             </select>
-                        </div>
-                        <div   style="width: 40%">
+                        </td>
+                        <td   >
                             <input type="date" name="durationTo" id="durationTo" ng-model="hoteltracker.durationTo" min="{{hoteltracker.durationFrom}}" required/>
-                            <span class="error" ng-messages="trackForm.durationTo.$error" ng-if="trackForm.durationTo.$touched">
+                            <div class="error" ng-messages="trackForm.durationTo.$error" ng-if="trackForm.durationTo.$touched">
                                 <div ng-message="required">Duration To is required.</div>
                                 <div ng-message="min">Duration To is invalid.</div>
-                            </span>
-                         </div>
-                    </td>
+                            </div>
+                         </td>
+
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="remark">Remarks:</label></td>
-                    <td><textarea type="text" name="remark" id="remark" ng-model="hoteltracker.remarks" placeholder="Remark" style="width:235px" required/>
+                    <td colspan="3"><textarea type="text" name="remark" id="remark" ng-model="hoteltracker.remarks" placeholder="Remark" style="width:235px" required/>
                         <span class="error" ng-messages="trackForm.remark.$error" ng-if="trackForm.remark.$touched">
                                 <span ng-message="required">Remark is required.</span>
                             </span>

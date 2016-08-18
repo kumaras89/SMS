@@ -118,8 +118,8 @@
             <br>
             <div class="well">
                 <div class="controls">
-                  <div include-if-allowed operation="makePayment">  <a  ng-if="calcTotalAmount() > 0" ng-click="goToPaymentCreation()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Make payment</a> </div>
-                    <a ng-click="viewStudent()" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Go Back</a>
+                  <span include-if-allowed operation="makePayment">  <a  ng-if="calcTotalAmount() > 0" ng-click="goToPaymentCreation()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Make payment</a> </span>
+                   <span> <a ng-click="goToPaymentList()" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Go Back</a> </span>
                 </div>
             </div>
         </form>

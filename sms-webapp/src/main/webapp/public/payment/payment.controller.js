@@ -28,8 +28,8 @@
 
                 }
 
-                $scope.viewStudent = function () {
-                    $state.go('home.student-detail' , {id: $scope.student.id});
+                $scope.goToPaymentList = function () {
+                    $state.go('home.payment-list');
                 }
 
                 $scope.goToPaymentCreation = function () {
@@ -102,6 +102,67 @@
 
 
                 $scope.loadPaymentDetail();
+
+            }])
+        .controller('PaymentListCtrl', ['$scope','$location','ngTableParams','$http','$timeout','$stateParams',
+            function ($scope, $location,ngTableParams,$http,$timeout,$stateParams) {
+                $scope.searchCriteria={};
+                $scope.searchCriteria.durationFrom='';
+                $scope.searchCriteria.durationTo='';
+                $scope.init=function () {
+                    if($stateParams.branch){
+                        $scope.searchCriteria.branchName=$stateParams.branch;
+                    }
+                    $scope.searchCriteria.durationFrom=new Date(moment());
+                    $scope.searchCriteria.durationTo=new Date(moment());
+                }
+                $scope.init();
+                
+                $scope.goToPayment = function(code) {
+                    $location.path('/home/payment-detail/'+code);
+                }
+
+                $scope.search = function () {
+                    if( $scope.searchCriteria.durationTo)
+                    {
+                        $scope.searchCriteria.durationTo=new Date($scope.searchCriteria.durationTo).setHours(23,59,59,59);
+                    }
+                    if( $scope.searchCriteria.durationFrom)
+                    {
+                        $scope.searchCriteria.durationFrom=new Date($scope.searchCriteria.durationFrom).setHours(0,0,0,0);
+                    }
+                    if(!$scope.searchCriteria){
+                        $scope.searchCriteria={};
+                    }
+                    if ($scope.tableParams) {
+                        $scope.tableParams.reload()
+                    } else {
+                        $scope.tableParams = new ngTableParams({
+                            page: 1,            // show first pagez
+                            count: 10,          // count per page
+                            sorting: {
+                                name: 'asc'     // initial sorting
+                            }
+                        }, {
+                            total: 0,           // length of data
+                            getData: function($defer, params) {
+                                $http.post('/payment/search', $scope.searchCriteria).then(function(res) {
+                                    var data = res.data;
+                                    $timeout(function() {
+                                        params.total(data.length);
+                                        $defer.resolve(data);
+                                    }, 10);
+                                }, function() {
+                                    $scope.entities = []
+                                    $timeout(function() {
+                                        params.total($scope.entities.length);
+                                        $defer.resolve($scope.entities);
+                                    }, 10);
+                                })
+                            }
+                        });
+                    }
+                }
 
             }]);
 

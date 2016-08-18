@@ -9,7 +9,8 @@ angular.module('Payment', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
             events: true
         });
 
-        $stateProvider.state('home.payment-detail', {
+        $stateProvider
+            .state('home.payment-detail', {
                 templateUrl: 'payment/payment-detail.html',
                 controller: 'PaymentCtrl',
                 url: '/payment-detail/:studentid'
@@ -18,5 +19,10 @@ angular.module('Payment', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
                 templateUrl: 'payment/payment-creation.html',
                 controller: 'PaymentCtrl',
                 url: '/payment-creation/:studentid'
+            })
+            .state('home.payment-list', {
+                templateUrl: 'payment/payment-list.html',
+                controller: 'PaymentListCtrl',
+                url: '/payment-list/:branch'
             })
     }]);

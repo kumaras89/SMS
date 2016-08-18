@@ -66,8 +66,8 @@ public class StudentInfo {
 
     private String mailId;
 
-    @NotNull(message = "English empty")
-    @Size(min = 1, message = "Caste is empty")
+    @NotNull(message = "English Fluency empty")
+    @Size(min = 1, message = "English Fluency is empty")
     private String englishFluency;
 
     @NotNull(message = "Language is empty")
