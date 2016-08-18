@@ -3,6 +3,7 @@ package com.sms.core.hotelTracker;
 import com.sms.core.common.Builder;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -43,6 +44,9 @@ public class HotelTrackerInfo
     @NotNull(message = "Remarks is Empty")
     private String remarks;
 
+    @NotNull(message = "Stipend is Empty")
+    private BigDecimal stipend;
+
     public HotelTrackerInfo()
     {
     }
@@ -64,7 +68,8 @@ public class HotelTrackerInfo
                 .on(HotelTrackerInfo::getModifiedDate).set(hotelTracker.getModifiedDate())
                 .on(HotelTrackerInfo::getStatus).set(hotelTracker.getStatus().name())
                 .on(HotelTrackerInfo::getRemarks).set(hotelTracker.getRemarks())
-                .on(HotelTrackerInfo::getHotelTrackerCode).set(hotelTracker.getHotelTrackerCode());
+                .on(HotelTrackerInfo::getHotelTrackerCode).set(hotelTracker.getHotelTrackerCode())
+                .on(HotelTrackerInfo::getStipend).set(hotelTracker.getStipend());
     }
 
 
@@ -115,4 +120,6 @@ public class HotelTrackerInfo
     public String getHotelTrackerCode() {
         return hotelTrackerCode;
     }
+
+    public BigDecimal getStipend() { return stipend; }
 }

@@ -78,6 +78,14 @@
                     </td>
                 </tr>
 
+                <tr class="even gradeA">
+                    <td class="firstcol"><label class="control-label" for="stipend">Stipend</label></td>
+                    <td colspan="3"><input type="text" name="stipend" id="stipend" ng-model="hoteltracker.stipend" placeholder="Stipend"   required/>
+                        <span class="error" ng-messages="trackForm.stipend.$error" ng-if="trackForm.stipend.$touched">
+                            <span ng-message="required">Stipend is required.</span>
+                        </span>
+                    </td>
+                </tr>
                 <tr>
                     <td rowspan="2"><label class="control-label" >Duration</label></td>
 

@@ -7,6 +7,7 @@ import com.sms.core.hotelHr.HotelHr;
 import com.sms.core.student.Student;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -59,6 +60,10 @@ public class HotelTracker
     @Column(name = "HT_REMARKS")
     private String remarks;
 
+    @Column(name= "HT_STIPEND")
+    private BigDecimal stipend;
+
+
     public HotelTracker()
     {
 
@@ -75,7 +80,8 @@ public class HotelTracker
                 .on(HotelTracker::getId).set(hotelTrackerInfo.getId())
                 .on(HotelTracker::getDurationFrom).set(hotelTrackerInfo.getDurationFrom())
                 .on(HotelTracker::getDurationTo).set(hotelTrackerInfo.getDurationTo())
-                .on(HotelTracker::getHotelTrackerCode).set(hotelTrackerInfo.getHotelTrackerCode());
+                .on(HotelTracker::getHotelTrackerCode).set(hotelTrackerInfo.getHotelTrackerCode())
+                .on(HotelTracker::getStipend).set(hotelTrackerInfo.getStipend());
 
     }
 
@@ -126,4 +132,6 @@ public class HotelTracker
     public String getHotelTrackerCode() {
         return hotelTrackerCode;
     }
+
+    public BigDecimal getStipend() { return stipend; }
 }
