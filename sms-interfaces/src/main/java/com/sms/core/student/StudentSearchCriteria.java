@@ -15,6 +15,7 @@ public class StudentSearchCriteria {
     private Integer year;
     private Date durationFrom;
     private Date durationTo;
+    private String villageName;
 
     public Date getDurationFrom() {
         return durationFrom;
@@ -46,5 +47,9 @@ public class StudentSearchCriteria {
 
     public Integer getBatch() {
         return batch;
+    }
+
+    public String getVillageName() {
+        return villageName;
     }
 }
