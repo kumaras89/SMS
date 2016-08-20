@@ -1,9 +1,7 @@
 package com.sms.core.student;
 
-import com.sms.core.SmsException;
-import com.sms.core.common.Builder;
 import com.sms.core.marketing.MarketingEmployee;
-import com.sms.core.message.SendMessageToAll;
+import com.sms.core.message.SMSSenderDetailsGenerator;
 import com.sms.core.message.SendingDetails;
 import com.sms.core.repositery.MarketingEmployeeRepository;
 import com.sms.core.repositery.StudentScholarRepository;
@@ -33,7 +31,7 @@ public class StudentFacadeImpl implements StudentFacade {
     StudentScholarRepository studentScholarRepository;
 
     @Autowired
-    SendMessageToAll sendToAllImp;
+    SMSSenderDetailsGenerator sendToAllImp;
 
     @Override
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
@@ -79,7 +77,7 @@ public class StudentFacadeImpl implements StudentFacade {
                 .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP")
                 .build());
 
-        sendToAllImp.sendAll(sendingDetailsList);
+        sendToAllImp.createSMSDetails(sendingDetailsList);
 
         return Optional.of(newStudentInfo);
     }

@@ -1,6 +1,5 @@
 package com.sms.core.message;
 
-import com.sms.core.repositery.MessageRepository;
 import com.sms.core.repositery.WelComeMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import java.util.List;
  */
 
 @Component
-public class SendToStudentInsertionImp implements SendMessageToAll {
+public class SMSDetailsGenerator implements SMSSenderDetailsGenerator {
 
     @Autowired
     private WelComeMessageRepository welComeMessageRepository;
@@ -21,7 +20,7 @@ public class SendToStudentInsertionImp implements SendMessageToAll {
     private SMSConfig smsConfig;
 
     @Override
-    public void sendAll(List<SendingDetails> sendingDetails) {
+    public void createSMSDetails(List<SendingDetails> sendingDetails) {
         for (SendingDetails sendDetails : sendingDetails) {
             WelcomeMessage welcomeMessage = welComeMessageRepository.findByCode(sendDetails.getMessageCode());
             SMSSender.sendSms(SMSDetails.builder().on(SMSDetails::getName).set("--")
@@ -29,6 +28,5 @@ public class SendToStudentInsertionImp implements SendMessageToAll {
                     .on(SMSDetails::getMessage)
                     .set(new StringBuilder(sendDetails.getSenderMessage()).append(welcomeMessage.getMessage()).toString()).build()).apply(smsConfig);
         }
-
     }
 }

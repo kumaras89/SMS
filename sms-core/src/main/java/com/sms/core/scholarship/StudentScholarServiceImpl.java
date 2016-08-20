@@ -4,12 +4,11 @@ import com.sms.core.SmsException;
 import com.sms.core.common.Builder;
 import com.sms.core.common.FList;
 import com.sms.core.marketing.MarketingEmployee;
-import com.sms.core.message.SendMessageToAll;
+import com.sms.core.message.SMSSenderDetailsGenerator;
 import com.sms.core.message.SendingDetails;
 import com.sms.core.repositery.BranchRepository;
 import com.sms.core.repositery.MarketingEmployeeRepository;
 import com.sms.core.repositery.StudentScholarRepository;
-import com.sms.core.student.StudentInfo;
 import com.sms.core.student.StudentScholar;
 import com.sms.core.student.StudentScholarInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +28,17 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     private final StudentScholarRepository studentScholarRepository;
     private final MarketingEmployeeRepository marketingEmployeeRepository;
     private final BranchRepository branchRepository;
-    private final SendMessageToAll sendMessageToAll;
+    private final SMSSenderDetailsGenerator SMSSenderDetailsGenerator;
 
     @Autowired
     public StudentScholarServiceImpl(final StudentScholarRepository studentScholarRepository,
                                      final MarketingEmployeeRepository marketingEmployeeRepository,
                                      final BranchRepository branchRepository,
-                                     final SendMessageToAll sendMessageToAll) {
+                                     final SMSSenderDetailsGenerator SMSSenderDetailsGenerator) {
         this.studentScholarRepository = studentScholarRepository;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.branchRepository = branchRepository;
-        this.sendMessageToAll = sendMessageToAll;
+        this.SMSSenderDetailsGenerator = SMSSenderDetailsGenerator;
     }
 
     private static StudentScholarInfo scholarToInfo(final StudentScholar source) {
@@ -117,7 +116,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP")
                 .build());
 
-        sendMessageToAll.sendAll(sendingDetailsList);
+        SMSSenderDetailsGenerator.createSMSDetails(sendingDetailsList);
 
         return studentScholarInfo;
     }

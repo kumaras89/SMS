@@ -3,20 +3,16 @@ package com.sms.core.attendance;
 import com.sms.core.SmsException;
 import com.sms.core.common.FList;
 import com.sms.core.marketing.MarketingEmployee;
-import com.sms.core.message.SendMessageToAll;
+import com.sms.core.message.SMSSenderDetailsGenerator;
 import com.sms.core.message.SendingDetails;
 import com.sms.core.repositery.*;
-import com.sms.core.scholarship.StudentScholarSearchCriteria;
-import com.sms.core.scholarship.StudentScholarSearchService;
 import com.sms.core.student.Student;
 import com.sms.core.student.StudentScholar;
-import com.sms.core.student.StudentScholarInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +27,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     private BranchRepository branchRepository;
     private UserRepository userRepository;
     private CourseRepository courseRepository;
-    private SendMessageToAll sendMessageToAll;
+    private SMSSenderDetailsGenerator SMSSenderDetailsGenerator;
     private StudentRepository studentRepository;
     private StudentScholarRepository studentScholarRepository;
     private MarketingEmployeeRepository marketingEmployeeRepository;
@@ -42,7 +38,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             final BranchRepository branchRepository,
             final UserRepository userRepository,
             final CourseRepository courseRepository,
-            final SendMessageToAll sendMessageToAll,
+            final SMSSenderDetailsGenerator SMSSenderDetailsGenerator,
             final MarketingEmployeeRepository marketingEmployeeRepository,
             final StudentRepository studentRepository,
             final StudentScholarRepository studentScholarRepository) {
@@ -50,7 +46,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.branchRepository = branchRepository;
         this.userRepository = userRepository;
         this.courseRepository = courseRepository;
-        this.sendMessageToAll = sendMessageToAll;
+        this.SMSSenderDetailsGenerator = SMSSenderDetailsGenerator;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.studentRepository = studentRepository;
         this.studentScholarRepository = studentScholarRepository;
@@ -123,7 +119,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                         .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP_ABSENT")
                         .build());
 
-                sendMessageToAll.sendAll(sendingDetailsList);
+                SMSSenderDetailsGenerator.createSMSDetails(sendingDetailsList);
             }
         }
         return savedStudents;

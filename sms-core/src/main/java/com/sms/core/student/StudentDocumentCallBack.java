@@ -1,9 +1,11 @@
 package com.sms.core.student;
 
+import com.sms.core.common.Builder;
 import com.sms.core.common.DateUtils;
 import com.sms.core.document.DocumentCallBack;
 import com.sms.core.document.DocumentFacade;
 import com.sms.core.document.UpdateInfo;
+import com.sms.core.identity.IDCardSpecification;
 import com.sms.core.identity.IdCard;
 import com.sms.core.identity.IdCardStatus;
 import com.sms.core.repositery.IdCardRepository;
@@ -43,8 +45,13 @@ public class StudentDocumentCallBack implements DocumentCallBack {
         final Student student = studentRepository.findByCode(updateInfo.getUploaderId());
         final Long photoId = DocumentFacade.getDocIdOfType(updateInfo.getUploaderId(), updateInfo.getCategory(), "PHOTO").with(fmsServer);
         studentRepository.updateStatus(updateInfo.getUploaderId(), StudentStatus.valueOf(updateInfo.getStatus()), photoId);
-        IdCard idCard = IdCard.builder()
-                .on(IdCard::getIdentityCode).set(updateInfo.getUploaderId())
+        IdCard existing = idCardRepository.findOne(IDCardSpecification.uploaderSpec(updateInfo.getUploaderId(), IdCardStatus.REQUESTED));
+        Builder<IdCard> idCardBuilder = IdCard.builder();
+        if(existing != null) {
+            idCardBuilder = Builder.of(IdCard.class, existing);
+
+        }
+        IdCard idCard = idCardBuilder.on(IdCard::getIdentityCode).set(updateInfo.getUploaderId())
                 .on(IdCard::getName).set(student.getName())
                 .on(IdCard::getBranchName).set(student.getBranch().getName())
                 .on(IdCard::getAddress).set(student.getBranch().getAddress())
@@ -52,8 +59,11 @@ public class StudentDocumentCallBack implements DocumentCallBack {
                 .on(IdCard::getLastModifiedDate).set(new Date())
                 .on(IdCard::getValidUpto).set(DateUtils.addYear(student.getCreatedDate(), 2))
                 .on(IdCard::getStatus).set(IdCardStatus.REQUESTED)
-                .on(IdCard::getFmsId).set(photoId)
-                .build();
+                .on(IdCard::getFmsId).set(photoId).build();
+
         idCardRepository.save(idCard);
+
+
+
     }
 }

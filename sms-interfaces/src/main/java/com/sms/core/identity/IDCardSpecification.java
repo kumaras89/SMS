@@ -2,6 +2,7 @@ package com.sms.core.identity;
 
 import com.sms.core.common.DateUtils;
 import com.sms.core.common.PredicateBuilder;
+import com.sms.core.document.UploadInfo;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.Month;
@@ -22,6 +23,14 @@ public class IDCardSpecification {
                                                                     DateUtils.fromYear(Year.of(year), Month.JANUARY, 1),
                                                                     DateUtils.fromYear(Year.of(year), Month.DECEMBER, 31)))
                 .getArray());
+    }
+
+    public static Specification<IdCard> uploaderSpec(final String uploaderId, final IdCardStatus status) {
+        return (root, query, builder) ->
+                builder.and(
+                        builder.equal(root.<String>get("status"), status),
+                        builder.like(builder.upper(root.<String>get("identityCode")), "%" + uploaderId + "%")
+                );
     }
 
 }

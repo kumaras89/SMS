@@ -1,9 +1,6 @@
 package com.sms.core.common;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Date;
 
 /**
@@ -30,5 +27,14 @@ public class DateUtils {
      */
     public static Date fromYear(final Year year, final Month month, final int date) {
         return Date.from(LocalDate.of(year.getValue(), month, date).atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * @param creationDate
+     * @return
+     */
+    public static boolean isOneDay(final Date creationDate) {
+        Period period = Period.between(creationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+        return period.getDays() >= 1;
     }
 }
