@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<body>
+The content of the body element is displayed in your browser.
+<input id="tags" name="name">
+<input id="tags_code" name="code">
+</body>
+
+<script>
+
+$(function() {
+
+ $.ajax({
+            type: 'GET',
+            url: "http://sms.rgmodern.org/branch",
+            async: false,
+            dataType: 'json',
+            success: function(data){
+             alert("Success");
+          
+ var json_obj = JSON.parse(JSON.stringify(data)); 
+ alert(json_obj[0].name);
+ alert(json_obj[0].code);
+ var text = [];
+ var code = [];
+
+			for (var i = 0; i < json_obj.length; i++) { 
+		    text[i] = json_obj[i].name ;
+            code[i] = json_obj[i].code ;
+			}
+			$("#tags").autocomplete({
+    source: text,
+    select: function(e, ui) {
+      $('#tags_code').val(code[text.indexOf(ui.item.value)]);
+    }
+  });
+     
+
+alert(text);
+alert(code);
+  
+            },  
+            error: function() {
+                alert("fail");
+            }   
+        });
+
+});
+
+</script>
+
+</html>
+

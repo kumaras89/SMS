@@ -1,0 +1,57 @@
+<html>
+<body>
+ 
+             
+</body>
+<script LANGUAGE="JavaScript">
+function getParams(){
+var idx = document.URL.indexOf('?');
+var params = new Array();
+if (idx != -1) {
+var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+for (var i=0; i<pairs.length; i++){
+nameVal = pairs[i].split('=');
+params[nameVal[0]] = nameVal[1];
+}
+}
+return params;
+}
+params = getParams();
+apnumber2 = unescape(params["apnumber"]);
+ad1 = unescape(params["ad1"]);
+ad2 = unescape(params["ad2"]);
+ad3 = unescape(params["ad3"]);
+branch = unescape(params["branch"]);
+markemp = unescape(params["markemp"]);
+stuname = unescape(params["stuname"]);
+fmname2 = unescape(params["fmname"]);
+dob = unescape(params["dob"]);
+age = unescape(params["age"]);
+nation2 = unescape(params["nation"]);
+mail = unescape(params["mail"]);
+stunumber = unescape(params["stunumber"]);
+prtnumber = unescape(params["prtnumber"]);
+taluk = unescape(params["taluk"]);
+dt = unescape(params["dt"]);
+postal = unescape(params["postal"]);
+
+exampass = unescape(params["exampass"]);
+institute = unescape(params["institute"]);
+group = unescape(params["group"]);
+percentage = unescape(params["percentage"]);
+postalcode = unescape(params["postalcode"]);
+colors = unescape(params["colors"]);
+marital = unescape(params["marital"]);
+gender = unescape(params["gender"]);
+
+
+document.write("Applicant Number43 = " + apnumber2 + "<br>");
+document.write("Branch = " + branch + "<br>");
+document.write("Marketing Employee = " + markemp + "<br>");
+document.write("Student Name = " + stuname + "<br>");
+document.write("Father/Mother Name = " + fmname2 + "<br>");
+document.write("Nationality = " + nation2 + "<br>");
+document.write("Student Mail = " + mail + "<br>");
+
+</script>
+<html>

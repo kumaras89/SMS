@@ -1,0 +1,127 @@
+<html>
+<link href="styles/style.css"           rel="stylesheet" type="text/css">
+<link href="styles/framework.css"       rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css"    rel="stylesheet" type="text/css">
+<link href="styles/animate.css"         rel="stylesheet" type="text/css">
+<head>
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</head>
+<div id="header-fixed">
+    <a class="open-left-sidebar" href="#"><i class="fa fa-navicon"></i></a>
+    <a class="header-logo" href="#"><img src="images/logo-ligh.png" alt="img"></a>
+ <!--    <a class="open-right-sidebar" href="#"><i class="fa fa-envelope-o"></i></a> -->
+</div>  
+<body onload="autoload()">
+<br>
+<br>
+<div id="content" class="responsive">
+
+<center><h3>Preview</h3></center>
+ <div class="container">
+ <script LANGUAGE="JavaScript">
+function getParams(){
+var idx = document.URL.indexOf('?');
+var params = new Array();
+if (idx != -1) {
+var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+for (var i=0; i<pairs.length; i++){
+nameVal = pairs[i].split('=');
+params[nameVal[0]] = nameVal[1];
+}
+}
+return params;
+}
+params = getParams();
+apnumber2 = unescape(params["apnumber"]);
+ad1 = unescape(params["ad1"]);
+ad2 = unescape(params["ad2"]);
+ad3 = unescape(params["ad3"]);
+branch = unescape(params["branch"]);
+markemp = unescape(params["markemp"]);
+stuname = unescape(params["stuname"]);
+fmname2 = unescape(params["fmname"]);
+gender = unescape(params["gender"]);
+dob = unescape(params["dob"]);
+age = unescape(params["ages"]);
+nation2 = unescape(params["nation"]);
+rel2 = unescape(params["rel"]);
+income = unescape(params["income"]);
+marital = unescape(params["marital"]);
+mail = unescape(params["mail"]);
+stunumber = unescape(params["stunumber"]);
+prtnumber = unescape(params["prtnumber"]);
+taluk = unescape(params["taluk"]);
+dt = unescape(params["dt"]);
+postal = unescape(params["postal"]);
+
+exampass2 = unescape(params["exmpass"]);
+institute = unescape(params["institute"]);
+group = unescape(params["group"]);
+year = unescape(params["YEAR"]);
+percentage = unescape(params["percentage"]);
+postalcode = unescape(params["postalcode"]);
+
+
+document.write("<h3>Personal Details</h3>");
+document.write("Applicant Number = " + apnumber2 + "<br>");
+document.write("Branch = " + branch + "<br>");
+document.write("Marketing Employee = " + markemp + "<br>");
+document.write("Student Name = " + stuname + "<br>");
+document.write("Father/Mother Name = " + fmname2 + "<br>");
+document.write("Gender = " + gender + "<br>");
+document.write("Nationality = " + nation2 + "<br>");
+document.write("Religion = " + rel2 + "<br>");
+document.write("Marital Status = " + marital + "<br>");
+document.write("Annual Income = " + income + "<br>");
+document.write("Date Of Birth = " + dob + "<br>");
+document.write("Age = " + age + "<br>");
+document.write("Email = " + mail + "<br>");
+document.write("Student Mobile Number = " + stunumber + "<br>");
+document.write("Parent Mobile Number = " + prtnumber + "<br>");
+
+document.write("<h3>Address Details</h3>");
+document.write("Address Line 1 = " + ad1 + "<br>");
+document.write("Address Line 2 = " + ad2 + "<br>");
+document.write("Address Line 3 = " + ad3 + "<br>");
+document.write("Taluk = " + taluk + "<br>");
+document.write("District = " + dt + "<br>");
+document.write("Postal Code = " + postal + "<br>");
+
+document.write("<h3>Qualification Details</h3>");
+document.write("Exam Passed = " + exampass2 + "<br>");
+document.write("Institute Name = " + institute + "<br>");
+document.write("Group Name = " + group + "<br>");
+document.write("Year Of Passing = " + year + "<br>");
+document.write("Percentage = " + percentage + "<br>");
+document.write("Postal Code = " + postalcode + "<br>");
+
+
+   
+
+</script>
+
+</div>
+<br>
+<div class="container">
+<center>
+
+<button onclick="goBack()" class="btn btn-primary">Go Back</button>
+<button type="button" id="ok" class="btn btn-success">Submit</button>
+</center>
+<br>
+<br>
+</div>
+   </div>          
+</body>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+<script>
+
+</script>
+<html>

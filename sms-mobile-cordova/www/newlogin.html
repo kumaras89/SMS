@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQM Complex Demo</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no; target-densityDpi=device-dpi"/>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>          
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   
+
+        <script src="aps.js">
+       
+        </script>
+    </head>
+    <body>
+        <div data-role="page" id="index">
+            <div data-theme="b" data-role="header">
+                <h1>Index page</h1>
+            </div>
+
+            <div data-role="content">
+<form action="testpage.html" id="login-form" data-ajax="true" method="post">
+        <fieldset>
+           <input type="text" name="username" id="username"  placeholder="Username">
+           <input type="password" name="password" id="password"  placeholder="Password">
+           <input type="button" data-theme="b" name="submit" id="submit" value="Enter" data-icon="plus">
+        </fieldset>
+     </form>
+            </div>
+        </div>    
+    </body>
+</html>   
