@@ -21,7 +21,7 @@
             <stats number="{{(students | filter: { branchCode: loggedInBranchCode }).length}}"
                    comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn" goto="home.student-list"></stats>
 
-            <stats ng-if="loggedUser == 'Satish'" number="{{totalPayment}}"
+            <stats ng-if="loggedUser == 'admin'" number="{{totalPayment}}"
                    comments="Total Payment for Today" colour="green" type="rupee" goto="home.income-dashboard"></stats>
         </div>
 
