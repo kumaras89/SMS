@@ -12,11 +12,28 @@
                 link: function(){
                     // alert('ergo sum!');
                 },
-                compile:  function(element, attr, linker){
-                    AuthenticationService.isAuthorized(attr.operation, function(){}, function() {
-                        element.children().remove();
-                        element.remove();
-                    });
+                compile: function (element, attr, linker) {
+                    if (attr.operation === undefined || attr.operation === null || attr.operation === '') {
+                        var operationArr = attr.operations.split(',');
+                        var headLink = false;
+                        _.forEach(operationArr, function (operation) {
+                            AuthenticationService.isAuthorized(operation, function () {}, function () {
+                                if(!headLink){
+                                    headLink = true;
+                                }
+                            });
+                        });
+                        if(headLink){
+                            element.children().remove();
+                            element.remove();
+                        }
+
+                    } else {
+                        AuthenticationService.isAuthorized(attr.operation, function () {}, function () {
+                            element.children().remove();
+                            element.remove();
+                        });
+                    }
                 }
             }
         });

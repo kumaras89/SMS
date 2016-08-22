@@ -30,8 +30,8 @@ public class AttendanceDetails implements Serializable
     private String studentCode;
 
     @Column(name = "AD_ATTENDANCE_STATUS")
-    @NotNull(message = "Student Present is Empty")
-    private boolean present;
+    @NotNull(message = "Attendance Status is Empty")
+    private String status;
 
     public AttendanceDetails() {
         super();
@@ -53,8 +53,8 @@ public class AttendanceDetails implements Serializable
         return studentName;
     }
 
-    public boolean isPresent() {
-        return present;
+    public String getStatus() {
+        return status;
     }
 
 }

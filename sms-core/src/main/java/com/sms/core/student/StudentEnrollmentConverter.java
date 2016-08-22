@@ -39,7 +39,6 @@ public class StudentEnrollmentConverter {
                 .on(Student::getHscMarkDetails).set(studentInfo.getHscMarkDetails())
                 .on(Student::getFmsPhotoId).set(studentInfo.getFmsPhotoId())
                 .on(Student::getScholarAppNo).set(studentInfo.getApplicationNumber())
-                .on(Student::getBatch).set(studentInfo.getBatch())
                 .build();
     }
 
@@ -65,7 +64,6 @@ public class StudentEnrollmentConverter {
                 .on(StudentInfo::getFeesInfos).set(StudentFeesConverter.convertTo(student.getStudentFees()))
                 .with(StudentInfo::getNationality, student.getNationality())
                 .with(StudentInfo::getBranchCode, student.getBranch().getCode())
-                .with(StudentInfo::getCourseCode, student.getCourse().getCode())
                 .with(StudentInfo::getSchemeCode, student.getScheme().getCode())
                 .with(StudentInfo::getStatus, student.getStatus().name())
                 .with(StudentInfo::getCreatedDate, student.getCreatedDate())
@@ -76,7 +74,7 @@ public class StudentEnrollmentConverter {
                 .on(StudentInfo::getOtherLanguages).set(student.getOtherLanguages())
                 .on(StudentInfo::getFmsPhotoId).set(student.getFmsPhotoId())
                 .on(StudentInfo::getApplicationNumber).set(student.getScholarAppNo())
-                .on(StudentInfo::getBatch).set(student.getBatch())
+                .on(StudentInfo::getBatchName).set(student.getBatch().getName())
                 .build();
     }
 

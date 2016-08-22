@@ -87,6 +87,7 @@
                                         </span>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td><label class="control-label" for="fatherOrMotherName">Father/Mother's Name</label></td>
                                     <td><input type="text" name="fatherOrMotherName" id="fatherOrMotherName" ng-model="student.fatherOrMotherName"
@@ -528,14 +529,15 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             <tr>
-                                <td class="firstcol"><label class="control-label">Course Name</label></td>
+                                <td class="firstcol"><label class="control-label">Batch</label></td>
                                 <td>
-                                    <select ng-model="student.courseName" name="courseName" id="courseName" required>
-                                        <option ng-repeat="courseName in courseNames" value="{{courseName}}">{{courseName}}</option>
+                                    <select ng-model="student.batchName" name="batchName" id="batchName" required>
+                                        <option ng-repeat="batchName in batchNames" value="{{batchName}}">{{batchName}}</option>
                                     </select>
-                                    <span class="error" ng-messages="studentForm.courseName.$error" ng-if="studentForm.courseName.$touched">
-                                        <span ng-message="required">Course Name is required.</span>
+                                    <span class="error" ng-messages="studentForm.batchName.$error" ng-if="studentForm.batchName.$touched">
+                                        <span ng-message="required">Batch Name is required.</span>
                                     </span>
                                 </td>
                             </tr>

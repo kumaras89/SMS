@@ -51,13 +51,21 @@
                     return AdminService.getBranchDesc(branchCode);
                 };
 
-                $scope.getCourseDesc = function (courseCode){
-                    return AdminService.getCourseDesc(courseCode);
+                $scope.getCourseDesc = function (batchName){
+                    return AdminService.getCourseDescByBatchName(batchName);
+                };
+
+                $scope.getCourseDescByBatchName = function (batchName){
+                    return AdminService.getCourseDescByBatchName(batchName);
                 };
 
                 $scope.getSchemeDesc = function (schemeCode){
                     return AdminService.getSchemeDesc(schemeCode);
                 };
+
+                AdminService.getBatches(function (data) {
+                    $scope.batchNames=_.pluck(data, "name");
+                })
 
                 $scope.search = function () {
                     if($scope.searchCriteria.durationTo){
@@ -111,8 +119,8 @@
                     return AdminService.getBranchDesc(branchCode);
                 };
 
-                $scope.getCourseDesc = function (courseCode){
-                    return AdminService.getCourseDesc(courseCode);
+                $scope.getCourseDesc = function (batchName){
+                    return AdminService.getCourseDescByBatchName(batchName);
                 };
 
                 $scope.getSchemeDesc = function (schemeCode){
@@ -142,7 +150,7 @@
                         $scope.student = res
                         $scope.student.branchName = AdminService.getBranchDesc(res.branchCode);
                         $scope.student.dateOfBirth = new Date(res.dateOfBirth);
-                        $scope.student.courseName = AdminService.getCourseDesc(res.courseCode);
+                      /*  $scope.student.courseName = AdminService.getCourseDesc(res.courseCode);*/
                         $scope.student.schemeName = AdminService.getSchemeDesc(res.schemeCode);
                         $scope.student.referalName = AdminService.getMarketingEmployeeName(res.marketingEmployeeCode);
                         $scope.src = '/document/download/' + $scope.student.fmsPhotoId + '/photo.jpg';
@@ -454,8 +462,8 @@
                         $scope.schemeNames = _.pluck(data, "name")
                     });
 
-                    AdminService.getCourses(function (data) {
-                        $scope.courseNames = _.pluck(data, "name")
+                    AdminService.getBatches(function (data) {
+                        $scope.batchNames = _.pluck(data, "name")
                     });
 
                     AdminService.getYearOfPassing(function (data) {

@@ -1,9 +1,9 @@
 package com.sms.core.student;
 
 import com.sms.core.BaseModel;
+import com.sms.core.batch.Batch;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
-import com.sms.core.course.Course;
 import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.payment.Payment;
 import com.sms.core.scheme.Scheme;
@@ -111,8 +111,8 @@ public class Student implements Serializable {
     private Set<StudentFees> studentFees;
 
     @ManyToOne
-    @JoinColumn(name = "ST_COURSE_ID")
-    private Course course;
+    @JoinColumn(name = "ST_BATCH_ID")
+    private Batch batch;
 
     @ManyToOne
     @JoinColumn(name = "ST_SCHEME_ID")
@@ -135,8 +135,7 @@ public class Student implements Serializable {
     @Column(name = "ST_FMS_PHOTO_ID")
     private Long fmsPhotoId;
 
-    @Column(name = "ST_BATCH")
-    private Integer batch;
+
 
     public Student() {
         super();
@@ -218,8 +217,8 @@ public class Student implements Serializable {
         return englishFluency;
     }
 
-    public Course getCourse() {
-        return course;
+    public Batch getBatch() {
+        return batch;
     }
 
     public Scheme getScheme() {
@@ -278,7 +277,4 @@ public class Student implements Serializable {
         return id;
     }
 
-    public Integer getBatch() {
-        return batch;
-    }
 }

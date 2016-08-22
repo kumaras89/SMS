@@ -10,6 +10,7 @@
             'Branch',
             'User',
             'Course',
+            'Batch',
             'Scheme',
             'FeesParticular',
             'ScholarshipEnrollment',

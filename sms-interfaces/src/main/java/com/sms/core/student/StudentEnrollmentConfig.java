@@ -15,7 +15,7 @@ public class StudentEnrollmentConfig {
     @Autowired
     private BranchRepository branchRepository;
     @Autowired
-    private CourseRepository courseRepository;
+    private BatchRepository batchRepository;
     @Autowired
     private SchemeRepository schemeRepository;
     @Autowired
@@ -33,8 +33,8 @@ public class StudentEnrollmentConfig {
         return branchRepository;
     }
 
-    public CourseRepository getCRepo() {
-        return courseRepository;
+    public BatchRepository getBTRepo() {
+        return batchRepository;
     }
 
     public SchemeRepository getSRepo() {

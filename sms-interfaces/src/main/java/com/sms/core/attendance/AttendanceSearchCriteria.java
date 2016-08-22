@@ -9,7 +9,7 @@ public class AttendanceSearchCriteria {
     private Date durationFrom;
     private Date durationTo;
     private String branchName;
-    private String courseName;
+    private String batchName;
     private String userName;
     private Integer batch;
     private String studentName;
@@ -26,8 +26,8 @@ public class AttendanceSearchCriteria {
         return branchName;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getBatchName() {
+        return batchName;
     }
 
     public String getUserName() {

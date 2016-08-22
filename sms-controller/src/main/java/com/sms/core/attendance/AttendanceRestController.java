@@ -19,12 +19,12 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/attendance")
-public class StudentAttendanceRestController {
+public class AttendanceRestController {
 
     private AttendanceService attendanceService;
 
     @Autowired
-    public StudentAttendanceRestController(final AttendanceService attendanceService) {
+    public AttendanceRestController(final AttendanceService attendanceService) {
         this.attendanceService = attendanceService;
     }
 

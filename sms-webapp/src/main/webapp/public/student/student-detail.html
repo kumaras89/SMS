@@ -332,8 +332,13 @@
             <tbody>
             <tr>
                 <td class="firstcol"><label class="control-label">Course Name</label></td>
-                <td><label class="control-label">{{getCourseDesc(student.courseCode)}}</label></td>
+                <td><label class="control-label">{{getCourseDesc(student.batchName)}}</label></td>
             </tr>
+            <tr>
+                <td class="firstcol"><label class="control-label">Batch Name</label></td>
+                <td><label class="control-label">{{student.batchName}}</label></td>
+            </tr>
+
             <tr>
                 <td class="firstcol"><label class="control-label">Referred By</label></td>
                 <td><label class="control-label">{{ getMarketingEmployeeName(student.marketingEmployeeCode) }}</label></td>

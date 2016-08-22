@@ -25,11 +25,8 @@ public class StudentAttendanceInfo {
     @NotNull(message = "Branch Name is Empty")
     private String branchCode;
 
-    @NotNull(message = "Course Name is empty")
-    private String courseCode;
-
-    @NotNull(message = "Batch is Empty")
-    private int batch;
+    @NotNull(message = "Batch  is empty")
+    private String batchName;
 
     @Valid
     @NotNull(message = "Attendance Details is Empty")
@@ -55,9 +52,8 @@ public class StudentAttendanceInfo {
                 .on(StudentAttendanceInfo::getBranchCode).set(studentAttendance.getBranch().getCode())
                 .on(StudentAttendanceInfo::getUserName).set(studentAttendance.getUser().getName())
                 .on(StudentAttendanceInfo::getAttendanceDate).set(studentAttendance.getAttendanceDate())
-                .on(StudentAttendanceInfo::getCourseCode).set(studentAttendance.getCourse().getName())
+                .on(StudentAttendanceInfo::getBatchName).set(studentAttendance.getBatch().getName())
                 .on(StudentAttendanceInfo::getAttendanceDetails).set(studentAttendance.getAttendanceDetails())
-                .on(StudentAttendanceInfo::getBatch).set(studentAttendance.getBatch())
                 ;
     }
 
@@ -89,11 +85,8 @@ public class StudentAttendanceInfo {
         return modificationDate;
     }
 
-    public String getCourseCode() {
-        return courseCode;
+    public String getBatchName() {
+        return batchName;
     }
 
-    public int getBatch() {
-        return batch;
-    }
 }

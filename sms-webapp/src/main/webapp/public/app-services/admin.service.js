@@ -10,7 +10,7 @@
 
     AdminService.$inject = ['AdminServiceProvider'];
 
-    function AdminService(AdminServiceProvider){
+    function AdminService(AdminServiceProvider) {
         return AdminServiceProvider.initService();
 
     }
@@ -28,6 +28,7 @@
         service.getCourses = getCourses
         service.getCourseCode = getCourseCode
         service.getCourseDesc = getCourseDesc
+        service.getCourseDescByBatchName = getCourseDescByBatchName
         service.getBranchCode = getBranchCode
         service.getBranchDesc = getBranchDesc
         service.getConstants = getConstants
@@ -43,18 +44,19 @@
         service.getHotelHrs=getHotelHrs
         service.getHotelCode=getHotelCode
         service.getStudents = getStudents
-        service.getHotelName=getHotelName
-        service.getHotelTrackers=getHotelTrackers
-        service.getStudentName=getStudentName
-        service.getStudentByCode=getStudentByCode
-        service.getHotelByCode=getHotelByCode
-        service.getHrById=getHrById
-        service.getBranchById=getBranchById
+        service.getHotelName = getHotelName
+        service.getHotelTrackers = getHotelTrackers
+        service.getStudentName = getStudentName
+        service.getStudentByCode = getStudentByCode
+        service.getHotelByCode = getHotelByCode
+        service.getHrById = getHrById
+        service.getBranchById = getBranchById
+        service.getBatches = getBatches
 
         return {
-            serviceImpl : null,
-            initService : function() {
-                if(this.serviceImpl == null){
+            serviceImpl: null,
+            initService: function () {
+                if (this.serviceImpl == null) {
                     initService()
                     this.serviceImpl = service;
                 }
@@ -68,6 +70,7 @@
             getFeesParticulars(function(){})
             getConstants(function(){})
             getCourses(function(){})
+            getBatches(function () {})
             getMarketingEmployees(function () {})
             getScholarshipEnrollment(function () {})
             getSchemes(function(){})
@@ -313,8 +316,31 @@
             return emp;
         }
 
+
+        function getLinkedUserName(code) {
+            var mars = StorageService.getTrustedStoarage('/marketingEmployee');
+            var mar = _.find(mars, function (mar) {
+                return mar.code == code
+            })
+            return mar != undefined ? mar.linkedUser : "";
+        }
+
+
+        function getBatches(success) {
+            StorageService.getFromStoarage('/batch', function (data) {
+                success(data);
+            });
+
+        }
+
+        function getCourseDescByBatchName(batchName) {
+            var batches = StorageService.getTrustedStoarage('/batch');
+            var bat = _.find(batches, function (batch) {
+                return batch.name == batchName
+            })
+            return getCourseDesc(bat.courseCode);
+        }
+
+
     }
-
-
-
 })();

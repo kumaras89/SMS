@@ -32,6 +32,7 @@
         service.hotelService = service.of('hotel')
         service.hotelHrService = service.of('hotelhr')
         service.hotelTrackerService= service.of('hoteltracker')
+        service.batchService= service.of('batch')
         return service;
 
         function Service(path) {

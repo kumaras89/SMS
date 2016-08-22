@@ -19,9 +19,8 @@ public class AttendanceSearchService {
     public static Specification<StudentAttendance> attendanceSearchSpec(final AttendanceSearchCriteria criteria) {
 
         return (root, query, builder) -> builder.and(PredicateBuilder.of(Optional.ofNullable(criteria))
-                .map(AttendanceSearchCriteria::getCourseName, name -> builder.like(builder.upper(root.join("course", JoinType.LEFT).get("name")), "%" + name.toUpperCase() + "%"))
+                .map(AttendanceSearchCriteria::getBatchName, name -> builder.like(builder.upper(root.join("batch", JoinType.LEFT).get("name")), "%" + name.toUpperCase() + "%"))
                 .map(AttendanceSearchCriteria::getUserName, name -> builder.like(builder.upper(root.join("user", JoinType.LEFT).get("name")), "%" + name.toUpperCase() + "%"))
-                .map(AttendanceSearchCriteria::getBatch, batch -> builder.equal(root.<Integer>get("batch"), batch))
                 .map(AttendanceSearchCriteria::getStudentName, name -> builder.like(builder.upper(root.join("attendanceDetails", JoinType.LEFT).get("studentName")), "%" + name.toUpperCase() + "%"))
                 .map(AttendanceSearchCriteria::getBranchName, name -> builder.like(root.join("branch", JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(AttendanceSearchCriteria::getDurationFrom, durationFrom -> builder.greaterThanOrEqualTo(root.<Date>get("attendanceDate"), durationFrom))

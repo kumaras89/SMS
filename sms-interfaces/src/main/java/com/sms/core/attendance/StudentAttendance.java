@@ -1,6 +1,7 @@
 package com.sms.core.attendance;
 
 import com.sms.core.admin.User;
+import com.sms.core.batch.Batch;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.Builder;
 import com.sms.core.course.Course;
@@ -25,9 +26,6 @@ public class StudentAttendance implements Serializable {
     @Column(name = "STA_ATTENDANCE_DATE", unique = true)
     private Date attendanceDate;
 
-    @Column(name = "STA_BATCH")
-    private int batch;
-
     @ManyToOne
     @JoinColumn(name = "STA_USER_ID")
     private User user;
@@ -37,8 +35,8 @@ public class StudentAttendance implements Serializable {
     private Branch branch;
 
     @ManyToOne
-    @JoinColumn(name = "STA_COURSE_ID")
-    private Course course;
+    @JoinColumn(name = "STA_BATCH_ID")
+    private Batch batch;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "AD_ATTENDANCE_ID")
@@ -63,8 +61,7 @@ public class StudentAttendance implements Serializable {
                 .on(StudentAttendance::getCreationDate).set(new Date())
                 .on(StudentAttendance::getModificationDate).set(new Date())
                 .on(StudentAttendance::getAttendanceDetails).set(studentAttendanceInfo.getAttendanceDetails())
-                .on(StudentAttendance::getAttendanceDate).set(studentAttendanceInfo.getAttendanceDate())
-                .on(StudentAttendance::getBatch).set(studentAttendanceInfo.getBatch());
+                .on(StudentAttendance::getAttendanceDate).set(studentAttendanceInfo.getAttendanceDate());
 
     }
 
@@ -96,11 +93,7 @@ public class StudentAttendance implements Serializable {
         return modificationDate;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public int getBatch() {
+    public Batch getBatch() {
         return batch;
     }
 }

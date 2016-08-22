@@ -36,9 +36,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="year">Year</label></td>
+                        <td class="firstcol"><label class="control-label" for="batchName">Batch</label></td>
                         <td>
-                            <input  ng-model="searchCriteria.year" id="year" type="number" placeholder="Year" maxlength="4"  />
+                            <input type="text" style="width: 42%;" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>
@@ -85,12 +85,12 @@
                     <td sortable="code">{{ student.code }}</td>
                     <td sortable="name">{{ student.name }}</td>
                     <td sortable="branchCode">{{ getBranchDesc(student.branchCode) }}</td>
-                    <td sortable="courseCode">{{ getCourseDesc(student.courseCode) }}</td>
+                    <td sortable="courseCode">{{ getCourseDesc(student.batchName) }}</td>
                     <td sortable="schemeCode">{{ getSchemeDesc(student.schemeCode) }}</td>
                     <td sortable="createdDate">{{ student.createdDate | date }}</td>
                     <td>
                         <a ng-click="viewStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
-                        <a ng-click="editStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                       <!-- <a ng-click="editStudent(student.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>-->
                     </td>
                 </tr>
                 <tr>

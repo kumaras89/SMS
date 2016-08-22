@@ -26,7 +26,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     private AttendanceRepository attendanceRepository;
     private BranchRepository branchRepository;
     private UserRepository userRepository;
-    private CourseRepository courseRepository;
+    private BatchRepository batchRepository;
     private SMSSenderDetailsGenerator SMSSenderDetailsGenerator;
     private StudentRepository studentRepository;
     private StudentScholarRepository studentScholarRepository;
@@ -37,7 +37,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             final AttendanceRepository attendanceRepository,
             final BranchRepository branchRepository,
             final UserRepository userRepository,
-            final CourseRepository courseRepository,
+            final BatchRepository batchRepository,
             final SMSSenderDetailsGenerator SMSSenderDetailsGenerator,
             final MarketingEmployeeRepository marketingEmployeeRepository,
             final StudentRepository studentRepository,
@@ -45,7 +45,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.attendanceRepository = attendanceRepository;
         this.branchRepository = branchRepository;
         this.userRepository = userRepository;
-        this.courseRepository = courseRepository;
+        this.batchRepository = batchRepository;
         this.SMSSenderDetailsGenerator = SMSSenderDetailsGenerator;
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.studentRepository = studentRepository;
@@ -69,7 +69,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         final StudentAttendance attendance = StudentAttendance.toBuilder(entityType)
                 .on(StudentAttendance::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
                 .on(StudentAttendance::getUser).set(userRepository.findByNameIgnoreCase(entityType.getUserName()))
-                .on(StudentAttendance::getCourse).set(courseRepository.findByCodeIgnoreCase(entityType.getCourseCode()))
+                .on(StudentAttendance::getBatch).set(batchRepository.findByNameIgnoreCase(entityType.getBatchName()))
                 .build();
 
         final Optional<StudentAttendanceInfo> savedStudents = Optional.of(attendanceRepository
@@ -79,7 +79,7 @@ public class AttendanceServiceImpl implements AttendanceService {
          * For sending message to the absents student in current date
          */
         for (AttendanceDetails attandanceDetails : attendance.getAttendanceDetails()) {
-            if (!attandanceDetails.isPresent()) {
+            if (attandanceDetails.getStatus()=="LEAVE") {
 
                 List<SendingDetails> sendingDetailsList = new ArrayList();
 
@@ -160,7 +160,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                     .saveAndFlush(StudentAttendance.toBuilder(entityType)
                             .on(StudentAttendance::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
                             .on(StudentAttendance::getUser).set(userRepository.findByNameIgnoreCase(entityType.getUserName()))
-                            .on(StudentAttendance::getCourse).set(courseRepository.findByCodeIgnoreCase(entityType.getCourseCode()))
+                            .on(StudentAttendance::getBatch).set(batchRepository.findByNameIgnoreCase(entityType.getBatchName()))
                             .on(StudentAttendance::getCreationDate).set(alreadyExist.getCreationDate())
                             .build()
                     ))

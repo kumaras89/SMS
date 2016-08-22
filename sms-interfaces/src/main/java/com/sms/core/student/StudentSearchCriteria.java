@@ -10,8 +10,7 @@ public class StudentSearchCriteria {
     private String studentName;
     private String studentCode;
     private String branchName;
-    private String courseName;
-    private Integer batch;
+    private String batchName;
     private Integer year;
     private Date durationFrom;
     private Date durationTo;
@@ -41,12 +40,8 @@ public class StudentSearchCriteria {
         return year;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public Integer getBatch() {
-        return batch;
+    public String getBatchName() {
+        return batchName;
     }
 
     public String getVillageName() {

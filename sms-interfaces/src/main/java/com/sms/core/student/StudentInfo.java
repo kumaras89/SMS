@@ -102,16 +102,13 @@ public class StudentInfo {
     @Size(min = 1, message = "Branch code is empty")
     private String branchCode;
 
-    @NotNull(message = "Course is empty")
-    @Size(min = 1, message = "Course code is empty")
-    private String courseCode;
 
     @NotNull(message = "Scheme is empty")
     @Size(min = 1, message = "Scheme code is empty")
     private String schemeCode;
 
     @NotNull(message = "Batch is Empty")
-    private Integer batch;
+    private String batchName;
 
     private String status;
 
@@ -205,10 +202,6 @@ public class StudentInfo {
         return englishFluency;
     }
 
-    public String getCourseCode() {
-        return courseCode;
-    }
-
     public String getSchemeCode() {
         return schemeCode;
     }
@@ -257,7 +250,7 @@ public class StudentInfo {
         return fmsPhotoId;
     }
 
-    public Integer getBatch() {
-        return batch;
+    public String getBatchName() {
+        return batchName;
     }
 }
