@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-inr fa-fw"></i> Expenses</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Expense Details
+    </div>
+    <div class="panel-body">
+        <form name="expenseForm" novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td class="firstcol"><label class="control-label">User :</label></td>
+                    <td>{{expense.userName}}</td>
+                </tr>
+
+                <tr class="even gradeA">
+                    <td class="firstcol"><label class="control-label" >Branch</label></td>
+                    <td>{{expense.branchCode }}</td>
+                </tr>
+                <tr class="even gradeA">
+                    <td><label class="control-label">Date:</label></td>
+                    <td class="firstcol">{{ expense.expenseDate | date}}
+                    </td>
+                </tr>
+
+
+            </table>
+            <br>
+            <br>
+            <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="min-width: 20px;">Reason</th>
+                        <th style="min-width: 20px;">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="exp in expense.expenseDetails">
+                        <td style="width: 70%;">{{exp.reason}}</td>
+                        <td>{{exp.amount}}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="min-width: 20px;">Total</td>
+                        <td style="min-width: 20px;"><label class="control-label">{{expense.totalAmount}}</label></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+            <div class="well">
+                <div class="controls">
+                    <a ui-sref="home.expense-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Expense</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

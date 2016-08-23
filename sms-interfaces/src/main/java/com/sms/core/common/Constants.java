@@ -1,5 +1,6 @@
 package com.sms.core.common;
 
+import com.sms.core.attendance.AttendanceStatus;
 import com.sms.core.hotelTracker.HotelTrackerStatus;
 import com.sms.core.identity.IdCardStatus;
 import com.sms.core.scholarship.ScholarStatus;
@@ -50,4 +51,6 @@ public class Constants {
     }
 
     public HotelTrackerStatus [] getHotelTrackerStatus() {return HotelTrackerStatus.values();}
+
+    public AttendanceStatus[] getAttendanceStatus() {return AttendanceStatus.values();}
 }

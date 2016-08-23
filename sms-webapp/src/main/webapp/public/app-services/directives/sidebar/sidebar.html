@@ -65,6 +65,12 @@
             <li ui-sref-active="active">
                 <a include-if-allowed operation="makePayment" ui-sref="home.payment-list"><i class="fa fa-credit-card fa-fw"></i> Payment</a>
             </li>
+            <li ui-sref-active="active">
+                <a include-if-allowed operation="attendance" ui-sref="home.attendance"><i class="fa fa-bell fa-fw"></i> Attendance</a>
+            </li>
+            <li ui-sref-active="active">
+                <a  operation="expense" ui-sref="home.expense-creation"><i class="fa fa-inr fa-fw"></i> Expense</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

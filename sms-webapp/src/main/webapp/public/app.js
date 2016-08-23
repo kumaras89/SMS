@@ -27,7 +27,9 @@
             'HotelHr',
             'HotelTracker',
             'angular-confirm',
-            'MessageService'])
+            'MessageService',
+            'Attendance',
+            'Expense'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
                 return {
                     responseError: function (response) {
