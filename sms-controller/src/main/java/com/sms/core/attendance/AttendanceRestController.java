@@ -60,7 +60,7 @@ public class AttendanceRestController {
     }
 
     @RequestMapping(value="/search", method = RequestMethod.POST)
-    public ResponseEntity<List<StudentAttendanceInfo>> search(@RequestBody @Valid AttendanceSearchCriteria criteria) {
+    public ResponseEntity<List<AttendanceView>> search(@RequestBody @Valid AttendanceSearchCriteria criteria) {
         return Optional.ofNullable(attendanceService.search(criteria))
                 .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))

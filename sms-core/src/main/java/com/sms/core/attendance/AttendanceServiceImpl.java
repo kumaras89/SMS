@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -176,9 +177,54 @@ public class AttendanceServiceImpl implements AttendanceService {
      * @return
      */
     @Override
-    public List<StudentAttendanceInfo> search(final AttendanceSearchCriteria attendanceSearchCriteria) {
-        return AttendanceSearchService
-                .search(attendanceSearchCriteria)
-                .with(attendanceRepository);
+    public List<AttendanceView> search(final AttendanceSearchCriteria attendanceSearchCriteria) {
+        List<StudentAttendance> studentAttendances = AttendanceSearchService.Remoduling(attendanceSearchCriteria).with(attendanceRepository);
+        List<AttendanceView> attendanceViews = new ArrayList<>();
+        Iterator<StudentAttendance> iterator = studentAttendances.iterator();
+        boolean checking = true;
+
+        while (iterator.hasNext()) {
+            StudentAttendance studentAttendance = iterator.next();
+            Iterator<AttendanceDetails> attendanceDetailsList = studentAttendance.getAttendanceDetails().iterator();
+            while (attendanceDetailsList.hasNext()) {
+                AttendanceDetails attendanceDetails = attendanceDetailsList.next();
+                List<Details> detailsList = new ArrayList<>();
+                Details details = new Details();
+                details.setId(attendanceDetails.getId());
+                details.setStatus(attendanceDetails.getStatus().substring(0,1));
+                details.setDate(studentAttendance.getAttendanceDate());
+
+                detailsList.add(details);
+
+                AttendanceView attendanceView = new AttendanceView();
+                attendanceView.setName(attendanceDetails.getStudentName());
+                attendanceView.setCode(attendanceDetails.getStudentCode());
+                attendanceView.setDateList(detailsList);
+
+                Iterator<AttendanceView> checkingExist = attendanceViews.iterator();
+
+                if (checkingExist.hasNext()) {
+                    Iterator<AttendanceView> checkingExist1 = attendanceViews.iterator();
+                    while (checkingExist1.hasNext()) {
+                        AttendanceView attendanceView1 = checkingExist1.next();
+                        if (attendanceView1.getCode().equals(attendanceView.getCode())) {
+                            List<Details> existDetails = attendanceView1.getDateList();
+                            existDetails.add(details);
+                            attendanceView1.setDateList(existDetails);
+                            checking = false;
+                            break;
+                        } else {
+                            checking = true;
+                        }
+                    }
+                    if (checking) {
+                        attendanceViews.add(attendanceView);
+                    }
+                } else {
+                    attendanceViews.add(attendanceView);
+                }
+            }
+        }
+        return attendanceViews;
     }
 }

@@ -31,6 +31,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><label class="control-label" >Batch</label></td>
+                        <td>
+                            <input type="text" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue " id="batchName" style="width: 42%;" placeholder="Batch" autocomplete="off" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td><label class="control-label">Hotel name</label></td>
                         <td>
                             <input type="text" ng-model="searchCriteria.hotelName" uib-typeahead="ht for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" />

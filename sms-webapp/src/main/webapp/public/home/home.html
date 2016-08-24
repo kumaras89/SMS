@@ -20,9 +20,12 @@
                    comments="Student Enrolment - Halfway!" colour="red" type="empire" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { branchCode: loggedInBranchCode }).length}}"
                    comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn" goto="home.student-list"></stats>
-
-            <stats ng-if="loggedUser == 'admin'" number="{{totalPayment}}"
+        </div>
+        <div class="row">
+            <stats ng-if="loggedUserRole == 'SUPER_ADMIN'" number="{{totalPayment}}"
                    comments="Total Payment for Today" colour="green" type="rupee" goto="home.income-dashboard"></stats>
+            <stats ng-if="loggedUserRole == 'SUPER_ADMIN'" number="{{totalExp}}"
+                   comments="Total Expense for Today" colour="red" type="rupee" goto="home.expense-dashboard"></stats>
         </div>
 
         <div class="row">

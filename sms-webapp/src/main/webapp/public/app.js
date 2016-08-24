@@ -177,6 +177,10 @@
                 templateUrl: 'home/income-dashboard.html',
                 controller: 'IncomeDashboardCtrl',
                 url: '/income-dashboard'
+            }).state('home.expense-dashboard', {
+                templateUrl: 'home/expense-dashboard.html',
+                controller: 'ExpenseDashboardCtrl',
+                url: '/expense-dashboard'
             })
 
 

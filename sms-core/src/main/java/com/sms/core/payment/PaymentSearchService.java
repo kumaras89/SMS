@@ -24,6 +24,7 @@ public class PaymentSearchService {
                 .map( PaymentSearchCriteria::getStudentName, name-> builder.like(builder.upper(root.join("student", JoinType.LEFT).get("name")), "%" +name.toUpperCase() +"%"))
                 .map( PaymentSearchCriteria::getStudentCode, code-> builder.like(builder.upper(root.join("student", JoinType.LEFT).get("code")), "%" +code.toUpperCase() +"%"))
                 .map( PaymentSearchCriteria::getBranchName, branch-> builder.like(builder.upper(root.join("student", JoinType.LEFT).get("branch").get("name")), "%" +branch.toUpperCase() +"%"))
+                .map( PaymentSearchCriteria::getBatchName, batch-> builder.like(builder.upper(root.join("student", JoinType.LEFT).get("batch").get("name")), "%" +batch.toUpperCase() +"%"))
                 .getArray());
     }
 

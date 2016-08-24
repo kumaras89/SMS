@@ -16,16 +16,7 @@
                     var CurrentDate = moment($scope.hoteltracker.durationFrom);
                    return $scope.hoteltracker.durationTo=new Date(CurrentDate.add($scope.duration, 'months'));
                 }
-
-                $scope.yr= function(){
-                    var years = [];
-                for (var i = 2014; i <= moment().year(); i++) {
-                    years.push(i);
-                }
-                $scope.years = years;
-                }
-                $scope.yr();
-
+                
                 $scope.getStudents= function (branchName) {
                     $scope.students={};
                     var searchCriteria = $.extend(searchCriteria, $scope.searchCriteria);
@@ -33,8 +24,7 @@
 
                     $http.post('/student/search', searchCriteria).then(function(res) {
                         $scope.students=res.data;
-
-                            })
+                    })
                 }
                 
                 
@@ -51,6 +41,10 @@
                     AdminService.getBranches(function(data) {
                         $scope.branches = data;
                     })
+                    AdminService.getBatches(function (data) {
+                        $scope.batchNames = _.pluck(data, "name")
+                    });
+
                 }
                 $scope.init();
                 $scope.hotelTrackerCreate = function () {
@@ -116,6 +110,9 @@
                     AdminService.getBranches(function(data) {
                         $scope.branches= _.pluck(data,"name")
                     })
+                    AdminService.getBatches(function (data) {
+                        $scope.batchNames = _.pluck(data, "name")
+                    });
                 }
                 $scope.init();
 

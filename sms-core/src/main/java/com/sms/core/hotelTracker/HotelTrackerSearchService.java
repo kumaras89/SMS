@@ -35,7 +35,9 @@ public class HotelTrackerSearchService {
                 name -> builder.like(root.join("branchName", JoinType.LEFT).get("name"), "%" + name + "%"))
             .map(HotelTrackerSearchCriteria::getDurationFrom, fromDate -> builder.greaterThanOrEqualTo(root.<Date>get("durationFrom"),fromDate))
             .map(HotelTrackerSearchCriteria::getDurationTo, toDate -> builder.lessThanOrEqualTo(root.<Date>get("durationTo"),toDate))
-                .getArray());
+
+            .map( HotelTrackerSearchCriteria::getBatchName, batch-> builder.like(builder.upper(root.join("studentName", JoinType.LEFT).get("batch").get("name")), "%" +batch.toUpperCase() +"%"))
+            .getArray());
     }
     public static Reader<HotelTrackerRepository, List<HotelTrackerInfo>> search(final HotelTrackerSearchCriteria
                                                                                            hotelTrackerSearchCriteria) {

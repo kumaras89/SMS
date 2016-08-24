@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/public/css/attendance.css">
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class=""></i> Attendances Report</h1>
@@ -23,15 +24,9 @@
                     </tr>
 
                     <tr>
-                        <td><label class="control-label">From</label></td>
+                        <td><label class="control-label">Month</label></td>
                         <td>
-                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">To</label></td>
-                        <td>
-                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo" />
+                            <input type="month" name="month" id="month" ng-model="searchCriteria.durationFrom" />
                         </td>
                     </tr>
                     <tr>
@@ -43,22 +38,29 @@
             </form>
             <br>
         </div>
-        <br> <button style="float: right;" ng-click="printToCart('printSectionId')" class="btn btn-group-sm btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  Print</button>
-        <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table" >
-            <thead>
-            <br>
-            <tr class="well" style="margin-bottom: 10px;margin-top: 10px">
-                <th></th>
-                <th ng-repeat="at in attendance">{{at.attendanceDate |date}}</th>
-            </tr>
+        <div class="clearfix"></div>
+
+            <h4> BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}} &nbsp;&nbsp;&nbsp;&nbsp; MONTH : {{searchCriteria.durationFrom |date : "MMMM" }}</h4>
+        <div class="table-responsive" loading-container="tableParams.settings().$loading">
+            <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table" >
+                <thead>
+                <br>
+                <tr style="margin-bottom: 10px;margin-top: 10px">
+                            <th>Name</th>
+                        <th ng-repeat="dt in students[0].dateList | orderBy:'date'">{{dt.date |date : "d"}}</th>
+                 </tr>
             </thead>
-            <tbody ng-repeat="at in attendance"></tbody>
-            <tr ng-repeat="st in students">
-                <th>{{st.name}}</th>
-                <th ng-repeat="ad in at.attendanceDetails" ng-if="ad.studentCode==st.code">{{ad.status}}</th>
+            <!--<tbody ng-repeat="at in attendance"></tbody>-->
+            <tr ng-repeat="st in students | orderBy:'name'" >
+                <th sortable="name" class="success">{{st.name}}</th>
+                <th ng-repeat="ad in st.dateList | orderBy:'date'"   ng-class="{present: ad.status=='P', absent: ad.status=='A',leave: ad.status=='L',holiday: ad.status=='H'}" >{{ad.status}}</th>
             </tr>
-
-
-        </table>
+            <tr>
+                <td ng-show="$data.length==0" class="info no_data" colspan="9">
+                    No Record Found
+                </td>
+            </tr>
+            </table>
+        </div>
     </div>
 </div>

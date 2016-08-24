@@ -49,5 +49,5 @@ public interface AttendanceService
      * @return
      */
 
-    List<StudentAttendanceInfo> search(final AttendanceSearchCriteria attendanceSearchCriteria);
+    List<AttendanceView> search(final AttendanceSearchCriteria attendanceSearchCriteria);
 }

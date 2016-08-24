@@ -16,7 +16,7 @@
                     };
 
                     AdminService.getConstants(function (data) {
-                        $scope.commonAttributes = data;
+                        $scope.status = data.attendanceStatus;
                     });
 
                     AdminService.getBatches(function (data) {
@@ -29,19 +29,23 @@
 
                     $scope.attendance.userName=$rootScope.globals.currentUser.username;
                     var branchName = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
-                    $scope.students={};
-                    /*$scope.attendance.userName=$scope.username;*/
                     $scope.attendance.branchCode=AdminService.getBranchCode(branchName);
                     $scope.searchCriteria.branchName=branchName;
-
-                    $scope.attendance.attendanceDetails=[];
                     
                 }
 
-                /*$scope.statusChanged=function (index,st) {
-                    $scope.attendance.attendanceDetails[$index].status=st;
+                $scope.statusHoliday=function () {
+                    $scope.status=['HOLIDAY'];
+                    $scope.attendance.attendanceDetails=[];
+                    _.forEach($scope.student, function (stud) {
+                        $scope.attendance.attendanceDetails.push({
+                            studentName : stud.name,
+                            studentCode : stud.code,
+                            status:'HOLIDAY'
+                        });
+                    })
                 }
-*/
+                
                 $scope.search = function () {
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
@@ -57,18 +61,19 @@
 
                             getData: function ($defer, params) {
                                 $http.post('/student/search', $scope.searchCriteria).then(function (res) {
-                                    var data = res.data;
-                                           _.forEach(data, function (stud) {
+                                    $scope.attendance.attendanceDetails=[];
+                                   _.forEach(res.data, function (stud) {
                                         $scope.attendance.attendanceDetails.push({
                                             studentName : stud.name,
                                             studentCode : stud.code,
-                                            
+                                            status:''
                                         });
-
                                     })
+                                    $scope.student = res.data;
+
                                     $timeout(function () {
-                                        params.total(data.length);
-                                        $defer.resolve(data);
+                                        params.total($scope.attendance.attendanceDetails.length);
+                                        $defer.resolve($scope.attendance.attendanceDetails);
                                     }, 10);
                                 }, function () {
                                     $scope.entities = []
@@ -127,25 +132,41 @@
                     })
                 }*/
 
+
                 $scope.search = function () {
+                    $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationFrom).add(1, 'months').startOf('month');
 
-                        if($scope.searchCriteria.durationTo){
-                            $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationTo).add(1,'days');
-                        }
-                                    $http.post('/attendance/search', $scope.searchCriteria).then(function(res) {
-                                        $scope.attendance = res.data;
-                                        $scope.students=[];
+                    if ($scope.tableParams) {
+                        $scope.tableParams.reload()
+                    } else {
+                        $scope.tableParams = new ngTableParams({
+                            page: 1,            // show first pagez
+                            count: 10,          // count per page
+                            sorting: {
+                                name: 'asc'     // initial sorting
+                            }
+                        }, {
+                            total: 0,           // length of data
 
-                                            _.forEach($scope.attendance[0].attendanceDetails, function (atd) {
-
-                                                $scope.students.push({
-                                                    name: atd.studentName,
-                                                    code: atd.code,
-                                                })
-                                        })
-
-                                    })
+                            getData: function ($defer, params) {
+                                $scope.students={};
+                                $http.post('/attendance/search', $scope.searchCriteria).then(function(res) {
+                                    $scope.students = res.data;
+                                    $timeout(function () {
+                                        params.total($scope.students.length);
+                                        $defer.resolve($scope.students);
+                                    }, 10);
+                                }, function () {
+                                    $scope.entities = []
+                                    $timeout(function () {
+                                        params.total($scope.entities.length);
+                                        $defer.resolve($scope.entities);
+                                    }, 10);
+                                })
+                            }
+                        });
                     }
+                }
 
 
 

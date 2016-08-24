@@ -12,6 +12,7 @@ public class HotelTrackerSearchCriteria
     private HotelTrackerStatus status;
     private String hotelHrName;
     private String studentName;
+    private String batchName;
     private Date durationFrom;
     private Date durationTo;
 
@@ -35,6 +36,8 @@ public class HotelTrackerSearchCriteria
     public String getStudentName() {
         return studentName;
     }
+
+    public String getBatchName() {  return batchName;  }
 
     public Date getDurationFrom() {
         return durationFrom;

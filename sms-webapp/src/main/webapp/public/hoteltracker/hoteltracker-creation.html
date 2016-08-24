@@ -56,13 +56,14 @@
 
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="hr">Joinging year : </label></td>
+                    <td class="firstcol"><label class="control-label" for="hr">Batch : </label></td>
                     <td colspan="3">
-                        <select  ng-model="searchCriteria.year" ng-change="getStudents()" id="year" required>
-                            <option ng-repeat="year in years"  value="{{year}}">{{year}}</option>
+                        <select  ng-model="searchCriteria.batchName" ng-change="getStudents()" id="batch" required>
+                            <option ng-repeat="batchName in batchNames"  value="{{batchName}}">{{batchName}}</option>
                         </select>
                     </td>
                 </tr>
+
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="student">Student : </label></td>
                     <td colspan="3">
@@ -80,7 +81,7 @@
 
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="stipend">Stipend</label></td>
-                    <td colspan="3"><input type="text" name="stipend" id="stipend" ng-model="hoteltracker.stipend" placeholder="Stipend"   required/>
+                    <td colspan="3"><input type="number" name="stipend" id="stipend" ng-model="hoteltracker.stipend" placeholder="Stipend" min="0"  required/>
                         <span class="error" ng-messages="trackForm.stipend.$error" ng-if="trackForm.stipend.$touched">
                             <span ng-message="required">Stipend is required.</span>
                         </span>
@@ -88,8 +89,6 @@
                 </tr>
                 <tr>
                     <td rowspan="2"><label class="control-label" >Duration</label></td>
-
-
                         <td ><label class="control-label" for="durationFrom"> From</label></td>
                         <td  ><label class="control-label" for="durationFrom"> Month</label></td>
                         <td ><label class="control-label" for="durationTo"> To</label></td>

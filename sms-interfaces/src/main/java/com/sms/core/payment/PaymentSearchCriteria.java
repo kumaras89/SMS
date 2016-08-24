@@ -13,6 +13,9 @@ public class PaymentSearchCriteria {
     private String branchName;
     private Date durationFrom;
     private Date durationTo;
+    private String batchName;
+
+    public String getBatchName() { return batchName;}
 
     public String getStudentName() {return studentName;}
 

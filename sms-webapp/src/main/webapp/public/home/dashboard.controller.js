@@ -7,6 +7,7 @@
             function ($rootScope,$scope, CrudService, FlashService, $location, AdminService, $cookieStore,$http) {
                 $scope.loggedUser='';
                 $scope.loggedUser = $rootScope.globals.currentUser.username;
+                $scope.loggedUserRole = $rootScope.globals.currentUser.otherDetails.role;
                 $scope.loggedInBranchCode = $cookieStore.get('globals').currentUser.otherDetails.branch;
 
                 $scope.getBranchDesc = function (branchCode) {
@@ -76,6 +77,7 @@
                     $scope.timedUpdate();
                     $scope.totalIncome();
                     $scope.calcEnrol();
+                    $scope.totalExpense();
 
                     AdminService.getCourses(function (data) {
                         $scope.courses = data
@@ -104,9 +106,23 @@
                         });
                         $scope.totalPayment=total;
                     })
-                }
-                $scope.init();
+                };
 
+                $scope.totalExpense= function () {
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    var total = 0;
+                    $http.post('/expense/search', searchCriteria).then(function (res) {
+                        var datas=res.data;
+                        _.forEach(datas, function (data) {
+                            total = total + data.totalAmount;
+                        });
+                        $scope.totalExp = total;
+                    })
+
+                };
+                $scope.init();
             }])
         .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
              function ($scope,AdminService,$http) {
@@ -226,5 +242,33 @@
                 $scope.init();
 
             
+            }])
+        .controller("ExpenseDashboardCtrl",["$scope","AdminService","$http","$state",
+            function ($scope,AdminService,$http,$state) {
+                $scope.expenses=[];
+                $scope.changeLocation= function () {
+                    $state.go('home.expense-list');
+                }
+
+                $scope.init= function () {
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    $http.post('/expense/search', searchCriteria).then(function (res){
+                      var exp=res.data;
+                        _.forEach(exp,function (ex) {
+                            $scope.expenses.push({
+                                branchName: AdminService.getBranchDesc(ex.branchCode),
+                                amount : ex.totalAmount
+                            })
+                        })
+
+                    })
+
+
+                }
+                $scope.init();
+
+
             }]);
 })();

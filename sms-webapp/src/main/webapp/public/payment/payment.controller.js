@@ -104,8 +104,8 @@
                 $scope.loadPaymentDetail();
 
             }])
-        .controller('PaymentListCtrl', ['$scope','$location','ngTableParams','$http','$timeout','$stateParams',
-            function ($scope, $location,ngTableParams,$http,$timeout,$stateParams) {
+        .controller('PaymentListCtrl', ['$scope','$location','ngTableParams','$http','$timeout','$stateParams','AdminService',
+            function ($scope, $location,ngTableParams,$http,$timeout,$stateParams,AdminService) {
                 $scope.searchCriteria={};
                 $scope.searchCriteria.durationFrom='';
                 $scope.searchCriteria.durationTo='';
@@ -115,6 +115,11 @@
                     }
                     $scope.searchCriteria.durationFrom=new Date(moment());
                     $scope.searchCriteria.durationTo=new Date(moment());
+
+                    AdminService.getBatches(function (data) {
+                        $scope.batchNames = _.pluck(data, "name")
+                    });
+
                 }
                 $scope.init();
                 

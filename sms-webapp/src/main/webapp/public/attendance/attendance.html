@@ -50,30 +50,36 @@
                 </table>
             </div>
         </div>
-        <br> <button style="float: right;" ng-click="printToCart('printSectionId')" class="btn btn-group-sm btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  Print</button>
         <div class="clearfix"></div>
-        <div id="printSectionId" class="table-responsive" loading-container="tableParams.settings().$loading">
+        <br>
+        <h4> BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}} &nbsp;&nbsp;&nbsp;&nbsp; DATE : {{attendance.attendanceDate |date}}</h4>
+       <div style="float: right">
+
+       </div>
+        <div class="table-responsive" loading-container="tableParams.settings().$loading">
             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Student name</th>
                     <th>Status</th>
+                    <th></th>
+                    <th></th>
+                    <th><a ng-click="statusHoliday()" class=" btn btn-primary">Assign Holiday</a></th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="at in attendance.attendanceDetails | filter: attendance_filter" class="success">
-                    <td>{{$index + 1 }}</td>
-                    <td sortable="code">{{ at.studentName }}</td>
-                    <!-- <input type="checkbox" name="{{attendance.code}}" ng-model="attendance.attendanceDetails.present" value="true" ng-false-value="false"/>-->
-                    <!-- <td><input type="radio" name="status{{attendance.code}}" value="Present" ng-model="attendance.attendanceDetails.status"></td>
-                     <td><input type="radio" name="status{{attendance.code}}" value="Leave" ng-model="attendance.attendanceDetails.status"></td>
-                     <td><input type="radio" name="status{{attendance.code}}" value="Absent" ng-model="attendance.attendanceDetails.status"></td>-->
-                    <td  ng-repeat="st in commonAttributes.attendanceStatus"   >
-                        <input type="radio"  name="at"  ng-model="attendance.attendanceDetails[$index].status"
+                <tr ng-repeat="std in attendance.attendanceDetails | filter: std_filter " class="success">
+                    <td>{{$index + 1 }}
+                        <input type="hidden" id="ind" ng-model="idx" value="{{$index}}"/>
+                    </td>
+                    <td sortable="code">{{ std.studentName }}
+                    </td>
+                    <td  ng-repeat="st in status" >
+                        <input type="radio"  name="st{{std.studentCode}}" ng-model="std.status"
                                value="{{st}}"/> {{st}}&nbsp;&nbsp;&nbsp;
                     </td>
-
 
                 </tr>
                 <tr>
