@@ -29,6 +29,7 @@
                 $scope.createNewScholarshipEnrollment = function () {
                     $state.go('home.scholarshipenrollment-creation');
                 }
+                
 
                 $scope.search = function () {
                     if( $scope.searchCriteria.status===""){

@@ -20,38 +20,54 @@
                     <tr class="firstcol">
                         <td><label class="control-label" for="studentName">Student Name</label></td>
                         <td>
-                            <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
+                            <input type="text" id="studentName" ng-model="searchCriteria.studentName" name="studentName" placeholder="Student Name"/>
                         </td>
                     </tr>
                     <tr>
                         <td class="firstcol"><label class="control-label" for="studentCode">Student Code</label></td>
                         <td>
-                            <input type="text" id="studentCode" ng-model="searchCriteria.studentCode" placeholder="Student Code"/>
+                            <input type="text" id="studentCode" ng-model="searchCriteria.studentCode" name="studentCode" placeholder="Student Code"/>
+
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label">Branch</label></td>
+                        <td class="firstcol"><label class="control-label">Branch *</label></td>
                         <td>
                             <span branch-name bn="searchCriteria.branchName"/>
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="batchName">Batch</label></td>
+                        <td class="firstcol"><label class="control-label" for="batchName">Batch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" />
+                            <input type="text" style="width: 42%;" name="batchName" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" required/>
+                            <span class="error" ng-messages="stForm.batchName.$error" ng-if="stForm.batchName.$touched">
+                                 <span ng-message="required">Batch is required.</span>
+                            </span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label">From</label></td>
+                        <td class="firstcol"><label class="control-label" for="address3">Village</label></td>
                         <td>
-                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
+                            <input type="text" id="address3" ng-model="searchCriteria.villageName" name="address3" placeholder="village"/>
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label">To</label></td>
+                        <td class="firstcol"><label class="control-label">From *</label></td>
                         <td>
-                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}"/>
-                            <span class="error" ng-show="stForm.durationTo.$error.min">Invalid From date !</span>
+                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" required/>
+                            <span class="error" ng-messages="stForm.durationFrom.$error" ng-if="stForm.durationFrom.$touched">
+                                <span ng-message="required">From Date is required.</span>
+                             </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="firstcol"><label class="control-label">To *</label></td>
+                        <td>
+                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}" required/>
+                            <span class="error" ng-messages="stForm.durationTo.$error" ng-if="stForm.durationTo.$touched">
+                                  <span ng-message="required">To Date is required.</span>
+                                  <span ng-message="min"> To date is invalid</span>
+                             </span>
                         </td>
                     </tr>
                     <tr>

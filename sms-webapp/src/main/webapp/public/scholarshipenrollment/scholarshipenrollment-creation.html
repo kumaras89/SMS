@@ -161,7 +161,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                                    <td><input type="number" ng-model="scholarshipEnrollment.studentPhoneNumber" name="studentPhoneNumber" id="studentPhoneNumber"  min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Student mobile number" required/>
+                                    <td><input type="number" ng-model="scholarshipEnrollment.studentPhoneNumber" name="studentPhoneNumber" id="studentPhoneNumber"  min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Student mobile number" required/>
                                         <span class="error" ng-messages="scholarship.studentPhoneNumber.$error" ng-if="scholarship.studentPhoneNumber.$touched">
                                             <span ng-message="required">Student Phone number is required.</span>
                                             <span ng-message="pattern">Student Phone number is invalid.</span>
@@ -170,7 +170,7 @@
                                 </tr>
                                 <tr>
                                      <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                                     <td><input type="number" ng-model="scholarshipEnrollment.parentPhoneNumber" name="parentPhoneNumber" id="parentPhoneNumber" min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Parent mobile number" required/>
+                                     <td><input type="number" ng-model="scholarshipEnrollment.parentPhoneNumber" name="parentPhoneNumber" id="parentPhoneNumber" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Parent mobile number" required/>
                                          <span class="error" ng-messages="scholarship.parentPhoneNumber.$error" ng-if="scholarship.parentPhoneNumber.$touched">
                                              <span ng-message="required">Parent Phone number is required.</span>
                                              <span ng-message="pattern">Parent Phone number is invalid.</span>
@@ -183,7 +183,68 @@
                 </div>
                 <br>
                 <!--Address deatils-->
-                <span address-template addfrm = "scholarship" data="scholarshipEnrollment"> </span>
+                <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="firstcol"><label class="control-label" for="address1">Adddress Line 1</label></td>
+                            <td><input type="text" ng-model="scholarshipEnrollment.address.address1" id="address1" name="address1"
+                                       placeholder="Adddress Line 1" required/>
+                                        <span class="error" ng-messages="scholarship.address1.$error" ng-if="scholarship.address1.$touched">
+                                            <span ng-message="required">Adddress Line 1 is required.</span>
+                                        </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="firstcol"><label class="control-label" for="address2">Adddress Line 2</label></td>
+                            <td><input type="text" ng-model="scholarshipEnrollment.address.address2" id="address2" name="address2"
+                                       placeholder="Adddress Line 2"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="firstcol"><label class="control-label"  for="address3">Village</label></td>
+                            <td><input type="text" ng-model="scholarshipEnrollment.address.address3" id="address3" name="Village"
+                                       placeholder="Adddress Line 3" required/>
+                                    <span class="error" ng-messages="scholarship.address3.$error" ng-if="scholarship.address3.$touched">
+                                        <span ng-message="required">Village is required.</span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="firstcol"><label class="control-label" for="taluk">Taluk</label></td>
+                            <td><input type="text" ng-model="scholarshipEnrollment.address.taluk" name="taluk" id="taluk" placeholder="Taluk" required/>
+                                    <span class="error" ng-messages="scholarship.taluk.$error" ng-if="scholarship.taluk.$touched">
+                                        <span ng-message="required">Taluk is required.</span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="firstcol"><label class="control-label" for="district">District</label></td>
+                            <td><input type="text" ng-model="scholarshipEnrollment.address.district" id="district" name="district"
+                                       placeholder="District" required/>
+                                    <span class="error" ng-messages="scholarship.district.$error" ng-if="scholarship.district.$touched">
+                                        <span ng-message="required">District is required.</span>
+                                    </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="firstcol"><label class="control-label" for="postalCode">Postal Code</label></td>
+                            <td><input type="number" ng-model="scholarshipEnrollment.address.postalCode" id="postalCode" name="postalCode"
+                                       placeholder="Postal code" ng-pattern="/^[1-9][0-9]{5}$/" min="6" maxlength="6" required/>
+                                    <span class="error" ng-messages="scholarship.postalCode.$error" ng-if="scholarship.postalCode.$touched">
+                                        <span ng-message="required">PostalCode is required.</span>
+                                        <span ng-message="pattern">PostalCode is invalid.</span>
+                                    </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
                 <br>
                 <!--Education details-->
                 <div style="border-radius:20px;border: 2px solid #3dad9c;">
@@ -341,7 +402,7 @@
                                 <td><label class="control-label">{{scholarshipSummarized.address.address2}}</label></td>
                             </tr>
                             <tr>
-                                <td class="firstcol"><label class="control-label">Address 3</label></td>
+                                <td class="firstcol"><label class="control-label">Village</label></td>
                                 <td><label class="control-label">{{scholarshipSummarized.address.address3}}</label></td>
                             </tr>
                             <tr>

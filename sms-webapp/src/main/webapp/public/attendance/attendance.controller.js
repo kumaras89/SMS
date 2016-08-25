@@ -27,7 +27,7 @@
                     $scope.searchCriteria={};
 
 
-                    $scope.attendance.userName=$rootScope.globals.currentUser.username;
+                   /* $scope.attendance.userName=$rootScope.globals.currentUser.username;*/
                     var branchName = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
                     $scope.attendance.branchCode=AdminService.getBranchCode(branchName);
                     $scope.searchCriteria.branchName=branchName;
@@ -89,7 +89,7 @@
 
 
                 $scope.attendanceSubmit = function () {
-                    $scope.attendance.attendanceDate=$scope.attendance.attendanceDate;
+                    $scope.attendance.attendanceDate = $scope.attendance.attendanceDate;
                     $scope.attendance.branchCode = AdminService.getBranchCode($scope.searchCriteria.branchName);
                     $scope.attendance.batchName = $scope.searchCriteria.batchName;
                     $scope.attendance.userName=$rootScope.globals.currentUser.username;
@@ -103,7 +103,6 @@
                     });
                 }
 
-                
                 $scope.init();
 
             }])
@@ -115,23 +114,6 @@
                         $scope.batchNames = _.pluck(data, "name")
                     });
                 }
-
-                /*$scope.getStudents= function () {
-                    $scope.students=[];
-                    $http.post('/student/search', searchCriteria).then(function(res) {
-                        var data=res.data;
-                        _.forEach(data, function (stud) {
-                            $scope.students.push({
-                                studentName : stud.name,
-                                studentCode : stud.code,
-                            });
-
-                        })
-
-
-                    })
-                }*/
-
 
                 $scope.search = function () {
                     $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationFrom).add(1, 'months').startOf('month');

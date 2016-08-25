@@ -54,11 +54,43 @@
          }])
         .config(config)
         .run(run)
+
+        .directive("userName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
+            return {
+                restrict: 'A',
+                scope :{
+                    us : '=us',
+                    fn : '=fn'
+                },
+                controller: function($scope){
+                    var logInUserDet = $rootScope.globals.currentUser.otherDetails;
+                    if(logInUserDet.role != 'SUPER_ADMIN'){
+                        var name = $rootScope.globals.currentUser.username;
+                        $timeout(function () {
+                            $scope.$apply(function () {
+                                $scope.us = name;
+                            })
+                        });
+                    }
+                    AdminService.getUsers(function (data) {
+                        $scope.userNames = _.pluck(data,"name");
+                    })
+                },
+                template: function(){
+                    if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
+                        return' <input type="text" ng-model="us" uib-typeahead="uName for uName in userNames | filter:$viewValue | limitTo:8" id="userName" placeholder="User" autocomplete="off"/>'
+                    }else{
+                        return '<input type="text" ng-model="us" readonly >'
+                    }
+                }
+            }
+        }])
         .directive("branchName", ['$rootScope','AdminService','$timeout', function ($rootScope, AdminService, $timeout) {
             return {
                 restrict: 'A',
                 scope :{
-                    bn : '=bn'
+                    bn : '=bn',
+                    fn: "=fn"
                 },
                 controller: function($scope){
                     if($rootScope.globals.currentUser.otherDetails.role != 'SUPER_ADMIN'){
@@ -77,8 +109,11 @@
                 },
                 template: function(){
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
-                        return '<input type="text" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
-                                       '| limitTo:8" id="branchName" style="width: 42%;" placeholder="Branch" autocomplete="off" />'
+                        return '<input type="text" name="bName" ng-model="bn" uib-typeahead="bName for bName in branchNames | filter:$viewValue ' +
+                                       '| limitTo:8" id="branchName" style="width: 42%;" placeholder="Branch" autocomplete="off" required/>'+
+                                        '<span class="error" ng-messages="fn.bName.$error" ng-if="fn.branchName.$touched">'+
+                                           ' <span ng-message="required">Branch is required.</span>'+
+                                        '</span>'
                     }else{
                         return '<label class="control-label">{{bn}}</label>'
                     }

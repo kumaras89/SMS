@@ -68,4 +68,17 @@ public class ExpenseRestController
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(@PathVariable("id") long id) {
+        expenseService.deleteExpense(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "expenseDetails/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteDetails(@PathVariable("id") long id)
+    {
+        expenseService.deleteExpenseDetails(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

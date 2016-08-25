@@ -326,6 +326,7 @@
 
                 $scope.initialize = function(){
                     $scope.today=moment().format("YYYY-MM-DD");
+                    $scope.student.englishFluency = 'AVERAGE';
                     $scope.student.guardians = [{}, {}, {}, {}];
                     $scope.student.otherLanguages = [{}, {}, {}];
                     $scope.student.sslcMarkDetails = {};
@@ -409,7 +410,6 @@
                     $scope.student.schemeCode = AdminService.getSchemeCode($scope.student.schemeName);
                     $scope.student.feesInfos = AdminService.getSchemeFeesInfo($scope.student.schemeCode);
                     $scope.student.branchCode = AdminService.getBranchCode($scope.student.branchName);
-                    $scope.student.courseCode = AdminService.getCourseCode($scope.student.courseName);
                     $scope.student.marketingEmployeeCode = AdminService.getMarketingEmployeeCode($scope.student.referalName);
                     $scope.studentSumarized = {};
 

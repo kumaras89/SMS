@@ -20,57 +20,77 @@
                     <tr>
                         <td class="firstcol"><label class="control-label" for="studentName">Student Name</label></td>
                         <td>
-                            <input type="text" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name"/>
+                            <input type="text" name="student" id="studentName" ng-model="searchCriteria.studentName" placeholder="Student Name" />
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="branchName">Branch</label></td>
+                        <td class="firstcol"><label class="control-label" for="branchName">Branch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" ng-model="searchCriteria.branchName" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" />
+                            <input type="text" style="width: 42%;" name="branch" ng-model="searchCriteria.branchName" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" required/>
+                             <span class="error" ng-messages="scholarshipForm.branch.$error" ng-if="scholarshipForm.branch.$touched">
+                                  <span ng-message="required">Branch is required.</span>
+                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td class="firstcol"><label class="control-label">Marketing Employee</label></td>
                         <td>
-                            <span marketing-employee mn="searchCriteria.marketingEmployeeName" ></span>
+                            <span marketing-employee mn="searchCriteria.marketingEmployeeName" fn="scholarshipForm"></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="firstcol"><label class="control-label" for="address3">Village</label></td>
+                        <td>
+                            <input type="text" id="address3" ng-model="searchCriteria.villageName" name="address3" placeholder="village"/>
+                        </td>
+                    </tr>
+                    <tr>
 
                     <tr>
                         <td class="firstcol"><label class="control-label" for="status">Status</label></td>
                         <td>
-                            <select ng-model="searchCriteria.status" id="status" class="selectpicker">
+                            <select name="status" ng-model="searchCriteria.status" id="status" class="selectpicker" >
                                 <option value="">ALL</option>
                                 <option ng-repeat="status in statusList" value="{{status}}">{{status}}</option>
                             </select>
+
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="year">Year</label></td>
+                        <td class="firstcol"><label class="control-label" for="year">Year *</label></td>
                         <td>
-                            <input  ng-model="searchCriteria.year" id="year" type="number" placeholder="Year" maxlength="4"  />
+                            <input  ng-model="searchCriteria.year" name="year" id="year" type="number" placeholder="Year" maxlength="4" required />
+                            <span class="error" ng-messages="scholarshipForm.year.$error" ng-if="scholarshipForm.year.$touched">
+                                          <span ng-message="required">Year Date is required.</span>
+                             </span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="firstcol"><label class="control-label">From</label></td>
+                        <td class="firstcol"><label class="control-label">From *</label></td>
                         <td>
-                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
+                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" required/>
+                            <span class="error" ng-messages="scholarshipForm.durationFrom.$error" ng-if="scholarshipForm.durationFrom.$touched">
+                                          <span ng-message="required">From Date is required.</span>
+                             </span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label">To</label></td>
+                        <td class="firstcol"><label class="control-label">To *</label></td>
                         <td>
-                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}"/>
-                            <span class="error" ng-show="scholarshipForm.durationTo.$error.min">Invalid From date !</span>
+                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}" required/>
+                             <span class="error" ng-messages="scholarshipForm.durationTo.$error" ng-if="scholarshipForm.durationTo.$touched">
+                                  <span ng-message="required">To Date is required.</span>
+                                  <span ng-message="min"> To date is invalid</span>
+                             </span>
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan="2" style="text-align: right">
-                                <a ng-click="search()" class="btn btn-group-sm btn-primary" ng-class="{linkdisabled: scholarshipForm.$invalid}" ><i class="fa fa-search fa-fw"></i>Search</a>
+                            <a ng-click="scholarshipForm.$valid && search()"  class="btn btn-group-sm btn-primary"  ><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
-                    </tr>
+                    </tr>  <!--ng-disabled="!scholarshipForm.$valid"-->
                     </tbody>
                 </table>
             </div>

@@ -168,7 +168,7 @@
                             <tr>
                                 <td><label class="control-label" for="phoneNumber">Mobile Number</label></td>
                                 <td>
-                                    <input type="tel" ng-model="student.phoneNumber" name="phoneNumber" id="phoneNumber" min="0" ng-pattern="/^[0-9]{10}$/" placeholder="Mobile number" required/>
+                                    <input type="tel" ng-model="student.phoneNumber" name="phoneNumber" id="phoneNumber" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Mobile number" required/>
                                         <span class="error" ng-messages="studentForm.phoneNumber.$error" ng-if="studentForm.phoneNumber.$touched">
                                             <span ng-message="required">Mobile Number is required.</span>
                                             <span ng-message="pattern">Mobile Number is invalid.</span>
@@ -178,7 +178,11 @@
                             <tr>
                                 <td><label class="control-label" for="alternatePhoneNumber">Alternate Mobile Number</label></td>
                                 <td>
-                                    <input type="tel" ng-model="student.alternatePhoneNumber" id="alternatePhoneNumber" placeholder="Alternate mobile number" min="0" ng-pattern="/^[0-9]{10}$/"/>
+                                    <input type="tel" ng-model="student.alternatePhoneNumber" name="alternatePhoneNumber" id="alternatePhoneNumber" placeholder="Alternate mobile number" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/"/>
+                                    <span class="error" ng-messages="studentForm.alternatePhoneNumber.$error" ng-if="studentForm.alternatePhoneNumber.$touched">
+                                            <span ng-message="required">Mobile Number is required.</span>
+                                            <span ng-message="pattern">Mobile Number is invalid.</span>
+                                        </span>
                                 </td>
                             </tr>
                             <tr>
@@ -214,7 +218,68 @@
             <!-- #second_step -->
             <div id="second_step">
                 <div class="control-group,form">
-                    <span address-template addfrm="studentForm" data="student"> </span>
+                    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Address Details</label></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="address1">Adddress Line 1</label></td>
+                                <td><input type="text" ng-model="student.address.address1" id="address1" name="address1"
+                                           placeholder="Adddress Line 1" required/>
+                                        <span class="error" ng-messages="studentForm.address1.$error" ng-if="studentForm.address1.$touched">
+                                            <span ng-message="required">Adddress Line 1 is required.</span>
+                                        </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="address2">Adddress Line 2</label></td>
+                                <td><input type="text" ng-model="student.address.address2" id="address2" name="address2"
+                                           placeholder="Adddress Line 2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="address3">Village</label></td>
+                                <td><input type="text" ng-model="student.address.address3" id="address3" name="address3"
+                                           placeholder="Adddress Line 3" required/>
+                                    <span class="error" ng-messages="studentForm.address.address3.$error" ng-if="studentForm.address3.$touched">
+                                        <span ng-message="required">Village is required.</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="taluk">Taluk</label></td>
+                                <td><input type="text" ng-model="student.address.taluk" name="taluk" id="taluk" placeholder="Taluk" required/>
+                                    <span class="error" ng-messages="studentForm.taluk.$error" ng-if="studentForm.taluk.$touched">
+                                        <span ng-message="required">Taluk is required.</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="district">District</label></td>
+                                <td><input type="text" ng-model="student.address.district" id="district" name="district"
+                                           placeholder="District" required/>
+                                    <span class="error" ng-messages="studentForm.district.$error" ng-if="studentForm.district.$touched">
+                                        <span ng-message="required">District is required.</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol"><label class="control-label" for="postalCode">Postal Code</label></td>
+                                <td><input type="number" ng-model="student.address.postalCode" id="postalCode" name="postalCode"
+                                           placeholder="Postal code" ng-pattern="/^[1-9][0-9]{5}$/" required/>
+                                    <span class="error" ng-messages="studentForm.postalCode.$error" ng-if="studentForm.postalCode.$touched">
+                                        <span ng-message="required">PostalCode is required.</span>
+                                        <span ng-message="pattern">PostalCode is invalid.</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <br>
                     <div style="border-radius:20px;border: 2px solid #3dad9c;">
                         <table class="table table-striped table-condensed">
@@ -656,7 +721,7 @@
                                 <td><label class="control-label">{{studentSumarized.address.address2}}</label></td>
                             </tr>
                             <tr>
-                                <td class="firstcol"><label class="control-label" >Address Line 3</label></td>
+                                <td class="firstcol"><label class="control-label" >Village</label></td>
                                 <td><label class="control-label">{{studentSumarized.address.address3}}</label></td>
                             </tr>
                             <tr>

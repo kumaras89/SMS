@@ -3,6 +3,7 @@ package com.sms.core.expense;
 import com.sms.core.SmsException;
 import com.sms.core.common.FList;
 import com.sms.core.repositery.BranchRepository;
+import com.sms.core.repositery.ExpenseDetailsRepository;
 import com.sms.core.repositery.ExpenseRepository;
 import com.sms.core.repositery.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,18 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final UserRepository userRepository;
     private final BranchRepository branchRepository;
+    private final ExpenseDetailsRepository expenseDetailsRepository;
 
     @Autowired
     public ExpenseServiceImpl
             (final ExpenseRepository expenseRepository,
              final UserRepository userRepository,
-             final BranchRepository branchRepository) {
+             final BranchRepository branchRepository,
+             final ExpenseDetailsRepository expenseDetailsRepository) {
         this.expenseRepository = expenseRepository;
         this.branchRepository = branchRepository;
         this.userRepository = userRepository;
+        this.expenseDetailsRepository = expenseDetailsRepository;
     }
 
     private static ExpenseInfo expenseInfo(final Expense source) {
@@ -78,5 +82,35 @@ public class ExpenseServiceImpl implements ExpenseService {
         return ExpenseSearchService
                 .search(expenseSearchCriteria)
                 .with(expenseRepository);
+    }
+
+    /**
+     * Deleting Expense
+     * @param id
+     */
+    @Override
+    public void deleteExpense(final long id)
+    {
+        Expense alreadyExist = expenseRepository.findById(id);
+        if (alreadyExist != null) {
+            expenseRepository.delete(alreadyExist);
+        } else {
+            throw new SmsException("Expense Delete Error", "What are you trying to delete its not available");
+        }
+    }
+
+    /**
+     * Deleting Expense Details
+     * @param id
+     */
+    @Override
+    public void deleteExpenseDetails(final long id)
+    {
+        ExpenseDetails alreadyExist = expenseDetailsRepository.findById(id);
+        if (alreadyExist != null) {
+            expenseDetailsRepository.delete(alreadyExist);
+        } else {
+            throw new SmsException("ExpenseDetails Delete Error", "What are you trying to delete its not available");
+        }
     }
 }

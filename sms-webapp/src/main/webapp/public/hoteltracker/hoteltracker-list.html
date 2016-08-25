@@ -25,50 +25,62 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" >Branch</label></td>
+                        <td><label class="control-label" >Branch *</label></td>
                         <td>
                             <span branch-name bn="searchCriteria.branchName"/>
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label" >Batch</label></td>
+                        <td><label class="control-label" >Batch *</label></td>
                         <td>
                             <input type="text" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue " id="batchName" style="width: 42%;" placeholder="Batch" autocomplete="off" />
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label">Hotel name</label></td>
+                        <td><label class="control-label">Hotel name *</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.hotelName" uib-typeahead="ht for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" />
+                            <input type="text" ng-model="searchCriteria.hotelName" name="hotelName" uib-typeahead="ht for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" required/>
+                            <span class="error" ng-messages="trackerForm.hotelName.$error" ng-if="trackerForm.hotelName.$touched">
+                                <span ng-message="required">Hotel name is required.</span>
+                            </span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td><label class="control-label" for="status">Status</label></td>
+                        <td><label class="control-label" for="status">Status *</label></td>
                         <td>
-                            <select ng-model="searchCriteria.status" id="status" class="selectpicker">
+                            <select ng-model="searchCriteria.status" name="status" id="status" class="selectpicker" required>
                                 <option value="">Select Status</option>
                                 <option ng-repeat="status in statusList" value="{{status}}">{{status}}</option>
+                                <span class="error" ng-messages="trackerForm.status.$error" ng-if="trackerForm.status.$touched">
+                                    <span ng-message="required">Status is required.</span>
+                                </span>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">HR name</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.hotelHrName" uib-typeahead="hr for hr in hrs | filter:$viewValue | limitTo:8" id="hr" placeholder="HR Name" autocomplete="off" />
+                            <input type="text" name="hotelHrName" ng-model="searchCriteria.hotelHrName" uib-typeahead="hr for hr in hrs | filter:$viewValue | limitTo:8" id="hr" placeholder="HR Name" autocomplete="off"/>
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label">From</label></td>
+                        <td><label class="control-label">From *</label></td>
                         <td>
-                                <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" />
+                            <input type="date" name="durationFrom" id="durationFrom" ng-model="searchCriteria.durationFrom" required/>
+                            <span class="error" ng-messages="trackerForm.durationFrom.$error" ng-if="trackerForm.durationFrom.$touched">
+                                <span ng-message="required">From Date is required.</span>
+                            </span>
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="control-label">To</label></td>
+                        <td><label class="control-label">To *</label></td>
                         <td>
-                                <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}"/>
-                            <span class="error" ng-show="trackerForm.durationTo.$error.min">Invalid From date !</span>
+                            <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo"  min="{{searchCriteria.durationFrom}}" required/>
+                            <span class="error" ng-messages="trackerForm.durationTo.$error" ng-if="trackerForm.durationTo.$touched">
+                                <span ng-message="required">To Date is required.</span>
+                                <span ng-message="min"> To date is invalid</span>
+                             </span>
                         </td>
                     </tr>
 

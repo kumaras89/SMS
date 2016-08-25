@@ -46,4 +46,16 @@ public interface ExpenseService {
      */
 
     List<ExpenseInfo> search(final ExpenseSearchCriteria expenseSearchCriteria);
+
+    /**
+     * Deleting Expense
+     * @param id
+     */
+    void deleteExpense(final long id);
+
+    /**Deleting Expenses Details
+     *
+     * @param id
+     */
+    void deleteExpenseDetails(final long id);
 }

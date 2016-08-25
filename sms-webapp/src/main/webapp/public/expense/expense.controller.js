@@ -63,6 +63,14 @@
                     $location.path('/home/expense-creation');
                 };
 
+                $scope.deleteExpense = function(id) {
+                    CrudService.expenseService.Delete(id).then(function(){
+                        window.scrollTo(0,0);
+                        FlashService.Success("Successfully Deleted !!", false);
+                        $scope.tableParams.reload();
+                    });
+                };
+
                 $scope.search = function () {
                     if($scope.searchCriteria.durationTo){
                         $scope.searchCriteria.durationTo= moment($scope.searchCriteria.durationTo).add(1,'days');
@@ -112,8 +120,6 @@
             function ($rootScope, $scope, CrudService, FlashService, $state, AdminService, $stateParams, $http) {
 
                 $scope.expense={};
-                $scope.expense.userName='';
-                $scope.expense.userName=$rootScope.globals.currentUser.username;
                 $scope.total1=0;
                 $scope.expense.expenseDetails = [];
 
@@ -128,8 +134,8 @@
                         amount: '',
                     });
                 }
-                $scope.removeRow = function (index) {
-
+                $scope.removeRow = function (index,id) {
+                    $http.delete('/expense/expenseDetails/' + id);
                     $scope.expense.expenseDetails.splice(index, 1);
                     $scope.getTotal();
                 };
