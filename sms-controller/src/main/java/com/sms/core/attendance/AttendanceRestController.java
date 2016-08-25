@@ -52,9 +52,9 @@ public class AttendanceRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<StudentAttendanceInfo> update(@PathVariable("id") final long id,
-                                                   @RequestBody @Valid final StudentAttendanceInfo hotelTrackerInfo) {
-        return attendanceService.update(id, hotelTrackerInfo)
+    public ResponseEntity<AttendanceDetails> update(@PathVariable("id") final long id,
+                                                   @RequestBody @Valid final String status) {
+        return attendanceService.update(id,status)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();
     }
@@ -66,4 +66,5 @@ public class AttendanceRestController {
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
 }

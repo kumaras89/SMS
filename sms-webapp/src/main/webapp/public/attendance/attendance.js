@@ -19,4 +19,9 @@ config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function 
             controller: 'AttendanceDetailCtrl',
             url: '/attendance-detail'
         })
+        .state('home.attendance-update', {
+            templateUrl: 'attendance/attendance-update.html',
+            controller: 'AttendanceUpdateCtrl',
+            url: '/attendance-update/:id'
+        })
 }]);

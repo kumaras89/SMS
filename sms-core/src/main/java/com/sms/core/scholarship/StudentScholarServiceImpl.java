@@ -52,8 +52,19 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
     @Override
     public Optional<StudentScholarInfo> findByApplicationNumberWithStatus(String applicationNumber, ScholarStatus status) {
-        return Optional.of(this.studentScholarRepository.findByApplicationNumberWithStatus(applicationNumber,status))
-                .map(StudentScholarServiceImpl::scholarToInfo);
+        StudentScholar result = studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber);
+        if (result != null) {
+            if (result.getStatus().equals(ScholarStatus.EXPIRED)) {
+                throw new SmsException("Scholar Search", "Scholar Id Already Expired due to 24 hours validation");
+            } else if (result.getStatus().equals(ScholarStatus.ENROLLED)) {
+                throw new SmsException("Scholar Search", "Scholar Id Already Enrolled");
+            } else {
+                return Optional.of(result).map(StudentScholarServiceImpl::scholarToInfo);
+            }
+        } else {
+            throw new SmsException("Scholar Search", "Scholar Id not exist in our database");
+        }
+
     }
 
     @Override

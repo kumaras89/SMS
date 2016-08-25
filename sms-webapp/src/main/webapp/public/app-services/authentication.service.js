@@ -17,14 +17,11 @@
                         var operationArr = attr.operations.split(',');
                         var headLink = false;
                         _.forEach(operationArr, function (operation) {
-                            AuthenticationService.isAuthorized(operation, function () {}, function () {
-                                if(!headLink){
-                                    headLink = true;
-                                }
-                            });
+                            AuthenticationService.isAuthorized(operation, function () {
+                                headLink = true;
+                            }, function () {});
                         });
-                        if(headLink){
-                            element.children().remove();
+                        if(!headLink){
                             element.remove();
                         }
 

@@ -28,7 +28,7 @@ public class StudentUpdater {
             .on(Student::getScheme).set(tuple._1.getSRepo().findByCodeIgnoreCase(info.getSchemeCode()))
             .on(Student::getMarketingEmployee).set(tuple._1.getMERepo().findByCodeIgnoreCase(info.getMarketingEmployeeCode()))
             .on(Student::getCode).set(new StringBuilder(info.getBranchCode())
-                        .append(info.getBatchName())
+                        .append(tuple._1.getBTRepo().findByNameIgnoreCase(info.getBatchName()).getCourse().getCode())
                         .append(LocalDateTime.now().getYear()%1000)
                         .append(String.format("%6d",tuple._1.getStuRepo().count() + 1).replace(' ', '0'))
                         .toString())

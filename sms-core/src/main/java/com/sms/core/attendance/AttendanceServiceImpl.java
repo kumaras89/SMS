@@ -34,7 +34,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     private StudentRepository studentRepository;
     private StudentScholarRepository studentScholarRepository;
     private MarketingEmployeeRepository marketingEmployeeRepository;
-
+    private AttendanceDetailsRepository attendanceDetailsRepository;
     @Autowired
     public AttendanceServiceImpl(
             final AttendanceRepository attendanceRepository,
@@ -44,7 +44,8 @@ public class AttendanceServiceImpl implements AttendanceService {
             final SMSSenderDetailsGenerator SMSSenderDetailsGenerator,
             final MarketingEmployeeRepository marketingEmployeeRepository,
             final StudentRepository studentRepository,
-            final StudentScholarRepository studentScholarRepository) {
+            final StudentScholarRepository studentScholarRepository,
+            final AttendanceDetailsRepository attendanceDetailsRepository) {
         this.attendanceRepository = attendanceRepository;
         this.branchRepository = branchRepository;
         this.userRepository = userRepository;
@@ -53,6 +54,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.marketingEmployeeRepository = marketingEmployeeRepository;
         this.studentRepository = studentRepository;
         this.studentScholarRepository = studentScholarRepository;
+        this.attendanceDetailsRepository =attendanceDetailsRepository;
     }
 
     private static StudentAttendanceInfo attendanceToInfo(final StudentAttendance source) {
@@ -79,7 +81,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .saveAndFlush(attendance))
                 .map(AttendanceServiceImpl::attendanceToInfo);
         //for sending message to all the student who all are ABSENT AND LEAVE
-        sendSMS(attendance);
+       /* sendSMS(attendance);*/
 
         return savedStudents;
     }
@@ -159,33 +161,6 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     /**
-     * Update the Attendance Detail Using Date
-     *
-     * @param id
-     * @param entityType
-     * @return
-     */
-
-    @Override
-    public Optional<StudentAttendanceInfo> update(final long id, final StudentAttendanceInfo entityType) {
-        StudentAttendance alreadyExist = attendanceRepository.findById(id);
-        if (alreadyExist != null) {
-            final Optional<StudentAttendanceInfo> modifiedAttendance = Optional.of(attendanceRepository
-                    .saveAndFlush(StudentAttendance.toBuilder(entityType)
-                            .on(StudentAttendance::getBranch).set(branchRepository.findByCodeIgnoreCase(entityType.getBranchCode()))
-                            .on(StudentAttendance::getUser).set(userRepository.findByNameIgnoreCase(entityType.getUserName()))
-                            .on(StudentAttendance::getBatch).set(batchRepository.findByNameIgnoreCase(entityType.getBatchName()))
-                            .on(StudentAttendance::getCreationDate).set(alreadyExist.getCreationDate())
-                            .build()
-                    ))
-                    .map(AttendanceServiceImpl::attendanceToInfo);
-            return modifiedAttendance;
-        } else {
-            throw new SmsException("Attendance Updation Error", "Updated One is not available");
-        }
-    }
-
-    /**
      * @param attendanceSearchCriteria
      * @return
      */
@@ -239,5 +214,26 @@ public class AttendanceServiceImpl implements AttendanceService {
             }
         }
         return attendanceViews;
+    }
+
+    /**
+     * updating attendance details table by taking id and status
+     * @param id
+     * @param status
+     * @return
+     */
+
+    @Override
+    public Optional<AttendanceDetails> update(final long id,final String status) {
+        AttendanceDetails existDetails = attendanceDetailsRepository.findById(id);
+        if(existDetails!=null)
+        {
+            existDetails.setStatus(status);
+            return Optional.of(attendanceDetailsRepository.saveAndFlush(existDetails));
+        }
+        else
+        {
+            throw new SmsException("Attendance Updation Error","Update Details not available");
+        }
     }
 }

@@ -7,6 +7,10 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
+        <div class="well">
+            <a ng-click="takeAttendance()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Make Attendance</a>
+            <a ng-click="updateAttendance()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Update Attendance</a>
+        </div>
         <div style="border-radius:20px;border: 2px solid #3dad9c;">
             <form name="attendanceForm" novalidate="novalidate" class="control-group,form,form-horizontal">
                 <br>
@@ -40,20 +44,26 @@
         </div>
         <div class="clearfix"></div>
 
-            <h4> BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}} &nbsp;&nbsp;&nbsp;&nbsp; MONTH : {{searchCriteria.durationFrom |date : "MMMM" }}</h4>
-        <div class="table-responsive" loading-container="tableParams.settings().$loading">
+         <div >  <h4>&nbsp;&nbsp; BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}}</h4></div>
+         <div >  <h4> &nbsp;&nbsp; MONTH : {{searchCriteria.durationFrom |date : "MMMM" }} &nbsp;&nbsp;&nbsp;&nbsp; Working Days :{{workingDays}}</h4>
+            <button style="float: right;" ng-click="printToCart('printSectionId')" class="btn btn-group-sm btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  Print</button>
+         </div>
+        <div class="table-responsive" id="printSectionId" loading-container="tableParams.settings().$loading">
             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table" >
                 <thead>
                 <br>
                 <tr style="margin-bottom: 10px;margin-top: 10px">
-                            <th>Name</th>
-                        <th ng-repeat="dt in students[0].dateList | orderBy:'date'">{{dt.date |date : "d"}}</th>
+                    <th>Name</th>
+                    <th>Total Present</th>
+                    <th ng-repeat="dt in students[0].dateList | orderBy:'date'">{{dt.date |date : "d"}}</th>
+
                  </tr>
             </thead>
             <!--<tbody ng-repeat="at in attendance"></tbody>-->
             <tr ng-repeat="st in students | orderBy:'name'" >
-                <th sortable="name" class="success">{{st.name}}</th>
-                <th ng-repeat="ad in st.dateList | orderBy:'date'"   ng-class="{present: ad.status=='P', absent: ad.status=='A',leave: ad.status=='L',holiday: ad.status=='H'}" >{{ad.status}}</th>
+                <th class="success">{{st.name}}</th>
+                <th class="success">{{ st | mySum}}</th>
+                <th ng-repeat="ad in st.dateList | orderBy:'date'"  ng-class="{present: ad.status=='PRESENT', absent: ad.status=='ABSENT',leave: ad.status=='LEAVE',holiday: ad.status=='HOLIDAY'}" >{{slic(ad.status)}}</th>
             </tr>
             <tr>
                 <td ng-show="$data.length==0" class="info no_data" colspan="9">

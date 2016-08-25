@@ -19,16 +19,6 @@ public interface AttendanceService
      */
 
     Optional<StudentAttendanceInfo> save(final StudentAttendanceInfo entityType);
-
-    /**
-     *
-     * @param id
-     * @param studentAttendanceInfo
-     * @return
-     */
-
-    Optional<StudentAttendanceInfo> update(final long id, final StudentAttendanceInfo studentAttendanceInfo);
-
     /**
      *
      * @param id
@@ -50,4 +40,12 @@ public interface AttendanceService
      */
 
     List<AttendanceView> search(final AttendanceSearchCriteria attendanceSearchCriteria);
+
+    /**
+     *This update for doing update the Attendance Details rather than attendance main Table
+     * @param id
+     * @param status
+     */
+
+    Optional<AttendanceDetails> update(final long id, final String status);
 }

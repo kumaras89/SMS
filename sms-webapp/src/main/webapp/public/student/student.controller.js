@@ -318,9 +318,7 @@
                                 }
                             }
                         })
-                    } else {
-                        $scope.initialize();
-                        $scope.student.educationDetails = [{}, {}, {}, {}];
+
                     }
                 };
 
