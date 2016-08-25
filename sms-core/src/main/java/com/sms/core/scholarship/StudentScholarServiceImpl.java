@@ -51,6 +51,12 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     }
 
     @Override
+    public Optional<StudentScholarInfo> findByApplicationNumberWithStatus(String applicationNumber, ScholarStatus status) {
+        return Optional.of(this.studentScholarRepository.findByApplicationNumberWithStatus(applicationNumber,status))
+                .map(StudentScholarServiceImpl::scholarToInfo);
+    }
+
+    @Override
     public Optional<StudentScholarInfo> findByApplicationNumber(final String applicationNumber) {
         return Optional.of(this.studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber))
                 .map(StudentScholarServiceImpl::scholarToInfo);
@@ -91,7 +97,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                                 .append(",Application No:")
                                 .append(entityType.getApplicationNumber())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_STUDENT")
+                .on(SendingDetails::getMessageCode).set("SMS_STD_SCH")
                 .build());
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(entityType.getParentPhoneNumber())
@@ -101,7 +107,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                                 .append(",Application No:")
                                 .append(entityType.getApplicationNumber())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_STUDENT")
+                .on(SendingDetails::getMessageCode).set("SMS_PRT_SCH")
                 .build());
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(entityType.getStudentPhoneNumber())
@@ -113,7 +119,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                                 .append(",Application No:")
                                 .append(entityType.getApplicationNumber())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP")
+                .on(SendingDetails::getMessageCode).set("SMS_EMP_SCH")
                 .build());
 
         SMSSenderDetailsGenerator.createSMSDetails(sendingDetailsList);

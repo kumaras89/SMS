@@ -28,15 +28,7 @@ public class AttendanceSearchService {
                 .getArray());
     }
 
-    public static Reader<AttendanceRepository, List<StudentAttendanceInfo>> search(AttendanceSearchCriteria attendanceSearchCriteriaa) {
-        return Reader.of(attendanceRepository ->
-                Do.of(attendanceRepository)
-                        .then(criteria -> attendanceSearchSpec(attendanceSearchCriteriaa))
-                        .then(spec -> attendanceRepository.findAll(spec))
-                        .then(attendances -> FList.of(attendances).map(aInfo -> StudentAttendanceInfo.toBuilder(aInfo).build()).get())
-                        .get());
-    }
-    public static Reader<AttendanceRepository, List<StudentAttendance>> Remoduling(AttendanceSearchCriteria attendanceSearchCriteriaa) {
+    public static Reader<AttendanceRepository, List<StudentAttendance>> search(AttendanceSearchCriteria attendanceSearchCriteriaa) {
         return Reader.of(attendanceRepository ->
                 Do.of(attendanceRepository)
                         .then(criteria -> attendanceSearchSpec(attendanceSearchCriteriaa))

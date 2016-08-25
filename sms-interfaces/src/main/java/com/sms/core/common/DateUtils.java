@@ -9,6 +9,7 @@ import java.util.Date;
 public class DateUtils {
 
     /**
+     *
      * @param date
      * @param noOfYears
      * @return
@@ -36,5 +37,17 @@ public class DateUtils {
     public static boolean isOneDay(final Date creationDate) {
         Period period = Period.between(creationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
         return period.getDays() >= 1;
+    }
+
+    /**
+     *
+     * @param durationTo
+     * @return
+     */
+
+    public static boolean isDateCrossed(final Date durationTo)
+    {
+        Period period = Period.between(durationTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),LocalDate.now());
+        return period.getDays() >= 0;
     }
 }

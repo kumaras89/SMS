@@ -10,6 +10,8 @@ import java.util.Optional;
  */
 public interface StudentScholarService {
 
+    Optional<StudentScholarInfo> findByApplicationNumberWithStatus(final String applicationNumber,final ScholarStatus status);
+
     /**
      * @param applicationNumber
      * @return

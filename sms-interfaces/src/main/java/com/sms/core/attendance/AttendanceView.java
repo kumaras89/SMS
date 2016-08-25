@@ -1,6 +1,5 @@
 package com.sms.core.attendance;
 
-
 import java.util.List;
 
 /**
@@ -36,3 +35,4 @@ public class AttendanceView
         this.dateList = dateList;
     }
 }
+

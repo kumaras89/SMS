@@ -52,7 +52,7 @@ public class StudentFacadeImpl implements StudentFacade {
                                 .append(",Application No:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_STUDENT")
+                .on(SendingDetails::getMessageCode).set("SMS_STD_STD")
                 .build());
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(studentScholar.getParentPhoneNumber())
@@ -62,7 +62,7 @@ public class StudentFacadeImpl implements StudentFacade {
                                 .append(",Application No:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_STUDENT")
+                .on(SendingDetails::getMessageCode).set("SMS_PRT_STD")
                 .build());
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
@@ -74,7 +74,7 @@ public class StudentFacadeImpl implements StudentFacade {
                                 .append(",Application No:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP")
+                .on(SendingDetails::getMessageCode).set("SMS_EMP_STD")
                 .build());
 
         sendToAllImp.createSMSDetails(sendingDetailsList);

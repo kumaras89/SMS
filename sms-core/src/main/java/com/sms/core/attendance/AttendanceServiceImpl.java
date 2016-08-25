@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Created by sathish on 7/29/2016.
@@ -76,56 +78,67 @@ public class AttendanceServiceImpl implements AttendanceService {
         final Optional<StudentAttendanceInfo> savedStudents = Optional.of(attendanceRepository
                 .saveAndFlush(attendance))
                 .map(AttendanceServiceImpl::attendanceToInfo);
-        /**
-         * For sending message to the absents student in current date
-         */
-        for (AttendanceDetails attandanceDetails : attendance.getAttendanceDetails()) {
-            if (attandanceDetails.getStatus()=="LEAVE") {
+        //for sending message to all the student who all are ABSENT AND LEAVE
+        sendSMS(attendance);
 
-                List<SendingDetails> sendingDetailsList = new ArrayList();
-
-                Student student = studentRepository.findByCode(attandanceDetails.getStudentCode());
-                StudentScholar studentScholar = studentScholarRepository.findByApplicationNumberIgnoreCase(student.getScholarAppNo());
-                MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(studentScholar.getMarketingEmployee().getCode());
-
-                sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(student.getPhoneNumber())
-                        .on(SendingDetails::getSenderMessage).set(
-                                new StringBuilder("Hi")
-                                        .append(student.getName())
-                                        .append(",Application No:")
-                                        .append(student.getCode())
-                                        .toString())
-                        .on(SendingDetails::getMessageCode).set("SMS_STUDENT_ABSENT")
-                        .build());
-
-                sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(studentScholar.getParentPhoneNumber())
-                        .on(SendingDetails::getSenderMessage).set(
-                                new StringBuilder("Hi")
-                                        .append(studentScholar.getName())
-                                        .append(",Application No:")
-                                        .append(student.getCode())
-                                        .toString())
-                        .on(SendingDetails::getMessageCode).set("SMS_STUDENT_ABSENT")
-                        .build());
-
-                sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
-                        .on(SendingDetails::getSenderMessage).set(
-                                new StringBuilder("Hi")
-                                        .append(marketingEmployee.getName())
-                                        .append(",Name:")
-                                        .append(student.getName())
-                                        .append(",Application No:")
-                                        .append(student.getCode())
-                                        .toString())
-                        .on(SendingDetails::getMessageCode).set("SMS_MARKET_EMP_ABSENT")
-                        .build());
-
-                SMSSenderDetailsGenerator.createSMSDetails(sendingDetailsList);
-            }
-        }
         return savedStudents;
     }
 
+    /**
+     *
+     * @param studentAttendance
+     */
+    public void sendSMS(final StudentAttendance studentAttendance)
+    {
+        List<SendingDetails> sendingDetails = new ArrayList();
+
+        for (AttendanceDetails details : studentAttendance.getAttendanceDetails())
+        {
+            Student student = studentRepository.findByCode(details.getStudentCode());
+            StudentScholar studentScholar = studentScholarRepository.findByApplicationNumberIgnoreCase(student.getScholarAppNo());
+            MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(studentScholar.getMarketingEmployee().getCode());
+
+            //set the content for marketing,student and parent
+
+            String marketingEmployeeMessage = new StringBuilder("Hi")
+                    .append(marketingEmployee.getName())
+                    .append(",Name:")
+                    .append(student.getName())
+                    .append(",Application No:")
+                    .append(student.getCode())
+                    .toString();
+            String studentMessage = new StringBuilder("Hi")
+                    .append(student.getName())
+                    .append(",Application No:")
+                    .append(student.getCode())
+                    .toString();
+            String parentMessage = new StringBuilder("Hi")
+                    .append(studentScholar.getName())
+                    .append(",Application No:")
+                    .append(student.getCode())
+                    .toString();
+
+            final BiFunction<String, String, Function<String, SendingDetails>> sendingDetailsCreator =
+                    (messageCode, message) -> phoneNumber ->
+                            SendingDetails.builder().on(SendingDetails::getMessageCode).set(messageCode)
+                                    .on(SendingDetails::getSenderMessage).set(message)
+                                    .on(SendingDetails::getSenderPhoneNumber).set(phoneNumber)
+                                    .build();
+
+            if (details.getStatus().equals("ABSENT"))
+            {
+                sendingDetails.add(sendingDetailsCreator.apply("SMS_STD_ABT", studentMessage).apply(studentScholar.getStudentPhoneNumber()));
+                sendingDetails.add(sendingDetailsCreator.apply("SMS_PRT_ABT", parentMessage).apply(studentScholar.getParentPhoneNumber()));
+                sendingDetails.add(sendingDetailsCreator.apply("SMS_EMP_ABT", marketingEmployeeMessage).apply(marketingEmployee.getPhoneNumber()));
+            }
+            else if(details.getStatus().equals("LEAVE"))
+            {
+                sendingDetails.add(sendingDetailsCreator.apply("SMS_STD_ALV", studentMessage).apply(studentScholar.getStudentPhoneNumber()));
+                sendingDetails.add(sendingDetailsCreator.apply("SMS_PRT_ALV", parentMessage).apply(studentScholar.getParentPhoneNumber()));
+            }
+            SMSSenderDetailsGenerator.createSMSDetails(sendingDetails);
+        }
+    }
     /**
      * @return
      */
@@ -178,7 +191,7 @@ public class AttendanceServiceImpl implements AttendanceService {
      */
     @Override
     public List<AttendanceView> search(final AttendanceSearchCriteria attendanceSearchCriteria) {
-        List<StudentAttendance> studentAttendances = AttendanceSearchService.Remoduling(attendanceSearchCriteria).with(attendanceRepository);
+        List<StudentAttendance> studentAttendances = AttendanceSearchService.search(attendanceSearchCriteria).with(attendanceRepository);
         List<AttendanceView> attendanceViews = new ArrayList<>();
         Iterator<StudentAttendance> iterator = studentAttendances.iterator();
         boolean checking = true;
@@ -191,7 +204,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 List<Details> detailsList = new ArrayList<>();
                 Details details = new Details();
                 details.setId(attendanceDetails.getId());
-                details.setStatus(attendanceDetails.getStatus().substring(0,1));
+                details.setStatus(attendanceDetails.getStatus());
                 details.setDate(studentAttendance.getAttendanceDate());
 
                 detailsList.add(details);

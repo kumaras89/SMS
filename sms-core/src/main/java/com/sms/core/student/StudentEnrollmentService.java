@@ -4,6 +4,7 @@ import com.sms.core.common.Do;
 import com.sms.core.common.FList;
 import com.sms.core.common.Reader;
 import com.sms.core.repositery.StudentRepository;
+import com.sms.core.scholarship.ScholarStatus;
 import com.sms.core.scholarship.StudentScholarService;
 import javaslang.Tuple;
 
@@ -87,7 +88,7 @@ public class StudentEnrollmentService {
      */
     public static Reader<StudentScholarService, Optional<StudentInfo>> findByStudentScholarship(final String
                                                                                                      applicationNumber){
-       return Reader.of(studentScholarService -> Do.of(studentScholarService.findByApplicationNumber(applicationNumber))
+       return Reader.of(studentScholarService -> Do.of(studentScholarService.findByApplicationNumberWithStatus(applicationNumber, ScholarStatus.INSERTED))
                                                             .then(StudentInfoConverter::convert).get());
 
     }
