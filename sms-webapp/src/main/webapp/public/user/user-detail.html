@@ -17,7 +17,7 @@
                     <td><label class="control-label">{{user.name}}</label></td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="firstName">First Name:</label></td>
+                    <td class="firstcol"><label class="control-label" for="firstName">First Name: *</label></td>
                     <td><input type="text" name="firstName" id="firstName" ng-model="user.firstName" placeholder="First Name" maxlength="15" style="width:141px;" required/>
                         <span class="error" ng-messages="userForm.firstName.$error" ng-if="userForm.firstName.$touched">
                             <span ng-message="required">Name is required.</span>
@@ -25,7 +25,7 @@
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="lastName">Last Name:</label></td>
+                    <td class="firstcol"><label class="control-label" for="lastName">Last Name: *</label></td>
                     <td><input type="text" name="lastName" id="lastName" ng-model="user.lastName" placeholder="Last Name" maxlength="15" style="width:141px;" required/>
                         <span class="error" ng-messages="userForm.lastName.$error" ng-if="userForm.lastName.$touched">
                             <span ng-message="required">Last name is required.</span>
@@ -33,7 +33,7 @@
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="role">Role : </label></td>
+                    <td class="firstcol"><label class="control-label" for="role">Role : *</label></td>
                     <td>
                         <select  ng-model="user.role" name="role" id="role" required>
                             <option ng-repeat="role in roles" value="{{role}}">{{role}}</option>
@@ -44,7 +44,7 @@
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label">Branch:</label></td>
+                    <td class="firstcol"><label class="control-label">Branch: *</label></td>
                     <td><span branch-name name="branch" bn="user.branch" style="width:284px;" required/></span>
                         <span class="error" ng-messages="userForm.branch.$error" ng-if="userForm.branch.$touched">
                             <span ng-message="required">Branch is required.</span>
@@ -54,7 +54,7 @@
             </table>
             <div class="well">
                 <div class="controls">
-                    <a ng-click="updateUser()" ng-class="{linkdisabled: userForm.$invalid}" class="btn btn-small btn-primary">Submit</a>
+                    <a ng-click="userForm.$valid && updateUser()" ng-disabled="userForm.$invalid" class="btn btn-small btn-primary">Submit</a>
                     <a ui-sref="home.user-list" class="btn btn-small"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Users</a>
                 </div>
             </div>

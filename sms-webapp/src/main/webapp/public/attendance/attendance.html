@@ -51,8 +51,9 @@
 
 
                     <tr>
-                        <td colspan="2" style="text-align: right">
-                            <a ng-click="search()"  ng-class="{linkdisabled: attendanceForm.$invalid}"  class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                        <td class="error"> * Fields are mandatory</td>
+                        <td style="text-align: right">
+                            <a ng-click="attendanceForm.$valid && search()"  ng-disabled="attendanceForm.$invalid"  class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>

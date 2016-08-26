@@ -42,17 +42,19 @@
                             <tr>
                                 <td class="firstcol"><label class="control-label">To *</label></td>
                                 <td>
-                                    <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo" required/>
+                                    <input type="date" name="durationTo" id="durationTo" ng-model="searchCriteria.durationTo" min="{{searchCriteria.durationFrom}}" required/>
                                     <span class="error" ng-messages="expenseForm.durationTo.$error" ng-if="expenseForm.durationTo.$touched">
                                           <span ng-message="required">To Date is required.</span>
+                                          <span ng-message="min">To Date is invalid.</span>
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-align: right">
-                                    <a ng-click="search()" ng-class="{linkdisabled: expenseForm.$invalid}" class="btn btn-group-sm btn-primary" ><i class="fa fa-search fa-fw"></i>Search</a>
+                                <td class="error"> * Fields are mandatory</td>
+                                <td  style="text-align: right">
+                                    <a ng-click="expenseForm.$valid && search()" ng-disabled="expenseForm.$invalid" class="btn btn-group-sm btn-primary" ><i class="fa fa-search fa-fw"></i>Search</a>
                                 </td>
-                            </tr><!--ng-disabled="!expenseForm.$valid" -->
+                            </tr>
                             </tbody>
                         </table>
                     </div>

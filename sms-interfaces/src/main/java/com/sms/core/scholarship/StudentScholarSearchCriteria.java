@@ -11,7 +11,7 @@ public class StudentScholarSearchCriteria {
     private String branchName;
     private ScholarStatus status;
     private String marketingEmployeeName;
-    private Integer year;
+    /*private Integer year;*/  // After adding duration wise in search, year is removed
     private Date durationFrom;
     private Date durationTo;
 
@@ -27,9 +27,9 @@ public class StudentScholarSearchCriteria {
         return branchName;
     }
 
-    public Integer getYear() {
+   /* public Integer getYear() {
         return year;
-    }
+    }*/
 
     public ScholarStatus getStatus() {
         return status;

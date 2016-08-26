@@ -81,7 +81,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 .saveAndFlush(attendance))
                 .map(AttendanceServiceImpl::attendanceToInfo);
         //for sending message to all the student who all are ABSENT AND LEAVE
-       /* sendSMS(attendance);*/
+        sendSMS(attendance);
 
         return savedStudents;
     }

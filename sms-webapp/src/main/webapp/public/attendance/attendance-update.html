@@ -31,19 +31,20 @@
                     </tr>
 
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="batchName">Batch: *</label></td>
+                        <td class="firstcol"><label class="control-label" for="batchName">Batch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" name="batch" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" required/>
-                            <span class="error" ng-messages="attendanceForm.batch.$error" ng-if="attendanceForm.batch.$touched">
-                                <span ng-message="required">Branch is required.</span>
-                            </span>
+                            <input type="text" style="width: 42%;" ng-model="searchCriteria.batchName" name="batch" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" required/>
+                             <span class="error" ng-messages="attendanceForm.batch.$error" ng-if="attendanceForm.batch.$touched">
+                                  <span ng-message="required">Batch is required.</span>
+                             </span>
                         </td>
                     </tr>
 
 
                     <tr>
-                        <td colspan="2" style="text-align: right">
-                            <a ng-click="search()"   class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                        <td class="error"> * Fields are mandatory</td>
+                        <td  style="text-align: right">
+                            <a ng-click="attendanceForm.$valid && search()" ng-disabled="attendanceForm.$invalid"   class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>

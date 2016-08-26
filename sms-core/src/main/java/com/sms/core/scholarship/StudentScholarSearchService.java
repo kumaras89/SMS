@@ -24,9 +24,9 @@ public class StudentScholarSearchService {
                 .map(StudentScholarSearchCriteria::getStatus, status -> builder.equal(root.<String>get("status"), status))
                 .map(StudentScholarSearchCriteria::getMarketingEmployeeName, name -> builder.like(root.join("marketingEmployee",  JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(StudentScholarSearchCriteria::getBranchName, name -> builder.like(root.join("branch",  JoinType.LEFT).get("name"), "%" + name + "%"))
-                .map(StudentScholarSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
+                /*.map(StudentScholarSearchCriteria::getYear, year -> builder.between(root.<Date>get("createdDate"),
                         DateUtils.fromYear(Year.of(year), Month.JANUARY, 1),
-                        DateUtils.fromYear(Year.of(year), Month.DECEMBER, 31)))
+                        DateUtils.fromYear(Year.of(year), Month.DECEMBER, 31)))*/
                 .map(StudentScholarSearchCriteria::getDurationFrom, durationFrom -> builder.greaterThanOrEqualTo(root.<Date>get("createdDate"),durationFrom))
                 .map(StudentScholarSearchCriteria::getDurationTo, durationTo -> builder.lessThanOrEqualTo(root.<Date>get("createdDate"),durationTo))
                 .getArray());

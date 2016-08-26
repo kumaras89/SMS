@@ -14,9 +14,7 @@
                     return AdminService.getBranchDesc(branchCode);
                 };
 
-                $scope.getCourseDesc = function (courseCode) {
-                    return AdminService.getCourseDesc(courseCode);
-                };
+             
 
                 $scope.getSchemeDesc = function (schemeCode) {
                     return AdminService.getSchemeDesc(schemeCode);
@@ -82,6 +80,10 @@
                     AdminService.getCourses(function (data) {
                         $scope.courses = data
                     });
+
+                    AdminService.getBatches(function (data) {
+                        $scope.batches = data
+                    });
                 };
 
 
@@ -124,7 +126,7 @@
                 };
                 $scope.init();
             }])
-        .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
+      /*  .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
              function ($scope,AdminService,$http) {
                  $scope.init= function () {
 
@@ -193,7 +195,7 @@
 
 
                  })
-        }])
+        }])*/
         .controller("IncomeDashboardCtrl",["$scope","AdminService","$http","$state",
             function ($scope,AdminService,$http,$state) {
                 $scope.changeLocation= function (branchName) {

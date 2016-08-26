@@ -19,7 +19,7 @@ public class ExpenseSearchService
     public static Specification<Expense> expenseSearchSpec(final ExpenseSearchCriteria criteria) {
 
         return (root, query, builder) -> builder.and(PredicateBuilder.of(Optional.ofNullable(criteria))
-                .map(ExpenseSearchCriteria::getUserName, name -> builder.like(root.join("user",  JoinType.LEFT).get("name"), "%" + name + "%"))
+                .map(ExpenseSearchCriteria::getUserName, name -> builder.like(root.join("user",  JoinType.LEFT).get("name"), "%" + name.toUpperCase() + "%"))
                 .map(ExpenseSearchCriteria::getBranchName, name -> builder.like(root.join("branch",  JoinType.LEFT).get("name"), "%" + name + "%"))
                 .map(ExpenseSearchCriteria::getDurationFrom, durationFrom -> builder.greaterThanOrEqualTo(root.<Date>get("creationDate"),durationFrom))
                 .map(ExpenseSearchCriteria::getDurationTo, durationTo -> builder.lessThanOrEqualTo(root.<Date>get("creationDate"),durationTo))

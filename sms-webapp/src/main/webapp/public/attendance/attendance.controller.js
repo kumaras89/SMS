@@ -71,6 +71,7 @@
                             total: 0,           // length of data
 
                             getData: function ($defer, params) {
+                                $scope.attendance.attendanceDetails=[];
                                 $http.post('/student/search', $scope.searchCriteria).then(function (res) {
                                     $scope.attendance.attendanceDetails=[];
                                    _.forEach(res.data, function (stud) {

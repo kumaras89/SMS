@@ -47,9 +47,9 @@ public class StudentFacadeImpl implements StudentFacade {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(newStudentInfo.getPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi,")
                                 .append(newStudentInfo.getName())
-                                .append(",Application No:")
+                                .append(",Student Code No:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
                 .on(SendingDetails::getMessageCode).set("SMS_STD_STD")
@@ -57,9 +57,9 @@ public class StudentFacadeImpl implements StudentFacade {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(studentScholar.getParentPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi,")
                                 .append(newStudentInfo.getName())
-                                .append(",Application No:")
+                                .append(",Student Code:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
                 .on(SendingDetails::getMessageCode).set("SMS_PRT_STD")
@@ -67,11 +67,11 @@ public class StudentFacadeImpl implements StudentFacade {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi,")
                                 .append(marketingEmployee.getName())
                                 .append(",Name:")
                                 .append(newStudentInfo.getName())
-                                .append(",Application No:")
+                                .append(",Student Code:")
                                 .append(newStudentInfo.getCode())
                                 .toString())
                 .on(SendingDetails::getMessageCode).set("SMS_EMP_STD")

@@ -44,7 +44,10 @@
                     <tr>
                         <td><label class="control-label" >Batch *</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue " id="batchName" style="width: 42%;" placeholder="Batch" autocomplete="off" />
+                            <input type="text" name="batch" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue " id="batchName" style="width: 42%;" placeholder="Batch" autocomplete="off" required/>
+                                <span class="error" ng-messages="paymentForm.batch.$error" ng-if="paymentForm.batch.$touched">
+                                  <span ng-message="required">Batch is required.</span>
+                             </span>
                         </td>
                     </tr>
                     <tr>
@@ -69,8 +72,9 @@
 
 
                     <tr>
-                        <td colspan="2" style="text-align: right">
-                            <a ng-click="search()" ng-class="{linkdisabled: paymentForm.$invalid}" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                        <td class="error"> * Fields are mandatory</td>
+                        <td  style="text-align: right">
+                            <a ng-click="paymentForm.$valid && search()" ng-disabled="paymentForm.$invalid" class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                     </tbody>

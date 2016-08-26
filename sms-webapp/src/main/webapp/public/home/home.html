@@ -12,25 +12,25 @@
 
             <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="home.scholarshipenrollment-list"></stats>
             <stats number="{{enrolled.length}}"
-                   comments="Students Enrolled Today" colour="yellow" type="shield" goto="home.student-dashboard"></stats>
+                   comments="Students Enrolled Today" colour="green" type="shield" goto="home.student-list"></stats>
 
 
-            <!--<stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="home.student-list"></stats>-->
+            <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { status: 'CREATED' }).length}}"
                    comments="Student Enrolment - Halfway!" colour="red" type="empire" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { branchCode: loggedInBranchCode }).length}}"
                    comments="{{getBranchDesc(loggedInBranchCode)}}" colour="yellow" type="bullhorn" goto="home.student-list"></stats>
         </div>
-        <div class="row">
-            <stats ng-if="loggedUserRole == 'SUPER_ADMIN'" number="{{totalPayment}}"
+        <div class="row" ng-if="loggedUserRole == 'SUPER_ADMIN'">
+            <stats  number="{{totalPayment}}"
                    comments="Total Payment for Today" colour="green" type="rupee" goto="home.income-dashboard"></stats>
-            <stats ng-if="loggedUserRole == 'SUPER_ADMIN'" number="{{totalExp}}"
+            <stats  number="{{totalExp}}"
                    comments="Total Expense for Today" colour="red" type="rupee" goto="home.expense-dashboard"></stats>
         </div>
 
         <div class="row">
-            <stats ng-repeat="course in courses" number="{{(students | filter: { courseCode: course.code }).length}}"
-                   comments="{{getCourseDesc(course.code)}}" colour="primary" type="anchor"></stats>
+            <stats ng-repeat="batch in batches" number="{{(students | filter: { batchName: batch.name }).length}}"
+                   comments="{{batch.name}}" colour="primary" type="anchor"></stats>
         </div>
 
         <div class="col-lg-4">

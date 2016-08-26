@@ -110,6 +110,7 @@
                 $scope.createNewUser = function () {
                     var user = {};
                     var user = $.extend(user, $scope.user);
+                    user.name= $scope.user.name.toUpperCase(); //fixed for duplicating the username with case sensitive.
                     user.branch = AdminService.getBranchCode($scope.user.branch);
                     CrudService.userService.Create(user).then(function (res) {
                             window.scrollTo(0,0);

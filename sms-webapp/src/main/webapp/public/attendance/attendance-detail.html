@@ -40,8 +40,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align: right">
-                            <a ng-click="search()" ng-class="{linkdisabled: attendanceForm.$invalid}"  class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
+                        <td class="error"> * Fields are mandatory</td>
+                        <td  style="text-align: right">
+                            <a ng-click="attendanceForm.$valid && search()" ng-disabled="attendanceForm.$invalid"  class="btn btn-group-sm btn-primary"><i class="fa fa-search fa-fw"></i>Search</a>
                         </td>
                     </tr>
                 </table>
@@ -49,12 +50,14 @@
             <br>
         </div>
         <div class="clearfix"></div>
-
-         <div >  <h4>&nbsp;&nbsp; BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}}</h4></div>
-         <div >  <h4> &nbsp;&nbsp; MONTH : {{searchCriteria.durationFrom |date : "MMMM" }} &nbsp;&nbsp;&nbsp;&nbsp; Working Days :{{workingDays}}</h4>
-            <button style="float: right;" ng-click="printToCart('printSectionId')" class="btn btn-group-sm btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  Print</button>
+        <button style="float: right;" ng-click="printToCart('printSectionId')" class="btn btn-group-sm btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  Print</button>
+        <div id="printSectionId">
+         <div >  <h4>&nbsp;&nbsp; BRANCH : {{searchCriteria.branchName}} &nbsp;&nbsp;&nbsp;&nbsp; BATCH : {{searchCriteria.batchName}}</h4>
          </div>
-        <div class="table-responsive" id="printSectionId" loading-container="tableParams.settings().$loading">
+         <div >  <h4> &nbsp;&nbsp; MONTH : {{searchCriteria.durationFrom |date : "MMMM" }} &nbsp;&nbsp;&nbsp;&nbsp; Working Days :{{workingDays}}</h4>
+
+         </div>
+        <div class="table-responsive"  loading-container="tableParams.settings().$loading">
             <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table" >
                 <thead>
                 <br>
@@ -78,5 +81,6 @@
             </tr>
             </table>
         </div>
+    </div>
     </div>
 </div>
