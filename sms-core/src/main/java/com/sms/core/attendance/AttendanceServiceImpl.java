@@ -92,31 +92,35 @@ public class AttendanceServiceImpl implements AttendanceService {
      */
     public void sendSMS(final StudentAttendance studentAttendance)
     {
-        List<SendingDetails> sendingDetails = new ArrayList();
+        Iterator<AttendanceDetails> attendanceDetails = studentAttendance.getAttendanceDetails().iterator();
 
-        for (AttendanceDetails details : studentAttendance.getAttendanceDetails())
+        while(attendanceDetails.hasNext())
         {
+            AttendanceDetails details = attendanceDetails.next();
+
+            List<SendingDetails> sendingDetails = new ArrayList();
+
             Student student = studentRepository.findByCode(details.getStudentCode());
             StudentScholar studentScholar = studentScholarRepository.findByApplicationNumberIgnoreCase(student.getScholarAppNo());
             MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(studentScholar.getMarketingEmployee().getCode());
 
             //set the content for marketing,student and parent
 
-            String marketingEmployeeMessage = new StringBuilder("Hi")
+            String marketingEmployeeMessage = new StringBuilder("Hi,")
                     .append(marketingEmployee.getName())
                     .append(",Name:")
                     .append(student.getName())
-                    .append(",Application No:")
+                    .append(",Student Code :")
                     .append(student.getCode())
                     .toString();
-            String studentMessage = new StringBuilder("Hi")
+            String studentMessage = new StringBuilder("Hi,")
                     .append(student.getName())
-                    .append(",Application No:")
+                    .append(",Student Code :")
                     .append(student.getCode())
                     .toString();
-            String parentMessage = new StringBuilder("Hi")
-                    .append(studentScholar.getName())
-                    .append(",Application No:")
+            String parentMessage = new StringBuilder("Hi,")
+                    .append(student.getName())
+                    .append(",Student Code :")
                     .append(student.getCode())
                     .toString();
 
@@ -126,14 +130,13 @@ public class AttendanceServiceImpl implements AttendanceService {
                                     .on(SendingDetails::getSenderMessage).set(message)
                                     .on(SendingDetails::getSenderPhoneNumber).set(phoneNumber)
                                     .build();
-
-            if (details.getStatus().equals("ABSENT"))
+            if (details.getStatus().equals(AttendanceStatus.ABSENT.name()))
             {
                 sendingDetails.add(sendingDetailsCreator.apply("SMS_STD_ABT", studentMessage).apply(studentScholar.getStudentPhoneNumber()));
                 sendingDetails.add(sendingDetailsCreator.apply("SMS_PRT_ABT", parentMessage).apply(studentScholar.getParentPhoneNumber()));
                 sendingDetails.add(sendingDetailsCreator.apply("SMS_EMP_ABT", marketingEmployeeMessage).apply(marketingEmployee.getPhoneNumber()));
             }
-            else if(details.getStatus().equals("LEAVE"))
+            else if(AttendanceStatus.LEAVE.name().equals(details.getStatus()))
             {
                 sendingDetails.add(sendingDetailsCreator.apply("SMS_STD_ALV", studentMessage).apply(studentScholar.getStudentPhoneNumber()));
                 sendingDetails.add(sendingDetailsCreator.apply("SMS_PRT_ALV", parentMessage).apply(studentScholar.getParentPhoneNumber()));
