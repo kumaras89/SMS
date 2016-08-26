@@ -17,20 +17,26 @@
                 <table width="75%" class="table table-striped table-condensed">
 
                     <tr class="even gradeA">
-                        <td><label class="control-label">Branch:</label></td>
+                        <td><label class="control-label">Branch *</label></td>
                         <td><span  branch-name bn="searchCriteria.branchName"/></td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="batchName">Batch</label></td>
+                        <td class="firstcol"><label class="control-label" for="batchName">Batch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" />
+                            <input type="text" style="width: 42%;" name="batch" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" required/>
+                            <span class="error" ng-messages="attendanceForm.batch.$error" ng-if="attendanceForm.batch.$touched">
+                                  <span ng-message="required">Batch is required.</span>
+                             </span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td><label class="control-label">Month</label></td>
+                        <td><label class="control-label">Month *</label></td>
                         <td>
-                            <input type="month" name="month" id="month" ng-model="searchCriteria.durationFrom" />
+                            <input type="month" name="month" id="month" ng-model="searchCriteria.durationFrom" required/>
+                            <span class="error" ng-messages="attendanceForm.durationFrom.$error" ng-if="attendanceForm.durationFrom.$touched">
+                                  <span ng-message="required">Month is required.</span>
+                             </span>
                         </td>
                     </tr>
                     <tr>

@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                     <tr class="even gradeA">
-                        <td><label class="control-label">Date:</label></td>
+                        <td><label class="control-label">Date </label></td>
                         <td class="firstcol"><input type="date" name="dateAttendance" id="dateAttendance" ng-model="attendance.attendanceDate" required/>
                         <span class="error" ng-messages="attendanceForm.dateAttendance.$error" ng-if="attendanceForm.dateAttendance.$touched">
                             <span ng-message="required">Select current Date.</span>
@@ -26,19 +26,26 @@
                     </tr>
 
                     <tr>
-                        <td class="firstcol"><label class="control-label">User name</label></td>
-                        <td><span user-name us="searchCriteria.userName"></span></td>
+                        <td class="firstcol"><label class="control-label">User name *</label></td>
+                        <td><span user-name us="searchCriteria.userName" name="user" required></span>
+                            <span class="error" ng-messages="attendanceForm.user.$error" ng-if="attendanceForm.user.$touched">
+                                  <span ng-message="required">User is required.</span>
+                             </span>
+                        </td>
                     </tr>
 
                     <tr class="even gradeA">
-                        <td><label class="control-label">Branch:</label></td>
+                        <td><label class="control-label">Branch *</label></td>
                         <td><span  branch-name bn="searchCriteria.branchName"/></td>
                     </tr>
 
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="batchName">Batch</label></td>
+                        <td class="firstcol"><label class="control-label" for="batchName">Batch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" />
+                            <input type="text" style="width: 42%;" name="batch" ng-model="searchCriteria.batchName" uib-typeahead="bName for bName in batchNames | filter:$viewValue | limitTo:8" id="batchName" placeholder="Batch" autocomplete="off" required/>
+                            <span class="error" ng-messages="attendanceForm.batch.$error" ng-if="attendanceForm.batch.$touched">
+                                  <span ng-message="required">Batch is required.</span>
+                             </span>
                         </td>
                     </tr>
 
