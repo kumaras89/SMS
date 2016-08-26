@@ -6,7 +6,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
+        <div include-if-allowed operation="expenseCreation" class="well">
             <a ng-click="createNewExpense()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Create Expense</a>
         </div>
         <div class="row">
@@ -77,9 +77,11 @@
                             <td sortable="user">{{ expense.userName }}</td>
                             <td sortable="expenseAmount">{{ expense.totalAmount | currency:'&#8377;' }}</td>
                             <td sortable="date">{{ expense.expenseDate | date }}</td>
-                            <td><a include-if-allowed operation="expenseEdit" ng-click="editExpense(expense.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
-                            <td><a include-if-allowed operation="expenseView" ng-click="viewExpense(expense.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>View</a>
-                            <a  confirm="Do you want to delete ?" confirm-title="Batch Delete Confirmation" ng-click="deleteExpense(expense.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
+                            <td>
+                                <a include-if-allowed operation="expenseEdit" ng-click="editExpense(expense.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                                <a  ng-click="viewExpense(expense.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>View</a>
+                                <a  include-if-allowed operation="expenseDelete" confirm="Do you want to delete ?" confirm-title="Batch Delete Confirmation" ng-click="deleteExpense(expense.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i>Delete</a>
+                            </td>
                         </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">

@@ -13,7 +13,7 @@
         <form name="courseForm" novalidate="novalidate" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="code">Code:</label></td>
+                    <td class="firstcol"><label class="control-label" for="code">Code: *</label></td>
                     <td><input type="text" name="code" id="code" ng-model="course.code" placeholder="Code" maxlength="10" style="width:94px;" required/>
                         <span class="error" ng-messages="courseForm.code.$error" ng-if="courseForm.code.$touched">
                             <span ng-message="required">Code is required.</span>
@@ -21,7 +21,7 @@
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="name">Name:</label></td>
+                    <td class="firstcol"><label class="control-label" for="name">Name: *</label></td>
                     <td><input type="text" name="name" id="name" ng-model="course.name" placeholder="Name" maxlength="50" style="width:233px;" required/>
                         <span class="error" ng-messages="courseForm.name.$error" ng-if="courseForm.name.$touched">
                             <span ng-message="required">Name is required.</span>
@@ -29,7 +29,7 @@
                     </td>
                 </tr>
                 <tr class="even gradeA">
-                    <td class="firstcol"><label class="control-label" for="description">Description:</label></td>
+                    <td class="firstcol"><label class="control-label" for="description">Description: *</label></td>
                     <td><textarea name="description" id="description" ng-model="course.description" placeholder="Description about the course" style="width: 233px" required/>
                         <span class="error" ng-messages="courseForm.description.$error" ng-if="courseForm.description.$touched">
                             <span ng-message="required">Description is required.</span>
@@ -42,7 +42,7 @@
             <div class="well">
                 <div class="controls">
                     <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                    <a ng-click="updateCourse()" ng-class="{linkdisabled: courseForm.$invalid}" class="btn btn-small btn-primary">Update</a>
+                    <a ng-click="courseForm.$valid && updateCourse()" ng-disabled="courseForm.$invalid" class="btn btn-small btn-primary">Update</a>
                  </div>
             </div>
         </form>
