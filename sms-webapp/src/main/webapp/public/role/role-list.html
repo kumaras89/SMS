@@ -34,7 +34,7 @@
                                 <td>{{$index + 1 }}</td>
                                 <td sortable="code">{{ role.name }}</td>
                                 <td sortable="name">{{ role.desc }}</td>
-                                <td><a ng-click="goToEdit(role.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                                <td><a ng-click="goToEdit(role.id)" ng-if="role.name != 'SUPER_ADMIN'" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                     &nbsp;
                                     <a confirm="Do you want to delete {{role.name}} ?" ng-if="role.name!='SUPER_ADMIN'" confirm-title=" Role Delete Confirmation" ng-click="deleteRole(role.id)" class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>
                             </tr>

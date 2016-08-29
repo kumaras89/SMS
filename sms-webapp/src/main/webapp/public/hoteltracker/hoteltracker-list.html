@@ -116,7 +116,7 @@
                 <tr ng-click="changeLocation(hoteltracker.id)" ng-class="{suspended: hoteltracker.status=='SUSPENDED' , mapped:hoteltracker.status=='MAPPED', datecrossed: calculateDays(hoteltracker.durationFrom,hoteltracker.durationTo)=='Date crosed'}" ng-repeat="hoteltracker in $data | filter:hoteltracker_filter" class="success" style="cursor: hand; cursor: pointer;">
 
                     <td>{{$index + 1 }}</td>
-                    <td sortable="studentCode">{{ getStudentName(hoteltracker.studentCode)}}</td>
+                    <td sortable="studentCode">{{hoteltracker.studentName}}</td>
                     <td sortable="branchCode">{{ getBranchDesc(hoteltracker.branchCode)}}</td>
                     <td sortable="hotelCode">{{ getHotelName(hoteltracker.hotelCode)}}</td>
                     <td >{{ hoteltracker.durationFrom|date}}</td>

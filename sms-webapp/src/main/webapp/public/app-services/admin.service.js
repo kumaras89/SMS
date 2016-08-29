@@ -43,11 +43,8 @@
         service.getHotels=getHotels
         service.getHotelHrs=getHotelHrs
         service.getHotelCode=getHotelCode
-        service.getStudents = getStudents
         service.getHotelName = getHotelName
         service.getHotelTrackers = getHotelTrackers
-        service.getStudentName = getStudentName
-        service.getStudentByCode = getStudentByCode
         service.getHotelByCode = getHotelByCode
         service.getHrById = getHrById
         service.getBranchById = getBranchById
@@ -78,12 +75,9 @@
             getHotels(function () {})
             getHotelCode(function () {})
             getHotelHrs(function () {})
-            getStudents(function () {})
             getMessageService(function () {})
             getHotelName(function () {})
             getHotelTrackers(function () {})
-            getStudentName(function (){})
-            getStudentByCode(function () {})
             getHotelByCode(function () {})
             getHrById=getHrById(function () {})
             getBranchById=getBranchById(function (){})
@@ -250,25 +244,10 @@
 
         function getHotelCode(hotelName) {
             var hotels = StorageService.getTrustedStoarage('/hotel');
-            var hotel =  _.find(hotels, function(hotel) {
+            var hotel = _.find(hotels, function (hotel) {
                 return hotel.hotelName == hotelName
             })
             return hotel != undefined ? hotel.hotelCode : "";
-        }
-
-
-        function getStudents(success) {
-            StorageService.getFromStoarage('/student', function(data) {
-                success(data);
-            });
-
-        }
-        function getStudentName(studentCode) {
-            var students = StorageService.getTrustedStoarage('/student');
-            var student =  _.find(students, function(student) {
-                return student.code == studentCode
-            })
-            return student != undefined ? student.name : "";
         }
 
         function getHotelName(hotelCode) {
@@ -286,13 +265,6 @@
 
         }
 
-        function getStudentByCode(studentCode) {
-            var students = StorageService.getTrustedStoarage('/student');
-            var emp =  _.find(students, function(student) {
-                return student.code == studentCode
-            })
-            return emp;
-        }
         function getHotelByCode(hotelCode) {
             var hotels = StorageService.getTrustedStoarage('/hotel');
             var emp =  _.find(hotels, function(hotel) {
@@ -315,16 +287,7 @@
             })
             return emp;
         }
-
-
-        function getLinkedUserName(code) {
-            var mars = StorageService.getTrustedStoarage('/marketingEmployee');
-            var mar = _.find(mars, function (mar) {
-                return mar.code == code
-            })
-            return mar != undefined ? mar.linkedUser : "";
-        }
-
+        
 
         function getBatches(success) {
             StorageService.getFromStoarage('/batch', function (data) {

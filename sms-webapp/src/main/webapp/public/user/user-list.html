@@ -37,7 +37,7 @@
                             <td>{{ user.firstName + ' ' + user.lastName }}</td>
                             <td>{{ user.role}}</td>
                             <td>{{ getBranchDesc(user.branch) }}</td>
-                            <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                            <td><a ng-click="editUser(user.id)" ng-if="user.role!= 'SUPER_ADMIN'" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                                 &nbsp;
                                 <a ng-click="resetPassword(user.id)" class="btn btn-small btn-primary"><i class="fa fa-refresh fa-fw"></i>Reset Password</a>
                                 &nbsp;

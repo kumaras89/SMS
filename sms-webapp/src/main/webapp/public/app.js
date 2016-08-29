@@ -80,7 +80,7 @@
                     if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                         return' <input type="text" ng-model="us" uib-typeahead="uName for uName in userNames | filter:$viewValue | limitTo:8" id="userName" placeholder="User" autocomplete="off"/>'
                     }else{
-                        return '<input type="text" ng-model="us" readonly >'
+                        return '<label class="control-label">{{us}}</label>'
                     }
                 }
             }

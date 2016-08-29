@@ -65,7 +65,6 @@
             function ($scope,$http, $timeout, ngTableParams, FlashService, $state, AdminService) {
                 $scope.searchCriteria = {};
                 $scope.getBranchDesc = AdminService.getBranchDesc;
-                $scope.getStudentName= AdminService.getStudentName;
                 $scope.getHotelName=AdminService.getHotelName;
                 $scope.calculateDays = function (start,end) {
                     var start = moment(new Date(start));
@@ -161,20 +160,26 @@
         .controller('HotelTrackerDetailCtrl', ['$scope', 'FlashService', 'ngTableParams', '$state','$stateParams', '$location', 'AdminService','CrudService',
             function ($scope, FlashService, ngTableParams, $state, $stateParams,$location, AdminService, CrudService) {
 
+                $scope.hotel={};
+                $scope.hr={};
                 $scope.loadTracker = function () {
                     CrudService.hotelTrackerService.GetById($stateParams.id).then(function (res) {
                         $scope.hoteltracker = res;
-                        $scope.hotel=AdminService.getHotelByCode($scope.hoteltracker.hotelCode);
                         $scope.branch=AdminService.getBranchDesc($scope.hoteltracker.branchCode);
-                        $scope.hr=AdminService.getHrById($scope.hoteltracker.hotelHrId);
-                        $scope.student=AdminService.getStudentByCode($scope.hoteltracker.studentCode);
+                        var hotell =AdminService.getHotelByCode($scope.hoteltracker.hotelCode);
+                        $scope.hotel.name= hotell.hotelName;
+                        $scope.hotel.phoneNumber= hotell.phoneNumber;
+                        var hrr=AdminService.getHrById($scope.hoteltracker.hotelHrId);
+                        $scope.hr.name= hrr.name;
+                        $scope.hr.phoneNumber= hrr.phoneNumber;
                     });
                 }
+
                 $scope.calculateDays = function (start,end) {
                     var start = moment(new Date(start));
                     var end = moment(new Date(end));
 
-                    if( moment()<start) {
+                    if( moment().isBefore(start)) {
                         return   parseInt(
                                 moment.duration(
                                     moment(end).diff(
@@ -182,20 +187,22 @@
                                     )
                                 ).asDays()
                             ) + 1+ ' Days';
-
                     }
-                    else if(moment()<end){
+
+                    else if( end.isSame(moment(), 'day')){
+                        return '1 Day';
+                    }
+                    else if(moment().isBefore(end)){
                         return parseInt(
                                 moment.duration(
                                     moment(end).diff(
                                         moment()
                                     )
                                 ).asDays()
-                            ) +1 + ' Days';
+                            ) +2 + ' Days';
                     }
-                    else return 'Date crossed'
+                    else return 'Date crosed'
                 };
-
 
                 $scope.loadTracker();
                 $scope.updateTracker= function (id) {
@@ -239,10 +246,10 @@
                     CrudService.hotelTrackerService.GetById($stateParams.id).then(function (res) {
                         var hoteltracker = res;
                         $scope.branchName=AdminService.getBranchDesc(res.branchCode)
-                        $scope.studentName = AdminService.getStudentName(res.studentCode);
                         hoteltracker.durationFrom = new Date(res.durationFrom);
                         $scope.hrName = AdminService.getHrById(res.hotelHrId).name;
                         hoteltracker.durationTo = new Date(res.durationTo);
+                        hoteltracker.hotel=AdminService.getHotelByCode(res.hotelCode);
                         $scope.hoteltracker = hoteltracker;
                     })
                 };

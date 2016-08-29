@@ -85,7 +85,7 @@
             <div class="well">
                 <div class="controls">
                     <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                    <a ng-click="updateScheme()" ng-class="{linkdisabled: schemeForm.$invalid}" class="btn btn-small btn-primary">Update</a>
+                    <a ng-click="scheme.feesAmount == total && updateScheme()" ng-class="{linkdisabled: schemeForm.$invalid}" class="btn btn-small btn-primary">Update</a>
                 </div>
             </div>
         </form>

@@ -22,11 +22,11 @@
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hotel">Hotel : </label></td>
                     <td class="secondcol">
-                        <select  ng-model="hoteltracker.hotelCode" ng-change="hotelChanged()" name="branch" id="hotel" required>
+                        <select  ng-model="hoteltracker.hotelCode" ng-change="hotelChanged()" name="hotel" id="hotel" required>
                             <option ng-repeat="hotel in hotels" ng-if="hotel.branchCode == hoteltracker.branchCode" value="{{hotel.hotelCode}}">{{hotel.hotelName}}</option>
                         </select>
-                    <span class="error" ng-messages="trackForm.branch.$error" ng-if="trackForm.hotel.$touched">
-                        <span ng-message="required">Branch is required.</span>
+                    <span class="error" ng-messages="trackForm.hotel.$error" ng-if="trackForm.hotel.$touched">
+                        <span ng-message="required">Hotel is required.</span>
                     </span>
                     </td>
                 </tr>
@@ -42,7 +42,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" >Student : </label></td>
-                    <td><label class="control-label">{{studentName}}</label></td>
+                    <td><label class="control-label">{{hoteltracker.studentName}}</label></td>
                 </tr>
 
                 <tr class="even gradeA">

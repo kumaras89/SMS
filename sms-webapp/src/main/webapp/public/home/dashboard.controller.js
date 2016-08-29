@@ -87,30 +87,31 @@
                 };
 
 
-                
-                $scope.calcEnrol= function () {
-                    var searchCriteria={};
-                    searchCriteria.durationFrom=new Date().setHours(0,0,0,0);
-                    $http.post('/student/search', searchCriteria).then(function(res) {
-                        $scope.enrolled  = res.data;
+                $scope.calcEnrol = function () {
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    $http.post('/student/search', searchCriteria).then(function (res) {
+                        $scope.enrolled = res.data;
                     })
                 };
 
-                $scope.totalIncome=function () {
-                    var searchCriteria={};
-                    searchCriteria.durationFrom=new Date().setHours(0,0,0,0);
-                    searchCriteria.durationTo=new Date().setHours(23,59,59,59);
-                    $http.post('/payment/search', searchCriteria).then(function(res) {
+                $scope.totalIncome = function () {
+                    $scope.totalPayment = 0;
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    $http.post('/payment/search', searchCriteria).then(function (res) {
                         var datas = res.data;
-                        var total=0;
+                        var total = 0;
                         _.forEach(datas, function (data) {
                             total = total + data.paymentInfo.amount;
                         });
-                        $scope.totalPayment=total;
+                        $scope.totalPayment = total;
                     })
                 };
 
-                $scope.totalExpense= function () {
+                $scope.totalExpense = function () {
+                    $scope.totalExp = 0;
                     var searchCriteria = {};
                     searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
                     searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
@@ -126,148 +127,165 @@
                 };
                 $scope.init();
             }])
-      /*  .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
-             function ($scope,AdminService,$http) {
-                 $scope.init= function () {
+        /*  .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
+         function ($scope,AdminService,$http) {
+         $scope.init= function () {
 
 
-                     AdminService.getUsers(function (res) {
-                         $scope.users = res;
-                     })
+         AdminService.getUsers(function (res) {
+         $scope.users = res;
+         })
 
-                     AdminService.getMarketingEmployees(function (res) {
-                         $scope.marketingEmployees = res;
-                     })
-                 }
-                 $scope.init();
-                 var searchCriteria={};
-                 searchCriteria.durationFrom=new Date().setHours(0,0,0,0);
-                 $http.post('/student/search', searchCriteria).then(function(res) {
-                      var studs  = res.data;
-                     $scope.linkedUsers=[];
-                     $scope.linkedUsers.marketingEmp=[];
-                     $scope.linkedUsers.marketingEmp.studNumber=0;
-                     $scope.linkedUsers.studNumber=0;
-                     var flag=0;
+         AdminService.getMarketingEmployees(function (res) {
+         $scope.marketingEmployees = res;
+         })
+         }
+         $scope.init();
+         var searchCriteria={};
+         searchCriteria.durationFrom=new Date().setHours(0,0,0,0);
+         $http.post('/student/search', searchCriteria).then(function(res) {
+         var studs  = res.data;
+         $scope.linkedUsers=[];
+         $scope.linkedUsers.marketingEmp=[];
+         $scope.linkedUsers.marketingEmp.studNumber=0;
+         $scope.linkedUsers.studNumber=0;
+         var flag=0;
 
-                     _.forEach(studs, function (stud) {
-                         if ($scope.linkedUsers.length==0){
-                             $scope.linkedUsers.push({
-                                 studNumber: $scope.linkedUsers.studNumber+1,
-                                 name : AdminService.getLinkedUserName(stud.marketingEmployeeCode),
-                                 marketingEmp:  $scope.linkedUsers.marketingEmp.push({
-                                     name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-                                     studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
-                                 })
-                             })
-                         }
-                        else {
-                             for (var i = 0; i < $scope.linkedUsers.length; i++) {
-                                 if ($scope.linkedUsers[i].name == AdminService.getLinkedUserName(stud.marketingEmployeeCode)) {
-                                     flag=1;
-                                     break;
-                                 }
+         _.forEach(studs, function (stud) {
+         if ($scope.linkedUsers.length==0){
+         $scope.linkedUsers.push({
+         studNumber: $scope.linkedUsers.studNumber+1,
+         name : AdminService.getLinkedUserName(stud.marketingEmployeeCode),
+         marketingEmp:  $scope.linkedUsers.marketingEmp.push({
+         name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
+         studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
+         })
+         })
+         }
+         else {
+         for (var i = 0; i < $scope.linkedUsers.length; i++) {
+         if ($scope.linkedUsers[i].name == AdminService.getLinkedUserName(stud.marketingEmployeeCode)) {
+         flag=1;
+         break;
+         }
 
-                             }
-                             if(flag==1){
-                                 $scope.linkedUsers[i].studNumber += 1;
-                                 marketingEmp:  $scope.linkedUsers[i].marketingEmp.push({
-                                     name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-                                     studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
-                                 })
-                             }
-                            else{
-                                 $scope.linkedUsers.push({
-                                     studNumber: $scope.linkedUsers.studNumber + 1,
-                                     name: AdminService.getLinkedUserName(stud.marketingEmployeeCode),
-                                     marketingEmp: $scope.linkedUsers.marketingEmp.push({
-                                         name: AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-                                         studNumber: $scope.linkedUsers.marketingEmp.studNumber + 1
-                                     })
-                                 })
-                             }
-                             flag=0;
-                         }
-
-
-
-                     })
+         }
+         if(flag==1){
+         $scope.linkedUsers[i].studNumber += 1;
+         marketingEmp:  $scope.linkedUsers[i].marketingEmp.push({
+         name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
+         studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
+         })
+         }
+         else{
+         $scope.linkedUsers.push({
+         studNumber: $scope.linkedUsers.studNumber + 1,
+         name: AdminService.getLinkedUserName(stud.marketingEmployeeCode),
+         marketingEmp: $scope.linkedUsers.marketingEmp.push({
+         name: AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
+         studNumber: $scope.linkedUsers.marketingEmp.studNumber + 1
+         })
+         })
+         }
+         flag=0;
+         }
 
 
-                 })
-        }])*/
-        .controller("IncomeDashboardCtrl",["$scope","AdminService","$http","$state",
-            function ($scope,AdminService,$http,$state) {
-                $scope.changeLocation= function (branchName) {
-                    $state.go('home.payment-list',{branch: branchName});
+
+         })
+
+
+         })
+         }])*/
+        .controller("IncomeDashboardCtrl", ["$scope", "AdminService", "$http", "$state",
+            function ($scope, AdminService, $http, $state) {
+                $scope.changeLocation = function (branchName) {
+                    $state.go('home.payment-list', {branch: branchName});
                 }
 
-               $scope.init= function () {
-                   $scope.incomeBranches=[];
-                   $scope.incomeBranches.amount=0;
-                   $scope.incomeBranches.branchName='';
+                $scope.init = function () {
+                    $scope.incomeBranches = [];
+                    $scope.incomeBranches.amount = 0;
+                    $scope.incomeBranches.branchName = '';
 
-                   var searchCriteria = {};
-                   searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
-                   searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
-                   $http.post('/payment/search', searchCriteria).then(function (res) {
-                       var datas = res.data;
-                       _.forEach(datas, function (data) {
-                           if( $scope.incomeBranches.length==0) {
-                               $scope.incomeBranches.push({
-                                   amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
-                                   branchName: data.branchName
-                               })
-                           }
-                           else {
-                               for (var i = 0; i < $scope.incomeBranches.length; i++) {
-                                   if ($scope.incomeBranches[i].branchName == data.branchName) {
-                                       $scope.incomeBranches[i].amount = $scope.incomeBranches[i].amount + data.paymentInfo.amount;
-                                       break;
-                                   }
-
-
-                                   else {
-                                       $scope.incomeBranches.push({
-                                           amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
-                                           branchName: data.branchName
-
-                                       })
-                                       break;
-                                   }
-                               }
-                           }
-                       })
-                   })
-                   
-               }
-                $scope.init();
-
-            
-            }])
-        .controller("ExpenseDashboardCtrl",["$scope","AdminService","$http","$state",
-            function ($scope,AdminService,$http,$state) {
-                $scope.expenses=[];
-                $scope.changeLocation= function () {
-                    $state.go('home.expense-list');
-                }
-
-                $scope.init= function () {
                     var searchCriteria = {};
                     searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
                     searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
-                    $http.post('/expense/search', searchCriteria).then(function (res){
-                      var exp=res.data;
-                        _.forEach(exp,function (ex) {
-                            $scope.expenses.push({
-                                branchName: AdminService.getBranchDesc(ex.branchCode),
-                                amount : ex.totalAmount
-                            })
-                        })
+                    $http.post('/payment/search', searchCriteria).then(function (res) {
+                        var datas = res.data;
+                        _.forEach(datas, function (data) {
+                            if ($scope.incomeBranches.length == 0) {
+                                $scope.incomeBranches.push({
+                                    amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
+                                    branchName: data.branchName
+                                })
+                            }
+                            else {
+                                for (var i = 0; i < $scope.incomeBranches.length; i++) {
+                                    if ($scope.incomeBranches[i].branchName == data.branchName) {
+                                        $scope.incomeBranches[i].amount = $scope.incomeBranches[i].amount + data.paymentInfo.amount;
+                                        break;
+                                    }
 
+
+                                    else {
+                                        $scope.incomeBranches.push({
+                                            amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
+                                            branchName: data.branchName
+
+                                        })
+                                        break;
+                                    }
+                                }
+                            }
+                        })
                     })
 
+                }
+                $scope.init();
 
+
+            }])
+        .controller("ExpenseDashboardCtrl", ["$scope", "AdminService", "$http", "$state",
+            function ($scope, AdminService, $http, $state) {
+                $scope.expenses = [];
+                $scope.changeLocation = function () {
+                    $state.go('home.expense-list');
+                }
+
+                $scope.init = function () {
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    $http.post('/expense/search', searchCriteria).then(function (res) {
+                        var datas = res.data;
+                        _.forEach(datas, function (data) {
+                            if ($scope.expenses.length == 0) {
+                                $scope.expenses.push({
+                                    amount: data.totalAmount,
+                                    branchName: AdminService.getBranchDesc(data.branchCode),
+                                })
+                            }
+                            else {
+                                for (var i = 0; i < $scope.expenses.length; i++) {
+                                    if ($scope.expenses[i].branchName == AdminService.getBranchDesc(data.branchCode)) {
+                                        $scope.expenses[i].amount = $scope.expenses[i].amount + data.totalAmount;
+                                        break;
+                                    }
+
+
+                                    else {
+                                        $scope.expenses.push({
+                                            amount: $scope.expenses.amount + data.totalAmount,
+                                            branchName: AdminService.getBranchDesc(data.branchCode)
+
+                                        })
+                                        break;
+                                    }
+                                }
+                            }
+                        })
+                    })
                 }
                 $scope.init();
 

@@ -39,11 +39,11 @@
                 }
                 
                 $scope.submitExpense = function () {
-                    $scope.expense.branchCode= AdminService.getBranchCode($scope.branchName);
+                    $scope.expense.branchCode= AdminService.getBranchCode($scope.expense.branchName);
                     $scope.expense.totalAmount = $scope.total;
                     CrudService.expenseService.Create($scope.expense).then(function () {
                         window.scrollTo(0,0);
-                        FlashService.Success("Successfuly submitted !!", true);
+                        FlashService.Success("Successfuly Inserted !!", true);
                         $state.go('home.expense-list');
                     });
 
@@ -121,12 +121,6 @@
 
                 $scope.expense={};
                 $scope.total1=0;
-                $scope.expense.expenseDetails = [];
-
-                $scope.expense.expenseDetails.push({
-                    reason: '',
-                    amount: '',
-                });
 
                 $scope.addRow = function(index){
                     $scope.expense.expenseDetails.push({
@@ -149,7 +143,7 @@
                 }
 
                 $scope.updateExpense = function () {
-                    $scope.expense.branchCode= AdminService.getBranchCode($scope.branchName);
+                    $scope.expense.branchCode= AdminService.getBranchCode($scope.expense.branchName);
                     CrudService.expenseService.Create($scope.expense).then(function () {
                         window.scrollTo(0,0);
                         FlashService.Success("Successfuly Updated !!", true);
@@ -161,9 +155,13 @@
                 $scope.loadExpense = function () {
                     $http.get('/expense/'+$stateParams.id).then(function (res) {
                         $scope.expense = res.data
-                        $scope.branchName = AdminService.getBranchDesc(res.data.branchCode);
+                        $scope.expense.branchName = AdminService.getBranchDesc(res.data.branchCode);
                         $scope.expense.expenseDate =  new Date(res.data.expenseDate);
                         $scope.expense.totalAmount =  res.data.totalAmount;
+
+                        if($scope.expense.expenseDetails.length===0){
+                            $scope.addRow();
+                        }
                     })
                 }
 

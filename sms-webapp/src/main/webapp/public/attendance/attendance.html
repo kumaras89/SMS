@@ -80,7 +80,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="std in attendance.attendanceDetails | filter: std_filter " class="success">
+                <tr ng-repeat="std in attendance.attendanceDetails | filter: std_filter | orderBy:'studentName'" class="success">
                     <td>{{$index + 1 }}
                         <input type="hidden" id="ind" ng-model="idx" value="{{$index}}"/>
                     </td>

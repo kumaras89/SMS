@@ -7,7 +7,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="well">
+        <div class="well" include-if-allowed operations="attendanceMake,attendanceEdit">
             <a include-if-allowed operation="attendanceMake" ng-click="takeAttendance()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Make Attendance</a>
             <a include-if-allowed operation="attendanceEdit" ng-click="updateAttendance()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>Update Attendance</a>
         </div>

@@ -28,6 +28,8 @@ public class HotelTrackerInfo
     @NotNull(message = "Student Name is Empty")
     private String studentCode;
 
+    private String studentName;
+
     @NotNull(message = "DurationTo is Empty")
     private Date durationTo;
 
@@ -62,6 +64,7 @@ public class HotelTrackerInfo
                 .on(HotelTrackerInfo::getBranchCode).set(hotelTracker.getBranchName().getCode())
                 .on(HotelTrackerInfo::getHotelHrId).set(hotelTracker.getHotelHrName().getId())
                 .on(HotelTrackerInfo::getStudentCode).set(hotelTracker.getStudentName().getCode())
+                .on(HotelTrackerInfo::getStudentName).set(hotelTracker.getStudentName().getName())
                 .on(HotelTrackerInfo::getDurationFrom).set(hotelTracker.getDurationFrom())
                 .on(HotelTrackerInfo::getDurationTo).set(hotelTracker.getDurationTo())
                 .on(HotelTrackerInfo::getCreatedDate).set(hotelTracker.getCreatedDate())
@@ -91,6 +94,10 @@ public class HotelTrackerInfo
 
     public String getStudentCode() {
         return studentCode;
+    }
+
+    public String getStudentName() {
+        return studentName;
     }
 
     public Date getDurationTo() {
