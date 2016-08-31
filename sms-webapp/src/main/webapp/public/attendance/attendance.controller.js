@@ -16,7 +16,12 @@
         })
         .controller('AttendanceCtrl', ['$rootScope','$scope','AdminService','$http','CrudService', 'FlashService', 'ngTableParams', '$state', '$timeout', '$uibModal',
             function ($rootScope,$scope,AdminService,$http, CrudService, FlashService, ngTableParams, $state, $timeout , $uibModal) {
-
+                
+                $scope.batchChanged = function (batch) {
+                    $scope.durationFrom=new Date(batch.durationFrom);
+                    $scope.durationTo=new Date(batch.durationTo);
+                    $scope.batchName= batch.name;
+                }
                 $scope.init = function () {
 
                     $scope.attendance={};
@@ -31,7 +36,7 @@
                     });
 
                     AdminService.getBatches(function (data) {
-                        $scope.batchNames = _.pluck(data, "name")
+                        $scope.batches=data;
                     });
 
                     $scope.username='';
@@ -42,7 +47,7 @@
                     var branchName = AdminService.getBranchDesc($rootScope.globals.currentUser.otherDetails.branch);
                     $scope.attendance.branchCode=AdminService.getBranchCode(branchName);
                     $scope.searchCriteria.branchName=branchName;
-                    
+
                 }
 
                 $scope.statusHoliday=function () {
@@ -72,6 +77,7 @@
 
                             getData: function ($defer, params) {
                                 $scope.attendance.attendanceDetails=[];
+                                $scope.searchCriteria.bachName=$scope.batchName;
                                 $http.post('/student/search', $scope.searchCriteria).then(function (res) {
                                     $scope.attendance.attendanceDetails=[];
                                    _.forEach(res.data, function (stud) {
@@ -103,7 +109,7 @@
                 $scope.attendanceSubmit = function () {
                     $scope.attendance.attendanceDate = $scope.attendance.attendanceDate;
                     $scope.attendance.branchCode = AdminService.getBranchCode($scope.searchCriteria.branchName);
-                    $scope.attendance.batchName = $scope.searchCriteria.batchName;
+                    $scope.attendance.batchName = $scope.batchName;
                     $scope.attendance.userName=$rootScope.globals.currentUser.username;
                     /*$scope.attendance.status = $scope.attendance.st.status;
 */

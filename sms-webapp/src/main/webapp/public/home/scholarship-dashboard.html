@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class="fa fa-shield fa-fw "></i> Today's Scholarship Enrolled</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<br>
+
+
+</div>
+<br>
+<br>
+<div class="control-group,form">
+    <br>
+    <div style="border-radius:20px;border: 2px solid #3dad9c;">
+        <div class="control-group,form">
+            <table  class="table table-striped table-condensed">
+                <thead>
+                <tr>
+                    <td colspan="2" style="min-width: 20px;" align="center"><label class="control-label">Branch wise Scholarship  Enrolled</label></td>
+                </tr>
+                <tr >
+                    <th  style="text-align: center">Branch Name</center></th>  <th style="text-align: center">Number of Scholarship  Enrolled</th>
+                </tr>
+                </thead>
+                <tr  ng-repeat="enrolledBranch in enrolledBranches " ng-click="changeBranch(enrolledBranch.branchCode)" style="text-align: center; " >
+                    <td class="firstcol" ><label style=" cursor: hand; cursor: pointer;" class="control-label" >{{getBranchDesc(enrolledBranch.branchCode)}} </label></td>
+                    <td class="firstcol"> <label style=" cursor: hand; cursor: pointer;" class="control-label" >{{ enrolledBranch.amount}} </label></td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+    <br>
+
+</div>
+<br>
+
+<script type="text/ng-template" id="scholarMarketingEmployee.html">
+
+    <div style="color: #F6F7EC; text-align: center; background-color: #58D68D; padding: 0;" class="modal-header">
+        <h4>{{branchName}}</h4>
+    </div>
+
+    <table class="table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th style="min-width: 20px;">Marketing Employee</th>
+            <th style="min-width: 20px;">Number of Scholarship</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="marketingEmployee in marketingEmployees">
+            <td style="width: 70%;">
+                <label class="control-label">{{getMarketingEmployeeName(marketingEmployee.marketingEmployeeCode)}}</label>
+            </td>
+            <td>
+                <label class="control-label">{{marketingEmployee.amount}}</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal-footer" style="text-align: center; padding: 5px;">
+        <button class="btn btn-primary" ng-click="cancel()" >Close</button>
+    </div>
+</script>

@@ -474,19 +474,25 @@
                 $scope.loadStudentScholarShip();
 
             }])
-        .controller("StudentModalCtrl", function ($scope, $uibModalInstance, $state) {
+        .controller("StudentModalCtrl", function ($rootScope,$http,$scope, $uibModalInstance, $state) {
+            $rootScope.flash={};
+            $rootScope.flash.message='';
             $scope.ok = function () {
                 if($scope.applicationNumber != undefined && $scope.applicationNumber != ''){
-                    $state.go('home.student-creation',{applicationNumber: $scope.applicationNumber});
-                    $uibModalInstance.close();
+
+                    $http.get('/student/studentScholarship/' + $scope.applicationNumber).then(function (res) {
+                        if (res.data) {
+                            $state.go('home.student-creation',{applicationNumber: $scope.applicationNumber});
+                            $uibModalInstance.close();
+                        }
+                        else {
+                            $state.go('home.student-list');
+                        }
+                    })
+
                 }
             };
-
-            $scope.continue = function () {
-                $state.go('home.student-creation');
-                $uibModalInstance.close();
-            };
-
+            
             $scope.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
             };

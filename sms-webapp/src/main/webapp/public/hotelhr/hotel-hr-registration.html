@@ -31,12 +31,7 @@
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="hotel">Hotel : </label></td>
                     <td>
-                        <select ng-model="hotelhr.hotelCode" name="hotel" id="hotel" required>
-                            <option ng-repeat="hotel in hotels" value="{{hotel.hotelCode}}">{{hotel.hotelName}}</option>
-                        </select>
-                    <span class="error" ng-messages="hotelhrForm.hotel.$error" ng-if="hotelhrForm.hotel.$touched">
-                        <span ng-message="required">Hotel is required.</span>
-                    </span>
+                        <span name="employee" hotels-hr ht="hotelhr.hotelCode" id="hotel" required></span>
                     </td>
                 </tr>
                 <tr class="even gradeA">

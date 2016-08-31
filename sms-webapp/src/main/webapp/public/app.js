@@ -212,10 +212,16 @@
                 templateUrl: 'home/income-dashboard.html',
                 controller: 'IncomeDashboardCtrl',
                 url: '/income-dashboard'
-            }).state('home.expense-dashboard', {
+            })
+            .state('home.expense-dashboard', {
                 templateUrl: 'home/expense-dashboard.html',
                 controller: 'ExpenseDashboardCtrl',
                 url: '/expense-dashboard'
+            })
+            .state('home.scholarship-dashboard', {
+                templateUrl: 'home/scholarship-dashboard.html',
+                controller: 'ScholarDashboardCtrl',
+                url: '/scholarship-dashboard'
             })
 
 

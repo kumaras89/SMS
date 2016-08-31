@@ -21,15 +21,17 @@
                         <tr>
                             <th>#</th>
                             <th>HR Name</th>
+                            <th>HR Code</th>
                             <th>Hotel</th>
                             <th>Contact Number</th>
                             <th style="max-width: 30px">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="hotelhr in $data | filter: hr_filter" class="success">
+                        <tr ng-repeat="hotelhr in $data track by hotelhr.hrCode | filter: hr_filter " class="success">
                             <td>{{$index + 1 }}</td>
                             <td>{{ hotelhr.name }}</td>
+                            <td>{{ hotelhr.hrCode }}</td>
                             <td>{{ getHotelName(hotelhr.hotelCode) }}</td>
                             <td>{{ hotelhr.phoneNumber }}</td>
                             <td><a include-if-allowed operation="hotelHrEdit" ng-click="updateHotelHr(hotelhr.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>

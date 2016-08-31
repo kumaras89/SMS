@@ -3,8 +3,11 @@
 
     angular
         .module('HotelTracker')
-        .controller('HotelTrackerCreationCtrl', ['$scope', 'FlashService', '$state', 'AdminService','CrudService','$http',
-            function ($scope, FlashService, $state, AdminService,CrudService,$http) {
+        .controller('HotelTrackerCreationCtrl', ['$rootScope','$scope', 'FlashService', '$state', 'AdminService','CrudService','$http',
+            function ($rootScope,$scope, FlashService, $state, AdminService,CrudService,$http) {
+                var logInUserDet = $rootScope.globals.currentUser.otherDetails;
+                var branchCode = $rootScope.globals.currentUser.otherDetails.branch;
+
                 $scope.hoteltracker = {};
                 $scope.branchname = '';
                 $scope.durations= [1,2,3,4,5,6,7,8,9,10,11,12];
@@ -39,7 +42,19 @@
                         $scope.hrs = data;
                     })
                     AdminService.getBranches(function(data) {
-                        $scope.branches = data;
+                        $scope.branches=[];
+                        if (logInUserDet.role == 'SUPER_ADMIN') {
+                            $scope.branches = data;
+                        }
+                        else {
+                            var branch=AdminService.getBranchByCode(branchCode);
+                            $scope.branches.push({
+                                name:branch.name,
+                                code: branch.code
+                            })
+                        }
+
+
                     })
                     AdminService.getBatches(function (data) {
                         $scope.batchNames = _.pluck(data, "name")
@@ -61,8 +76,11 @@
                     });
                 }
             }])
-        .controller('HotelTrackerListCtrl', ['$scope','$http', '$timeout','ngTableParams', 'FlashService', '$state', 'AdminService',
-            function ($scope,$http, $timeout, ngTableParams, FlashService, $state, AdminService) {
+        .controller('HotelTrackerListCtrl', ['$rootScope','$scope','$http', '$timeout','ngTableParams', 'FlashService', '$state', 'AdminService',
+            function ($rootScope,$scope,$http, $timeout, ngTableParams, FlashService, $state, AdminService) {
+                var logInUserDet = $rootScope.globals.currentUser.otherDetails.role;
+                var branch = $rootScope.globals.currentUser.otherDetails.branch;
+
                 $scope.searchCriteria = {};
                 $scope.getBranchDesc = AdminService.getBranchDesc;
                 $scope.getHotelName=AdminService.getHotelName;
@@ -101,7 +119,20 @@
                         $scope.statusList = data.hotelTrackerStatus;
                     });
                     AdminService.getHotels(function(data) {
-                        $scope.hotels= _.pluck(data,"hotelName")
+                        $scope.hotels=[]
+                        if (logInUserDet == 'SUPER_ADMIN')
+                            $scope.hotels= data;
+                        else {
+                            _.forEach(data, function (hotel) {
+                                if (hotel.branchCode == branch) {
+                                    $scope.hotels.push({
+                                        hotelName: hotel.hotelName,
+                                    })
+                                }
+                            })
+                        }
+
+                      
                     })
                     AdminService.getHotelHrs(function(data) {
                         $scope.hrs= _.pluck(data,"name")

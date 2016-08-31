@@ -10,12 +10,12 @@
     <div class="panel-body">
         <div class="row">
 
-            <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="home.scholarshipenrollment-list"></stats>
-            <stats number="{{enrolled.length}}"
-                   comments="Students Enrolled Today" colour="green" type="graduation-cap" goto="home.student-list"></stats>
+           <!-- <stats number="{{scholarshipEnrollments.length}}" comments="Total Scholarships Enrolled!" colour="yellow" type="shield" goto="home.scholarshipenrollment-list"></stats>-->
+            <stats number="{{scholarEnrolled}}" ng-if="loggedUserRole == 'SUPER_ADMIN'" comments="Scholarships Enrolled Today!" colour="yellow" type="shield" goto="home.scholarship-dashboard"></stats>
 
 
-            <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="home.student-list"></stats>
+           <!-- <stats number="{{students.length}}" comments="Total Students Enrolled!" colour="green" type="graduation-cap" goto="home.student-list"></stats>-->
+            <stats number="{{enrolled}}" ng-if="loggedUserRole == 'SUPER_ADMIN'" comments="Students Enrolled Today" colour="green" type="graduation-cap" goto="home.student-dashboard"></stats>
             <stats number="{{(students | filter: { status: 'CREATED' }).length}}"
                    comments="Student Enrolment - Halfway!" colour="red" type="empire" goto="home.student-list"></stats>
             <stats number="{{(students | filter: { branchCode: loggedInBranchCode }).length}}"

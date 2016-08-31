@@ -48,6 +48,7 @@
         service.getHotelByCode = getHotelByCode
         service.getHrById = getHrById
         service.getBranchById = getBranchById
+        service.getBranchByCode = getBranchByCode
         service.getBatches = getBatches
 
         return {
@@ -287,7 +288,14 @@
             })
             return emp;
         }
-        
+
+        function getBranchByCode(branchCode) {
+            var branches = StorageService.getTrustedStoarage('/branch');
+            var emp =  _.find(branches, function(branch) {
+                return branch.code == branchCode
+            })
+            return emp;
+        }
 
         function getBatches(success) {
             StorageService.getFromStoarage('/batch', function (data) {

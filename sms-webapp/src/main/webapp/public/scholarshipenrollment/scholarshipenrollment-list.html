@@ -24,12 +24,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="firstcol"><label class="control-label" for="branchName">Branch *</label></td>
+                        <td class="firstcol"><label class="control-label">Branch *</label></td>
                         <td>
-                            <input type="text" style="width: 42%;" name="branch" ng-model="searchCriteria.branchName" uib-typeahead="bName for bName in branchNames | filter:$viewValue | limitTo:8" id="branchName" placeholder="Branch" autocomplete="off" required/>
-                             <span class="error" ng-messages="scholarshipForm.branch.$error" ng-if="scholarshipForm.branch.$touched">
-                                  <span ng-message="required">Branch is required.</span>
-                             </span>
+                            <span branch-name bn="searchCriteria.branchName"/>
                         </td>
                     </tr>
                     <tr>
@@ -109,7 +106,7 @@
                     <td >{{ scholarshipEnrollment.status }}</td>
                     <td>
                         <a ng-click="viewScholarshipEnrollment(scholarshipEnrollment.applicationNumber)" class="btn btn-small btn-primary"><i class="fa fa-search fa-fw"></i>View</a>
-                        <a ng-click="editScholarshipEnrollment(scholarshipEnrollment.applicationNumber)" ng-if="scholarshipEnrollment.status=='INSERTED'" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
+                        <a include-if-allowed operation="scholarshipenrollmentEdit" ng-click="editScholarshipEnrollment(scholarshipEnrollment.applicationNumber)" ng-if="scholarshipEnrollment.status=='INSERTED'" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>
                     </td>
                 </tr>
                 <tr>

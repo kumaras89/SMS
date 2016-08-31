@@ -23,8 +23,11 @@
             <tr class="even gradeA">
                 <td class="firstcol"><label class="control-label" for="branch">Branch : </label></td>
                 <td colspan="3">
-                    <select  ng-model="hoteltracker.branchCode" ng-change="branchChanged()" name="branch" id="branch" required>
-                        <option value="">-- select --</option>
+                    <!--<select  ng-model="hoteltracker.branchCode" ng-options="branch.code as branch.name for branch in branches track by branch.code " name="branch" id="branch" required>
+                    </select>-->
+
+                     <select  ng-model="hoteltracker.branchCode" ng-change="branchChanged()" name="branch" id="branch" required>
+                        <option value="">&#45;&#45; select &#45;&#45;</option>
                         <option ng-repeat="branch in branches"  value="{{branch.code}}">{{branch.name}}</option>
                     </select>
                     <span class="error" ng-messages="trackForm.branch.$error" ng-if="trackForm.branch.$touched">

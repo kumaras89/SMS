@@ -33,6 +33,8 @@ public class HotelHrInfo
     @NotNull(message = "Address detais is Empty")
     private Address address;
 
+    private String branchCode;
+
     public HotelHrInfo() {
     }
 
@@ -47,7 +49,8 @@ public class HotelHrInfo
                 .on(HotelHrInfo::getHotelCode).set(hotelHr.getHotel().getHotelCode())
                 .on(HotelHrInfo::getName).set(hotelHr.getName())
                 .on(HotelHrInfo::getPhoneNumber).set(hotelHr.getPhoneNumber())
-                .on(HotelHrInfo::getHrCode).set(hotelHr.getHrCode());
+                .on(HotelHrInfo::getHrCode).set(hotelHr.getHrCode())
+                .on(HotelHrInfo::getBranchCode).set(hotelHr.getHotel().getBranch().getCode());
     }
 
 
@@ -66,6 +69,8 @@ public class HotelHrInfo
     public String getHotelCode() {
         return hotelCode;
     }
+
+    public String getBranchCode() { return branchCode;}
 
     public Address getAddress() {
         return address;

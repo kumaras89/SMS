@@ -5,7 +5,7 @@
         Make Payment of {{student.name}}
     </div>
     <div class="panel-body">
-        <form novalidate="novalidate" class="form-horizontal">
+        <form novalidate="novalidate" name="paymentForm" class="form-horizontal">
             <table width="75%" class="table table-striped table-bordered table-hover">
                 <tr class="even gradeA">
                     <td><label class="control-label" for="code">Student :</label></td>
@@ -47,15 +47,18 @@
                     <td colspan="3"><input type="text"  id="approvedBy" ng-model="payment.approvedBy" placeholder="Approved By" style="width: 188px;"/></td>
                 </tr>
                 <tr class="even gradeA">
-                    <td><label class="control-label" for="approvedBy">Fees Purticular</label></td>
-                    <td><label class="control-label" for="approvedBy">Amount</label></td>
-                    <td><label class="control-label" for="approvedBy">Remainig</label></td>
-                    <td><label class="control-label" for="approvedBy">Actual</label></td>
+                    <td style="width: 30%"><label class="control-label" for="approvedBy">Fees Purticular</label></td>
+                    <td style="width: 40%"><label class="control-label" for="approvedBy">Amount</label></td>
+                    <td style="width: 15%"><label class="control-label" for="approvedBy">Remainig</label></td>
+                    <td style="width: 15%"><label class="control-label" for="approvedBy">Actual</label></td>
                 </tr>
                 <tr ng-repeat="feesInfo in payment.feesInfos" class="even gradeA">
                     <td>{{adminService().getFeesParticularDesc(feesInfo.feesParticularCode)}}</td>
                     <td>
-                        <input ng-disabled="isDisabled(feesInfo)" type="number" id="amount" ng-model="feesInfo.amount" ng-focus="feesInfo.amount=0" placeholder="0" min="0" style="width:100px;"/>
+                        <input ng-disabled="isDisabled(feesInfo)" type="number" name="amount" id="amount" ng-model="feesInfo.amount" ng-focus="feesInfo.amount=0" placeholder="0" min="0"  style="width:100px;"/>
+                        <span class="error" ng-if="feesInfo.amount > getFeesPurtDetailAmt(paymentDetail.remainingPaymentDetail,feesInfo)">
+                           Amount is invalid.
+                        </span>
                     </td>
                     <td>{{ getFeesPurtDetailAmt(paymentDetail.remainingPaymentDetail,feesInfo) | currency:'&#8377;' }}</td>
                     <td>{{ getFeesPurtDetailAmt(paymentDetail.actualPaymentDetail,feesInfo) | currency:'&#8377;'}}</td>

@@ -4,25 +4,25 @@
     angular
         .module('Student')
         .controller('PaymentCtrl', ['$scope', '$stateParams', 'FlashService', '$state', '$http', '$timeout',
-            function ($scope, $stateParams, FlashService, $state, $http, $timeout) {
+            function ( $scope, $stateParams, FlashService, $state, $http, $timeout) {
 
                 $scope.shownHistory = [];
                 $scope.paymentChanged = function () {
-                    $scope.paymentMode=$scope.paymentMode;
+                    $scope.paymentMode = $scope.paymentMode;
                 }
 
                 $scope.loadPaymentDetail = function () {
                     $scope.studentId = $stateParams.studentid
-                    $http.get('/payment/'+$scope.studentId).then(function(res){
+                    $http.get('/payment/' + $scope.studentId).then(function (res) {
                         $scope.paymentDetail = res.data
                         $scope.payment = {}
                         $scope.payment.studentCode = $scope.studentId
                         $scope.payment.amount = $scope.paymentDetail.remainingPaymentDetail.amount
                         $scope.payment.feesInfos = []
                         angular.copy($scope.paymentDetail.remainingPaymentDetail.detailedFees, $scope.payment.feesInfos)
-                        $scope.paymentMode='cash';
+                        $scope.paymentMode = 'cash';
                     })
-                    $http.get('/student/code/'+$scope.studentId).then(function(res){
+                    $http.get('/student/code/' + $scope.studentId).then(function (res) {
                         $scope.student = res.data;
                     })
 
@@ -34,45 +34,45 @@
 
                 $scope.goToPaymentCreation = function () {
                     var amt = $scope.calcTotalAmount();
-                    if(amt == 0) {
+                    if (amt == 0) {
                         FlashService.Success("All Payment Due are already paid!");
                     } else {
-                        $state.go('home.payment-creation' , {studentid: $scope.studentId });
+                        $state.go('home.payment-creation', {studentid: $scope.studentId});
                     }
 
 
                 }
 
                 $scope.goToPaymentDetail = function () {
-                    $state.go('home.payment-detail' , {studentid: $scope.studentId });
+                    $state.go('home.payment-detail', {studentid: $scope.studentId});
                 }
 
-                $scope.makePayment = function() {
-                    if($scope.paymentMode='cash'){
-                        $scope.payment.ddNumber='Cash Transaction';
-                        $scope.payment.bankName='Cash Transaction';
-                        $scope.payment.bankBranchName='Cash Transaction';
+                $scope.makePayment = function () {
+                    if ($scope.paymentMode = 'cash') {
+                        $scope.payment.ddNumber = 'Cash Transaction';
+                        $scope.payment.bankName = 'Cash Transaction';
+                        $scope.payment.bankBranchName = 'Cash Transaction';
 
                     }
-                    $http.post('/payment', $scope.payment).then(function(){
+                    $http.post('/payment', $scope.payment).then(function () {
                         $scope.goToPaymentDetail()
                         FlashService.Success("Payment Inserted Succesfully!!", true);
                     })
                 }
 
-                $scope.getFeesPurtDetailAmt = function(feesDetail, feesInfo) {
+                $scope.getFeesPurtDetailAmt = function (feesDetail, feesInfo) {
                     try {
-                        var amt = _.find(feesDetail.detailedFees, function(df){
+                        var amt = _.find(feesDetail.detailedFees, function (df) {
                             return df.feesParticularCode === feesInfo.feesParticularCode;
                         }).amount
-                        amt = amt == null || amt== undefined? 0 : amt
-                    } catch(e){
+                        amt = amt == null || amt == undefined ? 0 : amt
+                    } catch (e) {
                         amt = 0;
                     }
                     return amt;
                 }
 
-                $scope.calcTotalAmount = function() {
+                $scope.calcTotalAmount = function () {
                     var sum = 0
                     angular.forEach($scope.payment.feesInfos, function (item, index) {
                         if (item.amount) {
@@ -83,11 +83,11 @@
                     return sum
                 }
 
-                $scope.isDisabled = function(feesInfo) {
+                $scope.isDisabled = function (feesInfo) {
                     return $scope.getFeesPurtDetailAmt($scope.paymentDetail.remainingPaymentDetail, feesInfo) == 0
                 }
 
-                $scope.toggleHistoryDetail = function(index) {
+                $scope.toggleHistoryDetail = function (index) {
                     var i = $scope.shownHistory.indexOf(index);
                     if (i > -1) {
                         $scope.shownHistory.splice(i, 1);
@@ -96,7 +96,7 @@
                     }
                 }
 
-                $scope.isShown = function(index) {
+                $scope.isShown = function (index) {
                     return $scope.shownHistory.indexOf(index) > -1
                 }
 
@@ -104,17 +104,17 @@
                 $scope.loadPaymentDetail();
 
             }])
-        .controller('PaymentListCtrl', ['$scope','$location','ngTableParams','$http','$timeout','$stateParams','AdminService',
-            function ($scope, $location,ngTableParams,$http,$timeout,$stateParams,AdminService) {
-                $scope.searchCriteria={};
-                $scope.searchCriteria.durationFrom='';
-                $scope.searchCriteria.durationTo='';
-                $scope.init=function () {
-                    if($stateParams.branch){
-                        $scope.searchCriteria.branchName=$stateParams.branch;
+        .controller('PaymentListCtrl', [$rootScope,'$scope', '$location', 'ngTableParams', '$http', '$timeout', '$stateParams', 'AdminService',
+            function ($rootScope,$scope, $location, ngTableParams, $http, $timeout, $stateParams, AdminService) {
+                $scope.searchCriteria = {};
+                $scope.searchCriteria.durationFrom = '';
+                $scope.searchCriteria.durationTo = '';
+                $scope.init = function () {
+                    if ($stateParams.branch) {
+                        $scope.searchCriteria.branchName = $stateParams.branch;
                     }
-                    $scope.searchCriteria.durationFrom=new Date(moment());
-                    $scope.searchCriteria.durationTo=new Date(moment());
+                    $scope.searchCriteria.durationFrom = new Date(moment());
+                    $scope.searchCriteria.durationTo = new Date(moment());
 
                     AdminService.getBatches(function (data) {
                         $scope.batchNames = _.pluck(data, "name")
@@ -122,22 +122,31 @@
 
                 }
                 $scope.init();
-                
-                $scope.goToPayment = function(code) {
-                    $location.path('/home/payment-detail/'+code);
+
+                $scope.goToPayment = function (code) {
+                    $scope.searchCriteria = {};
+                    $scope.searchCriteria.studentCode = code;
+                    $http.post('/student/search', $scope.searchCriteria).then(function (res) {
+                        var data = res.data;
+                        if (data) {
+                            $rootScope.flash.message = 'invalid Student Code'
+                        }
+                        else {
+                            $location.path('/home/payment-detail/' + code);
+                        }
+                    })
+
                 }
 
                 $scope.search = function () {
-                    if( $scope.searchCriteria.durationTo)
-                    {
-                        $scope.searchCriteria.durationTo=new Date($scope.searchCriteria.durationTo).setHours(23,59,59,59);
+                    if ($scope.searchCriteria.durationTo) {
+                        $scope.searchCriteria.durationTo = new Date($scope.searchCriteria.durationTo).setHours(23, 59, 59, 59);
                     }
-                    if( $scope.searchCriteria.durationFrom)
-                    {
-                        $scope.searchCriteria.durationFrom=new Date($scope.searchCriteria.durationFrom).setHours(0,0,0,0);
+                    if ($scope.searchCriteria.durationFrom) {
+                        $scope.searchCriteria.durationFrom = new Date($scope.searchCriteria.durationFrom).setHours(0, 0, 0, 0);
                     }
-                    if(!$scope.searchCriteria){
-                        $scope.searchCriteria={};
+                    if (!$scope.searchCriteria) {
+                        $scope.searchCriteria = {};
                     }
                     if ($scope.tableParams) {
                         $scope.tableParams.reload()
@@ -150,16 +159,16 @@
                             }
                         }, {
                             total: 0,           // length of data
-                            getData: function($defer, params) {
-                                $http.post('/payment/search', $scope.searchCriteria).then(function(res) {
+                            getData: function ($defer, params) {
+                                $http.post('/payment/search', $scope.searchCriteria).then(function (res) {
                                     var data = res.data;
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         params.total(data.length);
                                         $defer.resolve(data);
                                     }, 10);
-                                }, function() {
+                                }, function () {
                                     $scope.entities = []
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         params.total($scope.entities.length);
                                         $defer.resolve($scope.entities);
                                     }, 10);

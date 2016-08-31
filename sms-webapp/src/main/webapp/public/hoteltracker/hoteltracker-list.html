@@ -39,7 +39,7 @@
                     <tr>
                         <td><label class="control-label">Hotel name *</label></td>
                         <td>
-                            <input type="text" ng-model="searchCriteria.hotelName" name="hotelName" uib-typeahead="ht for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" required/>
+                            <input type="text" ng-model="searchCriteria.hotelName" name="hotelName" uib-typeahead="ht.hotelName as ht.hotelName for ht in hotels | filter:$viewValue | limitTo:8" id="hotel" placeholder="Hotel Name" autocomplete="off" required/>
                             <span class="error" ng-messages="trackerForm.hotelName.$error" ng-if="trackerForm.hotelName.$touched">
                                 <span ng-message="required">Hotel name is required.</span>
                             </span>

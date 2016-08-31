@@ -3,9 +3,9 @@
 
     angular
         .module('app')
-        .controller('DashBoardCtrl', ['$rootScope','$scope', 'CrudService', 'FlashService', '$location', 'AdminService', '$cookieStore','$http',
-            function ($rootScope,$scope, CrudService, FlashService, $location, AdminService, $cookieStore,$http) {
-                $scope.loggedUser='';
+        .controller('DashBoardCtrl', ['$rootScope', '$scope', 'CrudService', 'FlashService', '$location', 'AdminService', '$cookieStore', '$http',
+            function ($rootScope, $scope, CrudService, FlashService, $location, AdminService, $cookieStore, $http) {
+                $scope.loggedUser = '';
                 $scope.loggedUser = $rootScope.globals.currentUser.username;
                 $scope.loggedUserRole = $rootScope.globals.currentUser.otherDetails.role;
                 $scope.loggedInBranchCode = $cookieStore.get('globals').currentUser.otherDetails.branch;
@@ -14,7 +14,6 @@
                     return AdminService.getBranchDesc(branchCode);
                 };
 
-             
 
                 $scope.getSchemeDesc = function (schemeCode) {
                     return AdminService.getSchemeDesc(schemeCode);
@@ -36,7 +35,7 @@
                     setTimeout($scope.timedUpdate, 1000);
                 };
 
-                (function (){
+                (function () {
                     var today_date = moment().format('DD');
                     var month = moment().format('MMMM');
                     $(".dates").html(today_date);
@@ -76,6 +75,7 @@
                     $scope.totalIncome();
                     $scope.calcEnrol();
                     $scope.totalExpense();
+                    $scope.calcScholarshipEnrol();
 
                     AdminService.getCourses(function (data) {
                         $scope.courses = data
@@ -88,10 +88,20 @@
 
 
                 $scope.calcEnrol = function () {
+                    $scope.enrolled = 0;
                     var searchCriteria = {};
                     searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
                     $http.post('/student/search', searchCriteria).then(function (res) {
-                        $scope.enrolled = res.data;
+                        $scope.enrolled = res.data.length;
+                    })
+                };
+
+                $scope.calcScholarshipEnrol = function () {
+                    $scope.scholarEnrolled = 0;
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    $http.post('/scholarshipenrollment/search', searchCriteria).then(function (res) {
+                        $scope.scholarEnrolled = res.data.length;
                     })
                 };
 
@@ -117,7 +127,7 @@
                     searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
                     var total = 0;
                     $http.post('/expense/search', searchCriteria).then(function (res) {
-                        var datas=res.data;
+                        var datas = res.data;
                         _.forEach(datas, function (data) {
                             total = total + data.totalAmount;
                         });
@@ -127,76 +137,122 @@
                 };
                 $scope.init();
             }])
-        /*  .controller("StudentDashboardCtrl",["$scope","AdminService","$http",
-         function ($scope,AdminService,$http) {
-         $scope.init= function () {
+        .controller("StudentDashboardCtrl", ["$scope", "AdminService", "$http", "$state",
+            function ($scope, AdminService, $http, $state) {
+                $scope.init = function () {
+                    $scope.enrolledBranches = [];
+                    $scope.enrolledBranches.branchCode = '';
+                    var flag = false;
+
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    $http.post('/student/search', searchCriteria).then(function (res) {
+                        var datas = res.data;
+                        _.forEach(datas, function (data) {
+                            for (var i = 0; i < $scope.enrolledBranches.length; i++) {
+                                if ($scope.enrolledBranches[i].branchCode == data.branchCode) {
+                                    $scope.enrolledBranches[i].amount = $scope.enrolledBranches[i].amount + 1;
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            if (flag == false) {
+                                $scope.enrolledBranches.push({
+                                    amount: 1,
+                                    branchCode: data.branchCode
+                                })
+                            }
+                            flag = false;
+                        })
+                    })
+
+                }
+                $scope.init();
+                $scope.getBranchDesc = AdminService.getBranchDesc;
+            }])
+        .controller("ScholarDashboardCtrl", ["$scope", "AdminService", "$http", "$state","$uibModal",
+            function ($scope, AdminService, $http, $state,$uibModal) {
+                $scope.init = function () {
+                    $scope.enrolledBranches = [];
+                    $scope.enrolledBranches.branchCode = '';
+                    var flag = false;
+
+                    var searchCriteria = {};
+                    searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
+                    searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
+                    $http.post('/scholarshipenrollment/search', searchCriteria).then(function (res) {
+                        var datas = res.data;
+                        $scope.scholars = res.data;
+                        _.forEach(datas, function (data) {
+                            for (var i = 0; i < $scope.enrolledBranches.length; i++) {
+                                if ($scope.enrolledBranches[i].branchCode == data.branchCode) {
+                                    $scope.enrolledBranches[i].amount = $scope.enrolledBranches[i].amount + 1;
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            if (flag == false) {
+                                $scope.enrolledBranches.push({
+                                    amount: 1,
+                                    branchCode: data.branchCode,
+                                })
+                            }
+                            flag = false;
+                        })
+                    })
+
+                }
 
 
-         AdminService.getUsers(function (res) {
-         $scope.users = res;
-         })
-
-         AdminService.getMarketingEmployees(function (res) {
-         $scope.marketingEmployees = res;
-         })
-         }
-         $scope.init();
-         var searchCriteria={};
-         searchCriteria.durationFrom=new Date().setHours(0,0,0,0);
-         $http.post('/student/search', searchCriteria).then(function(res) {
-         var studs  = res.data;
-         $scope.linkedUsers=[];
-         $scope.linkedUsers.marketingEmp=[];
-         $scope.linkedUsers.marketingEmp.studNumber=0;
-         $scope.linkedUsers.studNumber=0;
-         var flag=0;
-
-         _.forEach(studs, function (stud) {
-         if ($scope.linkedUsers.length==0){
-         $scope.linkedUsers.push({
-         studNumber: $scope.linkedUsers.studNumber+1,
-         name : AdminService.getLinkedUserName(stud.marketingEmployeeCode),
-         marketingEmp:  $scope.linkedUsers.marketingEmp.push({
-         name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-         studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
-         })
-         })
-         }
-         else {
-         for (var i = 0; i < $scope.linkedUsers.length; i++) {
-         if ($scope.linkedUsers[i].name == AdminService.getLinkedUserName(stud.marketingEmployeeCode)) {
-         flag=1;
-         break;
-         }
-
-         }
-         if(flag==1){
-         $scope.linkedUsers[i].studNumber += 1;
-         marketingEmp:  $scope.linkedUsers[i].marketingEmp.push({
-         name : AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-         studNumber : $scope.linkedUsers.marketingEmp.studNumber+1
-         })
-         }
-         else{
-         $scope.linkedUsers.push({
-         studNumber: $scope.linkedUsers.studNumber + 1,
-         name: AdminService.getLinkedUserName(stud.marketingEmployeeCode),
-         marketingEmp: $scope.linkedUsers.marketingEmp.push({
-         name: AdminService.getMarketingEmployeeName(stud.marketingEmployeeCode),
-         studNumber: $scope.linkedUsers.marketingEmp.studNumber + 1
-         })
-         })
-         }
-         flag=0;
-         }
+                    $scope.changeBranch = function (branch) {
+                        var modalInstance = $uibModal.open({
+                            animation: true,
+                            templateUrl: 'scholarMarketingEmployee.html',
+                            controller: 'ScholarMarketingEmployeeCtrl',
+                            backdrop: 'static',
+                            resolve: {
+                                datas: function () {
+                                    return $scope.scholars;
+                                },
+                                branch:function () {
+                                    return branch;
+                                }
+                            }
+                        });
+                }
+                $scope.init();
+                $scope.getBranchDesc = AdminService.getBranchDesc;
 
 
-
-         })
-
-
-         })
-         }])*/
+            }])
+        .controller("ScholarMarketingEmployeeCtrl", function ($scope, $uibModalInstance, $state,datas,branch,AdminService) {
+            $scope.marketingEmployees = [];
+            $scope.branchName=AdminService.getBranchDesc(branch);
+            var flag = false;
+            _.forEach(datas, function (data) {
+                if(data.branchCode==branch) {
+                    for (var i = 0; i < $scope.marketingEmployees.length; i++) {
+                        if ($scope.marketingEmployees[i].marketingEmployeeCode == data.marketingEmployeeCode) {
+                            $scope.marketingEmployees[i].amount = $scope.marketingEmployees[i].amount + 1;
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag == false) {
+                        $scope.marketingEmployees.push({
+                            amount: 1,
+                            marketingEmployeeCode: data.marketingEmployeeCode
+                        })
+                    }
+                    flag = false;
+                }
+            })
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+            $scope.getMarketingEmployeeName = AdminService.getMarketingEmployeeName
+        })
         .controller("IncomeDashboardCtrl", ["$scope", "AdminService", "$http", "$state",
             function ($scope, AdminService, $http, $state) {
                 $scope.changeLocation = function (branchName) {
@@ -205,8 +261,8 @@
 
                 $scope.init = function () {
                     $scope.incomeBranches = [];
-                    $scope.incomeBranches.amount = 0;
                     $scope.incomeBranches.branchName = '';
+                    var flag = false;
 
                     var searchCriteria = {};
                     searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
@@ -214,30 +270,22 @@
                     $http.post('/payment/search', searchCriteria).then(function (res) {
                         var datas = res.data;
                         _.forEach(datas, function (data) {
-                            if ($scope.incomeBranches.length == 0) {
+                            for (var i = 0; i < $scope.incomeBranches.length; i++) {
+                                if ($scope.incomeBranches[i].branchName == data.branchName) {
+                                    $scope.incomeBranches[i].amount = $scope.incomeBranches[i].amount + data.paymentInfo.amount;
+                                    flag = true;
+                                    break;
+                                }
+
+                            }
+                            if (flag == false) {
                                 $scope.incomeBranches.push({
-                                    amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
+                                    amount: data.paymentInfo.amount,
                                     branchName: data.branchName
+
                                 })
                             }
-                            else {
-                                for (var i = 0; i < $scope.incomeBranches.length; i++) {
-                                    if ($scope.incomeBranches[i].branchName == data.branchName) {
-                                        $scope.incomeBranches[i].amount = $scope.incomeBranches[i].amount + data.paymentInfo.amount;
-                                        break;
-                                    }
-
-
-                                    else {
-                                        $scope.incomeBranches.push({
-                                            amount: $scope.incomeBranches.amount + data.paymentInfo.amount,
-                                            branchName: data.branchName
-
-                                        })
-                                        break;
-                                    }
-                                }
-                            }
+                            flag = false;
                         })
                     })
 
@@ -255,35 +303,26 @@
 
                 $scope.init = function () {
                     var searchCriteria = {};
+                    var flag = false;
                     searchCriteria.durationFrom = new Date().setHours(0, 0, 0, 0);
                     searchCriteria.durationTo = new Date().setHours(23, 59, 59, 59);
                     $http.post('/expense/search', searchCriteria).then(function (res) {
                         var datas = res.data;
                         _.forEach(datas, function (data) {
-                            if ($scope.expenses.length == 0) {
-                                $scope.expenses.push({
-                                    amount: data.totalAmount,
-                                    branchName: AdminService.getBranchDesc(data.branchCode),
-                                })
-                            }
-                            else {
-                                for (var i = 0; i < $scope.expenses.length; i++) {
-                                    if ($scope.expenses[i].branchName == AdminService.getBranchDesc(data.branchCode)) {
-                                        $scope.expenses[i].amount = $scope.expenses[i].amount + data.totalAmount;
-                                        break;
-                                    }
-
-
-                                    else {
-                                        $scope.expenses.push({
-                                            amount: $scope.expenses.amount + data.totalAmount,
-                                            branchName: AdminService.getBranchDesc(data.branchCode)
-
-                                        })
-                                        break;
-                                    }
+                            for (var i = 0; i < $scope.expenses.length; i++) {
+                                if ($scope.expenses[i].branchName == AdminService.getBranchDesc(data.branchCode)) {
+                                    $scope.expenses[i].amount = $scope.expenses[i].amount + data.totalAmount;
+                                    flag = true;
+                                    break;
                                 }
                             }
+                                if (flag == false) {
+                                    $scope.expenses.push({
+                                        amount: data.totalAmount,
+                                        branchName: AdminService.getBranchDesc(data.branchCode)
+                                    })
+                                }
+                                flag = false;
                         })
                     })
                 }
@@ -291,4 +330,5 @@
 
 
             }]);
+
 })();

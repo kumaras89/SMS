@@ -26,7 +26,7 @@ angular.module('ScholarshipEnrollment', ['oc.lazyLoad', 'ui.router', 'ui.bootstr
                 if($rootScope.globals.currentUser.otherDetails.role === 'SUPER_ADMIN'){
                     return '<input type="text" ng-model="mn" uib-typeahead="mName for mName in marketingEmployeeNames | filter:$viewValue | limitTo:8" id="markettingEmployeeName" placeholder="Marketting Employee Name" autocomplete="off" />'
                 }else{
-                    return '<input type="text" ng-model="mn" readonly >'
+                    return '<label class="control-label">{{mn}}</label>'
                 }
             }
         }
