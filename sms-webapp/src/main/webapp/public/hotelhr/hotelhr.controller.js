@@ -43,7 +43,8 @@
                                                 name: hr.name,
                                                 hrCode: hr.hrCode,
                                                 hotelCode: hr.hotelCode,
-                                                phoneNumber:hr.phoneNumber
+                                                phoneNumber:hr.phoneNumber,
+                                                id:hr.id
                                             })
                                         }
                                     })

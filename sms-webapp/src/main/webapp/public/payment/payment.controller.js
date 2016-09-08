@@ -104,7 +104,7 @@
                 $scope.loadPaymentDetail();
 
             }])
-        .controller('PaymentListCtrl', [$rootScope,'$scope', '$location', 'ngTableParams', '$http', '$timeout', '$stateParams', 'AdminService',
+        .controller('PaymentListCtrl', ['$rootScope','$scope', '$location', 'ngTableParams', '$http', '$timeout', '$stateParams', 'AdminService',
             function ($rootScope,$scope, $location, ngTableParams, $http, $timeout, $stateParams, AdminService) {
                 $scope.searchCriteria = {};
                 $scope.searchCriteria.durationFrom = '';
@@ -127,12 +127,8 @@
                     $scope.searchCriteria = {};
                     $scope.searchCriteria.studentCode = code;
                     $http.post('/student/search', $scope.searchCriteria).then(function (res) {
-                        var data = res.data;
-                        if (data) {
-                            $rootScope.flash.message = 'invalid Student Code'
-                        }
-                        else {
-                            $location.path('/home/payment-detail/' + code);
+                        if(res.data) {
+                            $location.path('/home/payment-detail/' + code)
                         }
                     })
 

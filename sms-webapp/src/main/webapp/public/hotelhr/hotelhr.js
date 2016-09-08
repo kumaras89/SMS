@@ -14,8 +14,7 @@ angular.module('HotelHr', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
                 AdminService.getHotels(function (data) {
                     $scope.hotels=[];
                     if (logInUserDet.role == 'SUPER_ADMIN'){
-                        $scope.hotels = _.pluck(data,"hotelName");
-                        $scope.hotels = _.pluck(data,"hotelCode");
+                        $scope.hotels = data;
                     }
                     else {
                         _.forEach(data, function (hr) {
@@ -30,16 +29,11 @@ angular.module('HotelHr', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'ngCookie
                 });
             },
             template: function () {
-                if ($rootScope.globals.currentUser.otherDetails.role == 'SUPER_ADMIN') {
+
                     return '<select  ng-model="ht" ng-options="hotel.hotelCode as hotel.hotelName for hotel in hotels track by hotelCode" name="hotel" required> </select>' +
                         '<span class="error" ng-messages="hotelhrForm.hr.$error" ng-if="hotelhrForm.hr.$touched">' +
                         '<span ng-message="required">Hotel is required.</span> </span>'
 
-                } else {
-                    return '<select  ng-model="ht" ng-options="hotel.hotelCode as hotel.hotelName for hotel in hotels track by hotelCode" name="hotel" required> </select>' +
-                        '<span class="error" ng-messages="hotelhrForm.hr.$error" ng-if="hotelhrForm.hr.$touched">' +
-                        '<span ng-message="required">Hotel is required.</span> </span>'
-                }
             }
         }
     }])
