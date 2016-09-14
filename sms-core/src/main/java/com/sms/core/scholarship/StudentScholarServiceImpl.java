@@ -53,6 +53,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
     @Override
     public Optional<StudentScholarInfo> findByApplicationNumberWithStatus(String applicationNumber, ScholarStatus status) {
         StudentScholar result = studentScholarRepository.findByApplicationNumberIgnoreCase(applicationNumber);
+
         if (result != null) {
             if (result.getStatus().equals(ScholarStatus.EXPIRED)) {
                 throw new SmsException("Scholar Search", "Scholar Id Already Expired due to 24 hours validation");
@@ -62,7 +63,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
                 return Optional.of(result).map(StudentScholarServiceImpl::scholarToInfo);
             }
         } else {
-            throw new SmsException("Scholar Search", "Scholar Id not exist in our database");
+            throw new SmsException("Scholar Search", "Scholar Id dosen't in our database");
         }
 
     }
@@ -103,7 +104,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(entityType.getStudentPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi ")
                                 .append(entityType.getName())
                                 .append(",Application No:")
                                 .append(entityType.getApplicationNumber())
@@ -113,21 +114,21 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(entityType.getParentPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi ")
                                 .append(entityType.getName())
-                                .append(",Application No:")
+                                .append(",Application No: ")
                                 .append(entityType.getApplicationNumber())
                                 .toString())
                 .on(SendingDetails::getMessageCode).set("SMS_PRT_SCH")
                 .build());
 
-        sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(entityType.getStudentPhoneNumber())
+        sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
                         new StringBuilder("Hi")
                                 .append(marketingEmployee.getName())
-                                .append(",Name:")
+                                .append(",Name: ")
                                 .append(entityType.getName())
-                                .append(",Application No:")
+                                .append(",Application No: ")
                                 .append(entityType.getApplicationNumber())
                                 .toString())
                 .on(SendingDetails::getMessageCode).set("SMS_EMP_SCH")
