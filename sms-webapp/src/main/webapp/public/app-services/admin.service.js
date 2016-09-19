@@ -226,7 +226,7 @@
             });
         }
         function getMessageService(success) {
-            StorageService.getFromStoarage('/messageService', function(data) {
+            StorageService.getFromStoarage('/messageservice', function(data) {
                 success(data);
             });
 

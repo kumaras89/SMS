@@ -47,7 +47,7 @@
                         <td style="width: 70%;"><input type="text" name="reason" id="reason" ng-model="exp.reason" /></td>
                         <td><input type="number" ng-change="getTotal($index)" name="amount" id="amount" ng-model="exp.amount" /></td>
                         <td><a ng-click="addRow()" class="btn btn-small btn-primary">ADD</a></td>
-                        <td><a ng-click="removeRow($index,exp.id)" class="btn btn-small btn-primary">REMOVE</a></td>
+                        <td><a ng-click="removeRow($index,exp.id)" ng-show="$index != 0" class="btn btn-small btn-primary">REMOVE</a></td>
                     </tr>
 
                     <tr>

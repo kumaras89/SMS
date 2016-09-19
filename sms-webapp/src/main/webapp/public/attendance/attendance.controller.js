@@ -116,8 +116,8 @@
 
                     CrudService.attendanceService.Create($scope.attendance).then(function () {
                         window.scrollTo(0,0);
+                        $state.go('home.attendance-detail');
                         FlashService.Success("Attendance submit !!", true);
-                        $state.reload();
                     });
                 }
 

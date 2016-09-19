@@ -1,3 +1,4 @@
+-- noinspection SqlNoDataSourceInspectionForFile
 CREATE TABLE SMS_MA_BRANCH (ID  BIGSERIAL NOT NULL, BR_CODE VARCHAR(255) NOT NULL, BR_ACTIVE INT4 NOT NULL, BR_NAME VARCHAR(255) NOT NULL, BR_ADDRESS_ID INT8 NOT NULL, PRIMARY KEY (ID));
 CREATE TABLE SMS_MA_COURSE (ID  BIGSERIAL NOT NULL, CO_CODE VARCHAR(255), CO_DESCRIPTION VARCHAR(255), CO_NAME VARCHAR(255), PRIMARY KEY (ID));
 CREATE TABLE SMS_MA_FEES_PARTICULAR (ID  BIGSERIAL NOT NULL, FP_CODE VARCHAR(255) NOT NULL, FP_NAME VARCHAR(255) NOT NULL, PRIMARY KEY (ID));
@@ -21,7 +22,7 @@ CREATE TABLE SMS_TR_STUDENT_FEES (ID  BIGSERIAL NOT NULL, FC_AMOUNT NUMERIC(19, 
 CREATE TABLE SMS_TR_STUDENT_SCHOLARSHIP (ID  BIGSERIAL NOT NULL, STS_AGE INT4, STS_ANNUAL_INCOME VARCHAR(255), STS_APPLICATION_NUMBER VARCHAR(255), STS_CASTE VARCHAR(255), STS_CASTEDESCRIPTION VARCHAR(255), STS_CREATION_DATE TIMESTAMP, STS_DATE_OF_BIRTH TIMESTAMP, STS_EMAILID VARCHAR(255), STS_PARENT_NAME VARCHAR(255), STS_GENDER VARCHAR(255), STS_LAST_MODIFIED_DATE TIMESTAMP, STS_MARITAL_STATUS VARCHAR(255), STS_NAME VARCHAR(255), STS_NATIONALITY VARCHAR(255), STS_PARENT_PHONE_NUMBER VARCHAR(255), STS_RELIGION VARCHAR(255), STS_STATUS VARCHAR(255), STS_PHONE_NUMBER VARCHAR(255), STS_ADDRESS_ID INT8, STS_BRANCH_ID INT8, STS_MARKETING_EMPLOYEE_ID INT8, PRIMARY KEY (ID));
 CREATE TABLE SMS_TR_SUBJECT (ID  BIGSERIAL NOT NULL, SU_NAME VARCHAR(255) NOT NULL, SU_SECURED_MARK INT8 CHECK (SU_SECURED_MARK>=1), SU_TOTAL_MARK INT8 CHECK (SU_TOTAL_MARK>=1), SU_MD_ID INT8, PRIMARY KEY (ID));
 --HOTEL,HOTELTRACKER,MESSAGING SERVICE
-CREATE TABLE SMS_TR_HOTEL (ID  BIGSERIAL NOT NULL, HL_CODE VARCHAR(255), HL_NAME VARCHAR(255),HL_CREATEDDATE VARCHAR(255),HL_STATUS VARCHAR(255),HL_BRANCH_ID bigint,Hl_PHONE_NUMBER VARCHAR(255),HL_ADDRESS_ID bigint,PRIMARY KEY (ID));
+CREATE TABLE SMS_TR_HOTEL (ID  BIGSERIAL NOT NULL, HL_CODE VARCHAR(255), HL_NAME VARCHAR(255),HL_CREATEDDATE DATE,HL_MODIFIEDDATE DATE,HL_STATUS VARCHAR(255),HL_BRANCH_ID bigint,Hl_PHONE_NUMBER VARCHAR(255),HL_ADDRESS_ID bigint,PRIMARY KEY (ID));
 CREATE TABLE SMS_TR_HOTEL_HR (ID  BIGSERIAL NOT NULL, HR_CODE VARCHAR(255), HR_NAME VARCHAR(255), HR_PHONE_NUMBER VARCHAR(255),HR_ADDRESS_ID bigint,HR_HOTEL_ID bigint,PRIMARY KEY (ID));
 CREATE TABLE SMS_TR_MESSAGING_SERVICE (ID BIGSERIAL NOT NULL,MS_RECEIVER VARCHAR(255) NOT NULL,MS_SENDING_DATE DATE,MS_MESSAGE VARCHAR(500) NOT NULL,MS_STATUS VARCHAR(255) NOT NULL, MS_PHONENUMBER VARCHAR(255),PRIMARY KEY (ID));
 CREATE TABLE SMS_TR_HOTEL_TRACKER (ID BIGSERIAL NOT NULL,HT_CODE VARCHAR(255),HT_BRANCH_ID bigint,HT_HOTEL_ID bigint,HT_HOTEL_HR_ID bigint,HT_STUDENT_ID bigint, HT_DURATION_TO Date,HT_DURATION_FROM Date,HT_CREATED_DATE Date,HT_MODIFIED_DATE Date,HT_STATUS VARCHAR(255),HT_REMARKS VARCHAR(255),HT_STIPEND NUMERIC(19, 2),PRIMARY KEY (ID));
@@ -125,7 +126,7 @@ CREATE SEQUENCE SMS_SQ_MS INCREMENT by 1 start with 1;
 CREATE SEQUENCE SMS_SQ_HL INCREMENT by 1 start with 1;
 CREATE SEQUENCE SMS_SQ_HR INCREMENT by 1 start with 1;
 CREATE SEQUENCE SMS_SQ_HT INCREMENT by 1 start with 1;
---STUDENT ATTENDANCE
+--STUDENT ATTENDANCE4
 CREATE SEQUENCE SMS_SQ_ATD INCREMENT by 1 start with 1;
 CREATE SEQUENCE SMS_SQ_AT INCREMENT by 1 start with 1;
 --BRANCH EXPENSE
@@ -133,3 +134,18 @@ CREATE SEQUENCE SMS_SQ_EXP INCREMENT by 1 start with 1;
 CREATE SEQUENCE SMS_SQ_EXD INCREMENT by 1 start with 1;
 --BATCH
 CREATE SEQUENCE SMS_SQ_BT INCREMENT by 1 start with 1;
+
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('1','SMS_EMP_SCH','மாணவரின்  கல்வி உதவி தொகை படிவம் ஏற்றுக்கொள்ளப்பட்டது.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('2','SMS_PRT_SCH','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('3','SMS_STD_SCH','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('4','SMS_PRT_STD','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('5','SMS_STD_STD','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('6','SMS_EMP_STD','மாணவரின்  கல்வி உதவி தொகை படிவம் ஏற்றுக்கொள்ளப்பட்டது.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('7','SMS_STD_EXP','தங்கள் கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் புதிய  கல்வி உதவித்தொகை படிவத்தை   பெற்றுக்கொளவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('8','SMS_PRT_EXP','தங்கள் மகன் / மகள் கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் புதிய  கல்வி உதவித்தொகை படிவத்தை பெற்றுக்கொளவும்.நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('9','SMS_EMP_EXP','தங்கள் பூர்த்தி செய்த கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் தக்க நடவடிக்கை மேற்கொள்ளுமாறு கேட்டுக்கொள்ளபடுகிறது. நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('10','SMS_STD_ABT','தாங்கள் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளீர்கள். எனவே தங்கள் பெற்றோரை அழைத்து வரவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('11','SMS_PRT_ABT','தங்கள் மகன் / மகள் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளார். எனவே தாங்கள் கல்லூரியை தொடர்பு கொள்ளவும். நன்றி');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('12','SMS_EMP_ABT','இவர் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளார் . எனவே இவரை தொடர்பு கொள்ளவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('13','SMS_STD_ALV','தங்கள் விடுமுறை இன்று அனுமதிக்கப்பட்டது நன்றி');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('14','SMS_PRT_ALV','தங்கள் மகன் / மகள்  இன்று கல்லூரி அனுமதியுடன் விடுமுறை எடுத்துள்ளார்.நன்றி.');

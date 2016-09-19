@@ -37,7 +37,6 @@
                             <td sortable="code">{{ marketingEmployee.code }}</td>
                             <td sortable="name">{{ marketingEmployee.name }}</td>
                             <td sortable="name">{{ marketingEmployee.linkedUser }}</td>
-                            <td sortable="name">{{ getBranchDesc( marketingEmployee.linkedUser) }}</td>
                             <td sortable="designation">{{ marketingEmployee.designation }}</td>
                             <td>{{ marketingEmployee.phoneNumber }}</td>
                             <td><a include-if-allowed operation="marketingEmployeeEdit"  ng-click="editMarketingEmployee(marketingEmployee.id)" class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>

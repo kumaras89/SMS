@@ -172,7 +172,7 @@
                                         <input type="tel" ng-model="student.phoneNumber" name="phoneNumber" id="phoneNumber" ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Mobile number" maxlength="10"  required/>
                                             <span class="error" ng-messages="studentForm.phoneNumber.$error" ng-if="studentForm.phoneNumber.$touched">
                                                 <span ng-message="required">Mobile Number is required.</span>
-                                                <span ng-message="pattern">Invalid Phone number.</span>
+                                                <span ng-message="pattern">Invalid Mobile number.</span>
                                             </span>
                                     </td>
                                 </tr>
@@ -181,7 +181,7 @@
                                     <td>
                                         <input type="tel" ng-model="student.alternatePhoneNumber" name="alternatePhoneNumber" id="alternatePhoneNumber" placeholder="Alternate mobile number" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/"/>
                                         <span class="error" ng-messages="studentForm.alternatePhoneNumber.$error" ng-if="studentForm.alternatePhoneNumber.$touched">
-                                            <span ng-message="pattern">Invalid Phone number.</span>
+                                            <span ng-message="pattern">Invalid Mobile number.</span>
                                         </span>
                                     </td>
                                 </tr>
@@ -318,11 +318,6 @@
                                     <td>
                                         <input class="percentage" type="number" ng-model="educationDetail.percentageObtained"
                                                id="percentageObtained" placeholder="%"/>
-                                       <!-- <div class="error" ng-messages="studentForm.percentage.$error" ng-if="studentForm.percentage.$touched">
-                                            <span ng-message="pattern">Percentage is Invaild.</span>
-                                            <span ng-message="invalid">Percentage is Invaild.</span>
-                                        </div>-->
-
                                     </td>
                                     <td>
                                         <input type="text" ng-model="educationDetail.remark" id="remark"
@@ -957,8 +952,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="firstcol"><label class="control-label">Course Name</label></td>
-                                    <td><label class="control-label">{{studentSumarized.courseName}}</label></td>
+                                    <td class="firstcol"><label class="control-label">Batch Name</label></td>
+                                    <td><label class="control-label">{{studentSumarized.batchName}}</label></td>
                                 </tr>
                                 <tr>
                                     <td class="firstcol"><label class="control-label">Referred By</label></td>
