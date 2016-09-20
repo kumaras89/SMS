@@ -566,7 +566,11 @@
                                 </td>
                                 <td><input type="text" id="name" ng-model="guardian.name" placeholder="Name"/></td>
                                 <td><input type="text" ng-model="guardian.occupation" id="occupation" placeholder="Occupation"/></td>
-                                <td><input type="tel" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="Phone number"/></td>
+                                <td><input type="tel" name="phoneNumber" ng-model="guardian.phoneNumber" id="phoneNumber" placeholder="Phone number" ng-pattern="/^[0-9].{9}$/" min="10" maxlength="10"/>
+                                    <span class="error" ng-messages="studentForm.phoneNumber.$error">
+                                        <span ng-message="pattern">Invalid Phone number.</span>
+                                    </span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

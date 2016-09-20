@@ -52,7 +52,7 @@
                 </tr>
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="phoneNumber">Phone Number: *</label></td>
-                    <td><input type="number" name="phoneNumber" id="phoneNumber" ng-model="marketingEmployee.phoneNumber"  ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="10" style="width:125px" required/>
+                    <td><input type="tel" name="phoneNumber" id="phoneNumber" ng-model="marketingEmployee.phoneNumber"  ng-pattern="/^[0-9].{9}$/" min="10" placeholder="Phone number" maxlength="10" style="width:125px" required/>
                         <span class="error" ng-messages="marketingForm.phoneNumber.$error" ng-if="marketingForm.phoneNumber.$touched">
                             <span ng-message="required">Phone Number is required.</span>
                             <span ng-message="pattern">Invalid Phone number.</span>

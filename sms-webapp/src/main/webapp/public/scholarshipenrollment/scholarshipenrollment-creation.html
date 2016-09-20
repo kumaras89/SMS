@@ -161,7 +161,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label" for="studentPhoneNumber">Student Mobile Number</label></td>
-                                    <td><input type="number" ng-model="scholarshipEnrollment.studentPhoneNumber" name="studentPhoneNumber" id="studentPhoneNumber"  min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Student mobile number" required/>
+                                    <td><input type="tel" ng-model="scholarshipEnrollment.studentPhoneNumber" name="studentPhoneNumber" id="studentPhoneNumber"  min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Student mobile number" required/>
                                         <span class="error" ng-messages="scholarship.studentPhoneNumber.$error" ng-if="scholarship.studentPhoneNumber.$touched">
                                             <span ng-message="required">Student Phone number is required.</span>
                                             <span ng-message="pattern">Student Phone number is invalid.</span>
@@ -170,7 +170,7 @@
                                 </tr>
                                 <tr>
                                      <td><label class="control-label" for="parentPhoneNumber">Parent Mobile Number</label></td>
-                                     <td><input type="number" ng-model="scholarshipEnrollment.parentPhoneNumber" name="parentPhoneNumber" id="parentPhoneNumber" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Parent mobile number" required/>
+                                     <td><input type="tel" ng-model="scholarshipEnrollment.parentPhoneNumber" name="parentPhoneNumber" id="parentPhoneNumber" min="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" placeholder="Parent mobile number" required/>
                                          <span class="error" ng-messages="scholarship.parentPhoneNumber.$error" ng-if="scholarship.parentPhoneNumber.$touched">
                                              <span ng-message="required">Parent Phone number is required.</span>
                                              <span ng-message="pattern">Parent Phone number is invalid.</span>
