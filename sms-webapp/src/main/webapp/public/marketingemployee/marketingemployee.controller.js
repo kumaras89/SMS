@@ -88,8 +88,8 @@
                 $scope.init();
 
             }])
-        .controller('MarketingEmployeeCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService',
-            function ($scope, CrudService, FlashService, $state, AdminService) {
+        .controller('MarketingEmployeeCreationCtrl', ['$scope', 'CrudService', 'FlashService', '$state', 'AdminService','$http',
+            function ($scope, CrudService, FlashService, $state, AdminService , $http) {
 
                 $scope.init = function () {
 
@@ -103,6 +103,12 @@
 
                 $scope.init();
 
+                $scope.getSuperiors = function(designation){
+                    $http.get('/marketingemployee/superiors/'+designation).then(function(response){
+                        console.log(response);
+                        $scope.superiors = response.data;
+                    });
+                };
 
                 $scope.createNewMarketingEmployee = function () {
                     CrudService.marketingEmployeeService.Create($scope.marketingEmployee).then(function () {

@@ -15,12 +15,16 @@ public class MarketingEmployeeServiceImpl extends BaseServiceConvertorImpl<Marke
 
     @Autowired
     public MarketingEmployeeServiceImpl(final MarketingEmployeeRepository marketingEmployeeRepository, final UserRepository userRepository) {
-        super(marketingEmployeeRepository,
-                (marketingEmployeeInfo) ->
-                        MarketingEmployee.toBuilder(marketingEmployeeInfo)
-                                .on(MarketingEmployee::getLinkedUser).set(userRepository.findByNameIgnoreCase(marketingEmployeeInfo.getLinkedUser()))
-                                .build(),
-                (marketingEmployee) -> MarketingEmployeeInfo.toBuilder(marketingEmployee).build());
+        super(
+            marketingEmployeeRepository,
+            (marketingEmployeeInfo) ->
+                MarketingEmployee.toBuilder(marketingEmployeeInfo)
+                    .on(MarketingEmployee::getLinkedUser).set(
+                            userRepository.findByNameIgnoreCase(marketingEmployeeInfo.getLinkedUser()))
+                    .on(MarketingEmployee::getSuperior).set(
+                            marketingEmployeeRepository.findByCodeIgnoreCase(marketingEmployeeInfo.getSuperior()))
+                    .build(),
+            (marketingEmployee) -> MarketingEmployeeInfo.toBuilder(marketingEmployee).build());
         this.userRepository = userRepository;
     }
 

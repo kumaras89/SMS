@@ -42,12 +42,22 @@
                 <tr class="even gradeA">
                     <td class="firstcol"><label class="control-label" for="designation">Designation: *</label></td>
                     <td>
-                        <select ng-model="marketingEmployee.designation" name="designation" id="designation" required>
+                        <select ng-model="marketingEmployee.designation" name="designation" id="designation" required
+                                ng-change="getSuperiors(marketingEmployee.designation)">
                             <option ng-repeat="designation in commonAttributes.designation" value="{{designation}}">{{designation}}</option>
                         </select>
                         <span class="error" ng-messages="marketingForm.designation.$error" ng-if="marketingForm.designation.$touched">
                             <span ng-message="required">Designation is required.</span>
                         </span>
+                    </td>
+                </tr>
+                <tr class="even gradeA"
+                    ng-hide="marketingEmployee.designation === undefined || marketingEmployee.designation === 'VP'">
+                    <td class="firstcol"><label class="control-label" for="superior">Superior: *</label></td>
+                    <td>
+                        <select ng-model="marketingEmployee.superior" name="superior" id="superior">
+                            <option ng-repeat="superior in superiors" value="{{superior.code}}">{{superior.name}}</option>
+                        </select>
                     </td>
                 </tr>
                 <tr class="even gradeA">

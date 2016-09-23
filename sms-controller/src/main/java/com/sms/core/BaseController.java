@@ -16,7 +16,7 @@ public abstract class BaseController<T> {
 
     private final IStudentPortalService<T> studentPortalService;
 
-    public BaseController(final IStudentPortalService<T> studentPortalService) {
+    protected BaseController(final IStudentPortalService<T> studentPortalService) {
         this.studentPortalService = studentPortalService;
     }
 
@@ -30,7 +30,7 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<T> get(@PathVariable("id") long id) {
+    public ResponseEntity<T> get(@PathVariable("id") final long id) {
         return studentPortalService.
                 findById(id).map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -38,7 +38,7 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid T entityObject, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> create(@RequestBody @Valid final T entityObject, final UriComponentsBuilder ucBuilder) {
 
         final Optional<T> t = studentPortalService.save(entityObject);
         final HttpHeaders headers = new HttpHeaders();
@@ -46,15 +46,15 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<T> update(@PathVariable("id") long id,
-                                    @RequestBody @Valid T entityObject) {
+    public ResponseEntity<T> update(@PathVariable("id") final long id,
+                                    @RequestBody @Valid final T entityObject) {
         return studentPortalService.update(id, entityObject)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<T> delete(@PathVariable("id") long id) {
+    public ResponseEntity<T> delete(@PathVariable("id") final long id) {
         studentPortalService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

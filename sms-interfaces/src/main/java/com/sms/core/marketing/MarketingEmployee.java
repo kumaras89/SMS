@@ -1,21 +1,21 @@
 package com.sms.core.marketing;
 
-import com.sms.core.BaseModel;
 import com.sms.core.admin.User;
 import com.sms.core.common.Builder;
 import com.sms.core.common.Designation;
 import com.sms.core.student.Address;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_MARKETING_EMPLOYEE")
-@SequenceGenerator(sequenceName = "SMS_SQ_ME",name = "SMS_SQ_ME", allocationSize = 1)
-public class MarketingEmployee implements Serializable
-{
+@SequenceGenerator(sequenceName = "SMS_SQ_ME", name = "SMS_SQ_ME", allocationSize = 1)
+public class MarketingEmployee implements Serializable {
 
+    private static final long serialVersionUID = -4167419041456583341L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ME")
     protected Long id;
@@ -40,18 +40,22 @@ public class MarketingEmployee implements Serializable
     @JoinColumn(name = "ME_USER_ID")
     private User linkedUser;
 
+    @ManyToOne
+    @JoinColumn(name ="ME_SUPPERIOR_ID")
+    private MarketingEmployee superior;
+
     public static Builder<MarketingEmployee> builder() {
         return Builder.of(MarketingEmployee.class);
     }
 
     public static Builder<MarketingEmployee> toBuilder(final MarketingEmployeeInfo marketingEmployeeInfo) {
         return builder()
-                .with(MarketingEmployee::getId, marketingEmployeeInfo.getId())
-                .with(MarketingEmployee::getCode, marketingEmployeeInfo.getCode())
-                .with(MarketingEmployee::getDesignation, Designation.valueOf(marketingEmployeeInfo.getDesignation()))
-                .with(MarketingEmployee::getName, marketingEmployeeInfo.getName())
-                .with(MarketingEmployee::getAddress, marketingEmployeeInfo.getAddress())
-                .with(MarketingEmployee::getPhoneNumber, marketingEmployeeInfo.getPhoneNumber());
+            .with(MarketingEmployee::getId, marketingEmployeeInfo.getId())
+            .with(MarketingEmployee::getCode, marketingEmployeeInfo.getCode())
+            .with(MarketingEmployee::getDesignation, Designation.valueOf(marketingEmployeeInfo.getDesignation()))
+            .with(MarketingEmployee::getName, marketingEmployeeInfo.getName())
+            .with(MarketingEmployee::getAddress, marketingEmployeeInfo.getAddress())
+            .with(MarketingEmployee::getPhoneNumber, marketingEmployeeInfo.getPhoneNumber());
     }
 
     public String getCode() {
@@ -80,5 +84,9 @@ public class MarketingEmployee implements Serializable
 
     public Long getId() {
         return id;
+    }
+
+    public MarketingEmployee getSuperior() {
+        return superior;
     }
 }

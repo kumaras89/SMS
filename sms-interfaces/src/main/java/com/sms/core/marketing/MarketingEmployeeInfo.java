@@ -6,6 +6,7 @@ import com.sms.core.student.Address;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 
 public class MarketingEmployeeInfo {
 
@@ -34,6 +35,8 @@ public class MarketingEmployeeInfo {
     @NotNull(message = "User is empty")
     private String linkedUser;
 
+    private String superior;
+
     public static Builder<MarketingEmployeeInfo> builder() {
         return Builder.of(MarketingEmployeeInfo.class);
     }
@@ -46,7 +49,9 @@ public class MarketingEmployeeInfo {
                 .with(MarketingEmployeeInfo::getName, marketingEmployee.getName())
                 .with(MarketingEmployeeInfo::getAddress, marketingEmployee.getAddress())
                 .with(MarketingEmployeeInfo::getPhoneNumber, marketingEmployee.getPhoneNumber())
-                .with(MarketingEmployeeInfo::getLinkedUser, marketingEmployee.getLinkedUser().getName());
+                .with(MarketingEmployeeInfo::getLinkedUser, marketingEmployee.getLinkedUser().getName())
+                .with(MarketingEmployeeInfo::getSuperior,
+                    Optional.ofNullable(marketingEmployee.getSuperior()).map(MarketingEmployee::getName).orElse(null));
     }
 
     public Long getId() {
@@ -75,5 +80,9 @@ public class MarketingEmployeeInfo {
 
     public String getLinkedUser() {
         return linkedUser;
+    }
+
+    public String getSuperior() {
+        return superior;
     }
 }
