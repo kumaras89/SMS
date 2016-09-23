@@ -4,12 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-/**
- * Created by sathish on 8/16/2016.
- */
 @Entity
 @Table(name = "SMS_TR_EXPENSE_DETAILS")
-@SequenceGenerator(name = "SMS_SQ_EXD",sequenceName = "SMS_SQ_EXD", allocationSize = 1)
+@SequenceGenerator(name = "SMS_SQ_EXD", sequenceName = "SMS_SQ_EXD", allocationSize = 1)
 public class ExpenseDetails {
 
     @Id

@@ -13,7 +13,6 @@ public class CommonRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Constants> get() {
-        return new ResponseEntity(new Constants(), HttpStatus.OK);
-
+        return new ResponseEntity<>(new Constants(), HttpStatus.OK);
     }
 }

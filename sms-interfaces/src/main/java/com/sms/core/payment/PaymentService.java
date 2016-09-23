@@ -1,9 +1,11 @@
 package com.sms.core.payment;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Created by Ganesan on 25/06/16.
+ * <p></p>
  */
 public interface PaymentService {
 
@@ -23,6 +25,11 @@ public interface PaymentService {
      * @param paymentSearchCriteria
      * @return
      */
-    List<PaymentSearchInfo> search(PaymentSearchCriteria paymentSearchCriteria);
+    List<PaymentSearchInfo> search(final PaymentSearchCriteria paymentSearchCriteria);
 
+    /**
+     * @param paymentSearchCriteria
+     * @return
+     */
+    BigDecimal totalIncome(final PaymentSearchCriteria paymentSearchCriteria);
 }

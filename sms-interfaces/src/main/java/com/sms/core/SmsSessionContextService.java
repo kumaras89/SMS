@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * Created by Ganesan on 25/05/16.
+ * <p></p>
  */
 @Service
 public class SmsSessionContextService {
@@ -36,49 +37,61 @@ public class SmsSessionContextService {
     @Autowired
     private SecuredOperationRepository securedOperationRepository;
 
-    public SmsSessionContext initSessionContext(String userName) {
-        User user = userRepository.findByNameIgnoreCase(userName);
+    public SmsSessionContext initSessionContext(final String userName) {
+        final User user = userRepository.findByNameIgnoreCase(userName);
         sessionContext.setContextIntialized(true);
         sessionContext.setLoggedInUserInfo(UserInfo.toBuilder(user).build());
-        List<SecuredOperation> securedOperations = securedOperationRepository.findAll();
+        final List<SecuredOperation> securedOperations = securedOperationRepository.findAll();
         sessionContext.setSecuredOperations(getSecuredByType(OPERATION).apply(securedOperations));
-        List<SecuredOperation> allowedOperationsForUser = findListOfSecuredOperation(getSecuredOperationByUser(user.getRole().getId()), securedOperations);
+        final List<SecuredOperation> allowedOperationsForUser =
+            findListOfSecuredOperation(getSecuredOperationByUser(user.getRole().getId()), securedOperations);
         sessionContext.setAllowedOperations(getSecuredByType(OPERATION).apply(allowedOperationsForUser));
         sessionContext.setAllowedUrls(getSecuredByType(URL).apply(allowedOperationsForUser));
-        sessionContext.setMarkettingEmployeeCode(Optional.ofNullable(marketingEmployeeRepository.findByUserName(userName)).map(MarketingEmployee::getCode).orElse(null));
+        sessionContext.setMarkettingEmployeeCode(
+            Optional.ofNullable(marketingEmployeeRepository.findByUserName(userName))
+                .map(MarketingEmployee::getCode)
+                .orElse(null));
+
         return sessionContext;
     }
 
-    private List<SecuredOperation> findListOfSecuredOperation(List<RoleOperationLink> rols, List<SecuredOperation> securedOperations){
+    private List<SecuredOperation> findListOfSecuredOperation(
+        final List<RoleOperationLink> rols,
+        final List<SecuredOperation> securedOperations) {
+
         return rols.stream()
-                .map(rol -> securedOperations
-                        .stream()
-                        .filter(so -> so.getId().equals(rol.getSecuredOperationId()))
-                        .findFirst()
-                        .get())
-                .collect(Collectors.toList());
+            .map(rol -> securedOperations
+                .stream()
+                .filter(so -> so.getId().equals(rol.getSecuredOperationId()))
+                .findFirst()
+                .get())
+            .collect(Collectors.toList());
     }
 
-    private List<RoleOperationLink> getSecuredOperationByUser(Long userId) {
-        return roleOperationLinkRepository.findAll().stream().filter(rol -> rol.getUserRoleId().equals(userId))
-                .collect(Collectors.toList());
+    private List<RoleOperationLink> getSecuredOperationByUser(final Long userId) {
+        return roleOperationLinkRepository
+            .findAll()
+            .stream()
+            .filter(rol -> rol.getUserRoleId().equals(userId))
+            .collect(Collectors.toList());
     }
 
     public List<String> getSecuredOperations() {
         return getSecuredByType(OPERATION).apply(securedOperationRepository.findAll());
     }
 
+    private Function<List<SecuredOperation>, List<String>> getSecuredByType(final Predicate<SecuredOperation> filter) {
 
-    private Function<List<SecuredOperation>, List<String>> getSecuredByType(Predicate<SecuredOperation> filter) {
-        return l -> l.stream().filter(filter).map(s -> s.getOperation()).collect(Collectors.toList());
+        return l -> l.stream()
+            .filter(filter)
+            .map(s -> s.getOperation())
+            .collect(Collectors.toList());
     }
 
     public List<String> getSecuredUrls() {
         return getSecuredByType(URL).apply(securedOperationRepository.findAll());
     }
 
-
-    private static Predicate<SecuredOperation> URL = so -> SecuredOperationType.URL.equals(so.getType());
-    private static Predicate<SecuredOperation> OPERATION = so -> SecuredOperationType.OPERATION.equals(so.getType());
-
+    private static final Predicate<SecuredOperation> URL = so -> SecuredOperationType.URL == so.getType();
+    private static final Predicate<SecuredOperation> OPERATION = so -> SecuredOperationType.OPERATION == so.getType();
 }

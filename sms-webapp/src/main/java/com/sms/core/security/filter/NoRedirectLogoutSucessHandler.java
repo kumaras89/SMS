@@ -1,25 +1,31 @@
 package com.sms.core.security.filter;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import java.io.IOException;
 
 public class NoRedirectLogoutSucessHandler implements LogoutSuccessHandler {
 
-	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		try {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NoRedirectLogoutSucessHandler.class);
 
-			response.getWriter().print("{ \"result\": true, \"message\" : \"Logged out!\" }");
-	        response.getWriter().flush();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
+    @Override
+    public void onLogoutSuccess(
+        final HttpServletRequest request,
+        final HttpServletResponse response,
+        final Authentication authentication)
+        throws IOException, ServletException {
+
+        try {
+            response.getWriter().print("{ \"result\": true, \"message\" : \"Logged out!\" }");
+            response.getWriter().flush();
+        } catch (final IOException e) {
+            LOGGER.debug(e.getMessage());
+        }
+    }
 }

@@ -4,8 +4,6 @@ import com.sms.core.admin.User;
 import com.sms.core.batch.Batch;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.Builder;
-import com.sms.core.course.Course;
-import com.sms.core.student.Student;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,11 +12,13 @@ import java.util.Set;
 
 /**
  * Created by sathish on 7/29/2016.
+ * <p></p>
  */
 @Entity
 @Table(name = "SMS_TR_STUDENT_ATTENDANCE")
 @SequenceGenerator(name = "SMS_SQ_AT", sequenceName = "SMS_SQ_AT", allocationSize = 1)
 public class StudentAttendance implements Serializable {
+    private static final long serialVersionUID = -1004257020831273351L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_AT")
     private long id;
@@ -57,12 +57,11 @@ public class StudentAttendance implements Serializable {
 
     public static Builder<StudentAttendance> toBuilder(final StudentAttendanceInfo studentAttendanceInfo) {
         return builder()
-                .on(StudentAttendance::getId).set(studentAttendanceInfo.getId())
-                .on(StudentAttendance::getCreationDate).set(new Date())
-                .on(StudentAttendance::getModificationDate).set(new Date())
-                .on(StudentAttendance::getAttendanceDetails).set(studentAttendanceInfo.getAttendanceDetails())
-                .on(StudentAttendance::getAttendanceDate).set(studentAttendanceInfo.getAttendanceDate());
-
+            .on(StudentAttendance::getId).set(studentAttendanceInfo.getId())
+            .on(StudentAttendance::getCreationDate).set(new Date())
+            .on(StudentAttendance::getModificationDate).set(new Date())
+            .on(StudentAttendance::getAttendanceDetails).set(studentAttendanceInfo.getAttendanceDetails())
+            .on(StudentAttendance::getAttendanceDate).set(studentAttendanceInfo.getAttendanceDate());
     }
 
     public long getId() {

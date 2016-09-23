@@ -1,12 +1,10 @@
 package com.sms.core.hotelTracker;
 
-import com.sms.core.hotel.HotelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -45,9 +43,9 @@ public class HotelTrackerRestController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ResponseEntity<List<HotelTrackerInfo>> search(@RequestBody @Valid
-                                                          final HotelTrackerSearchCriteria hotelTrackerSearchCriteria) {
-        return Optional.ofNullable(hotelTrackerService.search(hotelTrackerSearchCriteria))
+    public ResponseEntity<List<HotelTrackerInfo>> search(@RequestBody @Valid final HotelTrackerSearchCriteria criteria) {
+
+        return Optional.ofNullable(hotelTrackerService.search(criteria))
                        .filter(e -> !e.isEmpty())
                        .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -56,6 +54,7 @@ public class HotelTrackerRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<HotelTrackerInfo> update(@PathVariable("id") final long id,
                                             @RequestBody @Valid final HotelTrackerInfo hotelTrackerInfo) {
+
         return hotelTrackerService.update(id, hotelTrackerInfo)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();

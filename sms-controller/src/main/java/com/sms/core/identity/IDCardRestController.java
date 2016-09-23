@@ -25,28 +25,31 @@ public class IDCardRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<List<IdCardInfo>> listAll(@RequestBody @Valid IdCardSearchCriteria idCardInfo) {
+    public ResponseEntity<List<IdCardInfo>> listAll(@RequestBody @Valid final IdCardSearchCriteria idCardInfo) {
 
         return Optional.ofNullable(idCardService.search(Optional.ofNullable(idCardInfo)).with(idCardRepository))
-                .filter(e -> !e.isEmpty())
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .filter(e -> !e.isEmpty())
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IdCardInfo> get(@PathVariable("id") long id) {
+    public ResponseEntity<IdCardInfo> get(@PathVariable("id") final long id) {
+
         return idCardService.findById(id).with(idCardRepository)
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<IdCardInfo> update(@PathVariable("id") long id,
-                                    @RequestBody @Valid IdCardInfo entityObject) {
+    public ResponseEntity<IdCardInfo> update(
+        @PathVariable("id") final long id,
+        @RequestBody @Valid final IdCardInfo entityObject) {
+
         return idCardService.update(id, entityObject).with(idCardRepository)
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .get();
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .get();
     }
 
 }

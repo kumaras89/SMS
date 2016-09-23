@@ -1,6 +1,5 @@
 package com.sms.core.admin;
 
-import com.sms.core.repositery.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
@@ -19,11 +18,11 @@ public class UserConverterImpl implements Converter<UserInfo, User> {
     @Override
     public User convert(final UserInfo userInfo) {
         return User.builder()
-                .on(u -> u.getName()).set(userInfo.getName())
-                .on(u -> u.getPassword()).set(encoder.encode(defaultPassword))
-                .on(u -> u.getBranch()).set(userInfo.getBranch())
-                .on(u -> u.getFirstName()).set(userInfo.getFirstName())
-                .on(u -> u.getLastName()).set(userInfo.getLastName())
-                .build();
+            .on(u -> u.getName()).set(userInfo.getName())
+            .on(u -> u.getPassword()).set(encoder.encode(defaultPassword))
+            .on(u -> u.getBranch()).set(userInfo.getBranch())
+            .on(u -> u.getFirstName()).set(userInfo.getFirstName())
+            .on(u -> u.getLastName()).set(userInfo.getLastName())
+            .build();
     }
 }

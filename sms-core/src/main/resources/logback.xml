@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <!--
+        These values are populated by the Slf4jMDCFilter
+        - varId - from User object assigned to session - not present if none assigned)
+        - programId - from User object assigned to session - not present if none assigned)
+        - userId - from User object assigned to session - not present if none assigned)
+        - orderId - present only when processing checkouts
+        - hostname - From the current host we are on
+        - tranxId - A random transaction ID that is unique to the current request
+    -->
+    <property name="userPattern" value="%X{varId:-NA}:%X{programId:-NA}:%X{userId:-NA}:%X{orderId:-NA}"/>
+    <property name="encoderPattern"
+              value="[%d] ${HOSTNAME} %X{tranxId:-NA} ${userPattern} %t %-5p %m \\(%c{0}.%M\\)%n"/>
+
+    <appender name="sms_base" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/sms_base.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.base}/logs/sms_base.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${encoderPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="sms_access" clas="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/sms_access_verbose.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.base}/logs/sms_access_verbose.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${encoderPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.cxf" level="info"/>
+    <logger name="com.sms.core" level="debug"/>
+
+    <root level="error">
+        <appender-ref ref="sms_base"/>
+    </root>
+</configuration>

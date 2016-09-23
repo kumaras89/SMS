@@ -1,13 +1,10 @@
 package com.sms.core.student;
 
-import com.sms.core.identity.IdCardInfo;
-import com.sms.core.identity.IdCardSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -42,33 +39,37 @@ public class StudentRestController {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<StudentInfo> create(@RequestBody @Valid final StudentInfo entityObject,
-        final UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<StudentInfo> create(
+        @RequestBody @Valid final StudentInfo entityObject) {
+
         return studentFacade.save(entityObject)
-                .map(e->new ResponseEntity<>(e, HttpStatus.CREATED))
-                .orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+            .map(e -> new ResponseEntity<>(e, HttpStatus.CREATED))
+            .orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<StudentInfo> delete(@PathVariable("id") final Long id) {
+
         studentFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "studentScholarship/{applicationNumber}", method = RequestMethod.GET)
-    public ResponseEntity<StudentInfo> findStudentFromScholarship(@PathVariable("applicationNumber") final String applicationNumber) {
+    public ResponseEntity<StudentInfo> findStudentFromScholarship(
+        @PathVariable("applicationNumber") final String applicationNumber) {
+
         return studentFacade.findByScholarship(applicationNumber)
             .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @RequestMapping(value="/search", method = RequestMethod.POST)
-    public ResponseEntity<List<StudentInfo>> search(@RequestBody @Valid StudentSearchCriteria criteria) {
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResponseEntity<List<StudentInfo>> search(@RequestBody @Valid final StudentSearchCriteria criteria) {
+
         return Optional.ofNullable(studentFacade.search(criteria))
-                .filter(e -> !e.isEmpty())
-                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .filter(e -> !e.isEmpty())
+            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

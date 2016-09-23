@@ -1,11 +1,9 @@
 package com.sms.core.student;
 
-import com.sms.core.marketing.IMarketingEmployeeSuperiorService;
 import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.message.SMSSenderDetailsGenerator;
 import com.sms.core.message.SendingDetails;
 import com.sms.core.repositery.MarketingEmployeeRepository;
-import com.sms.core.repositery.StudentScholarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Created by Ram on 6/26/2016.
@@ -24,74 +24,18 @@ public class StudentFacadeImpl implements StudentFacade {
 
     @Autowired
     private StudentEnrollmentConfig seConfig;
+
     @Autowired
     private MarketingEmployeeRepository marketingEmployeeRepository;
+
     @Autowired
-    private StudentScholarRepository studentScholarRepository;
-    @Autowired
-    private SMSSenderDetailsGenerator sendToAllImp;
-    @Autowired
-    private IMarketingEmployeeSuperiorService employeeSuperiorService;
+    private SMSSenderDetailsGenerator smsSenderDetailsGenerator;
 
     @Override
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
-
-        final MarketingEmployee marketingEmployee =
-            marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode());
-
-        final StudentScholar studentScholar =
-            studentScholarRepository.findByApplicationNumberIgnoreCase(studentInfo.getApplicationNumber());
-
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
-
-        final List<SendingDetails> sendingDetailsList = new ArrayList<>();
-
-
-        sendingDetailsList.add(SendingDetails.builder()
-            .on(SendingDetails::getSenderPhoneNumber)
-            .set(newStudentInfo.getPhoneNumber())
-            .on(SendingDetails::getSenderMessage)
-            .set(
-                new StringBuilder("Hi,")
-                    .append(newStudentInfo.getName())
-                    .append(",Student Code No:")
-                    .append(newStudentInfo.getCode())
-                    .toString())
-            .on(SendingDetails::getMessageCode)
-            .set("SMS_STD_STD")
-            .build());
-
-        sendingDetailsList.add(SendingDetails.builder()
-            .on(SendingDetails::getSenderPhoneNumber)
-            .set(studentScholar.getParentPhoneNumber())
-            .on(SendingDetails::getSenderMessage)
-            .set(
-                new StringBuilder("Hi,")
-                    .append(newStudentInfo.getName())
-                    .append(",Student Code:")
-                    .append(newStudentInfo.getCode())
-                    .toString())
-            .on(SendingDetails::getMessageCode)
-            .set("SMS_PRT_STD")
-            .build());
-
-        sendingDetailsList.add(SendingDetails.builder()
-            .on(SendingDetails::getSenderPhoneNumber)
-            .set(marketingEmployee.getPhoneNumber())
-            .on(SendingDetails::getSenderMessage)
-            .set(
-                new StringBuilder("Hi,")
-                    .append(marketingEmployee.getName())
-                    .append(",Name:")
-                    .append(newStudentInfo.getName())
-                    .append(",Student Code:")
-                    .append(newStudentInfo.getCode())
-                    .toString())
-            .on(SendingDetails::getMessageCode)
-            .set("SMS_EMP_STD")
-            .build());
-
-        sendToAllImp.createSMSDetails(sendingDetailsList);
+        //Sending welcome message to student,parent,marketing employee
+        sendWelcomeMessage(newStudentInfo);
 
         return Optional.of(newStudentInfo);
     }
@@ -132,5 +76,36 @@ public class StudentFacadeImpl implements StudentFacade {
     @Override
     public Optional<StudentInfo> update(final long id, final StudentInfo studentInfo) {
         return null;
+    }
+
+    private void sendWelcomeMessage(final StudentInfo newStudentInfo) {
+        final MarketingEmployee marketingEmployee =
+            marketingEmployeeRepository.findByCodeIgnoreCase(newStudentInfo.getMarketingEmployeeCode());
+
+        final BiFunction<String, String, Function<String, SendingDetails>> sendingDetailsCreator =
+            (messageCode, message) -> phoneNumber ->
+                SendingDetails.builder().on(SendingDetails::getMessageCode).set(messageCode)
+                    .on(SendingDetails::getSenderMessage).set(message)
+                    .on(SendingDetails::getSenderPhoneNumber).set(phoneNumber)
+                    .build();
+
+        final BiFunction<String, String, String> senderMessage =
+            (who, code) -> new StringBuilder("Hi").append(who).append(",Application No:").append(code).toString();
+
+        final Function<String, String> messageCreator = (message) -> senderMessage.apply(message, newStudentInfo
+            .getApplicationNumber());
+
+        final String message = messageCreator.apply(newStudentInfo.getName());
+        final String marketingMessage = messageCreator.apply(
+            String.join(marketingEmployee.getName(), ",Name:", newStudentInfo.getName()));
+
+        final List<SendingDetails> sendingDetails = new ArrayList<>();
+        sendingDetails.add(sendingDetailsCreator.apply("SMS_STD_STD", message).apply(newStudentInfo.getPhoneNumber()));
+        sendingDetails.add(sendingDetailsCreator.apply("SMS_PRT_STD", message)
+            .apply(newStudentInfo.getAlternatePhoneNumber()));
+        sendingDetails.add(sendingDetailsCreator.apply("SMS_EMP_STD", marketingMessage)
+            .apply(marketingEmployee.getPhoneNumber()));
+
+        smsSenderDetailsGenerator.createSMSDetails(sendingDetails);
     }
 }

@@ -6,12 +6,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * Created by sathish on 7/29/2016.
+ * <p></p>
+ */
 @Entity
 @Table(name = "SMS_TR_ATTENDANCE_DETAILS")
 @SequenceGenerator(name = "SMS_SQ_ATD", sequenceName = "SMS_SQ_ATD", allocationSize = 1)
 public class AttendanceDetails implements Serializable {
 
     private static final long serialVersionUID = -6890590290096608469L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_ATD")
     private Long id;
