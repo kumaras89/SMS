@@ -1,5 +1,6 @@
 package com.sms.core.student;
 
+import com.sms.core.marketing.IMarketingEmployeeSuperiorService;
 import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.message.SMSSenderDetailsGenerator;
 import com.sms.core.message.SendingDetails;
@@ -23,59 +24,72 @@ public class StudentFacadeImpl implements StudentFacade {
 
     @Autowired
     private StudentEnrollmentConfig seConfig;
-
     @Autowired
     private MarketingEmployeeRepository marketingEmployeeRepository;
-
     @Autowired
-    StudentScholarRepository studentScholarRepository;
-
+    private StudentScholarRepository studentScholarRepository;
     @Autowired
-    SMSSenderDetailsGenerator sendToAllImp;
+    private SMSSenderDetailsGenerator sendToAllImp;
+    @Autowired
+    private IMarketingEmployeeSuperiorService employeeSuperiorService;
 
     @Override
     public Optional<StudentInfo> save(final StudentInfo studentInfo) {
 
-        MarketingEmployee marketingEmployee = marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode());
+        final MarketingEmployee marketingEmployee =
+            marketingEmployeeRepository.findByCodeIgnoreCase(studentInfo.getMarketingEmployeeCode());
 
-        StudentScholar studentScholar = studentScholarRepository.findByApplicationNumberIgnoreCase(studentInfo.getApplicationNumber());
+        final StudentScholar studentScholar =
+            studentScholarRepository.findByApplicationNumberIgnoreCase(studentInfo.getApplicationNumber());
 
         final StudentInfo newStudentInfo = StudentEnrollmentService.save(studentInfo).with(seConfig);
 
-        List<SendingDetails> sendingDetailsList = new ArrayList<>();
+        final List<SendingDetails> sendingDetailsList = new ArrayList<>();
 
 
-        sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(newStudentInfo.getPhoneNumber())
-                .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi,")
-                                .append(newStudentInfo.getName())
-                                .append(",Student Code No:")
-                                .append(newStudentInfo.getCode())
-                                .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_STD_STD")
-                .build());
+        sendingDetailsList.add(SendingDetails.builder()
+            .on(SendingDetails::getSenderPhoneNumber)
+            .set(newStudentInfo.getPhoneNumber())
+            .on(SendingDetails::getSenderMessage)
+            .set(
+                new StringBuilder("Hi,")
+                    .append(newStudentInfo.getName())
+                    .append(",Student Code No:")
+                    .append(newStudentInfo.getCode())
+                    .toString())
+            .on(SendingDetails::getMessageCode)
+            .set("SMS_STD_STD")
+            .build());
 
-        sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(studentScholar.getParentPhoneNumber())
-                .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi,")
-                                .append(newStudentInfo.getName())
-                                .append(",Student Code:")
-                                .append(newStudentInfo.getCode())
-                                .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_PRT_STD")
-                .build());
+        sendingDetailsList.add(SendingDetails.builder()
+            .on(SendingDetails::getSenderPhoneNumber)
+            .set(studentScholar.getParentPhoneNumber())
+            .on(SendingDetails::getSenderMessage)
+            .set(
+                new StringBuilder("Hi,")
+                    .append(newStudentInfo.getName())
+                    .append(",Student Code:")
+                    .append(newStudentInfo.getCode())
+                    .toString())
+            .on(SendingDetails::getMessageCode)
+            .set("SMS_PRT_STD")
+            .build());
 
-        sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
-                .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi,")
-                                .append(marketingEmployee.getName())
-                                .append(",Name:")
-                                .append(newStudentInfo.getName())
-                                .append(",Student Code:")
-                                .append(newStudentInfo.getCode())
-                                .toString())
-                .on(SendingDetails::getMessageCode).set("SMS_EMP_STD")
-                .build());
+        sendingDetailsList.add(SendingDetails.builder()
+            .on(SendingDetails::getSenderPhoneNumber)
+            .set(marketingEmployee.getPhoneNumber())
+            .on(SendingDetails::getSenderMessage)
+            .set(
+                new StringBuilder("Hi,")
+                    .append(marketingEmployee.getName())
+                    .append(",Name:")
+                    .append(newStudentInfo.getName())
+                    .append(",Student Code:")
+                    .append(newStudentInfo.getCode())
+                    .toString())
+            .on(SendingDetails::getMessageCode)
+            .set("SMS_EMP_STD")
+            .build());
 
         sendToAllImp.createSMSDetails(sendingDetailsList);
 
@@ -110,9 +124,9 @@ public class StudentFacadeImpl implements StudentFacade {
     @Override
     public List<StudentInfo> search(final StudentSearchCriteria studentSearchCriteria) {
         return StudentSearchService
-                .search(studentSearchCriteria)
-                .local(StudentEnrollmentConfig::getStuRepo)
-                .with(seConfig);
+            .search(studentSearchCriteria)
+            .local(StudentEnrollmentConfig::getStuRepo)
+            .with(seConfig);
     }
 
     @Override

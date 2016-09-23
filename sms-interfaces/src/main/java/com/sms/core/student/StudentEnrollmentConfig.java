@@ -1,5 +1,6 @@
 package com.sms.core.student;
 
+import com.sms.core.marketing.IMarketingEmployeeSuperiorService;
 import com.sms.core.repositery.*;
 import com.sms.core.scholarship.StudentScholarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class StudentEnrollmentConfig {
     private StudentRepository studentRepository;
     @Autowired
     private StudentScholarService studentScholarService;
+    @Autowired
+    private IMarketingEmployeeSuperiorService employeeSuperiorService;
 
 
 
@@ -54,4 +57,8 @@ public class StudentEnrollmentConfig {
     }
 
     public StudentScholarService getStudScholarServ(){return studentScholarService;}
+
+    public IMarketingEmployeeSuperiorService getEmployeeSuperiorService() {
+        return employeeSuperiorService;
+    }
 }

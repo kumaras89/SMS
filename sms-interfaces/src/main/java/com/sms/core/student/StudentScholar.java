@@ -1,32 +1,25 @@
 package com.sms.core.student;
 
-import com.sms.core.BaseModel;
 import com.sms.core.branch.Branch;
 import com.sms.core.common.*;
 import com.sms.core.marketing.MarketingEmployee;
 import com.sms.core.scholarship.ScholarStatus;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * Created by sathish on 6/20/2016.
- */
-
 @Entity
 @Table(name = "SMS_TR_STUDENT_SCHOLARSHIP")
-@SequenceGenerator(name = "SMS_SQ_STS",sequenceName = "SMS_SQ_STS", allocationSize = 1)
-public class StudentScholar implements Serializable
-{
+@SequenceGenerator(name = "SMS_SQ_STS", sequenceName = "SMS_SQ_STS", allocationSize = 1)
+public class StudentScholar implements Serializable {
+    private static final long serialVersionUID = -2252289425199449945L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SMS_SQ_STS")
     protected Long id;
 
-    @Column(name = "STS_APPLICATION_NUMBER",unique = true)
+    @Column(name = "STS_APPLICATION_NUMBER", unique = true)
     private String applicationNumber;
 
     @Column(name = "STS_NAME")
@@ -80,7 +73,7 @@ public class StudentScholar implements Serializable
     @Column(name = "STS_ANNUAL_INCOME")
     private String annualIncome;
 
-    @Column(name = "STS_EMAILID" ,unique = true)
+    @Column(name = "STS_EMAILID", unique = true)
     private String emailId;
 
     @Column(name = "STS_CREATION_DATE")
@@ -101,31 +94,33 @@ public class StudentScholar implements Serializable
     @Column(name = "STS_STATUS")
     private ScholarStatus status;
 
-    public static Builder<StudentScholar> builder() { return Builder.of(StudentScholar.class); }
+    public static Builder<StudentScholar> builder() {
+        return Builder.of(StudentScholar.class);
+    }
 
     public static Builder<StudentScholar> toBuilder(final StudentScholarInfo studentScholarInfo) {
         return builder()
-                .with(StudentScholar::getId, studentScholarInfo.getId())
-                .with(StudentScholar::getApplicationNumber, studentScholarInfo.getApplicationNumber())//change
-                .with(StudentScholar::getName, studentScholarInfo.getName())
-                .with(StudentScholar::getDateOfBirth, studentScholarInfo.getDateOfBirth())
-                .with(StudentScholar::getAge, studentScholarInfo.getAge())
-                .with(StudentScholar::getGender, Gender.valueOf(studentScholarInfo.getGender()))
-                .with(StudentScholar::getMaritalStatus, MaritalStatus.valueOf(studentScholarInfo.getMaritalStatus()))
-                .on(StudentScholar::getStatus).set(ScholarStatus.valueOf(studentScholarInfo.getStatus()))
-                .with(StudentScholar::getStudentPhoneNumber, studentScholarInfo.getStudentPhoneNumber())
-                .with(StudentScholar::getParentPhoneNumber, studentScholarInfo.getParentPhoneNumber())
-                .with(StudentScholar::getEducationDetails, studentScholarInfo.getEducationDetails())
-                .with(StudentScholar::getAddress, studentScholarInfo.getAddress())
-                .with(StudentScholar::getNationality, studentScholarInfo.getNationality())
-                .with(StudentScholar::getReligion, Religion.valueOf(studentScholarInfo.getReligion()))
-                .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()))
-                .with(StudentScholar::getFatherOrMotherName,studentScholarInfo.getFatherOrMotherName())
-                .with(StudentScholar::getCasteDescription,studentScholarInfo.getCasteDescription())
-                .with(StudentScholar::getAnnualIncome,studentScholarInfo.getAnnualIncome())
-                .with(StudentScholar::getEmailId,studentScholarInfo.getEmailId())
-                .on(StudentScholar::getLastModifiedDate).set(new Date())
-                .on(StudentScholar::getCreatedDate).set(new Date());
+            .with(StudentScholar::getId, studentScholarInfo.getId())
+            .with(StudentScholar::getApplicationNumber, studentScholarInfo.getApplicationNumber())//change
+            .with(StudentScholar::getName, studentScholarInfo.getName())
+            .with(StudentScholar::getDateOfBirth, studentScholarInfo.getDateOfBirth())
+            .with(StudentScholar::getAge, studentScholarInfo.getAge())
+            .with(StudentScholar::getGender, Gender.valueOf(studentScholarInfo.getGender()))
+            .with(StudentScholar::getMaritalStatus, MaritalStatus.valueOf(studentScholarInfo.getMaritalStatus()))
+            .on(StudentScholar::getStatus).set(ScholarStatus.valueOf(studentScholarInfo.getStatus()))
+            .with(StudentScholar::getStudentPhoneNumber, studentScholarInfo.getStudentPhoneNumber())
+            .with(StudentScholar::getParentPhoneNumber, studentScholarInfo.getParentPhoneNumber())
+            .with(StudentScholar::getEducationDetails, studentScholarInfo.getEducationDetails())
+            .with(StudentScholar::getAddress, studentScholarInfo.getAddress())
+            .with(StudentScholar::getNationality, studentScholarInfo.getNationality())
+            .with(StudentScholar::getReligion, Religion.valueOf(studentScholarInfo.getReligion()))
+            .with(StudentScholar::getCaste, Caste.valueOf(studentScholarInfo.getCaste()))
+            .with(StudentScholar::getFatherOrMotherName, studentScholarInfo.getFatherOrMotherName())
+            .with(StudentScholar::getCasteDescription, studentScholarInfo.getCasteDescription())
+            .with(StudentScholar::getAnnualIncome, studentScholarInfo.getAnnualIncome())
+            .with(StudentScholar::getEmailId, studentScholarInfo.getEmailId())
+            .on(StudentScholar::getLastModifiedDate).set(new Date())
+            .on(StudentScholar::getCreatedDate).set(new Date());
 
     }
 

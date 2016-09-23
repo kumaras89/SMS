@@ -1,6 +1,7 @@
 package com.sms.core.marketing;
 
 import com.sms.core.common.Designation;
+import com.sms.core.student.Student;
 
 import java.util.List;
 
@@ -9,5 +10,16 @@ import java.util.List;
  *  
  */
 public interface IMarketingEmployeeSuperiorService {
+    /**
+     * \
+     *
+     * @param designation
+     * @return
+     */
     List<MarketingEmployee> getAllMarketingEmployee(Designation designation);
+
+    /**
+     * @param student
+     */
+    void generateMarketingCommissionSplit(final Student student);
 }

@@ -24,6 +24,11 @@ public class StudentEnrollmentService {
                                 .then(StudentEnrollmentConverter::convert)
                                 .then(s -> StudentUpdater.updateStudent(studentInfo).apply(Tuple.of(sec, s)))
                                 .then(student -> sec.getStuRepo().save(student))
+                                .then(student -> {
+                                               sec.getEmployeeSuperiorService().generateMarketingCommissionSplit
+                                                   (student);
+                                               return student;
+                                })
                                 .then(StudentEnrollmentConverter::convertTo)
                                 .then(si -> {
                                     if(si.getApplicationNumber() != null && !si.getApplicationNumber().isEmpty()) {

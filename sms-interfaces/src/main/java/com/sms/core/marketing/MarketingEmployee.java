@@ -8,7 +8,6 @@ import com.sms.core.student.Address;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "SMS_TR_MARKETING_EMPLOYEE")
@@ -43,6 +42,13 @@ public class MarketingEmployee implements Serializable {
     @ManyToOne
     @JoinColumn(name ="ME_SUPPERIOR_ID")
     private MarketingEmployee superior;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "SMS_TR_MARKETING_EMPLOYEE",
+        joinColumns = {@JoinColumn(name = "ME_SUPPERIOR_ID")},
+        inverseJoinColumns = {@JoinColumn(name = "ID")})
+    private List<MarketingEmployee> subOrdinates;
+
 
     public static Builder<MarketingEmployee> builder() {
         return Builder.of(MarketingEmployee.class);
@@ -88,5 +94,9 @@ public class MarketingEmployee implements Serializable {
 
     public MarketingEmployee getSuperior() {
         return superior;
+    }
+
+    public List<MarketingEmployee> getSubOrdinates() {
+        return subOrdinates;
     }
 }
