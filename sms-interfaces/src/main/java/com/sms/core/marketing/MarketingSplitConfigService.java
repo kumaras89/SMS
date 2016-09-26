@@ -26,4 +26,11 @@ public interface MarketingSplitConfigService {
      */
 
     Optional<MarketingCommissionConfigSplitInfo> update(final long id, final MarketingCommissionConfigSplitInfo marketingCommissionConfigSplitInfo);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    Optional<MarketingCommissionConfigSplitInfo> find(final long id);
 }

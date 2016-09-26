@@ -44,9 +44,25 @@ public class MarketingSplitConfigRestController {
     public ResponseEntity<MarketingCommissionConfigSplitInfo> update(
             @PathVariable("id") final long id,
             @RequestBody @Valid final MarketingCommissionConfigSplitInfo commissionConfigSplitInfo) {
-
         return configService.update(id, commissionConfigSplitInfo)
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .get();
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<MarketingCommissionConfigSplitInfo> findById(
+            @PathVariable("id") final long id) {
+        return configService.find(id)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
+    }
+
+    @RequestMapping(value = "/commissonsplitdetails", method = RequestMethod.GET)
+    public ResponseEntity<MarketingCommissionConfigSplitInfo> find(
+            @PathVariable("id") final long id) {
+        return configService.find(id)
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
+    }
+
 }

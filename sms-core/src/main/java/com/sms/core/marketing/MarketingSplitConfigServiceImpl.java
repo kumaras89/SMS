@@ -46,4 +46,9 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
             throw new SmsException("Updation Error", "Updating Configuration not Exist");
         }
     }
+
+    @Override
+    public Optional<MarketingCommissionConfigSplitInfo> find(long id) {
+        return Optional.of(configRepository.findOne(id)).map(MarketingSplitConfigServiceImpl::scholarToInfo);
+    }
 }
