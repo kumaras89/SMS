@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 public class MarketingCommissionConfigSplitInfo implements Serializable {
     private static final long serialVersionUID = -8392018822491242239L;
     private Long id;
-    private Designation subOrdinate;
-    private Designation superior;
+    private String subOrdinate;
+    private String superior;
     private BigDecimal amount;
 
     public static Builder<MarketingCommissionConfigSplitInfo> builder() {
@@ -22,23 +22,23 @@ public class MarketingCommissionConfigSplitInfo implements Serializable {
     }
 
     public static Builder<MarketingCommissionConfigSplitInfo> toBuilder(final MarketingCommissionSplitConfig
-        marketingCommissionSplitConfigInfo) {
+                                                                                marketingCommissionSplitConfigInfo) {
         return builder()
-            .with(MarketingCommissionConfigSplitInfo::getId, marketingCommissionSplitConfigInfo.getId())
-            .with(MarketingCommissionConfigSplitInfo::getSubOrdinate, marketingCommissionSplitConfigInfo.getSubOrdinate())
-            .with(MarketingCommissionConfigSplitInfo::getSuperior, marketingCommissionSplitConfigInfo.getSuperior())
-            .with(MarketingCommissionConfigSplitInfo::getAmount, marketingCommissionSplitConfigInfo.getAmount());
+                .with(MarketingCommissionConfigSplitInfo::getId, marketingCommissionSplitConfigInfo.getId())
+                .with(MarketingCommissionConfigSplitInfo::getSubOrdinate, marketingCommissionSplitConfigInfo.getSubOrdinate().name())
+                .with(MarketingCommissionConfigSplitInfo::getSuperior, marketingCommissionSplitConfigInfo.getSuperior().name())
+                .with(MarketingCommissionConfigSplitInfo::getAmount, marketingCommissionSplitConfigInfo.getAmount());
     }
 
     public Long getId() {
         return id;
     }
 
-    public Designation getSubOrdinate() {
+    public String getSubOrdinate() {
         return subOrdinate;
     }
 
-    public Designation getSuperior() {
+    public String getSuperior() {
         return superior;
     }
 

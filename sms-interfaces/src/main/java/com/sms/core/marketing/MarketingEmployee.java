@@ -1,5 +1,6 @@
 package com.sms.core.marketing;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sms.core.admin.User;
 import com.sms.core.common.Builder;
 import com.sms.core.common.Designation;
@@ -40,13 +41,14 @@ public class MarketingEmployee implements Serializable {
     private User linkedUser;
 
     @ManyToOne
-    @JoinColumn(name ="ME_SUPPERIOR_ID")
+    @JoinColumn(name = "ME_SUPPERIOR_ID")
     private MarketingEmployee superior;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "SMS_TR_MARKETING_EMPLOYEE",
-        joinColumns = {@JoinColumn(name = "ME_SUPPERIOR_ID")},
-        inverseJoinColumns = {@JoinColumn(name = "ID")})
+            joinColumns = {@JoinColumn(name = "ME_SUPPERIOR_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ID")})
     private List<MarketingEmployee> subOrdinates;
 
 
@@ -56,12 +58,12 @@ public class MarketingEmployee implements Serializable {
 
     public static Builder<MarketingEmployee> toBuilder(final MarketingEmployeeInfo marketingEmployeeInfo) {
         return builder()
-            .with(MarketingEmployee::getId, marketingEmployeeInfo.getId())
-            .with(MarketingEmployee::getCode, marketingEmployeeInfo.getCode())
-            .with(MarketingEmployee::getDesignation, Designation.valueOf(marketingEmployeeInfo.getDesignation()))
-            .with(MarketingEmployee::getName, marketingEmployeeInfo.getName())
-            .with(MarketingEmployee::getAddress, marketingEmployeeInfo.getAddress())
-            .with(MarketingEmployee::getPhoneNumber, marketingEmployeeInfo.getPhoneNumber());
+                .with(MarketingEmployee::getId, marketingEmployeeInfo.getId())
+                .with(MarketingEmployee::getCode, marketingEmployeeInfo.getCode())
+                .with(MarketingEmployee::getDesignation, Designation.valueOf(marketingEmployeeInfo.getDesignation()))
+                .with(MarketingEmployee::getName, marketingEmployeeInfo.getName())
+                .with(MarketingEmployee::getAddress, marketingEmployeeInfo.getAddress())
+                .with(MarketingEmployee::getPhoneNumber, marketingEmployeeInfo.getPhoneNumber());
     }
 
     public String getCode() {

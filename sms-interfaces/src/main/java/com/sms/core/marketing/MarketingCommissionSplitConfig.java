@@ -35,10 +35,10 @@ public class MarketingCommissionSplitConfig implements Serializable {
 
     public static Builder<MarketingCommissionSplitConfig> toBuilder(final MarketingCommissionConfigSplitInfo marketingCommissionConfigSplitInfo) {
         return builder()
-            .with(MarketingCommissionSplitConfig::getId, marketingCommissionConfigSplitInfo.getId())
-            .with(MarketingCommissionSplitConfig::getSubOrdinate, marketingCommissionConfigSplitInfo.getSubOrdinate())
-            .with(MarketingCommissionSplitConfig::getSuperior, marketingCommissionConfigSplitInfo.getSuperior())
-            .with(MarketingCommissionSplitConfig::getAmount, marketingCommissionConfigSplitInfo.getAmount());
+                .with(MarketingCommissionSplitConfig::getId, marketingCommissionConfigSplitInfo.getId())
+                .with(MarketingCommissionSplitConfig::getSubOrdinate, Designation.valueOf(marketingCommissionConfigSplitInfo.getSubOrdinate()))
+                .with(MarketingCommissionSplitConfig::getSuperior, Designation.valueOf(marketingCommissionConfigSplitInfo.getSuperior()))
+                .with(MarketingCommissionSplitConfig::getAmount, marketingCommissionConfigSplitInfo.getAmount());
     }
 
     public Long getId() {

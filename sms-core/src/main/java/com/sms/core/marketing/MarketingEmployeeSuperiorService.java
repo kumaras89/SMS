@@ -8,6 +8,7 @@ import com.sms.core.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  *  
  */
 @Component
+@Transactional
 public class MarketingEmployeeSuperiorService implements IMarketingEmployeeSuperiorService {
 
     @Autowired
@@ -34,13 +36,14 @@ public class MarketingEmployeeSuperiorService implements IMarketingEmployeeSuper
     @Override
     public List<MarketingEmployee> getAllMarketingEmployee(final Designation designation) {
 
-        return Optional.of(designation)
+       return  Optional.of(designation)
             .map(Designation::getSuperior)
             .filter(s -> !s.isEmpty())
             .map
                 (Designation::valueOf)
             .map(repository::findByDesignation)
             .orElse(Collections.emptyList());
+
     }
 
     @Override
@@ -75,5 +78,4 @@ public class MarketingEmployeeSuperiorService implements IMarketingEmployeeSuper
         } while (employeeOptional.isPresent());
 
     }
-
 }
