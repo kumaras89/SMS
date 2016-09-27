@@ -33,4 +33,11 @@ public interface MarketingSplitConfigService {
      * @return
      */
     Optional<MarketingCommissionConfigSplitInfo> find(final long id);
+
+    /**
+     *
+     * @return
+     */
+    List<MarketingCommissionSplitInfo> getAll();
+
 }

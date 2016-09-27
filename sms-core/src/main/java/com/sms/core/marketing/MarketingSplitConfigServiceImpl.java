@@ -3,8 +3,8 @@ package com.sms.core.marketing;
 import com.sms.core.SmsException;
 import com.sms.core.common.FList;
 import com.sms.core.repositery.MarketingCommissionSplitConfigRepository;
+import com.sms.core.repositery.MarketingCommissionSplitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,19 +20,26 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
     @Autowired
     private MarketingCommissionSplitConfigRepository configRepository;
 
-    private static MarketingCommissionConfigSplitInfo scholarToInfo(final MarketingCommissionSplitConfig source) {
+    @Autowired
+    private MarketingCommissionSplitRepository commissionSplitRepository;
+
+    private static MarketingCommissionConfigSplitInfo configToInfo(final MarketingCommissionSplitConfig source) {
         return MarketingCommissionConfigSplitInfo.toBuilder(source).build();
+    }
+
+    private static MarketingCommissionSplitInfo splitInfo(final MarketingCommissionSplit source) {
+        return MarketingCommissionSplitInfo.toBuilder(source).build();
     }
 
     @Override
     public List<MarketingCommissionConfigSplitInfo> findAll() {
-        return FList.of(this.configRepository.findAll()).map(MarketingSplitConfigServiceImpl::scholarToInfo).get();
+        return FList.of(this.configRepository.findAll()).map(MarketingSplitConfigServiceImpl::configToInfo).get();
     }
 
     @Override
     public Optional<MarketingCommissionConfigSplitInfo> save(final MarketingCommissionConfigSplitInfo entityType) {
 
-        return Optional.of(configRepository.save(MarketingCommissionSplitConfig.toBuilder(entityType).build())).map(MarketingSplitConfigServiceImpl::scholarToInfo);
+        return Optional.of(configRepository.save(MarketingCommissionSplitConfig.toBuilder(entityType).build())).map(MarketingSplitConfigServiceImpl::configToInfo);
     }
 
     @Override
@@ -41,7 +48,7 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
         if (alreadyExists != null) {
             return Optional.of(configRepository.saveAndFlush(MarketingCommissionSplitConfig.toBuilder(editedConfiguration)
                     .on(MarketingCommissionSplitConfig::getId).set(alreadyExists.getId())
-                    .build())).map(MarketingSplitConfigServiceImpl::scholarToInfo);
+                    .build())).map(MarketingSplitConfigServiceImpl::configToInfo);
         } else {
             throw new SmsException("Updation Error", "Updating Configuration not Exist");
         }
@@ -49,6 +56,12 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
 
     @Override
     public Optional<MarketingCommissionConfigSplitInfo> find(long id) {
-        return Optional.of(configRepository.findOne(id)).map(MarketingSplitConfigServiceImpl::scholarToInfo);
+        return Optional.of(configRepository.findOne(id)).map(MarketingSplitConfigServiceImpl::configToInfo);
     }
+
+    @Override
+    public List<MarketingCommissionSplitInfo> getAll() {
+        return FList.of(commissionSplitRepository.findAll()).map(MarketingSplitConfigServiceImpl::splitInfo).get();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.sms.core.marketing;
 
+import com.sms.core.repositery.MarketingCommissionSplitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/marketingsplit")
 public class MarketingSplitConfigRestController {
+
     private final MarketingSplitConfigService configService;
 
     @Autowired
@@ -57,12 +59,12 @@ public class MarketingSplitConfigRestController {
                 .get();
     }
 
+    //fetching all inforamtion about commission details
     @RequestMapping(value = "/commissonsplitdetails", method = RequestMethod.GET)
-    public ResponseEntity<MarketingCommissionConfigSplitInfo> find(
-            @PathVariable("id") final long id) {
-        return configService.find(id)
+    public ResponseEntity<List<MarketingCommissionSplitInfo>> getAll() {
+        return Optional.ofNullable(configService.getAll())
+                .filter(e -> !e.isEmpty())
                 .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-                .get();
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
 }
