@@ -29,7 +29,8 @@
             'angular-confirm',
             'MessageService',
             'Attendance',
-            'Expense'])
+            'Expense',
+            'MarketingCommission'])
            .factory('errorInterceptor',['$rootScope', '$q', 'FlashService', function (scope, $q, FlashService) {
                 return {
                     responseError: function (response) {

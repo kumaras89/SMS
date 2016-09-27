@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class=""></i> Marketing Commission</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5>Marketing Commission Edit </h5>
+    </div>
+    <div class="panel-body">
+
+        <form name="commissionForm" novalidate="novalidate" class="form-horizontal">
+            <table width="75%" class="table table-striped table-bordered table-hover">
+                <tr class="even gradeA">
+                    <td><label class="control-label" for="SubOrdinate">SubOrdinate: *</label></td>
+                    <td>
+                        <select ng-model="marketingCommission.subOrdinate" name="subOrdinate" id="subOrdinate" required>
+                            <option ng-repeat="subOrdinate in commonAttributes.designation" value="{{subOrdinate}}">{{subOrdinate}}</option>
+                        </select>
+                        <span class="error" ng-messages="commissionForm.subOrdinate.$error" ng-if="commissionForm.subOrdinate.$touched">
+                            <span ng-message="required">SubOrdinate is required.</span>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="even gradeA">
+                    <td class="firstcol"><label class="control-label" for="superior">Superior: *</label></td>
+                    <td>
+                        <select ng-model="marketingCommission.superior" name="superior" id="superior" required>
+                            <option ng-repeat="superior in commonAttributes.designation" value="{{superior}}">{{superior}}</option>
+                        </select>
+                        <span class="error" ng-messages="commissionForm.superior.$error" ng-if="commissionForm.superior.$touched">
+                            <span ng-message="required">Superior is required.</span>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="even gradeA">
+                    <td class="firstcol"><label class="control-label" for="amount">Amount: *</label></td>
+                    <td><input type="text" name="amount" id="amount" ng-model="marketingCommission.amount" placeholder="Amount" style="width:141px;" required/>
+                    <span class="error" ng-messages="commissionForm.amount.$error" ng-if="commissionForm.amount.$touched">
+                        <span ng-message="required">Amount is required.</span>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+            <div class="well">
+                <div class="controls">
+                    <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                    <a ng-click="commissionForm.$valid && updateMarketingCommission()" ng-disabled="commissionForm.$invalid" class="btn btn-small btn-primary">Update</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>

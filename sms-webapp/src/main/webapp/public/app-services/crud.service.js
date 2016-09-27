@@ -28,6 +28,7 @@
         service.messageService = service.of('messageservice')
         service.roleService = service.of('role');
         service.securedOperationService = service.of('securedoperation');
+        service.marketingCommissionService = service.of('marketingsplit')
         service.scholarshipEnrollmentService = service.of('scholarshipenrollment')
         service.hotelService = service.of('hotel')
         service.hotelHrService = service.of('hotelhr')

@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><i class=""></i> Marketing Commission</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div include-if-allowed operation="marketingCommissionCreation" class="well">
+            <a ng-click="createMarketingCommission()" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o fa-fw fa-align-left"></i>New Marketing Commission</a>
+            <a ui-sref="home.commissiondistribution-list" class="btn btn-small btn-primary"><i class="fa fa-list-alt fa-fw fa-align-left"></i>Marketing Commission Distribution</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-5 pull-right">
+                    <label for="filter" class="col-lg-2 control-label filter">Search:</label>
+                    <div class="col-lg-10">
+                        <input class="form-control ng-pristine ng-untouched ng-valid" type="text" placeholder="Filter" ng-model="marketingCommission_filter" id="filter">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="table-responsive" loading-container="tableParams.settings().$loading">
+                    <table ng-table="tableParams" show-filter="true" class="table ng-scope ng-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>SubOrdinate</th>
+                            <th>Superior</th>
+                            <th>Amount</th>
+                            <th style="max-width: 30px">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="marketingCommission in entities | filter: marketingCommission_filter" class="success">
+                            <td>{{$index + 1 }}</td>
+                            <td sortable="code">{{ marketingCommission.subOrdinate }}</td>
+                            <td sortable="name">{{ marketingCommission.superior }}</td>
+                            <td sortable="name">{{ marketingCommission.amount }}</td>
+                            <td><a ng-click="editMarketingCommission(marketingCommission.id)" include-if-allowed operation="marketingCommissionEdit"   class="btn btn-small btn-primary"><i class="fa fa-edit fa-fw"></i>Edit</a>&nbsp;
+                               <!-- <a ng-click="deleteMarketingCommission(marketingCommission.id)"include-if-allowed operation="marketingCommissionDelete"  confirm="Do you want to delete {{marketingCommission.subOrdinate}} ?" confirm-title="Marketing Employee Delete Confirmation"  class="btn btn-small btn-danger"><i class="fa fa-recycle fa-fw"></i> Delete </a>-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-show="$data.length==0" class="info no_data" colspan="9">
+                                No Record Found
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
