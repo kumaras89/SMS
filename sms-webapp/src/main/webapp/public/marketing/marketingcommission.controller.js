@@ -112,8 +112,13 @@
 
 
             }])
-        .controller('MarketingCommissionDistributionCtrl', ['$scope', '$stateParams', 'CrudService', 'FlashService', '$timeout', '$state', 'ngTableParams', 'AdminService','$http',
-            function ($scope, $stateParams, CrudService, FlashService, $timeout, $state, ngTableParams, AdminService ,$http) {
+        .controller('MarketingCommissionDistributionCtrl', ['$scope', '$rootScope', '$stateParams', 'CrudService', 'FlashService', '$timeout', '$state', 'ngTableParams', 'AdminService','$http',
+            function ($scope, $rootScope, $stateParams, CrudService, FlashService, $timeout, $state, ngTableParams, AdminService ,$http) {
+
+                $scope.logInUserDet = '';
+                $scope.logInUserDet = $rootScope.globals.currentUser.otherDetails.role;
+                $scope.marketingEmpCode = $rootScope.globals.currentUser.otherDetails.marketingEmployee;
+
 
                 $scope.tableParams = new ngTableParams({
                     page: 1,            // show first pagez
@@ -129,7 +134,21 @@
                                 $scope.entities = []
                                 FlashService.Error(res.message)
                             } else {
-                                $scope.entities = res.data;
+                                if (logInUserDet == 'SUPER_ADMIN')
+                                    $scope.entities = res.data;
+                                else {
+                                    _.forEach(res.data, function (commission) {
+                                        if (commission.referencePersonCode == marketingEmpCode) {
+                                            $scope.entities.push({
+                                                referencePersonCode: commission.referencePersonCode,
+                                                referencePersonName: commission.referencePersonName,
+                                                applicationNumber: commission.applicationNumber,
+                                                studentName:commission.studentName,
+                                                amount:commission.amount
+                                            })
+                                        }
+                                    })
+                                }
                             }
                             $timeout(function() {
                                 params.total($scope.entities.length);

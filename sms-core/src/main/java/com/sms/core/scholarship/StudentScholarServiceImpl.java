@@ -124,7 +124,7 @@ public class StudentScholarServiceImpl implements StudentScholarService {
 
         sendingDetailsList.add(SendingDetails.builder().on(SendingDetails::getSenderPhoneNumber).set(marketingEmployee.getPhoneNumber())
                 .on(SendingDetails::getSenderMessage).set(
-                        new StringBuilder("Hi")
+                        new StringBuilder("Hi ")
                                 .append(marketingEmployee.getName())
                                 .append(",Name: ")
                                 .append(entityType.getName())

@@ -4,7 +4,7 @@
             <li ui-sref-active="active">
                 <a ui-sref="home.dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
-            <li ui-sref-active="active"><a include-if-allowed operations="branch,user,marketingemployee,course,batch,role,roleoperationlink" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-list-ul"></i> Admin Access<i style="float: right" class="fa fa-sort-desc" aria-hidden="true"></i></a>
+            <li ui-sref-active="active"><a include-if-allowed operations="branch,user,marketingemployee,course,batch,role,roleoperationlink,marketingCommission" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-list-ul"></i> Admin Access<i style="float: right" class="fa fa-sort-desc" aria-hidden="true"></i></a>
 
                 <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
                     <li ui-sref-active="active">
@@ -30,7 +30,7 @@
                         <a include-if-allowed operation="roleoperationlink" ui-sref="home.roleoperationlink-list"><i class="fa fa-wrench fa-fw"></i> Access Privileges</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a include-if-allowed operation="marketingemployee" ui-sref="home.marketingcommission-list"><i class="fa fa-wrench fa-fw"></i> Marketing Commission</a>
+                        <a include-if-allowed operation="marketingCommission" ui-sref="home.marketingcommission-list"><i class="fa fa-wrench fa-fw"></i> Marketing Commission</a>
                     </li>
                 </ul>
             </li>

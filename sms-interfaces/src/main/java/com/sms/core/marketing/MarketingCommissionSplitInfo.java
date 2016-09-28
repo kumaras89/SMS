@@ -11,9 +11,13 @@ public class MarketingCommissionSplitInfo
 {
     private long id;
 
-    private String studentNameAppNo;
+    private String studentName;
 
-    private String referencePersonNameCode;
+    private String applicationNumber;
+
+    private String referencePersonName;
+
+    private String referencePersonCode;
 
     private BigDecimal amount;
 
@@ -29,8 +33,10 @@ public class MarketingCommissionSplitInfo
     public static Builder<MarketingCommissionSplitInfo> toBuilder(final MarketingCommissionSplit commissionSplit) {
         return builder()
                 .on(MarketingCommissionSplitInfo::getId).set(commissionSplit.getId())
-                .on(MarketingCommissionSplitInfo::getReferencePersonNameCode).set(commissionSplit.getReferencePerson().getName()+"["+commissionSplit.getReferencePerson().getCode()+"]")
-                .on(MarketingCommissionSplitInfo::getStudentNameAppNo).set(commissionSplit.getStudent().getName()+"["+commissionSplit.getStudent().getCode()+"]")
+                .on(MarketingCommissionSplitInfo::getReferencePersonName).set(commissionSplit.getReferencePerson().getName())
+                .on(MarketingCommissionSplitInfo::getReferencePersonCode).set(commissionSplit.getReferencePerson().getCode())
+                .on(MarketingCommissionSplitInfo::getStudentName).set(commissionSplit.getStudent().getName())
+                .on(MarketingCommissionSplitInfo::getApplicationNumber).set(commissionSplit.getStudent().getCode())
                 .on(MarketingCommissionSplitInfo::getAmount).set(commissionSplit.getAmount());
     }
 
@@ -38,12 +44,20 @@ public class MarketingCommissionSplitInfo
         return id;
     }
 
-    public String getStudentNameAppNo() {
-        return studentNameAppNo;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public String getReferencePersonNameCode() {
-        return referencePersonNameCode;
+    public String getApplicationNumber() {
+        return applicationNumber;
+    }
+
+    public String getReferencePersonName() {
+        return referencePersonName;
+    }
+
+    public String getReferencePersonCode() {
+        return referencePersonCode;
     }
 
     public BigDecimal getAmount() {

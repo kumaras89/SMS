@@ -23,18 +23,21 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Student Name</th>
+                                <th>Reference Person Code</th>
                                 <th>Reference Person</th>
+                                <th>Student Code</th>
+                                <th>Student Name</th>
                                 <th>Amount</th>
-                                <th style="max-width: 30px">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="dis in entities | filter: dis_filter" class="success">
+                            <tr ng-repeat="dis in entities | filter: dis_filter" ng-if="" class="success">
                                 <td>{{$index + 1 }}</td>
-                                <td sortable="code">{{ dis.studentNameAppNo }}</td>
-                                <td sortable="name">{{ dis.referencePersonNameCode }}</td>
-                                <td sortable="name">{{ dis.amount }}</td>
+                                <td sortable="code">{{ dis.referencePersonCode }}</td>
+                                <td sortable="name">{{ dis.referencePersonName }}</td>
+                                <td sortable="code">{{ dis.applicationNumber }}</td>
+                                <td sortable="name">{{ dis.studentName }}</td>
+                                <td sortable="amount">{{ dis.amount }}</td>
                             </tr>
                         <tr>
                             <td ng-show="$data.length==0" class="info no_data" colspan="9">
