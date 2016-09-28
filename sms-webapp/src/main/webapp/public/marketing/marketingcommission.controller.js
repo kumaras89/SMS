@@ -130,15 +130,16 @@
                     total: 0,           // length of data
                     getData: function($defer, params) {
                         $http.get('/marketingsplit/commissonsplitdetails/').then(function (res) {
+                            $scope.entities = [];
                             if (res.message) {
                                 $scope.entities = []
                                 FlashService.Error(res.message)
                             } else {
-                                if (logInUserDet == 'SUPER_ADMIN')
+                                if ($scope.logInUserDet == 'SUPER_ADMIN')
                                     $scope.entities = res.data;
                                 else {
                                     _.forEach(res.data, function (commission) {
-                                        if (commission.referencePersonCode == marketingEmpCode) {
+                                        if (commission.referencePersonCode == $scope.marketingEmpCode) {
                                             $scope.entities.push({
                                                 referencePersonCode: commission.referencePersonCode,
                                                 referencePersonName: commission.referencePersonName,
