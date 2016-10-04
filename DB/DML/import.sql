@@ -178,6 +178,21 @@ INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval(
 INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), 'scholarshipenrollmentCreation','OPERATION' , 'Student Scholarship Creation');
 INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 75);
 
+INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), 'marketingCommissionCreation','OPERATION' , 'Marketing Commission Creation List');
+INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 76);
+
+INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), 'commissionDistributionList','OPERATION' , 'Marketing Commission Distribution List');
+INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 77);
+
+INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), 'marketingCommissionEdit','OPERATION' , 'Marketing Commisson Edit Operation');
+INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 78);
+
+INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), 'marketingCommission','OPERATION' , 'Marketing Commisson list operations');
+INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 79);
+
+INSERT INTO SMS_MA_SECURED_OPERATION(ID, SO_OPERATION, SO_TYPE, SO_OPERATION_DESC) VALUES(nextval('SMS_SQ_SO'), '/marketingCommission/**','URL' , 'Marketing Commisson url related operations');
+INSERT INTO SMS_MA_ROLE_OPERATION_LINK(ID, ROL_UR_ID, ROL_SO_ID) VALUES(nextval('SMS_SQ_ROL'), 1, 80);
+
 INSERT INTO SMS_MA_USER (ID, US_FIRST_NAME, US_LAST_NAME, US_BRANCH, US_NAME, US_UR_ID, US_PASSWORD) VALUES (nextval('SMS_SQ_US'), 'ADMIN', 'ADMIN', 'MMT01', 'ADMIN', 1, '$2a$10$IhHsRrddT9qVXke96pQqSO94hCzSlPolLHSElYFbKUaouVisr6g4W');
 
 -- FEES_PARTICULAR INSERTION
@@ -350,3 +365,20 @@ INSERT INTO SMS_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUE
 --39.HARUR BRANCH
 INSERT INTO SMS_TR_ADDRESS (ID, AD_TALUK,  AD_ADDRESS_1, AD_POSTAL_CODE, AD_DISTRICT, AD_ADDRESS_2) VALUES(nextval('SMS_SQ_AD'), 'HARUR', '1', '600063', 'TAMIL NADU', 'GANDHI NAGAR');
 INSERT INTO SMS_MA_BRANCH (ID, BR_ADDRESS_ID, BR_CODE, BR_ACTIVE, BR_NAME) VALUES (nextval('SMS_SQ_BR'), 39, 'HRR01', 1, 'HARUR BRANCH');
+
+--Welcome Message
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('1','SMS_EMP_SCH','மாணவரின்  கல்வி உதவி தொகை படிவம் ஏற்றுக்கொள்ளப்பட்டது.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('2','SMS_PRT_SCH','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('3','SMS_STD_SCH','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('4','SMS_PRT_STD','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('5','SMS_STD_STD','RGMIHM-ல்  இணைந்தமைக்கு வாழ்த்துக்கள்.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('6','SMS_EMP_STD','மாணவரின்  கல்வி உதவி தொகை படிவம் ஏற்றுக்கொள்ளப்பட்டது.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('7','SMS_STD_EXP','தங்கள் கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் புதிய  கல்வி உதவித்தொகை படிவத்தை   பெற்றுக்கொளவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('8','SMS_PRT_EXP','தங்கள் மகன் / மகள் கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் புதிய  கல்வி உதவித்தொகை படிவத்தை பெற்றுக்கொளவும்.நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('9','SMS_EMP_EXP','தங்கள் பூர்த்தி செய்த கல்வி உதவித்தொகை படிவம் காலவதி ஆகிவிட்டது, எனவே தாங்கள் தக்க நடவடிக்கை மேற்கொள்ளுமாறு கேட்டுக்கொள்ளபடுகிறது. நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('10','SMS_STD_ABT','தாங்கள் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளீர்கள். எனவே தங்கள் பெற்றோரை அழைத்து வரவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('11','SMS_PRT_ABT','தங்கள் மகன் / மகள் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளார். எனவே தாங்கள் கல்லூரியை தொடர்பு கொள்ளவும். நன்றி');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('12','SMS_EMP_ABT','இவர் எந்தவொரு முன் அறிவிப்பின்றி விடுமுறை எடுத்துள்ளார் . எனவே இவரை தொடர்பு கொள்ளவும். நன்றி.');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('13','SMS_STD_ALV','தங்கள் விடுமுறை இன்று அனுமதிக்கப்பட்டது நன்றி');
+INSERT into SMS_WELCOME_MESSAGE(id,sms_code,sms_message) values ('14','SMS_PRT_ALV','தங்கள் மகன் / மகள்  இன்று கல்லூரி அனுமதியுடன் விடுமுறை எடுத்துள்ளார்.நன்றி.');
+

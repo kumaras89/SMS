@@ -34,7 +34,7 @@ public class PaymentRestController {
 
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<PaymentSearchInfo>> search(@RequestBody @Valid final PaymentSearchCriteria criteria) {
         return Optional.ofNullable(paymentService.search(criteria))
             .filter(e -> !e.isEmpty())

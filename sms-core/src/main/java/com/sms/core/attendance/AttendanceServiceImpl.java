@@ -78,6 +78,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         final Optional<StudentAttendanceInfo> savedStudents = Optional.of(attendanceRepository
                 .saveAndFlush(attendance))
                 .map(AttendanceServiceImpl::attendanceToInfo);
+
         //for sending message(MARKETING_EMPLOYEE,PARENTS,GUARDIANS) who all are ABSENT AND LEAVE
         attendance.getAttendanceDetails()
                 .stream()

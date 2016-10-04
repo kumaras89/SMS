@@ -23,6 +23,9 @@ public class ExpenseRestController {
     @Autowired
     private ExpenseService expenseService;
 
+    @Autowired
+    private ExpenseDetailsService expenseDetailsService;
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestBody @Valid final ExpenseInfo entityObject) {
         expenseService.save(entityObject);
@@ -35,33 +38,33 @@ public class ExpenseRestController {
     public ResponseEntity<List<ExpenseInfo>> listAll() {
 
         return Optional.ofNullable(expenseService.findAll())
-            .filter(e -> !e.isEmpty())
-            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExpenseInfo> get(@PathVariable("id") final Long id) {
         return expenseService.findById(id)
-            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<ExpenseInfo> update(
-        @PathVariable("id") final long id,
-        @RequestBody @Valid final ExpenseInfo expenseInfo) {
+            @PathVariable("id") final long id,
+            @RequestBody @Valid final ExpenseInfo expenseInfo) {
         return expenseService.update(id, expenseInfo)
-            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-            .get();
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .get();
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<ExpenseInfo>> search(@RequestBody @Valid final ExpenseSearchCriteria criteria) {
         return Optional.ofNullable(expenseService.search(criteria))
-            .filter(e -> !e.isEmpty())
-            .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .filter(e -> !e.isEmpty())
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/totalExpense", method = RequestMethod.GET)
@@ -78,8 +81,7 @@ public class ExpenseRestController {
 
     @RequestMapping(value = "expenseDetails/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteDetails(@PathVariable("id") final Long id) {
-        expenseService.deleteExpenseDetails(id);
-
+        expenseDetailsService.deleteExpenseDetails(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

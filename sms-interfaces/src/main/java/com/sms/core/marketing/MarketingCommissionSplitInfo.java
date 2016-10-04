@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 /**
  * Created by sathish on 9/26/2016.
  */
-public class MarketingCommissionSplitInfo
-{
+public class MarketingCommissionSplitInfo {
     private long id;
 
     private String studentName;
@@ -18,6 +17,8 @@ public class MarketingCommissionSplitInfo
     private String referencePersonName;
 
     private String referencePersonCode;
+
+    private String referencePersonDesignation;
 
     private BigDecimal amount;
 
@@ -37,7 +38,9 @@ public class MarketingCommissionSplitInfo
                 .on(MarketingCommissionSplitInfo::getReferencePersonCode).set(commissionSplit.getReferencePerson().getCode())
                 .on(MarketingCommissionSplitInfo::getStudentName).set(commissionSplit.getStudent().getName())
                 .on(MarketingCommissionSplitInfo::getApplicationNumber).set(commissionSplit.getStudent().getCode())
-                .on(MarketingCommissionSplitInfo::getAmount).set(commissionSplit.getAmount());
+                .on(MarketingCommissionSplitInfo::getAmount).set(commissionSplit.getAmount())
+                .on(MarketingCommissionSplitInfo::getReferencePersonDesignation).set(commissionSplit.getReferencePerson().getDesignation().name())
+                ;
     }
 
     public long getId() {
@@ -62,5 +65,9 @@ public class MarketingCommissionSplitInfo
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public String getReferencePersonDesignation() {
+        return referencePersonDesignation;
     }
 }

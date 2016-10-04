@@ -52,13 +52,6 @@ public interface ExpenseService {
     void deleteExpense(final long id);
 
     /**
-     * Deleting Expenses Details
-     *
-     * @param id
-     */
-    void deleteExpenseDetails(final long id);
-
-    /**
      *
      * @param expenseSearchCriteria
      * @return

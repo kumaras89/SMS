@@ -31,12 +31,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     private UserRepository userRepository;
     @Autowired
     private BranchRepository branchRepository;
-    @Autowired
-    private ExpenseDetailsRepository expenseDetailsRepository;
 
     private static ExpenseInfo expenseInfo(final Expense source) {
         return ExpenseInfo.toBuilder(source).build();
     }
+
     /**
      * @param expenseInfo
      * @param createdDate
@@ -44,13 +43,13 @@ public class ExpenseServiceImpl implements ExpenseService {
      */
     public Optional<ExpenseInfo> commonSave(final ExpenseInfo expenseInfo, final Date createdDate) {
         return Optional.of(
-            expenseRepository.saveAndFlush(
-                Expense.toBuilder(expenseInfo)
-                    .on(Expense::getBranch).set(branchRepository.findByCodeIgnoreCase(expenseInfo.getBranchCode()))
-                    .on(Expense::getUser).set(userRepository.findByNameIgnoreCase(expenseInfo.getUserName()))
-                    .on(Expense::getCreationDate).set(createdDate)
-                    .build()))
-            .map(ExpenseServiceImpl::expenseInfo);
+                expenseRepository.saveAndFlush(
+                        Expense.toBuilder(expenseInfo)
+                                .on(Expense::getBranch).set(branchRepository.findByCodeIgnoreCase(expenseInfo.getBranchCode()))
+                                .on(Expense::getUser).set(userRepository.findByNameIgnoreCase(expenseInfo.getUserName()))
+                                .on(Expense::getCreationDate).set(createdDate)
+                                .build()))
+                .map(ExpenseServiceImpl::expenseInfo);
     }
 
     /**
@@ -70,9 +69,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Optional<ExpenseInfo> update(final long id, final ExpenseInfo expenseInfo) {
         return Optional.ofNullable(expenseRepository.findById(id))
-            .map(expense -> this.commonSave(expenseInfo, expense.getCreationDate()))
-            .orElseThrow(
-                () -> new SmsException("Expense updation Error", "What are you trying to update its not available"));
+                .map(expense -> this.commonSave(expenseInfo, expense.getCreationDate()))
+                .orElseThrow(
+                        () -> new SmsException("Expense updation Error", "What are you trying to update its not available"));
     }
 
     /**
@@ -109,26 +108,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void deleteExpense(final long id) {
         OptionalExt.of(expenseRepository.findById(id))
-            .ifPresentOrElse(
-                expense -> expenseRepository.delete(expense),
-                () -> new SmsException("Expense Delete Error", "What are you trying to delete its not available"));
+                .ifPresentOrElse(
+                        expense -> expenseRepository.delete(expense),
+                        () -> new SmsException("Expense Delete Error", "What are you trying to delete its not available"));
     }
 
-    //TODO Sathish please remove this method and add in new Service for expense details
-    /**
-     * Deleting Expense Details
-     *
-     * @param id
-     */
-    @Override
-    public void deleteExpenseDetails(final long id) {
-        OptionalExt.of(expenseDetailsRepository.findById(id))
-            .ifPresentOrElse(
-                expenseDetailsRepository::delete,
-                () -> new SmsException(
-                    "ExpenseDetails Delete Error",
-                    "What are you trying to delete its not available"));
-    }
 
     /**
      * @param expenseSearchCriteria
@@ -137,9 +121,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public BigDecimal totalExpense(final ExpenseSearchCriteria expenseSearchCriteria) {
         return ExpenseSearchService
-            .search(expenseSearchCriteria)
-            .with(expenseRepository)
-            .stream()
-            .collect(CollectorUtils.grouping(() -> BigDecimal.ZERO, ExpenseInfo::getTotalAmount, BigDecimal::add));
+                .search(expenseSearchCriteria)
+                .with(expenseRepository)
+                .stream()
+                .collect(CollectorUtils.grouping(() -> BigDecimal.ZERO, ExpenseInfo::getTotalAmount, BigDecimal::add));
     }
 }

@@ -38,8 +38,8 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
 
     @Override
     public Optional<MarketingCommissionConfigSplitInfo> save(final MarketingCommissionConfigSplitInfo entityType) {
-
-        return Optional.of(configRepository.save(MarketingCommissionSplitConfig.toBuilder(entityType).build())).map(MarketingSplitConfigServiceImpl::configToInfo);
+        return Optional.of(configRepository.save(MarketingCommissionSplitConfig.toBuilder(entityType).build()))
+                .map(MarketingSplitConfigServiceImpl::configToInfo);
     }
 
     @Override
@@ -61,7 +61,11 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
 
     @Override
     public List<MarketingCommissionSplitInfo> getAll() {
-        return FList.of(commissionSplitRepository.findAll()).map(MarketingSplitConfigServiceImpl::splitInfo).get();
+        List<MarketingCommissionSplit> commissionSplits = commissionSplitRepository.findAll();
+        //Designation wise ascending order sort
+        commissionSplits.sort((o1, o2) -> o1.getReferencePerson().getDesignation().compareTo(o2.getReferencePerson().getDesignation()));
+        return FList.of(commissionSplits)
+                .map(MarketingSplitConfigServiceImpl::splitInfo).get();
     }
 
 }
