@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by sathish on 9/26/2016.
@@ -61,11 +63,10 @@ public class MarketingSplitConfigServiceImpl implements MarketingSplitConfigServ
 
     @Override
     public List<MarketingCommissionSplitInfo> getAll() {
-        List<MarketingCommissionSplit> commissionSplits = commissionSplitRepository.findAll();
-        //Designation wise ascending order sort
-        commissionSplits.sort((o1, o2) -> o1.getReferencePerson().getDesignation().compareTo(o2.getReferencePerson().getDesignation()));
-        return FList.of(commissionSplits)
-                .map(MarketingSplitConfigServiceImpl::splitInfo).get();
+        return commissionSplitRepository.findAll().stream()
+                .sorted(Comparator.comparing((MarketingCommissionSplit m1) -> m1.getStudent().getCode())
+                        .thenComparing((MarketingCommissionSplit m2) -> m2.getReferencePerson().getDesignation()))
+                .map(MarketingSplitConfigServiceImpl::splitInfo).collect(Collectors.toList());
     }
 
 }
